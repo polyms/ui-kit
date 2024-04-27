@@ -1,0 +1,69 @@
+{
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"defaultBase": "main",
+	"targetDefaults": {
+		"build": {
+			"cache": true,
+			"dependsOn": ["^build"]
+		},
+		"lint": {
+			"cache": true
+		},
+		"test": {
+			"cache": true
+		},
+		"e2e": {
+			"cache": true
+		}
+	},
+	"plugins": [
+		{
+			"plugin": "@nx/vite/plugin",
+			"options": {
+				"buildTargetName": "build",
+				"testTargetName": "test",
+				"serveTargetName": "serve",
+				"previewTargetName": "preview",
+				"serveStaticTargetName": "serve-static"
+			}
+		},
+		{
+			"plugin": "@nx/eslint/plugin",
+			"options": {
+				"targetName": "lint"
+			}
+		}
+	],
+	"generators": {
+		"@nx/react": {
+			"library": {
+				"style": "scss",
+				"linter": "eslint",
+				"bundler": "vite",
+				"compiler": "swc",
+				"projectNameAndRootFormat": "derived",
+				"publishable": true,
+				"unitTestRunner": "none"
+			},
+			"application": {
+				"babel": true,
+				"style": "scss",
+				"linter": "eslint",
+				"bundler": "vite",
+				"compiler": "swc",
+				"e2eTestRunner": "none",
+				"projectNameAndRootFormat": "derived",
+				"routing": false,
+				"unitTestRunner": "none"
+			},
+			"component": {
+				"style": "scss"
+			}
+		},
+		"@nx/storybook": {
+			"configuration": {
+				"uiFramework": "@storybook/react-vite"
+			}
+		}
+	}
+}
