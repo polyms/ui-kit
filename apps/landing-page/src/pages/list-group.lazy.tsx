@@ -9,7 +9,10 @@ import parse, {
   domToReact,
 } from 'html-react-parser'
 import { PropsWithChildren } from 'react'
+import slugify from 'slugify'
 import styled from 'styled-components'
+
+import AnchorIcon from '../assets/anchor.svg'
 
 // Then register the languages you need
 hljs.registerLanguage('xml', xml)
@@ -37,7 +40,7 @@ const options: HTMLReactParserOptions = {
 }
 
 const listGroup = /* HTML */ `
-  <ListGroup>
+  <ListGroup className="col-lg-8">
     <ListGroup.Item>An item</ListGroup.Item>
     <ListGroup.Item>A second item</ListGroup.Item>
     <ListGroup.Item>A third item</ListGroup.Item>
@@ -47,7 +50,7 @@ const listGroup = /* HTML */ `
 `
 
 const listGroupActive = /* HTML */ `
-  <ListGroup>
+  <ListGroup className="col-lg-8">
     <ListGroup.Item active>An active item</ListGroup.Item>
     <ListGroup.Item>A second item</ListGroup.Item>
     <ListGroup.Item>A third item</ListGroup.Item>
@@ -57,7 +60,7 @@ const listGroupActive = /* HTML */ `
 `
 
 const listGroupDisabled = /* HTML */ `
-  <ListGroup>
+  <ListGroup className="col-lg-8">
     <ListGroup.Item disabled>A disabled item</ListGroup.Item>
     <ListGroup.Item>A second item</ListGroup.Item>
     <ListGroup.Item>A third item</ListGroup.Item>
@@ -67,17 +70,19 @@ const listGroupDisabled = /* HTML */ `
 `
 
 const listGroupLink = /* HTML */ `
-  <ListGroup>
-    <ListGroup.Link href="#" active>The current link item</ListGroup.Link>
-    <ListGroup.Link href="#">A second item</ListGroup.Link>
-    <ListGroup.Link href="#">A third item</ListGroup.Link>
-    <ListGroup.Link href="#">A fourth item</ListGroup.Link>
-    <ListGroup.Link href="#" disabled>A disabled link item</ListGroup.Link>
+  <ListGroup className="col-lg-8">
+    <ListGroup.Link href="#links-and-buttons" active>
+      The current link item
+    </ListGroup.Link>
+    <ListGroup.Link href="#flush">A second item</ListGroup.Link>
+    <ListGroup.Link href="#numbered">A third item</ListGroup.Link>
+    <ListGroup.Link href="#horizontal">A fourth item</ListGroup.Link>
+    <ListGroup.Link href="#variants" disabled>A disabled link item</ListGroup.Link>
   </ListGroup>
 `
 
 const listGroupButton = /* HTML */ `
-  <ListGroup>
+  <ListGroup className="col-lg-8">
     <ListGroup.Button active>The current link item</ListGroup.Button>
     <ListGroup.Button>A second item</ListGroup.Button>
     <ListGroup.Button>A third item</ListGroup.Button>
@@ -87,7 +92,7 @@ const listGroupButton = /* HTML */ `
 `
 
 const listGroupFlush = /* HTML */ `
-  <ListGroup flush>
+  <ListGroup flush className="col-lg-8">
     <ListGroup.Item>An item</ListGroup.Item>
     <ListGroup.Item>A second item</ListGroup.Item>
     <ListGroup.Item>A third item</ListGroup.Item>
@@ -97,7 +102,7 @@ const listGroupFlush = /* HTML */ `
 `
 
 const listGroupNumbered = /* HTML */ `
-  <ListGroup numbered>
+  <ListGroup numbered className="col-lg-8">
     <ListGroup.Item>An item</ListGroup.Item>
     <ListGroup.Item>A second item</ListGroup.Item>
     <ListGroup.Item>A third item</ListGroup.Item>
@@ -107,7 +112,7 @@ const listGroupNumbered = /* HTML */ `
 `
 
 const listGroupNumberedCustom = /* HTML */ `
-  <ListGroup numbered>
+  <ListGroup numbered className="col-lg-8">
     <ListGroup.Item className="d-flex justify-content-between align-items-start">
       <div className="ms-2 me-auto">
         <div className="fw-bold">Subheading</div>
@@ -165,10 +170,26 @@ const listGroupHorizontal = /* HTML */ `
   </ListGroup>
 `
 
+const listGroupVariants = /* HTML */ `
+  <ListGroup className="col-lg-8">
+    <ListGroup.Item>A simple default list group item</ListGroup.Item>
+    <ListGroup.Item variant="primary">A simple primary list group item</ListGroup.Item>
+    <ListGroup.Item variant="secondary">
+      A simple secondary list group item
+    </ListGroup.Item>
+    <ListGroup.Item variant="success">A simple success list group item</ListGroup.Item>
+    <ListGroup.Item variant="danger">A simple danger list group item</ListGroup.Item>
+    <ListGroup.Item variant="warning">A simple warning list group item</ListGroup.Item>
+    <ListGroup.Item variant="info">A simple info list group item</ListGroup.Item>
+    <ListGroup.Item variant="light">A simple light list group item</ListGroup.Item>
+    <ListGroup.Item variant="dark">A simple dark list group item</ListGroup.Item>
+  </ListGroup>
+`
+
 const Page = () => {
   return (
     <Container className='p-4'>
-      <div className='col-9'>
+      <div className='col-lg-10 col-xl-9'>
         <h1>List group</h1>
         <p className='small'>
           <strong>
@@ -272,15 +293,28 @@ const Page = () => {
           <code>.flex-fill</code> to each list group item.
         </p>
         <Example content={listGroupHorizontal} options={options} />
+
+        <br />
+
+        <Section title='Variants'>
+          Use contextual classes to style list items with a stateful background and color.
+        </Section>
+        <Example content={listGroupVariants} options={options} />
       </div>
     </Container>
   )
 }
 
 const Section = ({ title, children }: SectionProps) => {
+  const id = slugify(title, { lower: true })
   return (
     <>
-      <h2>{title}</h2>
+      <h2 id={id} className='d-flex gap-2'>
+        {title}
+        <a href={`#${id}`}>
+          <AnchorIcon width={16} height={16} />
+        </a>
+      </h2>
       <p>{children}</p>
     </>
   )
@@ -292,10 +326,10 @@ export type ExampleProps = {
 }
 const Example = ({ content, options }: ExampleProps) => {
   return (
-    <ExampleCard className='card col-8 overflow-hidden border-2 border-secondary'>
-      <div className='card-body'>{parse(content, options)}</div>
+    <ExampleCard className='card overflow-hidden border-2 border-secondary'>
+      <div className='card-body d-flex flex-column gap-2'>{parse(content, options)}</div>
       <pre
-        className='bg-light mb-0 pb-3 border-top'
+        className='bg-light mb-0 pb-3 pe-3 border-top'
         dangerouslySetInnerHTML={{
           __html: hljs.highlight(content, { language: 'xml' }).value,
         }}

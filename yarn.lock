@@ -2583,6 +2583,7 @@ __metadata:
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     sass: "npm:~1.75.0"
+    slugify: "npm:^1.6.6"
     styled-components: "npm:^6.1.8"
     tslib: "npm:^2.6.2"
     typescript: "npm:~5.4.2"
@@ -9602,6 +9603,13 @@ __metadata:
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
   checksum: 10c0/e18488c6a42bdfd4ac5be85b2ced3ccd0224773baae6ad42cfbb9ec74fc07f9fa8396bd35ee638084ead7a2a0818eb5e7151111544d4731ce843019dab4be47b
+  languageName: node
+  linkType: hard
+
+"slugify@npm:^1.6.6":
+  version: 1.6.6
+  resolution: "slugify@npm:1.6.6"
+  checksum: 10c0/e7e63f08f389a371d6228bc19d64ec84360bf0a538333446cc49dbbf3971751a6d180d2f31551188dd007a65ca771e69f574e0283290a7825a818e90b75ef44d
   languageName: node
   linkType: hard
 

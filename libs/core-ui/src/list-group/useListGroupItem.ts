@@ -7,6 +7,7 @@ export function useListGroupItem<T extends ListGroupItemBase = ListGroupItemBase
   disabled,
   className,
   variant,
+  groupId,
   ...props
 }: T) {
   const newProps = {
@@ -18,6 +19,7 @@ export function useListGroupItem<T extends ListGroupItemBase = ListGroupItemBase
     }),
     'aria-current': active,
     'aria-disabled': disabled,
+    'data-group': groupId,
   }
 
   return newProps

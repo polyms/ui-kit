@@ -5,4 +5,5 @@ export type ListGroupItemBase = {
   disabled?: boolean
   className?: string
   variant?: Variant
+  groupId?: string
 }
