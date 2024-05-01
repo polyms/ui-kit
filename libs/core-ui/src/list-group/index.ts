@@ -1,5 +1,7 @@
 import { ListGroup as Root } from './ListGroup'
-import { ListGroupItem, ListGroupItemButton, ListGroupItemLink } from './ListGroupItem'
+import { ListGroupItem } from './ListGroupItem'
+import { ListGroupItemButton } from './ListGroupItemButton'
+import { ListGroupItemLink } from './ListGroupItemLink'
 
 export const ListGroup = Object.assign(Root, {
   Item: ListGroupItem,
@@ -8,4 +10,9 @@ export const ListGroup = Object.assign(Root, {
 })
 
 export * from './ListGroup.types'
+export * from './ListGroupItem'
+export * from './ListGroupItemLink'
+export * from './ListGroupItemButton'
 export * from './useListGroupItem'
+
+export type { ListGroupProps } from './ListGroup'

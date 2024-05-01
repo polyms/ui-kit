@@ -7,6 +7,20 @@
 		".": {
 			"import": "./index.mjs",
 			"require": "./index.js"
+		},
+
+		"./container": {
+			"import": "./container.mjs",
+			"require": "./container.js"
+		},
+
+		"./button": {
+			"import": "./button.mjs",
+			"require": "./button.js"
+		},
+		"./list-group": {
+			"import": "./list-group.mjs",
+			"require": "./list-group.js"
 		}
 	}
 }

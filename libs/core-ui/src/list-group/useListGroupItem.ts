@@ -1,15 +1,10 @@
 import classNames from 'classnames'
 
-import { ListGroupItemBase } from './ListGroup.types'
+import { ListGroupItemBaseProps } from './ListGroup.types'
 
-export function useListGroupItem<T extends ListGroupItemBase = ListGroupItemBase>({
-  active,
-  disabled,
-  className,
-  variant,
-  groupId,
-  ...props
-}: T) {
+export function useListGroupItem<
+  T extends ListGroupItemBaseProps = ListGroupItemBaseProps
+>({ active, disabled, className, variant, groupId, ...props }: T) {
   const newProps = {
     ...props,
     className: classNames(className, 'list-group-item', {

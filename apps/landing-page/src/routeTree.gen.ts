@@ -18,6 +18,7 @@ import { Route as ContainerImport } from './pages/container'
 // Create Virtual Routes
 
 const ListGroupLazyImport = createFileRoute('/list-group')()
+const ButtonsLazyImport = createFileRoute('/buttons')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
@@ -26,6 +27,11 @@ const ListGroupLazyRoute = ListGroupLazyImport.update({
   path: '/list-group',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./pages/list-group.lazy').then((d) => d.Route))
+
+const ButtonsLazyRoute = ButtonsLazyImport.update({
+  path: '/buttons',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./pages/buttons.lazy').then((d) => d.Route))
 
 const ContainerRoute = ContainerImport.update({
   path: '/container',
@@ -49,6 +55,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContainerImport
       parentRoute: typeof rootRoute
     }
+    '/buttons': {
+      preLoaderRoute: typeof ButtonsLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/list-group': {
       preLoaderRoute: typeof ListGroupLazyImport
       parentRoute: typeof rootRoute
@@ -61,6 +71,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   ContainerRoute,
+  ButtonsLazyRoute,
   ListGroupLazyRoute,
 ])
 

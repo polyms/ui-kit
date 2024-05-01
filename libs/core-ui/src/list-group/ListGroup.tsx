@@ -1,8 +1,10 @@
 import classNames from 'classnames'
 import {
   Children,
+  ForwardRefExoticComponent,
   ForwardedRef,
   ReactElement,
+  RefAttributes,
   cloneElement,
   forwardRef,
   isValidElement,
@@ -12,7 +14,7 @@ import {
 import { Breakpoint } from '../enums.const'
 import { ListGroupItemProps } from './ListGroupItem'
 
-export const ListGroup = forwardRef(
+export const ListGroup: ListGroupComponent = forwardRef(
   (
     { flush, numbered, horizontal, className, children, ...props }: ListGroupProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -53,3 +55,7 @@ export type ListGroupProps = JSX.IntrinsicElements['div'] & {
   numbered?: boolean
   horizontal?: true | Exclude<Breakpoint, 'xs'>
 }
+
+type ListGroupComponent = ForwardRefExoticComponent<
+  Omit<ListGroupProps, 'ref'> & RefAttributes<HTMLDivElement>
+>

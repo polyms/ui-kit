@@ -5,20 +5,6 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
-    },
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-
-    reporters: ['default'],
-    coverage: {
-      reportsDirectory: '../../coverage/libs/core-ui',
-      provider: 'v8',
-    },
-  },
   root: __dirname,
   cacheDir: '../../node_modules/.vite/libs/core-ui',
 
@@ -46,12 +32,19 @@ export default defineConfig({
     },
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: {
+        index: 'src/index.ts',
+        // Layouts
+        container: 'src/container/index.ts',
+        // Components
+        button: 'src/button/index.ts',
+        'list-group': 'src/list-group/index.ts',
+      },
       name: 'core-ui',
-      fileName: 'index',
+      // fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
-      formats: ['es', 'umd'],
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.

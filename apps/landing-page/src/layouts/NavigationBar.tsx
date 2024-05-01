@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 import LayersIcon from '../assets/layers.svg'
 import LayoutIcon from '../assets/layout.svg'
-import LibraryIcon from '../assets/library.svg'
 import RocketIcon from '../assets/rocket.svg'
 
 export const NavigationBar = () => {
@@ -36,6 +35,9 @@ export const NavigationBar = () => {
       <Heading icon={LayersIcon} iconClassName='text-danger'>
         Components
       </Heading>
+      <ListGroup>
+        <ListGroupLink href='/buttons'>Buttons</ListGroupLink>
+      </ListGroup>
       <ListGroup>
         <ListGroupLink href='/list-group'>List Group</ListGroupLink>
       </ListGroup>

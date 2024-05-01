@@ -1,6 +1,6 @@
 import { Variant } from '../enums.const'
 
-export type ListGroupItemBase = {
+export type ListGroupItemBaseProps = {
   active?: boolean
   disabled?: boolean
   className?: string
