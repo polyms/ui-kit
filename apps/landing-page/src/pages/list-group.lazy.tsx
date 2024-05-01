@@ -1,43 +1,16 @@
 import { Container, ListGroup } from '@polyms/core-ui'
 import { createFileRoute } from '@tanstack/react-router'
-import hljs from 'highlight.js/lib/core'
-import xml from 'highlight.js/lib/languages/xml'
-import parse, {
-  DOMNode,
-  HTMLReactParserOptions,
-  attributesToProps,
-  domToReact,
-} from 'html-react-parser'
-import { PropsWithChildren } from 'react'
-import slugify from 'slugify'
-import styled from 'styled-components'
 
-import AnchorIcon from '../assets/anchor.svg'
+import { Example } from '../components/Example'
+import { Section } from '../layouts/Section'
+import { makeOptions } from '../utils/htmlParser.utils'
 
-// Then register the languages you need
-hljs.registerLanguage('xml', xml)
-
-const options: HTMLReactParserOptions = {
-  replace(domNode) {
-    if (domNode.type === 'tag') {
-      const props = attributesToProps(domNode.attribs)
-      Object.keys(props).forEach((key) => {
-        if (props[key] === '') props[key] = true
-      })
-
-      const mapping = {
-        listgroup: ListGroup,
-        'listgroup.item': ListGroup.Item,
-        'listgroup.link': ListGroup.Link,
-        'listgroup.button': ListGroup.Button,
-      }
-      const Tag = mapping[domNode.name as keyof typeof mapping]
-      if (Tag)
-        return <Tag {...props}>{domToReact(domNode.children as DOMNode[], options)}</Tag>
-    }
-    return domNode
-  },
-}
+const options = makeOptions({
+  listgroup: ListGroup,
+  'listgroup.item': ListGroup.Item,
+  'listgroup.link': ListGroup.Link,
+  'listgroup.button': ListGroup.Button,
+})
 
 const listGroup = /* HTML */ `
   <ListGroup className="col-lg-8">
@@ -305,51 +278,6 @@ const Page = () => {
   )
 }
 
-const Section = ({ title, children }: SectionProps) => {
-  const id = slugify(title, { lower: true })
-  return (
-    <>
-      <h2 id={id} className='d-flex gap-2'>
-        {title}
-        <a href={`#${id}`}>
-          <AnchorIcon width={16} height={16} />
-        </a>
-      </h2>
-      <p>{children}</p>
-    </>
-  )
-}
-
-export type ExampleProps = {
-  content: string
-  options: HTMLReactParserOptions
-}
-const Example = ({ content, options }: ExampleProps) => {
-  return (
-    <ExampleCard className='card overflow-hidden border-2 border-secondary'>
-      <div className='card-body d-flex flex-column gap-2'>{parse(content, options)}</div>
-      <pre
-        className='bg-light mb-0 pb-3 pe-3 border-top'
-        dangerouslySetInnerHTML={{
-          __html: hljs.highlight(content, { language: 'xml' }).value,
-        }}
-      />
-    </ExampleCard>
-  )
-}
-
-const ExampleCard = styled.div`
-  pre {
-    --po-border-style: dashed;
-  }
-`
-
 export const Route = createFileRoute('/list-group')({
   component: Page,
 })
-
-// ======================================================================================
-
-type SectionProps = PropsWithChildren<{
-  title: string
-}>
