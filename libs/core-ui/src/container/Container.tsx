@@ -1,8 +1,8 @@
 import classNames from 'classnames'
-import { ForwardedRef, forwardRef } from 'react'
+import { ForwardRefExoticComponent, RefAttributes, forwardRef } from 'react'
 
-export const Container = forwardRef(
-  ({ size, className, ...props }: ContainerProps, ref: ForwardedRef<HTMLDivElement>) => {
+export const Container: ContainerComponent = forwardRef(
+  ({ size, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -21,3 +21,7 @@ export const Container = forwardRef(
 export type ContainerProps = JSX.IntrinsicElements['div'] & {
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'fluid'
 }
+
+type ContainerComponent = ForwardRefExoticComponent<
+  Omit<ContainerProps, 'ref'> & RefAttributes<HTMLDivElement>
+>
