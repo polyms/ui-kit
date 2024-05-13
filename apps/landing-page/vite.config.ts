@@ -1,6 +1,10 @@
+import mdx from '@mdx-js/rollup'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react-swc'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkGfm from 'remark-gfm'
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
@@ -19,6 +23,10 @@ export default defineConfig({
   },
 
   plugins: [
+    {
+      enforce: 'pre',
+      ...mdx({ remarkPlugins: [remarkGfm, remarkMdxFrontmatter, remarkFrontmatter] }),
+    },
     svgr({
       include: '**/*.svg',
     }),
