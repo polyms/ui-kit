@@ -2,5 +2,12 @@
 /dist
 /coverage
 /.nx/cache
-tsconfig.base.json
-_variables.scss
+/.nx/workspace-data
+
+pnpm-lock.yaml
+.npmrc
+**/build/
+*.tsx
+*.ts
+*.json
+*.html

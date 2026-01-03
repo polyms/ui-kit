@@ -1,0 +1,37 @@
+@reference './tailwind.css';
+
+.sidebar-container {
+  @apply transition-all duration-300;
+  @apply flex w-72 flex-col items-end;
+
+  .sidebar-closed & {
+    @apply w-4;
+  }
+}
+
+.navigation {
+  z-index: 1;
+
+  @apply sticky top-0 flex h-screen w-72 flex-col;
+
+  .nav-item {
+    @apply relative flex items-center gap-2 rounded-lg p-2 text-left text-sm transition-colors;
+    @apply w-full cursor-pointer font-semibold no-underline;
+    &:not(.active) {
+      @apply text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900;
+      @apply focus-visible:bg-neutral-100 focus-visible:text-neutral-900 focus-visible:outline-none;
+    }
+
+    &.active {
+      @apply bg-interaction/10 text-primary;
+    }
+  }
+}
+
+main {
+  @apply relative me-1 mt-1 flex grow flex-col rounded-t-xl border-x border-t border-neutral-300;
+}
+
+.shiki {
+  @apply m-1 rounded-2xl px-6 py-4 text-sm;
+}

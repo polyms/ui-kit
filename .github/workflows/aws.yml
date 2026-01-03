@@ -1,0 +1,105 @@
+name: Build and Deploy
+
+on:
+  push:
+    tags:
+      - core@*
+
+env:
+  NODE_VERSION: '22'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  pr-affected:
+    name: 'Build and test affected apps on Pull Requests'
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run affected tasks
+        run: |
+          pnpm check
+          pnpm nx affected --base=origin/main -t test build
+        env:
+          NX_BRANCH: ${{ github.event.pull_request.number }}
+
+  build-and-deploy:
+    name: 'Build and test'
+    runs-on: ubuntu-latest
+    # environment: production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run affected tasks
+        id: build
+        env:
+          NX_BRANCH: ${{ github.ref_name }}
+        run: |
+          pnpm check
+          pnpm nx affected -t build --base=HEAD~1
+          echo "pkg_index=$(node -p "require('./dist/core/.vite/manifest.json')['src/index.ts'].file")" >> $GITHUB_OUTPUT
+          echo "pkg_style=$(node -p "require('./dist/core/.vite/manifest.json')['src/styles/tailwind.css'].file")" >> $GITHUB_OUTPUT
+
+      - name: Package and prepare artifacts
+        run: |
+          mkdir -p dist/mfe
+          mv dist/core/*.css dist/mfe/
+          mv dist/core/.vite/ dist/mfe/
+
+      - name: Publish to GitHub Packages
+        run: |
+          echo "@polyms:registry=https://npm.pkg.github.com/polyms" >> .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          echo "always-auth=true" >> .npmrc
+          pnpm publish dist/core --no-git-checks --registry=https://npm.pkg.github.com
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Deploy MFE to S3
+        run: |
+          aws s3 sync dist/mfe s3://editors-upload/lib/mfe/core/

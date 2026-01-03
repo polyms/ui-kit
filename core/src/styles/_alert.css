@@ -1,0 +1,55 @@
+.alert {
+  @apply relative mb-4 rounded border border-transparent font-medium;
+
+  padding: 0.75rem 1rem;
+  font-size: 14px;
+}
+
+.alert-heading {
+  @apply text-inherit;
+}
+
+.alert-link {
+  @apply font-bold text-inherit;
+}
+
+.alert-dismissible {
+  @apply pr-12;
+}
+
+.alert-dismissible .btn-close {
+  @apply absolute top-0 right-0 z-10 p-5;
+}
+
+/* Alert Variants */
+.alert-primary {
+  @apply border-primary-300 bg-primary-50 text-primary-700;
+}
+
+.alert-secondary {
+  @apply border-neutral-200 bg-neutral-100 text-neutral-700;
+}
+
+.alert-success {
+  @apply border-green-200 bg-green-100 text-green-700;
+}
+
+.alert-info {
+  @apply border-cyan-200 bg-cyan-100 text-cyan-700;
+}
+
+.alert-warning {
+  @apply border-yellow-200 bg-yellow-100 text-yellow-700;
+}
+
+.alert-danger {
+  @apply border-red-200 bg-red-100 text-red-700;
+}
+
+.alert-light {
+  @apply border-neutral-300 bg-primary-50 text-neutral-900;
+}
+
+.alert-dark {
+  @apply border-neutral-400 bg-neutral-300 text-neutral-900;
+}

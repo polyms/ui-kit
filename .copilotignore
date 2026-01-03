@@ -1,0 +1,56 @@
+# === Sensitive files ===
+.env
+*.env
+*.env.*
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+*.keystore
+*.cer
+*.csr
+*.json
+secrets/
+certs/
+private/
+keys/
+config/private/
+
+# === Build artifacts ===
+node_modules/
+dist/
+build/
+.cache/
+tmp/
+logs/
+
+# === Environment or deployment configs ===
+docker-compose*.yml
+*.tfstate
+*.tfvars
+*.tfplan
+.terraform/
+.kube/
+helm/
+charts/
+
+# === Credentials & Tokens ===
+**/aws/
+**/gcp/
+**/azure/
+**/service-account*.json
+**/id_rsa*
+**/known_hosts
+**/ssh/
+
+# === Local IDE & system files ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# === Misc ===
+*.log
+*.bak
+*.swp

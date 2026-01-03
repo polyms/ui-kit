@@ -1,0 +1,35 @@
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+@utility container-5xl {
+  width: var(--container-5xl); /* 64rem (1024px) */
+}
+
+@layer components {
+  .\@page {
+    @apply @container;
+
+    container-name: page;
+  }
+
+  .container-page {
+    margin-inline: auto;
+    padding-inline: 1rem;
+    width: 100%;
+
+    @container page (width >= 40rem) {
+      width: 40rem;
+    }
+
+    @container page (width >= 64rem) {
+      width: 64rem;
+    }
+
+    @container page (width >= 90rem) {
+      width: 90rem;
+      padding-inline: 2rem;
+    }
+  }
+}

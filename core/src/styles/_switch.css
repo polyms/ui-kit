@@ -1,0 +1,58 @@
+.switch {
+  width: 3rem;
+  height: 1.5rem;
+  margin: 0;
+  border-radius: 1.5em;
+  appearance: none;
+  transition: all 300ms ease-in-out;
+  background-position: left center;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="-4 -4 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><circle r="3" fill="%23CFD6DD"/></svg>');
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid var(--t-neutral-300);
+  flex-shrink: 0;
+
+  &:hover:not(:disabled):not(.disabled):not(:checked) {
+    border: 1px solid var(--t-neutral-300);
+    background-color: var(--t-primary-50);
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="-4 -4 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><circle r="3" fill="%23CFD6DD"/></svg>');
+  }
+
+  &:checked {
+    border-color: var(--t-neutral-300);
+    background-color: var(--t-primary-500);
+    background-position: right center;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='-4 -4 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><circle r='3' fill='%23f2f5fd'/></svg>");
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: var(--t-neutral-100);
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='-4 -4 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><circle r='3' fill='%23CFD6DD'/></svg>");
+  }
+
+  &.primary {
+    &:hover:not(:disabled):not(.disabled):not(:checked) {
+      border-color: var(--t-primary-300);
+      cursor: pointer;
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='-4 -4 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><circle r='3' fill='%237a6dff'/></svg>");
+    }
+
+    &:focus,
+    &:focus-visible {
+      border-color: var(--t-primary-300);
+    }
+
+    &:focus:not(:hover):not(:checked),
+    &:focus-visible:not(:hover):not(:checked) {
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='-4 -4 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><circle r='3' fill='%23a79eff'/></svg>");
+    }
+
+    &:checked {
+      border-color: var(--t-primary-300);
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='-4 -4 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><circle r='3' fill='%231E0DFF'/></svg>");
+    }
+  }
+}

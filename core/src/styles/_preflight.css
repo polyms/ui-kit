@@ -1,0 +1,25 @@
+html,
+body {
+  scroll-behavior: smooth;
+  @apply bg-white;
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+input {
+  outline: none;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+}

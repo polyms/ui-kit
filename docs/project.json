@@ -1,0 +1,24 @@
+{
+  "name": "docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "docs/src",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project docs --web",
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "biome lint .",
+        "cwd": "docs"
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "biome format . --write",
+        "cwd": "docs"
+      }
+    }
+  }
+}

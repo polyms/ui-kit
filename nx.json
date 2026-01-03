@@ -1,64 +1,86 @@
 {
-	"$schema": "./node_modules/nx/schemas/nx-schema.json",
-	"defaultBase": "main",
-	"targetDefaults": {
-		"build": {
-			"cache": true,
-			"dependsOn": ["^build"]
-		},
-		"lint": {
-			"cache": true
-		},
-		"test": {
-			"cache": true
-		},
-		"e2e": {
-			"cache": true
-		}
-	},
-	"plugins": [
-		{
-			"plugin": "@nx/vite/plugin",
-			"options": {
-				"buildTargetName": "build",
-				"testTargetName": "test",
-				"serveTargetName": "serve",
-				"previewTargetName": "preview",
-				"serveStaticTargetName": "serve-static"
-			}
-		},
-		{
-			"plugin": "@nx/eslint/plugin",
-			"options": {
-				"targetName": "lint"
-			}
-		}
-	],
-	"generators": {
-		"@nx/react": {
-			"library": {
-				"style": "scss",
-				"linter": "eslint",
-				"bundler": "vite",
-				"compiler": "swc",
-				"projectNameAndRootFormat": "derived",
-				"publishable": true,
-				"unitTestRunner": "none"
-			},
-			"application": {
-				"babel": true,
-				"style": "scss",
-				"linter": "eslint",
-				"bundler": "vite",
-				"compiler": "swc",
-				"e2eTestRunner": "none",
-				"projectNameAndRootFormat": "derived",
-				"routing": false,
-				"unitTestRunner": "none"
-			},
-			"component": {
-				"style": "scss"
-			}
-		}
-	}
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
+    ],
+    "sharedGlobals": ["{workspaceRoot}/bitbucket-pipelines.yml"]
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "devTargetName": "dev",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    },
+    {
+      "plugin": "@nx/vitest",
+      "options": {
+        "testTargetName": "vitest:test",
+        "ciTargetName": "test-ci",
+        "testMode": "watch"
+      }
+    }
+  ],
+  "defaultProject": "ui",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true,
+        "style": "css",
+        "linter": "none",
+        "bundler": "vite",
+        "compiler": "swc",
+        "projectNameAndRootFormat": "derived",
+        "publishable": true,
+        "unitTestRunner": "vitest"
+      },
+      "component": {
+        "style": "tailwind"
+      },
+      "library": {
+        "style": "css",
+        "linter": "none",
+        "bundler": "vite",
+        "compiler": "swc",
+        "projectNameAndRootFormat": "derived",
+        "publishable": true,
+        "unitTestRunner": "vitest"
+      }
+    }
+  },
+  "release": {
+    "projects": ["core", "docs"],
+    "projectsRelationship": "independent",
+    "changelog": {
+      "projectChangelogs": false,
+      "workspaceChangelog": false
+    },
+    "version": {
+      "preVersionCommand": "pnpm dlx nx run-many -t build",
+      "git": {
+        "stageChanges": true,
+        "tag": true,
+        "commit": true,
+        "commitMessage": "chore(release): {projectName}@{version}"
+      }
+    },
+    "releaseTag": {
+      "pattern": "{projectName}@{version}"
+    }
+  },
+  "defaultBase": "origin/main"
 }

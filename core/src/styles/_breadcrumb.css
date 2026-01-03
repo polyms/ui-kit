@@ -1,0 +1,31 @@
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 1.25rem;
+  overflow-x: auto;
+
+  .breadcrumb-item {
+    position: relative;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    @apply font-medium whitespace-nowrap;
+  }
+
+  .breadcrumb-item + .breadcrumb-item {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) translateX(-100%) translateX(-0.125rem);
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2IiBmaWxsPSJub25lIj48cGF0aCBkPSJNNS45NDA0MyAxMy4yOEwxMC4yODcxIDguOTMzM0MxMC44MDA0IDguNDE5OTcgMTAuODAwNCA3LjU3OTk3IDEwLjI4NzEgNy4wNjY2NEw1Ljk0MDQzIDIuNzE5OTciIHN0cm9rZT0iIzFGMjEyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+');
+      width: 1rem;
+      height: 1rem;
+      background-size: 1rem;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

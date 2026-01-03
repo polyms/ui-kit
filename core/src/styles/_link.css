@@ -1,0 +1,32 @@
+.link-primary {
+  color: var(--t-primary);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--t-primary-700);
+  }
+}
+
+.link-light {
+  color: var(--t-neutral-500);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--t-neutral-900);
+  }
+}
+
+.link-dark {
+  color: var(--t-neutral-900);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--t-primary);
+  }
+}

@@ -1,0 +1,152 @@
+.table {
+  /* Reset needed for nesting tables */
+  --t-table-color-type: initial;
+  --t-table-bg-type: initial;
+  --t-table-color-state: initial;
+  --t-table-bg-state: initial;
+  /* End of reset */
+  --t-table-color: var(--t-neutral-900);
+  --t-table-bg: #fff;
+  --t-table-border-color: var(--t-neutral-300);
+  --t-table-accent-bg: transparent;
+  --t-table-striped-color: var(--t-table-color);
+  --t-table-striped-bg: hsla(210, 17%, 84%, 0.05);
+  --t-table-active-color: var(--t-table-color);
+  --t-table-active-bg: hsla(210, 17%, 84%, 0.1);
+  --t-table-hover-color: var(--t-table-color);
+  --t-table-hover-bg: hsla(210, 17%, 84%, 0.075);
+  --t-table-border-width: 1px;
+
+  width: 100%;
+  margin-bottom: 1rem;
+  vertical-align: top;
+
+  /* 
+  // Target th & td
+  // We need the child combinator to prevent styles leaking to nested tables which doesn't have a `.table` class.
+  // We use the universal selectors here to simplify the selector (else we would need 6 different selectors).
+  // Another advantage is that this generates less code and makes the selector less specific making it easier to override. */
+  > :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+    /* Following the precept of cascades: https://codepen.io/miriamsuzanne/full/vYNgodb */
+    color: var(--t-table-color-state, var(--t-table-color-type, var(--t-table-color)));
+    background-color: var(--t-table-bg);
+    border-color: var(--t-table-border-color);
+    border-bottom-width: var(--t-table-border-width);
+    box-shadow: inset 0 0 0 9999px var(--t-table-bg-state, var(--t-table-bg-type, var(--t-table-accent-bg)));
+  }
+
+  > tbody {
+    vertical-align: inherit;
+  }
+
+  > thead {
+    vertical-align: bottom;
+  }
+
+  th,
+  td {
+    text-align: start;
+  }
+
+  th {
+    font-weight: 600;
+  }
+}
+
+.table-group-divider {
+  border-top: calc(var(--t-table-border-width) * 2) solid currentcolor;
+}
+
+/* 
+//
+// Change placement of captions with a class
+// */
+
+.caption-top {
+  caption-side: top;
+}
+
+/* 
+//
+// Condensed table w/ half padding
+// */
+
+.table-sm {
+  > :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+/*
+// Border versions
+//
+// Add or remove borders all around the table and between all the columns.
+//
+// When borders are added on all sides of the cells, the corners can render odd when
+// these borders do not have the same color or if they are semi-transparent.
+// Therefore we add top and border bottoms to the `tr`s and left and right borders
+// to the `td`s or `th`s */
+
+.table-bordered {
+  > :not(caption) > * {
+    border-width: var(--t-table-border-width) 0;
+
+    > * {
+      border-width: 0 var(--t-table-border-width);
+    }
+  }
+}
+
+.table-borderless {
+  > :not(caption) > * > * {
+    border-bottom-width: 0;
+  }
+
+  > :not(:first-child) {
+    border-top-width: 0;
+  }
+}
+
+/* 
+// Zebra-striping
+//
+// Default zebra-stripe styles (alternating gray and transparent backgrounds) */
+
+/* For rows */
+.table-striped {
+  > tbody > tr:nth-of-type(odd) > * {
+    --t-table-color-type: var(--t-table-striped-color);
+    --t-table-bg-type: var(--t-table-striped-bg);
+  }
+}
+
+/* For columns */
+.table-striped-columns {
+  > :not(caption) > tr > :nth-child(even) {
+    --t-table-color-type: var(--t-table-striped-color);
+    --t-table-bg-type: var(--t-table-striped-bg);
+  }
+}
+
+/* 
+// Active table
+//
+// The `.table-active` class can be added to highlight rows or cells */
+
+.table-active {
+  --t-table-color-state: var(--t-table-active-color);
+  --t-table-bg-state: var(--t-table-active-bg);
+}
+
+/* 
+// Hover effect
+//
+// Placed here since it has to come after the potential zebra striping */
+
+.table-hover {
+  > tbody > tr:hover > * {
+    --t-table-color-state: var(--t-table-hover-color);
+    --t-table-bg-state: var(--t-table-hover-bg);
+  }
+}

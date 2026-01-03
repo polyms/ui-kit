@@ -1,24 +1,19 @@
-printWidth: 90
+printWidth: 110
 singleQuote: true
 jsxSingleQuote: true
 useTabs: false
 semi: false
+trailingComma: es5
 plugins:
-  - '@trivago/prettier-plugin-sort-imports'
-
-importOrderSeparation: true
-importOrderSortSpecifiers: true
-importOrder:
-  - <THIRD_PARTY_MODULES>
-  - ^[~]
-  - ^[./]
+  - tailwindcss
 
 overrides:
   - files:
-      - .*rc
-      - '*.json'
-      - .*.json
+      - '*.yml'
+      - '*.yaml'
     options:
-      parser: json
-      useTabs: true
-      tabWidth: 4
+      parser: yaml
+      plugins:
+        - '@prettier/plugin-xml'
+      xmlSelfClosingSpace: true
+      xmlSortAttributesByKey: true
