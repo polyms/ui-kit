@@ -5,18 +5,18 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/styles/tailwind.css",
+    "css": "../dist/tailwind.css",
     "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""
   },
   "iconLibrary": "radix",
   "aliases": {
-    "components": "~components",
-    "utils": "~lib/utils",
-    "ui": "~components/ui",
-    "lib": "~lib",
-    "hooks": "~hooks"
+    "components": "dist/components",
+    "utils": "dist/lib/utils",
+    "ui": "dist/components/ui",
+    "lib": "dist/lib",
+    "hooks": "dist/hooks"
   },
   "registries": {
     "@pureui": "https://pure.kam-ui.com/r/{name}.json",
