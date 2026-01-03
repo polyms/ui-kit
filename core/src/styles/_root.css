@@ -8,14 +8,17 @@
   --color-interaction: #1e5ae1;
 
   --color-primary: var(--color-primary-500);
-  --color-primary-10: #f2f5fd; /* deprecated */
-  --color-primary-50: #f2f5fd;
-  --color-primary-100: #d3ceff;
-  --color-primary-200: #a79eff;
-  --color-primary-300: #4031ff;
-  --color-primary-500: #1e0dff;
-  --color-primary-700: #1006b7;
-  --color-primary-900: #0f0780;
+  --color-primary-50: theme(colors.cyan.50);
+  --color-primary-100: theme(colors.cyan.100);
+  --color-primary-200: theme(colors.cyan.200);
+  --color-primary-300: theme(colors.cyan.300);
+  --color-primary-400: theme(colors.cyan.400);
+  --color-primary-500: theme(colors.cyan.500);
+  --color-primary-600: theme(colors.cyan.600);
+  --color-primary-700: theme(colors.cyan.700);
+  --color-primary-800: theme(colors.cyan.800);
+  --color-primary-900: theme(colors.cyan.900);
+  --color-primary-950: theme(colors.cyan.950);
 
   --color-secondary: var(--color-secondary-500);
   --color-secondary-100: #ffe8d7;
@@ -27,25 +30,33 @@
   --color-secondary-900: #7a0a20;
 
   --color-success: var(--color-success-500);
-  --color-success-100: #dcfce7;
-  --color-success-200: #b1f694;
-  --color-success-300: #79e35c;
-  --color-success-400: #4cda25;
-  --color-success-500: #00a63e;
-  --color-success-700: #00760e;
-  --color-success-900: #004f16;
+  --color-success-50: theme(colors.emerald.50);
+  --color-success-100: theme(colors.emerald.100);
+  --color-success-200: theme(colors.emerald.200);
+  --color-success-300: theme(colors.emerald.300);
+  --color-success-400: theme(colors.emerald.400);
+  --color-success-500: theme(colors.emerald.500);
+  --color-success-600: theme(colors.emerald.600);
+  --color-success-700: theme(colors.emerald.700);
+  --color-success-800: theme(colors.emerald.800);
+  --color-success-900: theme(colors.emerald.900);
+  --color-success-950: theme(colors.emerald.950);
 
   --color-info-500: #1e5ae1;
   --color-info: var(--color-info-500);
 
   --color-danger: var(--color-danger-500);
-  --color-danger-100: #fef2f2;
-  --color-danger-200: #feaa9a;
-  --color-danger-300: #fd7167;
-  --color-danger-400: #f85044;
-  --color-danger-500: #f93827;
-  --color-danger-700: #b40237;
-  --color-danger-900: #78003a;
+  --color-danger-50: theme(colors.rose.50);
+  --color-danger-100: theme(colors.rose.100);
+  --color-danger-200: theme(colors.rose.200);
+  --color-danger-300: theme(colors.rose.300);
+  --color-danger-400: theme(colors.rose.400);
+  --color-danger-500: theme(colors.rose.500);
+  --color-danger-600: theme(colors.rose.600);
+  --color-danger-700: theme(colors.rose.700);
+  --color-danger-800: theme(colors.rose.800);
+  --color-danger-900: theme(colors.rose.900);
+  --color-danger-950: theme(colors.rose.950);
 
   --color-warning: var(--color-warning-500);
   --color-warning-100: #fffbeb;

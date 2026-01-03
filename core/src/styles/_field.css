@@ -1,0 +1,211 @@
+.field {
+  --input-padding-x: 0.5rem;
+  --input-padding-y: 0.375rem;
+  --input-lh: 1.125rem;
+  --input-fs: 0.75rem;
+  --input-icon-size: 1.25rem;
+
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  line-height: var(--input-lh) !important;
+  border: none !important;
+  font-size: var(--input-fs);
+  font-weight: 500;
+
+  &.prefix {
+    display: flex;
+    @apply w-full xl:w-25;
+    flex-shrink: 0;
+  }
+
+  .icon-start,
+  .icon-end {
+    position: absolute;
+    top: calc(var(--input-padding-y) + var(--input-lh) / 2 + 1px);
+    width: var(--input-icon-size);
+    height: var(--input-icon-size);
+    cursor: pointer;
+    transform: translateY(-50%);
+
+    @apply text-slate-400;
+
+    &:hover {
+      color: var(--color-slate-900);
+    }
+  }
+
+  .icon-start {
+    left: calc(var(--input-padding-x) * 0.75 + 0.375rem);
+  }
+
+  .icon-end {
+    right: calc(var(--input-padding-x) * 0.75 + 0.375rem);
+  }
+
+  &.invalid {
+    > .field-input {
+      border-color: var(--color-danger-400);
+      color: var(--color-danger);
+
+      &::placeholder {
+        color: var(--color-danger-300);
+      }
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--color-danger);
+      }
+
+      &:not([readonly]):focus-visible {
+        box-shadow: 0 0 0 3px #fb042140;
+        z-index: 1;
+      }
+    }
+  }
+
+  &.required {
+    .form-label::after {
+      content: '*';
+      color: var(--color-danger);
+      margin-left: 0.25rem;
+    }
+  }
+
+  &.field-sm {
+    --input-padding-x: 0.5rem;
+    --input-padding-y: 0.25rem;
+    --input-lh: 1.125rem;
+    --input-fs: 0.75rem;
+  }
+
+  &.field-lg {
+    --input-padding-x: 0.5rem;
+    --input-padding-y: 0.5rem;
+    --input-lh: 1.125rem;
+    --input-fs: 0.875rem;
+  }
+
+  &.field-xl {
+    --input-padding-x: 0.75rem;
+    --input-padding-y: 0.5rem;
+    --input-lh: 1.375rem;
+    --input-fs: 0.875rem;
+
+    border-radius: 0.5rem;
+  }
+
+  &.field-2xl {
+    --input-padding-x: 1rem;
+    --input-padding-y: 0.625rem;
+    --input-lh: 1.625rem;
+    --input-fs: 1rem;
+
+    border-radius: 0.5rem;
+  }
+
+  &.field-3xl {
+    --input-padding-x: 1rem;
+    --input-padding-y: 0.875rem;
+    --input-lh: 1.625rem;
+    --input-fs: 1rem;
+    --input-icon-size: 1.375rem;
+
+    border-radius: 0.5rem;
+  }
+}
+
+.field-input {
+  font-family: inherit;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  line-height: var(--input-lh);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-slate-300);
+  color: var(--color-slate-900);
+  background-clip: padding-box;
+  appearance: none;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  outline: none;
+  @apply w-full;
+
+  &::placeholder {
+    color: var(--color-slate-300);
+    /* font-style: italic; */
+  }
+
+  &:hover:not(:disabled):not([disabled]),
+  &:focus-visible:not(:disabled):not([disabled]) {
+    @apply border-primary-600/70;
+  }
+
+  &:focus-visible:not([readonly]):not(:disabled):not([disabled]) {
+    @apply ring-3 ring-primary-600/20;
+  }
+
+  &.field-success > .field-input {
+    background-color: var(--color-success-100);
+    border-color: var(--color-success-400);
+
+    &::placeholder {
+      color: var(--color-success-300);
+    }
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--color-success-500);
+    }
+
+    &:not([readonly]):focus-visible {
+      box-shadow: 0 0 0 3px #79e35c40;
+    }
+  }
+
+  &.rounded-full {
+    border-radius: 50rem;
+
+    padding-left: calc(var(--input-padding-x) + 0.25rem);
+    padding-right: calc(var(--input-padding-x) + 0.25rem);
+  }
+
+  .field.addon-start & {
+    padding-left: calc(var(--input-padding-x) + var(--input-lh) + 0.5rem);
+  }
+
+  .field.addon-end & {
+    padding-right: calc(var(--input-padding-x) + var(--input-lh) + 0.5rem);
+  }
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1rem;
+
+  & ~ .icon-start,
+  & ~ .icon-end {
+    /* margin-top: 1rem; */
+    top: calc(var(--input-padding-y) + var(--input-lh) / 2 + 1.25rem + 1px);
+  }
+}
+
+.field-help-text {
+  color: var(--color-slate-300);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1rem;
+  cursor: default;
+}
+
+.invalid-feedback {
+  display: inline-flex;
+  font-size: 0.75rem;
+  background-color: var(--color-danger);
+  color: #fff;
+  border-radius: 0.25rem;
+  padding: 0 0.5rem;
+  line-height: 1.375rem;
+}

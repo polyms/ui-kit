@@ -1,32 +1,44 @@
-.link-primary {
-  color: var(--t-primary);
+.link {
   text-decoration: none;
   cursor: pointer;
+  outline: none;
 
   &:hover,
-  &:focus {
-    color: var(--t-primary-700);
+  &:focus,
+  &:focus-visible {
+    text-decoration: underline;
+    outline: none;
   }
-}
 
-.link-light {
-  color: var(--t-neutral-500);
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: var(--t-neutral-900);
+  &:active,
+  &:visited {
+    color: var(--color-primary);
   }
-}
 
-.link-dark {
-  color: var(--t-neutral-900);
-  text-decoration: none;
-  cursor: pointer;
+  &.link-primary {
+    color: var(--color-primary-500);
 
-  &:hover,
-  &:focus {
-    color: var(--t-primary);
+    &:active,
+    &:visited {
+      color: var(--color-primary-800);
+    }
+  }
+
+  &.link-danger {
+    color: var(--color-danger);
+
+    &:active,
+    &:visited {
+      color: var(--color-danger-700);
+    }
+  }
+
+  &.link-light {
+    color: var(--color-slate-500);
+
+    &:active,
+    &:visited {
+      color: var(--color-slate-900);
+    }
   }
 }

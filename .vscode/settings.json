@@ -1,6 +1,6 @@
 {
   "files.associations": {
-    "*.css": "scss"
+    "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": "on"
@@ -22,7 +22,7 @@
   "[mdx][yaml]": {
     "editor.defaultFormatter": "prettier.prettier-vscode"
   },
-  "[scss]": {
+  "[tailwindcss]": {
     "editor.defaultFormatter": "prettier.prettier-vscode"
   }
 }

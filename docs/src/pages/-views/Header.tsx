@@ -1,6 +1,6 @@
 import { SearchList02Icon, SearchRemoveIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, FormControl } from '@polyms/core'
+import { Button, Field } from '@polyms/core'
 import React from 'react'
 
 export const Header = () => {
@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <header className='flex h-14 shrink-0 items-center gap-2 border-slate-300 border-b px-4'>
       <img src='favicon.svg' alt='logo' />
-      <FormControl
+      <Field
         rounded
         placeholder='Search...'
         iconStart={<HugeiconsIcon icon={search ? SearchRemoveIcon : SearchList02Icon} strokeWidth={2} />}

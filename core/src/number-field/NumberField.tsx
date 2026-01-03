@@ -2,7 +2,7 @@ import { NumberField as Base } from '@base-ui/react/number-field'
 import clsx from 'clsx'
 import { useId } from 'react'
 
-import type { FormControlRootProps } from '../form-control/FormControlRoot'
+import type { FieldRootProps } from '../field/FieldRoot'
 
 export const NumberField = ({ id: propId, className, label, size, ...props }: NumberFieldProps) => {
   const genId = useId()
@@ -11,13 +11,13 @@ export const NumberField = ({ id: propId, className, label, size, ...props }: Nu
   return (
     <Base.Root
       {...props}
-      className={clsx('number-field form-control-root', className, {
-        [`form-control-${size}`]: size,
+      className={clsx('number-field field', className, {
+        [`field-${size}`]: size,
       })}
       id={id}
     >
       {label && (
-        <Base.ScrubArea className='number-field-scrub-area form-label'>
+        <Base.ScrubArea className='number-field-scrub-area field-label'>
           <label htmlFor={id} className='number-field-label'>
             {label}
           </label>
@@ -31,7 +31,7 @@ export const NumberField = ({ id: propId, className, label, size, ...props }: Nu
       <Base.Decrement className='number-field-decrement icon-start'>
         <MinusIcon />
       </Base.Decrement>
-      <Base.Input className='number-field-input form-control rounded-full' />
+      <Base.Input className='number-field-input field-input rounded-full' />
       <Base.Increment className='number-field-increment icon-end'>
         <PlusIcon />
       </Base.Increment>
@@ -84,5 +84,5 @@ const PlusIcon = () => (
 
 type NumberFieldProps = Base.Root.Props & {
   label?: string
-  size?: FormControlRootProps['size']
+  size?: FieldRootProps['size']
 }

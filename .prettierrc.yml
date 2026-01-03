@@ -5,7 +5,9 @@ useTabs: false
 semi: false
 trailingComma: es5
 plugins:
-  - tailwindcss
+  - prettier-plugin-tailwindcss
+
+tailwindStylesheet: ./core/src/styles/tailwind.css
 
 overrides:
   - files:
@@ -17,3 +19,7 @@ overrides:
         - '@prettier/plugin-xml'
       xmlSelfClosingSpace: true
       xmlSortAttributesByKey: true
+  - files:
+      - 'tailwind.css'
+    options:
+      printWidth: 200

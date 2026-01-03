@@ -4,7 +4,7 @@
 @import './_bottom-sheet.css' layer(components);
 @import './_breadcrumb.css' layer(components);
 @import './_button.css';
-@import './_form-control.css' layer(components);
+@import './_field.css' layer(components);
 @import './_link.css' layer(components);
 @import './_loading.css' layer(components);
 @import './_menu.css' layer(components);
@@ -25,38 +25,40 @@
 
 @import './_preflight.css' layer(base);
 
+@custom-variant dark (&:is(.dark *));
+
 /* @import "tw-animate-css"; */
 
 /* @custom-variant dark (&:is(.dark *)); */
 
 /* === Inline Utilities === */
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{italic,relative,absolute,static,fixed,sticky,truncate}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{flex,inline-flex,block,inline-block,inline,hidden,hidden!}");
-@source inline("{shrink,grow}{-0,}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}flex-{auto,initial,none,row,row-reverse,col,col-reverse,nowrap,wrap}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}justify-{start,end,center,between,around,evenly,stretch,normal}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}items-{start,end,center,baseline,stretch}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}self-{auto,start,end,center,baseline,stretch}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{w,h}-{auto,full,screen,dvh}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{gap,p,px,py,ps,pe,pt,pb,m,mx,my,ms,me,mt,mb}-{auto,3xs,2xs,xs,sm,md,lg,xl,2xl,3xl,4xl,1,2,3,4}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}grid{,-cols-{1..12}}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}col-span-{1..12}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{rounded}-{3xs,2xs,xs,sm,md,lg,xl,2xl,3xl,4xl,full}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}text-{2xs,xs,sm,base,lg,xl,2xl,3xl,4xl,start,end,center,justify,ellipsis,clip}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}overflow-{auto,hidden,clip,visible,scroll}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{btn,leading}-{xs,sm,lg,xl,2xl,3xl}");
-@source inline("{sm:,md:,lg:,xl:,2xl:,}{h1,h2,h3,h4,h5,h6}");
-@source inline("font-{normal,medium,semibold,bold,extrabold,black}");
-@source inline("{hover:,focus:,}underline");
-@source inline("{hover:,focus:,}bg-interaction/{10..90..10}");
-@source inline("{hover:,focus:,}bg-{white,primary,danger}");
-@source inline("{hover:,focus:,}bg-primary-{50,300,500}");
-@source inline("{hover:,focus:,}bg-neutral-{50,{100..900..100}}");
-@source inline("{hover:,focus:,}text-{white,primary,danger}");
-@source inline("{hover:,focus:,}text-neutral-{100..900..100}");
-@source inline("{hover:,focus:,}text-success-{500}");
-@source inline("aspect-{square,video,auto}");
-@source inline("{skeleton}");
-@source inline("shadow-{base,raised,overlay,sticky,popout,bottom}");
-@source inline("link-{primary,light,dark}");
-@source inline("container{-5xl,}");
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{italic,relative,absolute,static,fixed,sticky,truncate}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{flex,inline-flex,block,inline-block,inline,hidden,hidden!}');
+@source inline('{shrink,grow}{-0,}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}flex-{auto,initial,none,row,row-reverse,col,col-reverse,nowrap,wrap}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}justify-{start,end,center,between,around,evenly,stretch,normal}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}items-{start,end,center,baseline,stretch}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}self-{auto,start,end,center,baseline,stretch}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{w,h}-{auto,full,screen,dvh}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{gap,p,px,py,ps,pe,pt,pb,m,mx,my,ms,me,mt,mb}-{auto,3xs,2xs,xs,sm,md,lg,xl,2xl,3xl,4xl,1,2,3,4}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}grid{,-cols-{1..12}}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}col-span-{1..12}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{rounded}-{3xs,2xs,xs,sm,md,lg,xl,2xl,3xl,4xl,full}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}text-{2xs,xs,sm,base,lg,xl,2xl,3xl,4xl,start,end,center,justify,ellipsis,clip}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}overflow-{auto,hidden,clip,visible,scroll}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{btn,leading}-{xs,sm,lg,xl,2xl,3xl}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}{h1,h2,h3,h4,h5,h6}');
+@source inline('font-{normal,medium,semibold,bold,extrabold,black}');
+@source inline('{hover:,focus:,}underline');
+@source inline('{hover:,focus:,}bg-interaction/{10..90..10}');
+@source inline('{hover:,focus:,}bg-{white,primary,danger}');
+@source inline('{hover:,focus:,}bg-primary-{50,300,500}');
+@source inline('{hover:,focus:,}bg-neutral-{50,{100..900..100}}');
+@source inline('{hover:,focus:,}text-{white,primary,danger}');
+@source inline('{hover:,focus:,}text-neutral-{100..900..100}');
+@source inline('{hover:,focus:,}text-success-{500}');
+@source inline('aspect-{square,video,auto}');
+@source inline('{skeleton}');
+@source inline('shadow-{base,raised,overlay,sticky,popout,bottom}');
+@source inline('link-{primary,light,dark}');
+@source inline('container{-5xl,}');

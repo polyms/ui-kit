@@ -33,5 +33,5 @@ main {
 }
 
 .shiki {
-  @apply m-1 rounded-2xl px-6 py-4 text-sm;
+  @apply m-px rounded-2xl px-6 py-4 text-sm;
 }

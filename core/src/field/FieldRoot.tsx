@@ -4,7 +4,7 @@ import { cloneElement, forwardRef, type MouseEventHandler, type SVGProps, useId 
 
 import { ValidationTooltip } from './ValidationTooltip'
 
-export const FormControlRoot = forwardRef<HTMLInputElement, FormControlRootProps>(
+export const FieldRoot = forwardRef<HTMLInputElement, FieldRootProps>(
   (
     {
       variant,
@@ -31,18 +31,18 @@ export const FormControlRoot = forwardRef<HTMLInputElement, FormControlRootProps
 
     return (
       <div
-        className={clsx('form-control-root', className, {
+        className={clsx('field', className, {
           'addon-start': !!IconStart,
           'addon-end': !!IconEnd,
           invalid,
-          [`form-control-${size}`]: size,
-          [`form-control-${variant}`]: variant,
+          [`field-${size}`]: size,
+          [`field-${variant}`]: variant,
           required,
         })}
         contentEditable={false}
       >
         {label && (
-          <label htmlFor={id} className='form-label'>
+          <label htmlFor={id} className='field-label'>
             {label}
           </label>
         )}
@@ -61,7 +61,7 @@ export const FormControlRoot = forwardRef<HTMLInputElement, FormControlRootProps
           <input
             type='text'
             id={id}
-            className={clsx('form-control', {
+            className={clsx('field-input', {
               'rounded-full': rounded,
             })}
           />
@@ -77,7 +77,7 @@ export const FormControlRoot = forwardRef<HTMLInputElement, FormControlRootProps
               onClick: onClickIconEnd,
             })
           ))}
-        {helpText && <div className='form-help-text'>{helpText}</div>}
+        {helpText && <div className='field-help-text'>{helpText}</div>}
         {children}
       </div>
     )
@@ -86,7 +86,7 @@ export const FormControlRoot = forwardRef<HTMLInputElement, FormControlRootProps
 
 // ======================================================================================
 
-export type FormControlRootProps = Omit<
+export type FieldRootProps = Omit<
   React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
   'size'
 > & {

@@ -19,26 +19,34 @@ const ColoredLinks: React.FC = () => {
         </thead>
         <tbody>
           <tr>
+            <td>.link</td>
+            <td>
+              <a href='#link' className='link'>
+                <span>link</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
             <td>.link-primary</td>
             <td>
-              <a href='#link-primary' className='link-primary'>
+              <a href='#link-primary' className='link link-primary'>
                 <span>link primary</span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>.link-danger</td>
+            <td>
+              <a href='#link-danger' className='link link-danger'>
+                <span>link danger</span>
               </a>
             </td>
           </tr>
           <tr>
             <td>.link-light</td>
             <td>
-              <a href='#link-light' className='link-light'>
+              <a href='#link-light' className='link link-light'>
                 <span>link light</span>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>.link-dark</td>
-            <td>
-              <a href='#link-dark' className='link-dark'>
-                <span>link dark</span>
               </a>
             </td>
           </tr>

@@ -7,7 +7,7 @@ import {
   Tag01Icon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { FormControl } from '@polyms/core'
+import { Field } from '@polyms/core'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useMemo, useState } from 'react'
@@ -60,11 +60,11 @@ export function AppSidebar() {
         )}
 
         <h2 className='mt-1 flex h-14 shrink-0 items-center px-4'>
-          <img src='/icons/logo.svg' alt='logo' className='h-6' />
+          <img src='/favicon.png' alt='logo' className='h-6' />
         </h2>
 
         <div className='relative mb-4 px-4'>
-          <FormControl
+          <Field
             rounded
             placeholder='Find components...'
             iconEnd={<HugeiconsIcon icon={search ? SearchRemoveIcon : SearchList02Icon} strokeWidth={2} />}

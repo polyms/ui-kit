@@ -1,4 +1,4 @@
-import { Notification03Icon } from '@hugeicons/core-free-icons'
+import { Cart } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, type ButtonVariant, Spinner } from '@polyms/core'
 import { nanoid } from 'nanoid'
@@ -37,43 +37,24 @@ export default function ButtonDefault() {
       <div className='flex flex-col gap-xs'>
         <h1 className='border-b text-2xl'>Variants</h1>
         <div className='grid grid-cols-2 gap-4'>
-          {[
-            undefined,
-            'primary',
-            'secondary',
-            'success',
-            'light',
-            'dark',
-            'danger',
-            'link',
-            'link-danger',
-          ].map(variant => (
-            <Button key={variant ?? 'default'} size='xl' rounded variant={variant as ButtonVariant}>
-              <HugeiconsIcon icon={Notification03Icon} size={18} strokeWidth={2} />
-              <span>{variant ?? 'default'}</span>
+          {[undefined, 'primary', 'success', 'light', 'dark', 'danger'].map(variant => (
+            <Button key={variant ?? 'ghost'} size='xl' rounded variant={variant as ButtonVariant}>
+              <HugeiconsIcon icon={Cart} size={18} strokeWidth={2} />
+              <span>{variant ?? 'ghost'}</span>
             </Button>
           ))}
-          {[
-            undefined,
-            'primary',
-            'secondary',
-            'success',
-            'light',
-            'dark',
-            'danger',
-            'link',
-            'link-danger',
-          ].map(variant => (
-            <Button key={variant ?? 'default'} size='xl' rounded outlined variant={variant as ButtonVariant}>
-              <HugeiconsIcon icon={Notification03Icon} size={18} strokeWidth={2} />
-              <span>{variant ?? 'default'}</span>
+          {[undefined, 'primary', 'success', 'light', 'dark', 'danger'].map(variant => (
+            <Button key={variant ?? 'ghost'} size='xl' rounded outlined variant={variant as ButtonVariant}>
+              <HugeiconsIcon icon={Cart} size={18} strokeWidth={2} />
+              <span>{variant ?? 'ghost'}</span>
             </Button>
           ))}
+
           <Button variant='primary' size='xl' rounded>
-            <Spinner size={18} color='#fff' />
+            <Spinner size={22} color='var(--color-primary-700)' subColor='var(--color-primary-100)' />
           </Button>
           <Button variant='dark' size='xl' rounded>
-            <Spinner size={18} color='#fff' />
+            <Spinner size={22} color='#fff' subColor='var(--color-slate-500)' />
           </Button>
         </div>
       </div>
@@ -103,11 +84,7 @@ export default function ButtonDefault() {
                       btnRefs.current[size] = ref
                     }}
                   >
-                    <HugeiconsIcon
-                      icon={Notification03Icon}
-                      size={styles[size]?.lineHeight || 16}
-                      strokeWidth={2}
-                    />
+                    <HugeiconsIcon icon={Cart} size={styles[size]?.lineHeight || 16} strokeWidth={2} />
 
                     {size !== 'default' ? `btn-${size}` : 'default'}
                   </Button>
