@@ -57,26 +57,6 @@ export const Button: FC<ButtonProps> = ({
     props: mergeProps<'button'>(defaultProps, props),
     render,
   })
-  // return (
-  //   <button
-  //     type='button'
-  //     {...props}
-  //     className={clsx(
-  //       props.className,
-  //       'btn',
-  //       variant ? variantMap[variant] : 'btn-ghost',
-  //       content && contentMap[content],
-  //       {
-  //         outlined,
-  //         'rounded-full': rounded,
-  //         icon,
-  //         active,
-  //         [`btn-${size}`]: size,
-  //       }
-  //     )}
-  //     ref={ref}
-  //   />
-  // )
 }
 
 // ======================================================================================
@@ -91,4 +71,4 @@ export interface ButtonProps extends useRender.ComponentProps<'button'> {
 }
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
-export type ButtonVariant = 'primary' | 'success' | 'light' | 'dark' | 'danger' | 'link' | 'link-danger'
+export type ButtonVariant = 'primary' | 'success' | 'light' | 'dark' | 'danger'

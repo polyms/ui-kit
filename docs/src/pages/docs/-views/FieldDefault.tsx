@@ -48,17 +48,25 @@ export default function FieldDefault() {
               <td>
                 <Field
                   key={size}
+                  id={`field-demo-${size}`}
                   size={size === 'default' ? undefined : size}
                   rounded
-                  label={`Form Control: ${size}`}
-                  placeholder={size !== 'default' ? `.field-${size}` : 'default'}
-                  ref={ref => {
-                    refs.current[size] = ref
-                  }}
-                  iconStart={<HugeiconsIcon icon={SearchList02Icon} strokeWidth={2} />}
-                  iconEnd={<HugeiconsIcon icon={CancelCircleHalfDotIcon} strokeWidth={2} />}
                   required
-                />
+                  // invalid
+                >
+                  <Field.Label>{`Form Control: ${size}`}</Field.Label>
+                  <HugeiconsIcon icon={SearchList02Icon} strokeWidth={2} className='icon-start' />
+                  <HugeiconsIcon icon={CancelCircleHalfDotIcon} strokeWidth={2} className='icon-end' />
+                  <Field.Control
+                    rounded
+                    placeholder={size !== 'default' ? `.field-${size}` : 'default'}
+                    ref={ref => {
+                      refs.current[size] = ref
+                    }}
+                  />
+                  <Field.Description>{`Description for ${size}`}</Field.Description>
+                  <Field.Feedback>Error message for {size}</Field.Feedback>
+                </Field>
               </td>
               <td>{styles[size]?.fontSize}</td>
               <td>{styles[size]?.lineHeight}</td>

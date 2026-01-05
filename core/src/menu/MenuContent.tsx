@@ -1,4 +1,4 @@
-import { Menu } from '@base-ui/react/menu'
+import { Menu as Base } from '@base-ui/react/menu'
 import clsx from 'clsx'
 import type { FC, HTMLProps } from 'react'
 
@@ -12,44 +12,44 @@ export const MenuContent = ({
   alignOffset = 0,
 }: MenuContentProps) => {
   return (
-    <Menu.Portal>
-      <Menu.Positioner
+    <Base.Portal>
+      <Base.Positioner
         className='menu z-popover outline-none'
         sideOffset={sideOffset}
         alignOffset={alignOffset}
         side={side}
         align={align}
       >
-        <Menu.Popup style={style} className={clsx(className, 'menu-popup')}>
+        <Base.Popup style={style} className={clsx(className, 'menu-popup')}>
           {children}
-        </Menu.Popup>
-      </Menu.Positioner>
-    </Menu.Portal>
+        </Base.Popup>
+      </Base.Positioner>
+    </Base.Portal>
   )
 }
 
 export const MenuItem: FC<MenuItemProps> = ({ variant, ...props }) => (
-  <Menu.Item {...props} className={clsx(props.className, 'menu-item', { [`menu-${variant}`]: !!variant })} />
+  <Base.Item {...props} className={clsx(props.className, 'menu-item', { [`menu-${variant}`]: !!variant })} />
 )
-export const MenuSubmenuTrigger: FC<Menu.Item.Props> = props => (
-  <Menu.SubmenuTrigger {...props} className={clsx(props.className, 'menu-item')} />
+export const MenuSubmenuTrigger: FC<Base.Item.Props> = props => (
+  <Base.SubmenuTrigger {...props} className={clsx(props.className, 'menu-item')} />
 )
 
-export const MenuSeparator: FC<Menu.Separator.Props> = props => (
-  <Menu.Separator {...props} className={clsx(props.className, 'menu-separator')} />
+export const MenuSeparator: FC<Base.Separator.Props> = props => (
+  <Base.Separator {...props} className={clsx(props.className, 'menu-separator')} />
 )
-export const MenuGroup: FC<Menu.Group.Props> = props => (
-  <Menu.Group {...props} className={clsx(props.className, 'menu-group')} />
+export const MenuGroup: FC<Base.Group.Props> = props => (
+  <Base.Group {...props} className={clsx(props.className, 'menu-group')} />
 )
-export const MenuGroupLabel: FC<Menu.GroupLabel.Props> = props => (
-  <Menu.GroupLabel {...props} className={clsx(props.className, 'menu-group-label')} />
+export const MenuGroupLabel: FC<Base.GroupLabel.Props> = props => (
+  <Base.GroupLabel {...props} className={clsx(props.className, 'menu-group-label')} />
 )
 
 // ======================================================================================
 
 type MenuContentProps = HTMLProps<HTMLDivElement> &
-  Partial<Pick<Menu.Positioner.Props, 'side' | 'align' | 'sideOffset' | 'alignOffset'>>
+  Partial<Pick<Base.Positioner.Props, 'side' | 'align' | 'sideOffset' | 'alignOffset'>>
 
-type MenuItemProps = Menu.Item.Props & {
+type MenuItemProps = Base.Item.Props & {
   variant?: 'danger'
 }

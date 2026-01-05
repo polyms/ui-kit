@@ -6,7 +6,6 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type UserConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import pkg from './package.json'
 
@@ -47,7 +46,7 @@ export default defineConfig(async ({ mode }) => {
     plugins: [
       react(),
       nxViteTsPaths(),
-      nxCopyAssetsPlugin(['*.md']),
+      nxCopyAssetsPlugin(['*.md', { input: 'src/styles', glob: '**/*', output: 'styles' }]),
       tailwindcssVite(),
       // federation(),
       dts({
@@ -58,7 +57,7 @@ export default defineConfig(async ({ mode }) => {
         clearPureImport: true,
         tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
         outDir,
-        bundledPackages: ['@base-ui/react'],
+        // bundledPackages: ['@base-ui/react'],
         beforeWriteFile(filePath, content) {
           const matchs = content.match(/(?:node_modules\/)?@base-ui\/react(\/esm)?/g)
           if (!matchs) return { filePath, content }
@@ -68,21 +67,30 @@ export default defineConfig(async ({ mode }) => {
 
           return { filePath, content: modifiedContent }
         },
-      }),
-      viteStaticCopy({
-        targets: [
-          {
-            src: '../node_modules/@base-ui/react/esm/**/*.d.ts',
-            dest: `${outDir}/base/`,
-            rename: (_, __, fullPath) => {
-              const relativePath = path.relative(
-                path.resolve(__dirname, '../node_modules/@base-ui/react/esm'),
-                fullPath
-              )
-              return relativePath
-            },
-          },
-        ],
+        afterBuild: async () => {
+          // Copy @base-ui/react types to dist
+          const fs = await import('node:fs/promises')
+          const baseUiPath = path.resolve(__dirname, '../node_modules/@base-ui/react/esm')
+          const destPath = path.join(outDir, 'base')
+
+          const copyDir = async (src: string, dest: string) => {
+            await fs.mkdir(dest, { recursive: true })
+            const entries = await fs.readdir(src, { withFileTypes: true })
+
+            for (const entry of entries) {
+              const srcPath = path.join(src, entry.name)
+              const destPath = path.join(dest, entry.name)
+
+              if (entry.isDirectory()) {
+                await copyDir(srcPath, destPath)
+              } else if (entry.name.endsWith('.d.ts')) {
+                await fs.copyFile(srcPath, destPath)
+              }
+            }
+          }
+
+          await copyDir(baseUiPath, destPath)
+        },
       }),
     ].filter(Boolean),
     // Uncomment this if you are using workers.
@@ -136,13 +144,13 @@ export default defineConfig(async ({ mode }) => {
             }
             return '[name]-[hash].mjs'
           },
-          assetFileNames: assetInfo => {
-            if (assetInfo.names.some(name => name.endsWith('.css'))) {
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.names.some((name) => name.endsWith('.css'))) {
               return isLocal ? 'styles.css' : 'styles-[hash].css'
             }
             return '[name]-[hash][extname]'
           },
-          footer: chunk => (chunk.isEntry ? footer(mode, version) : ''),
+          footer: (chunk) => (chunk.isEntry ? footer(mode, version) : ''),
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',

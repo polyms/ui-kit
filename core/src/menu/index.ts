@@ -13,7 +13,7 @@ export const Menu = Object.assign(Base.Root, {
   Trigger: Base.Trigger,
   Content: MenuContent,
   Item: MenuItem,
-  Separator: MenuSeparator,
+  // Separator: MenuSeparator,
   Group: MenuGroup,
   GroupLabel: MenuGroupLabel,
   SubmenuRoot: Base.SubmenuRoot,

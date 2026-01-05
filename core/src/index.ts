@@ -1,6 +1,7 @@
 export { Accordion } from '@base-ui/react/accordion'
 export { Avatar } from '@base-ui/react/avatar'
 export { Collapsible } from '@base-ui/react/collapsible'
+export * from '@base-ui/react/use-render'
 export * from './bottom-sheet'
 export * from './breadcrumb'
 export * from './button'

@@ -12,9 +12,9 @@ export function ModalContainer() {
         <ModalRoot
           key={id}
           open={open}
-          onOpenChange={(newOpen, _, reason) => {
+          onOpenChange={(newOpen, e) => {
             if (!newOpen) {
-              useModalStore.getState().closeModal(id, reason) // Only close when actually closed
+              useModalStore.getState().closeModal(id, e.reason) // Only close when actually closed
             }
           }}
         >

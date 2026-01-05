@@ -129,99 +129,25 @@
 
 @layer base {
   :root {
-    --t-w-sidebar: 350px;
-    --t-w-sidebar-min: 50px;
+    --shadow-base: var(--shadow-base);
+    --shadow-raised: var(--shadow-raised);
+    --shadow-overlay: var(--shadow-overlay);
+    --shadow-sticky: var(--shadow-sticky);
+    --shadow-popout: var(--shadow-popout);
+    --shadow-bottom: var(--shadow-bottom);
 
-    --t-h-top-nav: 56px;
-    --t-h-sub-nav: 48px;
-
-    @media (min-width: 1600px) {
-      --t-w-sidebar: 450px;
-    }
-
-    --t-primary: var(--color-primary);
-    --t-primary-10: var(--color-primary-10);
-    --t-primary-50: var(--color-primary-50);
-    --t-primary-100: var(--color-primary-100);
-    --t-primary-200: var(--color-primary-200);
-    --t-primary-300: var(--color-primary-300);
-    --t-primary-500: var(--color-primary-500);
-    --t-primary-700: var(--color-primary-700);
-    --t-primary-900: var(--color-primary-900);
-
-    --t-secondary: var(--color-secondary);
-    --t-secondary-50: var(--color-secondary-50);
-    --t-secondary-100: var(--color-secondary-100);
-    --t-secondary-200: var(--color-secondary-200);
-    --t-secondary-300: var(--color-secondary-300);
-    --t-secondary-500: var(--color-secondary-500);
-    --t-secondary-700: var(--color-secondary-700);
-    --t-secondary-900: var(--color-secondary-900);
-
-    --t-success: var(--color-success);
-    --t-success-50: var(--color-success-50);
-    --t-success-100: var(--color-success-100);
-    --t-success-200: var(--color-success-200);
-    --t-success-300: var(--color-success-300);
-    --t-success-500: var(--color-success-500);
-    --t-success-700: var(--color-success-700);
-    --t-success-900: var(--color-success-900);
-
-    --t-danger: var(--color-danger);
-    --t-danger-50: var(--color-danger-50);
-    --t-danger-100: var(--color-danger-100);
-    --t-danger-200: var(--color-danger-200);
-    --t-danger-300: var(--color-danger-300);
-    --t-danger-500: var(--color-danger-500);
-    --t-danger-700: var(--color-danger-700);
-    --t-danger-900: var(--color-danger-900);
-
-    --t-neutral: var(--color-neutral-500);
-    --t-neutral-0: #fff;
-    --t-neutral-25: #f8f9fa;
-    --t-neutral-50: var(--color-neutral-50);
-    --t-neutral-100: var(--color-neutral-100);
-    --t-neutral-200: var(--color-neutral-200);
-    --t-neutral-250: var(--color-neutral-250);
-    --t-neutral-300: var(--color-neutral-300);
-    --t-neutral-400: var(--color-neutral-400);
-    --t-neutral-500: var(--color-neutral-500);
-    --t-neutral-600: var(--color-neutral-600);
-    --t-neutral-700: var(--color-neutral-700);
-    --t-neutral-800: var(--color-neutral-800);
-    --t-neutral-900: var(--color-neutral-900);
-
-    --t-mono-0: hsl(0, 0%, 0%);
-    --t-mono-5: hsla(0, 0%, 0%, 0.05);
-    --t-mono-10: hsla(0, 0%, 0%, 0.1);
-    --t-mono-15: hsla(0, 0%, 0%, 0.15);
-    --t-mono-25: hsla(0, 0%, 0%, 0.25);
-    --t-mono-50: hsla(0, 0%, 0%, 0.5);
-    --t-mono-75: hsla(0, 0%, 0%, 0.75);
-    --t-mono-85: hsla(0, 0%, 0%, 0.85);
-    --t-mono-90: hsla(0, 0%, 0%, 0.9);
-
-    --t-shadow-base: var(--shadow-base);
-    --t-shadow-raised: var(--shadow-raised);
-    --t-shadow-overlay: var(--shadow-overlay);
-    --t-shadow-sticky: var(--shadow-sticky);
-    --t-shadow-popout: var(--shadow-popout);
-    --t-shadow-bottom: var(--shadow-bottom);
-
-    --t-ring-primary: 0 0 0 3px #0d6efd40;
-
-    --t-z-dropdown: 1000;
-    --t-z-sticky: 1020;
-    --t-z-fixed: 1030;
-    --t-z-toolbar: 1050;
-    --t-z-offcanvas-backdrop: 2000;
-    --t-z-offcanvas: 2005;
-    --t-z-sidebar: 2010;
-    --t-z-modal-backdrop: 3000;
-    --t-z-modal: 3005;
-    --t-z-popover: 4010;
-    --t-z-tooltip: 4020;
-    --t-z-toast: 5000;
+    --zindex-dropdown: 1000;
+    --zindex-sticky: 1020;
+    --zindex-fixed: 1030;
+    --zindex-toolbar: 1050;
+    --zindex-offcanvas-backdrop: 2000;
+    --zindex-offcanvas: 2005;
+    --zindex-sidebar: 2010;
+    --zindex-modal-backdrop: 3000;
+    --zindex-modal: 3005;
+    --zindex-popover: 4010;
+    --zindex-tooltip: 4020;
+    --zindex-toast: 5000;
 
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;

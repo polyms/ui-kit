@@ -45,29 +45,8 @@
     right: calc(var(--input-padding-x) * 0.75 + 0.375rem);
   }
 
-  &.invalid {
-    > .field-input {
-      border-color: var(--color-danger-400);
-      color: var(--color-danger);
-
-      &::placeholder {
-        color: var(--color-danger-300);
-      }
-
-      &:hover,
-      &:focus-visible {
-        border-color: var(--color-danger);
-      }
-
-      &:not([readonly]):focus-visible {
-        box-shadow: 0 0 0 3px #fb042140;
-        z-index: 1;
-      }
-    }
-  }
-
   &.required {
-    .form-label::after {
+    .field-label::after {
       content: '*';
       color: var(--color-danger);
       margin-left: 0.25rem;
@@ -117,7 +96,7 @@
   }
 }
 
-.field-input {
+.field-control {
   font-family: inherit;
   padding: var(--input-padding-y) var(--input-padding-x);
   line-height: var(--input-lh);
@@ -146,21 +125,20 @@
     @apply ring-3 ring-primary-600/20;
   }
 
-  &.field-success > .field-input {
-    background-color: var(--color-success-100);
-    border-color: var(--color-success-400);
+  .field.invalid &.field-control {
+    @apply border-danger-600/70 text-danger;
 
     &::placeholder {
-      color: var(--color-success-300);
+      color: var(--color-danger-300);
     }
 
-    &:hover,
-    &:focus-visible {
-      border-color: var(--color-success-500);
+    &:hover:not(:disabled):not([disabled]),
+    &:focus-visible:not(:disabled):not([disabled]) {
+      @apply border-danger-600/70;
     }
 
-    &:not([readonly]):focus-visible {
-      box-shadow: 0 0 0 3px #79e35c40;
+    &:focus-visible:not([readonly]):not(:disabled):not([disabled]) {
+      @apply ring-danger-600/20;
     }
   }
 
@@ -171,11 +149,11 @@
     padding-right: calc(var(--input-padding-x) + 0.25rem);
   }
 
-  .field.addon-start & {
+  .icon-start ~ & {
     padding-left: calc(var(--input-padding-x) + var(--input-lh) + 0.5rem);
   }
 
-  .field.addon-end & {
+  .icon-end ~ & {
     padding-right: calc(var(--input-padding-x) + var(--input-lh) + 0.5rem);
   }
 }
@@ -192,15 +170,15 @@
   }
 }
 
-.field-help-text {
-  color: var(--color-slate-300);
+.field-description {
+  color: var(--color-slate-400);
   font-size: 12px;
   font-weight: 500;
   line-height: 1rem;
   cursor: default;
 }
 
-.invalid-feedback {
+.field-feedback {
   display: inline-flex;
   font-size: 0.75rem;
   background-color: var(--color-danger);
@@ -208,4 +186,69 @@
   border-radius: 0.25rem;
   padding: 0 0.5rem;
   line-height: 1.375rem;
+}
+
+.field-floating {
+  position: relative;
+  z-index: 0;
+
+  input {
+    display: block;
+    width: 100%;
+    appearance: none;
+    background: transparent;
+    padding: 1.25rem 0 0.25rem 0;
+    font-size: 0.875rem;
+    color: var(--color-slate-900);
+    border: none;
+    border-bottom: 2px solid var(--color-slate-300);
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+
+    &::placeholder {
+      color: transparent;
+    }
+
+    &[type='number'] {
+      @apply font-mono;
+    }
+
+    &:focus {
+      @apply border-primary-600 ring-0;
+    }
+  }
+
+  label {
+    position: absolute;
+    bottom: 0.5rem;
+    z-index: -10;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-slate-500);
+    transform-origin: top left;
+    transform: translateY(-1rem) scale(0.85);
+    transition:
+      transform 0.3s ease-in-out,
+      color 0.3s ease-in-out;
+    pointer-events: none;
+    left: auto;
+  }
+
+  input:placeholder-shown ~ label {
+    transform: translateY(0) scale(1);
+  }
+
+  input:focus ~ label {
+    transform: translateY(-1rem) scale(0.85);
+    left: 0;
+    @apply text-primary-600;
+  }
+
+  /* RTL Support */
+  &:dir(rtl) {
+    input:focus ~ label {
+      left: auto;
+      transform: translateY(-1rem) scale(0.85) translateX(0.25em);
+    }
+  }
 }

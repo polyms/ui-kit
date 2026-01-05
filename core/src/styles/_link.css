@@ -42,3 +42,7 @@
     }
   }
 }
+
+.stretched-link {
+  @apply absolute inset-0 z-0 cursor-pointer;
+}

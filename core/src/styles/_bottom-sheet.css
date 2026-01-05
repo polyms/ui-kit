@@ -86,8 +86,8 @@
 
   &:active::before {
     cursor: grabbing;
-    background-color: var(--t-neutral-600); /* Màu chính khi nhấn */
-    transform: translateX(-50%) scale(1); /* Trở lại kích thước ban đầu */
+    background-color: var(--t-neutral-600);
+    transform: translateX(-50%) scale(1);
   }
 }
 
