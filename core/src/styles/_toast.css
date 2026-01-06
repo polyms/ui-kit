@@ -96,7 +96,7 @@
     transform: translateX(-50%);
     max-width: min(100%, 25rem);
     min-width: 20rem;
-    z-index: var(--t-z-toast);
+    z-index: var(--zindex-toast);
   }
 
   .toast-close {

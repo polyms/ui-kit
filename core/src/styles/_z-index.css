@@ -1,36 +1,36 @@
 .z-dropdown {
-  z-index: var(--t-z-dropdown);
+  z-index: var(--zindex-dropdown);
 }
 .z-sticky {
-  z-index: var(--t-z-sticky);
+  z-index: var(--zindex-sticky);
 }
 .z-fixed {
-  z-index: var(--t-z-fixed);
+  z-index: var(--zindex-fixed);
 }
 .z-toolbar {
-  z-index: var(--t-z-toolbar);
+  z-index: var(--zindex-toolbar);
 }
 .z-offcanvas-backdrop {
-  z-index: var(--t-z-offcanvas-backdrop);
+  z-index: var(--zindex-offcanvas-backdrop);
 }
 .z-offcanvas {
-  z-index: var(--t-z-offcanvas);
+  z-index: var(--zindex-offcanvas);
 }
 .z-sidebar {
-  z-index: var(--t-z-sidebar);
+  z-index: var(--zindex-sidebar);
 }
 .z-modal-backdrop {
-  z-index: var(--t-z-modal-backdrop);
+  z-index: var(--zindex-modal-backdrop);
 }
 .z-modal {
-  z-index: var(--t-z-modal);
+  z-index: var(--zindex-modal);
 }
 .z-popover {
-  z-index: var(--t-z-popover);
+  z-index: var(--zindex-popover);
 }
 .z-tooltip {
-  z-index: var(--t-z-tooltip);
+  z-index: var(--zindex-tooltip);
 }
 .z-toast {
-  z-index: var(--t-z-toast);
+  z-index: var(--zindex-toast);
 }

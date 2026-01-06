@@ -1,5 +1,5 @@
 .tooltip-positioner {
-  z-index: var(--t-z-tooltip);
+  z-index: var(--zindex-tooltip);
 }
 
 .tooltip-popup {
@@ -15,7 +15,7 @@
   background-color: var(--t-neutral-900);
   transform-origin: var(--transform-origin);
   white-space: nowrap;
-  z-index: var(--t-z-tooltip);
+  z-index: var(--zindex-tooltip);
   transition:
     transform 150ms,
     opacity 150ms;
@@ -45,7 +45,7 @@
 
 .tooltip-arrow {
   display: flex;
-  z-index: var(--t-z-tooltip);
+  z-index: var(--zindex-tooltip);
 
   &[data-side='top'] {
     bottom: -12px;

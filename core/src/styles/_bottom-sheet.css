@@ -4,7 +4,7 @@
   background-color: black;
   opacity: 0.7;
   transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
-  z-index: var(--t-z-modal-backdrop);
+  z-index: var(--zindex-modal-backdrop);
 
   /* @media (prefers-color-scheme: dark) {
     opacity: 0.7;
@@ -29,7 +29,7 @@
   background-color: #fff;
   color: var(--color-gray-900);
   transition: all 250ms;
-  z-index: var(--t-z-modal);
+  z-index: var(--zindex-modal);
   display: flex;
   flex-direction: column;
   user-select: none;

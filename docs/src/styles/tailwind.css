@@ -10,6 +10,6 @@ body {
 
 @layer base {
   section {
-    @apply mb-lg;
+    @apply mb-10;
   }
 }

@@ -13,7 +13,7 @@
   &.offcanvas-overlay {
     top: 0;
     bottom: 0;
-    z-index: var(--t-z-offcanvas-backdrop);
+    z-index: var(--zindex-offcanvas-backdrop);
 
     &.bottom-spacing {
       bottom: var(--t-h-bottom-menu, 0) !important;
@@ -34,7 +34,7 @@
     flex-direction: column;
     box-sizing: border-box;
     animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
-    z-index: var(--t-z-offcanvas);
+    z-index: var(--zindex-offcanvas);
 
     &.bottom-spacing {
       bottom: var(--t-h-bottom-menu, 0);

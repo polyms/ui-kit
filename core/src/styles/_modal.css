@@ -1,7 +1,7 @@
 .modal {
   @apply fixed top-0 left-0 flex h-full w-full flex-col overflow-x-hidden overflow-y-auto outline-none;
 
-  z-index: var(--t-z-modal-backdrop);
+  z-index: var(--zindex-modal-backdrop);
 }
 
 .modal-dialog {
@@ -9,7 +9,7 @@
   @apply transition-all ease-out;
 
   transition-duration: 300ms;
-  z-index: var(--t-z-modal);
+  z-index: var(--zindex-modal);
 
   &[data-nested-dialog-open] {
     .modal-content::after {
@@ -39,16 +39,15 @@
 }
 
 .modal-content {
-  @apply pointer-events-auto relative flex w-full flex-col bg-white bg-clip-padding outline-none;
+  @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-white bg-clip-padding outline-none;
 
   /* overflow: hidden; */
   border-radius: 1.5rem;
 }
 
 .modal-backdrop {
-  @apply fixed inset-0 h-screen w-screen;
-  background-color: #000;
-  z-index: var(--t-z-modal-backdrop);
+  @apply fixed inset-0 h-screen w-screen bg-black;
+  z-index: var(--zindex-modal-backdrop);
   opacity: 0.8;
   transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
 
@@ -63,7 +62,15 @@
 }
 
 .modal-header {
-  @apply flex shrink-0 items-center px-sm pt-xs pb-2xs text-xl font-medium;
+  @apply flex shrink-0 items-center gap-2 leading-5;
+  @apply rounded-t-3xl p-5 font-semibold;
+
+  font-size: 22px;
+
+  .modal-close {
+    @apply self-start;
+    /* @apply -mt-2 -mr-2 -mb-2 m-auto p-2; */
+  }
 }
 
 .modal-title {
@@ -71,7 +78,7 @@
 }
 
 .modal-body {
-  @apply relative flex-auto p-sm;
+  @apply relative flex-auto p-5;
 
   .modal-header + & {
     @apply pt-0;
@@ -90,15 +97,12 @@
 .modal-close {
   @apply z-10 flex p-2;
   @apply cursor-pointer rounded-full outline-0;
-  @apply text-neutral-600 hover:bg-neutral-200 hover:text-neutral-900 focus:text-neutral-900;
+  @apply text-slate-300 hover:bg-slate-50/10 hover:text-slate-50;
+  @apply focus:text-slate-400;
 
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-
-  &:focus-visible {
-    box-shadow: 0 0 0 2px var(--color-neutral-300);
-  }
+  top: -1.5rem;
+  left: 100%;
 }
 
 @media (min-width: 40rem) {
