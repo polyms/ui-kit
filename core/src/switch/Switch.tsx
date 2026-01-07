@@ -1,12 +1,17 @@
+import clsx from 'clsx'
 import { type FC, forwardRef, type InputHTMLAttributes, type RefAttributes, useId } from 'react'
 
 export const Switch: FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>(
-  ({ id: propId, className, variant, ...props }, ref) => {
+  ({ id: propId, className, variant, label, ...props }, ref) => {
     const genId = useId()
     const id = propId ?? genId
 
-    const computedClass = ['switch', className, variant].filter(Boolean).join(' ')
-    return <input id={id} {...props} ref={ref} type='checkbox' className={computedClass} />
+    return (
+      <label htmlFor={id} className={clsx('switch', className, variant)}>
+        <input id={id} {...props} ref={ref} type='checkbox' />
+        {label && <span className='switch-label'>{label}</span>}
+      </label>
+    )
   }
 )
 
@@ -15,4 +20,5 @@ export const Switch: FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>
 export type SwitchProps = RefAttributes<HTMLInputElement> &
   Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
     variant?: 'primary'
+    label?: string
   }
