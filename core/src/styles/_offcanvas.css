@@ -1,5 +1,5 @@
 .offcanvas {
-  --t-w-offcanvas: calc(var(--t-w-sidebar));
+  --w-offcanvas: calc(var(--w-sidebar));
   background-color: hsla(0, 0%, 100%, 0.5);
 
   &.backdrop {
@@ -7,7 +7,7 @@
   }
 
   &:not(.backdrop) {
-    width: var(--t-w-offcanvas);
+    width: var(--w-offcanvas);
   }
 
   &.offcanvas-overlay {
@@ -16,11 +16,11 @@
     z-index: var(--zindex-offcanvas-backdrop);
 
     &.bottom-spacing {
-      bottom: var(--t-h-bottom-menu, 0) !important;
+      bottom: var(--h-bottom-menu, 0) !important;
     }
 
     @media (min-width: 1025px) {
-      top: var(--t-w-offcanvas-top, 0);
+      top: var(--w-offcanvas-top, 0);
     }
   }
 
@@ -37,7 +37,7 @@
     z-index: var(--zindex-offcanvas);
 
     &.bottom-spacing {
-      bottom: var(--t-h-bottom-menu, 0);
+      bottom: var(--h-bottom-menu, 0);
     }
 
     &.open {
@@ -59,13 +59,13 @@
       border-top-left-radius: 1rem;
       border-top-right-radius: 1rem;
       max-height: 90%;
-      border-top: 1px solid var(--t-neutral-300);
+      border-top: 1px solid var(--color-slate-300);
     }
 
     @media (min-width: 1024px) {
-      width: var(--t-w-offcanvas);
-      border-right: 1px solid var(--t-neutral-300);
-      top: var(--t-w-offcanvas-top, 0);
+      width: var(--w-offcanvas);
+      border-right: 1px solid var(--color-slate-300);
+      top: var(--w-offcanvas-top, 0);
     }
   }
 

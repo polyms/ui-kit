@@ -86,7 +86,7 @@
 
   &:active::before {
     cursor: grabbing;
-    background-color: var(--t-neutral-600);
+    background-color: var(--color-slate-600);
     transform: translateX(-50%) scale(1);
   }
 }

@@ -1,5 +1,5 @@
 .menu-popup {
-  border: 1px solid var(--t-neutral-300);
+  border: 1px solid var(--color-slate-300);
   box-sizing: border-box;
   padding-block: 0.25rem;
   border-radius: 0.375rem;
@@ -50,7 +50,7 @@
     inset-block: 0;
     inset-inline: 0.25rem;
     border-radius: 0.25rem;
-    background-color: var(--t-primary-50);
+    background-color: var(--color-primary-50);
   }
 
   &[data-disabled] {
@@ -59,14 +59,14 @@
   }
 
   &.menu-danger {
-    color: var(--t-danger);
+    color: var(--color-danger);
 
     &[data-highlighted] {
       color: #fff;
     }
 
     &[data-highlighted]::before {
-      background-color: var(--t-danger);
+      background-color: var(--color-danger);
     }
   }
 }
@@ -74,7 +74,7 @@
 .menu-separator {
   margin: 2px 0.25rem;
   height: 1px;
-  background-color: var(--t-neutral-300);
+  background-color: var(--color-slate-300);
 }
 
 .menu-group {

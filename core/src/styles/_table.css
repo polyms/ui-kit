@@ -1,21 +1,21 @@
 .table {
   /* Reset needed for nesting tables */
-  --t-table-color-type: initial;
-  --t-table-bg-type: initial;
-  --t-table-color-state: initial;
-  --t-table-bg-state: initial;
+  --table-color-type: initial;
+  --table-bg-type: initial;
+  --table-color-state: initial;
+  --table-bg-state: initial;
   /* End of reset */
-  --t-table-color: var(--t-neutral-900);
-  --t-table-bg: #fff;
-  --t-table-border-color: var(--t-neutral-300);
-  --t-table-accent-bg: transparent;
-  --t-table-striped-color: var(--t-table-color);
-  --t-table-striped-bg: hsla(210, 17%, 84%, 0.05);
-  --t-table-active-color: var(--t-table-color);
-  --t-table-active-bg: hsla(210, 17%, 84%, 0.1);
-  --t-table-hover-color: var(--t-table-color);
-  --t-table-hover-bg: hsla(210, 17%, 84%, 0.075);
-  --t-table-border-width: 1px;
+  --table-color: var(--color-slate-900);
+  --table-bg: #fff;
+  --table-border-color: var(--color-slate-300);
+  --table-accent-bg: transparent;
+  --table-striped-color: var(--table-color);
+  --table-striped-bg: hsla(210, 17%, 84%, 0.05);
+  --table-active-color: var(--table-color);
+  --table-active-bg: hsla(210, 17%, 84%, 0.1);
+  --table-hover-color: var(--table-color);
+  --table-hover-bg: hsla(210, 17%, 84%, 0.075);
+  --table-border-width: 1px;
 
   width: 100%;
   margin-bottom: 1rem;
@@ -29,11 +29,11 @@
   > :not(caption) > * > * {
     padding: 0.5rem 0.5rem;
     /* Following the precept of cascades: https://codepen.io/miriamsuzanne/full/vYNgodb */
-    color: var(--t-table-color-state, var(--t-table-color-type, var(--t-table-color)));
-    background-color: var(--t-table-bg);
-    border-color: var(--t-table-border-color);
-    border-bottom-width: var(--t-table-border-width);
-    box-shadow: inset 0 0 0 9999px var(--t-table-bg-state, var(--t-table-bg-type, var(--t-table-accent-bg)));
+    color: var(--table-color-state, var(--table-color-type, var(--table-color)));
+    background-color: var(--table-bg);
+    border-color: var(--table-border-color);
+    border-bottom-width: var(--table-border-width);
+    box-shadow: inset 0 0 0 9999px var(--table-bg-state, var(--table-bg-type, var(--table-accent-bg)));
   }
 
   > tbody {
@@ -55,7 +55,7 @@
 }
 
 .table-group-divider {
-  border-top: calc(var(--t-table-border-width) * 2) solid currentcolor;
+  border-top: calc(var(--table-border-width) * 2) solid currentcolor;
 }
 
 /* 
@@ -90,10 +90,10 @@
 
 .table-bordered {
   > :not(caption) > * {
-    border-width: var(--t-table-border-width) 0;
+    border-width: var(--table-border-width) 0;
 
     > * {
-      border-width: 0 var(--t-table-border-width);
+      border-width: 0 var(--table-border-width);
     }
   }
 }
@@ -116,16 +116,16 @@
 /* For rows */
 .table-striped {
   > tbody > tr:nth-of-type(odd) > * {
-    --t-table-color-type: var(--t-table-striped-color);
-    --t-table-bg-type: var(--t-table-striped-bg);
+    --table-color-type: var(--table-striped-color);
+    --table-bg-type: var(--table-striped-bg);
   }
 }
 
 /* For columns */
 .table-striped-columns {
   > :not(caption) > tr > :nth-child(even) {
-    --t-table-color-type: var(--t-table-striped-color);
-    --t-table-bg-type: var(--t-table-striped-bg);
+    --table-color-type: var(--table-striped-color);
+    --table-bg-type: var(--table-striped-bg);
   }
 }
 
@@ -135,8 +135,8 @@
 // The `.table-active` class can be added to highlight rows or cells */
 
 .table-active {
-  --t-table-color-state: var(--t-table-active-color);
-  --t-table-bg-state: var(--t-table-active-bg);
+  --table-color-state: var(--table-active-color);
+  --table-bg-state: var(--table-active-bg);
 }
 
 /* 
@@ -146,7 +146,7 @@
 
 .table-hover {
   > tbody > tr:hover > * {
-    --t-table-color-state: var(--t-table-hover-color);
-    --t-table-bg-state: var(--t-table-hover-bg);
+    --table-color-state: var(--table-hover-color);
+    --table-bg-state: var(--table-hover-bg);
   }
 }
