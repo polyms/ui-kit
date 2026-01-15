@@ -4,6 +4,15 @@ import { useId } from 'react'
 
 import type { FieldRootProps } from '../field/FieldRoot'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type NumberFieldProps = Base.Root.Props & {
+  label?: string
+  size?: FieldRootProps['size']
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const NumberField = ({ id: propId, className, label, size, ...props }: NumberFieldProps) => {
   const genId = useId()
   const id = propId ?? genId
@@ -18,7 +27,7 @@ export const NumberField = ({ id: propId, className, label, size, ...props }: Nu
     >
       {label && (
         <Base.ScrubArea className='number-field-scrub-area field-label'>
-          <label htmlFor={id} className='number-field-label'>
+          <label className='number-field-label' htmlFor={id}>
             {label}
           </label>
           <Base.ScrubAreaCursor className='number-field-scrub-area-cursor'>
@@ -43,11 +52,11 @@ export const NumberField = ({ id: propId, className, label, size, ...props }: Nu
 function CursorGrowIcon(props: React.ComponentProps<'svg'>) {
   return (
     <svg
-      width='26'
-      height='14'
-      viewBox='0 0 24 14'
       fill='black'
+      height='14'
       stroke='white'
+      viewBox='0 0 24 14'
+      width='26'
       xmlns='http://www.w3.org/2000/svg'
       {...props}
     >
@@ -57,18 +66,18 @@ function CursorGrowIcon(props: React.ComponentProps<'svg'>) {
 }
 
 const MinusIcon = () => (
-  <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg fill='none' height='18' viewBox='0 0 18 18' width='18' xmlns='http://www.w3.org/2000/svg'>
     <path
-      fillRule='evenodd'
       clipRule='evenodd'
       d='M15.5 8.99805C15.5 9.55035 15.1642 9.99805 14.75 9.99805H4.25C3.83579 9.99805 3.5 9.55035 3.5 8.99805C3.5 8.44575 3.83579 7.99805 4.25 7.99805H14.75C15.1642 7.99805 15.5 8.44575 15.5 8.99805Z'
       fill='currentColor'
+      fillRule='evenodd'
     />
   </svg>
 )
 
 const PlusIcon = () => (
-  <svg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg fill='none' height='18' viewBox='0 0 18 18' width='18' xmlns='http://www.w3.org/2000/svg'>
     <path
       d='M9.49929 15.4673C9.01379 15.4673 8.62039 15.0739 8.62039 14.5884V3.41016C8.62039 2.92465 9.01379 2.53125 9.49929 2.53125C9.9848 2.53125 10.3782 2.92465 10.3782 3.41016V14.5884C10.3782 15.0739 9.9848 15.4673 9.49929 15.4673Z'
       fill='currentColor'
@@ -79,10 +88,3 @@ const PlusIcon = () => (
     />
   </svg>
 )
-
-// ======================================================================================
-
-type NumberFieldProps = Base.Root.Props & {
-  label?: string
-  size?: FieldRootProps['size']
-}

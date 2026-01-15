@@ -1,6 +1,26 @@
 import type { Dialog } from '@base-ui/react/dialog'
 import { create } from 'zustand'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface ModalItem {
+  id: string
+  element: React.ReactNode
+  open: boolean
+  onClose?: CloseFunc
+  reason?: string
+}
+
+interface ModalState {
+  modals: Map<string, ModalItem>
+  showModal: (id: string, element: React.ReactNode, options?: { onClose?: CloseFunc }) => void
+  closeModal: (id: string, reason?: Dialog.Root.ChangeEventReason) => void
+}
+
+type CloseFunc = (reason?: Dialog.Root.ChangeEventReason) => void
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const useModalStore = create<ModalState>((set, get) => ({
   modals: new Map(),
 
@@ -40,21 +60,3 @@ export const useModalStore = create<ModalState>((set, get) => ({
     }, 300)
   },
 }))
-
-// ======================================================================================
-
-export interface ModalItem {
-  id: string
-  element: React.ReactNode
-  open: boolean
-  onClose?: CloseFunc
-  reason?: string
-}
-
-interface ModalState {
-  modals: Map<string, ModalItem>
-  showModal: (id: string, element: React.ReactNode, options?: { onClose?: CloseFunc }) => void
-  closeModal: (id: string, reason?: Dialog.Root.ChangeEventReason) => void
-}
-
-type CloseFunc = (reason?: Dialog.Root.ChangeEventReason) => void

@@ -4,11 +4,11 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 
-// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface ModalCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>((props, ref) => {
   return (

@@ -3,13 +3,13 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { ModalClose } from './ModalClose'
 
-// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   close?: boolean
 }
 
-// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
   ({ children, className, close = true, ...props }, ref) => {

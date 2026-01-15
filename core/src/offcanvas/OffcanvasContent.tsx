@@ -11,6 +11,16 @@ import { forwardRef, type HTMLProps } from 'react'
 import { Spinner } from '../loading/Spinner'
 import { useOffcanvasContext } from './OffcanvasContext'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type OffcanvasContentProps = HTMLProps<HTMLDivElement> & {
+  loading?: boolean
+  backdrop?: boolean
+  floatingRoot?: string
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const OffcanvasContent = forwardRef<HTMLDivElement, OffcanvasContentProps>(function OffcanvasContent(
   { loading, backdrop: backdropProp, floatingRoot, ...props },
   propRef
@@ -27,13 +37,13 @@ export const OffcanvasContent = forwardRef<HTMLDivElement, OffcanvasContentProps
         <FloatingFocusManager context={floatingContext} initialFocus={-1}>
           <FloatingOverlay
             className={clsx('offcanvas offcanvas-overlay', props.className, status, { backdrop })}
-            lockScroll={backdrop}
             data-status={status}
+            lockScroll={backdrop}
           >
             <div
-              ref={ref}
-              // aria-labelledby={context.labelId}
               aria-describedby={context.descriptionId}
+              // aria-labelledby={context.labelId}
+              ref={ref}
               {...context.getFloatingProps(props)}
               className={clsx('offcanvas-content overflow-auto', props.className, status, {
                 loading,
@@ -52,12 +62,3 @@ export const OffcanvasContent = forwardRef<HTMLDivElement, OffcanvasContentProps
     </FloatingNode>
   )
 })
-
-// ======================================================================================
-
-export type OffcanvasContentProps = {
-  loading?: boolean
-  backdrop?: boolean
-  floatingRoot?: string
-  bottom?: string
-} & HTMLProps<HTMLDivElement>

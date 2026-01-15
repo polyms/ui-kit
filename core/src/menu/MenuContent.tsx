@@ -2,6 +2,17 @@ import { Menu as Base } from '@base-ui/react/menu'
 import clsx from 'clsx'
 import type { FC, HTMLProps } from 'react'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type MenuContentProps = HTMLProps<HTMLDivElement> &
+  Partial<Pick<Base.Positioner.Props, 'side' | 'align' | 'sideOffset' | 'alignOffset'>>
+
+type MenuItemProps = Base.Item.Props & {
+  variant?: 'danger'
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const MenuContent = ({
   children,
   style,
@@ -14,13 +25,13 @@ export const MenuContent = ({
   return (
     <Base.Portal>
       <Base.Positioner
-        className='menu z-popover outline-none'
-        sideOffset={sideOffset}
-        alignOffset={alignOffset}
-        side={side}
         align={align}
+        alignOffset={alignOffset}
+        className='menu z-popover outline-none'
+        side={side}
+        sideOffset={sideOffset}
       >
-        <Base.Popup style={style} className={clsx(className, 'menu-popup')}>
+        <Base.Popup className={clsx(className, 'menu-popup')} style={style}>
           {children}
         </Base.Popup>
       </Base.Positioner>
@@ -44,12 +55,3 @@ export const MenuGroup: FC<Base.Group.Props> = props => (
 export const MenuGroupLabel: FC<Base.GroupLabel.Props> = props => (
   <Base.GroupLabel {...props} className={clsx(props.className, 'menu-group-label')} />
 )
-
-// ======================================================================================
-
-type MenuContentProps = HTMLProps<HTMLDivElement> &
-  Partial<Pick<Base.Positioner.Props, 'side' | 'align' | 'sideOffset' | 'alignOffset'>>
-
-type MenuItemProps = Base.Item.Props & {
-  variant?: 'danger'
-}

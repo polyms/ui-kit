@@ -5,6 +5,15 @@ import { cloneElement, forwardRef, type HTMLProps, isValidElement, type ReactNod
 import { Button, type ButtonProps } from '../button'
 import { useOffcanvasContext } from './OffcanvasContext'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface OffcanvasTriggerProps {
+  children: ReactNode
+  asChild?: boolean
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const OffcanvasTrigger = forwardRef<HTMLElement, ButtonProps & OffcanvasTriggerProps>(
   function OffcanvasTrigger({ children, asChild = false, ...props }, propRef) {
     const context = useOffcanvasContext()
@@ -26,9 +35,9 @@ export const OffcanvasTrigger = forwardRef<HTMLElement, ButtonProps & OffcanvasT
 
     return (
       <Button
-        ref={ref}
-        // The user can style the trigger based on the state
         data-state={context.open ? 'open' : 'closed'}
+        // The user can style the trigger based on the state
+        ref={ref}
         {...context.getReferenceProps(props as HTMLProps<HTMLButtonElement>)}
       >
         {children}
@@ -36,10 +45,3 @@ export const OffcanvasTrigger = forwardRef<HTMLElement, ButtonProps & OffcanvasT
     )
   }
 )
-
-// ======================================================================================
-
-export interface OffcanvasTriggerProps {
-  children: ReactNode
-  asChild?: boolean
-}

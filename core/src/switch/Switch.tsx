@@ -1,6 +1,16 @@
 import clsx from 'clsx'
 import { type FC, forwardRef, type InputHTMLAttributes, type RefAttributes, useId } from 'react'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export type SwitchProps = RefAttributes<HTMLInputElement> &
+  Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+    variant?: 'primary'
+    label?: string
+  }
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const Switch: FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>(
   ({ id: propId, className, variant, label, ...props }, ref) => {
     const genId = useId()
@@ -14,11 +24,3 @@ export const Switch: FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>
     )
   }
 )
-
-// ======================================================================================
-
-export type SwitchProps = RefAttributes<HTMLInputElement> &
-  Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
-    variant?: 'primary'
-    label?: string
-  }

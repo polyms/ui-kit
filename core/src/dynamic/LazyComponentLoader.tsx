@@ -1,6 +1,8 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: off */
 import { type ComponentType, forwardRef, lazy, Suspense } from 'react'
 
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export function LazyComponentLoader<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
   // biome-ignore lint/style/useNamingConvention: off

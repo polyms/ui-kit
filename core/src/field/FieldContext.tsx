@@ -1,6 +1,6 @@
 import { createContext, type PropsWithChildren, useContext, useId, useMemo } from 'react'
 
-// ── Types ─────────────────────────────------------------------------------------------
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface FieldContextValue {
   id?: string
@@ -9,7 +9,7 @@ interface FieldContextValue {
   invalid?: boolean
 }
 
-// ── Components ─────────────────────────────-------------------------------------------
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldContext = createContext<FieldContextValue | undefined>(undefined)
 

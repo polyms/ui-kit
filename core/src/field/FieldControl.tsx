@@ -3,13 +3,13 @@ import clsx from 'clsx'
 import type { FC } from 'react'
 import { useFieldContext } from './FieldContext'
 
-// ── Types ─────────────────────────────------------------------------------------------
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface FieldControlProps extends useRender.ComponentProps<'input'> {
   rounded?: boolean
 }
 
-// ── Components ─────────────────────────────-------------------------------------------
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldControl: FC<FieldControlProps> = ({ className, render, rounded, ...props }) => {
   const { id, name } = useFieldContext()

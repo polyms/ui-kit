@@ -11,6 +11,31 @@ import {
 } from '@floating-ui/react'
 import React, { useEffect } from 'react'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface OffcanvasOptions {
+  initialOpen?: boolean
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  dismissible?: boolean
+  ignoreClickOutside?: string[]
+}
+
+export type OffcanvasContextType = UseFloatingReturn &
+  UseInteractionsReturn & {
+    isMounted: boolean
+    status: 'unmounted' | 'initial' | 'open' | 'close'
+    nodeId?: string
+    labelId?: string
+    descriptionId?: string
+    setLabelId: React.Dispatch<React.SetStateAction<string | undefined>>
+    setDescriptionId: React.Dispatch<React.SetStateAction<string | undefined>>
+    open: boolean
+    setOpen: (open: boolean) => void
+  }
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export function useOffcanvas({
   initialOpen = false,
   open: controlledOpen,
@@ -86,26 +111,3 @@ export function useOffcanvas({
     [open, setOpen, interactions, data, labelId, descriptionId, isMounted, status]
   )
 }
-
-// ======================================================================================
-
-export interface OffcanvasOptions {
-  initialOpen?: boolean
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
-  dismissible?: boolean
-  ignoreClickOutside?: string[]
-}
-
-export type OffcanvasContextType = UseFloatingReturn &
-  UseInteractionsReturn & {
-    isMounted: boolean
-    status: 'unmounted' | 'initial' | 'open' | 'close'
-    nodeId?: string
-    labelId?: string
-    descriptionId?: string
-    setLabelId: React.Dispatch<React.SetStateAction<string | undefined>>
-    setDescriptionId: React.Dispatch<React.SetStateAction<string | undefined>>
-    open: boolean
-    setOpen: (open: boolean) => void
-  }

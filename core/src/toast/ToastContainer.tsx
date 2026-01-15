@@ -24,24 +24,23 @@ export const ToastContainer = () => {
 
   return (
     <FloatingPortal>
-      {/* biome-ignore lint/correctness/useUniqueElementIds: off */}
-      <Toast.Viewport id='toast-container' className='toast-container'>
+      <Toast.Viewport className='toast-container' id='toast-container'>
         {toastManager.toasts.map(toast => (
           <Toast.Root
-            key={toast.id}
-            toast={toast}
-            swipeDirection='up'
             className={clsx('toast', {
               'toast-success': toast.type === 'success',
               'toast-danger': toast.type === 'danger',
               'toast-warning': toast.type === 'warning',
               'toast-primary': toast.type === 'primary',
             })}
+            key={toast.id}
             style={{
               ['--gap' as string]: '1rem',
               ['--offset-y' as string]:
                 'calc(var(--toast-offset-y) * -1 + (var(--toast-index) * var(--gap) * -1) + var(--toast-swipe-movement-y))',
             }}
+            swipeDirection='up'
+            toast={toast}
           >
             <div className='flex items-center gap-2xs'>
               {toast.type === 'success' && <SuccessToastIcon />}
@@ -51,7 +50,7 @@ export const ToastContainer = () => {
               <Toast.Description className='toast-description' />
               <Toast.Action className='toast-actions btn btn-primary ms-auto rounded-full' />
             </div>
-            <Toast.Close className='toast-close' aria-label='Close'>
+            <Toast.Close aria-label='Close' className='toast-close'>
               <CloseToastIcon />
             </Toast.Close>
           </Toast.Root>

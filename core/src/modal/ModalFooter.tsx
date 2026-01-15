@@ -2,11 +2,11 @@ import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
 import type { FC } from 'react'
 
-// ── Types ─────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface ModalFooterProps extends useRender.ComponentProps<'div'> {}
 
-// ── Components ────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalFooter: FC<ModalFooterProps> = ({ className, render, ...props }) => {
   const defaultProps = {

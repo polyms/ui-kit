@@ -3,11 +3,11 @@ import clsx from 'clsx'
 import type { FC } from 'react'
 import { useFieldContext } from './FieldContext'
 
-// ── Types ─────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface FieldLabelProps extends useRender.ComponentProps<'label'> {}
 
-// ── Components ──────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldLabel: FC<FieldLabelProps> = ({ className, render, ...props }) => {
   const { id } = useFieldContext()

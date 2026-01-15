@@ -3,6 +3,16 @@ import type { PropsWithChildren } from 'react'
 
 import { TooltipContent } from './TooltipContent'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type TooltipProps = PropsWithChildren &
+  Pick<Base.Root.Props, 'open' | 'onOpenChange' | 'onOpenChangeComplete' | 'disabled'> &
+  Pick<Base.Positioner.Props, 'side' | 'align'> & {
+    title?: string
+  }
+
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+
 export function Tooltip({
   children,
   title,
@@ -14,10 +24,10 @@ export function Tooltip({
 }: TooltipProps) {
   return (
     <Base.Root
-      open={open}
+      disabled={disabled}
       onOpenChange={onOpenChange}
       onOpenChangeComplete={onOpenChangeComplete}
-      disabled={disabled}
+      open={open}
     >
       {title ? (
         <>
@@ -30,11 +40,3 @@ export function Tooltip({
     </Base.Root>
   )
 }
-
-// ======================================================================================
-
-type TooltipProps = PropsWithChildren &
-  Pick<Base.Root.Props, 'open' | 'onOpenChange' | 'onOpenChangeComplete' | 'disabled'> &
-  Pick<Base.Positioner.Props, 'side' | 'align'> & {
-    title?: string
-  }

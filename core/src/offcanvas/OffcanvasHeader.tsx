@@ -4,6 +4,14 @@ import { forwardRef, type HTMLProps, useId, useLayoutEffect } from 'react'
 import { OffcanvasClose } from './OffcanvasClose'
 import { useOffcanvasContext } from './OffcanvasContext'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export type OffcanvasHeaderProps = HTMLProps<HTMLHeadingElement> & {
+  closeButton?: boolean
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const OffcanvasHeader = forwardRef<HTMLHeadingElement, OffcanvasHeaderProps>(function OffcanvasHeader(
   { children, className, closeButton, ...props },
   ref
@@ -19,15 +27,9 @@ export const OffcanvasHeader = forwardRef<HTMLHeadingElement, OffcanvasHeaderPro
   }, [id, setLabelId])
 
   return (
-    <h2 {...props} className={clsx('offcanvas-heading', className)} ref={ref} id={id}>
+    <h2 {...props} className={clsx('offcanvas-heading', className)} id={id} ref={ref}>
       {children}
       {closeButton && <OffcanvasClose className='ms-auto p-0_125' />}
     </h2>
   )
 })
-
-// ======================================================================================
-
-export type OffcanvasHeaderProps = HTMLProps<HTMLHeadingElement> & {
-  closeButton?: boolean
-}

@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { useFieldContext } from './FieldContext'
 import { useValidation } from './useValidation'
 
-// ── Types ─────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface FieldFeedbackProps {
   children?: React.ReactNode
@@ -11,7 +11,7 @@ export interface FieldFeedbackProps {
   defaultShowOnError?: boolean
 }
 
-// ── Components ──────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldFeedback: FC<FieldFeedbackProps> = ({
   children,

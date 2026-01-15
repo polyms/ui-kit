@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import type { FC } from 'react'
 import { FieldProvider } from './FieldContext'
 
-// ── Types ─────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface FieldRootProps extends useRender.ComponentProps<'div'> {
   variant?: string
@@ -14,7 +14,7 @@ export interface FieldRootProps extends useRender.ComponentProps<'div'> {
   required?: boolean
 }
 
-// ── Components ──────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldRoot: FC<FieldRootProps> = ({
   variant,

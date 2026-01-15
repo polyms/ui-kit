@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import { FieldDescription } from './FieldDescription'
 
-// ── Types ─────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export type FieldFloatingProps = {
   label?: ReactNode
@@ -20,7 +20,7 @@ export type FieldFloatingProps = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
 
-// ── Components ──────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldFloating: React.FC<FieldFloatingProps> = ({
   onChange,

@@ -3,6 +3,8 @@ import { forwardRef, type HTMLProps, useId, useLayoutEffect } from 'react'
 
 import { useOffcanvasContext } from './OffcanvasContext'
 
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const OffcanvasDescription = forwardRef<HTMLParagraphElement, HTMLProps<HTMLParagraphElement>>(
   function OffcanvasDescription({ children, className, ...props }, ref) {
     const { setDescriptionId } = useOffcanvasContext()
@@ -16,7 +18,7 @@ export const OffcanvasDescription = forwardRef<HTMLParagraphElement, HTMLProps<H
     }, [id, setDescriptionId])
 
     return (
-      <div {...props} className={clsx('offcanvas-description', className)} ref={ref} id={id}>
+      <div {...props} className={clsx('offcanvas-description', className)} id={id} ref={ref}>
         {children}
       </div>
     )

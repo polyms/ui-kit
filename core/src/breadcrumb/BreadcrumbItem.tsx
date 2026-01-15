@@ -1,12 +1,22 @@
 import clsx from 'clsx'
 import { forwardRef, type HTMLAttributes } from 'react'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type BreadcrumbItemProps = HTMLAttributes<HTMLLIElement> & {
+  active?: boolean
+  href?: string
+  title?: string
+}
+
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+
 export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   ({ active, href, title, children, ...rest }, ref) => {
     return (
-      <li className={clsx('breadcrumb-item', active && 'active')} aria-current='page' {...rest} ref={ref}>
+      <li aria-current='page' className={clsx('breadcrumb-item', active && 'active')} {...rest} ref={ref}>
         {href ? (
-          <a href={href} title={title} className='link-dark'>
+          <a className='link-dark' href={href} title={title}>
             {children}
           </a>
         ) : (
@@ -18,9 +28,3 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
 )
 
 BreadcrumbItem.displayName = 'BreadcrumbItem'
-
-type BreadcrumbItemProps = HTMLAttributes<HTMLLIElement> & {
-  active?: boolean
-  href?: string
-  title?: string
-}

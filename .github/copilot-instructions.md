@@ -56,8 +56,7 @@ npx nx build docs
 
 ### Testing
 
-To run tests:
-4. Add corresponding styles in `core/src/styles/_component-name.css`.
+To run tests: 4. Add corresponding styles in `core/src/styles/_component-name.css`.
 
 ### Adding Documentation Pages
 
@@ -104,7 +103,47 @@ Each component resides in its own folder under `core/src/`. A typical component 
 - `styles/`: Contains CSS files specific to the component.
 
 ### Styling
-Virtual Modules
+
+- **TailwindCSS**: For utility-first styling. Classes are organized with `clsx()`.
+- **Component-specific CSS**: Each component has a corresponding `.css` file in `core/src/styles/_component-name.css`.
+
+### Code Style & Format
+
+All TypeScript/TSX files must follow this structure:
+
+```tsx
+import statements...
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface TypeName {}
+export type CustomType = ...
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export const Component = () => {}
+```
+
+**Separator Format Rules (CRITICAL):**
+
+- Each separator is exactly **110 characters** total (including `//` and spaces)
+- Format: `// ── SectionName ────────────────────────────────────────────────────────────────────────────────────────────`
+- Types section first, then Components section
+- Always use `// ──` (2 dashes with spaces) at start
+- Fill the rest with dashes until total reaches exactly 110 characters
+
+**Example from ModalTrigger.tsx (REFERENCE STANDARD):**
+
+```
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+```
+
+**Editor Formatting:**
+
+- Biome auto-format enabled on save (Cmd+S)
+- Auto-organize imports with `source.organizeImports.biome`
+- Auto-fix unused imports with `source.fixAll.biome`
 
 - **`virtual:mdx-navigation`**: Auto-generated navigation from MDX files via `docs/plugins/mdxNavigation.plugin.ts`.
   - Scans `docs/src/pages/` directory for `.mdx` files.
@@ -122,6 +161,7 @@ Virtual Modules
 
 - Use React Context for shared state management (e.g., `OffcanvasContext.ts`).
 - Follow the `use<Feature>` naming convention for hooks (e.g., `useValidation.ts`, `useOffcanvas
+
 ---
 
 ## Integration Points
@@ -132,12 +172,14 @@ Virtual Modules
 - **Vite**: Used for bundling. Configuration files are located in `vite.config.ts`.
 
 ### Core Library
+
 - `core/src/`: Source code for reusable components.
 - `core/src/styles/`: Global styles and component-specific CSS.
 - `core/plugins/`: Vite plugins (e.g., Module Federation).
 - `core/vite.config.mts`: Vite configuration for core library.
 
 ### Documentation Site
+
 - `docs/src/pages/`: MDX documentation pages (auto-generates navigation).
 - `docs/src/layouts/`: Layout components (e.g., `AppSidebar.tsx`).
 - `docs/plugins/`: Custom Vite plugins (e.g., `mdxNavigation.plugin.ts`).
@@ -145,10 +187,12 @@ Virtual Modules
 - `docs/vite.config.mts`: Vite configuration for docs site.
 
 ### Root
+
 - `nx.json`: Nx workspace configuration.
 - `pnpm-workspace.yaml`: PNPM workspace configuration.
 - `tsconfig.base.json`: Base TypeScript configuration.
 - `biome.json`: Biome linter/formatter
+
 ---
 
 ## Key Files and Directories
@@ -175,6 +219,7 @@ Virtual Modules
 - MDX navigation is auto-generated - just create `.mdx` files with proper frontmatter.
 - Use `gray-matter` to parse MDX frontmatter in Vite plugins.
 - Follow existing patterns for Vite plugins (virtual modules use `\0` prefix for resolved IDs).
+
 ## Useful Commands
 
 - List all available tasks:

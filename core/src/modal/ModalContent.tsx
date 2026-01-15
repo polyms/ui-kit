@@ -2,7 +2,7 @@ import { Dialog } from '@base-ui/react/dialog'
 import clsx from 'clsx'
 import React from 'react'
 
-// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 const sizeMap = {
   sm: 'modal-sm',
@@ -19,7 +19,7 @@ export interface ModalContentProps extends Omit<React.HTMLProps<HTMLDivElement>,
   scrollable?: boolean
 }
 
-// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(function ModalContent(
   { className, size, centered = true, scrollable = false, id, ...props },

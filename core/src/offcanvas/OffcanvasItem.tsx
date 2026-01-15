@@ -1,6 +1,8 @@
 import clsx from 'clsx'
 import React from 'react'
 
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const OffcanvasItem = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
   function OffcanvasItem({ children, className, ...props }, ref) {
     return (

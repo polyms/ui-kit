@@ -1,6 +1,8 @@
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import clsx from 'clsx'
 
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const Tab = ({ className, ...props }: BaseTabs.Tab.Props) => {
   return <BaseTabs.Tab {...props} className={clsx('tabs-tab', className)} />
 }

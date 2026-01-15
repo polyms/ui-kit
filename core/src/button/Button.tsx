@@ -3,6 +3,23 @@ import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
 import type { FC } from 'react'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export type ButtonSize = 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
+export type ButtonVariant = 'primary' | 'success' | 'light' | 'dark' | 'danger'
+
+export interface ButtonProps extends useRender.ComponentProps<'button'> {
+  size?: ButtonSize
+  variant?: ButtonVariant
+  outlined?: boolean
+  rounded?: boolean
+  icon?: boolean
+  active?: boolean
+  content?: 'start' | 'center' | 'end' | 'between' | 'around'
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 const contentMap = {
   start: 'justify-start',
   end: 'justify-end',
@@ -58,17 +75,3 @@ export const Button: FC<ButtonProps> = ({
     render,
   })
 }
-
-// ======================================================================================
-export interface ButtonProps extends useRender.ComponentProps<'button'> {
-  size?: ButtonSize
-  variant?: ButtonVariant
-  outlined?: boolean
-  rounded?: boolean
-  icon?: boolean
-  active?: boolean
-  content?: 'start' | 'center' | 'end' | 'between' | 'around'
-}
-
-export type ButtonSize = 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
-export type ButtonVariant = 'primary' | 'success' | 'light' | 'dark' | 'danger'

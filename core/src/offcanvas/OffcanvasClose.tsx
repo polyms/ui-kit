@@ -5,6 +5,8 @@ import { type ButtonHTMLAttributes, forwardRef } from 'react'
 
 import { useOffcanvasContext } from './OffcanvasContext'
 
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const OffcanvasClose = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(
   function OffcanvasClose({ content: _, className, ...props }, ref) {
     const { setOpen } = useOffcanvasContext()
@@ -12,13 +14,13 @@ export const OffcanvasClose = forwardRef<HTMLButtonElement, ButtonHTMLAttributes
       <button
         {...props}
         className={clsx(className, 'offcanvas-close')}
-        ref={ref}
         onClick={e => {
           e.stopPropagation()
           setOpen(false)
         }}
+        ref={ref}
       >
-        <HugeiconsIcon icon={CancelCircleHalfDotIcon} width={22} height={22} strokeWidth={2} />
+        <HugeiconsIcon height={22} icon={CancelCircleHalfDotIcon} strokeWidth={2} width={22} />
       </button>
     )
   }

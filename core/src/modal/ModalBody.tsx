@@ -2,11 +2,11 @@ import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
 import type { FC } from 'react'
 
-// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface ModalBodyProps extends useRender.ComponentProps<'div'> {}
 
-// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalBody: FC<ModalBodyProps> = ({ className, render, ...props }) => {
   const defaultProps = {

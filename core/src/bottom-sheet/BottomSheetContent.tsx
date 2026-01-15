@@ -6,6 +6,27 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 
 import { Button } from '../button'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type BottomSheetContentProps = React.PropsWithChildren<{
+  id?: string
+  title: React.ReactNode
+  className?: string
+  rootClassName?: string
+  onBack?: React.MouseEventHandler<HTMLButtonElement>
+  close?: boolean
+}>
+
+type BottomSheetPopupProps = React.PropsWithChildren<{
+  id: string
+  className?: string
+  title: React.ReactNode
+  onBack?: React.MouseEventHandler<HTMLButtonElement>
+  close?: boolean
+}>
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const BottomSheetContent = ({
   children,
   title,
@@ -29,20 +50,7 @@ export const BottomSheetContent = ({
   )
 }
 
-const BottomSheetPopup = ({
-  id,
-  className,
-  children,
-  title,
-  onBack,
-  close,
-}: React.PropsWithChildren & {
-  id: string
-  className?: string
-  title: React.ReactNode
-  onBack?: React.MouseEventHandler<HTMLButtonElement>
-  close?: boolean
-}) => {
+const BottomSheetPopup = ({ id, className, children, title, onBack, close }: BottomSheetPopupProps) => {
   const closeRef = useRef<HTMLButtonElement>(null)
   const sheetRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
@@ -168,15 +176,4 @@ const BottomSheetPopup = ({
       <Dialog.Close ref={closeRef} />
     </>
   )
-}
-
-// ======================================================================================
-
-type BottomSheetContentProps = React.PropsWithChildren & {
-  id?: string
-  title: React.ReactNode
-  className?: string
-  rootClassName?: string
-  onBack?: React.MouseEventHandler<HTMLButtonElement>
-  close?: boolean
 }
