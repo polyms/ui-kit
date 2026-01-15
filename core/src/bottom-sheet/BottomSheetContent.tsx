@@ -22,7 +22,7 @@ export const BottomSheetContent = ({
     <Dialog.Portal>
       <Dialog.Backdrop className='bottom-sheet-backdrop' />
 
-      <BottomSheetPopup id={id} className={rootClassName} title={title} onBack={onBack} close={close}>
+      <BottomSheetPopup className={rootClassName} close={close} id={id} onBack={onBack} title={title}>
         <div className={clsx(className, 'bottom-sheet-body')}>{children}</div>
       </BottomSheetPopup>
     </Dialog.Portal>
@@ -140,11 +140,11 @@ const BottomSheetPopup = ({
 
   return (
     <>
-      <Dialog.Popup id={id} className={clsx('bottom-sheet-popup', className)} ref={sheetRef}>
+      <Dialog.Popup className={clsx('bottom-sheet-popup', className)} id={id} ref={sheetRef}>
         <div className='bottom-sheet-header' ref={headerRef}>
           {onBack && (
             <Button icon onClick={onBack}>
-              <HugeiconsIcon icon={ArrowLeft01Icon} width={18} height={18} strokeWidth={1.5} />
+              <HugeiconsIcon height={18} icon={ArrowLeft01Icon} strokeWidth={1.5} width={18} />
             </Button>
           )}
           <span className='bottom-sheet-title'>{title}</span>
@@ -153,11 +153,11 @@ const BottomSheetPopup = ({
               autoFocus={false}
               render={
                 <HugeiconsIcon
-                  icon={Cancel01Icon}
-                  width={18}
-                  height={18}
                   className='link-light cursor-pointer outline-none'
+                  height={18}
+                  icon={Cancel01Icon}
                   strokeWidth={3}
+                  width={18}
                 />
               }
             />

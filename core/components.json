@@ -1,25 +1,25 @@
 {
   "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "new-york",
+  "aliases": {
+    "components": "dist/components",
+    "hooks": "dist/hooks",
+    "lib": "dist/lib",
+    "ui": "dist/components/ui",
+    "utils": "dist/lib/utils"
+  },
+  "iconLibrary": "radix",
+  "registries": {
+    "@coss": "https://coss.com/ui/r/{name}.json",
+    "@pureui": "https://pure.kam-ui.com/r/{name}.json"
+  },
   "rsc": false,
-  "tsx": true,
+  "style": "new-york",
   "tailwind": {
+    "baseColor": "slate",
     "config": "",
     "css": "../dist/tailwind.css",
-    "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "radix",
-  "aliases": {
-    "components": "dist/components",
-    "utils": "dist/lib/utils",
-    "ui": "dist/components/ui",
-    "lib": "dist/lib",
-    "hooks": "dist/hooks"
-  },
-  "registries": {
-    "@pureui": "https://pure.kam-ui.com/r/{name}.json",
-    "@coss": "https://coss.com/ui/r/{name}.json"
-  }
+  "tsx": true
 }

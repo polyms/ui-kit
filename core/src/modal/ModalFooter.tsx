@@ -1,8 +1,21 @@
+import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import React from 'react'
+import type { FC } from 'react'
 
-export const ModalFooter = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
-  function ModalFooter({ className, ...props }, ref) {
-    return <div {...props} className={clsx('modal-footer', className)} ref={ref} />
+// ── Types ─────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface ModalFooterProps extends useRender.ComponentProps<'div'> {}
+
+// ── Components ────────────────────────────────────────────────────────────────────────────────────────────
+
+export const ModalFooter: FC<ModalFooterProps> = ({ className, render, ...props }) => {
+  const defaultProps = {
+    className: clsx('modal-footer', className),
   }
-)
+
+  return useRender({
+    defaultTagName: 'div',
+    props: { ...defaultProps, ...props },
+    render,
+  })
+}

@@ -1,3 +1,9 @@
 import { Dialog } from '@base-ui/react/dialog'
 
-export const ModalRoot = (props: Dialog.Root.Props) => <Dialog.Root {...props} />
+// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface ModalRootProps extends Dialog.Root.Props {}
+
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+
+export const ModalRoot = (props: ModalRootProps) => <Dialog.Root {...props} />

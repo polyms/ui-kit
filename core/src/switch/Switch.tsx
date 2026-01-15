@@ -7,7 +7,7 @@ export const Switch: FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>
     const id = propId ?? genId
 
     return (
-      <label htmlFor={id} className={clsx('switch', className, variant)}>
+      <label className={clsx('switch', className, variant)} htmlFor={id}>
         <input id={id} {...props} ref={ref} type='checkbox' />
         {label && <span className='switch-label'>{label}</span>}
       </label>

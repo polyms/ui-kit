@@ -1,9 +1,21 @@
+import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import React from 'react'
+import type { FC } from 'react'
 
-export const ModalBody = React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(function ModalBody(
-  { className, ...props },
-  ref
-) {
-  return <div {...props} className={clsx('modal-body', className)} ref={ref} />
-})
+// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface ModalBodyProps extends useRender.ComponentProps<'div'> {}
+
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+
+export const ModalBody: FC<ModalBodyProps> = ({ className, render, ...props }) => {
+  const defaultProps = {
+    className: clsx('modal-body', className),
+  }
+
+  return useRender({
+    defaultTagName: 'div',
+    props: { ...defaultProps, ...props },
+    render,
+  })
+}

@@ -11,12 +11,12 @@ export function ModalContainer() {
       {modals.map(({ id, open, element }) => (
         <ModalRoot
           key={id}
-          open={open}
           onOpenChange={(newOpen, e) => {
             if (!newOpen) {
               useModalStore.getState().closeModal(id, e.reason) // Only close when actually closed
             }
           }}
+          open={open}
         >
           {element}
         </ModalRoot>

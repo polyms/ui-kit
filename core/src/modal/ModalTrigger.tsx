@@ -1,14 +1,21 @@
 import { Dialog } from '@base-ui/react/dialog'
 import clsx from 'clsx'
-import React from 'react'
+import { forwardRef } from 'react'
 
-export const ModalTrigger = React.forwardRef<HTMLButtonElement, Dialog.Trigger.Props>(function ModalTrigger(
-  { children, className, ...props },
-  propRef
-) {
-  return (
-    <Dialog.Trigger {...props} ref={propRef} className={clsx('modal-trigger', className)}>
-      {children}
-    </Dialog.Trigger>
-  )
-})
+// ── Types ───────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface ModalTriggerProps extends Dialog.Trigger.Props {}
+
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+
+export const ModalTrigger = forwardRef<HTMLButtonElement, ModalTriggerProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <Dialog.Trigger {...props} className={clsx('modal-trigger', className)} ref={ref}>
+        {children}
+      </Dialog.Trigger>
+    )
+  }
+)
+
+ModalTrigger.displayName = 'ModalTrigger'

@@ -46,7 +46,7 @@ export const FieldRoot: FC<FieldRootProps> = ({
   })
 
   return (
-    <FieldProvider id={id} name={name} required={required} invalid={invalid}>
+    <FieldProvider id={id} invalid={invalid} name={name} required={required}>
       {element}
     </FieldProvider>
   )
