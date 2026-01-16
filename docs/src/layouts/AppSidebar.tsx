@@ -49,36 +49,42 @@ export function AppSidebar() {
       <aside className='navigation'>
         {isShowToggleSidebar && (
           <HugeiconsIcon
-            icon={CircleArrowLeftDoubleIcon}
-            onClick={toggleSidebar}
-            size={28}
             className={clsx(
               'link-light absolute -end-3.5 top-16 z-50 shrink-0 cursor-pointer fill-white transition-transform',
               !isShowSidebar && 'rotate-180'
             )}
+            icon={CircleArrowLeftDoubleIcon}
+            onClick={toggleSidebar}
+            size={28}
           />
         )}
 
         <h2 className='mt-1 flex h-14 shrink-0 items-center px-4'>
-          <img src='/favicon.png' alt='logo' className='h-6' />
+          <img alt='logo' className='h-6' src='/favicon.png' />
         </h2>
 
         <div className='relative mb-4 px-4'>
-          <Field
-            rounded
-            placeholder='Find components...'
-            iconEnd={<HugeiconsIcon icon={search ? SearchRemoveIcon : SearchList02Icon} strokeWidth={2} />}
-            onClickIconEnd={() => setSearch('')}
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
+          <Field>
+            <HugeiconsIcon
+              className='icon-start'
+              icon={search ? SearchRemoveIcon : SearchList02Icon}
+              onClick={() => setSearch('')}
+              strokeWidth={2}
+            />
+            <Field.Control
+              onChange={e => setSearch(e.target.value)}
+              placeholder='Find components...'
+              rounded
+              value={search}
+            />
+          </Field>
         </div>
 
         <nav className='space-y-2 overflow-y-auto px-4 pb-4'>
           <ul className=''>
             <li>
-              <Link to='/page' className={'nav-item'}>
-                <HugeiconsIcon icon={GoogleDocIcon} className='size-4 text-amber-600' />
+              <Link className={'nav-item'} to='/page'>
+                <HugeiconsIcon className='size-4 text-amber-600' icon={GoogleDocIcon} />
                 Page Demo
               </Link>
             </li>
@@ -90,11 +96,11 @@ export function AppSidebar() {
                 {section.items.map(item => (
                   <li key={item.path}>
                     <button
-                      type='button'
-                      onClick={() => onSelect(item.path)}
                       className={clsx('nav-item', activePath === item.path && 'active')}
+                      onClick={() => onSelect(item.path)}
+                      type='button'
                     >
-                      <HugeiconsIcon icon={Tag01Icon} className='size-4' />
+                      <HugeiconsIcon className='size-4' icon={Tag01Icon} />
                       {item.label}
                     </button>
                   </li>

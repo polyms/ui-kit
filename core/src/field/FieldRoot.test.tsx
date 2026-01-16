@@ -57,13 +57,6 @@ describe('FieldRoot', () => {
     expect(div).toHaveClass('required')
   })
 
-  it('accepts rounded prop without error', () => {
-    const { container } = render(<FieldRoot rounded />)
-    // rounded prop is accepted but not applied as class on root div
-    const div = container.querySelector('div')
-    expect(div).toHaveClass('field')
-  })
-
   it('applies custom className', () => {
     const { container } = render(<FieldRoot className='custom-field' />)
     const div = container.querySelector('div')
@@ -95,7 +88,6 @@ describe('FieldRoot', () => {
         invalid
         name='combo'
         required
-        rounded
         size='xl'
         variant='filled'
       >

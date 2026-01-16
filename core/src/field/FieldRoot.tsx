@@ -7,7 +7,6 @@ import { FieldProvider } from './FieldContext'
 
 export interface FieldRootProps extends useRender.ComponentProps<'div'> {
   variant?: string
-  rounded?: boolean
   size?: 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
   invalid?: boolean
   name?: string
@@ -18,7 +17,6 @@ export interface FieldRootProps extends useRender.ComponentProps<'div'> {
 
 export const FieldRoot: FC<FieldRootProps> = ({
   variant,
-  rounded,
   size,
   className,
   id,

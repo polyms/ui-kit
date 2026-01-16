@@ -5,16 +5,11 @@ import { Spinner } from './Spinner'
 // ── Components ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 describe('Spinner', () => {
-  it('renders as SVG element', () => {
+  it('renders with default size', () => {
     render(<Spinner />)
     const spinner = document.querySelector('svg.spinner-loader')
     expect(spinner).toBeInTheDocument()
     expect(spinner?.tagName).toBe('svg')
-  })
-
-  it('renders with default size', () => {
-    render(<Spinner />)
-    const spinner = document.querySelector('svg.spinner-loader')
     expect(spinner).toHaveAttribute('width', '12')
     expect(spinner).toHaveAttribute('height', '12')
   })
