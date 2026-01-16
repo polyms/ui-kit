@@ -42,6 +42,7 @@ export const MenuContent = ({
 export const MenuItem: FC<MenuItemProps> = ({ variant, ...props }) => (
   <Base.Item {...props} className={clsx(props.className, 'menu-item', { [`menu-${variant}`]: !!variant })} />
 )
+
 export const MenuSubmenuTrigger: FC<Base.Item.Props> = props => (
   <Base.SubmenuTrigger {...props} className={clsx(props.className, 'menu-item')} />
 )
@@ -49,9 +50,11 @@ export const MenuSubmenuTrigger: FC<Base.Item.Props> = props => (
 export const MenuSeparator: FC<Base.Separator.Props> = props => (
   <Base.Separator {...props} className={clsx(props.className, 'menu-separator')} />
 )
+
 export const MenuGroup: FC<Base.Group.Props> = props => (
   <Base.Group {...props} className={clsx(props.className, 'menu-group')} />
 )
+
 export const MenuGroupLabel: FC<Base.GroupLabel.Props> = props => (
   <Base.GroupLabel {...props} className={clsx(props.className, 'menu-group-label')} />
 )

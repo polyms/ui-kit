@@ -47,22 +47,22 @@ export default function FieldDefault() {
             <tr key={size}>
               <td>
                 <Field
-                  key={size}
                   id={`field-demo-${size}`}
-                  size={size === 'default' ? undefined : size}
-                  rounded
+                  key={size}
                   required
+                  rounded
+                  size={size === 'default' ? undefined : size}
                   // invalid
                 >
                   <Field.Label>{`Form Control: ${size}`}</Field.Label>
-                  <HugeiconsIcon icon={SearchList02Icon} strokeWidth={2} className='icon-start' />
-                  <HugeiconsIcon icon={CancelCircleHalfDotIcon} strokeWidth={2} className='icon-end' />
+                  <HugeiconsIcon className='icon-start' icon={SearchList02Icon} strokeWidth={2} />
+                  <HugeiconsIcon className='icon-end' icon={CancelCircleHalfDotIcon} strokeWidth={2} />
                   <Field.Control
-                    rounded
                     placeholder={size !== 'default' ? `.field-${size}` : 'default'}
                     ref={ref => {
                       refs.current[size] = ref
                     }}
+                    rounded
                   />
                   <Field.Description>{`Description for ${size}`}</Field.Description>
                   <Field.Feedback>Error message for {size}</Field.Feedback>

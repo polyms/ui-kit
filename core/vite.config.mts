@@ -1,5 +1,3 @@
-/// <reference types='vitest' />
-
 import path from 'node:path'
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
@@ -48,7 +46,6 @@ export default defineConfig(async ({ mode }) => {
       nxViteTsPaths(),
       nxCopyAssetsPlugin(['*.md', { input: 'src/styles', glob: '**/*', output: 'styles' }]),
       tailwindcssVite(),
-      // federation(),
       dts({
         entryRoot: 'src',
         staticImport: true,

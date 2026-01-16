@@ -1,7 +1,20 @@
-import { forwardRef, type HTMLAttributes } from 'react'
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+import type { FC } from 'react'
 
-export const BreadcrumbRoot = forwardRef<HTMLOListElement, HTMLAttributes<HTMLOListElement>>((props, ref) => {
-  return <ol className='breadcrumb' {...props} ref={ref} />
-})
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-BreadcrumbRoot.displayName = 'BreadcrumbRoot'
+export interface BreadcrumbRootProps extends useRender.ComponentProps<'ol'> {}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export const BreadcrumbRoot: FC<BreadcrumbRootProps> = ({ className, render, ...props }) => {
+  const defaultProps = {
+    className: clsx('breadcrumb', className),
+  }
+  return useRender({
+    defaultTagName: 'ol',
+    props: { ...defaultProps, ...props },
+    render,
+  })
+}

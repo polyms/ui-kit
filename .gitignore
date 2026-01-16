@@ -100,3 +100,4 @@ vitest.config.*.timestamp*
 .github/instructions/nx.instructions.md
 .npmrc
 doc_build/
+**/coverage/

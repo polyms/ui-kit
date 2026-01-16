@@ -128,15 +128,26 @@ export const Component = () => {}
 
 - Each separator is exactly **110 characters** total (including `//` and spaces)
 - Format: `// ── SectionName ────────────────────────────────────────────────────────────────────────────────────────────`
-- Types section first, then Components section
+- **Always include both Types and Components sections if file has code**
+- **If file has NO types, omit the Types section entirely** (only show Components section)
+- If file has no components (rare), omit the Components section
 - Always use `// ──` (2 dashes with spaces) at start
 - Fill the rest with dashes until total reaches exactly 110 characters
+- Types section must come before Components section when both exist
 
-**Example from ModalTrigger.tsx (REFERENCE STANDARD):**
+**Examples:**
 
-```
+File with both Types and Components (ModalTrigger.tsx):
+
+```tsx
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+```
+
+File with only Components (no types, e.g., Button.test.tsx):
+
+```tsx
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
 **Editor Formatting:**
@@ -144,6 +155,61 @@ export const Component = () => {}
 - Biome auto-format enabled on save (Cmd+S)
 - Auto-organize imports with `source.organizeImports.biome`
 - Auto-fix unused imports with `source.fixAll.biome`
+
+### Testing
+
+All tests are written using **Vitest** and **React Testing Library**. Follow these conventions:
+
+**Test File Structure:**
+
+```typescript
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it, vi } from 'vitest'
+
+// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
+
+describe('ComponentName', () => {
+  it('should do something', () => {
+    render(<Component />)
+    expect(screen.getByText('text')).toBeInTheDocument()
+  })
+})
+```
+
+**Key Testing Patterns:**
+
+1. **Always import from vitest**: `describe`, `expect`, `it`, `vi` (for mocking)
+2. **Use screen queries over container**: Prefer `screen.getByRole()`, `screen.getByText()`, `screen.getByTestId()`
+3. **Portal Elements (Floating-UI)**: Components using Floating-UI render in portals. Use:
+   - `document.querySelector()` for DOM queries in portals
+   - `screen.getByTestId()` for test IDs
+   - `{ hidden: true }` option in `getByRole()` for hidden elements
+4. **Test File Naming**: Follow `ComponentName.test.tsx` pattern
+5. **User Interactions**: Use `userEvent.setup()` for realistic user interactions
+
+**Example with Portal Elements:**
+
+```typescript
+it('renders close button in portal', () => {
+  render(
+    <OffcanvasContent>
+      <OffcanvasClose />
+    </OffcanvasContent>
+  )
+  // Use document.querySelector for portal elements
+  const closeButton = document.querySelector('.offcanvas-close')
+  expect(closeButton).toBeInTheDocument()
+})
+```
+
+**Running Tests:**
+
+```bash
+npx nx test core
+npx nx test core --watch
+npx nx test core -- --coverage
+```
 
 - **`virtual:mdx-navigation`**: Auto-generated navigation from MDX files via `docs/plugins/mdxNavigation.plugin.ts`.
   - Scans `docs/src/pages/` directory for `.mdx` files.

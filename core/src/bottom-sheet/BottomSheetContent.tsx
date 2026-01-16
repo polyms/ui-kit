@@ -159,6 +159,7 @@ const BottomSheetPopup = ({ id, className, children, title, onBack, close }: Bot
           {close && (
             <Dialog.Close
               autoFocus={false}
+              nativeButton={false}
               render={
                 <HugeiconsIcon
                   className='link-light cursor-pointer outline-none'

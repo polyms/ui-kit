@@ -3,24 +3,24 @@ import clsx from 'clsx'
 export const Spinner = ({ size = 12, color = '#181b1f', subColor = '#AEB4BD', className }: SpinnerProps) => {
   return (
     <svg
-      width={size}
+      className={clsx(className, 'spinner-loader')}
+      fill='none'
       height={size}
       viewBox='0 0 20 20'
-      fill='none'
+      width={size}
       xmlns='http://www.w3.org/2000/svg'
-      className={clsx(className, 'spinner-loader')}
     >
       <path
-        fillRule='evenodd'
         clipRule='evenodd'
         d='M9.99995 19C14.9705 19 19 14.9705 19 9.99996C19 5.02943 14.9705 1 9.99995 1C5.02943 1 1 5.02943 1 9.99996C1 14.9705 5.02943 19 9.99995 19ZM9.99995 16.3C13.4794 16.3 16.3 13.4794 16.3 9.99996C16.3 6.52059 13.4794 3.69999 9.99995 3.69999C6.5206 3.69999 3.69999 6.52059 3.69999 9.99996C3.69999 13.4794 6.5206 16.3 9.99995 16.3Z'
         fill={subColor}
+        fillRule='evenodd'
       />
       <path
-        fillRule='evenodd'
         clipRule='evenodd'
         d='M1.68404 6.55574C1.40444 7.23077 1.20871 7.93577 1.10002 8.65493C0.988595 9.39215 1.60337 9.99989 2.34895 9.99989C3.09454 9.99989 3.68393 9.38838 3.8418 8.65971C4.36254 6.25602 6.25507 4.36349 8.65876 3.84274C9.38743 3.68488 9.99889 3.09548 9.99889 2.34991C9.99889 1.60432 9.3912 0.989541 8.65399 1.10096C7.93482 1.20966 7.22983 1.40537 6.5548 1.68498C5.46287 2.13728 4.47072 2.80021 3.63499 3.63594C2.79926 4.47166 2.13633 5.46381 1.68404 6.55574Z'
         fill={color}
+        fillRule='evenodd'
       />
     </svg>
   )
