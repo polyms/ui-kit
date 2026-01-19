@@ -30,7 +30,7 @@ const Root = () => {
     <>
       <AppSidebar />
 
-      <main className='overflow-clip'>
+      <main className='overflow-auto md:overflow-clip'>
         {/* <TopNavbar className='border-bottom flex py-0 pe-0'>
           <Logo />
           <div id='top-navbar' className='flex-fill' />
