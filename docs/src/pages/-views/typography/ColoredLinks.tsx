@@ -21,7 +21,7 @@ const ColoredLinks: React.FC = () => {
           <tr>
             <td>.link</td>
             <td>
-              <a href='#link' className='link'>
+              <a className='link' href='#link'>
                 <span>link</span>
               </a>
             </td>
@@ -29,7 +29,7 @@ const ColoredLinks: React.FC = () => {
           <tr>
             <td>.link-primary</td>
             <td>
-              <a href='#link-primary' className='link link-primary'>
+              <a className='link link-primary' href='#link-primary'>
                 <span>link primary</span>
               </a>
             </td>
@@ -37,7 +37,7 @@ const ColoredLinks: React.FC = () => {
           <tr>
             <td>.link-danger</td>
             <td>
-              <a href='#link-danger' className='link link-danger'>
+              <a className='link link-danger' href='#link-danger'>
                 <span>link danger</span>
               </a>
             </td>
@@ -45,7 +45,7 @@ const ColoredLinks: React.FC = () => {
           <tr>
             <td>.link-light</td>
             <td>
-              <a href='#link-light' className='link link-light'>
+              <a className='link link-light' href='#link-light'>
                 <span>link light</span>
               </a>
             </td>

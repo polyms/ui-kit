@@ -4,7 +4,7 @@ export default function Alert() {
   return (
     <div className='flex flex-col space-y-2'>
       {variants.map(variant => (
-        <div key={variant} className={`alert alert-${variant}`}>
+        <div className={`alert alert-${variant}`} key={variant}>
           This is a {variant} alert—check it out!
         </div>
       ))}

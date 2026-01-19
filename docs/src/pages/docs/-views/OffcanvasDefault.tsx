@@ -6,7 +6,7 @@ export default function OffcanvasDefault() {
 
   return (
     <div className='mt-4 flex w-full justify-between gap-xl'>
-      <Offcanvas open={open} onOpenChange={toggle}>
+      <Offcanvas onOpenChange={toggle} open={open}>
         <Offcanvas.Trigger className='btn btn-primary btn-xl mx-auto'>Open Offcanvas</Offcanvas.Trigger>
         <Offcanvas.Content backdrop={false} title='Offcanvas Title'>
           <Offcanvas.Header closeButton>Offcanvas Header</Offcanvas.Header>

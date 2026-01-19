@@ -1,4 +1,4 @@
-import { type RenderResult, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 import { Offcanvas } from './Offcanvas'
@@ -29,18 +29,17 @@ describe('OffcanvasTrigger', () => {
   })
 
   it('sets data-state attribute based on open state', async () => {
-    let rerender: RenderResult['rerender']
     const result = render(
       <Offcanvas open={false}>
         <OffcanvasTrigger>Open</OffcanvasTrigger>
         <OffcanvasContent>Content</OffcanvasContent>
       </Offcanvas>
     )
-    rerender = result.rerender
+
     const trigger = screen.getByRole('button', { name: 'Open' })
     expect(trigger).toHaveAttribute('data-state', 'closed')
 
-    rerender(
+    result.rerender(
       <Offcanvas open={true}>
         <OffcanvasTrigger>Open</OffcanvasTrigger>
         <OffcanvasContent>Content</OffcanvasContent>

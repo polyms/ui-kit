@@ -9,7 +9,7 @@ export default function MenuDefault() {
       <Menu defaultOpen>
         <Menu.Trigger className='btn outlined btn-lg mx-auto pe-2xs'>
           Song
-          <HugeiconsIcon icon={ArrowDown01Icon} width={18} height={18} strokeWidth={2} />
+          <HugeiconsIcon height={18} icon={ArrowDown01Icon} strokeWidth={2} width={18} />
         </Menu.Trigger>
         <Menu.Content title='Song Options'>
           <Menu.Item>
@@ -63,7 +63,7 @@ export default function MenuDefault() {
           <Menu.SubmenuRoot>
             <Menu.SubmenuTrigger>
               Export
-              <HugeiconsIcon icon={ArrowRight01Icon} size={18} strokeWidth={2} className='ms-auto' />
+              <HugeiconsIcon className='ms-auto' icon={ArrowRight01Icon} size={18} strokeWidth={2} />
             </Menu.SubmenuTrigger>
             <Menu.Content sideOffset={0}>
               <Menu.Item>PDF</Menu.Item>

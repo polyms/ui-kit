@@ -10,17 +10,17 @@ export default function ModalDefault() {
 
   return (
     <div className='mt-4 flex w-full justify-between gap-xl'>
-      <Modal open={open} onOpenChange={toggle}>
+      <Modal onOpenChange={toggle} open={open}>
         {sizes.map(size => (
           <Modal.Trigger
-            key={size || 'default'}
             className='btn btn-primary btn-xl mx-auto'
+            key={size || 'default'}
             onClick={() => setSize(size)}
           >
             Open Modal {size}
           </Modal.Trigger>
         ))}
-        <Modal.Content scrollable={!1} size={size} centered={size !== 'full'} title='Modal Title'>
+        <Modal.Content centered={size !== 'full'} scrollable={!1} size={size} title='Modal Title'>
           <Modal.Header>Modal Header</Modal.Header>
           <Modal.Body>
             <div className='text-2xl'>Title</div>
@@ -37,17 +37,17 @@ export default function ModalDefault() {
                   Modal end body text goes here.
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button size='xl' rounded content='center' onClick={setFalse}>
+                  <Button content='center' onClick={setFalse} rounded size='xl'>
                     Close
                   </Button>
                   <Button
-                    size='xl'
-                    rounded
-                    variant='danger'
                     className='px-lg'
                     content='center'
-                    // autoFocus
                     onClick={setFalse}
+                    rounded
+                    size='xl'
+                    // autoFocus
+                    variant='danger'
                   >
                     Confirm
                   </Button>
@@ -58,17 +58,17 @@ export default function ModalDefault() {
             Modal end body text goes here.
           </Modal.Body>
           <Modal.Footer>
-            <Button size='xl' rounded content='center' onClick={setFalse}>
+            <Button content='center' onClick={setFalse} rounded size='xl'>
               Close
             </Button>
             <Button
-              size='xl'
-              rounded
-              variant='danger'
               className='px-lg'
               content='center'
-              // autoFocus
               onClick={setFalse}
+              rounded
+              size='xl'
+              // autoFocus
+              variant='danger'
             >
               Confirm
             </Button>

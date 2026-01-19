@@ -38,23 +38,23 @@ export default function ButtonDefault() {
         <h1 className='border-b text-2xl'>Variants</h1>
         <div className='grid grid-cols-2 gap-4'>
           {[undefined, 'primary', 'success', 'light', 'dark', 'danger'].map(variant => (
-            <Button key={variant ?? 'ghost'} size='xl' rounded variant={variant as ButtonVariant}>
+            <Button key={variant ?? 'ghost'} rounded size='xl' variant={variant as ButtonVariant}>
               <HugeiconsIcon icon={Cart} size={18} strokeWidth={2} />
               <span>{variant ?? 'ghost'}</span>
             </Button>
           ))}
           {[undefined, 'primary', 'success', 'light', 'dark', 'danger'].map(variant => (
-            <Button key={variant ?? 'ghost'} size='xl' rounded outlined variant={variant as ButtonVariant}>
+            <Button key={variant ?? 'ghost'} outlined rounded size='xl' variant={variant as ButtonVariant}>
               <HugeiconsIcon icon={Cart} size={18} strokeWidth={2} />
               <span>{variant ?? 'ghost'}</span>
             </Button>
           ))}
 
-          <Button variant='primary' size='xl' rounded>
-            <Spinner size={22} color='var(--color-primary-700)' subColor='var(--color-primary-100)' />
+          <Button rounded size='xl' variant='primary'>
+            <Spinner color='var(--color-primary-700)' size={22} subColor='var(--color-primary-100)' />
           </Button>
-          <Button variant='dark' size='xl' rounded>
-            <Spinner size={22} color='#fff' subColor='var(--color-slate-500)' />
+          <Button rounded size='xl' variant='dark'>
+            <Spinner color='#fff' size={22} subColor='var(--color-slate-500)' />
           </Button>
         </div>
       </div>
@@ -75,14 +75,14 @@ export default function ButtonDefault() {
               <tr key={size}>
                 <td className='text-center'>
                   <Button
-                    key={size}
                     id={`btn-${size}`}
-                    size={size === 'default' ? undefined : size}
+                    key={size}
                     outlined
-                    rounded
                     ref={ref => {
                       btnRefs.current[size] = ref
                     }}
+                    rounded
+                    size={size === 'default' ? undefined : size}
                   >
                     <HugeiconsIcon icon={Cart} size={styles[size]?.lineHeight || 16} strokeWidth={2} />
 

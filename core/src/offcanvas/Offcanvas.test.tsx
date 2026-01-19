@@ -1,4 +1,4 @@
-import { type RenderResult, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { Offcanvas } from './Offcanvas'
@@ -37,8 +37,7 @@ describe('Offcanvas', () => {
   })
 
   it('supports controlled open state', async () => {
-    let renderResult: RenderResult
-    renderResult = render(
+    const renderResult = render(
       <Offcanvas open={false}>
         <OffcanvasTrigger>Open</OffcanvasTrigger>
         <OffcanvasContent>Content</OffcanvasContent>

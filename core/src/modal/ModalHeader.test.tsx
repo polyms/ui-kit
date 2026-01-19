@@ -53,7 +53,7 @@ describe('ModalHeader', () => {
   })
 
   it('hides close button when close prop is false', () => {
-    const { container } = render(
+    render(
       <ModalRoot open>
         <ModalContent>
           <ModalHeader close={false}>Title No Close</ModalHeader>
