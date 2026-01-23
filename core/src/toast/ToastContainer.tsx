@@ -4,6 +4,8 @@ import clsx from 'clsx'
 import { type PropsWithChildren, useEffect } from 'react'
 import { CloseToastIcon, DangerToastIcon, SuccessToastIcon, WarningToastIcon } from './ToastIcons'
 
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const toastManager = Toast.createToastManager()
 
 export const ToastProvider = ({ children }: PropsWithChildren) => (
