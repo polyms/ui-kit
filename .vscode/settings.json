@@ -3,10 +3,10 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[mdx][yaml]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[tailwindcss]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
