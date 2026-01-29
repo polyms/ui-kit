@@ -55,7 +55,7 @@
 
   &[aria-invalid]:focus-visible {
     border-color: var(--color-danger-600);
-    box-shadow: 0 0 0 3px var(--color-danger-500 / 0.1);
+    box-shadow: 0 0 0 3px var(--color-danger-500);
   }
 
   &[data-disabled] {
