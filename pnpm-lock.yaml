@@ -23,6 +23,9 @@ importers:
       '@mdx-js/react':
         specifier: ~3.1.1
         version: 3.1.1(@types/react@19.2.7)(react@19.2.3)
+      '@solar-icons/react-perf':
+        specifier: ^2.0.3
+        version: 2.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@tanstack/react-router':
         specifier: ~1.144.0
         version: 1.144.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -2351,6 +2354,13 @@ packages:
   '@sindresorhus/is@5.6.0':
     resolution: {integrity: sha512-TV7t8GKYaJWsn00tFDqBw8+Uqmr8A0fRU1tvTQhyZzGv0sJCGRQL3JGMI3ucuKo3XIZdUP+Lx7/gh2t3lewy7g==}
     engines: {node: '>=14.16'}
+
+  '@solar-icons/react-perf@2.0.3':
+    resolution: {integrity: sha512-H68mbj1Pi/XDXLn5B0GR6c0UqkJ7r6dx43fmqa23TNO+SQETtI8rJCGxFLLJldJN5epdYpziNqBxe2ZlgpzUCA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: '>= 16.8'
+      react-dom: '>= 16.8'
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -9464,6 +9474,11 @@ snapshots:
   '@sinclair/typebox@0.34.46': {}
 
   '@sindresorhus/is@5.6.0': {}
+
+  '@solar-icons/react-perf@2.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   '@standard-schema/spec@1.1.0': {}
 

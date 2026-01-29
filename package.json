@@ -27,6 +27,7 @@
     "@hugeicons/core-free-icons": "~3.1.1",
     "@hugeicons/react": "~1.1.4",
     "@mdx-js/react": "~3.1.1",
+    "@solar-icons/react-perf": "^2.0.3",
     "@tanstack/react-router": "~1.144.0",
     "clsx": "~2.1.1",
     "nanoid": "~5.1.6",

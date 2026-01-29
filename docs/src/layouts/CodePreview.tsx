@@ -1,4 +1,4 @@
-// src/components/CodePreview.tsx
+import { Tabs } from '@polyms/core'
 import { useEffect, useState } from 'react'
 import { codeToHtml } from 'shiki'
 
@@ -15,9 +15,17 @@ export function CodePreview({ code, children }: { code: string; children: React.
   }, [code])
 
   return (
-    <div className='mt-4 flex w-full flex-col justify-between rounded-2xl border border-neutral-400'>
-      <div className='flex w-full justify-center px-20 py-16 align-middle'>{children}</div>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+    <Tabs className='mt-4 w-full overflow-clip rounded-2xl border border-neutral-400' defaultValue='preview'>
+      <Tabs.List className='bg-slate-50 px-8'>
+        <Tabs.Tab value='preview'>Preview</Tabs.Tab>
+        <Tabs.Tab value='code'>Code</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel className='flex h-96 items-center justify-center' value='preview'>
+        {children}
+      </Tabs.Panel>
+      <Tabs.Panel className='h-96 overflow-auto p-0' style={{ background: '#2e3440' }} value='code'>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </Tabs.Panel>
+    </Tabs>
   )
 }

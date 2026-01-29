@@ -108,5 +108,5 @@ main {
 }
 
 .shiki {
-  @apply m-px overflow-auto rounded-2xl px-6 py-4 text-sm;
+  @apply m-px overflow-auto rounded-b-2xl px-6 py-4 text-sm;
 }

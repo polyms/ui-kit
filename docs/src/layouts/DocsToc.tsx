@@ -51,7 +51,7 @@ export function DocsToc({ toc, className }: { toc: TocItem[]; className?: string
       )}
     >
       <div className='sticky top-0 max-h-dvh overflow-auto px-6 py-4'>
-        <p className='flex h-7 items-center font-medium text-neutral-600 text-xs uppercase tracking-wide'>
+        <p className='flex h-7 items-center font-medium text-neutral-600 text-xs tracking-wide'>
           On This Page
         </p>
         <div className='relative mt-2 flex flex-col gap-0.5'>
