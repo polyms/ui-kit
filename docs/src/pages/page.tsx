@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { Header } from './-views/Header'
+import { Header } from './-views/DemoHeader'
 
 export const Route = createFileRoute('/page')({
   component: Page,

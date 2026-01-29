@@ -1,27 +1,8 @@
-import { MDXProvider } from '@mdx-js/react'
+// import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router'
-import clsx from 'clsx'
 import { useRef } from 'react'
 
-// import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { AppSidebar } from '../layouts/AppSidebar'
-import { CodePreview } from '../layouts/CodePreview'
-
-// import { Root, TopNavbar } from '../layouts/Layout.styled'
-const mdxComponents = {
-  h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1 className='h1 mb-xs' {...props}>
-      {props.children}
-    </h1>
-  ),
-  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 className='mb-3xs font-mono font-semibold text-neutral-500 text-xs uppercase' {...props}>
-      {props.children}
-    </h3>
-  ),
-  // biome-ignore lint/style/useNamingConvention: off
-  CodePreview,
-}
 
 const Navigation = ({ onToggleSidebar }: NavigationProps) => {
   return (
@@ -56,16 +37,8 @@ const Root = () => {
       <Name />
       <Navigation onToggleSidebar={() => appSidebarRef.current?.toggleSidebar()} />
       <AppSidebar ref={appSidebarRef} />
-      <main className='overflow-auto md:overflow-clip'>
-        {/* <TopNavbar className='border-bottom flex py-0 pe-0'>
-          <Logo />
-          <div id='top-navbar' className='flex-fill' />
-        </TopNavbar> */}
-        <div className={clsx('flex flex-col', className)}>
-          <MDXProvider components={mdxComponents}>
-            <Outlet />
-          </MDXProvider>
-        </div>
+      <main className={className}>
+        <Outlet />
       </main>
     </>
   )

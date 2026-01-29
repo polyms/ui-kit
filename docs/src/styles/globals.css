@@ -100,7 +100,7 @@
 main {
   grid-area: main-content;
 
-  @apply relative flex grow flex-col;
+  @apply relative flex grow flex-col overflow-auto md:overflow-clip;
 
   @media (min-width: 768px) {
     @apply me-1 mt-1 rounded-t-xl border-x border-t border-neutral-300;

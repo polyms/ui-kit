@@ -7,9 +7,11 @@ import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Plugin } from 'vite'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 export interface TocItem {
-  level: number
-  text: string
+  depth: number
+  title: string
+  url: string
 }
 
 export interface NavigationItem {
@@ -22,15 +24,22 @@ export interface NavigationSection {
   items: NavigationItem[]
 }
 
+export interface PageMetadata {
+  type?: string
+  title?: string
+  [key: string]: unknown
+}
+
 export interface PageNavigation {
   file: string
   route: string
   title?: string
+  metadata: PageMetadata
   toc: TocItem[]
   section: string
 }
 
-// ======================================================================================
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 const VIRTUAL_ID = 'virtual:mdx-navigation'
 const RESOLVED_VIRTUAL_ID = `\0${VIRTUAL_ID}`
@@ -40,31 +49,61 @@ export function mdxNavigationPlugin(options: { contentDir?: string; routeBase?: 
 
   let pages: PageNavigation[] = []
 
+  function slugify(value: string) {
+    const normalized = value
+      .trim()
+      .toLowerCase()
+      // replace non-alphanumeric with dashes
+      .replace(/[^a-z0-9]+/g, '-')
+      // trim dashes
+      .replace(/^-+|-+$/g, '')
+
+    return normalized || 'section'
+  }
+
+  function createSlugger() {
+    const counts: Record<string, number> = {}
+    return (value: string) => {
+      const base = slugify(value)
+      const count = counts[base] ?? 0
+      counts[base] = count + 1
+      return count === 0 ? base : `${base}-${count}`
+    }
+  }
+
   function parseMdxFile(filePath: string): PageNavigation {
     const raw = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(raw)
+    const metadata = data as PageMetadata
 
+    // Parse content to extract headings for TOC
     const tree = unified().use(remarkParse).parse(content)
 
     const toc: TocItem[] = []
+    const slug = createSlugger()
     visit(tree, 'heading', node => {
-      toc.push({
-        level: node.depth,
-        text: mdastUtilToString.toString(node),
-      })
+      const title = mdastUtilToString.toString(node)
+
+      // Skip h1 headings
+      if (node.depth <= 1) return
+
+      // Skip headings with placeholders
+      if (title.includes('{{') || title.includes('}}')) return
+
+      const id = slug(title)
+      toc.push({ depth: node.depth, title, url: `#${id}` })
     })
 
     const relativePath = path.relative(contentDir, filePath).replace(/\\/g, '/')
-
     const route = routeBase + relativePath.replace(/\.mdx?$/, '')
-
     const segments = relativePath.replace(/\.mdx$/, '').split('/')
     const section = segments.length > 1 ? segments[0]! : 'docs'
 
     return {
       file: filePath,
       route,
-      title: data.title || 'Untitled',
+      title: metadata.title || 'Untitled',
+      metadata,
       toc,
       section,
     }
@@ -126,16 +165,32 @@ export function mdxNavigationPlugin(options: { contentDir?: string; routeBase?: 
     configureServer(server) {
       scanAll()
 
+      const invalidateModule = () => {
+        const mod = server.moduleGraph.getModuleById(RESOLVED_VIRTUAL_ID)
+        if (mod) {
+          server.moduleGraph.invalidateModule(mod)
+        }
+      }
+
       server.watcher.on('add', file => {
-        if (file.endsWith('.mdx')) scanAll()
+        if (file.endsWith('.mdx')) {
+          scanAll()
+          invalidateModule()
+        }
       })
 
       server.watcher.on('change', file => {
-        if (file.endsWith('.mdx')) scanAll()
+        if (file.endsWith('.mdx')) {
+          scanAll()
+          invalidateModule()
+        }
       })
 
       server.watcher.on('unlink', file => {
-        if (file.endsWith('.mdx')) scanAll()
+        if (file.endsWith('.mdx')) {
+          scanAll()
+          invalidateModule()
+        }
       })
     },
 
@@ -148,7 +203,13 @@ export function mdxNavigationPlugin(options: { contentDir?: string; routeBase?: 
     load(id) {
       if (id === RESOLVED_VIRTUAL_ID) {
         const navSections = buildNavigation()
-        return `export const navigation = ${JSON.stringify(navSections, null, 2)}`
+        const tocByRoute = Object.fromEntries(pages.map(p => [p.route, p.toc]))
+        const metadataByRoute = Object.fromEntries(pages.map(p => [p.route, p.metadata]))
+        return [
+          `export const navigation = ${JSON.stringify(navSections, null, 2)}`,
+          `export const tocByRoute = ${JSON.stringify(tocByRoute, null, 2)}`,
+          `export const metadataByRoute = ${JSON.stringify(metadataByRoute, null, 2)}`,
+        ].join('\n\n')
       }
     },
   }
