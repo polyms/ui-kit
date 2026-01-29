@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <header className='flex h-14 shrink-0 items-center gap-2 border-slate-300 border-b px-4'>
       <img alt='logo' src='favicon.png' width={40} />
-      <Field rounded>
+      <Field>
         <HugeiconsIcon
           className='icon-start'
           icon={search ? SearchRemoveIcon : SearchList02Icon}

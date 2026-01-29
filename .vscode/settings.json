@@ -16,7 +16,6 @@
     "source.action.useSortedAttributes.biome": "explicit",
     "source.action.useSortedProperties.biome": "explicit",
     "source.fixAll.biome": "explicit",
-    "source.organizeImports": "explicit",
     "source.organizeImports.biome": "explicit"
   },
   "editor.defaultFormatter": "biomejs.biome",

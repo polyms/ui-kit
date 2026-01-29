@@ -5,8 +5,6 @@
 
   --color-body: #1f2124;
 
-  --color-interaction: #1e5ae1;
-
   --color-primary: var(--color-primary-500);
   --color-primary-50: theme(colors.cyan.50);
   --color-primary-100: theme(colors.cyan.100);

@@ -1,35 +1,110 @@
 @reference './tailwind.css';
 
-.sidebar-container {
-  @apply transition-all duration-300;
-  @apply flex w-72 flex-col items-end;
+#root {
+  @apply grid h-dvh w-screen;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'main-content'
+    'navigation';
+  grid-template-rows: 1fr auto;
 
-  .sidebar-closed & {
-    @apply w-4;
+  @media (min-width: 768px) {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'name navigation'
+      'app-sidebar main-content';
   }
 }
 
-.navigation {
+#navigation {
+  grid-area: navigation;
+
+  @media all and not (min-width: 768px) {
+    box-shadow:
+      0 -4px 6px -1px rgb(0 0 0 / 0.1),
+      0 -2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+}
+
+.sidebar-container {
+  @apply flex flex-col items-start;
+
+  /* Mobile: full-screen backdrop; panel slides in/out */
+  @media all and not (min-width: 768px) {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  @media all and not (min-width: 768px) {
+    .sidebar-closed & {
+      background: rgb(0 0 0 / 0.35);
+      pointer-events: auto;
+    }
+  }
+
+  /* Desktop: in-grid + collapsible */
+  @media (min-width: 768px) {
+    @apply w-72;
+
+    grid-area: app-sidebar;
+    position: static;
+    transition: width 200ms ease;
+
+    .sidebar-closed & {
+      @apply w-4;
+    }
+  }
+}
+
+.sidebar-content {
   z-index: 1;
 
-  @apply sticky top-0 flex h-screen w-72 flex-col;
+  @media all and not (min-width: 768px) {
+    position: relative;
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+    will-change: transform;
+
+    .sidebar-closed & {
+      transform: translateX(0);
+      box-shadow:
+        4px 0 6px -1px rgb(0 0 0 / 0.1),
+        2px 0 4px -2px rgb(0 0 0 / 0.1);
+    }
+  }
+
+  @apply sticky top-0 flex h-screen w-72 flex-col bg-white;
 
   .nav-item {
     @apply relative flex items-center gap-2 rounded-lg p-2 text-left text-sm transition-colors;
     @apply w-full cursor-pointer font-semibold no-underline;
     &:not(.active) {
-      @apply text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900;
-      @apply focus-visible:bg-neutral-100 focus-visible:text-neutral-900 focus-visible:outline-none;
+      @apply text-neutral-600 hover:bg-slate-100 hover:text-slate-900;
+      @apply focus-visible:bg-slate-100 focus-visible:text-slate-900 focus-visible:outline-none;
     }
 
     &.active {
-      @apply bg-interaction/10 text-primary;
+      @apply bg-primary/10 text-primary-700;
     }
   }
 }
 
+.name {
+  grid-area: name;
+}
+
 main {
-  @apply relative me-1 mt-1 flex grow flex-col rounded-t-xl border-x border-t border-neutral-300;
+  grid-area: main-content;
+
+  @apply relative flex grow flex-col;
+
+  @media (min-width: 768px) {
+    @apply me-1 mt-1 rounded-t-xl border-x border-t border-neutral-300;
+  }
 }
 
 .shiki {
