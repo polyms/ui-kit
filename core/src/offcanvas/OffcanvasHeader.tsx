@@ -1,35 +1,27 @@
+import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import { forwardRef, type HTMLProps, useId, useLayoutEffect } from 'react'
-
-import { OffcanvasClose } from './OffcanvasClose'
-import { useOffcanvasContext } from './OffcanvasContext'
+import { forwardRef } from 'react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-export type OffcanvasHeaderProps = HTMLProps<HTMLHeadingElement> & {
-  closeButton?: boolean
-}
+type OffcanvasHeaderProps = useRender.ComponentProps<'div'>
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export const OffcanvasHeader = forwardRef<HTMLHeadingElement, OffcanvasHeaderProps>(function OffcanvasHeader(
-  { children, className, closeButton, ...props },
-  ref
-) {
-  const { setLabelId } = useOffcanvasContext()
-  const id = useId()
+export const OffcanvasHeader = forwardRef<HTMLDivElement, OffcanvasHeaderProps>(
+  ({ className, render, ...props }, forwardedRef) => {
+    const element = useRender({
+      defaultTagName: 'div',
+      ref: [forwardedRef],
+      render,
+      props: {
+        ...props,
+        className: clsx('offcanvas-heading', className),
+      },
+    })
 
-  // Only sets `aria-labelledby` on the Offcanvas root element
-  // if this component is mounted inside it.
-  useLayoutEffect(() => {
-    setLabelId(id)
-    return () => setLabelId(undefined)
-  }, [id, setLabelId])
+    return element
+  }
+)
 
-  return (
-    <h2 {...props} className={clsx('offcanvas-heading', className)} id={id} ref={ref}>
-      {children}
-      {closeButton && <OffcanvasClose className='ms-auto p-0_125' />}
-    </h2>
-  )
-})
+OffcanvasHeader.displayName = 'OffcanvasHeader'

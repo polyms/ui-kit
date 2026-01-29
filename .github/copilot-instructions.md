@@ -106,6 +106,7 @@ Each component resides in its own folder under `core/src/`. A typical component 
 
 - **TailwindCSS**: For utility-first styling. Classes are organized with `clsx()`.
 - **Component-specific CSS**: Each component has a corresponding `.css` file in `core/src/styles/_component-name.css`.
+- **Color Variables**: Always use `--color-slate-*` instead of `--color-neutral-*` for gray tones (e.g., `var(--color-slate-400)`, `var(--color-slate-100)`, etc.).
 
 ### Code Style & Format
 
@@ -285,6 +286,42 @@ npx nx test core -- --coverage
 - MDX navigation is auto-generated - just create `.mdx` files with proper frontmatter.
 - Use `gray-matter` to parse MDX frontmatter in Vite plugins.
 - Follow existing patterns for Vite plugins (virtual modules use `\0` prefix for resolved IDs).
+
+### Using `useRender` Hook from Base UI
+
+When building custom components with Base UI's `useRender` hook, follow this pattern:
+
+```tsx
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ComponentProps = useRender.ComponentProps<'div'>
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function Component({ className, render, ...props }: ComponentProps) {
+  const element = useRender({
+    defaultTagName: 'div',
+    ref: props.ref,
+    render,
+    props: {
+      ...props,
+      className: clsx('component-class', className),
+    },
+  })
+
+  return element
+}
+```
+
+**Key Points:**
+- Use `useRender.ComponentProps<'tagname'>` for typing props (includes `render` prop automatically)
+- `ref` is a regular prop in React 19, pass `props.ref` directly to `useRender`
+- Merge props and className inside the `props` object
+- Return the `element` directly from `useRender`
+- No need for `forwardRef` in React 19
 
 ## Useful Commands
 
