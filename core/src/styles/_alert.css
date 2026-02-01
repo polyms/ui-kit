@@ -26,10 +26,6 @@
   @apply border-primary-300 bg-primary-50 text-primary-700;
 }
 
-.alert-secondary {
-  @apply border-neutral-200 bg-neutral-100 text-neutral-700;
-}
-
 .alert-success {
   @apply border-green-200 bg-green-100 text-green-700;
 }

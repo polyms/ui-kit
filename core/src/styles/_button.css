@@ -113,7 +113,8 @@
 
     &.btn-primary,
     &.btn-success,
-    &.btn-danger {
+    &.btn-danger,
+    &.btn-warning {
       --btn-color: #fff;
       --btn-bg-color: var(--btn-variant-color);
       --btn-bg-hover-color: color-mix(in oklab, var(--btn-variant-color) 80%, transparent);
@@ -156,6 +157,16 @@
 
       &.outlined {
         --btn-border-active-color: var(--color-danger-600);
+      }
+    }
+
+    &.btn-warning {
+      --btn-variant-color: var(--color-warning-500);
+
+      --btn-bg-active-color: var(--color-warning-600);
+
+      &.outlined {
+        --btn-border-active-color: var(--color-warning-600);
       }
     }
 

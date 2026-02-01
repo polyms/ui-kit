@@ -1,0 +1,5 @@
+.card {
+  @apply overflow-clip rounded-2xl;
+
+  border: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}

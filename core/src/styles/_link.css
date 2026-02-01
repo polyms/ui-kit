@@ -16,11 +16,12 @@
   }
 
   &.link-primary {
-    color: var(--color-primary-500);
+    color: var(--color-primary-700);
+    font-weight: 500;
 
     &:active,
     &:visited {
-      color: var(--color-primary-800);
+      color: var(--color-primary-900);
     }
   }
 

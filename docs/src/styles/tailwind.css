@@ -1,17 +1,8 @@
 @import '../../../core/src/styles/tailwind.css';
+@import './_details.css' layer(components);
+@import './_toc.css' layer(components);
 
 @source '../';
-
-#root,
-body {
-  overflow-x: hidden;
-  grid-template-columns: 0 1fr;
-  @apply grid h-dvh w-screen;
-
-  @media (min-width: 768px) {
-    grid-template-columns: auto 1fr;
-  }
-}
 
 @layer base {
   section {

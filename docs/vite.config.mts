@@ -13,7 +13,7 @@ import { stripFrontmatter } from './plugins/stripFrontmatter.plugin'
 
 export default defineConfig({
   root: __dirname,
-  base: '/',
+  // base: '/',
   cacheDir: '../node_modules/.vite/docs',
   server: {
     port: 4200,

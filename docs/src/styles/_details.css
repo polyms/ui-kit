@@ -1,0 +1,74 @@
+.accordion {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.accordion-item {
+  border-width: 0;
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-item:not(:last-child) {
+  border-bottom: 1px dashed var(--color-slate-300);
+}
+
+/* Trigger button styling */
+.accordion-trigger {
+  display: grid;
+  grid-template-columns: 1rem 4fr 4fr 7fr;
+  @apply w-full cursor-default items-center gap-3 p-2;
+  box-sizing: border-box;
+  position: relative;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  background: none;
+  border: none;
+  outline: none;
+  text-align: left;
+
+  &:not([data-disabled]) {
+    @apply cursor-pointer;
+  }
+
+  &:hover:not([data-disabled]) {
+    @apply bg-slate-50;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-blue);
+    z-index: 1;
+  }
+
+  svg {
+    transition: transform 200ms ease;
+  }
+}
+
+/* Icon rotation when open */
+.accordion-item[data-open] .accordion-trigger svg {
+  transform: rotate(135deg);
+}
+
+/* Panel styling */
+.accordion-panel {
+  @apply border-slate-200 bg-slate-50;
+  box-sizing: border-box;
+  height: var(--accordion-panel-height);
+  max-height: 500px;
+  overflow: hidden;
+  transition: height 150ms ease-out;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    height: 0;
+  }
+}

@@ -3,9 +3,32 @@ type: components
 title: Button
 ---
 
-import Story from './-views/ButtonDefault.tsx'
-import code from './-views/ButtonDefault.tsx?raw'
+import Story from './-views/buttons/ButtonDefault.tsx'
+import code from './-views/buttons/ButtonDefault.tsx?raw'
+import Props from './-views/buttons/ButtonProps.tsx'
+import Sizes from './-views/buttons/ButtonSizes.tsx'
+import Variants from './-views/buttons/ButtonVariants.tsx'
+
+Trigger an action or event, such as submitting a Form, opening a Dialog, canceling an action, or performing a delete operation in React. This component is based on the [WAI-ARIA Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/).
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+<Button>Click me</Button>
+```
+
+## Props
+
+<Props />
+
+## Sizes
+
+<Sizes/ >
+
+## Variants
+
+<Variants/ >

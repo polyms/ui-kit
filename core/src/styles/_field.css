@@ -112,7 +112,7 @@
   @apply w-full;
 
   &::placeholder {
-    color: var(--color-slate-300);
+    color: var(--color-slate-400);
     /* font-style: italic; */
   }
 

@@ -4,9 +4,9 @@ import { useRef } from 'react'
 
 import { AppSidebar } from '../layouts/AppSidebar'
 
-const Navigation = ({ onToggleSidebar }: NavigationProps) => {
+const AppNavigation = ({ onToggleSidebar }: NavigationProps) => {
   return (
-    <div className='flex h-14 shrink-0 items-center gap-2 px-4' id='navigation'>
+    <div className='flex h-14 shrink-0 items-center gap-2 px-4' id='app-navigation'>
       <button
         className='ml-auto inline-flex items-center justify-center rounded-md border border-slate-300 px-2 py-1 font-medium text-xs md:hidden'
         onClick={onToggleSidebar}
@@ -20,9 +20,10 @@ const Navigation = ({ onToggleSidebar }: NavigationProps) => {
 
 const Name = () => {
   return (
-    <div className='name hidden h-14 items-center gap-2 px-4 font-semibold text-sm tracking-wide md:flex'>
-      <img alt='logo' className='h-6' src='/favicon.png' />
-      Polyms • Core UI
+    <div className='hidden h-14 items-center gap-2 px-4 tracking-wide md:flex' id='app-name'>
+      <img alt='logo' className='h-10' src='/favicon.png' />
+      <strong className='text-xl'>Polyms</strong>
+      <span className='text-sm'> • Core UI</span>
     </div>
   )
 }
@@ -35,7 +36,7 @@ const Root = () => {
   return (
     <>
       <Name />
-      <Navigation onToggleSidebar={() => appSidebarRef.current?.toggleSidebar()} />
+      <AppNavigation onToggleSidebar={() => appSidebarRef.current?.toggleSidebar()} />
       <AppSidebar ref={appSidebarRef} />
       <main className={className}>
         <Outlet />

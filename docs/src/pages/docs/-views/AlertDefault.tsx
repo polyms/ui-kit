@@ -1,4 +1,4 @@
-const variants = ['primary', 'secondary', 'danger', 'success', 'info', 'warning', 'light', 'dark']
+const variants = ['primary', 'danger', 'success', 'info', 'warning', 'light', 'dark']
 
 export default function Alert() {
   return (

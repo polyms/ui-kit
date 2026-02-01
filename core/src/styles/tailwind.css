@@ -4,6 +4,7 @@
 @import './_bottom-sheet.css' layer(components);
 @import './_breadcrumb.css' layer(components);
 @import './_button.css';
+@import './_card.css' layer(components);
 @import './_field.css' layer(components);
 @import './_link.css' layer(components);
 @import './_loading.css' layer(components);
@@ -19,6 +20,7 @@
 @import './_toast.css';
 @import './_tooltip.css' layer(components);
 @import './_typography.css' layer(components);
+@import './_utilities.css' layer(utilities);
 @import './_z-index.css' layer(utilities);
 
 @import 'tailwindcss' source('../');

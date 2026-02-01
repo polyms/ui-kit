@@ -1,0 +1,47 @@
+/* ──────────────────────────────────────────────────────────────────────────────────────────────────────────
+ * Utility Classes
+ * ────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+/* Border utilities */
+.border-light {
+  border: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-t-light {
+  border-top: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-r-light {
+  border-right: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-b-light {
+  border-bottom: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-l-light {
+  border-left: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-s-light {
+  border-inline-start: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-e-light {
+  border-inline-end: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-x-light {
+  border-left: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-right: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+.border-y-light {
+  border-top: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-bottom: 1px var(--tw-border-style, solid) var(--color-slate-300);
+}
+
+/* Background utilities */
+.bg-light {
+  background-color: var(--color-slate-50);
+}

@@ -54,7 +54,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
     <>
       {/* biome-ignore lint/a11y/noStaticElementInteractions: off */}
       <div
-        className='sidebar-container'
+        id='app-sidebar'
         onClick={() => {
           // Close when clicking the mobile backdrop (outside the sidebar panel)
           if (window.matchMedia('(max-width: 767px)').matches && !isShowSidebar) {
@@ -70,7 +70,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
         }}
         onMouseEnter={showToggleSidebar}
         onMouseLeave={hideToggleSidebar}
-        tabIndex={-1}
+        // tabIndex={-1}
       >
         <aside
           className='sidebar-content'
@@ -101,6 +101,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
                 strokeWidth={2}
               />
               <Field.Control
+                className='bg-white'
                 onChange={e => setSearch(e.target.value)}
                 placeholder='Find components...'
                 rounded

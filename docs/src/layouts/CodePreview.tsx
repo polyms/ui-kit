@@ -24,7 +24,7 @@ export function CodePreview({ code, children }: { code: string; children: React.
         {children}
       </Tabs.Panel>
       <Tabs.Panel className='h-96 overflow-auto p-0' style={{ background: '#2e3440' }} value='code'>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div className='rounded-b-2xl' dangerouslySetInnerHTML={{ __html: html }} />
       </Tabs.Panel>
     </Tabs>
   )

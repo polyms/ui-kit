@@ -6,7 +6,7 @@ export function DesignSystem() {
         You can use <code>bg-primary</code> for the default primary color (equivalent to{' '}
         <code>bg-primary-500</code>), or specify a shade with <code>bg-primary-100</code>,{' '}
         <code>bg-primary-200</code>, etc. This pattern works for all color variants like{' '}
-        <code>bg-secondary</code>, <code>bg-danger</code>, and <code>bg-neutral</code>:
+        <code>bg-danger</code>, and <code>bg-neutral</code>:
       </p>
       <table className='table align-middle'>
         <thead>
@@ -56,39 +56,6 @@ export function DesignSystem() {
             </td>
             <td>
               <div className='h-12 w-12 rounded-lg bg-primary-900 outline outline-black/10 -outline-offset-1' />
-            </td>
-          </tr>
-          <tr>
-            <td>secondary</td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-50 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-100 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-200 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-300 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-400 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-500 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-600 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-700 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-800 outline outline-black/10 -outline-offset-1' />
-            </td>
-            <td>
-              <div className='h-12 w-12 rounded-lg bg-secondary-900 outline outline-black/10 -outline-offset-1' />
             </td>
           </tr>
           <tr>

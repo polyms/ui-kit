@@ -6,7 +6,7 @@ import type { FC } from 'react'
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
-export type ButtonVariant = 'primary' | 'success' | 'light' | 'dark' | 'danger' | 'warning'
+export type ButtonVariant = 'primary' | 'success' | 'warning' | 'danger' | 'dark' | 'light'
 
 export interface ButtonProps extends useRender.ComponentProps<'button'> {
   size?: ButtonSize
@@ -15,18 +15,9 @@ export interface ButtonProps extends useRender.ComponentProps<'button'> {
   rounded?: boolean
   icon?: boolean
   active?: boolean
-  content?: 'start' | 'center' | 'end' | 'between' | 'around'
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
-
-const contentMap = {
-  start: 'justify-start',
-  end: 'justify-end',
-  center: 'justify-center',
-  between: 'justify-between',
-  around: 'justify-around',
-}
 
 const variantMap = {
   primary: 'btn-primary',
@@ -47,26 +38,19 @@ export const Button: FC<ButtonProps> = ({
   rounded,
   icon,
   active,
-  content = 'center',
   render,
   ...props
 }) => {
   const typeValue: React.ButtonHTMLAttributes<HTMLButtonElement>['type'] = render ? undefined : 'button'
 
   const defaultProps = {
-    className: clsx(
-      className,
-      'btn',
-      variant ? variantMap[variant] : 'btn-ghost',
-      content && contentMap[content],
-      {
-        outlined,
-        'rounded-full': rounded,
-        'btn-icon': icon,
-        active,
-        [`btn-${size}`]: size,
-      }
-    ),
+    className: clsx(className, 'btn', variant ? variantMap[variant] : 'btn-ghost', {
+      outlined,
+      'rounded-full': rounded,
+      'btn-icon': icon,
+      active,
+      [`btn-${size}`]: size,
+    }),
     'data-slot': 'button',
     type: typeValue,
   }
