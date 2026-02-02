@@ -1,13 +1,64 @@
 ---
-type: components
+type: Overlays
 title: Tooltip
+apis:
+  - separator: Tooltip
+  - name: title
+    default: '-'
+    values: string
+    description: The content to display inside the tooltip popup.
+  - name: side
+    default: top
+    values: top | bottom | left | right
+    description: The preferred side of the anchor element to position the tooltip against.
+  - name: align
+    default: center
+    values: start | center | end
+    description: The alignment of the tooltip relative to the anchor element's edge.
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state of the tooltip. Use this for controlled tooltip behavior.
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Callback fired when the tooltip's open state changes.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents the tooltip from opening on hover or focus.
+  - separator: Tooltip.Provider
+  - name: closeDelay
+    default: 0
+    values: number
+    description: The delay in milliseconds before closing the tooltip after the user stops hovering.
+  - name: delay
+    default: 600
+    values: number
+    description: The delay in milliseconds before opening the tooltip when hovering.
 ---
 
-import Story from './-views/TooltipDefault.tsx'
-import code from './-views/TooltipDefault.tsx?raw'
+import Story from './-views/tooltip/TooltipDefault.tsx'
+import code from './-views/tooltip/TooltipDefault.tsx?raw'
 
-A popup that appears when an element is hovered or focused, showing a hint for sighted users.
+Display brief, contextual information when users hover or focus on an element. Tooltips provide helpful hints without cluttering the interface, enhancing usability for sighted users.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Tooltip } from '@polyms/core'
+
+<Tooltip.Provider>
+  <Tooltip title="Helpful information" side="top">
+    <button>Hover me</button>
+  </Tooltip>
+</Tooltip.Provider>
+```
+
+## API Reference
+
+<APIReference />
