@@ -1,15 +1,63 @@
 ---
-type: components
+type: Feedback
 title: Alert
+apis:
+  - separator: Alert
+  - name: variant
+    default: primary
+    values: primary | success | info | warning | danger | light | dark
+    description: Determines the visual style and semantic meaning of the alert.
+  - name: dismissible
+    default: false
+    values: boolean
+    description: When true, displays a close button allowing users to dismiss the alert.
+  - name: onDismiss
+    default: '-'
+    values: () => void
+    description: Callback function triggered when the close button is clicked.
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default alert container.
+  - separator: Alert.Heading
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default h4 heading tag.
 ---
 
-import Story from './-views/AlertDefault.tsx'
-import code from './-views/AlertDefault.tsx?raw'
+import Story from './-views/alert/AlertDefault.tsx'
+import code from './-views/alert/AlertDefault.tsx?raw'
+import Variants from './-views/alert/AlertVariants.tsx'
 
-Alerts are used to provide feedback messages to users. They can be used to convey important information, warnings, or errors.
-
-## Usage
+Provide contextual feedback messages for typical user actions with a handful of available and flexible alert messages. Use alerts to communicate important information, warnings, errors, or success states to users.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Alert } from '@polyms/core'
+
+<Alert variant="primary">
+  <Alert.Heading>Success!</Alert.Heading>
+  Your changes have been saved successfully.
+</Alert>
+
+<Alert variant="danger" dismissible onDismiss={() => console.log('Dismissed')}>
+  <Alert.Heading>Error occurred</Alert.Heading>
+  Please check your input and try again.
+</Alert>
+```
+
+## Variants
+
+Alerts support 7 different semantic variants for various feedback contexts. Each variant uses distinct colors to convey different meanings.
+
+<Variants/ >
+
+## API Reference
+
+<APIReference />

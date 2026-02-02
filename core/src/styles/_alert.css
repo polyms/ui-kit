@@ -1,51 +1,83 @@
 .alert {
-  @apply relative mb-4 rounded border border-transparent font-medium;
+  @apply relative mb-4 rounded-lg font-medium;
 
   padding: 0.75rem 1rem;
   font-size: 14px;
+  border: 1px solid var(--alert-border);
+  background-color: var(--alert-bg);
+  color: var(--alert-color);
 }
 
 .alert-heading {
-  @apply text-inherit;
+  font-weight: 700;
+  color: var(--alert-color);
 }
 
 .alert-link {
-  @apply font-bold text-inherit;
+  font-weight: 700;
+}
+
+.alert-dismissible .alert-close {
+  @apply absolute -top-1 -right-1 z-10 flex items-center justify-center bg-white transition-all duration-200;
+  @apply opacity-0;
+
+  padding-block: 0.25rem;
+  border: 1px solid var(--alert-border);
+  color: var(--alert-color);
+  border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
+
+  &:hover {
+    background-color: var(--alert-bg);
+  }
 }
 
 .alert-dismissible {
-  @apply pr-12;
-}
+  @apply pe-12;
 
-.alert-dismissible .btn-close {
-  @apply absolute top-0 right-0 z-10 p-5;
+  &:hover .alert-close {
+    @apply scale-110 opacity-100 shadow-lg;
+  }
 }
 
 /* Alert Variants */
 .alert-primary {
-  @apply border-primary-300 bg-primary-50 text-primary-700;
+  --alert-border: var(--color-primary-600);
+  --alert-bg: var(--color-primary-50);
+  --alert-color: var(--color-primary-700);
 }
 
 .alert-success {
-  @apply border-green-200 bg-green-100 text-green-700;
+  --alert-border: var(--color-success-600);
+  --alert-bg: var(--color-success-50);
+  --alert-color: var(--color-success-700);
 }
 
 .alert-info {
-  @apply border-cyan-200 bg-cyan-100 text-cyan-700;
+  --alert-border: var(--color-info-600);
+  --alert-bg: var(--color-info-50);
+  --alert-color: var(--color-info-700);
 }
 
 .alert-warning {
-  @apply border-yellow-200 bg-yellow-100 text-yellow-700;
+  --alert-border: var(--color-warning-600);
+  --alert-bg: var(--color-warning-50);
+  --alert-color: var(--color-warning-700);
 }
 
 .alert-danger {
-  @apply border-red-200 bg-red-100 text-red-700;
+  --alert-border: var(--color-danger-600);
+  --alert-bg: var(--color-danger-50);
+  --alert-color: var(--color-danger-700);
 }
 
 .alert-light {
-  @apply border-neutral-300 bg-primary-50 text-neutral-900;
+  --alert-border: var(--color-slate-300);
+  --alert-bg: var(--color-slate-50);
+  --alert-color: var(--color-slate-900);
 }
 
 .alert-dark {
-  @apply border-neutral-400 bg-neutral-300 text-neutral-900;
+  --alert-border: var(--color-slate-900);
+  --alert-bg: var(--color-slate-900);
+  --alert-color: #fff;
 }

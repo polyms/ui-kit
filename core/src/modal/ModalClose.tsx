@@ -1,8 +1,7 @@
 import { Dialog } from '@base-ui/react/dialog'
-import { CancelCircleHalfDotIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
+import { CloseIcon } from '../CloseIcon'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -19,7 +18,7 @@ export const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>((props,
       className={clsx('modal-close', props.className)}
       ref={ref}
     >
-      <HugeiconsIcon height={22} icon={CancelCircleHalfDotIcon} strokeWidth={2} width={22} />
+      <CloseIcon size={22} />
     </Dialog.Close>
   )
 })
