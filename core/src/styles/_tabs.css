@@ -43,12 +43,12 @@
     height: 2rem;
 
     &[data-selected] {
-      color: var(--color-primary-500);
+      color: var(--color-primary-600);
     }
 
     @media (hover: hover) {
       &:hover {
-        color: var(--color-primary-500);
+        color: var(--color-primary-600);
       }
     }
 
@@ -100,12 +100,12 @@
     position: absolute;
     z-index: -1;
     left: 0;
-    bottom: -1px;
+    bottom: -1.5px;
     translate: var(--active-tab-left) -50%;
     width: var(--active-tab-width);
     height: 3px;
     border-radius: 0.25rem 0.25rem 0 0;
-    background-color: var(--color-primary-500);
+    background-color: var(--color-primary-600);
     transition-property: translate, width;
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;

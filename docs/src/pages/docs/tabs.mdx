@@ -1,11 +1,88 @@
 ---
-type: components
+type: Navigation
 title: Tabs
+apis:
+  - separator: Tabs (Root)
+  - name: defaultValue
+    default: '-'
+    values: string
+    description: The value of the tab that should be active by default when the component mounts.
+  - name: value
+    default: '-'
+    values: string
+    description: The controlled value of the active tab. Use with onValueChange for controlled behavior.
+  - name: onValueChange
+    default: '-'
+    values: '(value: string) => void'
+    description: Callback fired when the active tab changes.
+  - name: orientation
+    default: horizontal
+    values: horizontal | vertical
+    description: The orientation of the tabs component.
+  - separator: Tabs.Tab
+  - name: value
+    default: '-'
+    values: string
+    description: A unique value that identifies this tab. Required.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents the tab from being selected and applies disabled styling.
+  - separator: Tabs.Panel
+  - name: value
+    default: '-'
+    values: string
+    description: The value that identifies which tab controls this panel. Must match a Tab's value.
 ---
 
-import Story from './-views/TabsDefault.tsx'
-import code from './-views/TabsDefault.tsx?raw'
+import Story from './-views/tabs/TabsDefault.tsx'
+import code from './-views/tabs/TabsDefault.tsx?raw'
+
+Organize and navigate between related content groups without leaving the page. Tabs provide a clean interface for switching between different views while maintaining context and reducing cognitive load.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Tabs } from '@polyms/core'
+
+<Tabs defaultValue="profile">
+  <Tabs.List>
+    <Tabs.Tab value="profile">Profile</Tabs.Tab>
+    <Tabs.Tab value="settings">Settings</Tabs.Tab>
+    <Tabs.Tab value="notifications">Notifications</Tabs.Tab>
+  </Tabs.List>
+  
+  <Tabs.Panel value="profile">
+    Profile content goes here
+  </Tabs.Panel>
+  <Tabs.Panel value="settings">
+    Settings content goes here
+  </Tabs.Panel>
+  <Tabs.Panel value="notifications">
+    Notifications content goes here
+  </Tabs.Panel>
+</Tabs>
+```
+
+## Behavior
+
+### Active Indicator
+
+The tabs component includes an animated indicator that smoothly transitions between tabs as users navigate, providing clear visual feedback about the current selection.
+
+### Keyboard Navigation
+
+Tabs support full keyboard navigation for accessibility:
+- **Arrow Left/Right** - Navigate between tabs (horizontal orientation)
+- **Arrow Up/Down** - Navigate between tabs (vertical orientation)
+- **Home** - Move to first tab
+- **End** - Move to last tab
+- **Tab** - Move focus to/from the tab panel
+
+## API Reference
+
+<APIReference />
