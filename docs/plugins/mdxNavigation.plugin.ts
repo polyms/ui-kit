@@ -14,16 +14,6 @@ export interface TocItem {
   url: string
 }
 
-export interface NavigationItem {
-  label: string
-  path: string
-}
-
-export interface NavigationSection {
-  label: string
-  items: NavigationItem[]
-}
-
 export interface PageMetadata {
   type?: string
   title?: string
@@ -97,7 +87,7 @@ export function mdxNavigationPlugin(options: { contentDir?: string; routeBase?: 
     const relativePath = path.relative(contentDir, filePath).replace(/\\/g, '/')
     const route = routeBase + relativePath.replace(/\.mdx?$/, '')
     const segments = relativePath.replace(/\.mdx$/, '').split('/')
-    const section = segments.length > 1 ? segments[0]! : 'docs'
+    const section = segments.length > 1 ? segments[0]! : 'root'
 
     return {
       file: filePath,
@@ -128,29 +118,6 @@ export function mdxNavigationPlugin(options: { contentDir?: string; routeBase?: 
     if (fs.existsSync(contentDir)) {
       walk(contentDir)
     }
-  }
-
-  function buildNavigation(): NavigationSection[] {
-    const nav: Record<string, NavigationItem[]> = {}
-
-    for (const page of pages) {
-      const section = page.section
-      if (!nav[section]) {
-        nav[section] = []
-      }
-
-      nav[section].push({
-        label: page.title || 'Untitled',
-        path: page.route,
-      })
-    }
-
-    return Object.entries(nav)
-      .map(([label, items]) => ({
-        label: label === 'docs' ? '⚡ Components' : `📂 ${label}`,
-        items: items.sort((a, b) => a.label.localeCompare(b.label)),
-      }))
-      .sort((a, b) => a.label.localeCompare(b.label))
   }
 
   return {
@@ -202,11 +169,10 @@ export function mdxNavigationPlugin(options: { contentDir?: string; routeBase?: 
 
     load(id) {
       if (id === RESOLVED_VIRTUAL_ID) {
-        const navSections = buildNavigation()
         const tocByRoute = Object.fromEntries(pages.map(p => [p.route, p.toc]))
         const metadataByRoute = Object.fromEntries(pages.map(p => [p.route, p.metadata]))
         return [
-          `export const navigation = ${JSON.stringify(navSections, null, 2)}`,
+          `export const pages = ${JSON.stringify(pages, null, 2)}`,
           `export const tocByRoute = ${JSON.stringify(tocByRoute, null, 2)}`,
           `export const metadataByRoute = ${JSON.stringify(metadataByRoute, null, 2)}`,
         ].join('\n\n')

@@ -5,16 +5,6 @@ declare module 'virtual:mdx-navigation' {
     url: string
   }
 
-  export interface NavigationItem {
-    label: string
-    path: string
-  }
-
-  export interface NavigationSection {
-    label: string
-    items: NavigationItem[]
-  }
-
   export interface PageMetadata {
     type?: string
     title?: string
@@ -29,7 +19,17 @@ declare module 'virtual:mdx-navigation' {
     description: string
   }
 
+  export interface PageNavigation {
+    file: string
+    route: string
+    title?: string
+    metadata: PageMetadata
+    toc: TocItem[]
+    section: string
+  }
+
   export const navigation: NavigationSection[]
+  export const pages: PageNavigation[]
   export const tocByRoute: Record<string, TocItem[]>
   export const metadataByRoute: Record<string, PageMetadata>
 }

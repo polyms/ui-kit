@@ -1,7 +1,7 @@
 import { tocByRoute } from 'virtual:mdx-navigation'
 import { Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { useLocation } from '@tanstack/react-router'
+import { useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -128,12 +128,11 @@ function useVisibleHeadings(itemIds: string[]) {
 }
 
 export function DocsToc() {
-  const location = useLocation()
+  const activePath = useRouterState({ select: s => s.location.pathname })
   const [toc, itemIds] = useMemo(() => {
-    const routeKey = location.pathname
-    const toc = tocByRoute[routeKey] ?? tocByRoute[routeKey.replace(/\/$/, '')] ?? []
+    const toc = tocByRoute[activePath] ?? tocByRoute[activePath.replace(/\/$/, '')] ?? []
     return [toc, toc.map(i => i.url.replace('#', ''))]
-  }, [location.pathname])
+  }, [activePath])
   const visibleHeadings = useVisibleHeadings(itemIds)
   const visibleIds = useMemo(() => new Set(visibleHeadings.map(h => h.id)), [visibleHeadings])
 

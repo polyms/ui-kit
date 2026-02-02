@@ -1,16 +1,18 @@
-import { navigation } from 'virtual:mdx-navigation'
+import { pages } from 'virtual:mdx-navigation'
 import {
+  ArrowRight01Icon,
   CircleArrowLeftDoubleIcon,
+  CursorMagicSelection04Icon,
   GoogleDocIcon,
   SearchList02Icon,
   SearchRemoveIcon,
-  Tag01Icon,
+  ThreeDScaleIcon,
 } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
-import { Field, useBoolean, useEventCallback, useToggle } from '@polyms/core'
+import { Collapsible, Field, useBoolean, useEventCallback, useToggle } from '@polyms/core'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useImperativeHandle, useMemo, useState } from 'react'
+import { Icon } from '../components/Icons'
 
 export function AppSidebar({ ref }: AppSidebarProps) {
   const [search, setSearch] = useState('')
@@ -22,33 +24,67 @@ export function AppSidebar({ ref }: AppSidebarProps) {
     setFalse: hideToggleSidebar,
   } = useBoolean(false)
 
-  useImperativeHandle<AppSidebarRef, AppSidebarRef>(
-    ref,
-    () => ({
-      toggleSidebar,
-    }),
-    []
-  )
+  useImperativeHandle<AppSidebarRef, AppSidebarRef>(ref, () => ({ toggleSidebar }), [])
 
   const navigate = useNavigate()
   const onSelect = useEventCallback((path: string) => {
     navigate({ to: '/$', params: { _splat: path.substring(1) } })
   })
 
-  const filteredNav = useMemo(() => {
-    if (!search) return navigation
-    const lower = search.toLowerCase()
-    return navigation
-      .map(section => ({
-        ...section,
-        items: section.items.filter(i => i.label.toLowerCase().includes(lower)),
-      }))
-      .filter(section => section.items.length > 0)
-  }, [search, navigation])
-
   useEffect(() => {
     document.body.classList.toggle('sidebar-closed', !isShowSidebar)
   }, [isShowSidebar])
+
+  const items = useMemo(() => {
+    const nav: Record<string, NavigationItem[]> = {}
+
+    for (const page of pages) {
+      const section = page.metadata.type || 'Others'
+      if (!nav[section]) {
+        nav[section] = []
+      }
+
+      nav[section].push({
+        label: page.title || 'Untitled',
+        path: page.route,
+      })
+    }
+
+    // biome-ignore-start lint/style/useNamingConvention: label name
+    const iconMaps = {
+      Guide: GoogleDocIcon,
+      Actions: CursorMagicSelection04Icon,
+      Others: ThreeDScaleIcon,
+    }
+    const colors = {
+      Guide: 'text-warning-600',
+      Actions: 'text-success',
+      Others: 'text-danger',
+    }
+    // biome-ignore-end lint/style/useNamingConvention: label name
+
+    return Object.entries(nav)
+      .sort(([labelA], [labelB]) => {
+        if (labelA === 'Guide') return -1
+        if (labelB === 'Guide') return 1
+        if (labelA === 'Others') return 1
+        if (labelB === 'Others') return -1
+        return labelA.localeCompare(labelB)
+      })
+      .map(([label, items]) => ({
+        key: label,
+        label: (
+          <>
+            <Icon
+              className={clsx('size-4', colors[label as keyof typeof colors])}
+              icon={iconMaps[label as keyof typeof iconMaps] || GoogleDocIcon}
+            />
+            {label}
+          </>
+        ),
+        items: items.sort((a, b) => a.label.localeCompare(b.label)),
+      }))
+  }, [])
 
   return (
     <>
@@ -70,7 +106,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
         }}
         onMouseEnter={showToggleSidebar}
         onMouseLeave={hideToggleSidebar}
-        // tabIndex={-1}
+        tabIndex={-1}
       >
         <aside
           className='sidebar-content'
@@ -81,24 +117,24 @@ export function AppSidebar({ ref }: AppSidebarProps) {
           onKeyDown={event => event.stopPropagation()}
         >
           {isShowToggleSidebar && (
-            <HugeiconsIcon
+            <Icon
               className={clsx(
-                'link-light absolute -end-3.5 top-16 z-50 hidden shrink-0 cursor-pointer fill-white transition-transform md:block',
+                'link link-light absolute -end-3.5 top-16 z-50 hidden shrink-0 fill-white transition-transform md:block',
                 !isShowSidebar && 'rotate-180'
               )}
               icon={CircleArrowLeftDoubleIcon}
               onClick={toggleSidebar}
               size={28}
+              strokeWidth={1.5}
             />
           )}
 
           <div className='relative mb-4 px-4'>
             <Field>
-              <HugeiconsIcon
+              <Icon
                 className='icon-start'
                 icon={search ? SearchRemoveIcon : SearchList02Icon}
                 onClick={() => setSearch('')}
-                strokeWidth={2}
               />
               <Field.Control
                 className='bg-white'
@@ -114,29 +150,34 @@ export function AppSidebar({ ref }: AppSidebarProps) {
             <ul className=''>
               <li>
                 <Link className={'nav-item'} to='/page'>
-                  <HugeiconsIcon className='size-4 text-amber-600' icon={GoogleDocIcon} />
+                  <Icon className='size-4 text-warning-600' icon={GoogleDocIcon} />
                   Page Demo
                 </Link>
               </li>
             </ul>
-            {filteredNav.map(section => (
-              <div key={section.label}>
-                <h4 className='mt-md mb-1 ps-2 font-bold text-xs uppercase'>{section.label}</h4>
-                <ul className='space-y-1'>
-                  {section.items.map(item => (
-                    <li key={item.path}>
-                      <button
-                        className={clsx('nav-item', activePath === item.path && 'active')}
-                        onClick={() => onSelect(item.path)}
-                        type='button'
-                      >
-                        <HugeiconsIcon className='size-4' icon={Tag01Icon} />
-                        {item.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+            {items.map(section => (
+              <Collapsible.Root defaultOpen key={section.key}>
+                <Collapsible.Trigger className='nav-item'>
+                  {section.label}
+                  <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
+                </Collapsible.Trigger>
+                <Collapsible.Panel className='nav-panel'>
+                  <div className='nav-panel-content'>
+                    {section.items.map(item => (
+                      <div key={item.path}>
+                        <button
+                          className={clsx('nav-item', activePath === item.path && 'active')}
+                          onClick={() => onSelect(item.path)}
+                          type='button'
+                        >
+                          {item.label}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </Collapsible.Panel>
+              </Collapsible.Root>
             ))}
           </nav>
         </aside>
@@ -153,6 +194,16 @@ type AppSidebarRef = {
 
 type AppSidebarProps = {
   ref: React.Ref<AppSidebarRef>
+}
+
+interface NavigationItem {
+  label: string
+  path: string
+}
+
+interface NavigationSection {
+  label: string
+  items: NavigationItem[]
 }
 
 export declare namespace AppSidebar {

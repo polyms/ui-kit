@@ -2,17 +2,18 @@ import { metadataByRoute } from 'virtual:mdx-navigation'
 import { Accordion } from '@base-ui/react/accordion'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { useLocation } from '@tanstack/react-router'
+import { useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
+import { useMemo } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export default function APIReference() {
-  const location = useLocation()
-  const routeKey = location.pathname
-  const meta = metadataByRoute[routeKey] ?? metadataByRoute[routeKey.replace(/\/$/, '')] ?? {}
-
-  const apis = meta.apis
+  const activePath = useRouterState({ select: s => s.location.pathname })
+  const meta = useMemo(
+    () => metadataByRoute[activePath] ?? metadataByRoute[activePath.replace(/\/$/, '')] ?? {},
+    [activePath]
+  )
 
   return (
     <div className='card'>
@@ -28,7 +29,7 @@ export default function APIReference() {
           </Accordion.Header>
         </Accordion.Item>
 
-        {apis?.map(prop => (
+        {meta.apis?.map(prop => (
           <Accordion.Item className='accordion-item' key={prop.name} value={prop.name}>
             <Accordion.Header className='accordion-header'>
               <Accordion.Trigger className='accordion-trigger'>

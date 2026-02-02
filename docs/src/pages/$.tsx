@@ -21,14 +21,11 @@ export const Route = createFileRoute('/$')({
 })
 
 export function MdxLayout({ children }: { children: React.ReactNode }) {
-  const location = useLocation()
-  const path = location.pathname
-
   // routeBase is '/' and contentDir is 'src/pages'
   // MDX files under 'src/pages/docs/**/*.mdx' map to '/docs/...'
-  const routeKey = path
+  const activePath = useRouterState({ select: s => s.location.pathname })
 
-  const metadata: PageMetadata | undefined = metadataByRoute[routeKey]
+  const metadata: PageMetadata | undefined = metadataByRoute[activePath]
 
   return (
     <div className={clsx('flex min-w-0')}>

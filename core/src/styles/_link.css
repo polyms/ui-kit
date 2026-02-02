@@ -37,6 +37,12 @@
   &.link-light {
     color: var(--color-slate-500);
 
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      color: var(--color-primary-600);
+    }
+
     &:active,
     &:visited {
       color: var(--color-slate-900);

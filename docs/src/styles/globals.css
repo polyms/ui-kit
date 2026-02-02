@@ -112,15 +112,73 @@ body {
   }
 
   .nav-item {
-    @apply relative flex items-center gap-2 rounded-lg p-2 text-left text-sm transition-colors;
+    @apply relative flex items-center gap-2 rounded-lg p-2 text-left text-sm;
     @apply w-full cursor-pointer font-semibold no-underline;
-    &:not(.active) {
-      @apply text-neutral-600 hover:bg-slate-100 hover:text-slate-900;
-      @apply focus-visible:bg-slate-100 focus-visible:text-slate-900 focus-visible:outline-none;
+
+    &:not(.active):not(:active) {
+      @apply text-neutral-600;
+
+      @media (hover: hover) {
+        &:hover {
+          @apply bg-slate-100 text-slate-900;
+        }
+      }
+
+      &:focus-visible {
+        @apply bg-slate-100 text-slate-900 outline-none;
+      }
     }
 
-    &.active {
+    &.active,
+    &:active {
       @apply bg-primary/10 text-primary-700;
+    }
+
+    .chevron-icon {
+      transition: all 150ms ease-out;
+    }
+
+    &[data-panel-open] .chevron-icon {
+      transform: rotate(90deg);
+    }
+  }
+
+  .nav-panel {
+    display: flex;
+    height: var(--collapsible-panel-height);
+    flex-direction: column;
+    justify-content: start;
+    overflow: hidden;
+    transition: all 150ms ease-out;
+
+    &[hidden]:not([hidden='until-found']) {
+      display: none;
+    }
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      height: 0;
+    }
+  }
+
+  .nav-panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-inline-start: 1rem;
+    padding-inline-start: 0.5rem;
+    border-left: 1px dashed var(--color-slate-300);
+
+    .nav-item.active::before {
+      content: '';
+      display: flex;
+      position: absolute;
+      left: -0.75rem;
+      transform: translateX(2px);
+      background-color: var(--color-primary-700);
+      border-radius: 3px;
+      height: 80%;
+      width: 3px;
     }
   }
 }
