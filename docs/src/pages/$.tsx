@@ -77,11 +77,7 @@ function MdxPage() {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
         return (
-          <h3
-            className='mb-3xs font-mono font-semibold text-neutral-500 text-xs uppercase'
-            {...props}
-            id={id}
-          >
+          <h3 className='h3 mb-2 pt-6 font-semibold text-slate-700' {...props} id={id}>
             {props.children}
           </h3>
         )
@@ -89,7 +85,7 @@ function MdxPage() {
       h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
-        return <h4 {...props} id={id} />
+        return <h4 className='h4 mb-2 pt-4 font-semibold text-slate-700' {...props} id={id} />
       },
       a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
         return (

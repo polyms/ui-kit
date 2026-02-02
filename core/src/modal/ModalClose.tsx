@@ -1,7 +1,7 @@
 import { Dialog } from '@base-ui/react/dialog'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
-import { CloseIcon } from '../CloseIcon'
+import Icons from '../Icons'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -18,7 +18,7 @@ export const ModalClose = forwardRef<HTMLButtonElement, ModalCloseProps>((props,
       className={clsx('modal-close', props.className)}
       ref={ref}
     >
-      <CloseIcon size={22} />
+      <Icons.Close size={22} />
     </Dialog.Close>
   )
 })

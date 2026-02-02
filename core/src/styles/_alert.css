@@ -17,22 +17,20 @@
   font-weight: 700;
 }
 
-.alert-dismissible .alert-close {
-  @apply absolute -top-1 -right-1 z-10 flex items-center justify-center bg-white transition-all duration-200;
-  @apply opacity-0;
-
-  padding-block: 0.25rem;
-  border: 1px solid var(--alert-border);
-  color: var(--alert-color);
-  border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
-
-  &:hover {
-    background-color: var(--alert-bg);
-  }
-}
-
 .alert-dismissible {
-  @apply pe-12;
+  .alert-close {
+    @apply absolute -top-1 -right-1 z-10 flex items-center justify-center bg-white transition-all duration-200;
+    @apply opacity-0;
+
+    padding-block: 0.25rem;
+    border: 1px solid var(--alert-border);
+    color: var(--alert-color);
+    border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
+
+    &:hover {
+      background-color: var(--alert-bg);
+    }
+  }
 
   &:hover .alert-close {
     @apply scale-110 opacity-100 shadow-lg;

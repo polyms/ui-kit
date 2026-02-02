@@ -7,14 +7,10 @@ apis:
     default: primary
     values: primary | success | info | warning | danger | light | dark
     description: Determines the visual style and semantic meaning of the alert.
-  - name: dismissible
-    default: false
-    values: boolean
-    description: When true, displays a close button allowing users to dismiss the alert.
   - name: onDismiss
     default: '-'
     values: () => void
-    description: Callback function triggered when the close button is clicked.
+    description: Callback function triggered when the close button is clicked. When provided, automatically displays a close button.
   - name: render
     default: '-'
     values: React element | (props) => React element
@@ -46,7 +42,7 @@ import { Alert } from '@polyms/core'
   Your changes have been saved successfully.
 </Alert>
 
-<Alert variant="danger" dismissible onDismiss={() => console.log('Dismissed')}>
+<Alert variant="danger" onDismiss={() => console.log('Dismissed')}>
   <Alert.Heading>Error occurred</Alert.Heading>
   Please check your input and try again.
 </Alert>

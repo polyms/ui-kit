@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noArrayIndexKey: dup prop name */
 import { metadataByRoute } from 'virtual:mdx-navigation'
 import { Accordion } from '@base-ui/react/accordion'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
@@ -29,7 +30,7 @@ export default function APIReference() {
           </Accordion.Header>
         </Accordion.Item>
 
-        {meta.apis?.map(prop => {
+        {meta.apis?.map((prop, idx) => {
           // Render separator
           if (prop.separator) {
             return (
@@ -44,7 +45,7 @@ export default function APIReference() {
 
           // Render prop item
           return (
-            <Accordion.Item className='accordion-item' key={prop.name} value={prop.name}>
+            <Accordion.Item className='accordion-item' key={`item-${idx}`} value={prop.name}>
               <Accordion.Header className='accordion-header'>
                 <Accordion.Trigger className='accordion-trigger'>
                   <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />

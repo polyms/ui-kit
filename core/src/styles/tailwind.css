@@ -17,7 +17,7 @@
 @import './_switch.css' layer(components);
 @import './_table.css' layer(components);
 @import './_tabs.css' layer(components);
-@import './_toast.css';
+@import './_toast.css' layer(components);
 @import './_tooltip.css' layer(components);
 @import './_typography.css' layer(components);
 @import './_utilities.css' layer(utilities);

@@ -1,7 +1,8 @@
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+
+import { Toast } from '@polyms/core'
 import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router'
 import { useRef } from 'react'
-
 import { AppSidebar } from '../layouts/AppSidebar'
 
 const AppNavigation = ({ onToggleSidebar }: NavigationProps) => {
@@ -34,14 +35,15 @@ const Root = () => {
   const appSidebarRef = useRef<AppSidebar.Ref>(null)
 
   return (
-    <>
+    <Toast>
       <Name />
       <AppNavigation onToggleSidebar={() => appSidebarRef.current?.toggleSidebar()} />
       <AppSidebar ref={appSidebarRef} />
       <main className={className}>
         <Outlet />
       </main>
-    </>
+      <Toast.Container />
+    </Toast>
   )
 }
 

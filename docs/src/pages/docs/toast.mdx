@@ -1,11 +1,127 @@
 ---
-type: components
+type: Feedback
 title: Toast
+apis:
+  - separator: toastManager.add(options)
+  - name: title
+    default: '-'
+    values: string
+    description: The primary heading text displayed in the toast notification.
+  - name: description
+    default: '-'
+    values: string
+    description: Additional descriptive text shown below the title.
+  - name: type
+    default: '-'
+    values: success | danger | warning | primary | actions
+    description: Determines the visual style and icon displayed in the toast.
+  - name: timeout
+    default: 5000
+    values: number
+    description: Duration in milliseconds before the toast auto-dismisses. Set to 0 to prevent auto-dismiss.
+  - name: actionProps
+    default: '-'
+    values: ButtonProps
+    description: Props for an optional action button displayed in the toast. Only shown when type is 'actions'.
+  - separator: toastManager.close(id)
+  - name: id
+    default: '-'
+    values: string
+    description: The unique identifier of the toast to close. Returned from toastManager.add().
 ---
 
-import Story from './-views/ToastDefault.tsx'
-import code from './-views/ToastDefault.tsx?raw'
+import Story from './-views/toast/ToastDefault.tsx'
+import code from './-views/toast/ToastDefault.tsx?raw'
+
+Display brief, non-blocking feedback messages to users about the outcome of an action or system event. Toasts appear temporarily and auto-dismiss, ensuring they don't interrupt the user's workflow.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Toast } from '@polyms/core'
+
+// Wrap your app with Toast provider
+function App() {
+  return (
+    <Toast>
+      {/* Your app content */}
+      <Toast.Container />
+    </Toast>
+  )
+}
+
+// Show toasts from any component
+function MyComponent() {
+  const toastManager = Toast.useToastManager()
+
+  return (
+    <button onClick={() => toastManager.add({
+      title: 'Success!',
+      description: 'Your changes have been saved.',
+      type: 'success'
+    })}>
+      Save Changes
+    </button>
+  )
+}
+```
+
+## Types
+
+Toasts support 5 different types for various feedback contexts. Each type displays a distinct icon and color scheme.
+
+### Success Toast
+Used for confirming successful operations like saving data, completing uploads, or sending messages.
+
+```tsx
+toastManager.add({
+  title: 'File uploaded',
+  description: 'Your document is now available.',
+  type: 'success'
+})
+```
+
+### Warning Toast
+Alerts users to potential issues that require attention but aren't critical errors.
+
+```tsx
+toastManager.add({
+  description: 'Your session will expire in 5 minutes.',
+  type: 'warning'
+})
+```
+
+### Danger Toast
+Communicates errors or failed operations that need immediate user attention.
+
+```tsx
+toastManager.add({
+  description: 'Failed to save changes. Please try again.',
+  type: 'danger'
+})
+```
+
+### Action Toast
+Provides an actionable button for users to respond to the notification, such as undo operations.
+
+```tsx
+const id = toastManager.add({
+  description: 'Message deleted',
+  type: 'actions',
+  actionProps: {
+    children: 'Undo',
+    onClick: () => {
+      toastManager.close(id)
+      // Undo logic here
+    }
+  }
+})
+```
+
+## API Reference
+
+<APIReference />

@@ -2,11 +2,10 @@ import { Toast } from '@base-ui/react/toast'
 import { FloatingPortal } from '@floating-ui/react'
 import clsx from 'clsx'
 import { type PropsWithChildren, useEffect } from 'react'
-import { CloseToastIcon, DangerToastIcon, SuccessToastIcon, WarningToastIcon } from './ToastIcons'
+import Icons from '../Icons'
+import { toastManager } from './useToastManager'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
-
-export const toastManager = Toast.createToastManager()
 
 export const ToastProvider = ({ children }: PropsWithChildren) => (
   <Toast.Provider toastManager={toastManager}>{children}</Toast.Provider>
@@ -32,8 +31,8 @@ export const ToastContainer = () => {
             className={clsx('toast', {
               'toast-success': toast.type === 'success',
               'toast-danger': toast.type === 'danger',
+              'toast-info': toast.type === 'info',
               'toast-warning': toast.type === 'warning',
-              'toast-primary': toast.type === 'primary',
             })}
             key={toast.id}
             style={{
@@ -44,17 +43,18 @@ export const ToastContainer = () => {
             swipeDirection='up'
             toast={toast}
           >
-            <div className='flex items-center gap-2xs'>
-              {toast.type === 'success' && <SuccessToastIcon />}
-              {toast.type === 'danger' && <DangerToastIcon />}
-              {toast.type === 'warning' && <WarningToastIcon />}
+            <Toast.Content className='toast-content'>
+              {toast.type === 'success' && <Icons.Success className='toast-icon' />}
+              {toast.type === 'danger' && <Icons.Danger className='toast-icon' />}
+              {toast.type === 'warning' && <Icons.Warning className='toast-icon' />}
+              {toast.type === 'info' && <Icons.Info className='toast-icon' />}
               <Toast.Title className='toast-title' />
               <Toast.Description className='toast-description' />
-              <Toast.Action className='toast-actions btn btn-primary ms-auto rounded-full' />
-            </div>
-            <Toast.Close aria-label='Close' className='toast-close'>
-              <CloseToastIcon />
-            </Toast.Close>
+              <Toast.Action className='toast-actions btn btn-dark btn-xs' />
+              <Toast.Close aria-label='Close' className='toast-close'>
+                <Icons.Close size={14} />
+              </Toast.Close>
+            </Toast.Content>
           </Toast.Root>
         ))}
       </Toast.Viewport>
