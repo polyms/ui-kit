@@ -1,11 +1,66 @@
 ---
-type: components
+type: Navigation
 title: Breadcrumb
+apis:
+  - separator: Breadcrumb (Root)
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default ordered list element.
+  - separator: Breadcrumb.Item
+  - name: href
+    default: '-'
+    values: string
+    description: The URL to navigate to when the breadcrumb item is clicked. When provided, wraps children in an anchor tag.
+  - name: active
+    default: false
+    values: boolean
+    description: Indicates the current page in the breadcrumb trail. Active items are not clickable.
+  - name: title
+    default: '-'
+    values: string
+    description: The title attribute for the anchor element, providing additional context on hover.
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default list item element.
 ---
 
-import Story from './-views/BreadcrumbDefault.tsx'
-import code from './-views/BreadcrumbDefault.tsx?raw'
+import Story from './-views/breadcrumb/BreadcrumbDefault.tsx'
+import code from './-views/breadcrumb/BreadcrumbDefault.tsx?raw'
+
+Display the current page's location within a navigational hierarchy. Breadcrumbs help users understand where they are in your site and provide quick navigation back to parent pages.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Breadcrumb } from '@polyms/core'
+
+<Breadcrumb>
+  <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+  <Breadcrumb.Item href="/products">Products</Breadcrumb.Item>
+  <Breadcrumb.Item href="/products/electronics">Electronics</Breadcrumb.Item>
+  <Breadcrumb.Item active>Laptop</Breadcrumb.Item>
+</Breadcrumb>
+```
+
+## Behavior
+
+### Active Item
+
+The last item in the breadcrumb trail typically represents the current page and should be marked with the `active` prop. Active items are styled differently and are not clickable.
+
+### Accessibility
+
+Breadcrumbs automatically include proper ARIA attributes:
+- Uses `<nav>` and `<ol>` for semantic HTML structure
+- Active items include `aria-current="page"` for screen readers
+- Each item is a list item (`<li>`) for proper navigation structure
+
+## API Reference
+
+<APIReference />

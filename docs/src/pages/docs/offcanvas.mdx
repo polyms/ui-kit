@@ -1,11 +1,130 @@
 ---
-type: components
+type: Feedback
 title: Offcanvas
+apis:
+  - separator: Offcanvas (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Called when offcanvas open state changes.
+  - separator: Offcanvas.Content
+  - name: closeButton
+    default: 'true'
+    values: boolean
+    description: When true, displays a close button in the top-right corner.
+  - name: backdrop
+    default: 'true'
+    values: boolean
+    description: When true, displays a backdrop overlay behind the offcanvas.
 ---
 
-import Story from './-views/OffcanvasDefault.tsx'
-import code from './-views/OffcanvasDefault.tsx?raw'
+import Story from './-views/offcanvas/OffcanvasDefault.tsx'
+import code from './-views/offcanvas/OffcanvasDefault.tsx?raw'
+
+Offcanvas panels slide in from the edge of the viewport to display supplementary content, navigation menus, or settings. They provide a focused workspace without leaving the current page context.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Offcanvas } from '@polyms/core'
+
+<Offcanvas>
+  <Offcanvas.Trigger>Open Menu</Offcanvas.Trigger>
+  <Offcanvas.Content>
+    <Offcanvas.Header>Navigation</Offcanvas.Header>
+    <Offcanvas.Description>
+      Browse through the menu options below
+    </Offcanvas.Description>
+  </Offcanvas.Content>
+</Offcanvas>
+```
+
+## Composition
+
+Offcanvas supports flexible composition with Header, Title, Description, Body, and Close components.
+
+### Complete Example
+
+```tsx
+<Offcanvas>
+  <Offcanvas.Trigger>Settings</Offcanvas.Trigger>
+  <Offcanvas.Content>
+    <Offcanvas.Header>
+      <Offcanvas.Title>Settings</Offcanvas.Title>
+      <Offcanvas.Description>
+        Manage your preferences
+      </Offcanvas.Description>
+    </Offcanvas.Header>
+    <Offcanvas.Body>
+      <div>Settings content goes here</div>
+    </Offcanvas.Body>
+  </Offcanvas.Content>
+</Offcanvas>
+```
+
+### Without Close Button
+
+Hide the close button when you need explicit user action to close.
+
+```tsx
+<Offcanvas>
+  <Offcanvas.Trigger>Confirm</Offcanvas.Trigger>
+  <Offcanvas.Content closeButton={false}>
+    <Offcanvas.Header>Confirmation Required</Offcanvas.Header>
+    <Offcanvas.Body>
+      <Button>Confirm</Button>
+      <Offcanvas.Close>Cancel</Offcanvas.Close>
+    </Offcanvas.Body>
+  </Offcanvas.Content>
+</Offcanvas>
+```
+
+### Without Backdrop
+
+Remove the backdrop overlay for a less intrusive experience.
+
+```tsx
+<Offcanvas>
+  <Offcanvas.Trigger>Quick Menu</Offcanvas.Trigger>
+  <Offcanvas.Content backdrop={false}>
+    <Offcanvas.Header>Quick Actions</Offcanvas.Header>
+    <Offcanvas.Body>
+      Menu content
+    </Offcanvas.Body>
+  </Offcanvas.Content>
+</Offcanvas>
+```
+
+## Behavior
+
+### Slide Animation
+
+The offcanvas smoothly slides in from the left edge of the viewport with a backdrop overlay, creating a focused interaction space.
+
+### Click Outside to Close
+
+Users can click on the backdrop to dismiss the offcanvas, providing an intuitive way to close it.
+
+## Keyboard Navigation
+
+- **Escape**: Close the offcanvas
+- **Tab**: Cycle through focusable elements within the offcanvas
+- **Shift + Tab**: Cycle backwards through focusable elements
+
+Focus is automatically trapped within the offcanvas when open and restored to the trigger element when closed.
+
+## API Reference
+
+<APIReference />

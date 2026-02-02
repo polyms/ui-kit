@@ -50,7 +50,7 @@
     inset-block: 0;
     inset-inline: 0.25rem;
     border-radius: 0.25rem;
-    background-color: var(--color-primary-50);
+    background-color: var(--color-slate-100);
   }
 
   &[data-disabled] {

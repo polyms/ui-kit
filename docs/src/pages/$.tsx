@@ -101,7 +101,7 @@ function MdxPage() {
         return language ? (
           <CodeHighlight language={language} {...props} />
         ) : (
-          <code {...props} className='badge' />
+          <code {...props} className='badge badge-primary rounded-full' />
         )
       },
       p: (props: React.HTMLAttributes<HTMLParagraphElement>) => {

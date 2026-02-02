@@ -1,11 +1,151 @@
 ---
-type: components
+type: Feedback
 title: Modal
+apis:
+  - separator: Modal (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Called when modal open state changes.
+  - separator: Modal.Content
+  - name: size
+    default: '-'
+    values: sm | lg | xl | full
+    description: Controls the width of the modal dialog.
+  - name: centered
+    default: 'true'
+    values: boolean
+    description: Vertically centers the modal in the viewport.
+  - name: scrollable
+    default: 'false'
+    values: boolean
+    description: Enables scrolling inside the modal body instead of the entire modal.
 ---
 
-import Story from './-views/ModalDefault.tsx'
-import code from './-views/ModalDefault.tsx?raw'
+import Story from './-views/modal/ModalDefault.tsx'
+import code from './-views/modal/ModalDefault.tsx?raw'
+
+Modals display focused content in a layer above the main interface, requiring user interaction before proceeding. They're ideal for confirmations, forms, or detailed information. This component is based on the [WAI-ARIA Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Modal } from '@polyms/core'
+
+<Modal>
+  <Modal.Trigger>Open Modal</Modal.Trigger>
+  <Modal.Content>
+    <Modal.Header>Confirmation</Modal.Header>
+    <Modal.Body>
+      Are you sure you want to proceed with this action?
+    </Modal.Body>
+    <Modal.Footer>
+      <Modal.Close>Cancel</Modal.Close>
+      <Button variant="primary">Confirm</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal>
+```
+
+## Composition
+
+Modals support flexible composition with Header, Body, and Footer sections for organized content layout.
+
+### With Controlled State
+
+```tsx
+import { Modal } from '@polyms/core'
+import { useState } from 'react'
+
+export default function ControlledModal() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Modal open={open} onOpenChange={setOpen}>
+      <Modal.Trigger>Open</Modal.Trigger>
+      <Modal.Content size="lg">
+        <Modal.Header>Controlled Modal</Modal.Header>
+        <Modal.Body>
+          This modal's state is controlled externally.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
+  )
+}
+```
+
+### Nested Modals
+
+Modals can be nested to create multi-step flows or additional confirmation dialogs.
+
+```tsx
+<Modal>
+  <Modal.Trigger>Open Parent</Modal.Trigger>
+  <Modal.Content>
+    <Modal.Header>Parent Modal</Modal.Header>
+    <Modal.Body>
+      <Modal>
+        <Modal.Trigger>Open Nested</Modal.Trigger>
+        <Modal.Content size="sm">
+          <Modal.Header>Nested Modal</Modal.Header>
+          <Modal.Body>
+            This is a nested modal dialog.
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+    </Modal.Body>
+  </Modal.Content>
+</Modal>
+```
+
+## Sizes
+
+Control modal width with the `size` prop on `Modal.Content`. The `full` size makes the modal occupy the entire viewport.
+
+```tsx
+<Modal.Content size="sm">Small modal</Modal.Content>
+<Modal.Content size="lg">Large modal</Modal.Content>
+<Modal.Content size="xl">Extra large modal</Modal.Content>
+<Modal.Content size="full">Full screen modal</Modal.Content>
+```
+
+## Scrollable Content
+
+By default, long content causes the entire modal to scroll. Enable `scrollable` to scroll only the body section while keeping header and footer fixed.
+
+```tsx
+<Modal.Content scrollable>
+  <Modal.Header>Fixed Header</Modal.Header>
+  <Modal.Body>
+    {/* Long content scrolls here */}
+  </Modal.Body>
+  <Modal.Footer>Fixed Footer</Modal.Footer>
+</Modal.Content>
+```
+
+## Keyboard Navigation
+
+- **Escape**: Close the modal
+- **Tab**: Cycle through focusable elements within the modal
+- **Shift + Tab**: Cycle backwards through focusable elements
+
+Focus is automatically trapped within the modal when open and restored to the trigger element when closed.
+
+## API Reference
+
+<APIReference />

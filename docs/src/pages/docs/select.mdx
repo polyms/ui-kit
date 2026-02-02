@@ -1,11 +1,97 @@
 ---
-type: components
+type: Data input
 title: Select
+apis:
+  - separator: Select (Root)
+  - name: defaultValue
+    default: '-'
+    values: string | string[]
+    description: The default selected value when the component mounts. Use string array for multiple selection.
+  - name: value
+    default: '-'
+    values: string | string[]
+    description: The controlled selected value. Use with onValueChange for controlled behavior.
+  - name: onValueChange
+    default: '-'
+    values: '(value: string | string[]) => void'
+    description: Callback fired when the selected value changes.
+  - name: multiple
+    default: false
+    values: boolean
+    description: When true, allows selecting multiple items. Values become an array.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents interaction with the select component.
+  - separator: Select.Trigger
+  - name: placeholder
+    default: '-'
+    values: string
+    description: Text displayed when no value is selected.
+  - separator: Select.Item
+  - name: value
+    default: '-'
+    values: string
+    description: The unique value of this item. Required.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents this item from being selected.
 ---
 
-import Story from './-views/SelectDefault.tsx'
-import code from './-views/SelectDefault.tsx?raw'
+import Story from './-views/select/SelectDefault.tsx'
+import code from './-views/select/SelectDefault.tsx?raw'
+
+Allow users to choose one or multiple options from a dropdown list. Select components provide a space-efficient way to present many choices while maintaining a clean interface.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Select } from '@polyms/core'
+
+<Select defaultValue="option1">
+  <Select.Trigger placeholder="Choose an option">
+    {item => item.label}
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Item value="option1">Option 1</Select.Item>
+    <Select.Item value="option2">Option 2</Select.Item>
+    <Select.Item value="option3">Option 3</Select.Item>
+  </Select.Content>
+</Select>
+```
+
+## Grouping
+
+Organize related options into groups with labels and separators for better scanability.
+
+```tsx
+<Select>
+  <Select.Trigger placeholder="Select framework">
+    {item => item.label}
+  </Select.Trigger>
+  <Select.Content>
+    <Select.Group>
+      <Select.GroupLabel>Frontend</Select.GroupLabel>
+      <Select.Item value="react">React</Select.Item>
+      <Select.Item value="vue">Vue</Select.Item>
+    </Select.Group>
+    
+    <Select.Separator />
+    
+    <Select.Group>
+      <Select.GroupLabel>Backend</Select.GroupLabel>
+      <Select.Item value="node">Node.js</Select.Item>
+      <Select.Item value="django">Django</Select.Item>
+    </Select.Group>
+  </Select.Content>
+</Select>
+```
+
+## API Reference
+
+<APIReference />

@@ -1,13 +1,74 @@
 ---
-type: components
+type: Data input
 title: Switch
+apis:
+  - name: defaultChecked
+    default: false
+    values: boolean
+    description: The default checked state when the component mounts in uncontrolled mode.
+  - name: checked
+    default: '-'
+    values: boolean
+    description: The controlled checked state. Use with onChange for controlled behavior.
+  - name: onChange
+    default: '-'
+    values: '(event: ChangeEvent) => void'
+    description: Callback fired when the switch state changes.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents interaction with the switch and applies disabled styling.
+  - name: label
+    default: '-'
+    values: string
+    description: Optional label text displayed next to the switch.
+  - name: variant
+    default: '-'
+    values: primary
+    description: Visual style variant for the switch component.
 ---
 
-import Story from './-views/SwitchDefault.tsx'
-import code from './-views/SwitchDefault.tsx?raw'
+import Story from './-views/switch/SwitchDefault.tsx'
+import code from './-views/switch/SwitchDefault.tsx?raw'
 
-Switches are input controls that allow users to toggle between two states: on and off.
+Toggle between two mutually exclusive states, typically on and off. Switches provide immediate feedback and are ideal for settings that take effect instantly without requiring a save action.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Switch } from '@polyms/core'
+
+<Switch label="Enable notifications" defaultChecked />
+```
+
+## Controlled vs Uncontrolled
+
+### Uncontrolled (Recommended for simple cases)
+
+Use `defaultChecked` to set the initial state and let the component manage its own state:
+
+```tsx
+<Switch defaultChecked label="Dark mode" />
+```
+
+### Controlled (For complex state management)
+
+Control the switch state externally using `checked` and `onChange` :
+
+```tsx
+const [enabled, setEnabled] = useState(false)
+
+<Switch 
+  checked={enabled} 
+  onChange={(e) => setEnabled(e.target.checked)}
+  label="Enable feature"
+/>
+```
+
+## API Reference
+
+<APIReference />

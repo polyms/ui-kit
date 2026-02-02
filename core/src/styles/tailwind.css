@@ -1,6 +1,7 @@
 @import './_root.css';
 @import './_layouts.css';
 @import './_alert.css' layer(components);
+@import './_badge.css' layer(components);
 @import './_bottom-sheet.css' layer(components);
 @import './_breadcrumb.css' layer(components);
 @import './_button.css';

@@ -36,15 +36,15 @@ export const NumberField = ({ id: propId, className, label, size, ...props }: Nu
         </Base.ScrubArea>
       )}
 
-      {/* <Base.Group className='number-field-group'> */}
-      <Base.Decrement className='number-field-decrement icon-start'>
-        <MinusIcon />
-      </Base.Decrement>
-      <Base.Input className='number-field-input field-input rounded-full' />
-      <Base.Increment className='number-field-increment icon-end'>
-        <PlusIcon />
-      </Base.Increment>
-      {/* </Base.Group> */}
+      <Base.Group className='number-field-group'>
+        <Base.Input className='number-field-input field-control' />
+        <Base.Decrement className='number-field-decrement'>
+          <MinusIcon />
+        </Base.Decrement>
+        <Base.Increment className='number-field-increment'>
+          <PlusIcon />
+        </Base.Increment>
+      </Base.Group>
     </Base.Root>
   )
 }

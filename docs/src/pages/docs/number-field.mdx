@@ -1,14 +1,114 @@
 ---
-type: components
+type: Data input
 title: Number Field
+apis:
+  - name: defaultValue
+    default: '-'
+    values: number
+    description: Initial value (uncontrolled).
+  - name: value
+    default: '-'
+    values: number
+    description: Current value (controlled).
+  - name: onValueChange
+    default: '-'
+    values: (value number) => void
+    description: Called when value changes.
+  - name: min
+    default: '-Infinity'
+    values: number
+    description: Minimum allowed value.
+  - name: max
+    default: 'Infinity'
+    values: number
+    description: Maximum allowed value.
+  - name: step
+    default: '1'
+    values: number
+    description: Amount to increment/decrement.
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: Disables all interactions.
+  - name: label
+    default: '-'
+    values: string
+    description: Label text. When provided, enables interactive scrubbing on label drag.
+  - name: size
+    default: 'md'
+    values: sm | md | lg
+    description: Field size variant.
 ---
 
-import Story from './-views/NumberFieldDefault.tsx'
-import code from './-views/NumberFieldDefault.tsx?raw'
+import Story from './-views/field/NumberFieldDefault.tsx'
+import code from './-views/field/NumberFieldDefault.tsx?raw'
 import { NumberField } from '@polyms/core'
 
-Number fields are input fields that allow users to enter numbers.
+Number fields let users enter numeric values with precision. They support increment/decrement buttons, keyboard input, and interactive label scrubbing.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+### Controlled
+
+```tsx
+import { NumberField } from '@polyms/core'
+import { useState } from 'react'
+
+export default function ControlledNumberField() {
+  const [value, setValue] = useState(50)
+
+  return (
+    <NumberField
+      label='Quantity'
+      value={value}
+      onValueChange={setValue}
+      min={0}
+      max={100}
+    />
+  )
+}
+```
+
+### With Constraints
+
+```tsx
+<NumberField
+  label='Price ($)'
+  defaultValue={9.99}
+  min={0}
+  max={999.99}
+  step={0.01}
+/>
+```
+
+### Without Label (No Scrubbing)
+
+```tsx
+<NumberField
+  defaultValue={42}
+  min={0}
+  step={5}
+/>
+```
+
+## Interactive Label Scrubbing
+
+When the `label` prop is provided, users can drag the label left/right to scrub (adjust) the value continuously. This provides a fast, intuitive way to change numeric values without clicking buttons or typing.
+
+- **Drag left**: Decrease value
+- **Drag right**: Increase value
+- **Cursor changes**: Displays a horizontal resize cursor (↔) on hover
+
+## Keyboard Navigation
+
+- **Arrow Up / Arrow Down**: Increment or decrement by `step`
+- **Page Up / Page Down**: Increment or decrement by 10× `step`
+- **Home / End**: Jump to `min` or `max` value
+
+## API Reference
+
+<APIReference />

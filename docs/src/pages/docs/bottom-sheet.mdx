@@ -1,16 +1,106 @@
 ---
-type: components
+type: Feedback
 title: Bottom Sheet
+apis:
+  - separator: BottomSheet (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Called when bottom sheet open state changes.
+  - separator: BottomSheet.Content
+  - name: title
+    default: '-'
+    values: ReactNode
+    description: Title displayed in the bottom sheet header.
+  - name: onBack
+    default: '-'
+    values: '() => void'
+    description: When provided, displays a back button in the header that calls this function.
+  - name: close
+    default: 'true'
+    values: boolean
+    description: When true, displays a close button in the header.
 ---
 
-import Story from './-views/BottomSheet.tsx'
-import code from './-views/BottomSheet.tsx?raw'
+import Story from './-views/bottom-sheet/BottomSheet.tsx'
+import code from './-views/bottom-sheet/BottomSheet.tsx?raw'
 import { BottomSheet } from '@polyms/core'
 
-Bottom sheets are surfaces containing supplementary content that are anchored to the bottom of the screen.
-They can be used to present additional information, options, or actions without disrupting the main content
-flow.
+Bottom sheets are surfaces containing supplementary content anchored to the bottom of the screen. They're ideal for mobile experiences, presenting actions, options, or additional information without disrupting the main content flow.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { BottomSheet } from '@polyms/core'
+
+<BottomSheet>
+  <BottomSheet.Trigger>Open Options</BottomSheet.Trigger>
+  <BottomSheet.Content title='Options'>
+    <div>Choose an option from the list below</div>
+  </BottomSheet.Content>
+</BottomSheet>
+```
+
+## Behavior
+
+### Slide Animation
+
+Bottom sheets smoothly slide up from the bottom of the viewport with a backdrop overlay, creating a focused interaction space.
+
+### Swipe to Dismiss
+
+Users can swipe down on the sheet to dismiss it, providing an intuitive mobile-friendly interaction pattern.
+
+### With Back Button
+
+Display a back button for multi-step flows within the bottom sheet.
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>Open Settings</BottomSheet.Trigger>
+  <BottomSheet.Content 
+    title='Account Settings' 
+    onBack={() => console.log('Back pressed')}
+  >
+    <div>Settings content</div>
+  </BottomSheet.Content>
+</BottomSheet>
+```
+
+### Without Close Button
+
+Hide the close button for flows requiring explicit user action.
+
+```tsx
+<BottomSheet>
+  <BottomSheet.Trigger>Confirm Action</BottomSheet.Trigger>
+  <BottomSheet.Content title='Confirmation' close={false}>
+    <div>Please confirm to continue</div>
+    <Button>Confirm</Button>
+  </BottomSheet.Content>
+</BottomSheet>
+```
+
+## Keyboard Navigation
+
+- **Escape**: Close the bottom sheet
+- **Tab**: Cycle through focusable elements within the sheet
+- **Shift + Tab**: Cycle backwards through focusable elements
+
+Focus is automatically trapped within the bottom sheet when open.
+
+## API Reference
+
+<APIReference />

@@ -1,12 +1,14 @@
 import { pages } from 'virtual:mdx-navigation'
 import {
   ArrowRight01Icon,
+  ChatFeedback01Icon,
   CircleArrowLeftDoubleIcon,
   CursorMagicSelection04Icon,
   GoogleDocIcon,
   InputCursorTextIcon,
   SearchList02Icon,
   SearchRemoveIcon,
+  Share08Icon,
   ThreeDScaleIcon,
 } from '@hugeicons/core-free-icons'
 import { Collapsible, Field, useBoolean, useEventCallback, useToggle } from '@polyms/core'
@@ -56,11 +58,16 @@ export function AppSidebar({ ref }: AppSidebarProps) {
       Guide: GoogleDocIcon,
       Actions: CursorMagicSelection04Icon,
       'Data input': InputCursorTextIcon,
+      Feedback: ChatFeedback01Icon,
+      Navigation: Share08Icon,
       Others: ThreeDScaleIcon,
     }
     const colors = {
       Guide: 'text-warning-600',
       Actions: 'text-success',
+      'Data input': 'text-info',
+      Feedback: 'text-danger',
+      Navigation: 'text-primary',
       Others: 'text-danger',
     }
     // biome-ignore-end lint/style/useNamingConvention: label name

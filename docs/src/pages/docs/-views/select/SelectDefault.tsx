@@ -17,8 +17,8 @@ const backend = [
 export default function SelectDefault() {
   return (
     <div>
-      <Select>
-        <Select.Trigger placeholder='Select'>{item => item.label}</Select.Trigger>
+      <Select multiple>
+        <Select.Trigger placeholder='Select...'>{item => item.label}</Select.Trigger>
         <Select.Content>
           {frontend.map(item => (
             <Select.Item key={item.value} value={item.label}>

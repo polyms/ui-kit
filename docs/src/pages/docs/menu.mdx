@@ -1,11 +1,141 @@
 ---
-type: components
+type: Navigation
 title: Menu
+apis:
+  - separator: Menu (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open boolean) => void'
+    description: Called when menu open state changes.
+  - separator: Menu.Content
+  - name: side
+    default: bottom
+    values: top | right | bottom | left
+    description: Preferred placement side of the menu relative to trigger.
+  - name: align
+    default: center
+    values: start | center | end
+    description: Alignment of the menu along the placement side.
+  - name: sideOffset
+    default: '8'
+    values: number
+    description: Distance in pixels from the trigger element.
+  - separator: Menu.Item
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: Disables the menu item, preventing interaction.
+  - name: variant
+    default: '-'
+    values: danger
+    description: Applies danger styling (e.g., for destructive actions).
 ---
 
-import Story from './-views/MenuDefault.tsx'
-import code from './-views/MenuDefault.tsx?raw'
+import Story from './-views/menu/MenuDefault.tsx'
+import code from './-views/menu/MenuDefault.tsx?raw'
+
+Menus display a list of actions or options triggered by a button. They support nested submenus, keyboard navigation, and accessible patterns. This component is based on the [WAI-ARIA Menu Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu/).
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Menu } from '@polyms/core'
+
+<Menu>
+  <Menu.Trigger>Options</Menu.Trigger>
+  <Menu.Content>
+    <Menu.Item>Edit</Menu.Item>
+    <Menu.Item>Duplicate</Menu.Item>
+    <Menu.Separator />
+    <Menu.Item variant='danger'>Delete</Menu.Item>
+  </Menu.Content>
+</Menu>
+```
+
+## Composition
+
+Menu supports rich composition with submenus, grouping, and separators for organizing complex action lists.
+
+### With Submenu
+
+```tsx
+<Menu>
+  <Menu.Trigger>File</Menu.Trigger>
+  <Menu.Content>
+    <Menu.Item>New File</Menu.Item>
+    <Menu.Item>Open...</Menu.Item>
+    <Menu.Separator />
+    <Menu.SubmenuRoot>
+      <Menu.SubmenuTrigger>
+        Export
+        <ArrowRightIcon />
+      </Menu.SubmenuTrigger>
+      <Menu.Content sideOffset={0}>
+        <Menu.Item>PDF</Menu.Item>
+        <Menu.Item>PNG</Menu.Item>
+        <Menu.Item>SVG</Menu.Item>
+      </Menu.Content>
+    </Menu.SubmenuRoot>
+  </Menu.Content>
+</Menu>
+```
+
+### With Groups
+
+```tsx
+<Menu>
+  <Menu.Trigger>View</Menu.Trigger>
+  <Menu.Content>
+    <Menu.Group>
+      <Menu.GroupLabel>Appearance</Menu.GroupLabel>
+      <Menu.Item>Show Toolbar</Menu.Item>
+      <Menu.Item>Show Sidebar</Menu.Item>
+    </Menu.Group>
+    <Menu.Separator />
+    <Menu.Group>
+      <Menu.GroupLabel>Zoom</Menu.GroupLabel>
+      <Menu.Item>Zoom In</Menu.Item>
+      <Menu.Item>Zoom Out</Menu.Item>
+    </Menu.Group>
+  </Menu.Content>
+</Menu>
+```
+
+## Positioning
+
+Control menu placement with `side` and `align` props on `Menu.Content`.
+
+```tsx
+<Menu>
+  <Menu.Trigger>Options</Menu.Trigger>
+  <Menu.Content side='right' align='start' sideOffset={12}>
+    <Menu.Item>Edit</Menu.Item>
+    <Menu.Item>Delete</Menu.Item>
+  </Menu.Content>
+</Menu>
+```
+
+## Keyboard Navigation
+
+- **Arrow Down / Arrow Up**: Navigate between items
+- **Home / End**: Jump to first or last item
+- **Enter / Space**: Activate the focused item
+- **Arrow Right**: Open submenu (if available)
+- **Arrow Left**: Close submenu and return to parent
+- **Escape**: Close menu
+
+## API Reference
+
+<APIReference />
