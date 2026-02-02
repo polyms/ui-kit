@@ -127,6 +127,7 @@
     /* margin-top: 2px; */
     outline: none;
     padding: 0.25rem;
+    overflow: auto;
 
     &:focus-visible {
       outline: 2px solid var(--color-primary-100);

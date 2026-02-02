@@ -29,27 +29,42 @@ export default function APIReference() {
           </Accordion.Header>
         </Accordion.Item>
 
-        {meta.apis?.map(prop => (
-          <Accordion.Item className='accordion-item' key={prop.name} value={prop.name}>
-            <Accordion.Header className='accordion-header'>
-              <Accordion.Trigger className='accordion-trigger'>
-                <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
-                <span className='font-medium'>{prop.name}</span>
-                <span
-                  className={clsx('font-mono text-sm', {
-                    'text-primary': prop.default !== '-',
-                  })}
-                >
-                  {prop.default}
-                </span>
-                <span className='font-mono text-primary text-xs'>{prop.values}</span>
-              </Accordion.Trigger>
-            </Accordion.Header>
-            <Accordion.Panel className='accordion-panel'>
-              <p className='p-2 ps-10 text-slate-700 text-sm'>{prop.description}</p>
-            </Accordion.Panel>
-          </Accordion.Item>
-        ))}
+        {meta.apis?.map(prop => {
+          // Render separator
+          if (prop.separator) {
+            return (
+              <div
+                className='m-px rounded-xs bg-primary-600 px-9 py-1 font-semibold text-white'
+                key={`sep-${prop.separator}`}
+              >
+                {prop.separator}
+              </div>
+            )
+          }
+
+          // Render prop item
+          return (
+            <Accordion.Item className='accordion-item' key={prop.name} value={prop.name}>
+              <Accordion.Header className='accordion-header'>
+                <Accordion.Trigger className='accordion-trigger'>
+                  <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
+                  <span className='font-medium'>{prop.name}</span>
+                  <span
+                    className={clsx('font-mono text-sm', {
+                      'text-primary': prop.default !== '-',
+                    })}
+                  >
+                    {prop.default}
+                  </span>
+                  <span className='font-mono text-primary text-xs'>{prop.values}</span>
+                </Accordion.Trigger>
+              </Accordion.Header>
+              <Accordion.Panel className='accordion-panel'>
+                <p className='p-2 ps-10 text-slate-700 text-sm'>{prop.description}</p>
+              </Accordion.Panel>
+            </Accordion.Item>
+          )
+        })}
       </Accordion.Root>
     </div>
   )

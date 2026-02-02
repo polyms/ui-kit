@@ -4,6 +4,7 @@ import {
   CircleArrowLeftDoubleIcon,
   CursorMagicSelection04Icon,
   GoogleDocIcon,
+  InputCursorTextIcon,
   SearchList02Icon,
   SearchRemoveIcon,
   ThreeDScaleIcon,
@@ -54,6 +55,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
     const iconMaps = {
       Guide: GoogleDocIcon,
       Actions: CursorMagicSelection04Icon,
+      'Data input': InputCursorTextIcon,
       Others: ThreeDScaleIcon,
     }
     const colors = {
@@ -199,11 +201,6 @@ type AppSidebarProps = {
 interface NavigationItem {
   label: string
   path: string
-}
-
-interface NavigationSection {
-  label: string
-  items: NavigationItem[]
 }
 
 export declare namespace AppSidebar {

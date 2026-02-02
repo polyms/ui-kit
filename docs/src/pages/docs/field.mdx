@@ -1,11 +1,78 @@
 ---
-type: components
+type: Data input
 title: Field
+apis:
+  - separator: Field.Root
+  - name: size
+    default: '-'
+    values: sm | lg | xl | 2xl | 3xl
+    description: Controls the padding and font size of the input field.
+  - name: required
+    default: '-'
+    values: boolean
+    description: Marks the field as required and displays a visual indicator.
+  - name: invalid
+    default: '-'
+    values: boolean
+    description: Applies error styling to the field and shows validation feedback.
+  - name: disabled
+    default: '-'
+    values: boolean
+    description: Disables the field, preventing user interaction and applying reduced opacity.
+  - separator: Field.Label
+  - name: render
+    default: <label/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default label element. Pass a React element or render function for advanced customization.
+  - separator: Field.Control
+  - name: rounded
+    default: '-'
+    values: boolean
+    description: Makes the input field fully rounded (pill shape) when set to true.
+  - name: render
+    default: <input/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default input element. Pass a React element or render function for advanced customization.
+  - separator: Field.Description
+  - name: render
+    default: <p/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default paragraph element. Pass a React element or render function for advanced customization.
+  - separator: Field.Feedback
+  - name: render
+    default: <p/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default paragraph element. Pass a React element or render function for advanced customization.
 ---
 
-import Story from './-views/FieldDefault.tsx'
-import code from './-views/FieldDefault.tsx?raw'
+import Story from './-views/field/FieldDefault.tsx'
+import code from './-views/field/FieldDefault.tsx?raw'
+import Sizes from './-views/field/FieldSizes.tsx'
+
+A flexible form field wrapper that combines labels, inputs, descriptions, and validation feedback into a cohesive component. Use it to collect user input such as text, email, passwords, or search queries with proper accessibility and visual hierarchy.
 
 <CodePreview code={code}>
   <Story />
 </CodePreview>
+
+## Usage
+
+```tsx
+import { Field } from '@polyms/core'
+
+<Field required>
+  <Field.Label>Let me know your email?</Field.Label>
+  <Field.Control />
+  <Field.Description>We'll never share your email with anyone else.</Field.Description>
+</Field>
+```
+
+## Sizes
+
+Fields come in 6 different sizes to match various UI contexts. The default size provides balanced proportions for standard forms.
+
+<Sizes/ >
+
+## API Reference
+
+<APIReference />

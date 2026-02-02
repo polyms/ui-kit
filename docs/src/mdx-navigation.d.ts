@@ -17,6 +17,7 @@ declare module 'virtual:mdx-navigation' {
     default: string
     values: string
     description: string
+    separator?: string
   }
 
   export interface PageNavigation {

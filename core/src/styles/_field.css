@@ -38,11 +38,11 @@
   }
 
   .icon-start {
-    left: calc(var(--input-padding-x) * 0.75 + 0.375rem);
+    left: calc(var(--input-padding-x) * 0.75 + 0.25rem);
   }
 
   .icon-end {
-    right: calc(var(--input-padding-x) * 0.75 + 0.375rem);
+    right: calc(var(--input-padding-x) * 0.75 + 0.25rem);
   }
 
   &.required {
