@@ -1,5 +1,5 @@
 import { tocByRoute } from 'virtual:mdx-navigation'
-import { Menu02Icon } from '@hugeicons/core-free-icons'
+import { Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { useLocation } from '@tanstack/react-router'
 import clsx from 'clsx'
@@ -23,8 +23,8 @@ function useVisibleHeadings(itemIds: string[]) {
     const checkVisibility = () => {
       const visibilityMap = new Map<string, VisibleHeading>()
       const viewportHeight = window.innerHeight
-      const topThreshold = viewportHeight * 0.1
-      const bottomThreshold = viewportHeight * 0.9
+      const topThreshold = viewportHeight * 0.05
+      const bottomThreshold = viewportHeight * 0.95
 
       // Get all currently visible headings
       for (const id of itemIds) {
@@ -129,16 +129,19 @@ function useVisibleHeadings(itemIds: string[]) {
 
 export function DocsToc() {
   const location = useLocation()
-  const path = location.pathname
-
-  const routeKey = path
-  const toc = tocByRoute[routeKey] ?? tocByRoute[routeKey.replace(/\/$/, '')] ?? []
-  const itemIds = useMemo(() => toc.map(i => i.url.replace('#', '')), [toc])
+  const [toc, itemIds] = useMemo(() => {
+    const routeKey = location.pathname
+    const toc = tocByRoute[routeKey] ?? tocByRoute[routeKey.replace(/\/$/, '')] ?? []
+    return [toc, toc.map(i => i.url.replace('#', ''))]
+  }, [location.pathname])
   const visibleHeadings = useVisibleHeadings(itemIds)
   const visibleIds = useMemo(() => new Set(visibleHeadings.map(h => h.id)), [visibleHeadings])
-  const primaryActiveId = visibleHeadings[0]?.id
 
   if (!toc?.length) return null
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
     <div className='sticky top-6 max-h-dvh overflow-auto py-4 ps-4'>
@@ -146,11 +149,19 @@ export function DocsToc() {
         <HugeiconsIcon className='me-1' icon={Menu02Icon} size={16} strokeWidth={2} />
         On This Page
       </p>
+
       <nav aria-label='Table of contents' className='toc relative ms-1'>
         <ul className='toc-list'>
+          <li>
+            <button className='toc-item w-full' onClick={scrollToTop} title='Back to top' type='button'>
+              <HugeiconsIcon icon={MoveTopIcon} size={14} strokeWidth={2} />
+              (Top)
+            </button>
+          </li>
           {toc.map(item => {
             const headingId = item.url.replace('#', '')
             const isVisible = visibleIds.has(headingId)
+            const primaryActiveId = visibleHeadings[0]?.id
             const isPrimary = headingId === primaryActiveId
 
             return (
@@ -176,7 +187,7 @@ export function DocsToc() {
               </li>
             )
           })}
-          {primaryActiveId && <div className='toc-indicator' data-active={primaryActiveId} />}
+          {visibleHeadings.length > 0 && <div className='toc-indicator' />}
         </ul>
       </nav>
     </div>

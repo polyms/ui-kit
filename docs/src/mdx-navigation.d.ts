@@ -18,7 +18,15 @@ declare module 'virtual:mdx-navigation' {
   export interface PageMetadata {
     type?: string
     title?: string
+    apis?: PropItem[]
     [key: string]: unknown
+  }
+
+  export interface PropItem {
+    name: string
+    default: string
+    values: string
+    description: string
   }
 
   export const navigation: NavigationSection[]

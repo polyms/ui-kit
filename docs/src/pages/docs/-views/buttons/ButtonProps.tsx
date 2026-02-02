@@ -1,72 +1,19 @@
+import { metadataByRoute } from 'virtual:mdx-navigation'
 import { Accordion } from '@base-ui/react/accordion'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-
-// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
-
-interface PropItem {
-  name: string
-  default: string
-  values: string
-  defaultHighlight: string
-  description: string
-}
+import { useLocation } from '@tanstack/react-router'
+import clsx from 'clsx'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-const props: PropItem[] = [
-  {
-    name: 'variant',
-    default: 'ghost',
-    values: 'primary | success | light | dark | danger | warning | ghost',
-    defaultHighlight: 'text-primary',
-    description: 'Determines the visual style and appearance of the button.',
-  },
-  {
-    name: 'size',
-    default: '-',
-    values: 'xs | sm | lg | xl | 2xl | 3xl',
-    defaultHighlight: 'text-slate-400',
-    description: 'Controls the padding and font size of the button.',
-  },
-  {
-    name: 'rounded',
-    default: '-',
-    values: 'boolean',
-    defaultHighlight: 'text-slate-400',
-    description: 'Makes the button fully rounded (pill shape) when set to true.',
-  },
-  {
-    name: 'outlined',
-    default: '-',
-    values: 'boolean',
-    defaultHighlight: 'text-slate-400',
-    description: 'Renders the button with an outline style instead of solid background.',
-  },
-  {
-    name: 'icon',
-    default: '-',
-    values: 'boolean',
-    defaultHighlight: 'text-slate-400',
-    description: 'When provided, styles the button as a square icon button with equal width and height.',
-  },
-  {
-    name: 'active',
-    default: '-',
-    values: 'boolean',
-    defaultHighlight: 'text-slate-400',
-    description: 'Applies active state styling to the button, useful for indicating selected state.',
-  },
-  {
-    name: 'disabled',
-    default: '-',
-    values: 'boolean',
-    defaultHighlight: 'text-slate-400',
-    description: 'Disables the button, preventing user interaction and applying reduced opacity.',
-  },
-]
+export default function APIReference() {
+  const location = useLocation()
+  const routeKey = location.pathname
+  const meta = metadataByRoute[routeKey] ?? metadataByRoute[routeKey.replace(/\/$/, '')] ?? {}
 
-export default function ButtonProps() {
+  const apis = meta.apis
+
   return (
     <div className='card'>
       <Accordion.Root className='accordion' multiple>
@@ -81,14 +28,20 @@ export default function ButtonProps() {
           </Accordion.Header>
         </Accordion.Item>
 
-        {props.map(prop => (
+        {apis?.map(prop => (
           <Accordion.Item className='accordion-item' key={prop.name} value={prop.name}>
             <Accordion.Header className='accordion-header'>
               <Accordion.Trigger className='accordion-trigger'>
                 <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
                 <span className='font-medium'>{prop.name}</span>
-                <span className={`${prop.defaultHighlight} font-mono text-sm`}>{prop.default}</span>
-                <span className='font-mono text-slate-600 text-xs'>{prop.values}</span>
+                <span
+                  className={clsx('font-mono text-sm', {
+                    'text-primary': prop.default !== '-',
+                  })}
+                >
+                  {prop.default}
+                </span>
+                <span className='font-mono text-primary text-xs'>{prop.values}</span>
               </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Panel className='accordion-panel'>

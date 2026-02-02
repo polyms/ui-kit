@@ -1,4 +1,4 @@
-import { metadataByRoute, type PageMetadata, tocByRoute } from 'virtual:mdx-navigation'
+import { metadataByRoute, type PageMetadata } from 'virtual:mdx-navigation'
 import { LinkSquare02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { MDXProvider } from '@mdx-js/react'
@@ -6,6 +6,7 @@ import { createFileRoute, useLocation, useMatch, useRouterState } from '@tanstac
 import clsx from 'clsx'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { CodeHighlight } from '../components/CodeHighlight'
+import APIReference from '../layouts/APIReference'
 import { CodePreview } from '../layouts/CodePreview'
 import { DocsToc } from '../layouts/DocsToc'
 
@@ -110,8 +111,13 @@ function MdxPage() {
           <code {...props} className='badge' />
         )
       },
-      // biome-ignore lint/style/useNamingConvention: off
+      p: (props: React.HTMLAttributes<HTMLParagraphElement>) => {
+        return <p {...props} className='mb-4' />
+      },
+      // biome-ignore-start lint/style/useNamingConvention: off
       CodePreview,
+      APIReference,
+      // biome-ignore-end lint/style/useNamingConvention: off
     }),
     [pathname]
   )
