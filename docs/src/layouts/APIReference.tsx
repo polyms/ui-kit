@@ -17,10 +17,10 @@ export default function APIReference() {
   )
 
   return (
-    <div className='card'>
+    <div className='card mt-4'>
       <Accordion.Root className='accordion' multiple>
         <Accordion.Item className='accordion-item border-solid bg-slate-100' disabled value='_header'>
-          <Accordion.Header className='accordion-header font-semibold'>
+          <Accordion.Header className='accordion-header font-semibold' render={<div />}>
             <Accordion.Trigger className='accordion-trigger font-semibold' disabled>
               <span></span>
               <span>Prop</span>
@@ -46,7 +46,7 @@ export default function APIReference() {
           // Render prop item
           return (
             <Accordion.Item className='accordion-item' key={`item-${idx}`} value={prop.name}>
-              <Accordion.Header className='accordion-header'>
+              <Accordion.Header className='accordion-header' render={<div />}>
                 <Accordion.Trigger className='accordion-trigger'>
                   <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
                   <span className='font-medium'>{prop.name}</span>

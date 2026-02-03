@@ -3,24 +3,145 @@ type: Guide
 title: Typography
 ---
 
-import ColoredLinks from './-views/typography/ColoredLinks'
 import Headings from './-views/typography/Headings'
-import TextUtilities from './-views/typography/TextUtilities'
-
-<div
-  id='gradient-background'
-  className='absolute start-0 end-0 top-0 h-120 w-screen bg-linear-to-br from-primary-300 to-danger-400'
-/>
-<img src='bg-grid-hero.svg' className='absolute start-0 end-0 top-0 mx-auto' />
-<div className='relative mx-auto mt-40 mb-10 flex container-5xl flex-col rounded-2xl border-2 border-neutral-700 bg-white p-sm'>
-
-# {{title}}
+import { CodePreview } from '../layouts/CodePreview'
+import { Alert } from '@polyms/core'
 
 Documentation and examples for Polyms typography, including global settings, headings, body
 text, lists, and more.
 
-<Headings />
-<TextUtilities />
-<ColoredLinks />
+## Headings
 
+All headings, `<h1>` through `<h6>`, are available.
+
+<Headings />
+
+## Text Utilities
+
+For headings, body text, lists, and more, use our text utilities and classes for styling and spacing. Includes support for styling links with hover states, too.
+
+export const textUtilities = [
+  { class: '.text-xs', output: 'Extra small text', value: '0.75rem (12px)' },
+  { class: '.text-sm', output: 'Small text', value: '0.875rem (14px)' },
+  { class: '.text-base', output: 'Base text', value: '1rem (16px)' },
+  { class: '.text-lg', output: 'Large text', value: '1.125rem (18px)' },
+  { class: '.text-xl', output: 'Extra large text', value: '1.25rem (20px)' },
+  { class: '.font-light', output: 'Light text', value: '300' },
+  { class: '.font-normal', output: 'Normal text', value: '400' },
+  { class: '.font-medium', output: 'Medium text', value: '500' },
+  { class: '.font-semibold', output: 'Semibold text', value: '600' },
+  { class: '.font-bold', output: 'Bold text', value: '700' },
+]
+
+<div className='card mt-2'>
+  <table className='table-striped table-borderless table text-center align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th>Class</th>
+        <th>Output</th>
+        <th>font-size/font-weight</th>
+      </tr>
+    </thead>
+    <tbody>
+      {textUtilities.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code>{row.class}</code>
+          </td>
+          <td>
+            <span className={row.class.substring(1)}>{row.output}</span>
+          </td>
+          <td>{row.value}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 </div>
+
+## Colored links
+
+You can use the `.link-*` classes to colorize links. Unlike the `.text-*` classes, these classes have a `:hover` and `:focus` state. Some of the link styles use a relatively light foreground color, and should only be used on a dark background in order to have sufficient contrast.
+
+export const coloredLinks = [
+  {
+    class: '.link',
+    variant: 'link',
+    description: 'Default link with primary color on active/visited states',
+  },
+  {
+    class: '.link-primary',
+    variant: 'link link-primary',
+    description: 'Primary colored link (primary-700) with medium font weight',
+  },
+  {
+    class: '.link-danger',
+    variant: 'link link-danger',
+    description: 'Danger colored link for destructive actions',
+  },
+  {
+    class: '.link-light',
+    variant: 'link link-light',
+    description: 'Light gray link (slate-500), changes to primary on hover',
+  },
+]
+
+<div className='card mt-2'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Class</th>
+        <th>Output</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {coloredLinks.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap'>{row.class}</code>
+          </td>
+          <td>
+            <a className={row.variant} href={`#${row.variant}`}>
+              Click to see hover effect
+            </a>
+          </td>
+          <td className='text-sm text-slate-600'>{row.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+## Stretched link
+
+Make any HTML element or component clickable by "stretching" a nested link via CSS. The `.stretched-link` class adds `position: absolute` to a link, making its containing block clickable via a `::after` pseudo element. In most cases, this means that an element with `position: relative` that contains a link with the `.stretched-link` class is clickable.
+
+export const stretchedLinkCode = `<div className='card relative max-w-md'>
+  <div className='card-body'>
+    <h5 className='card-title'>Card with stretched link</h5>
+    <p className='card-text'>
+      Some quick example text to build on the card title and make up the bulk of the card's content.
+    </p>
+    <a href='#stretched-link' className='link link-primary stretched-link'>
+      Go somewhere
+    </a>
+  </div>
+</div>`
+
+<CodePreview code={stretchedLinkCode}>
+  <div className='card relative max-w-md'>
+    <div className='card-body'>
+      <h5 className='card-title'>Card with stretched link</h5>
+      <p className='card-text'>
+        {"Some quick example text to build on the card title and make up the bulk of the card's content."}
+      </p>
+      <a href='#stretched-link' className='link link-primary stretched-link'>
+        {'Go somewhere'}
+      </a>
+    </div>
+  </div>
+</CodePreview>
+
+<Alert variant='info' className='mt-8' badge='::: Tip'>
+  The parent element must have `position: relative` for the stretched link to work properly.
+</Alert>

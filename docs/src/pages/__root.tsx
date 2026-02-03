@@ -1,13 +1,13 @@
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { Toast } from '@polyms/core'
-import { createRootRoute, Outlet, useMatches } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { useRef } from 'react'
 import { AppSidebar } from '../layouts/AppSidebar'
 
 const AppNavigation = ({ onToggleSidebar }: NavigationProps) => {
   return (
-    <div className='flex h-14 shrink-0 items-center gap-2 px-4' id='app-navigation'>
+    <div id='app-navigation'>
       <button
         className='ml-auto inline-flex items-center justify-center rounded-md border border-slate-300 px-2 py-1 font-medium text-xs md:hidden'
         onClick={onToggleSidebar}
@@ -30,8 +30,6 @@ const Name = () => {
 }
 
 const Root = () => {
-  const matches = useMatches()
-  const className = matches.at(-1)?.staticData.className
   const appSidebarRef = useRef<AppSidebar.Ref>(null)
 
   return (
@@ -39,9 +37,7 @@ const Root = () => {
       <Name />
       <AppNavigation onToggleSidebar={() => appSidebarRef.current?.toggleSidebar()} />
       <AppSidebar ref={appSidebarRef} />
-      <main className={className}>
-        <Outlet />
-      </main>
+      <Outlet />
       <Toast.Container />
     </Toast>
   )
@@ -56,7 +52,7 @@ export const Route = createRootRoute({
 
 declare module '@tanstack/react-router' {
   interface StaticDataRouteOption {
-    className?: string
+    // className?: string
   }
 }
 

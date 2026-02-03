@@ -8,14 +8,12 @@ export const Route = createFileRoute('/page')({
 
 function Page() {
   return (
-    <article>
+    <>
       <Header />
 
-      <section className='container mt-10'>
+      <main className='container mt-10'>
         <h2>
-          <span className='me-4 rounded-full bg-success/10 px-3 py-1 font-semibold text-sm text-success'>
-            Tip
-          </span>
+          <span className='badge badge-success badge-lg me-2 rounded-full'>Tip</span>
           Pages in .container
         </h2>
         <p className='mt-4 text-justify'>
@@ -39,7 +37,7 @@ function Page() {
           ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet
           consectetur adipisicing elit. Quisquam, quos.
         </p>
-      </section>
-    </article>
+      </main>
+    </>
   )
 }

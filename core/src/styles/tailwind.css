@@ -53,7 +53,6 @@
 @source inline('{sm:,md:,lg:,xl:,2xl:,}{h1,h2,h3,h4,h5,h6}');
 @source inline('font-{normal,medium,semibold,bold,extrabold,black}');
 @source inline('{hover:,focus:,}underline');
-@source inline('{hover:,focus:,}bg-interaction/{10..90..10}');
 @source inline('{hover:,focus:,}bg-{white,primary,danger}');
 @source inline('{hover:,focus:,}bg-primary-{50,300,500}');
 @source inline('{hover:,focus:,}bg-neutral-{50,{100..900..100}}');

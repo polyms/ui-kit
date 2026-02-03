@@ -3,14 +3,484 @@ type: Guide
 title: Design System
 ---
 
-import { DesignSystem } from '../layouts/DesignSystem'
+A comprehensive design system built with modern web standards, providing a consistent foundation for building accessible and scalable user interfaces.
 
-<div
-  id='gradient-background'
-  className='absolute start-0 end-0 top-0 h-120 w-screen bg-linear-to-br from-primary-300 to-danger-400'
-/>
-<img src='bg-grid-hero.svg' className='absolute start-0 end-0 top-0 mx-auto' />
-<div className='relative mx-auto mt-40 mb-10 flex container-5xl flex-col rounded-2xl border-2 border-neutral-700 bg-white p-sm'>
-  <h1 className='h1 mb-sm'>Design System</h1>
-  <DesignSystem />
+## Philosophy
+
+Our design system is built on three core principles:
+
+**Consistency** — Unified visual language and interaction patterns across all components ensure a cohesive user experience.
+
+**Accessibility** — WCAG 2.1 Level AA compliance built into every component, with semantic HTML and ARIA patterns.
+
+**Flexibility** — Customizable tokens and CSS variables enable easy theming while maintaining design consistency.
+
+## Foundation
+
+### Color System
+
+Our semantic color palette features 11 shades (50-950) for each variant. Colors are accessible via CSS custom properties and Tailwind utilities.
+
+```css
+/* CSS Custom Properties */
+var(--color-primary-500)
+var(--color-success-600)
+var(--color-danger-50)
+
+/* Tailwind Utilities */
+bg-primary-500
+text-success-600
+border-danger-50
+```
+
+**Available Variants:**
+
+- `primary` — Brand colors for primary actions
+- `success` — Positive states and confirmations
+- `info` — Informational messages
+- `warning` — Cautionary states
+- `danger` — Errors and destructive actions
+- `light` — Subtle backgrounds and borders
+- `dark` — High contrast text and elements
+- `slate` — Neutral grays for UI elements
+
+### Typography
+
+Typography scale follows a modular type system with consistent line heights for optimal readability.
+
+**Headings:**
+
+- `h1` — 2.25rem (36px) — Page titles
+- `h2` — 1.875rem (30px) — Section headers
+- `h3` — 1.5rem (24px) — Subsection titles
+- `h4` — 1.25rem (20px) — Card headers
+- `h5` — 1.125rem (18px) — Small headers
+- `h6` — 1rem (16px) — Inline headers
+
+**Body Text:**
+
+- Base font size: 1rem (16px)
+- Line height: 1.5 for optimal readability
+- Font weights: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
+
+### Spacing System
+
+Consistent spacing scale using Tailwind's default spacing tokens (0.25rem increments).
+
+```tsx
+<div className='p-4 gap-2 mb-6'>
+  {/* padding: 1rem, gap: 0.5rem, margin-bottom: 1.5rem */}
 </div>
+```
+
+### Border Radius
+
+Rounded corners follow a consistent scale:
+
+- `rounded-sm` — 0.125rem (2px)
+- `rounded` — 0.25rem (4px)
+- `rounded-md` — 0.375rem (6px)
+- `rounded-lg` — 0.5rem (8px)
+- `rounded-xl` — 0.75rem (12px)
+- `rounded-full` — 9999px (pill shape)
+
+### Breakpoints
+
+Responsive design breakpoints follow mobile-first approach:
+
+- `sm` — 640px — Small tablets and large phones
+- `md` — 768px — Tablets
+- `lg` — 1024px — Laptops and desktops
+- `xl` — 1280px — Large desktops
+- `2xl` — 1536px — Extra large screens
+
+```tsx
+<div className='p-4 md:p-6 lg:p-8'>
+  {/* Responsive padding: 1rem on mobile, 1.5rem on tablet, 2rem on desktop */}
+</div>
+```
+
+### Z-Index Scale
+
+Layering system ensures proper stacking order:
+
+- `z-0` — 0 — Base layer
+- `z-10` — 10 — Dropdowns and popovers
+- `z-20` — 20 — Sticky headers
+- `z-30` — 30 — Fixed elements
+- `z-40` — 40 — Overlays and backdrops
+- `z-50` — 50 — Modals and dialogs
+- `z-auto` — auto — Default stacking context
+
+```tsx
+<div className='fixed z-50'>
+  {/* Modal with highest priority */}
+</div>
+```
+
+## Component Architecture
+
+### Composition Pattern
+
+Components follow a root-subcomponent pattern for maximum flexibility:
+
+```tsx
+<Alert variant='success' onDismiss={handleDismiss}>
+  <Alert.Heading>Success!</Alert.Heading>
+  Payment processed successfully.
+</Alert>
+
+<Modal>
+  <Modal.Trigger>Open</Modal.Trigger>
+  <Modal.Content>
+    <Modal.Header>Title</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+    <Modal.Footer>Actions</Modal.Footer>
+  </Modal.Content>
+</Modal>
+```
+
+### CSS Variables Pattern
+
+Components use CSS custom properties for themeable styling:
+
+```css
+.alert {
+  background-color: var(--alert-bg);
+  border-color: var(--alert-border);
+  color: var(--alert-color);
+}
+
+.alert-success {
+  --alert-bg: var(--color-success-50);
+  --alert-border: var(--color-success-600);
+  --alert-color: var(--color-success-700);
+}
+```
+
+### Data Attributes
+
+Components expose semantic data attributes for styling and testing:
+
+```css
+[data-part='trigger'][data-state='open'] {
+  /* Styles for open trigger */
+}
+
+[data-part='item'][data-highlighted] {
+  /* Styles for highlighted item */
+}
+
+[data-part='content'][data-placement='top'] {
+  /* Styles for top-placed content */
+}
+```
+
+## Usage Guidelines
+
+### Color Usage
+
+**Do:**
+
+- Use semantic colors (success for confirmations, danger for errors)
+- Maintain 4.5:1 contrast ratio for text
+- Use lighter shades (50-200) for backgrounds
+- Use darker shades (600-900) for text and borders
+
+**Don't:**
+
+- Mix semantic meanings (don't use `success` for errors)
+- Use low-contrast color combinations
+- Override semantic colors with arbitrary values
+
+### Component Selection
+
+Choose components based on interaction patterns:
+
+- **Modal** — Requires immediate attention, blocks other actions
+- **Offcanvas** — Navigation menus, supplementary content
+- **BottomSheet** — Mobile-first actions and options
+- **Popover** — Contextual information, non-critical
+- **Tooltip** — Brief descriptions on hover/focus
+
+### Accessibility
+
+All components follow accessibility best practices:
+
+- Semantic HTML structure
+- Keyboard navigation support
+- Screen reader announcements
+- Focus management
+- ARIA attributes where appropriate
+
+## Color Palette
+
+You can use `bg-primary` for the default primary color (equivalent to `bg-primary-500`), or specify a shade with `bg-primary-100`, `bg-primary-200`, etc. This pattern works for all color variants.
+
+<table className='table align-middle'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th className='w-px text-center'>50</th>
+      <th className='w-px text-center'>100</th>
+      <th className='w-px text-center'>200</th>
+      <th className='w-px text-center'>300</th>
+      <th className='w-px text-center'>400</th>
+      <th className='w-px text-center'>500</th>
+      <th className='w-px text-center'>600</th>
+      <th className='w-px text-center'>700</th>
+      <th className='w-px text-center'>800</th>
+      <th className='w-px text-center'>900</th>
+      <th className='w-px text-center'>950</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>primary</td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>info</td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>danger</td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>neutral</td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Available Utilities
+
+<table className='table'>
+  <thead>
+    <tr>
+      <th>Utility</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>bg-*-&#123;50,100...950&#125;</code>
+      </td>
+      <td>Sets the background color of an element</td>
+    </tr>
+    <tr>
+      <td>
+        <code>text-*-&#123;50,100...950&#125;</code>
+      </td>
+      <td>Sets the text color of an element</td>
+    </tr>
+    <tr>
+      <td>
+        <code>border-*-&#123;50,100...950&#125;</code>
+      </td>
+      <td>Sets the border color of an element</td>
+    </tr>
+  </tbody>
+</table>

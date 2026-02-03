@@ -1,5 +1,6 @@
 import { pages } from 'virtual:mdx-navigation'
 import {
+  AiChemistry02Icon,
   ArrowRight01Icon,
   ChatFeedback01Icon,
   CircleArrowLeftDoubleIcon,
@@ -156,15 +157,6 @@ export function AppSidebar({ ref }: AppSidebarProps) {
           </div>
 
           <nav className='space-y-2 overflow-y-auto px-4 pb-4'>
-            <ul className=''>
-              <li>
-                <Link className={'nav-item'} to='/page'>
-                  <Icon className='size-4 text-warning-600' icon={GoogleDocIcon} />
-                  Page Demo
-                </Link>
-              </li>
-            </ul>
-
             {items.map(section => (
               <Collapsible.Root defaultOpen key={section.key}>
                 <Collapsible.Trigger className='nav-item'>
@@ -188,6 +180,22 @@ export function AppSidebar({ ref }: AppSidebarProps) {
                 </Collapsible.Panel>
               </Collapsible.Root>
             ))}
+
+            <Collapsible.Root defaultOpen>
+              <Collapsible.Trigger className='nav-item'>
+                <Icon className='size-4 text-slate-600' icon={AiChemistry02Icon} />
+                Examples
+                <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
+              </Collapsible.Trigger>
+              <Collapsible.Panel className='nav-panel'>
+                <div className='nav-panel-content'>
+                  <Link className='nav-item' to='/page'>
+                    <Icon className='size-4 text-slate-600' icon={GoogleDocIcon} />
+                    Page Demo
+                  </Link>
+                </div>
+              </Collapsible.Panel>
+            </Collapsible.Root>
           </nav>
         </aside>
       </div>

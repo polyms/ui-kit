@@ -1,6 +1,6 @@
 import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import Icons from '../Icons'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
@@ -9,6 +9,7 @@ export type AlertVariant = 'primary' | 'success' | 'info' | 'warning' | 'danger'
 
 export interface AlertProps extends useRender.ComponentProps<'div'> {
   variant?: AlertVariant
+  badge?: ReactNode
   onDismiss?: () => void
 }
 
@@ -20,6 +21,7 @@ export const Alert: FC<AlertProps> = ({
   onDismiss,
   render,
   children,
+  badge,
   ...props
 }) => {
   const defaultProps = {
@@ -28,6 +30,7 @@ export const Alert: FC<AlertProps> = ({
     children: (
       <>
         {children}
+        {badge && <span className='alert-badge'>{badge}</span>}
         {onDismiss && (
           <button aria-label='Close' className='alert-close' onClick={onDismiss} type='button'>
             <Icons.Close />

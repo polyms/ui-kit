@@ -1,6 +1,7 @@
 @import '../../../core/src/styles/tailwind.css';
 @import './_details.css' layer(components);
 @import './_toc.css' layer(components);
+/* @import './_docs.css' layer(components); */
 
 @source '../';
 

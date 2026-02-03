@@ -10,7 +10,7 @@ export const Header = () => {
   const [search, setSearch] = React.useState('')
 
   return (
-    <header className='flex h-14 shrink-0 items-center gap-2 border-slate-300 border-b px-4'>
+    <header className='border-slate-300 border-b border-dashed px-6' id='app-navigation'>
       <img alt='logo' src='favicon.png' width={40} />
       <Field>
         <HugeiconsIcon
@@ -19,7 +19,13 @@ export const Header = () => {
           onClick={() => setSearch('')}
           strokeWidth={2}
         />
-        <Field.Control onChange={e => setSearch(e.target.value)} placeholder='Search...' value={search} />
+        <Field.Control
+          className='w-72'
+          onChange={e => setSearch(e.target.value)}
+          placeholder='Search...'
+          rounded
+          value={search}
+        />
       </Field>
       <div className='ms-auto flex shrink-0 items-center gap-2'>
         {user ? (
@@ -43,12 +49,3 @@ export const Header = () => {
     </header>
   )
 }
-
-// Header.propTypes = {
-//   user: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//   }),
-//   onLogin: PropTypes.func.isRequired,
-//   onLogout: PropTypes.func.isRequired,
-//   onCreateAccount: PropTypes.func.isRequired,
-// };

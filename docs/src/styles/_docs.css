@@ -1,0 +1,48 @@
+.docs {
+  > p {
+    @apply mb-2;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply relative;
+  }
+  /* 
+  h1 + p,
+  h2 + p,
+  h3 + p,
+  h2 + ul,
+  h3 + ul {
+    @apply mt-2;
+  } */
+
+  h2,
+  h3 {
+    @apply mb-2;
+  }
+
+  h2::before,
+  h3::before {
+    @apply absolute rounded-full bg-primary/50;
+
+    content: '';
+    height: 3px;
+    width: 2rem;
+    bottom: -3px;
+  }
+
+  pre + p {
+    @apply mt-4;
+  }
+
+  h2,
+  h3,
+  h4 {
+    @apply pt-6 font-semibold;
+  }
+
+  ul {
+    @apply mb-2 list-inside list-disc;
+  }
+}

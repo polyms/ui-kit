@@ -17,7 +17,6 @@ const mdxFiles = import.meta.glob('./**/*.mdx', { eager: true }) as Record<
 
 export const Route = createFileRoute('/$')({
   component: MdxPage,
-  staticData: { className: 'px-8 pb-8' },
 })
 
 export function MdxLayout({ children }: { children: React.ReactNode }) {
@@ -28,7 +27,7 @@ export function MdxLayout({ children }: { children: React.ReactNode }) {
   const metadata: PageMetadata | undefined = metadataByRoute[activePath]
 
   return (
-    <div className={clsx('flex min-w-0')}>
+    <main className={clsx('docs min-w-0 flex-row px-8 pb-8')}>
       <div className='min-w-0 flex-1 pe-6'>
         <div>
           {/* {metadata?.type && (
@@ -36,14 +35,14 @@ export function MdxLayout({ children }: { children: React.ReactNode }) {
               {metadata.type}
             </span>
           )} */}
-          <h1 className='h1 mb-xs'>{metadata?.title}</h1>
+          <h1 className='h1'>{metadata?.title}</h1>
           {children}
         </div>
       </div>
       <aside className='hidden xl:flex xl:w-72 xl:shrink-0 xl:flex-col'>
         <DocsToc />
       </aside>
-    </div>
+    </main>
   )
 }
 
@@ -63,7 +62,7 @@ function MdxPage() {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
         return (
-          <h1 className='h1 mb-xs' {...props} id={id}>
+          <h1 {...props} className={clsx('h1', props.className)} id={id}>
             {props.children}
           </h1>
         )
@@ -71,13 +70,13 @@ function MdxPage() {
       h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
-        return <h2 className={clsx('h2 mb-4 pt-6', props.className)} {...props} id={id} />
+        return <h2 {...props} className={clsx('h2', props.className)} id={id} />
       },
       h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
         return (
-          <h3 className='h3 mb-2 pt-6 font-semibold text-slate-700' {...props} id={id}>
+          <h3 {...props} className={clsx('h3', props.className)} id={id}>
             {props.children}
           </h3>
         )
@@ -85,7 +84,7 @@ function MdxPage() {
       h4: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
-        return <h4 className='h4 mb-2 pt-4 font-semibold text-slate-700' {...props} id={id} />
+        return <h4 {...props} className={clsx('h4', props.className)} id={id} />
       },
       a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
         return (
@@ -103,9 +102,6 @@ function MdxPage() {
         ) : (
           <code {...props} className='badge badge-primary rounded-full' />
         )
-      },
-      p: (props: React.HTMLAttributes<HTMLParagraphElement>) => {
-        return <p {...props} className='mb-4' />
       },
       // biome-ignore-start lint/style/useNamingConvention: off
       CodePreview,

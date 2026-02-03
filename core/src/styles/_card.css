@@ -3,3 +3,7 @@
 
   border: 1px var(--tw-border-style, solid) var(--color-slate-300);
 }
+
+.card-body {
+  @apply p-4;
+}

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
-const Headings: React.FC = () => {
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export default function Headings() {
   const headingRefs = useRef<Record<string, HTMLHeadingElement>>({})
   const [headingHeights, setHeadingHeights] = useState<Record<string, number>>({})
   const [fontSizes, setFontSizes] = useState<Record<string, string>>({})
@@ -22,17 +24,12 @@ const Headings: React.FC = () => {
   }, [])
 
   return (
-    <section>
-      <h2 className='h2'>Headings</h2>
-      <p className='mb-2xs'>
-        All headings, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>, are available.
-      </p>
-
-      <table className='table align-middle'>
-        <thead>
+    <div className='card mt-2'>
+      <table className='table-striped table-borderless table text-center align-middle'>
+        <thead className='thead-light'>
           <tr>
             <th className='w-px'>Class</th>
-            <th>Example</th>
+            <th>Output</th>
             <th>Font Size</th>
             <th>Line Height</th>
           </tr>
@@ -40,7 +37,9 @@ const Headings: React.FC = () => {
         <tbody>
           {['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map(heading => (
             <tr key={heading}>
-              <td>.{heading}</td>
+              <td>
+                <code>.{heading}</code>
+              </td>
               <td>
                 <p
                   className={heading}
@@ -57,8 +56,6 @@ const Headings: React.FC = () => {
           ))}
         </tbody>
       </table>
-    </section>
+    </div>
   )
 }
-
-export default Headings
