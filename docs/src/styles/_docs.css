@@ -46,4 +46,8 @@
   ul {
     @apply mb-2 list-inside list-disc;
   }
+
+  .tabs-panel > pre {
+    height: 100%;
+  }
 }

@@ -1,11 +1,12 @@
 import { metadataByRoute, type PageMetadata } from 'virtual:mdx-navigation'
-import { LinkSquare02Icon } from '@hugeicons/core-free-icons'
+import { LinkSquare02Icon, Unlink01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { MDXProvider } from '@mdx-js/react'
 import { createFileRoute, useMatch, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { CodeHighlight } from '../components/CodeHighlight'
+import { Icon } from '../components/Icons'
 import APIReference from '../layouts/APIReference'
 import { CodePreview } from '../layouts/CodePreview'
 import { DocsToc } from '../layouts/DocsToc'
@@ -68,14 +69,26 @@ function MdxPage() {
       h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
-        return <h2 {...props} className={clsx('h2', props.className)} id={id} />
+        return (
+          <h2 {...props} className={clsx('h2', props.className)} id={id}>
+            <span className='link peer decoration-transparent'>{props.children}</span>
+            <Icon
+              className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
+              icon={Unlink01Icon}
+            />
+          </h2>
+        )
       },
       h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => {
         const text = String(props.children ?? '')
         const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
         return (
           <h3 {...props} className={clsx('h3', props.className)} id={id}>
-            {props.children}
+            <span className='link peer decoration-transparent'>{props.children}</span>
+            <Icon
+              className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
+              icon={Unlink01Icon}
+            />
           </h3>
         )
       },

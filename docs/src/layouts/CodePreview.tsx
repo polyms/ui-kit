@@ -87,9 +87,11 @@ export function CodePreview({ code, children }: { code: string; children: React.
       <Tabs.Panel className='flex h-96 items-center justify-center' value='preview'>
         {children}
       </Tabs.Panel>
-      <Tabs.Panel className='h-96 overflow-auto p-0' style={{ background: '#2e3440' }} value='code'>
-        <div className='rounded-b-xl' dangerouslySetInnerHTML={{ __html: html }} />
-      </Tabs.Panel>
+      <Tabs.Panel
+        className='h-96 overflow-auto p-0'
+        dangerouslySetInnerHTML={{ __html: html }}
+        value='code'
+      />
     </Tabs>
   )
 }
