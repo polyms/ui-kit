@@ -1,8 +1,9 @@
+import clsx from 'clsx'
 import type React from 'react'
 import { useEffect, useState } from 'react'
 import { codeToHtml } from 'shiki'
 
-export function CodeHighlight({ children, language, ...props }: CodeHighlightProps) {
+export function CodeHighlight({ children, language, className, ...props }: CodeHighlightProps) {
   const [html, setHtml] = useState('')
 
   useEffect(() => {
@@ -21,7 +22,8 @@ export function CodeHighlight({ children, language, ...props }: CodeHighlightPro
     <div
       dangerouslySetInnerHTML={{ __html: html }}
       {...props}
-      className='overflow-hidden rounded-xl border-none'
+      className={clsx('overflow-hidden rounded-xl border-none', className)}
+      data-language={language}
     />
   )
 }

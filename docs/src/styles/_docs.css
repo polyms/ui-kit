@@ -1,5 +1,6 @@
 .docs {
-  > p {
+  & > p,
+  & > pre {
     @apply mb-2;
   }
 
