@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm nx build docs",
+  "outputDirectory": "dist/docs",
+  "devCommand": "pnpm nx serve docs",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  }
+}

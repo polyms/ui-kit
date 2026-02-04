@@ -4,15 +4,15 @@
 
 .switch input {
   cursor: pointer;
-  width: 3rem;
-  height: 1.5rem;
+  width: 2.5rem;
+  height: 1.25rem;
   margin: 0;
   border-radius: 1.5em;
   appearance: none;
   transition: all 200ms ease-in-out;
   position: relative;
   flex-shrink: 0;
-  background-color: var(--color-slate-100);
+  background-color: var(--color-slate-200);
   /* knob translate distance (horizontal) */
   --switch-knob-x: 0;
 
@@ -23,7 +23,7 @@
   &.disabled,
   &:disabled {
     cursor: not-allowed;
-    background-color: var(--color-slate-100);
+    opacity: 0.7;
   }
 
   /* Knob using pseudo-element (replaces background SVG) */
@@ -32,31 +32,28 @@
     position: absolute;
     top: 50%;
     left: 0.125rem; /* knob padding from left */
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    background-color: var(--color-slate-300); /* default knob color */
+    width: 1rem;
+    height: 1rem;
+    border-radius: 99px;
+    border: 1px solid transparent;
+    background-color: #fff; /* default knob color */
     transform: translate(var(--switch-knob-x), -50%);
     transition:
+      width 150ms ease-in-out,
       transform 300ms ease-in-out,
       background-color 300ms ease-in-out,
       box-shadow 300ms ease-in-out;
   }
 
   &:hover:not(:disabled):not(.disabled):not(:checked)::before {
-    background-color: var(--color-slate-400);
+    width: 1.25rem;
   }
 
   &:checked {
-    --switch-knob-x: 1.5rem; /* track width (3rem) - knob (1.25rem) - 2*padding (0.25rem) = 1.5rem */
+    --switch-knob-x: 1.25rem; /* track width (2.5rem) - knob (1rem) - 2*padding (0.25rem) = 1.25rem */
   }
   &:checked::before {
     background-color: var(--color-info-50); /* checked knob color */
-  }
-
-  &.disabled::before,
-  &:disabled::before {
-    background-color: var(--color-slate-200);
   }
 
   /* Primary variant knob colors */
