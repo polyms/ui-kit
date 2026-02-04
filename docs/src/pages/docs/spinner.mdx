@@ -1,0 +1,92 @@
+---
+type: Feedback
+title: Spinner
+apis:
+  - name: size
+    default: '12'
+    values: number
+    description: Controls the width and height of the spinner in pixels.
+  - name: color
+    default: '#181b1f'
+    values: string
+    description: Sets the color of the animated spinner arc. Accepts any valid CSS color value.
+  - name: subColor
+    default: '#AEB4BD'
+    values: string
+    description: Sets the color of the background circle track. Accepts any valid CSS color value.
+  - name: className
+    default: '-'
+    values: string
+    description: Additional CSS classes to apply custom styling to the spinner.
+---
+
+import Story from './-views/loading/SpinnerDefault.tsx'
+import code from './-views/loading/SpinnerDefault.tsx?raw'
+import Sizes from './-views/loading/SpinnerSizes.tsx'
+import sizesCode from './-views/loading/SpinnerSizes.tsx?raw'
+import Colors from './-views/loading/SpinnerColors.tsx'
+import colorsCode from './-views/loading/SpinnerColors.tsx?raw'
+
+A loading indicator that provides visual feedback to users during asynchronous operations. Use spinners to indicate that content is loading, processing, or being fetched.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Spinner } from '@polyms/core'
+
+<Spinner />
+<Spinner size={24} />
+<Spinner color='#3b82f6' subColor='#93c5fd' />
+```
+
+## Sizes
+
+Spinners can be customized to any size to fit your layout needs. Common sizes range from 12px (compact) to 48px (prominent).
+
+<CodePreview code={sizesCode}>
+  <Sizes />
+</CodePreview>
+
+## Colors
+
+Customize spinner colors to match your brand or indicate different states using the `color` and `subColor` props.
+
+<CodePreview code={colorsCode}>
+  <Colors />
+</CodePreview>
+
+## Common Use Cases
+
+**Loading States:**
+
+- Page or component initial load
+- Data fetching from APIs
+- Form submission processing
+
+**Button States:**
+
+```tsx
+<Button disabled>
+  <Spinner size={16} color='white' subColor='rgba(255,255,255,0.3)' />
+  <span className='ms-2'>Loading...</span>
+</Button>
+```
+
+**Overlay:**
+
+```tsx
+<div className='relative'>
+  <div className='absolute inset-0 z-10 flex items-center justify-center bg-white/80'>
+    <Spinner size={32} />
+  </div>
+  {/* Your content */}
+</div>
+```
+
+## API Reference
+
+<APIReference />
