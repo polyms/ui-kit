@@ -521,7 +521,10 @@ function ComponentShowcaseSection() {
         </div>
 
         <div className='mt-12 text-center'>
-          <GlowingButton className='btn btn-primary btn-lg inline-flex items-center gap-2' to='/docs'>
+          <GlowingButton
+            className='btn btn-primary btn-lg inline-flex items-center gap-2'
+            to='/design-system'
+          >
             Explore All Components →
           </GlowingButton>
         </div>
@@ -551,7 +554,7 @@ function CTASection() {
             Join thousands of developers building production applications with Core UI
           </p>
           <div className='flex flex-wrap items-center justify-center gap-4'>
-            <GlowingButton className='btn btn-primary btn-lg' to='/docs'>
+            <GlowingButton className='btn btn-primary btn-lg' to='/design-system'>
               Start Building →
             </GlowingButton>
             <a

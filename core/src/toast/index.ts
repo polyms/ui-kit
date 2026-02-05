@@ -1,7 +1,7 @@
+import { Toast as Base } from '@base-ui/react/toast'
 import { ToastContainer, ToastProvider } from './ToastContainer'
-import { toastManager } from './useToastManager'
 
 export const Toast = Object.assign(ToastProvider, {
   Container: ToastContainer,
-  useToastManager: () => toastManager,
+  useToastManager: Base.useToastManager,
 })
