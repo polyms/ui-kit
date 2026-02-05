@@ -13,19 +13,27 @@ body {
 
 @layer components {
   #root {
-    @apply grid min-h-dvh w-screen;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'main-content'
-      'navigation';
-    grid-template-rows: 1fr auto;
+    @apply min-h-dvh w-screen;
 
-    @media (min-width: 768px) {
-      grid-template-columns: 18rem 1fr;
-      grid-template-rows: auto 1fr;
+    &:not(.landing) {
+      @apply grid;
+      grid-template-columns: 1fr;
       grid-template-areas:
-        'name navigation'
-        'app-sidebar main-content';
+        'main-content'
+        'navigation';
+      grid-template-rows: 1fr auto;
+
+      @media (min-width: 768px) {
+        grid-template-columns: 18rem 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+          'name navigation'
+          'app-sidebar main-content';
+      }
+    }
+
+    &.landing {
+      @apply flex flex-col;
     }
   }
 

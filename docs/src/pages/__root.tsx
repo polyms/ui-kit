@@ -1,7 +1,7 @@
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { Toast } from '@polyms/core'
-import { createRootRoute, Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet, useRouterState } from '@tanstack/react-router'
 import { useRef } from 'react'
 import { AppSidebar } from '../layouts/AppSidebar'
 
@@ -31,6 +31,25 @@ const Name = () => {
 
 const Root = () => {
   const appSidebarRef = useRef<AppSidebar.Ref>(null)
+  const router = useRouterState()
+  const layout = router.matches[router.matches.length - 1]?.staticData?.layout
+  const isLandingLayout = layout === 'landing'
+
+  // Apply class to root element
+  if (typeof document !== 'undefined') {
+    const root = document.getElementById('root')
+    root?.classList.toggle('landing', isLandingLayout)
+  }
+
+  // Landing layout không dùng sidebar
+  if (isLandingLayout) {
+    return (
+      <Toast>
+        <Outlet />
+        <Toast.Container />
+      </Toast>
+    )
+  }
 
   return (
     <Toast>
@@ -52,7 +71,7 @@ export const Route = createRootRoute({
 
 declare module '@tanstack/react-router' {
   interface StaticDataRouteOption {
-    // className?: string
+    layout?: 'landing'
   }
 }
 

@@ -75,6 +75,7 @@ function MdxPage() {
             <Icon
               className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
               icon={Unlink01Icon}
+              size={16}
             />
           </h2>
         )
@@ -88,6 +89,7 @@ function MdxPage() {
             <Icon
               className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
               icon={Unlink01Icon}
+              size={16}
             />
           </h3>
         )

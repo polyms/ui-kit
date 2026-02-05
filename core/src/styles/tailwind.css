@@ -13,6 +13,7 @@
 @import './_modal.css' layer(components);
 @import './_number-field.css' layer(components);
 @import './_offcanvas.css' layer(components);
+@import './_popover.css' layer(components);
 @import './_select.css' layer(components);
 @import './_skeleton.css' layer(components);
 @import './_switch.css' layer(components);

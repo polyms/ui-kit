@@ -19,7 +19,7 @@ export function CodePreview({ code, children }: { code: string; children: React.
       <Tabs.List className='bg-slate-50 px-8'>
         <Tabs.Tab value='preview'>
           <svg
-            className='me-2 text-primary/70'
+            className='me-1 text-primary/70'
             fill='none'
             height='20'
             viewBox='0 0 24 24'
@@ -60,7 +60,7 @@ export function CodePreview({ code, children }: { code: string; children: React.
         </Tabs.Tab>
         <Tabs.Tab value='code'>
           <svg
-            className='me-2 text-primary/70'
+            className='me-1 text-primary/70'
             fill='none'
             height='20'
             viewBox='0 0 24 24'
