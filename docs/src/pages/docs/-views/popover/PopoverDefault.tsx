@@ -2,7 +2,7 @@ import { Popover } from '@polyms/core'
 
 export default function PopoverDefault() {
   return (
-    <div className='grid grid-cols-2 gap-4'>
+    <div className='m-auto grid grid-cols-2 gap-4'>
       <Popover defaultOpen>
         <Popover.Trigger className='btn btn-primary'>Top</Popover.Trigger>
         <Popover.Content

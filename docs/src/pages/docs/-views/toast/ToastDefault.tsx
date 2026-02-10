@@ -4,7 +4,7 @@ const ToastDefault = () => {
   const toastManager = Toast.useToastManager()
 
   return (
-    <div className='grid grid-cols-2 gap-2'>
+    <div className='m-auto grid grid-cols-2 gap-4'>
       <Button
         content='center'
         onClick={() =>

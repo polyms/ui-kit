@@ -2,7 +2,7 @@ import { Tabs } from '@polyms/core'
 
 export default function TabsDefault() {
   return (
-    <Tabs className='w-1/2' defaultValue='profile'>
+    <Tabs className='mx-6 mt-10' defaultValue='profile'>
       <Tabs.List>
         <Tabs.Tab value='profile'>Profile</Tabs.Tab>
         <Tabs.Tab value='account'>Account</Tabs.Tab>

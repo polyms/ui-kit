@@ -1,0 +1,212 @@
+---
+type: Layout
+title: Collapsible
+apis:
+  - name: defaultOpen
+    default: false
+    values: boolean
+    description: The default open state when the component mounts in uncontrolled mode.
+  - name: open
+    default: '-'
+    values: boolean
+    description: The controlled open state. Use with onOpenChange for controlled behavior.
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Callback fired when the collapsible state changes.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents interaction with the trigger and keeps the panel in its current state.
+  - name: animated
+    default: true
+    values: boolean
+    description: Whether to animate the panel open/close transition.
+---
+
+import Story from './-views/collapsible/CollapsibleDefault.tsx'
+import code from './-views/collapsible/CollapsibleDefault.tsx?raw'
+
+Expandable container that shows and hides content. Perfect for FAQs, detailed information sections, and progressive disclosure patterns where you want to reduce visual clutter while keeping content accessible.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Collapsible } from '@polyms/core'
+
+<Collapsible defaultOpen>
+  <Collapsible.Trigger>
+    Show more details
+  </Collapsible.Trigger>
+  <Collapsible.Panel>
+    <div className="p-4">
+      Hidden content that expands and collapses
+    </div>
+  </Collapsible.Panel>
+</Collapsible>
+```
+
+## Compound Components
+
+### Collapsible (Root)
+
+The root component that manages the collapsible state.
+
+### Collapsible.Trigger
+
+Button or element that toggles the panel visibility. Can contain icons, text, or any custom content.
+
+```tsx
+<Collapsible.Trigger className="btn btn-ghost">
+  <ChevronIcon className="collapsible-icon" />
+  Toggle content
+</Collapsible.Trigger>
+```
+
+### Collapsible.Panel
+
+The content container that expands and collapses. Automatically handles height transitions and accessibility attributes.
+
+```tsx
+<Collapsible.Panel>
+  <div className="p-4 border-t">
+    Your collapsible content here
+  </div>
+</Collapsible.Panel>
+```
+
+## Controlled vs Uncontrolled
+
+### Uncontrolled (Recommended for simple cases)
+
+Use `defaultOpen` to set the initial state and let the component manage its own state:
+
+```tsx
+<Collapsible defaultOpen>
+  <Collapsible.Trigger>FAQ Question</Collapsible.Trigger>
+  <Collapsible.Panel>Answer content</Collapsible.Panel>
+</Collapsible>
+```
+
+### Controlled (For complex state management)
+
+Control the open state externally using `open` and `onOpenChange`:
+
+```tsx
+const [isOpen, setIsOpen] = useState(false)
+
+<Collapsible open={isOpen} onOpenChange={setIsOpen}>
+  <Collapsible.Trigger>
+    {isOpen ? 'Hide' : 'Show'} details
+  </Collapsible.Trigger>
+  <Collapsible.Panel>
+    Controlled content
+  </Collapsible.Panel>
+</Collapsible>
+```
+
+## Examples
+
+### FAQ Accordion
+
+```tsx
+const faqs = [
+  { q: 'What is Core-UI?', a: 'A production-ready React component library...' },
+  { q: 'Is it free?', a: 'Yes, Core-UI is open source under MIT license...' },
+]
+
+<div className="space-y-2">
+  {faqs.map((faq, i) => (
+    <Collapsible key={i} className="border rounded-lg">
+      <Collapsible.Trigger className="w-full p-4 text-left font-medium hover:bg-slate-50">
+        <ChevronIcon className="collapsible-icon mr-2" />
+        {faq.q}
+      </Collapsible.Trigger>
+      <Collapsible.Panel>
+        <div className="p-4 pt-0 text-slate-600">
+          {faq.a}
+        </div>
+      </Collapsible.Panel>
+    </Collapsible>
+  ))}
+</div>
+```
+
+### With Custom Icon Rotation
+
+The `.collapsible-icon` class automatically rotates 90° when the panel is open:
+
+```tsx
+<Collapsible>
+  <Collapsible.Trigger className="flex items-center gap-2">
+    <ChevronRightIcon className="collapsible-icon transition-transform" />
+    Expand section
+  </Collapsible.Trigger>
+  <Collapsible.Panel>
+    Content with rotating icon
+  </Collapsible.Panel>
+</Collapsible>
+```
+
+### Nested Collapsibles
+
+```tsx
+<Collapsible>
+  <Collapsible.Trigger>Parent section</Collapsible.Trigger>
+  <Collapsible.Panel>
+    <div className="p-4">
+      <Collapsible>
+        <Collapsible.Trigger>Nested section</Collapsible.Trigger>
+        <Collapsible.Panel>
+          <div className="p-4">
+            Nested content
+          </div>
+        </Collapsible.Panel>
+      </Collapsible>
+    </div>
+  </Collapsible.Panel>
+</Collapsible>
+```
+
+## Styling
+
+### Custom Trigger Styling
+
+```tsx
+<Collapsible>
+  <Collapsible.Trigger className="btn btn-primary w-full">
+    Custom styled trigger
+  </Collapsible.Trigger>
+  <Collapsible.Panel>
+    Content
+  </Collapsible.Panel>
+</Collapsible>
+```
+
+### Panel Animation Control
+
+Disable animation by setting `animated={false}`:
+
+```tsx
+<Collapsible animated={false}>
+  <Collapsible.Trigger>No animation</Collapsible.Trigger>
+  <Collapsible.Panel>
+    Instant toggle
+  </Collapsible.Panel>
+</Collapsible>
+```
+
+## Accessibility
+
+- **Keyboard Navigation**: Trigger is focusable and activates with Space/Enter
+- **ARIA Attributes**: Automatically manages `aria-expanded`, `aria-controls`, and `aria-labelledby`
+- **Screen Readers**: Announces state changes and content visibility
+- **Focus Management**: Maintains focus on trigger after toggle
+
+## API Reference
+
+<APIReference />

@@ -158,7 +158,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
 
           <nav className='space-y-2 overflow-y-auto px-4 pb-4'>
             {items.map(section => (
-              <Collapsible.Root defaultOpen key={section.key}>
+              <Collapsible defaultOpen key={section.key}>
                 <Collapsible.Trigger className='nav-item'>
                   {section.label}
                   <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
@@ -178,10 +178,10 @@ export function AppSidebar({ ref }: AppSidebarProps) {
                     ))}
                   </div>
                 </Collapsible.Panel>
-              </Collapsible.Root>
+              </Collapsible>
             ))}
 
-            <Collapsible.Root defaultOpen>
+            <Collapsible defaultOpen>
               <Collapsible.Trigger className='nav-item'>
                 <Icon className='size-4 text-slate-600' icon={AiChemistry02Icon} />
                 Examples
@@ -195,7 +195,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
                   </Link>
                 </div>
               </Collapsible.Panel>
-            </Collapsible.Root>
+            </Collapsible>
           </nav>
         </aside>
       </div>

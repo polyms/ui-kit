@@ -4,7 +4,7 @@ export default function AlertDefault() {
   const toastManager = Toast.useToastManager()
 
   return (
-    <div className='grid grid-cols-1 gap-2'>
+    <div className='m-auto grid grid-cols-1 gap-2'>
       <Alert onDismiss={() => toastManager.add({ title: 'Dismissed!', type: 'success' })} variant='primary'>
         <Alert.Heading>New feature available</Alert.Heading>
         You can now export your data in multiple formats. Visit settings to configure your preferences.

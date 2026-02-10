@@ -2,7 +2,7 @@ import { Tooltip } from '@polyms/core'
 
 export default function TooltipDefault() {
   return (
-    <div className='grid grid-cols-2 gap-4'>
+    <div className='m-auto grid grid-cols-2 gap-4'>
       <Tooltip.Provider>
         <Tooltip align='center' open side='top' title='Save your changes before leaving'>
           <button className='btn btn-primary outlined' type='button'>

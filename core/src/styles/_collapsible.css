@@ -1,14 +1,12 @@
 .collapsible {
   display: flex;
-  min-height: 9rem;
   flex-direction: column;
-  justify-content: center;
 
   & > [data-panel-open] .collapsible-icon {
     transform: rotate(90deg);
   }
 
-  & > [data-open] {
+  [aria-expanded] + div {
     display: flex;
     height: var(--collapsible-panel-height);
     flex-direction: column;
@@ -19,10 +17,10 @@
     &[hidden]:not([hidden='until-found']) {
       display: none;
     }
+  }
 
-    &[data-starting-style],
-    &[data-ending-style] {
-      height: 0;
-    }
+  [aria-expanded] + [data-starting-style],
+  [aria-expanded] + [data-ending-style] {
+    height: 0;
   }
 }

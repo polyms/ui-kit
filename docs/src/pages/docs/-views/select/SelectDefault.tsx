@@ -16,7 +16,7 @@ const backend = [
 
 export default function SelectDefault() {
   return (
-    <div>
+    <div className='m-auto'>
       <Select multiple>
         <Select.Trigger placeholder='Select...'>{item => item.label}</Select.Trigger>
         <Select.Content>

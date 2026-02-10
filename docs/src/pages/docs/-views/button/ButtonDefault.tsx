@@ -4,7 +4,7 @@ import { Button, Spinner } from '@polyms/core'
 
 export default function ButtonDefault() {
   return (
-    <div className='grid grid-cols-2 gap-4'>
+    <div className='m-auto grid grid-cols-2 gap-4'>
       <Button outlined rounded size='xl'>
         <HugeiconsIcon icon={MouseLeftClick06Icon} size={18} strokeWidth={2} />
         Click me

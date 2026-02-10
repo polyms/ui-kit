@@ -84,7 +84,7 @@ export function CodePreview({ code, children }: { code: string; children: React.
           Code
         </Tabs.Tab>
       </Tabs.List>
-      <Tabs.Panel className='flex h-96 items-center justify-center' value='preview'>
+      <Tabs.Panel className='flex h-96 flex-col' value='preview'>
         {children}
       </Tabs.Panel>
       <Tabs.Panel

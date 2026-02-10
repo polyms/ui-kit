@@ -10,7 +10,7 @@ export default function FieldDefault() {
   const showError = useMemo(() => !!ref.current && value === '', [value])
 
   return (
-    <Field className='w-1/2' invalid={showError} required>
+    <Field className='m-auto w-1/2' invalid={showError} required>
       <Field.Label>{'Let me know your email?'}</Field.Label>
       <HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
       <HugeiconsIcon

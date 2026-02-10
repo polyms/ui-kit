@@ -10,7 +10,7 @@ export default function SpinnerColors() {
   ]
 
   return (
-    <div className='flex flex-wrap items-center justify-center gap-4'>
+    <div className='m-auto flex flex-wrap items-center justify-center gap-4'>
       {colors.map(({ name, color, subColor }) => (
         <div className='flex flex-col items-center gap-2' key={name}>
           <Spinner color={color} size={32} subColor={subColor} />
