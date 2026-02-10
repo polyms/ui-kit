@@ -1,0 +1,1532 @@
+# Core-UI
+
+> Enterprise-grade React component library built with TypeScript, Base UI, and Tailwind CSS
+
+## Overview
+
+Core-UI is a modular, component-driven UI library designed for production use. It combines the flexibility of Base UI headless components with Tailwind CSS styling and TypeScript type safety.
+
+**Key Features:**
+- 30+ production-ready components
+- 100% TypeScript coverage
+- WCAG 2.1 AA accessibility compliant
+- Zero hidden dependencies
+- React 19 with modern patterns
+- Full dark mode support
+
+## Tech Stack
+
+- **React 19+**: Functional components + hooks only (NO class components)
+- **TypeScript**: Strict mode enabled, full type safety
+- **Base UI**: Headless UI primitives with `useRender` hook pattern
+- **Tailwind CSS v4**: Utility-first styling with CSS variables
+- **Floating UI**: Positioning for popovers, tooltips, dropdowns
+- **Nx**: Monorepo management and task orchestration
+- **Vite**: Fast bundling, HMR, module federation
+- **Vitest + React Testing Library**: Unit and integration testing
+- **TanStack Router**: File-based routing with static data
+- **PNPM**: Fast, efficient package manager
+
+## Project Structure
+
+```
+core-ui/
+├── core/                           # Component library (main package)
+│   ├── src/
+│   │   ├── alert/                 # Alert components
+│   │   ├── bottom-sheet/          # Mobile bottom sheet
+│   │   ├── breadcrumb/            # Breadcrumb navigation
+│   │   ├── button/                # Button component
+│   │   ├── field/                 # Form field components with validation
+│   │   ├── modal/                 # Modal/Dialog with Zustand store
+│   │   ├── offcanvas/             # Offcanvas/Drawer
+│   │   ├── popover/               # Popover component
+│   │   ├── select/                # Select dropdown
+│   │   ├── switch/                # Switch/Toggle
+│   │   ├── tabs/                  # Tabs component
+│   │   ├── toast/                 # Toast notifications
+│   │   ├── tooltip/               # Tooltip component
+│   │   ├── number-field/          # Number input with controls
+│   │   ├── styles/                # Global styles + component CSS
+│   │   │   ├── tailwind.css      # Tailwind config & theme
+│   │   │   ├── _component.css    # Per-component styles
+│   │   │   └── ...
+│   │   ├── Icons.tsx              # Icon components
+│   │   └── index.ts               # Main exports
+│   ├── plugins/
+│   │   └── module-federation.plugin.ts  # Vite module federation
+│   ├── vite.config.mts            # Vite config for library
+│   └── package.json
+│
+├── docs/                          # Documentation site
+│   ├── src/
+│   │   ├── pages/                # MDX documentation pages
+│   │   │   ├── __root.tsx       # Root layout with conditional sidebar
+│   │   │   ├── index.tsx        # Landing page (layout: 'landing')
+│   │   │   └── docs/            # Doc pages (default layout)
+│   │   ├── layouts/
+│   │   │   └── AppSidebar.tsx   # Collapsible sidebar navigation
+│   │   ├── components/          # Doc-specific components
+│   │   └── styles/
+│   │       └── globals.css      # Global styles with grid layout
+│   ├── plugins/
+│   │   ├── mdxNavigation.plugin.ts  # Auto-generates navigation
+│   │   └── stripFrontmatter.plugin.ts
+│   ├── vite.config.mts
+│   └── public/
+│       └── llms.txt             # This file
+│
+├── .github/
+│   └── copilot-instructions.md  # GitHub Copilot context (MUST READ)
+├── nx.json                      # Nx workspace config
+├── pnpm-workspace.yaml          # PNPM workspace config
+└── tsconfig.base.json           # Base TypeScript config
+```
+
+## Key Conventions
+
+### Component Structure
+
+Each component folder follows this pattern:
+```
+component-name/
+├── ComponentName.tsx          # Main component
+├── ComponentSubpart.tsx       # Sub-components (if complex)
+├── ComponentName.test.tsx     # Vitest tests
+├── ComponentContext.tsx       # Context (if needed)
+├── component.store.ts         # Zustand store (if needed)
+└── index.ts                   # Barrel exports
+```
+
+### Code Format (CRITICAL)
+
+**All TypeScript/TSX files MUST follow this structure:**
+
+```tsx
+import statements...
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export interface TypeName {}
+export type CustomType = ...
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export const Component = () => {}
+```
+
+**Separator Format Rules:**
+- Each separator is EXACTLY 110 characters total (including `//` and spaces)
+- Format: `// ── SectionName ────────────────────────────────────────────────────────────────────────────────────────────`
+- Always use `// ──` (2 dashes with spaces) at start
+- Fill remaining space with dashes until 110 characters
+- Types section MUST come before Components section (when both exist)
+- **If file has NO types, omit Types section entirely** (only show Components section)
+- If file has no components (rare), omit Components section
+
+**Examples:**
+
+File with both Types and Components:
+```tsx
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+```
+
+File with only Components (no types):
+```tsx
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+```
+
+### Styling System
+
+**Tailwind CSS:**
+- Use utility classes combined with `clsx()` for conditional styling
+- Responsive: `md:`, `lg:`, `xl:` breakpoints
+- Dark mode: `dark:` prefix
+- Hover states: `hover:` prefix with `@media (hover: hover)` for touch devices
+
+**Color Variables (CRITICAL):**
+- **ALWAYS use `--color-slate-*`** for grays (e.g., `var(--color-slate-400)`, `var(--color-slate-100)`)
+- **NEVER use `--color-neutral-*`** (deprecated)
+- Primary colors: `--color-primary-*` (50-950)
+- Theme colors: `--color-blue-*`, `--color-purple-*`, etc.
+
+**Component-Specific CSS:**
+- Each component has `_component-name.css` in `core/src/styles/`
+- Import in main `tailwind.css`: `@import './_component-name.css' layer(components);`
+- Use `@layer components` for component styles
+- Use CSS custom properties for themeable values
+
+**Example:**
+```css
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2;
+    @apply font-medium transition-colors;
+    
+    &.btn-primary {
+      @apply bg-primary-600 text-white;
+      @apply hover:bg-primary-700;
+    }
+  }
+}
+```
+
+### Base UI Integration
+
+**useRender Hook Pattern:**
+
+```tsx
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ComponentProps = useRender.ComponentProps<'div'>
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function Component({ className, render, ...props }: ComponentProps) {
+  const element = useRender({
+    defaultTagName: 'div',
+    ref: props.ref,  // React 19: ref is regular prop (NO forwardRef needed)
+    render,
+    props: {
+      ...props,
+      className: clsx('component-class', className),
+    },
+  })
+  
+  return element
+}
+```
+
+**Key Points:**
+- Use `useRender.ComponentProps<'tagname'>` for typing props
+- `ref` is a regular prop in React 19 (pass `props.ref` directly)
+- Merge props and className inside the `props` object
+- Return the `element` directly from `useRender`
+- **NO `forwardRef` needed in React 19**
+
+### React Patterns
+
+**Functional Components Only:**
+```tsx
+// ✅ CORRECT
+export const Component = ({ prop }: Props) => {
+  return <div>{prop}</div>
+}
+
+// ✅ ALSO CORRECT
+export function Component({ prop }: Props) {
+  return <div>{prop}</div>
+}
+
+// ❌ WRONG - NO class components
+export class Component extends React.Component {
+  render() { return <div /> }
+}
+```
+
+**Hooks Best Practices:**
+- Use `useState`, `useEffect`, `useRef`, `useMemo`, `useCallback`
+- Custom hooks: `use<FeatureName>` naming (e.g., `useValidation`, `useOffcanvas`)
+- Context: Create separate `ComponentContext.tsx` file
+- State management: Zustand for complex state (e.g., `modal.store.ts`)
+
+### Testing Patterns
+
+**Test File Structure:**
+```typescript
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it, vi } from 'vitest'
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+describe('ComponentName', () => {
+  it('should render correctly', () => {
+    render(<Component />)
+    expect(screen.getByText('text')).toBeInTheDocument()
+  })
+  
+  it('should handle user interaction', async () => {
+    const user = userEvent.setup()
+    render(<Component />)
+    
+    await user.click(screen.getByRole('button'))
+    expect(screen.getByText('clicked')).toBeInTheDocument()
+  })
+})
+```
+
+**Testing Rules:**
+1. **Always import from vitest**: `describe`, `expect`, `it`, `vi` (for mocking)
+2. **Use screen queries**: Prefer `screen.getByRole()`, `screen.getByText()`, `screen.getByTestId()`
+3. **Portal Elements (Floating-UI)**: Components using Floating-UI render in portals
+   - Use `document.querySelector()` for DOM queries in portals
+   - Use `screen.getByTestId()` for test IDs
+   - Use `{ hidden: true }` option in `getByRole()` for hidden elements
+4. **User Interactions**: Use `userEvent.setup()` for realistic interactions
+5. **Test File Naming**: `ComponentName.test.tsx`
+
+**Portal Testing Example:**
+```typescript
+it('renders close button in portal', () => {
+  render(
+    <OffcanvasContent>
+      <OffcanvasClose />
+    </OffcanvasContent>
+  )
+  
+  // Use document.querySelector for portal elements
+  const closeButton = document.querySelector('.offcanvas-close')
+  expect(closeButton).toBeInTheDocument()
+})
+```
+
+## Routing & Layouts
+
+**TanStack Router with Static Data:**
+
+```tsx
+// pages/index.tsx - Landing page (no sidebar)
+export const Route = createFileRoute('/')({
+  component: LandingPage,
+  staticData: {
+    layout: 'landing',  // Disables sidebar layout
+  },
+})
+
+// pages/docs/button.tsx - Doc page (with sidebar)
+export const Route = createFileRoute('/docs/button')({
+  component: ButtonDocs,
+  // No staticData = default layout with sidebar
+})
+```
+
+**Root Layout Logic:**
+```tsx
+// pages/__root.tsx
+const Root = () => {
+  const router = useRouterState()
+  const layout = router.matches[router.matches.length - 1]?.staticData?.layout
+  const isLandingLayout = layout === 'landing'
+  
+  // Apply class to #root for CSS targeting
+  if (typeof document !== 'undefined') {
+    const root = document.getElementById('root')
+    if (root) {
+      root.classList.toggle('homepage', isLandingLayout)
+    }
+  }
+  
+  if (isLandingLayout) {
+    return <Outlet /> // No sidebar
+  }
+  
+  return (
+    <>
+      <Name />
+      <AppNavigation />
+      <AppSidebar />
+      <Outlet />
+    </>
+  )
+}
+```
+
+**CSS Grid Layout:**
+```css
+/* globals.css */
+#root {
+  @apply min-h-dvh w-screen;
+  
+  &:not(.homepage) {
+    @apply grid;
+    grid-template-areas: 'main-content' 'navigation';
+    
+    @media (min-width: 768px) {
+      grid-template-areas:
+        'name navigation'
+        'app-sidebar main-content';
+    }
+  }
+  
+  &.homepage {
+    @apply block;  /* No grid for landing */
+  }
+}
+```
+
+## Virtual Modules
+
+**MDX Navigation Auto-Generation:**
+
+The docs site uses a Vite plugin to auto-generate navigation from MDX files:
+
+```typescript
+// plugins/mdxNavigation.plugin.ts
+// Scans docs/src/pages/ for .mdx files
+// Extracts frontmatter (title, order, etc.)
+// Generates virtual module: 'virtual:mdx-navigation'
+
+// Usage in components:
+import navigation from 'virtual:mdx-navigation'
+```
+
+**Type Declarations:**
+```typescript
+// src/mdx-navigation.d.ts
+declare module 'virtual:mdx-navigation' {
+  export interface NavItem {
+    title: string
+    path: string
+    children?: NavItem[]
+  }
+  const navigation: NavItem[]
+  export default navigation
+}
+```
+
+## Commands
+
+```bash
+# Development
+npx nx serve docs                   # Start docs dev server (http://localhost:5173)
+npx nx serve core                   # Start core dev server
+
+# Build
+npx nx build core                   # Build core library → dist/core
+npx nx build docs                   # Build docs site → dist/docs
+
+# Testing
+npx nx test core                    # Run tests once
+npx nx test core --watch            # Watch mode
+npx nx test core -- --coverage      # With coverage report
+npx nx test core -- --ui            # Vitest UI
+
+# Linting & Formatting
+npx biome check .                   # Check all files
+npx biome check --write .           # Auto-fix
+npx biome format .                  # Format only
+
+# Nx Tasks
+npx nx show project core            # List all tasks for core
+npx nx graph                        # Show dependency graph
+npx nx affected:test                # Test affected projects
+```
+
+## Documentation Workflow
+
+### Adding New Components
+
+1. **Create component folder:**
+   ```bash
+   mkdir core/src/new-component
+   ```
+
+2. **Create component files:**
+   ```tsx
+   // core/src/new-component/NewComponent.tsx
+   import { useRender } from '@base-ui/react/use-render'
+   import clsx from 'clsx'
+   
+   // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+   
+   type NewComponentProps = useRender.ComponentProps<'div'>
+   
+   // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+   
+   export function NewComponent({ className, render, ...props }: NewComponentProps) {
+     const element = useRender({
+       defaultTagName: 'div',
+       ref: props.ref,
+       render,
+       props: {
+         ...props,
+         className: clsx('new-component', className),
+       },
+     })
+     
+     return element
+   }
+   ```
+
+3. **Export in index.ts:**
+   ```tsx
+   // core/src/new-component/index.ts
+   export * from './NewComponent'
+   ```
+
+4. **Add to main exports:**
+   ```tsx
+   // core/src/index.ts
+   export * from './new-component'
+   ```
+
+5. **Add component styles:**
+   ```css
+   /* core/src/styles/_new-component.css */
+   @layer components {
+     .new-component {
+       @apply relative;
+     }
+   }
+   ```
+
+6. **Import styles:**
+   ```css
+   /* core/src/styles/tailwind.css */
+   @import './_new-component.css' layer(components);
+   ```
+
+### Adding Documentation Pages
+
+1. **Create MDX file:**
+   ```mdx
+   ---
+   title: New Component
+   ---
+   
+   # New Component
+   
+   Description of the component...
+   
+   ## Usage
+   
+   ```tsx
+   import { NewComponent } from '@polyms/core'
+   
+   <NewComponent>Content</NewComponent>
+   ```
+   ```
+
+2. **Auto-generated navigation:**
+   - File: `docs/src/pages/components/new-component.mdx`
+   - Auto-appears in sidebar under "Components" section
+   - Uses frontmatter `title` for label
+   - Supports nested folders for grouping
+
+3. **Live Examples:**
+   ```mdx
+   import { NewComponent } from '@polyms/core'
+   
+   <NewComponent>
+     Live example!
+   </NewComponent>
+   ```
+
+## Module Federation
+
+Core-UI uses Vite Module Federation for dynamic imports:
+
+```typescript
+// core/plugins/module-federation.plugin.ts
+export default {
+  name: 'core-ui',
+  filename: 'remoteEntry.js',
+  exposes: {
+    './Button': './src/button',
+    './Modal': './src/modal',
+    // ... all components
+  },
+  shared: ['react', 'react-dom'],
+}
+```
+
+This enables:
+- Dynamic component loading
+- Micro-frontend architecture
+- Version isolation
+- Code splitting
+
+## Best Practices
+
+### Performance
+
+1. **Memoization:**
+   ```tsx
+   const MemoizedComponent = React.memo(Component)
+   const memoizedValue = useMemo(() => computeExpensive(), [deps])
+   const memoizedCallback = useCallback(() => handleClick(), [deps])
+   ```
+
+2. **Lazy Loading:**
+   ```tsx
+   const LazyComponent = lazy(() => import('./Component'))
+   
+   <Suspense fallback={<Spinner />}>
+     <LazyComponent />
+   </Suspense>
+   ```
+
+3. **Avoid Re-renders:**
+   - Use `React.memo` for expensive components
+   - Split state to minimize update scope
+   - Use Zustand for global state (avoids Context re-renders)
+
+### Accessibility
+
+1. **Semantic HTML:**
+   ```tsx
+   <button type="button">Click</button>  // Not <div onClick>
+   <nav>...</nav>                        // Not <div>
+   <main>...</main>                      // Proper landmarks
+   ```
+
+2. **ARIA Attributes:**
+   ```tsx
+   <button aria-label="Close dialog" aria-expanded={isOpen}>
+   <div role="dialog" aria-modal="true" aria-labelledby="title">
+   ```
+
+3. **Keyboard Navigation:**
+   - All interactive elements must be keyboard accessible
+   - Tab order logical and predictable
+   - Focus visible (`:focus-visible` styles)
+
+### TypeScript
+
+1. **Strict Mode:**
+   - `strict: true` in tsconfig
+   - No `any` types (use `unknown` if needed)
+   - Explicit return types for exported functions
+
+2. **Generic Components:**
+   ```tsx
+   function GenericComponent<T>({ items }: { items: T[] }) {
+     return items.map(item => <div key={String(item)} />)
+   }
+   ```
+
+3. **Type Guards:**
+   ```tsx
+   function isString(value: unknown): value is string {
+     return typeof value === 'string'
+   }
+   ```
+
+## Component API Reference
+
+### Available Components
+
+| Component | Description | Key Props | Use Case |
+|-----------|-------------|-----------|----------|
+| `Alert` | Notification banner | `variant`, `dismissible` | Status messages, warnings |
+| `BottomSheet` | Mobile drawer from bottom | `open`, `onOpenChange` | Mobile actions, filters |
+| `Breadcrumb` | Navigation trail | `items`, `separator` | Page hierarchy |
+| `Button` | Clickable button | `variant`, `size`, `disabled` | Actions, forms |
+| `Field` | Form field wrapper | `label`, `error`, `required` | Form inputs with validation |
+| `Modal` | Dialog overlay | `open`, `onOpenChange` | Confirmations, forms |
+| `Offcanvas` | Side drawer | `placement`, `open` | Navigation, filters |
+| `Popover` | Floating content | `trigger`, `placement` | Tooltips, menus |
+| `Select` | Dropdown selector | `value`, `options`, `onChange` | Single/multi select |
+| `Switch` | Toggle control | `checked`, `onCheckedChange` | Settings, features |
+| `Tabs` | Tabbed interface | `value`, `onValueChange` | Content sections |
+| `Toast` | Temporary notification | `variant`, `duration` | Success, error messages |
+| `Tooltip` | Hover hint | `content`, `placement` | Help text |
+| `NumberField` | Numeric input | `min`, `max`, `step` | Quantities, prices |
+
+### Component Composition Pattern
+
+All complex components follow compound component pattern:
+
+```tsx
+// Modal Example
+<Modal>
+  <Modal.Trigger>Open</Modal.Trigger>
+  <Modal.Content>
+    <Modal.Header>Title</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+    <Modal.Footer>
+      <Modal.Close>Cancel</Modal.Close>
+      <Button>Confirm</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal>
+
+// Offcanvas Example
+<Offcanvas placement="right">
+  <Offcanvas.Trigger>Menu</Offcanvas.Trigger>
+  <Offcanvas.Content>
+    <Offcanvas.Close />
+    <nav>...</nav>
+  </Offcanvas.Content>
+</Offcanvas>
+
+// Tabs Example
+<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
+    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+  </Tabs.List>
+  <Tabs.Panel value="tab1">Content 1</Tabs.Panel>
+  <Tabs.Panel value="tab2">Content 2</Tabs.Panel>
+</Tabs>
+```
+
+## Complete Component Examples
+
+### Example 1: Simple Component (Button)
+
+```tsx
+// core/src/button/Button.tsx
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost'
+export type ButtonSize = 'sm' | 'md' | 'lg'
+
+export type ButtonProps = useRender.ComponentProps<'button'> & {
+  variant?: ButtonVariant
+  size?: ButtonSize
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function Button({
+  className,
+  variant = 'primary',
+  size = 'md',
+  render,
+  ...props
+}: ButtonProps) {
+  const element = useRender({
+    defaultTagName: 'button',
+    ref: props.ref,
+    render,
+    props: {
+      type: 'button',
+      ...props,
+      className: clsx(
+        'btn',
+        `btn-${variant}`,
+        `btn-${size}`,
+        props.disabled && 'btn-disabled',
+        className
+      ),
+    },
+  })
+
+  return element
+}
+```
+
+```tsx
+// core/src/button/index.ts
+export * from './Button'
+```
+
+```css
+/* core/src/styles/_button.css */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply rounded-lg font-medium transition-all duration-200;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500;
+    
+    &.btn-sm {
+      @apply h-8 px-3 text-sm;
+    }
+    
+    &.btn-md {
+      @apply h-10 px-4 text-base;
+    }
+    
+    &.btn-lg {
+      @apply h-12 px-6 text-lg;
+    }
+    
+    &.btn-primary {
+      @apply bg-primary-600 text-white;
+      @apply hover:bg-primary-700;
+      @apply active:bg-primary-800;
+    }
+    
+    &.btn-secondary {
+      @apply border border-slate-300 bg-white text-slate-900;
+      @apply hover:bg-slate-50;
+      @apply dark:border-slate-700 dark:bg-slate-800 dark:text-white;
+    }
+    
+    &.btn-danger {
+      @apply bg-red-600 text-white;
+      @apply hover:bg-red-700;
+    }
+    
+    &.btn-ghost {
+      @apply text-slate-700 hover:bg-slate-100;
+      @apply dark:text-slate-300 dark:hover:bg-slate-800;
+    }
+    
+    &.btn-disabled {
+      @apply cursor-not-allowed opacity-50;
+      @apply pointer-events-none;
+    }
+  }
+}
+```
+
+```tsx
+// core/src/button/Button.test.tsx
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it, vi } from 'vitest'
+import { Button } from './Button'
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+describe('Button', () => {
+  it('should render with default props', () => {
+    render(<Button>Click me</Button>)
+    
+    const button = screen.getByRole('button', { name: 'Click me' })
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveClass('btn', 'btn-primary', 'btn-md')
+  })
+  
+  it('should apply variant classes', () => {
+    render(<Button variant="secondary">Secondary</Button>)
+    
+    expect(screen.getByRole('button')).toHaveClass('btn-secondary')
+  })
+  
+  it('should handle click events', async () => {
+    const handleClick = vi.fn()
+    const user = userEvent.setup()
+    
+    render(<Button onClick={handleClick}>Click</Button>)
+    
+    await user.click(screen.getByRole('button'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+  
+  it('should be disabled when disabled prop is true', () => {
+    render(<Button disabled>Disabled</Button>)
+    
+    const button = screen.getByRole('button')
+    expect(button).toBeDisabled()
+    expect(button).toHaveClass('btn-disabled')
+  })
+})
+```
+
+### Example 2: Complex Compound Component (Modal)
+
+```tsx
+// core/src/modal/ModalRoot.tsx
+import * as Dialog from '@base-ui/react/Dialog'
+import { type ReactNode, createContext, useContext } from 'react'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ModalContextValue = {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}
+
+type ModalRootProps = {
+  children: ReactNode
+  open?: boolean
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+const ModalContext = createContext<ModalContextValue | null>(null)
+
+export function useModal() {
+  const context = useContext(ModalContext)
+  if (!context) {
+    throw new Error('Modal compound components must be used within Modal')
+  }
+  return context
+}
+
+export function ModalRoot({ children, open, defaultOpen, onOpenChange }: ModalRootProps) {
+  return (
+    <Dialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
+      {children}
+    </Dialog.Root>
+  )
+}
+```
+
+```tsx
+// core/src/modal/ModalTrigger.tsx
+import * as Dialog from '@base-ui/react/Dialog'
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ModalTriggerProps = useRender.ComponentProps<'button'>
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function ModalTrigger({ className, render, ...props }: ModalTriggerProps) {
+  const element = useRender({
+    defaultTagName: 'button',
+    ref: props.ref,
+    render,
+    props: {
+      ...props,
+      className: clsx('modal-trigger', className),
+    },
+  })
+
+  return <Dialog.Trigger render={() => element} />
+}
+```
+
+```tsx
+// core/src/modal/ModalContent.tsx
+import * as Dialog from '@base-ui/react/Dialog'
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ModalContentProps = useRender.ComponentProps<'div'>
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function ModalContent({ className, render, children, ...props }: ModalContentProps) {
+  const element = useRender({
+    defaultTagName: 'div',
+    ref: props.ref,
+    render,
+    props: {
+      ...props,
+      className: clsx('modal-content', className),
+    },
+  })
+
+  return (
+    <Dialog.Portal>
+      <Dialog.Backdrop className="modal-backdrop" />
+      <Dialog.Popup render={() => element}>{children}</Dialog.Popup>
+    </Dialog.Portal>
+  )
+}
+```
+
+```tsx
+// core/src/modal/index.ts
+import { ModalClose } from './ModalClose'
+import { ModalContent } from './ModalContent'
+import { ModalRoot } from './ModalRoot'
+import { ModalTrigger } from './ModalTrigger'
+
+export const Modal = Object.assign(ModalRoot, {
+  Trigger: ModalTrigger,
+  Content: ModalContent,
+  Close: ModalClose,
+})
+
+export type { ModalRootProps } from './ModalRoot'
+```
+
+### Example 3: Form Field with Validation
+
+```tsx
+// core/src/field/FieldRoot.tsx
+import { Field as BaseField } from '@base-ui/react/Field'
+import { type ReactNode } from 'react'
+import { FieldProvider } from './FieldContext'
+import { useValidation } from './useValidation'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ValidationRule = {
+  required?: boolean | string
+  pattern?: { value: RegExp; message: string }
+  min?: { value: number; message: string }
+  max?: { value: number; message: string }
+  validate?: (value: unknown) => string | true
+}
+
+export type FieldRootProps = {
+  children: ReactNode
+  name: string
+  label?: string
+  rules?: ValidationRule
+  defaultValue?: string
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function FieldRoot({ children, name, label, rules, defaultValue }: FieldRootProps) {
+  const validation = useValidation(name, rules)
+
+  return (
+    <BaseField.Root name={name} defaultValue={defaultValue}>
+      <FieldProvider value={{ name, label, validation }}>{children}</FieldProvider>
+    </BaseField.Root>
+  )
+}
+```
+
+```tsx
+// core/src/field/FieldControl.tsx
+import { Field as BaseField } from '@base-ui/react/Field'
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+import { useFieldContext } from './FieldContext'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type FieldControlProps = useRender.ComponentProps<'input'>
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function FieldControl({ className, render, ...props }: FieldControlProps) {
+  const { validation } = useFieldContext()
+
+  const element = useRender({
+    defaultTagName: 'input',
+    ref: props.ref,
+    render,
+    props: {
+      ...props,
+      className: clsx(
+        'field-control',
+        validation.error && 'field-error',
+        className
+      ),
+      'aria-invalid': !!validation.error,
+    },
+  })
+
+  return <BaseField.Control render={() => element} />
+}
+```
+
+## Naming Conventions
+
+### File Naming
+
+**Components:**
+- Component files: `PascalCase.tsx` (e.g., `Button.tsx`, `ModalContent.tsx`)
+- Test files: `PascalCase.test.tsx` (e.g., `Button.test.tsx`)
+- Context files: `PascalCase + Context.tsx` (e.g., `FieldContext.tsx`)
+- Store files: `kebab-case.store.ts` (e.g., `modal.store.ts`)
+- Hook files: `useCamelCase.ts` (e.g., `useValidation.ts`)
+- Index files: `index.ts` (barrel exports)
+
+**Styles:**
+- Component styles: `_kebab-case.css` (e.g., `_button.css`, `_modal.css`)
+- Global styles: `kebab-case.css` (e.g., `tailwind.css`, `globals.css`)
+
+**Folders:**
+- Component folders: `kebab-case` (e.g., `button/`, `modal/`, `number-field/`)
+
+### Variable Naming
+
+```tsx
+// ✅ CORRECT
+const userName = 'John'                    // camelCase for variables
+const MAX_ITEMS = 10                       // UPPER_CASE for constants
+type ButtonProps = {}                      // PascalCase for types
+interface UserData {}                      // PascalCase for interfaces
+function handleClick() {}                  // camelCase for functions
+export function Button() {}                // PascalCase for components
+const useCustomHook = () => {}             // camelCase with 'use' prefix
+
+// ❌ WRONG
+const UserName = 'John'                    // Not PascalCase for variables
+const max_items = 10                       // Not snake_case
+type buttonProps = {}                      // Not camelCase for types
+function HandleClick() {}                  // Not PascalCase for functions
+const customHook = () => {}                // Missing 'use' prefix
+```
+
+### CSS Class Naming
+
+```css
+/* Component-specific classes: kebab-case */
+.btn { }
+.modal-backdrop { }
+.field-control { }
+
+/* Modifier classes: component-modifier */
+.btn-primary { }
+.btn-disabled { }
+.modal-open { }
+
+/* State classes: is-/has- prefix */
+.is-active { }
+.is-disabled { }
+.has-error { }
+```
+
+## Props Typing Patterns
+
+### Extending HTML Attributes
+
+```tsx
+// Method 1: Using useRender.ComponentProps (RECOMMENDED)
+import { useRender } from '@base-ui/react/use-render'
+
+type ButtonProps = useRender.ComponentProps<'button'> & {
+  variant?: 'primary' | 'secondary'
+}
+
+// Method 2: Using React types
+import type { ComponentPropsWithRef } from 'react'
+
+type ButtonProps = ComponentPropsWithRef<'button'> & {
+  variant?: 'primary' | 'secondary'
+}
+```
+
+### Discriminated Unions
+
+```tsx
+// Single select
+type SelectProps = {
+  multiple?: false
+  value?: string
+  onChange?: (value: string) => void
+} | {
+  multiple: true
+  value?: string[]
+  onChange?: (value: string[]) => void
+}
+
+// Usage
+<Select value="option1" onChange={(val) => {
+  // val is string
+}} />
+
+<Select multiple value={['a', 'b']} onChange={(val) => {
+  // val is string[]
+}} />
+```
+
+### Generic Props
+
+```tsx
+type ListProps<T> = {
+  items: T[]
+  renderItem: (item: T) => ReactNode
+  keyExtractor: (item: T) => string
+}
+
+function List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={keyExtractor(item)}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  )
+}
+
+// Usage
+<List
+  items={users}
+  renderItem={(user) => <div>{user.name}</div>}
+  keyExtractor={(user) => user.id}
+/>
+```
+
+### Polymorphic Components
+
+```tsx
+type PolymorphicProps<C extends React.ElementType> = {
+  as?: C
+  children: React.ReactNode
+} & React.ComponentPropsWithoutRef<C>
+
+function Box<C extends React.ElementType = 'div'>({
+  as,
+  children,
+  ...props
+}: PolymorphicProps<C>) {
+  const Component = as || 'div'
+  return <Component {...props}>{children}</Component>
+}
+
+// Usage
+<Box>Default div</Box>
+<Box as="section">Section element</Box>
+<Box as={Link} to="/home">Link component</Box>
+```
+
+## State Management Decision Tree
+
+```
+Question: Does the state need to be shared?
+│
+├─ NO → Use useState
+│   └─ Component-local state (form inputs, toggles, UI state)
+│
+├─ YES → Is it shared within a component tree only?
+│   │
+│   ├─ YES → Use Context + Custom Hook
+│   │   └─ Form state, theme, accordion group
+│   │
+│   └─ NO → Is it complex with frequent updates?
+│       │
+│       ├─ YES → Use Zustand
+│       │   └─ Modal management, toast queue, global UI state
+│       │
+│       └─ NO → Use Context
+│           └─ User info, auth state, feature flags
+```
+
+**Examples:**
+
+```tsx
+// 1. Local state - useState
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>
+}
+
+// 2. Tree-scoped state - Context
+function TabsRoot({ children }: { children: ReactNode }) {
+  const [activeTab, setActiveTab] = useState('tab1')
+  
+  return (
+    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+      {children}
+    </TabsContext.Provider>
+  )
+}
+
+// 3. Global complex state - Zustand
+const useModalStore = create<ModalStore>((set) => ({
+  modals: [],
+  open: (id, props) => set((state) => ({ 
+    modals: [...state.modals, { id, props }] 
+  })),
+  close: (id) => set((state) => ({ 
+    modals: state.modals.filter(m => m.id !== id) 
+  })),
+}))
+```
+
+## Error Handling
+
+### Error Boundaries
+
+```tsx
+// components/ErrorBoundary.tsx
+import { Component, type ReactNode } from 'react'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type ErrorBoundaryProps = {
+  children: ReactNode
+  fallback?: (error: Error) => ReactNode
+}
+
+type ErrorBoundaryState = {
+  hasError: boolean
+  error: Error | null
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      if (this.props.fallback) {
+        return this.props.fallback(this.state.error!)
+      }
+      
+      return (
+        <div className="error-boundary">
+          <h2>Something went wrong</h2>
+          <details>
+            <summary>Error details</summary>
+            <pre>{this.state.error?.message}</pre>
+          </details>
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
+```
+
+### Async Error Handling
+
+```tsx
+// Try-catch in async functions
+async function fetchData() {
+  try {
+    const response = await fetch('/api/data')
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Failed to fetch data:', error)
+    // Handle error (show toast, fallback UI, etc.)
+    throw error // Re-throw if parent needs to handle
+  }
+}
+
+// React Query pattern (recommended for data fetching)
+import { useQuery } from '@tanstack/react-query'
+
+function UserProfile({ userId }: { userId: string }) {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['user', userId],
+    queryFn: () => fetchUser(userId),
+  })
+
+  if (isLoading) return <Spinner />
+  if (error) return <ErrorMessage error={error} />
+  if (!data) return null
+
+  return <div>{data.name}</div>
+}
+```
+
+## Export Patterns
+
+### Barrel Exports (index.ts)
+
+```tsx
+// ✅ CORRECT - Named exports for tree-shaking
+// core/src/button/index.ts
+export { Button } from './Button'
+export type { ButtonProps, ButtonVariant, ButtonSize } from './Button'
+
+// ✅ CORRECT - Compound component pattern
+// core/src/modal/index.ts
+import { ModalClose } from './ModalClose'
+import { ModalContent } from './ModalContent'
+import { ModalRoot } from './ModalRoot'
+import { ModalTrigger } from './ModalTrigger'
+
+export const Modal = Object.assign(ModalRoot, {
+  Trigger: ModalTrigger,
+  Content: ModalContent,
+  Close: ModalClose,
+})
+
+export type { ModalRootProps } from './ModalRoot'
+
+// ❌ WRONG - Default exports harder to refactor
+export default Button
+
+// ❌ WRONG - Export * loses type information
+export * from './Button'
+```
+
+### Main Package Exports
+
+```tsx
+// core/src/index.ts
+export * from './alert'
+export * from './button'
+export * from './modal'
+export * from './field'
+// ... all components
+
+// Export utility types
+export type { useRender } from '@base-ui/react/use-render'
+```
+
+## Common Patterns
+
+### Compound Components with Context
+
+```tsx
+// Step 1: Create context
+const ComponentContext = createContext<ComponentContextValue | null>(null)
+
+// Step 2: Create custom hook
+export function useComponent() {
+  const context = useContext(ComponentContext)
+  if (!context) {
+    throw new Error('useComponent must be used within Component')
+  }
+  return context
+}
+
+// Step 3: Create root component
+export function ComponentRoot({ children }: { children: ReactNode }) {
+  const [state, setState] = useState(initialState)
+  
+  return (
+    <ComponentContext.Provider value={{ state, setState }}>
+      {children}
+    </ComponentContext.Provider>
+  )
+}
+
+// Step 4: Create sub-components
+export function ComponentItem() {
+  const { state } = useComponent()
+  return <div>{state}</div>
+}
+
+// Step 5: Export as compound component
+export const Component = Object.assign(ComponentRoot, {
+  Item: ComponentItem,
+})
+```
+
+### Context + Custom Hook
+
+```tsx
+// ComponentContext.tsx
+import { createContext, useContext } from 'react'
+
+type ComponentContextValue = {
+  isOpen: boolean
+  toggle: () => void
+}
+
+const ComponentContext = createContext<ComponentContextValue | null>(null)
+
+export function useComponent() {
+  const context = useContext(ComponentContext)
+  if (!context) {
+    throw new Error('useComponent must be used within ComponentProvider')
+  }
+  return context
+}
+
+export const ComponentProvider = ComponentContext.Provider
+```
+
+### Zustand Store
+
+```tsx
+// component.store.ts
+import { create } from 'zustand'
+
+type ComponentStore = {
+  count: number
+  increment: () => void
+  decrement: () => void
+}
+
+export const useComponentStore = create<ComponentStore>((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+  decrement: () => set((state) => ({ count: state.count - 1 })),
+}))
+```
+
+### Floating UI Integration
+
+```tsx
+import { useFloating, offset, flip } from '@floating-ui/react'
+
+export function Popover() {
+  const { refs, floatingStyles } = useFloating({
+    placement: 'bottom-start',
+    middleware: [offset(8), flip()],
+  })
+  
+  return (
+    <>
+      <button ref={refs.setReference}>Trigger</button>
+      <div ref={refs.setFloating} style={floatingStyles}>
+        Popover content
+      </div>
+    </>
+  )
+}
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Import errors:**
+   - Check `package.json` dependencies
+   - Run `pnpm install` to sync packages
+   - Verify `tsconfig.json` paths
+
+2. **Build failures:**
+   - Clear cache: `rm -rf node_modules/.vite`
+   - Rebuild: `npx nx build core --skip-nx-cache`
+   - Check Vite config for plugin errors
+
+3. **Test failures:**
+   - Portal components need `document.querySelector()`
+   - Mock `window.matchMedia` for responsive tests
+   - Use `waitFor` for async updates
+
+4. **Style issues:**
+   - Check Tailwind config in `tailwind.css`
+   - Verify CSS import order
+   - Use `--color-slate-*` not `--color-neutral-*`
+
+### Debug Tips
+
+```tsx
+// Debug render cycles
+useEffect(() => {
+  console.log('Component rendered', props)
+})
+
+// Debug state changes
+const [state, setState] = useState(initial)
+useEffect(() => {
+  console.log('State changed:', state)
+}, [state])
+
+// Debug Floating UI
+const { refs, floatingStyles, middlewareData } = useFloating()
+console.log('Middleware data:', middlewareData)
+```
+
+## Important Notes
+
+- **React 19**: Use regular `ref` prop (NO `forwardRef`)
+- **TypeScript Strict**: All types must be properly defined
+- **Accessibility**: WCAG 2.1 AA compliant required
+- **Color System**: Use `--color-slate-*` for grays (NEVER `--color-neutral-*`)
+- **Virtual Modules**: `virtual:mdx-navigation` auto-generated from MDX files
+- **Editor**: Biome auto-format on save (Cmd+S)
+- **Testing**: Portal elements require special DOM queries
+- **Layouts**: Use `staticData.layout = 'landing'` to disable sidebar
+- **Code Format**: 110-character separators with exact format
+
+## Resources
+
+- **GitHub Copilot Instructions**: `.github/copilot-instructions.md` (MUST READ for full context)
+- Base UI: https://base-ui.com
+- Tailwind CSS: https://tailwindcss.com
+- TanStack Router: https://tanstack.com/router
+- Floating UI: https://floating-ui.com
+- Vitest: https://vitest.dev
+- Nx: https://nx.dev
+- Zustand: https://github.com/pmndrs/zustand
+- React 19 Docs: https://react.dev
+
+## See Also
+
+For complete project guidelines and AI coding agent instructions, see:
+- `.github/copilot-instructions.md` - Comprehensive coding guidelines
+- Root `llms.txt` - Workspace-level context
+- Component READMEs - Component-specific documentation
