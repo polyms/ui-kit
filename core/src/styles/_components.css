@@ -7,6 +7,7 @@
 @import './_breadcrumb.css' layer(components);
 @import './_button.css';
 @import './_card.css' layer(components);
+@import './_collapsible.css' layer(components);
 @import './_field.css' layer(components);
 @import './_link.css' layer(components);
 @import './_loading.css' layer(components);
