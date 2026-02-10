@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-const variants = ['ghost', 'primary', 'success', 'warning', 'danger', 'dark', 'light'] as const
+const variants = ['ghost', 'primary', 'success', 'info', 'warning', 'danger', 'dark', 'light'] as const
 
 export default function ButtonVariants() {
   const [rounded, setRounded] = useState(true)

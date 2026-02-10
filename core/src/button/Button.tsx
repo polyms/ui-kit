@@ -6,7 +6,7 @@ import type { FC } from 'react'
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
-export type ButtonVariant = 'primary' | 'success' | 'warning' | 'danger' | 'dark' | 'light'
+export type ButtonVariant = 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'dark' | 'light'
 
 export interface ButtonProps extends useRender.ComponentProps<'button'> {
   size?: ButtonSize
@@ -22,6 +22,7 @@ export interface ButtonProps extends useRender.ComponentProps<'button'> {
 const variantMap = {
   primary: 'btn-primary',
   success: 'btn-success',
+  info: 'btn-info',
   light: 'btn-light',
   dark: 'btn-dark',
   danger: 'btn-danger',

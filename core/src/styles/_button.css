@@ -113,6 +113,7 @@
 
     &.btn-primary,
     &.btn-success,
+    &.btn-info,
     &.btn-danger,
     &.btn-warning {
       --btn-color: #fff;
@@ -147,6 +148,16 @@
 
       &.outlined {
         --btn-border-active-color: var(--color-success-700);
+      }
+    }
+
+    &.btn-info {
+      --btn-variant-color: var(--color-info-600);
+
+      --btn-bg-active-color: var(--color-info-600);
+
+      &.outlined {
+        --btn-border-active-color: var(--color-info-600);
       }
     }
 

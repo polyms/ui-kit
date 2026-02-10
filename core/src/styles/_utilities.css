@@ -45,3 +45,127 @@
 .bg-light {
   background-color: var(--color-slate-50);
 }
+
+/* ──────────────────────────────────────────────────────────────────────────────────────────────────────────
+ * Interactive State Utilities
+ * ────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+/* Interactive Items (for nav-item, list-item, menu-item, etc.) */
+.item-primary {
+  color: var(--color-primary-600);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-primary-700);
+      background-color: var(--color-primary-100);
+    }
+  }
+
+  &:active {
+    color: var(--color-primary-700);
+    background-color: var(--color-primary-200);
+  }
+}
+
+.item-success {
+  color: var(--color-success-600);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-success-700);
+      background-color: var(--color-success-100);
+    }
+  }
+
+  &:active {
+    color: var(--color-success-700);
+    background-color: var(--color-success-200);
+  }
+}
+
+.item-info {
+  color: var(--color-info-600);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-info-700);
+      background-color: var(--color-info-100);
+    }
+  }
+
+  &:active {
+    color: var(--color-info-700);
+    background-color: var(--color-info-200);
+  }
+}
+
+.item-warning {
+  color: var(--color-warning-500);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-warning-600);
+      background-color: var(--color-warning-100);
+    }
+  }
+
+  &:active {
+    color: var(--color-warning-600);
+    background-color: var(--color-warning-200);
+  }
+}
+
+.item-danger {
+  color: var(--color-danger-500);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-danger-600);
+      background-color: var(--color-danger-100);
+    }
+  }
+
+  &:active {
+    color: var(--color-danger-600);
+    background-color: var(--color-danger-200);
+  }
+}
+
+.item-light {
+  color: var(--color-slate-600);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-slate-900);
+      background-color: var(--color-slate-100);
+    }
+  }
+
+  &:active {
+    color: var(--color-slate-900);
+    background-color: var(--color-slate-200);
+  }
+}
+
+.item-dark {
+  color: var(--color-slate-300);
+  background-color: transparent;
+
+  &:hover {
+    @media (hover: hover) {
+      color: #fff;
+      background-color: var(--color-slate-700);
+    }
+  }
+
+  &:active {
+    color: #fff;
+    background-color: var(--color-slate-800);
+  }
+}
