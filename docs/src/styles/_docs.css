@@ -6,9 +6,11 @@
 
   h1,
   h2,
-  h3 {
-    @apply relative;
+  h3,
+  h4 {
+    @apply relative flex items-center;
   }
+
   /* 
   h1 + p,
   h2 + p,
