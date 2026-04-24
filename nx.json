@@ -82,5 +82,6 @@
       "pattern": "{projectName}@{version}"
     }
   },
-  "defaultBase": "origin/main"
+  "defaultBase": "origin/main",
+  "analytics": true
 }
