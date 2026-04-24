@@ -118,6 +118,19 @@ export function AppSidebar({ ref }: AppSidebarProps) {
         onMouseLeave={hideToggleSidebar}
         tabIndex={-1}
       >
+        {(isShowToggleSidebar || !isShowSidebar) && (
+          <Icon
+            className={clsx('sidebar-toggle-icon link link-light')}
+            icon={CircleArrowLeftDoubleIcon}
+            onClick={event => {
+              event.stopPropagation()
+              toggleSidebar()
+            }}
+            size={28}
+            strokeWidth={1.5}
+          />
+        )}
+
         <aside
           className='sidebar-content'
           onClick={event => {
@@ -126,10 +139,10 @@ export function AppSidebar({ ref }: AppSidebarProps) {
           }}
           onKeyDown={event => event.stopPropagation()}
         >
-          {isShowToggleSidebar && (
+          {/* {isShowToggleSidebar && (
             <Icon
               className={clsx(
-                'link link-light absolute -end-3.5 top-16 z-50 hidden shrink-0 fill-white transition-transform md:block',
+                'link link-light absolute -inset-e-3.5 top-16 z-50 hidden shrink-0 fill-white transition-transform md:block',
                 !isShowSidebar && 'rotate-180'
               )}
               icon={CircleArrowLeftDoubleIcon}
@@ -137,7 +150,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
               size={28}
               strokeWidth={1.5}
             />
-          )}
+          )} */}
 
           <div className='relative mb-4 px-4'>
             <Field>

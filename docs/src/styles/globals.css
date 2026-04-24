@@ -29,6 +29,7 @@ body {
         grid-template-areas:
           'name navigation'
           'app-sidebar main-content';
+        transition: grid-template-columns 220ms ease-out;
       }
     }
 
@@ -40,11 +41,31 @@ body {
   #app-name {
     grid-area: name;
 
-    @apply border-r border-slate-300 bg-slate-50/80;
+    @apply hidden h-14 items-center gap-2 border-r border-slate-300 bg-slate-50/80 px-4 tracking-wide md:flex;
+    transition:
+      width 220ms ease-out,
+      padding 150ms ease-out,
+      gap 150ms ease-out;
 
     @media (min-width: 768px) {
       position: sticky;
       top: 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .sidebar-closed #root:not(.landing) {
+      grid-template-columns: 1rem 1fr;
+    }
+
+    .sidebar-closed #app-name {
+      @apply justify-center border-e border-slate-300 px-0!;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .sidebar-closed #app-name > * {
+      display: none;
     }
   }
 
@@ -83,7 +104,9 @@ body {
     /* Desktop: in-grid + collapsible + slate background + dashed border */
     @media (min-width: 768px) {
       grid-area: app-sidebar;
+      position: relative;
       @apply border-e border-slate-300 bg-slate-50/80;
+      transition: width 220ms ease-out;
       /* position: sticky;
     top: 56px;
     height: calc(100dvh - 56px);
@@ -93,6 +116,17 @@ body {
         @apply w-4;
       }
     }
+  }
+
+  .sidebar-toggle-icon {
+    right: 0;
+    transform: translateX(50%);
+    transform-origin: center;
+    @apply absolute top-16 z-50 hidden shrink-0 rounded-full bg-white text-slate-500 shadow-sm transition-transform md:block;
+  }
+
+  .sidebar-closed .sidebar-toggle-icon {
+    transform: translateX(50%) rotate(180deg);
   }
 
   .sidebar-content {

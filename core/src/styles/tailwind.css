@@ -36,5 +36,5 @@
 @source inline('aspect-{square,video,auto}');
 @source inline('{skeleton}');
 @source inline('shadow-{base,raised,overlay,sticky,popout,bottom}');
-@source inline('link-{primary,light,dark}');
+@source inline('link,link-{primary,light,dark}');
 @source inline('container{-5xl,}');

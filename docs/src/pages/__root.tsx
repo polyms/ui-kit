@@ -21,10 +21,10 @@ const AppNavigation = ({ onToggleSidebar }: NavigationProps) => {
 
 const Name = () => {
   return (
-    <div className='hidden h-14 items-center gap-2 px-4 tracking-wide md:flex' id='app-name'>
-      <img alt='logo' className='h-10' src='/favicon.png' />
+    <div id='app-name'>
+      <img alt='logo' className='h-10 shrink-0' src='/favicon.png' />
       <strong className='text-xl'>Polyms</strong>
-      <span className='badge badge-primary rounded-full px-4 font-bold'>Design system</span>
+      <span className='badge badge-primary whitespace-nowrap rounded-full px-4 font-bold'>Design system</span>
     </div>
   )
 }
