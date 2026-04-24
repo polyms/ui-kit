@@ -101,3 +101,7 @@ vitest.config.*.timestamp*
 .npmrc
 doc_build/
 **/coverage/
+.pnpm-store
+
+.claude/worktrees
+.claude/settings.local.json
