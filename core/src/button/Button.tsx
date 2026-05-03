@@ -1,9 +1,12 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import { type FC, useEffect, useState } from 'react'
+import { type FC, lazy, Suspense, useEffect, useState } from 'react'
 
-import { Tooltip } from '../tooltip'
+const TooltipLazy = lazy(async () => {
+  const { Tooltip } = await import('../tooltip')
+  return { default: Tooltip }
+})
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -78,7 +81,11 @@ export const Button: FC<ButtonProps> = ({
   })
 
   if (useRichTooltip && mounted) {
-    return <Tooltip title={tooltip}>{button}</Tooltip>
+    return (
+      <Suspense fallback={button}>
+        <TooltipLazy title={tooltip}>{button}</TooltipLazy>
+      </Suspense>
+    )
   }
 
   return button

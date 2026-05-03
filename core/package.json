@@ -1,6 +1,6 @@
 {
   "name": "@polyms/core-ui",
-  "version": "0.3.89",
+  "version": "0.3.90",
   "type": "module",
   "main": "./index.mjs",
   "types": "./index.d.ts",
