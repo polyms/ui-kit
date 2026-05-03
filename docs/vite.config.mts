@@ -15,15 +15,6 @@ export default defineConfig({
   root: __dirname,
   // base: '/',
   cacheDir: '../node_modules/.vite/docs',
-  optimizeDeps: {
-    rolldownOptions: {
-      plugins: [
-        esmExternalRequirePlugin({
-          external: [/^react(-dom)?(\/.+)?$/],
-        }),
-      ],
-    },
-  },
   server: {
     port: 4200,
     host: 'localhost',
