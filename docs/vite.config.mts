@@ -5,7 +5,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import tailwindcssVite from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, esmExternalRequirePlugin } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
 import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin'
@@ -15,6 +15,15 @@ export default defineConfig({
   root: __dirname,
   // base: '/',
   cacheDir: '../node_modules/.vite/docs',
+  optimizeDeps: {
+    rolldownOptions: {
+      plugins: [
+        esmExternalRequirePlugin({
+          external: [/^react(-dom)?(\/.+)?$/],
+        }),
+      ],
+    },
+  },
   server: {
     port: 4200,
     host: 'localhost',
@@ -47,6 +56,13 @@ export default defineConfig({
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
+    },
+    rolldownOptions: {
+      plugins: [
+        esmExternalRequirePlugin({
+          external: [/^react(-dom)?(\/.+)?$/],
+        }),
+      ],
     },
   },
   // test: {

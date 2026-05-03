@@ -2,7 +2,7 @@ import path from 'node:path'
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
-import { defineConfig, type UserConfig } from 'vite'
+import { defineConfig, esmExternalRequirePlugin, type UserConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 import pkg from './package.json'
@@ -128,9 +128,15 @@ export default defineConfig(async ({ mode }) => {
         // Don't forget to update your package.json as well.
         formats: ['es' as const],
       },
-      rollupOptions: {
-        // Externalize deps that shouldn't be bundled into the library.
-        external: ['react', 'react-dom', 'react/jsx-runtime', 'use-sync-external-store', 'zustand'],
+      // Rolldown preserves `require()` for externals; browser bundles need `import` (see rolldown.rs bundling-cjs).
+      // Keep react out of top-level `external` here — handled by esmExternalRequirePlugin's own list.
+      rolldownOptions: {
+        plugins: [
+          esmExternalRequirePlugin({
+            external: [/^react(-dom)?(\/.+)?$/],
+          }),
+        ],
+        external: ['use-sync-external-store', 'zustand'],
         treeshake: true,
         output: {
           entryFileNames: '[name].mjs',
