@@ -8,7 +8,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test ui",
+    "test": "nx test core",
     "dev": "nx serve docs",
     "release": "nx release version patch --projects=core",
     "lint": "biome lint .",

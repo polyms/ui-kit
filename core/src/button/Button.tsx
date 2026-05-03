@@ -1,7 +1,9 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import type { FC } from 'react'
+import { type FC, useEffect, useState } from 'react'
+
+import { Tooltip } from '../tooltip'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -15,6 +17,7 @@ export interface ButtonProps extends useRender.ComponentProps<'button'> {
   rounded?: boolean
   icon?: boolean
   active?: boolean
+  tooltip?: string
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -39,9 +42,20 @@ export const Button: FC<ButtonProps> = ({
   rounded,
   icon,
   active,
+  tooltip,
+  title,
   render,
   ...props
 }) => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const useRichTooltip = Boolean(tooltip)
+  const resolvedTitle = useRichTooltip ? (mounted ? undefined : tooltip) : title
+
   const typeValue: React.ButtonHTMLAttributes<HTMLButtonElement>['type'] = render ? undefined : 'button'
 
   const defaultProps = {
@@ -54,10 +68,18 @@ export const Button: FC<ButtonProps> = ({
     }),
     'data-slot': 'button',
     type: typeValue,
+    ...(resolvedTitle !== undefined && resolvedTitle !== '' ? { title: resolvedTitle } : {}),
   }
-  return useRender({
+
+  const button = useRender({
     defaultTagName: 'button',
     props: mergeProps<'button'>(defaultProps, props),
     render,
   })
+
+  if (useRichTooltip && mounted) {
+    return <Tooltip title={tooltip}>{button}</Tooltip>
+  }
+
+  return button
 }

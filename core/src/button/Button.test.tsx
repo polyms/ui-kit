@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
+import { renderToString } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 import { Button } from '../button'
 
@@ -107,5 +108,35 @@ describe('Button', () => {
     const ref = { current: null }
     render(<Button ref={ref}>Ref Button</Button>)
     expect(ref.current).toBeInstanceOf(HTMLButtonElement)
+  })
+
+  it('SSR maps tooltip onto native title', () => {
+    const html = renderToString(
+      <Button tooltip='Mẹo nhanh' type='button'>
+        Lưu
+      </Button>
+    )
+    expect(html).toContain('title="Mẹo nhanh"')
+  })
+
+  it('removes native title and uses Tooltip after mount when tooltip is set', async () => {
+    render(
+      <Button tooltip='Mẹo nhanh' type='button'>
+        Lưu
+      </Button>
+    )
+    const btn = screen.getByRole('button', { name: /lưu/i })
+    await waitFor(() => {
+      expect(btn).not.toHaveAttribute('title')
+    })
+  })
+
+  it('keeps explicit title when tooltip is not set', () => {
+    render(
+      <Button title='Chỉ title' type='button'>
+        Đóng
+      </Button>
+    )
+    expect(screen.getByRole('button', { name: /đóng/i })).toHaveAttribute('title', 'Chỉ title')
   })
 })

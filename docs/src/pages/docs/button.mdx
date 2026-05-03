@@ -34,11 +34,16 @@ apis:
     default: <button/>
     values: ReactElement | (props, state) => ReactNode
     description: Overrides the default button element. Pass a React element (e.g., <Link to="..." />) or a render function for advanced prop merging and state access.
+  - name: tooltip
+    default: '-'
+    values: string
+    description: Progressive enhancement for short hints. Server HTML and the first client paint use the native title attribute; after mount the attribute is removed and the Tooltip component handles hover/focus with floating UI.
 ---
 
 import Story from './-views/button/ButtonDefault.tsx'
 import code from './-views/button/ButtonDefault.tsx?raw'
 import Sizes from './-views/button/ButtonSizes.tsx'
+import ButtonTooltip from './-views/button/ButtonTooltip.tsx'
 import Variants from './-views/button/ButtonVariants.tsx'
 
 Trigger an action or event, such as submitting a Form, opening a Dialog, canceling an action, or performing a delete operation in React. This component is based on the [WAI-ARIA Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/).
@@ -66,6 +71,22 @@ Buttons come in 7 different sizes to fit various use cases. The default size pro
 Buttons support multiple visual styles for different semantic meanings and contexts. Each variant can be rendered in both default and outlined styles.
 
 <Variants/ >
+
+## Tooltip
+
+Pass **`tooltip`** for a short hint. During SSR and the first client render, the same text is applied as the native **`title`** attribute so HTML remains useful without JavaScript. After hydration, **`title`** is cleared and the library **`Tooltip`** wraps the button so the hint uses the design-system popup (positioning, delay, styling).
+
+Prefer **`tooltip`** over a manual **`title`** when you want that behavior. If you only need the browser default tooltip and no floating UI, use **`title`** alone.
+
+```tsx
+import { Button } from '@polyms/core'
+
+<Button tooltip="Save changes to the server" variant="primary">
+  Save
+</Button>
+```
+
+<ButtonTooltip />
 
 ## API Reference
 
