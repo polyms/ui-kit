@@ -38,8 +38,8 @@
 
 .badge-info {
   --badge-border: var(--color-info-600);
-  --badge-bg: var(--color-info-50);
-  --badge-color: var(--color-info-700);
+  --badge-bg: color-mix(in oklab, var(--color-info) 10%, transparent);
+  --badge-color: var(--color-info-600);
 }
 
 .badge-warning {

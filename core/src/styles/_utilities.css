@@ -52,19 +52,17 @@
 
 /* Interactive Items (for nav-item, list-item, menu-item, etc.) */
 .item-primary {
-  color: var(--color-primary-600);
   background-color: transparent;
 
   &:hover {
     @media (hover: hover) {
-      color: var(--color-primary-700);
-      background-color: var(--color-primary-100);
+      @apply bg-primary-500/10 text-primary-700;
     }
   }
 
-  &:active {
-    color: var(--color-primary-700);
-    background-color: var(--color-primary-200);
+  &:active,
+  &.active {
+    @apply bg-primary-500/10 text-primary-700;
   }
 }
 
@@ -79,7 +77,8 @@
     }
   }
 
-  &:active {
+  &:active,
+  &.active {
     color: var(--color-success-700);
     background-color: var(--color-success-200);
   }
@@ -91,14 +90,13 @@
 
   &:hover {
     @media (hover: hover) {
-      color: var(--color-info-700);
-      background-color: var(--color-info-100);
+      @apply bg-info-500/5 text-info-600;
     }
   }
 
-  &:active {
-    color: var(--color-info-700);
-    background-color: var(--color-info-200);
+  &:active,
+  &.active {
+    @apply bg-info-500/5 text-info-600;
   }
 }
 
@@ -113,7 +111,8 @@
     }
   }
 
-  &:active {
+  &:active,
+  &.active {
     color: var(--color-warning-600);
     background-color: var(--color-warning-200);
   }
@@ -130,7 +129,8 @@
     }
   }
 
-  &:active {
+  &:active,
+  &.active {
     color: var(--color-danger-600);
     background-color: var(--color-danger-200);
   }
@@ -147,7 +147,8 @@
     }
   }
 
-  &:active {
+  &:active,
+  &.active {
     color: var(--color-slate-900);
     background-color: var(--color-slate-200);
   }
@@ -164,7 +165,8 @@
     }
   }
 
-  &:active {
+  &:active,
+  &.active {
     color: #fff;
     background-color: var(--color-slate-800);
   }
