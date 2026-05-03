@@ -48,13 +48,6 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
-    rolldownOptions: {
-      plugins: [
-        esmExternalRequirePlugin({
-          external: [/^react(-dom)?(\/.+)?$/],
-        }),
-      ],
-    },
   },
   // test: {
   //   watch: false,
