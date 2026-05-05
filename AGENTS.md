@@ -8,10 +8,10 @@ File **nguồn chính** cho Cursor, Claude, các IDE tích hợp AI, và bất k
 
 ## Tổng quan
 
-| Khu vực | Vai trò |
-|---------|---------|
+| Khu vực | Vai trò                                                                                                    |
+| ------- | ---------------------------------------------------------------------------------------------------------- |
 | `core/` | Component tái sử dụng + style; build Vite → `dist/core`, package **`@polyms/core-ui`** (theo metadata Nx). |
-| `docs/` | Site tài liệu: **TanStack Router**, **MDX**, demo live. |
+| `docs/` | Site tài liệu: **TanStack Router**, **MDX**, demo live.                                                    |
 
 **Stack chính:** React 19, TypeScript (strict), Vite 8, Tailwind CSS 4, `@base-ui/react`, Floating UI, Vitest + Testing Library, Zustand (ví dụ modal), shiki (highlight trong docs).
 
@@ -167,6 +167,12 @@ describe('ComponentName', () => {
 4. Khi đổi API component công khai: cập nhật trang MDX tương ứng và demo trong **`-views/`** nếu có.
 
 Plugin/virtual module: dùng **`gray-matter`** cho frontmatter; virtual ID trong Vite thường resolve với prefix **`\\0`** — bám theo plugin hiện có.
+
+---
+
+## Tài liệu cho consumer (`AI.md`)
+
+File **`core/AI.md`** được copy vào **`dist/core`** khi build (cùng cơ chế `*.md` trong Vite) và đi kèm package **`@polyms/core-ui`**. Khi đổi cách tiêu thụ công khai (import style, peer deps, quy ước compose UI), cập nhật **`core/AI.md`** và **`core/README.md`** cho đồng bộ.
 
 ---
 
