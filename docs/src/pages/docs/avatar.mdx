@@ -1,0 +1,63 @@
+---
+type: Layout
+title: Avatar
+apis:
+  - separator: Avatar (Root)
+  - name: render
+    default: '-'
+    values: ReactElement | (props, state) => ReactNode
+    description: Allows you to replace the rendered `<span>` element or customize rendering via a function.
+  - separator: Avatar.Image
+  - name: src
+    default: '-'
+    values: string
+    description: The image URL displayed in the avatar.
+  - name: alt
+    default: '-'
+    values: string
+    description: Alt text for the avatar image (recommended for accessibility).
+  - name: onLoadingStatusChange
+    default: '-'
+    values: '(status: "idle" | "loading" | "loaded" | "error") => void'
+    description: Callback fired when the avatar image loading status changes.
+  - separator: Avatar.Fallback
+  - name: delay
+    default: '-'
+    values: number
+    description: How long (milliseconds) to wait before showing the fallback. Useful to avoid flicker for fast-loading images.
+---
+
+import Story from './-views/avatar/AvatarDefault.tsx'
+import code from './-views/avatar/AvatarDefault.tsx?raw'
+
+Displays a user's profile picture, initials, or fallback icon. Use it in headers, user menus, comments, or any place where visual identity helps users recognize context.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Avatar } from '@polyms/core'
+
+<Avatar className='inline-flex h-10 w-10 overflow-hidden rounded-full bg-slate-100 text-slate-700'>
+  <Avatar.Image
+    src='/avatar.png'
+    alt='John Doe'
+    className='h-full w-full object-cover'
+  />
+  <Avatar.Fallback className='flex h-full w-full items-center justify-center text-sm font-semibold'>
+    JD
+  </Avatar.Fallback>
+</Avatar>
+```
+
+## Fallback
+
+`Avatar.Fallback` is rendered when the image fails to load or when no image is provided. Pass `delay` to control when the fallback appears (in milliseconds).
+
+## API Reference
+
+<APIReference />
+

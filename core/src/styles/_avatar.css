@@ -1,0 +1,26 @@
+@layer components {
+  .avatar {
+    --avatar-size: 2.5rem;
+
+    display: inline-flex;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 9999px;
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-700);
+  }
+
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .avatar-fallback {
+    @apply inline-flex h-full w-full items-center justify-center text-sm font-semibold;
+  }
+}
