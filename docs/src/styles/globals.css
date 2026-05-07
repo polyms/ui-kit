@@ -42,6 +42,7 @@ body {
     grid-area: name;
 
     @apply hidden h-14 items-center gap-2 border-r border-slate-300 bg-slate-50/80 px-4 tracking-wide md:flex;
+    z-index: 20;
     transition:
       width 220ms ease-out,
       padding 150ms ease-out,
@@ -104,13 +105,12 @@ body {
     /* Desktop: in-grid + collapsible + slate background + dashed border */
     @media (min-width: 768px) {
       grid-area: app-sidebar;
-      position: relative;
+      position: sticky;
+      top: 56px;
+      height: calc(100dvh - 56px);
+      z-index: 10;
       @apply border-e border-slate-300 bg-slate-50/80;
       transition: width 220ms ease-out;
-      /* position: sticky;
-    top: 56px;
-    height: calc(100dvh - 56px);
-    transition: width 200ms ease; */
 
       .sidebar-closed & {
         @apply w-4;
@@ -150,10 +150,8 @@ body {
     }
 
     @media (min-width: 768px) {
-      position: sticky;
-      top: 56px;
-      height: calc(100dvh - 56px);
-      /* transition: width 200ms ease; */
+      position: relative;
+      height: 100%;
 
       .sidebar-closed & {
         transform: translateX(-100%);
