@@ -53,6 +53,6 @@
 .stretched-link {
   &::after {
     content: '';
-    @apply absolute inset-0 z-0 cursor-pointer;
+    @apply absolute inset-0 z-10 cursor-pointer;
   }
 }

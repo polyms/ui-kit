@@ -1,0 +1,80 @@
+---
+type: Layout
+title: Badge
+apis:
+  - separator: Base class
+  - name: badge
+    default: required
+    values: className
+    description: Base pill label with theme tokens via CSS variables.
+  - separator: Size modifiers
+  - name: badge-lg
+    default: '-'
+    values: className
+    description: Larger padding and font size.
+  - name: badge-xl
+    default: '-'
+    values: className
+    description: Extra-large padding and typography.
+  - separator: Tone variants
+  - name: badge-primary
+    default: '-'
+    values: className
+    description: Primary brand tone.
+  - name: badge-success
+    default: '-'
+    values: className
+    description: Success tone.
+  - name: badge-info
+    default: '-'
+    values: className
+    description: Info tone.
+  - name: badge-warning
+    default: '-'
+    values: className
+    description: Warning tone.
+  - name: badge-danger
+    default: '-'
+    values: className
+    description: Danger tone.
+  - name: badge-light
+    default: '-'
+    values: className
+    description: Neutral light surface on slate.
+  - name: badge-dark
+    default: '-'
+    values: className
+    description: Inverted dark surface.
+---
+
+import Story from './-views/badge/BadgeDefault.tsx'
+import code from './-views/badge/BadgeDefault.tsx?raw'
+
+Small status and label chips. CSS-only — combine **`badge`** with a tone variant (and optional size).
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+<span className='badge badge-primary'>New</span>
+<span className='badge badge-light'>Draft</span>
+```
+
+Sizes:
+
+```tsx
+<span className='badge badge-lg badge-success'>Large</span>
+<span className='badge badge-xl badge-info'>XL</span>
+```
+
+## Notes
+
+- Tone classes set `--badge-bg` and `--badge-color`; base **`.badge`** applies layout and typography.
+- Pair at least one variant with **`badge`** so color tokens apply.
+
+## API Reference
+
+<APIReference />

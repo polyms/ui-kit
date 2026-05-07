@@ -1,0 +1,142 @@
+---
+type: Layout
+title: Table
+apis:
+  - separator: Base class
+  - name: table
+    default: required
+    values: className
+    description: Enables the base table styling and CSS variables.
+  - separator: Size modifiers
+  - name: table-sm
+    default: '-'
+    values: className
+    description: Reduces cell padding for dense data layouts.
+  - name: table-lg
+    default: '-'
+    values: className
+    description: Increases row line-height for a roomier layout.
+  - separator: Border modifiers
+  - name: table-bordered
+    default: '-'
+    values: className
+    description: Adds borders around rows and columns.
+  - name: table-borderless
+    default: '-'
+    values: className
+    description: Removes inner borders for a cleaner look.
+  - separator: State modifiers
+  - name: table-striped
+    default: '-'
+    values: className
+    description: Applies zebra striping by row.
+  - name: table-striped-columns
+    default: '-'
+    values: className
+    description: Applies zebra striping by column.
+  - name: table-hover
+    default: '-'
+    values: className
+    description: Highlights row background on hover.
+  - name: table-active
+    default: '-'
+    values: className
+    description: Highlights a row or cell as active.
+  - separator: Utilities
+  - name: table-group-divider
+    default: '-'
+    values: className
+    description: Adds a stronger separator between body row groups.
+  - name: caption-top
+    default: '-'
+    values: className
+    description: Moves the caption to the top of the table.
+  - name: thead-light
+    default: '-'
+    values: className
+    description: Applies the standard light slate header style on `thead`.
+---
+
+import Story from './-views/table/TableDefault.tsx'
+import code from './-views/table/TableDefault.tsx?raw'
+
+Render structured data with semantic HTML and table utility classes. This is a CSS-only pattern, so there is no `Table` React component export.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+<table className='table'>
+  <thead className='thead-light'>
+    <tr>
+      <th scope='col'>Name</th>
+      <th scope='col'>Status</th>
+      <th scope='col'>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Order #1024</td>
+      <td>Paid</td>
+      <td>$128.00</td>
+    </tr>
+    <tr>
+      <td>Order #1025</td>
+      <td>Pending</td>
+      <td>$64.00</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Common combinations
+
+Use modifiers together on the same table:
+
+```tsx
+<table className='table table-striped table-hover table-bordered'>
+  ...
+</table>
+```
+
+Compact and roomy density:
+
+```tsx
+<table className='table table-sm'>...</table>
+<table className='table table-lg'>...</table>
+```
+
+Column striping:
+
+```tsx
+<table className='table table-striped-columns'>...</table>
+```
+
+Active row or cell:
+
+```tsx
+<tr className='table-active'>...</tr>
+<td className='table-active'>...</td>
+```
+
+Caption at the top:
+
+```tsx
+<table className='table caption-top'>
+  <caption>Recent orders</caption>
+  ...
+</table>
+```
+
+## Notes
+
+- Prefer `<thead className='thead-light'>` for the standard header treatment.
+- `thead.bg-neutral` is still supported for compatibility, but new code should use the slate-based header rules.
+- For nested tables, apply `.table` to each table you want styled.
+
+## API Reference
+
+<APIReference />

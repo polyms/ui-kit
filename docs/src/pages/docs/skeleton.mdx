@@ -1,0 +1,48 @@
+---
+type: Layout
+title: Skeleton
+apis:
+  - separator: Utility
+  - name: skeleton
+    default: required
+    values: className
+    description: Slate base fill with a looping shine animation; size and shape come from your utilities (e.g. height, width, rounded).
+---
+
+import Story from './-views/skeleton/SkeletonDefault.tsx'
+import code from './-views/skeleton/SkeletonDefault.tsx?raw'
+
+Loading placeholder blocks. CSS-only — apply **`skeleton`** then Tailwind (or your own CSS) for dimensions and **`rounded-*`**.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+<div className='skeleton h-4 rounded-md' />
+<div className='skeleton size-12 rounded-full' />
+<div className='skeleton h-32 rounded-xl' />
+```
+
+Typical list row placeholder:
+
+```tsx
+<div className='flex items-center gap-3'>
+  <div className='skeleton size-10 shrink-0 rounded-full' />
+  <div className='flex min-w-0 flex-1 flex-col gap-2'>
+    <div className='skeleton h-4 rounded-md' />
+    <div className='skeleton h-3 w-2/3 rounded-md' />
+  </div>
+</div>
+```
+
+## Notes
+
+- Animation **`shine`** is defined in the same stylesheet; no extra class needed.
+- Background uses **`var(--color-slate-100)`** for the track.
+
+## API Reference
+
+<APIReference />

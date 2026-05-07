@@ -1,0 +1,179 @@
+---
+type: Layout
+title: Z-index
+apis:
+  - separator: Page & chrome
+  - name: z-dropdown
+    default: '-'
+    values: className
+    description: Maps to **`--zindex-dropdown`** (menus, typeahead, etc.).
+  - name: z-sticky
+    default: '-'
+    values: className
+    description: Sticky headers and bars — **`--zindex-sticky`**.
+  - name: z-fixed
+    default: '-'
+    values: className
+    description: Fixed UI chrome — **`--zindex-fixed`**.
+  - name: z-toolbar
+    default: '-'
+    values: className
+    description: Toolbars above sticky content — **`--zindex-toolbar`**.
+  - separator: Offcanvas & sidebar
+  - name: z-offcanvas-backdrop
+    default: '-'
+    values: className
+    description: Dimmed scrim behind offcanvas — **`--zindex-offcanvas-backdrop`**.
+  - name: z-offcanvas
+    default: '-'
+    values: className
+    description: Offcanvas panel — **`--zindex-offcanvas`**.
+  - name: z-sidebar
+    default: '-'
+    values: className
+    description: Persistent sidebar layer — **`--zindex-sidebar`**.
+  - separator: Modal
+  - name: z-modal-backdrop
+    default: '-'
+    values: className
+    description: Modal backdrop — **`--zindex-modal-backdrop`**.
+  - name: z-modal
+    default: '-'
+    values: className
+    description: Modal dialog surface — **`--zindex-modal`**.
+  - separator: Floating overlays
+  - name: z-popover
+    default: '-'
+    values: className
+    description: Popovers and anchored panels — **`--zindex-popover`**.
+  - name: z-tooltip
+    default: '-'
+    values: className
+    description: Tooltips — **`--zindex-tooltip`**.
+  - name: z-toast
+    default: '-'
+    values: className
+    description: Toast / notification stack — **`--zindex-toast`**.
+---
+
+import Story from './-views/z-index/ZIndexDefault.tsx'
+import code from './-views/z-index/ZIndexDefault.tsx?raw'
+
+Named stacking helpers backed by **`--zindex-*`** tokens on **`:root`** (`core/src/styles/_root.css`). Use these classes instead of ad-hoc numbers so overlays stay consistent with modal, offcanvas, tooltip, and toast styles in the library.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+<div className='fixed inset-0 z-modal-backdrop bg-slate-900/40' aria-hidden />
+<div className='fixed z-modal rounded-xl bg-white p-6 shadow-overlay' role='dialog'>
+  …
+</div>
+```
+
+```tsx
+<header className='sticky top-0 z-sticky border-slate-200 border-b bg-white'>…</header>
+```
+
+## Tokens
+
+Numeric values are defined once on **`:root`** and referenced by both component CSS (e.g. modal, tooltip) and these utilities:
+
+<div className='not-prose mb-6 overflow-x-auto'>
+  <table className='w-full min-w-72 border-collapse border-slate-200 text-left text-sm'>
+    <thead>
+      <tr className='border-slate-200 border-b'>
+        <th className='py-2 pe-6 font-semibold text-slate-900'>Token</th>
+        <th className='py-2 font-semibold text-slate-900'>Default</th>
+      </tr>
+    </thead>
+    <tbody className='text-slate-600'>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-dropdown</code>
+        </td>
+        <td className='py-2'>1000</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-sticky</code>
+        </td>
+        <td className='py-2'>1020</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-fixed</code>
+        </td>
+        <td className='py-2'>1030</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-toolbar</code>
+        </td>
+        <td className='py-2'>1050</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-offcanvas-backdrop</code>
+        </td>
+        <td className='py-2'>2000</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-offcanvas</code>
+        </td>
+        <td className='py-2'>2005</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-sidebar</code>
+        </td>
+        <td className='py-2'>2010</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-modal-backdrop</code>
+        </td>
+        <td className='py-2'>3000</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-modal</code>
+        </td>
+        <td className='py-2'>3005</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-popover</code>
+        </td>
+        <td className='py-2'>4010</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-tooltip</code>
+        </td>
+        <td className='py-2'>4020</td>
+      </tr>
+      <tr className='border-slate-100 border-b'>
+        <td className='py-2 pe-6 text-xs'>
+          <code className='font-mono text-slate-800'>--zindex-toast</code>
+        </td>
+        <td className='py-2'>5000</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Override the variables in your app theme if you need a different scale; the **`.z-*`** classes will follow.
+
+## Notes
+
+- Classes live in **`core/src/styles/_z-index.css`** (`@layer utilities`).
+- Stacking only compares elements within the same [stacking context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Stacking_context); a parent with **`transform`**, **`filter`**, or **`isolation`** can isolate children from global overlays.
+
+## API Reference
+
+<APIReference />

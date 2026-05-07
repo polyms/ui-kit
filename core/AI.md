@@ -89,12 +89,86 @@ When unsure a symbol exists, open **`node_modules/@polyms/core-ui/index.d.ts`**.
 
 If anything conflicts, trust **on-disk paths** and **`package.json`** for the version you installed.
 
+## CSS-only UI classes (no React component)
+
+Some UI patterns are provided as CSS classes only. They are still part of the public consumption surface when styles are loaded.
+
+- **Table system:** `.table`, `.table-sm`, `.table-lg`, `.table-striped`, `.table-hover`, `.table-bordered`, `.table-borderless`, `.table-active`, `.table-group-divider`, `.caption-top`, `thead.thead-light`.
+- **Badge:** `.badge`, size variants (`.badge-lg`, `.badge-xl`) and tone variants (`.badge-primary`, `.badge-success`, `.badge-info`, `.badge-warning`, `.badge-danger`, `.badge-light`, `.badge-dark`).
+- **Card:** `.card`, `.card-body`.
+- **Link helpers:** `.link` + flavor classes (`.link-primary`, `.link-danger`, `.link-light`) and `.stretched-link`.
+- **Skeleton:** `.skeleton` for loading placeholders.
+- **Typography:** `.h1` ... `.h6`.
+- **Z-index helpers:** `.z-dropdown`, `.z-sticky`, `.z-fixed`, `.z-toolbar`, `.z-offcanvas`, `.z-modal`, `.z-popover`, `.z-tooltip`, `.z-toast`, etc.
+- **Layout utilities:** `.@page` and `.container-page` for container-query based page layout.
+- **General utilities:** `.border-light`, `.border-{t|r|b|l|s|e|x|y}-light`, `.bg-light`, and state classes like `.item-primary` ... `.item-dark`.
+- **Rule for AI code generation:** if there is no exported React component (for example `Table`), generate semantic HTML + these classes instead of inventing a new component API.
+
+Table example:
+
+```tsx
+<table className='table table-striped table-hover table-bordered'>
+  <thead className='thead-light'>
+    <tr>
+      <th scope='col'>Name</th>
+      <th scope='col'>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Order #1024</td>
+      <td>Paid</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+Badge / card example:
+
+```tsx
+<div className='card'>
+  <div className='card-body'>
+    <div className='mb-2 inline-flex gap-2'>
+      <span className='badge badge-primary'>New</span>
+      <span className='badge badge-light'>Draft</span>
+    </div>
+    <a className='link link-primary stretched-link' href='/docs'>
+      Open docs
+    </a>
+  </div>
+</div>
+```
+
+Notes:
+
+- Prefer `<thead className='thead-light'>` for a standard header style.
+- `thead.bg-neutral` is supported for compatibility in table CSS, but it maps to slate-like styling. For new code, keep using the **slate** rules in this file.
+- For new generated code, prioritize CSS-only classes above before introducing custom one-off class names for equivalent behavior.
+
 ## Conventions when composing UI
 
 - Prefer exports from **`@polyms/core-ui`** before reimplementing the same patterns.
 - **Tailwind** + **`clsx()`** for conditional classes.
 - **Button:** use typed props — **`variant`**, **`size`**, **`outlined`**, **`rounded`**, **`icon`**, **`tooltip`**, etc. — per **`ButtonProps`**, not only raw classes.
 - Extending primitives: follow **`useRender.ComponentProps<…>`** patterns already used in the library types.
+
+## Logical direction spacing (start/end over left/right)
+
+To keep layouts RTL-friendly and consistent, prefer logical-direction utilities and properties.
+
+- **Spacing utilities:** use `ms-*` / `me-*` and `ps-*` / `pe-*` instead of `ml-*` / `mr-*` and `pl-*` / `pr-*` for new generated code.
+- **Borders:** prefer `border-s-*` / `border-e-*` over `border-l-*` / `border-r-*` where direction matters.
+- **CSS properties:** prefer `margin-inline-start` / `margin-inline-end`, `padding-inline-start` / `padding-inline-end`, and `inset-inline-*` instead of physical left/right properties.
+- **Fallback rule:** if existing local code in a file is still physical (`ml`, `mr`, etc.), follow nearby style for minimal diffs; default to logical start/end for all new code.
+
+Example:
+
+```tsx
+<div className='flex items-center gap-2 ps-3 pe-2'>
+  <span className='me-2'>Label</span>
+  <button className='ms-auto'>Action</button>
+</div>
+```
 
 ## Documentation
 

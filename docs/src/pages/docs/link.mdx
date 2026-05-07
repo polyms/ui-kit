@@ -1,0 +1,74 @@
+---
+type: Layout
+title: Link
+apis:
+  - separator: Base
+  - name: link
+    default: required
+    values: className
+    description: Resets underline by default; shows underline on hover/focus; visited/active use primary color.
+  - separator: Flavors
+  - name: link-primary
+    default: '-'
+    values: className
+    description: Primary emphasis with medium weight.
+  - name: link-danger
+    default: '-'
+    values: className
+    description: Destructive or error emphasis.
+  - name: link-light
+    default: '-'
+    values: className
+    description: Muted default; brightens on hover.
+  - separator: Pattern
+  - name: stretched-link
+    default: '-'
+    values: className
+    description: 'Pseudo-element overlay so a parent with **`position: relative`** becomes fully clickable.'
+---
+
+import Story from './-views/link/LinkDefault.tsx'
+import code from './-views/link/LinkDefault.tsx?raw'
+
+Text links and “clickable card” pattern. CSS-only — use on **`a`** (or elements that behave like links).
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+<a className='link link-primary' href='/docs'>
+  Documentation
+</a>
+```
+
+```tsx
+<a className='link link-danger' href='https://polyms.dev/'>
+  Delete
+</a>
+```
+
+**Stretched link:** parent must be **`relative`** (e.g. **`card relative`**) so the overlay covers the whole block.
+
+```tsx
+<div className='card relative'>
+  <div className='card-body'>
+    <h3>Title</h3>
+    <p>Preview…</p>
+    <a className='link link-primary stretched-link' href='/details'>
+      Details
+    </a>
+  </div>
+</div>
+```
+
+## Notes
+
+- **`link-primary`**, **`link-danger`**, **`link-light`** are used together with **`link`** (nested selector in CSS).
+- **`stretched-link`** uses **`::after`** with **`absolute inset-0`**; keep **`z-index`** of other controls above if needed.
+
+## API Reference
+
+<APIReference />

@@ -1,0 +1,43 @@
+---
+type: Layout
+title: Card
+apis:
+  - separator: Structure
+  - name: card
+    default: required
+    values: className
+    description: Bordered, rounded container with overflow clipped.
+  - name: card-body
+    default: '-'
+    values: className
+    description: Standard padding for card content.
+---
+
+import Story from './-views/card/CardDefault.tsx'
+import code from './-views/card/CardDefault.tsx?raw'
+
+Simple content container. CSS-only — nest **`card-body`** inside **`card`** for padded content.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+<div className='card'>
+  <div className='card-body'>
+    <h3 className='font-semibold'>Title</h3>
+    <p className='mt-1 text-slate-600 text-sm'>Supporting text.</p>
+  </div>
+</div>
+```
+
+## Notes
+
+- Border uses **`var(--color-slate-300)`**; radius is **`rounded-xl`** on **`.card`**.
+- Add layout utilities (e.g. **`max-w-md`**, **`relative`**) on the **`card`** when you need width or stacking context (e.g. with **`.stretched-link`**).
+
+## API Reference
+
+<APIReference />
