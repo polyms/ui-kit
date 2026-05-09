@@ -6,20 +6,25 @@ export default function ButtonDefault() {
   return (
     <div className='m-auto grid grid-cols-2 gap-4'>
       <Button outlined rounded size='xl'>
-        <HugeiconsIcon icon={MouseLeftClick06Icon} size={18} strokeWidth={2} />
+        <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
         Click me
       </Button>
 
       <Button rounded size='xl'>
-        <HugeiconsIcon icon={MouseLeftClick06Icon} size={18} strokeWidth={2} />
+        <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
         Click me
       </Button>
 
       <Button rounded size='xl' variant='primary'>
-        <Spinner color='var(--color-primary-700)' size={22} subColor='var(--color-primary-100)' />
+        <Spinner
+          className='btn-icon-content'
+          color='var(--color-primary-700)'
+          size={22}
+          subColor='var(--color-primary-100)'
+        />
       </Button>
       <Button rounded size='xl' variant='dark'>
-        <Spinner color='#fff' size={22} subColor='var(--color-slate-500)' />
+        <Spinner className='btn-icon-content' color='#fff' size={22} subColor='var(--color-slate-500)' />
       </Button>
     </div>
   )

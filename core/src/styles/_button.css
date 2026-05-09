@@ -272,3 +272,12 @@
     }
   }
 }
+
+@utility btn-icon-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--btn-lh);
+  height: var(--btn-lh);
+}

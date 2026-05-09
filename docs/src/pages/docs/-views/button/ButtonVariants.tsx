@@ -57,7 +57,7 @@ export default function ButtonVariants() {
                   rounded={rounded}
                   variant={variant === 'ghost' ? undefined : variant}
                 >
-                  <HugeiconsIcon icon={Sent02Icon} size={18} strokeWidth={1.5} />
+                  <HugeiconsIcon className='btn-icon-content' icon={Sent02Icon} strokeWidth={1.5} />
                 </Button>
               </td>
             </tr>

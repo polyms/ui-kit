@@ -9,7 +9,7 @@ export default function ButtonTooltip() {
         Save
       </Button>
       <Button icon rounded tooltip='Dismiss'>
-        <HugeiconsIcon icon={Cancel01Icon} size={18} strokeWidth={2} />
+        <HugeiconsIcon className='btn-icon-content' icon={Cancel01Icon} strokeWidth={2} />
       </Button>
     </div>
   )

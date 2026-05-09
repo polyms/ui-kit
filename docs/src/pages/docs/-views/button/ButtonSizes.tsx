@@ -58,11 +58,7 @@ export default function ButtonSizes() {
                   rounded
                   size={size === 'default' ? undefined : size}
                 >
-                  <HugeiconsIcon
-                    icon={MouseLeftClick06Icon}
-                    size={styles[size]?.lineHeight || 16}
-                    strokeWidth={2}
-                  />
+                  <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
 
                   {size !== 'default' ? `btn-${size}` : 'default'}
                 </Button>
@@ -79,11 +75,7 @@ export default function ButtonSizes() {
                   rounded
                   size={size === 'default' ? undefined : size}
                 >
-                  <HugeiconsIcon
-                    icon={MouseLeftClick06Icon}
-                    size={styles[size]?.lineHeight || 16}
-                    strokeWidth={2}
-                  />
+                  <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
                 </Button>
               </td>
               <td className='text-center'>{styles[size]?.fontSize}</td>

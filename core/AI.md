@@ -31,6 +31,24 @@ Do **not** rely on deep imports like `@polyms/core-ui/button` unless your toolch
 3. **When refactoring or generating code** — If you see **`neutral`** used for generic gray UI near Polyms components, **replace with the closest `slate` step** so contrast and hue stay aligned with the design system.
 4. **Exceptions** — Third-party snippets, legacy pages, or brand-specific tokens may still use other palettes; isolate those regions or migrate gradually. Default assumption for new UI alongside this package: **slate**.
 
+## Semantic colors: **primary**, **success**, **warning**, **danger**, **light**, **dark**
+
+The design system expresses **intent** through named tones, not through arbitrary Tailwind palette families.
+
+**Prefer these semantics when generating or composing UI with this library:**
+
+| Intent | Tokens / APIs (examples) |
+| ------ | ------------------------ |
+| Brand / default emphasis | **`primary`** — `btn-primary`, `badge-primary`, `alert-primary`, `link-primary`, `text-primary-*` / `bg-primary-*` where the theme exposes them |
+| Positive / completion | **`success`** — `btn-success`, `badge-success`, `alert-success`, … |
+| Caution / at-risk | **`warning`** — `btn-warning`, `badge-warning`, `alert-warning`, … |
+| Error / destructive | **`danger`** — `btn-danger`, `badge-danger`, `alert-danger`, `link-danger`, … |
+| Surfaces / contrast | **`light`**, **`dark`** — `badge-light`, `badge-dark`, `link-light`, `thead-light`, … |
+
+**Do not** substitute unrelated Tailwind color scales (**`rose-*`**, **`red-*`**, **`emerald-*`**, **`amber-*`**, etc.) when you mean **danger**, **success**, or **warning**. Those palettes are not part of the contract for Polyms components and produce inconsistent results next to `btn-*`, `badge-*`, and `alert-*`.
+
+**Rule for AI code generation:** default to **`primary` / `success` / `warning` / `danger` / `light` / `dark`** (and **slate** for neutral chrome per the previous section). Only use other Tailwind color families when the product explicitly requires a non-semantic accent and it is documented locally.
+
 ## Compound components (dot notation)
 
 Prefer **dot access** on the root export instead of inventing separate top-level imports.
@@ -46,6 +64,118 @@ Prefer **dot access** on the root export instead of inventing separate top-level
 | Toast | `Toast` + `Toast.Container`; **`Toast.useToastManager`** for imperative use where applicable |
 
 If code uses `ModalHeader` as a standalone import, it is likely wrong — use **`Modal.Header`** unless types say otherwise. Confirm names in **`index.d.ts`** for your installed version.
+
+### Composition trees (don’t flatten or misuse children)
+
+Compound components rely on **order and ancestry**. Wrong nesting breaks **accessibility** (`Title` /
+`Description`, menu roving focus, submenu relationships) and **library CSS** (sibling selectors, fixed
+header/body/footer regions, menu item states).
+
+**General rule for AI code generation:** keep the documented component tree intact. Use the root component,
+then its **Trigger**, then **Content**, then the provided semantic slots (`Header`, `Body`, `Footer`, `Item`,
+`Separator`, `Group`, …). Do **not** flatten these slots into raw `<div>`s, create fake standalone imports
+(`ModalHeader`, `MenuItem`, …), or move description/title-like nodes into arbitrary wrappers.
+
+#### Modal
+
+`Modal.Content` owns the dialog portal/backdrop/shell and accepts layout props such as **`size`**,
+**`centered`**, and **`scrollable`**. Put modal structure inside it in this order:
+
+```tsx
+<Modal>
+  <Modal.Trigger>Open</Modal.Trigger>
+  <Modal.Content size='lg' title='Account settings'>
+    <Modal.Header>Account settings</Modal.Header>
+    <Modal.Body>{/* Main content and form fields */}</Modal.Body>
+    <Modal.Footer>
+      <Button variant='primary'>Save</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal>
+```
+
+Use **`Modal.Header`** for the accessible dialog title; it already renders the close button by default.
+Use **`Modal.Body`** for scrollable primary content and **`Modal.Footer`** for actions. Do **not** put full
+dialog layout utilities on **`Modal.Content`** to recreate header/body/footer spacing; those shells are already
+styled by the package CSS.
+
+#### Offcanvas
+
+**`Offcanvas.Description`** is implemented as **`Drawer.Description`**: it must stay associated with
+**`Offcanvas.Title`** (`Drawer.Title`) and remain a **direct child** of **`Offcanvas.Content`** — **not** nested
+inside **`Offcanvas.Title`**.
+
+Spacing in the bundled CSS assumes **`Offcanvas.Header`** (`offcanvas-heading`) is followed **immediately** by
+**`Offcanvas.Description`** when you use both (selector `.offcanvas-heading + .offcanvas-description`).
+**Do not** insert **`Offcanvas.Body`** (or unrelated wrappers) between **`Header`** and **`Description`** if you
+rely on that layout.
+
+Recommended structure:
+
+```tsx
+<Offcanvas>
+  <Offcanvas.Trigger>Open</Offcanvas.Trigger>
+  <Offcanvas.Content>
+    <Offcanvas.Header>
+      <Offcanvas.Title>Panel title</Offcanvas.Title>
+    </Offcanvas.Header>
+    <Offcanvas.Description>Optional short subtitle tied to the title.</Offcanvas.Description>
+    <Offcanvas.Body>{/* Primary scrollable content */}</Offcanvas.Body>
+  </Offcanvas.Content>
+</Offcanvas>
+```
+
+Skip **`Description`** entirely when you don’t need a subtitle.
+
+#### Menu
+
+`Menu` is a Base UI menu wrapper with styled slots. Keep interactive options as **`Menu.Item`** (or
+**`Menu.SubmenuTrigger`**) so keyboard navigation, disabled state, and variants work.
+
+Recommended structure:
+
+```tsx
+<Menu>
+  <Menu.Trigger>Actions</Menu.Trigger>
+  <Menu.Content>
+    <Menu.Item>Edit</Menu.Item>
+    <Menu.Item>Duplicate</Menu.Item>
+    <Menu.Separator />
+    <Menu.Item variant='danger'>Delete</Menu.Item>
+  </Menu.Content>
+</Menu>
+```
+
+For submenus, use **`Menu.SubmenuRoot`** with **`Menu.SubmenuTrigger`** and a nested **`Menu.Content`**:
+
+```tsx
+<Menu.SubmenuRoot>
+  <Menu.SubmenuTrigger>Export</Menu.SubmenuTrigger>
+  <Menu.Content sideOffset={0}>
+    <Menu.Item>PDF</Menu.Item>
+    <Menu.Item>PNG</Menu.Item>
+  </Menu.Content>
+</Menu.SubmenuRoot>
+```
+
+Do **not** replace **`Menu.Item`** with plain buttons/anchors unless the types explicitly support a custom
+render prop for that case. For destructive actions, use **`variant='danger'`** instead of `text-rose-*` or
+manual danger classes.
+
+
+**Other roots** (`Field`, `Select`, `Tabs`, …) follow the same idea: inspect **`index.d.ts`**, match documented
+patterns, and avoid inventing wrappers that separate semantic subcomponents from their expected parent.
+
+### Built-in surfaces: avoid redundant utility classes
+
+Polyms primitives ship **pre-styled shells** (`offcanvas-content`, `offcanvas-heading`, `modal-*`, …) in the bundled CSS. Those nodes already define **layout, padding, typography, and motion**.
+
+**Rules for AI and hand-written code:**
+
+1. **Do not** paste large Tailwind bundles (`flex`, `p-*`, `bg-*`, `rounded-*`, `shadow-*`, full **width/height** systems, etc.) onto **library-owned roots** (`Offcanvas.Content`, `Modal.Content`, `Menu.Content`, `Menu.Item`, drawer/viewport internals, …) unless you have a documented one-off override.
+2. Prefer **component props** (`closeButton`, `backdrop`, `variant`, `size`, …) and **semantic children** (`Header`, `Body`, …) over re-styling the shell.
+3. Apply **`className`** mainly to **your** content inside **`Body`**, custom slots, or small layout wrappers **you** own — not to duplicate what the package CSS already encodes.
+4. If the visual result is wrong, first assume **wrong composition** (missing **`Header`**, **`Description`** in the wrong place, …) before adding utilities to the root.
 
 ## App shell: Toast
 
@@ -86,6 +216,8 @@ When unsure a symbol exists, open **`node_modules/@polyms/core-ui/index.d.ts`**.
 
 - **Pre-built CSS:** Package root includes a hashed file such as **`styles-<hash>.css`** (hash changes per release). Import or link it per your bundler from `node_modules/@polyms/core-ui/`.
 - **Tailwind v4 integration:** Source entry **`styles/tailwind.css`** under **`styles/`** is for apps that compile Tailwind 4 with a compatible pipeline.
+
+That stylesheet already applies to **exported components**; consumers should **import the package CSS** (or the Tailwind entry) so those rules are active. See **“Built-in surfaces”** under compound components — avoid re-implementing the same look with utilities on component roots.
 
 If anything conflicts, trust **on-disk paths** and **`package.json`** for the version you installed.
 
