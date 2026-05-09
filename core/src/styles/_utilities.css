@@ -54,15 +54,15 @@
 .item-primary {
   background-color: transparent;
 
-  &:hover {
-    @media (hover: hover) {
-      @apply bg-primary-500/10 text-primary-700;
+  @media (hover: hover) {
+    &:hover {
+      @apply bg-primary-700/10 text-primary-700;
     }
   }
 
   &:active,
   &.active {
-    @apply bg-primary-500/10 text-primary-700;
+    @apply bg-primary-700/10 text-primary-700;
   }
 }
 

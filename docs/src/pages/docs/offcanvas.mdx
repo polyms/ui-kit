@@ -15,6 +15,10 @@ apis:
     default: '-'
     values: '(open: boolean) => void'
     description: Called when offcanvas open state changes.
+  - name: swipeDirection
+    default: left
+    values: left | right | up | down
+    description: The edge where the panel appears and the direction it swipes to dismiss.
   - separator: Offcanvas.Content
   - name: closeButton
     default: 'true'
@@ -43,7 +47,9 @@ import { Offcanvas } from '@polyms/core'
 <Offcanvas>
   <Offcanvas.Trigger>Open Menu</Offcanvas.Trigger>
   <Offcanvas.Content>
-    <Offcanvas.Header>Navigation</Offcanvas.Header>
+    <Offcanvas.Header>
+      <Offcanvas.Title>Navigation</Offcanvas.Title>
+    </Offcanvas.Header>
     <Offcanvas.Description>
       Browse through the menu options below
     </Offcanvas.Description>
@@ -72,6 +78,36 @@ Offcanvas supports flexible composition with Header, Title, Description, Body, a
     </Offcanvas.Body>
   </Offcanvas.Content>
 </Offcanvas>
+```
+
+### Direction
+
+Use `swipeDirection` on `Offcanvas` to choose which viewport edge the panel uses. The value also controls the dismissal gesture and exit animation.
+
+```tsx
+import { Offcanvas } from '@polyms/core'
+
+export default function DirectionOffcanvas() {
+  return (
+    <div className="m-auto grid grid-cols-2 gap-4">
+      {(['left', 'right', 'up', 'down'] as const).map((direction) => (
+        <Offcanvas key={direction} swipeDirection={direction}>
+          <Offcanvas.Trigger className="btn btn-primary">
+            Open {direction}
+          </Offcanvas.Trigger>
+          <Offcanvas.Content>
+            <Offcanvas.Header>
+              <Offcanvas.Title>{direction} offcanvas</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Description>
+              This panel is placed on the {direction} edge.
+            </Offcanvas.Description>
+          </Offcanvas.Content>
+        </Offcanvas>
+      ))}
+    </div>
+  )
+}
 ```
 
 ### Without Close Button
@@ -111,7 +147,11 @@ Remove the backdrop overlay for a less intrusive experience.
 
 ### Slide Animation
 
-The offcanvas smoothly slides in from the left edge of the viewport with a backdrop overlay, creating a focused interaction space.
+The offcanvas smoothly slides in from the selected edge of the viewport with a backdrop overlay, creating a focused interaction space.
+
+### Swipe Direction
+
+`swipeDirection` accepts `left`, `right`, `up`, or `down`. A left drawer appears on the left edge and dismisses to the left; a down drawer appears on the bottom edge and dismisses downward.
 
 ### Click Outside to Close
 

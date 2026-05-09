@@ -1,0 +1,22 @@
+---
+description: Naming conventions for Core-UI TypeScript and React files
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Core-UI Naming Conventions
+
+- Use `PascalCase` for React component files and exported component names (`Button.tsx`, `ModalHeader.tsx`).
+- Use `camelCase` for hooks/util files and exported functions (`useValidation.ts`, `formatDate.ts`).
+- Hooks must start with `use` and be colocated with the related feature when possible.
+- Barrel exports use `index.ts` only for re-exporting public APIs.
+- Test files must be colocated and named `*.test.tsx` (for UI) or `*.test.ts` (for non-UI logic).
+- Avoid vague names (`helpers.ts`, `utils.ts`) when the file can be feature-specific.
+
+# Quick Examples
+
+```ts
+// Good
+export function useModalState() {}
+export function Button() {}
+```

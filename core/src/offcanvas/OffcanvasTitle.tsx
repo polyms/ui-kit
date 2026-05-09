@@ -1,16 +1,16 @@
-import { Dialog } from '@base-ui/react/dialog'
+import { Drawer } from '@base-ui/react/drawer'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-type OffcanvasTitleProps = Dialog.Title.Props
+type OffcanvasTitleProps = Drawer.Title.Props
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const OffcanvasTitle = forwardRef<HTMLHeadingElement, OffcanvasTitleProps>(
   ({ className, ...props }, ref) => (
-    <Dialog.Title className={clsx('offcanvas-title', className)} ref={ref} {...props} />
+    <Drawer.Title className={clsx('offcanvas-title', className)} ref={ref} {...props} />
   )
 )
 

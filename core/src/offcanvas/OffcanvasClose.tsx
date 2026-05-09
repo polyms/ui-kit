@@ -1,16 +1,16 @@
-import { Dialog } from '@base-ui/react/dialog'
+import { Drawer } from '@base-ui/react/drawer'
 import { forwardRef } from 'react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-type OffcanvasCloseProps = Dialog.Close.Props
+type OffcanvasCloseProps = Drawer.Close.Props
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const OffcanvasClose = forwardRef<HTMLButtonElement, OffcanvasCloseProps>((props, ref) => (
-  <Dialog.Close className='offcanvas-close' ref={ref} {...props}>
-    <CloseIcon height={24} width={24} />
-  </Dialog.Close>
+  <Drawer.Close className='offcanvas-close' ref={ref} {...props}>
+    <CloseIcon height={20} width={20} />
+  </Drawer.Close>
 ))
 
 const CloseIcon = (props: React.SVGProps<SVGSVGElement>) => (

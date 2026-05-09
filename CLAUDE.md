@@ -1,3 +1,8 @@
+# Core-UI Agent Guidance
+
+Use `AGENTS.md` as the single source of truth for conventions and workflows in this repository.
+When there is ambiguity, follow `AGENTS.md` first.
+
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->
 

@@ -1,0 +1,28 @@
+---
+description: TS/TSX section ordering and separator style for Core-UI
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# TS/TSX Section Structure
+
+- Keep file order: `imports` -> optional `Types` -> `Components` (or equivalent logical sections).
+- Use explicit section separators with this pattern:
+  `// ── SectionName ─────────────────────────────────────────────────────────────────────────────────────`
+- Separator lines should be 110 characters total, consistent with project formatting rules.
+- If a file has no dedicated types, omit the `Types` section instead of adding an empty section.
+- For component primitives using `useRender`, type props with `useRender.ComponentProps<'tag'>`.
+
+# Minimal Layout
+
+```tsx
+import clsx from 'clsx'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+type ButtonProps = { className?: string }
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+export function Button({ className }: ButtonProps) {
+  return <button className={clsx('btn', className)} />
+}
+```

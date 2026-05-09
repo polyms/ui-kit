@@ -1,0 +1,30 @@
+---
+description: Vitest + Testing Library test patterns for Core-UI
+globs: **/*.test.{ts,tsx}
+alwaysApply: false
+---
+
+# Core-UI Testing Patterns
+
+- Use Vitest imports from `vitest`: `describe`, `it`, `expect`, `vi`.
+- Prefer `screen` queries (`getByRole`, `getByText`, `getByTestId`) over container-level selectors.
+- Use `userEvent.setup()` for user interactions and async flows.
+- Keep tests close to the component/feature under test.
+- For portal or floating content, prefer semantic queries first, then targeted selectors when necessary.
+
+# Minimal Example
+
+```tsx
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, expect, it } from 'vitest'
+
+describe('Button', () => {
+  it('calls onClick', async () => {
+    const user = userEvent.setup()
+    render(<button type="button">Save</button>)
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+    expect(screen.getByRole('button', { name: 'Save' })).toBeInTheDocument()
+  })
+})
+```
