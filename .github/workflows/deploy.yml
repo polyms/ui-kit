@@ -3,10 +3,11 @@ name: Build and Deploy
 on:
   push:
     tags:
-      - core@*
+      - 'core@*'
+  pull_request:
 
 env:
-  NODE_VERSION: '22'
+  NODE_VERSION: '24'
 
 permissions:
   contents: read
@@ -19,21 +20,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Lockfile + source must exist before pnpm/setup-node can resolve the cache key and store path.
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
+      # setup-node (cache: pnpm) runs `pnpm store path` — pnpm must be on PATH first.
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          run_install: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -41,31 +45,33 @@ jobs:
       - name: Run affected tasks
         run: |
           pnpm check
-          pnpm nx affected --base=origin/main -t test build
+          pnpm nx affected --base=origin/${{ github.base_ref }} -t test build
         env:
           NX_BRANCH: ${{ github.event.pull_request.number }}
 
   build-and-deploy:
     name: 'Build and test'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/core@')
     runs-on: ubuntu-latest
     # environment: production
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          run_install: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
