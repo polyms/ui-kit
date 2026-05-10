@@ -1,4 +1,5 @@
 import { Popover } from '@base-ui/react/popover'
+import clsx from 'clsx'
 import type { PropsWithChildren } from 'react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
@@ -6,16 +7,25 @@ import type { PropsWithChildren } from 'react'
 type PopoverContentProps = PropsWithChildren<{
   title?: string
   description?: string
+  className?: string
 }> &
   Pick<Popover.Positioner.Props, 'anchor' | 'side' | 'align'>
 
 // ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
 
-export function PopoverContent({ title, description, children, anchor, side, align }: PopoverContentProps) {
+export function PopoverContent({
+  title,
+  description,
+  children,
+  anchor,
+  side,
+  align,
+  className,
+}: PopoverContentProps) {
   return (
     <Popover.Portal>
       <Popover.Positioner align={align} anchor={anchor} className='popover' side={side} sideOffset={8}>
-        <Popover.Popup className='popover-popup'>
+        <Popover.Popup className={clsx('popover-popup', className)}>
           <Popover.Arrow className='popover-arrow'>
             <ArrowSvg />
           </Popover.Arrow>

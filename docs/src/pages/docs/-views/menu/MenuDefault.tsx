@@ -14,50 +14,25 @@ export default function MenuDefault() {
         <Menu.Content title='Song Options'>
           <Menu.Item>
             Add to Library
-            <span className='ms-auto flex items-center gap-3xs ps-sm'>
-              <abbr className='no-underline' title='Command'>
-                ⌘
-              </abbr>
-              <span className='font-mono'>L</span>
-            </span>
+            <Menu.Command meta sequence='L' />
           </Menu.Item>
           <Menu.Item>
             Add to Playlist
-            <span className='ms-auto flex items-center gap-3xs ps-sm'>
-              <abbr className='no-underline' title='Command'>
-                ⌘
-              </abbr>
-              <span className='font-mono'>L</span>
-            </span>
+            <Menu.Command meta sequence='L+I' />
           </Menu.Item>
           <Menu.Separator />
           <Menu.Item>
             Play Next
-            <span className='ms-auto flex items-center gap-3xs ps-sm'>
-              <abbr className='no-underline' title='Command'>
-                ⌘
-              </abbr>
-              <span className='font-mono'>N</span>
-            </span>
+            <Menu.Command meta sequence='N' />
           </Menu.Item>
           <Menu.Item disabled>
             Play Last
-            <span className='ms-auto flex items-center gap-3xs ps-sm'>
-              <abbr className='no-underline' title='Command'>
-                ⌘
-              </abbr>
-              <span className='font-mono'>L</span>
-            </span>
+            <Menu.Command meta sequence='L' />
           </Menu.Item>
           <Menu.Separator />
           <Menu.Item>
             Favorite
-            <span className='ms-auto flex items-center gap-3xs ps-sm'>
-              <abbr className='no-underline' title='Command'>
-                ⌘
-              </abbr>
-              <span className='font-mono'>F</span>
-            </span>
+            <Menu.Command meta sequence='F' />
           </Menu.Item>
           <Menu.Item variant='danger'>Share</Menu.Item>
           <Menu.SubmenuRoot>

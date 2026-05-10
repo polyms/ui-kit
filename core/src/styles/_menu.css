@@ -24,18 +24,18 @@
 .menu-item {
   outline: 0;
   user-select: none;
-  padding-block: 0.5rem;
+  padding-block: 0.375rem;
   padding-left: 1rem;
   padding-right: 1rem;
   display: flex;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.5;
   align-items: center;
   column-gap: 0.5rem;
   row-gap: 2px;
   width: 100%;
-  min-width: 10rem;
+  min-width: 12rem;
   border-radius: 0.375rem;
   cursor: pointer;
 
@@ -66,6 +66,10 @@
       color: #fff;
     }
 
+    &[data-highlighted] .menu-command {
+      color: rgb(255 255 255 / 0.85);
+    }
+
     &[data-highlighted]::before {
       background-color: var(--color-danger);
     }
@@ -92,4 +96,28 @@
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.25rem;
+}
+
+.menu-command {
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  column-gap: 0.125rem;
+  padding-inline-start: 0.5rem;
+  color: var(--color-slate-400);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.menu-command abbr {
+  text-decoration: none;
+}
+
+.menu-command-key {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+}
+
+.menu-command-sep {
+  user-select: none;
 }
