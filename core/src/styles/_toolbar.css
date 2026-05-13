@@ -1,0 +1,193 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-slate-200);
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: var(--color-slate-900);
+  box-sizing: border-box;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &[data-disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+
+  .toolbar[data-orientation='vertical'] & {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &[data-disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.toolbar-separator {
+  flex: none;
+  background-color: var(--color-slate-200);
+
+  &[data-orientation='vertical'] {
+    width: 1px;
+    align-self: stretch;
+    margin-inline: 0.125rem;
+  }
+
+  &[data-orientation='horizontal'] {
+    height: 1px;
+    align-self: stretch;
+    margin-block: 0.125rem;
+  }
+}
+
+.toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-width: 2rem;
+  height: 2rem;
+  padding-inline: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  color: var(--color-slate-700);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease;
+
+  @media (hover: hover) {
+    &:hover:not([data-disabled]):not([data-pressed]) {
+      background-color: var(--color-slate-100);
+      color: var(--color-slate-900);
+    }
+  }
+
+  &:active:not([data-disabled]) {
+    background-color: var(--color-slate-200);
+    color: var(--color-slate-900);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: -1px;
+  }
+
+  &[data-pressed] {
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-700);
+  }
+
+  &[data-popup-open] {
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-900);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Compact variant when used inside a Group: collapse spacing into a unified pill */
+  .toolbar-group > & {
+    border-radius: 0.25rem;
+  }
+
+  .toolbar-group > &:first-child {
+    border-start-start-radius: 0.375rem;
+    border-end-start-radius: 0.375rem;
+  }
+
+  .toolbar-group > &:last-child {
+    border-start-end-radius: 0.375rem;
+    border-end-end-radius: 0.375rem;
+  }
+}
+
+.toolbar-link {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  padding-inline: 0.5rem;
+  border-radius: 0.375rem;
+  color: var(--color-slate-600);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  outline: none;
+  transition: color 150ms ease;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-primary-600);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+}
+
+.toolbar-input {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  min-width: 6rem;
+  padding-inline: 0.5rem;
+  border: 1px solid var(--color-slate-200);
+  border-radius: 0.375rem;
+  background-color: #fff;
+  color: var(--color-slate-900);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1;
+  outline: none;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+
+  &::placeholder {
+    color: var(--color-slate-400);
+  }
+
+  &:hover:not([data-disabled]) {
+    border-color: var(--color-slate-300);
+  }
+
+  &:focus-visible {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-primary-500) 25%, transparent);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

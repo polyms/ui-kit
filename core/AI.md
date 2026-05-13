@@ -12,7 +12,7 @@ This file ships inside the npm package so assistants and developers follow the s
 
 Everything comes from **one entry**: `@polyms/core-ui` (`index.mjs` / `index.d.ts`).
 
-- **Polyms components** — e.g. `Button`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `Tabs`, `Avatar`, …
+- **Polyms components** — e.g. `Button`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `Tabs`, `Toolbar`, `Avatar`, …
 - **Re-exports from Base UI** — e.g. `Accordion`, `NavigationMenu`, `Toggle`, `ToggleGroup`, plus **`useRender`** from `@base-ui/react/use-render`.
 - **Programmatic modals** — **`useModalStore`** with **`showModal`** / **`closeModal`** on the store (see modal types in `index.d.ts`).
 - **Code-splitting** — **`dynamic`** (lazy loader) if present in your version — confirm in `index.d.ts`.
@@ -60,6 +60,7 @@ Prefer **dot access** on the root export instead of inventing separate top-level
 | Menu | `Menu`, `Menu.Trigger`, `Menu.Content`, `Menu.Item`, … |
 | Offcanvas | `Offcanvas`, `Offcanvas.Trigger`, `Offcanvas.Content`, `Offcanvas.Header`, … |
 | Tabs | `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel` |
+| Toolbar | `Toolbar`, `Toolbar.Button`, `Toolbar.Link`, `Toolbar.Input`, `Toolbar.Group`, `Toolbar.Separator` |
 | Toast | `Toast` + `Toast.Container`; **`Toast.useToastManager`** for imperative use where applicable |
 
 If code uses `ModalHeader` as a standalone import, it is likely wrong — use **`Modal.Header`** unless types say otherwise. Confirm names in **`index.d.ts`** for your installed version.
@@ -161,6 +162,41 @@ Do **not** replace **`Menu.Item`** with plain buttons/anchors unless the types e
 render prop for that case. For destructive actions, use **`variant='danger'`** instead of `text-rose-*` or
 manual danger classes.
 
+#### Toolbar
+
+`Toolbar` is a Base UI toolbar wrapper with styled slots. Wrap clickable items in **`Toolbar.Button`** so they
+participate in the roving focus and inherit the `data-disabled` / `data-pressed` styling.
+
+Recommended structure:
+
+```tsx
+<Toolbar aria-label='Formatting'>
+  <Toolbar.Group aria-label='Text formatting'>
+    <Toolbar.Button>Bold</Toolbar.Button>
+    <Toolbar.Button>Italic</Toolbar.Button>
+  </Toolbar.Group>
+  <Toolbar.Separator orientation='vertical' />
+  <Toolbar.Link href='#'>Docs</Toolbar.Link>
+</Toolbar>
+```
+
+To compose with `Toggle`, `Menu.Trigger`, `Select.Trigger`, `Popover.Trigger`, `Dialog.Trigger`, or
+`AlertDialog.Trigger`, pass them through the **`render`** prop of **`Toolbar.Button`** so the toolbar still
+owns keyboard navigation:
+
+```tsx
+<Toolbar>
+  <ToggleGroup className='toolbar-group' aria-label='Alignment'>
+    <Toolbar.Button render={<Toggle />} value='left'>Left</Toolbar.Button>
+    <Toolbar.Button render={<Toggle />} value='right'>Right</Toolbar.Button>
+  </ToggleGroup>
+</Toolbar>
+```
+
+For tooltips, do the inverse — pass `Toolbar.Button` to `Tooltip.Trigger` via its `render` prop. Use
+**`Toolbar.Input`** sparingly and place it at the **end** of a horizontal toolbar so left/right keys keep
+working as text-cursor movement. Always provide an `aria-label` on the `Toolbar` itself and on each
+`Toolbar.Group` / `ToggleGroup` inside it.
 
 **Other roots** (`Field`, `Select`, `Tabs`, …) follow the same idea: inspect **`index.d.ts`**, match documented
 patterns, and avoid inventing wrappers that separate semantic subcomponents from their expected parent.
