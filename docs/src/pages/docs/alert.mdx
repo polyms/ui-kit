@@ -7,6 +7,10 @@ apis:
     default: primary
     values: primary | success | info | warning | danger | light | dark
     description: Determines the visual style and semantic meaning of the alert.
+  - name: badge
+    default: '-'
+    values: ReactNode
+    description: Optional content rendered in a badge slot after the main alert body (e.g. a label or count).
   - name: onDismiss
     default: '-'
     values: () => void
@@ -24,6 +28,8 @@ apis:
 
 import Story from './-views/alert/AlertDefault.tsx'
 import code from './-views/alert/AlertDefault.tsx?raw'
+import BadgeStory from './-views/alert/AlertBadge.tsx'
+import badgeCode from './-views/alert/AlertBadge.tsx?raw'
 import Variants from './-views/alert/AlertVariants.tsx'
 
 Provide contextual feedback messages for typical user actions with a handful of available and flexible alert messages. Use alerts to communicate important information, warnings, errors, or success states to users.
@@ -46,7 +52,20 @@ import { Alert } from '@polyms/core'
   <Alert.Heading>Error occurred</Alert.Heading>
   Please check your input and try again.
 </Alert>
+
+<Alert variant="info" badge="New">
+  <Alert.Heading>Policy update</Alert.Heading>
+  Review the latest changes to our terms of service.
+</Alert>
 ```
+
+## Badge
+
+Pass **`badge`** with a string, number, or any **`ReactNode`** to show extra context in the alert’s badge slot (after the body, before an optional dismiss control). It works together with **`onDismiss`** when you need both.
+
+<CodePreview code={badgeCode}>
+  <BadgeStory />
+</CodePreview>
 
 ## Variants
 

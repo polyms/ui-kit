@@ -4,15 +4,15 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function Headings() {
   const headingRefs = useRef<Record<string, HTMLHeadingElement>>({})
-  const [headingHeights, setHeadingHeights] = useState<Record<string, number>>({})
+  const [lineHeights, setLineHeights] = useState<Record<string, string>>({})
   const [fontSizes, setFontSizes] = useState<Record<string, string>>({})
 
   useEffect(() => {
-    setHeadingHeights(
+    setLineHeights(
       Object.fromEntries(
         Object.entries(headingRefs.current).map(([heading, ref]) => [
           heading,
-          ref.getBoundingClientRect().height,
+          getComputedStyle(ref).lineHeight,
         ])
       )
     )
@@ -31,7 +31,7 @@ export default function Headings() {
             <th className='w-px'>Class</th>
             <th>Output</th>
             <th>Font Size</th>
-            <th>Line Height</th>
+            <th>Computed line-height</th>
           </tr>
         </thead>
         <tbody>
@@ -51,7 +51,7 @@ export default function Headings() {
                 </p>
               </td>
               <td>{fontSizes[heading]}</td>
-              <td>{headingHeights[heading]}px</td>
+              <td>{lineHeights[heading]}</td>
             </tr>
           ))}
         </tbody>

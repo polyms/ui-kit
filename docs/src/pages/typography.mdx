@@ -7,30 +7,91 @@ import Headings from './-views/typography/Headings'
 import { CodePreview } from '../layouts/CodePreview'
 import { Alert } from '@polyms/core'
 
-Documentation and examples for Polyms typography, including global settings, headings, body
-text, lists, and more.
+**Polyms Core UI** bundles a heading scale as **CSS classes** (`h1`–`h6`, defined in `core/src/styles/_typography.css`) and relies on **Tailwind CSS 4** for size, weight, and alignment utilities. Prefer **semantic** `<h1>`–`<h6>` in markup and attach the matching class when you want this scale—for example `<h2 className='h2'>Section</h2>`. Muted chrome text should use the **slate** ramp (`text-slate-600`, …), not `neutral-*`, so it stays aligned with the rest of the system ([Design System](/design-system)).
 
 ## Headings
 
-All headings, `<h1>` through `<h6>`, are available.
+Classes **`h1`** through **`h6`** set font size, line height, and weight. **`h1`** and **`h2`** step up once from **`lg`** viewport width (`min-width: 64rem`); smaller breakpoints use the compact sizes below.
+
+<div className='card mt-2'>
+  <table className='table-striped table-borderless table table-fixed w-full align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-1/4'>Class</th>
+        <th className='w-1/2'>
+          Default (below <code className='text-nowrap'>lg</code>)
+        </th>
+        <th className='w-1/4'>
+          From <code className='text-nowrap'>lg</code>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <code>h1</code>
+        </td>
+        <td>1.25rem / semibold</td>
+        <td>2.5rem</td>
+      </tr>
+      <tr>
+        <td>
+          <code>h2</code>
+        </td>
+        <td>1.75rem / medium</td>
+        <td>2rem</td>
+      </tr>
+      <tr>
+        <td>
+          <code>h3</code>
+        </td>
+        <td>1.25rem / medium</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>
+          <code>h4</code>
+        </td>
+        <td>1.125rem / medium</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>
+          <code>h5</code>
+        </td>
+        <td>1rem / medium</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>
+          <code>h6</code>
+        </td>
+        <td>0.9375rem / medium</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Live computed **font-size** and **line-height** (viewport-dependent for `h1` / `h2`):
 
 <Headings />
 
-## Text Utilities
+## Body text & Tailwind utilities
 
-For headings, body text, lists, and more, use our text utilities and classes for styling and spacing. Includes support for styling links with hover states, too.
+Body copy in apps using this library typically follows **Tailwind** defaults (for example **`text-base`** with comfortable **`leading-*`**). The table below lists common **font-size** and **font-weight** utilities that match the workspace Tailwind inline safelist (`core/src/styles/tailwind.css`); use them next to components from **`@polyms/core-ui`**.
 
 <Alert variant='info' className='mb-4'>
-  **Body Text:** Base font size is 1rem (16px) with 1.5 line height for optimal readability.
+  **Readable body:** A common default is **`text-base`** (1rem) with line height from **`leading-normal`** or Tailwind’s default for that size—tune per layout, not only font size.
 </Alert>
 
 export const textUtilities = [
+  { class: '.text-2xs', output: '2xs text', value: 'from theme' },
   { class: '.text-xs', output: 'Extra small text', value: '0.75rem (12px)' },
   { class: '.text-sm', output: 'Small text', value: '0.875rem (14px)' },
   { class: '.text-base', output: 'Base text', value: '1rem (16px)' },
   { class: '.text-lg', output: 'Large text', value: '1.125rem (18px)' },
   { class: '.text-xl', output: 'Extra large text', value: '1.25rem (20px)' },
-  { class: '.font-light', output: 'Light text', value: '300' },
   { class: '.font-normal', output: 'Normal text', value: '400' },
   { class: '.font-medium', output: 'Medium text', value: '500' },
   { class: '.font-semibold', output: 'Semibold text', value: '600' },
@@ -43,7 +104,7 @@ export const textUtilities = [
       <tr>
         <th>Class</th>
         <th>Output</th>
-        <th>font-size/font-weight</th>
+        <th>font-size / font-weight</th>
       </tr>
     </thead>
     <tbody>
@@ -64,28 +125,30 @@ export const textUtilities = [
 
 ## Colored links
 
-You can use the `.link-*` classes to colorize links. Unlike the `.text-*` classes, these classes have a `:hover` and `:focus` state. Some of the link styles use a relatively light foreground color, and should only be used on a dark background in order to have sufficient contrast.
+Use the **`link`** base class together with a flavor class. These utilities match **`core/src/styles/_link.css`**: underline appears on **hover** / **focus**, and **visited** / **active** colors follow the semantic tokens. Full examples live on the [Link](/docs/link) page.
+
+Unlike bare **`text-primary-*`** utilities, **`link-*`** encodes interactive states for anchors.
 
 export const coloredLinks = [
   {
     class: '.link',
     variant: 'link',
-    description: 'Default link with primary color on active/visited states',
+    description: 'Default: visited/active use `--color-primary`.',
   },
   {
     class: '.link-primary',
     variant: 'link link-primary',
-    description: 'Primary colored link (primary-700) with medium font weight',
+    description: 'Emphasis: `--color-primary-700`, weight 500; visited/active toward `--color-primary-900`.',
   },
   {
     class: '.link-danger',
     variant: 'link link-danger',
-    description: 'Danger colored link for destructive actions',
+    description: 'Destructive: `--color-danger`; visited/active `--color-danger-700`.',
   },
   {
     class: '.link-light',
     variant: 'link link-light',
-    description: 'Light gray link (slate-500), changes to primary on hover',
+    description: 'Muted `--color-slate-500`; hover `--color-primary-600`; visited/active `--color-slate-900`.',
   },
 ]
 
@@ -106,7 +169,7 @@ export const coloredLinks = [
           </td>
           <td>
             <a className={row.variant} href={`#${row.variant}`}>
-              Click to see hover effect
+              Hover / focus to see underline
             </a>
           </td>
           <td className='text-sm text-slate-600'>{row.description}</td>
@@ -118,7 +181,7 @@ export const coloredLinks = [
 
 ## Stretched link
 
-Make any HTML element or component clickable by "stretching" a nested link via CSS. The `.stretched-link` class adds `position: absolute` to a link, making its containing block clickable via a `::after` pseudo element. In most cases, this means that an element with `position: relative` that contains a link with the `.stretched-link` class is clickable.
+The **`stretched-link`** class adds a **`::after`** overlay (`position: absolute; inset: 0; z-index: 10`) on the anchor so a **positioned** parent (usually **`relative`**, e.g. **`card relative`**) becomes fully clickable. Details and stacking notes: [Link — Stretched link](/docs/link).
 
 export const stretchedLinkCode = `<div className='card relative max-w-md'>
   <div className='card-body'>
@@ -133,7 +196,7 @@ export const stretchedLinkCode = `<div className='card relative max-w-md'>
 </div>`
 
 <CodePreview code={stretchedLinkCode}>
-  <div className='card relative max-w-md'>
+  <div className='card relative max-w-md m-auto'>
     <div className='card-body'>
       <h5 className='card-title'>Card with stretched link</h5>
       <p className='card-text'>
@@ -147,5 +210,5 @@ export const stretchedLinkCode = `<div className='card relative max-w-md'>
 </CodePreview>
 
 <Alert variant='info' className='mt-8' badge='::: TIP :::'>
-  The parent element must have `position: relative` for the stretched link to work properly.
+  The card (or other wrapper) must include **`relative`** so the overlay positions against it. Raise **`z-index`** on controls that must stay above the overlay.
 </Alert>

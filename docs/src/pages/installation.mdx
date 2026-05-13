@@ -1,0 +1,72 @@
+---
+type: Guide
+title: Installation
+---
+
+**Polyms Core UI** ships on npm as **`@polyms/core-ui`**. After install you need **React 19+**, the **package styles**, and component imports from the **single barrel** `@polyms/core-ui`. For composition rules (slate grays, compound trees, CSS-only helpers) see [Design System](/design-system). The tarball also includes **`AI.md`** next to the runtime files—when in doubt, prefer **`index.d.ts`** for the version you installed.
+
+## Install the package
+
+```bash
+pnpm add @polyms/core-ui
+```
+
+```bash
+npm install @polyms/core-ui
+```
+
+```bash
+yarn add @polyms/core-ui
+```
+
+```bash
+bun add @polyms/core-ui
+```
+
+## Peer dependencies
+
+Peers declared by the library:
+
+- **`react`** ≥ 19.0.0  
+- **`react-dom`** ≥ 19.0.0  
+
+Install them at the app level (or let your workspace manage versions). They are not bundled into `@polyms/core-ui`.
+
+## Styles
+
+Components rely on the CSS shipped with the package. You **must** load that stylesheet (or the Tailwind 4–compatible source entry) so layout, motion, and utility classes apply.
+
+**Pre-built CSS** — the package root typically contains a file like **`styles-<hash>.css`** (the hash changes per release). Import it from `node_modules/@polyms/core-ui/` according to your bundler (for example a single side-effect import in the client entry).
+
+**Tailwind CSS 4** — if your app compiles Tailwind 4 with a compatible pipeline, you can consume **`@polyms/core-ui/styles/tailwind.css`** (under the package `styles/` directory) so tokens and layers align with your own Tailwind setup.
+
+If anything disagrees with this page, trust **`package.json` and the on-disk paths** under `node_modules/@polyms/core-ui/` for your installed version.
+
+## Import components
+
+Use the **barrel export** only. Avoid deep imports such as `@polyms/core-ui/button` unless your toolchain explicitly supports them.
+
+```tsx
+import { Button, Modal, Field } from '@polyms/core-ui'
+```
+
+When unsure a symbol exists, open **`node_modules/@polyms/core-ui/index.d.ts`** in the editor.
+
+## Imperative modals and Zustand
+
+Using **`useModalStore`** with **`showModal`** / **`closeModal`** requires installing **`zustand`** in the host app (it is external to the library bundle). Mount **`Modal.Container`** once in your layout when using that flow. See the Modal docs page for the full pattern.
+
+## Link locally (monorepo / dogfooding)
+
+After building the library to `dist/core`, point your consumer `package.json` at the folder:
+
+```json
+"@polyms/core-ui": "file:./dist/core"
+```
+
+Adjust the relative path so it resolves from the consumer app to the directory that contains the built `package.json` and assets.
+
+## Next steps
+
+- [Design System](/design-system) — color tokens, **slate** vs neutral, CSS-only surface classes.  
+- Component pages under **Actions**, **Data input**, **Navigation**, etc. in the sidebar.

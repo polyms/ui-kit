@@ -9,7 +9,6 @@ export default function ButtonDefault() {
   useEffect(() => {
     setTimeout(() => {
       ref.current?.focus()
-      console.log(ref.current?.innerHTML)
     }, 100)
   }, [ref.current])
 

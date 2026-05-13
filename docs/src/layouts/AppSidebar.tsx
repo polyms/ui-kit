@@ -42,17 +42,22 @@ export function AppSidebar({ ref }: AppSidebarProps) {
 
   const items = useMemo(() => {
     const nav: Record<string, NavigationItem[]> = {}
+    const q = search.trim().toLowerCase()
 
     for (const page of pages) {
+      const label = page.title || 'Untitled'
+      const path = page.route
+      if (q) {
+        const haystack = `${label} ${path}`.toLowerCase()
+        if (!haystack.includes(q)) continue
+      }
+
       const section = page.metadata.type || 'Others'
       if (!nav[section]) {
         nav[section] = []
       }
 
-      nav[section].push({
-        label: page.title || 'Untitled',
-        path: page.route,
-      })
+      nav[section].push({ label, path })
     }
 
     // biome-ignore-start lint/style/useNamingConvention: label name
@@ -75,6 +80,7 @@ export function AppSidebar({ ref }: AppSidebarProps) {
     // biome-ignore-end lint/style/useNamingConvention: label name
 
     return Object.entries(nav)
+      .filter(([, sectionItems]) => sectionItems.length > 0)
       .sort(([labelA], [labelB]) => {
         if (labelA === 'Guide') return -1
         if (labelB === 'Guide') return 1
@@ -95,7 +101,13 @@ export function AppSidebar({ ref }: AppSidebarProps) {
         ),
         items: items.sort((a, b) => a.label.localeCompare(b.label)),
       }))
-  }, [])
+  }, [search])
+
+  const showExamplesNav = useMemo(() => {
+    const q = search.trim().toLowerCase()
+    if (!q) return true
+    return 'examples page demo'.includes(q)
+  }, [search])
 
   return (
     <>
@@ -195,21 +207,23 @@ export function AppSidebar({ ref }: AppSidebarProps) {
               </Collapsible>
             ))}
 
-            <Collapsible defaultOpen>
-              <Collapsible.Trigger className='nav-item'>
-                <Icon className='size-4 text-slate-600' icon={AiChemistry02Icon} />
-                Examples
-                <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
-              </Collapsible.Trigger>
-              <Collapsible.Panel className='nav-panel'>
-                <div className='nav-panel-content'>
-                  <Link className='nav-item' to='/page'>
-                    <Icon className='size-4 text-slate-600' icon={GoogleDocIcon} />
-                    Page Demo
-                  </Link>
-                </div>
-              </Collapsible.Panel>
-            </Collapsible>
+            {showExamplesNav && (
+              <Collapsible defaultOpen>
+                <Collapsible.Trigger className='nav-item'>
+                  <Icon className='size-4 text-slate-600' icon={AiChemistry02Icon} />
+                  Examples
+                  <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
+                </Collapsible.Trigger>
+                <Collapsible.Panel className='nav-panel'>
+                  <div className='nav-panel-content'>
+                    <Link className='nav-item' to='/demo'>
+                      <Icon className='size-4 text-slate-600' icon={GoogleDocIcon} />
+                      Page Demo
+                    </Link>
+                  </div>
+                </Collapsible.Panel>
+              </Collapsible>
+            )}
           </nav>
         </aside>
       </div>
