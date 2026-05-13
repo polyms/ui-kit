@@ -1,0 +1,359 @@
+/* ── Landing page (route /) ─────────────────────────────────────────────────────────────────────────────
+   Component-scoped styles for the home page. Keeps JSX clean by encapsulating:
+   - long Tailwind utility chains
+   - colors outside the project main variants (primary / slate)
+   The page itself only references primary-*, slate-*, and these semantic classes.
+
+   Loaded lazily via `?url` + TanStack Router `head` API (only for the landing route).
+   `@reference` brings in token context (primary-*, slate-*, ...) so `@apply` resolves correctly.
+   ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+@reference './tailwind.css';
+
+/* ── Background decor ────────────────────────────────────────────────────────────────────────────────── */
+
+.home-decor {
+  @apply pointer-events-none fixed inset-0 -z-10 overflow-hidden;
+}
+
+.home-decor-grid {
+  @apply absolute inset-0 opacity-60;
+  background-image: radial-gradient(var(--color-slate-800) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+.home-decor-glow {
+  @apply absolute rounded-full blur-3xl;
+}
+
+/* ── Nav bar ─────────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-nav {
+  @apply sticky top-0 z-30 border-b border-slate-800/60 bg-slate-950/70 backdrop-blur-md;
+}
+
+.home-nav-tag {
+  @apply inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-medium tracking-wider text-primary-300 uppercase;
+}
+
+.home-nav-link {
+  @apply rounded-full px-4 py-1.5 text-slate-400 transition-colors;
+}
+
+.home-nav-link:hover {
+  @apply bg-slate-800/60 text-slate-100;
+}
+
+/* ── Glass button (dark) ─────────────────────────────────────────────────────────────────────────────── */
+
+.home-btn-glass {
+  @apply inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 font-medium text-slate-100 backdrop-blur-sm transition-all;
+}
+
+.home-btn-glass:hover {
+  @apply border-slate-600 bg-slate-800/80;
+}
+
+.home-btn-glass.sm {
+  @apply px-3 py-1.5 text-xs;
+}
+
+.home-btn-glass.md {
+  @apply px-5 py-2.5 text-sm;
+}
+
+.home-btn-glass.lg {
+  @apply justify-center px-6 py-3 text-sm;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-hero-pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-300 shadow-sm backdrop-blur-sm transition-all;
+}
+
+.home-hero-pill:hover {
+  @apply border-primary/40 text-primary-300;
+}
+
+.home-hero-pill .arrow {
+  @apply size-3 text-slate-500 transition-transform;
+}
+
+.home-hero-pill:hover .arrow {
+  @apply translate-x-0.5 text-primary-400;
+}
+
+.home-hero-pill .sep {
+  @apply text-slate-700;
+}
+
+.home-hero-pulse {
+  @apply relative inline-flex size-1.5;
+}
+
+.home-hero-pulse::before,
+.home-hero-pulse::after {
+  content: '';
+  @apply inline-flex rounded-full bg-primary;
+}
+
+.home-hero-pulse::before {
+  @apply absolute h-full w-full animate-ping opacity-75;
+}
+
+.home-hero-pulse::after {
+  @apply relative size-1.5;
+}
+
+.home-hero-title-mute {
+  @apply bg-linear-to-b from-slate-100 to-slate-400 bg-clip-text text-transparent;
+}
+
+.home-hero-title-accent {
+  @apply bg-linear-to-r from-primary-700 via-primary-400 to-primary-300 bg-clip-text text-transparent;
+}
+
+/* ── Section header ──────────────────────────────────────────────────────────────────────────────────── */
+
+.home-section-eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary-300;
+}
+
+/* ── Showcase card (white card on dark bg) ───────────────────────────────────────────────────────────── */
+
+.home-showcase-card {
+  @apply relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-white transition-all duration-300;
+}
+
+.home-showcase-card:hover {
+  @apply border-primary/40 shadow-lg shadow-primary/10;
+}
+
+.home-showcase-card-footer {
+  @apply flex items-center justify-between border-t border-slate-200/80 bg-slate-50/60 px-4 py-2.5;
+}
+
+/* ── Features grid ───────────────────────────────────────────────────────────────────────────────────── */
+
+.home-feature-grid {
+  @apply grid gap-px overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-800/40 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.home-feature {
+  @apply relative bg-slate-950/70 p-7 transition-colors;
+}
+
+.home-feature:hover {
+  @apply bg-slate-900/60;
+}
+
+.home-feature-icon {
+  @apply inline-flex size-11 items-center justify-center rounded-xl;
+  background-color: color-mix(in oklab, var(--feature-tone) 15%, transparent);
+  color: var(--feature-tone-fg);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--feature-tone) 25%, transparent);
+}
+
+.home-feature-icon.tone-primary {
+  --feature-tone: var(--color-primary-500);
+  --feature-tone-fg: var(--color-primary-300);
+}
+
+.home-feature-icon.tone-success {
+  --feature-tone: var(--color-success-500);
+  --feature-tone-fg: var(--color-success-400);
+}
+
+.home-feature-icon.tone-warning {
+  --feature-tone: var(--color-warning-500);
+  --feature-tone-fg: var(--color-warning-300);
+}
+
+/* ── Metrics ─────────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-metric-grid {
+  @apply grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-800/40 lg:grid-cols-4;
+}
+
+.home-metric-cell {
+  @apply bg-slate-950/70 p-6 md:p-8;
+}
+
+.home-metric-value {
+  @apply bg-linear-to-b from-slate-100 to-primary-400 bg-clip-text text-4xl font-semibold tracking-tight text-transparent md:text-5xl;
+}
+
+/* ── CTA banner ──────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-cta {
+  @apply relative overflow-hidden rounded-3xl border border-slate-800 p-10 md:p-16;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-slate-900),
+    color-mix(in oklab, var(--color-primary-950) 40%, var(--color-slate-900)),
+    var(--color-slate-900)
+  );
+}
+
+.home-cta-pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-primary/30 bg-slate-950/60 px-3 py-1 text-xs font-medium text-primary-300 backdrop-blur-sm;
+}
+
+.home-cta-accent {
+  @apply bg-linear-to-r from-primary-300 to-primary-500 bg-clip-text text-transparent;
+}
+
+.home-cta-link {
+  @apply font-medium text-primary-300 underline-offset-4;
+}
+
+.home-cta-link:hover {
+  @apply text-primary-200 underline;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-footer-link {
+  @apply text-slate-400 transition-colors;
+}
+
+.home-footer-link:hover {
+  @apply text-slate-100;
+}
+
+/* ── Install card (light card on dark bg) ────────────────────────────────────────────────────────────── */
+
+.home-install-card {
+  @apply flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-white;
+}
+
+.home-install-card-header {
+  @apply flex items-center gap-2 border-b border-slate-200 px-5 py-3 text-slate-700;
+}
+
+.home-install-card-footer {
+  @apply border-t border-slate-200 bg-slate-50/60 p-5 text-xs leading-relaxed text-slate-600;
+}
+
+.home-install-card-footer code {
+  @apply rounded bg-slate-200/60 px-1 font-mono;
+}
+
+/* ── Example code card (terminal mock) ───────────────────────────────────────────────────────────────── */
+
+.home-example-card {
+  @apply overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-xl shadow-slate-900/5;
+}
+
+.home-example-card-header {
+  @apply flex items-center gap-2 border-b border-slate-800 bg-slate-900 px-5 py-3;
+}
+
+.home-example-card-header .label {
+  @apply ms-2 font-mono text-xs text-slate-400;
+}
+
+.home-example-code {
+  @apply overflow-x-auto p-6 font-mono leading-relaxed text-slate-100;
+  font-size: 13px;
+}
+
+/* ── Window dots (mac-style traffic lights) ──────────────────────────────────────────────────────────── */
+
+.home-dot {
+  @apply size-2.5 rounded-full;
+}
+
+.home-dot.close {
+  background-color: color-mix(in oklab, var(--color-rose-400) 80%, transparent);
+}
+
+.home-dot.minimize {
+  background-color: color-mix(in oklab, var(--color-amber-400) 80%, transparent);
+}
+
+.home-dot.maximize {
+  background-color: color-mix(in oklab, var(--color-emerald-400) 80%, transparent);
+}
+
+/* ── Inline command (CodeBlock) ──────────────────────────────────────────────────────────────────────── */
+
+.home-cmd {
+  @apply flex items-center justify-between gap-3 rounded-lg bg-slate-950 px-4 py-3 font-mono text-sm text-slate-100;
+}
+
+.home-cmd-prompt {
+  @apply text-primary-300;
+}
+
+.home-cmd-copy {
+  @apply shrink-0 rounded-md p-1.5 text-slate-400 transition-colors;
+}
+
+.home-cmd-copy:hover {
+  @apply bg-slate-800 text-slate-100;
+}
+
+.home-cmd-copy.copied {
+  color: var(--color-success-400);
+}
+
+/* ── Syntax highlight tokens ─────────────────────────────────────────────────────────────────────────── */
+
+.tk-keyword {
+  color: var(--color-violet-300);
+}
+
+.tk-component {
+  color: var(--color-sky-300);
+}
+
+.tk-string {
+  color: var(--color-emerald-300);
+}
+
+.tk-attr {
+  color: var(--color-amber-200);
+}
+
+.tk-punct {
+  color: var(--color-slate-300);
+}
+
+.tk-bracket {
+  color: var(--color-slate-400);
+}
+
+/* ── Overscroll bounce fix ───────────────────────────────────────────────────────────────────────────────
+   Chrome / Safari rubber-band scroll exposes the <html> background. Force it dark while the landing
+   layout is mounted; pseudo-elements on main.landing act as an extra safety net at the very top/bottom. */
+
+html:has(#root.landing) {
+  background-color: var(--color-slate-950);
+}
+
+main.landing {
+  position: relative;
+}
+
+main.landing::before,
+main.landing::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  height: 5rem;
+  background-color: var(--color-slate-950);
+  pointer-events: none;
+  z-index: -1;
+}
+
+main.landing::before {
+  bottom: 100%;
+}
+
+main.landing::after {
+  top: 100%;
+}

@@ -8,11 +8,12 @@ import {
   MagicStick3,
   Palette,
   Rocket,
-  SpedometerMax,
+  SpeedometerMax,
 } from '@solar-icons/react-perf/BoldDuotone'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
+import homePageStylesUrl from '../styles/home.page.css?url'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -34,34 +35,30 @@ type SectionProps = {
 
 function RouteComponent() {
   return (
-    <main className='landing relative isolate overflow-x-clip bg-white text-slate-900'>
-      <BackgroundDecor />
-      <LandingNav />
-      <HeroSection />
-      <ComponentShowcaseSection />
-      <FeaturesSection />
-      <InstallSection />
-      <MetricsSection />
-      <CTASection />
-      <FooterSection />
-    </main>
+    <>
+      <link href={homePageStylesUrl} precedence='high' rel='stylesheet' />
+      <main className='landing relative isolate overflow-x-clip bg-slate-950 text-slate-100'>
+        <BackgroundDecor />
+        <LandingNav />
+        <HeroSection />
+        <ComponentShowcaseSection />
+        <FeaturesSection />
+        <InstallSection />
+        <MetricsSection />
+        <CTASection />
+        <FooterSection />
+      </main>
+    </>
   )
 }
 
 function BackgroundDecor() {
   return (
-    <div aria-hidden='true' className='pointer-events-none fixed inset-0 -z-10 overflow-hidden'>
-      <div
-        className='absolute inset-0 opacity-[0.35]'
-        style={{
-          backgroundImage: 'radial-gradient(var(--color-slate-300) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%)',
-        }}
-      />
-      <div className='absolute -top-48 left-1/2 h-112 w-240 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl' />
-      <div className='absolute top-72 -right-40 h-96 w-96 rounded-full bg-info/10 blur-3xl' />
+    <div aria-hidden='true' className='home-decor'>
+      <div className='home-decor-grid' />
+      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -translate-x-1/2 bg-primary/25' />
+      <div className='home-decor-glow top-160 -left-40 h-96 w-96 bg-primary/10' />
+      <div className='home-decor-glow top-320 -right-40 h-112 w-md bg-primary/10' />
     </div>
   )
 }
@@ -72,31 +69,19 @@ function Container({ children, className }: SectionProps) {
 
 function LandingNav() {
   return (
-    <header className='sticky top-0 z-30 border-slate-200/70 border-b bg-white/70 backdrop-blur-md'>
+    <header className='home-nav'>
       <Container className='flex h-14 items-center gap-6'>
         <Link className='flex items-center gap-2' to='/'>
           <img alt='Polyms' className='size-7' src='/favicon.png' />
-          <span className='font-semibold text-slate-900 tracking-tight'>Polyms</span>
-          <span className='badge badge-primary rounded-full font-semibold'>Core UI</span>
+          <span className='font-semibold text-slate-100 tracking-tight'>Polyms</span>
+          <span className='home-nav-tag'>Core UI</span>
         </Link>
 
-        <nav className='hidden items-center gap-1 text-slate-600 text-sm md:flex'>
-          <Link
-            className='rounded-md px-3 py-1.5 transition-colors hover:bg-slate-100 hover:text-slate-900'
-            to='/design-system'
-          >
-            Components
-          </Link>
-          <Link
-            className='rounded-md px-3 py-1.5 transition-colors hover:bg-slate-100 hover:text-slate-900'
-            to='/design-system'
-          >
+        <nav className='hidden items-center gap-1 md:flex'>
+          <Link className='home-nav-link' to='/design-system'>
             Docs
           </Link>
-          <Link
-            className='rounded-md px-3 py-1.5 transition-colors hover:bg-slate-100 hover:text-slate-900'
-            to='/typography'
-          >
+          <Link className='home-nav-link' to='/typography'>
             Typography
           </Link>
         </nav>
@@ -104,7 +89,7 @@ function LandingNav() {
         <div className='ms-auto flex items-center gap-2'>
           <a
             aria-label='GitHub repository'
-            className='btn btn-light btn-sm hidden rounded-full sm:inline-flex'
+            className='home-btn-glass sm hidden sm:inline-flex'
             href='https://github.com/polyms/core-ui'
             rel='noopener noreferrer'
             target='_blank'
@@ -127,34 +112,30 @@ function HeroSection() {
     <section className='relative px-6 pt-20 pb-16 md:pt-28 md:pb-24'>
       <Container className='flex flex-col items-center text-center'>
         <a
-          className='group mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-slate-700 text-xs shadow-sm backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary-700'
+          className='home-hero-pill mb-7'
           href='https://github.com/polyms/core-ui/releases'
           rel='noopener noreferrer'
           target='_blank'
         >
-          <span className='inline-flex size-1.5 rounded-full bg-primary' />
+          <span className='home-hero-pulse' />
           <span className='font-medium'>v1.0 · MIT Licensed</span>
-          <span aria-hidden='true' className='text-slate-300'>
+          <span aria-hidden='true' className='sep'>
             ·
           </span>
           <span className='text-slate-500'>Now on React 19</span>
-          <ArrowRightIcon className='size-3 translate-x-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-primary' />
+          <ArrowRightIcon className='arrow' />
         </a>
 
         <h1 className='max-w-3xl text-balance font-semibold text-5xl tracking-tight md:text-7xl'>
-          <span className='bg-linear-to-b from-slate-900 to-slate-700 bg-clip-text text-transparent'>
-            Production-ready
-          </span>
+          <span className='home-hero-title-mute'>Production-ready</span>
           <br />
-          <span className='bg-linear-to-r from-primary-600 via-primary-500 to-info-500 bg-clip-text text-transparent'>
-            React components
-          </span>
+          <span className='home-hero-title-accent'>React components</span>
         </h1>
 
-        <p className='mt-6 max-w-2xl text-balance text-lg text-slate-600 leading-relaxed md:text-xl'>
+        <p className='mt-6 max-w-2xl text-balance text-lg text-slate-400 leading-relaxed md:text-xl'>
           Type-safe, accessible, and composable primitives built on{' '}
-          <span className='font-medium text-slate-900'>Base UI</span> and{' '}
-          <span className='font-medium text-slate-900'>Tailwind CSS</span>. Copy what you need, theme what you
+          <span className='font-medium text-slate-200'>Base UI</span> and{' '}
+          <span className='font-medium text-slate-200'>Tailwind CSS</span>. Copy what you need, theme what you
           want — ship faster.
         </p>
 
@@ -164,7 +145,7 @@ function HeroSection() {
             <ArrowRightIcon className='size-4' />
           </Link>
           <a
-            className='btn btn-light btn-xl rounded-full px-5'
+            className='home-btn-glass md'
             href='https://github.com/polyms/core-ui'
             rel='noopener noreferrer'
             target='_blank'
@@ -188,7 +169,7 @@ function HeroSection() {
 function HeroChip({ label }: { label: string }) {
   return (
     <span className='inline-flex items-center gap-2'>
-      <CheckIcon className='size-4 text-success' />
+      <CheckIcon className='size-4 text-primary-400' />
       {label}
     </span>
   )
@@ -246,14 +227,9 @@ function ShowcaseCard({
   className?: string
 }) {
   return (
-    <article
-      className={clsx(
-        'group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5',
-        className
-      )}
-    >
+    <article className={clsx('home-showcase-card group', className)}>
       <div className='flex flex-1 items-center justify-center p-6'>{children}</div>
-      <div className='flex items-center justify-between border-slate-200/80 border-t bg-slate-50/60 px-4 py-2.5'>
+      <div className='home-showcase-card-footer'>
         <span className='font-medium text-slate-700 text-xs uppercase tracking-wider'>{label}</span>
         <Link
           aria-label={`Open ${label} docs`}
@@ -373,7 +349,7 @@ function SwitchPreview() {
 function SelectPreview() {
   return (
     <Select defaultValue='vite' items={frameworks}>
-      <Select.Trigger className='w-full' placeholder='Pick a stack'>
+      <Select.Trigger className='w-full rounded-full' placeholder='Pick a stack'>
         {item => item?.label ?? 'Pick a stack'}
       </Select.Trigger>
       <Select.Content>
@@ -432,19 +408,19 @@ function FeaturesSection() {
       Icon: Layers,
       title: 'Composable architecture',
       description: 'Dot-notation compound components (`Modal.Header`, `Field.Control`) for clear intent.',
-      tone: 'info',
+      tone: 'primary',
     },
     {
       Icon: Palette,
       title: 'Themeable tokens',
       description: 'CSS variables and Tailwind v4 — swap palettes per brand without forking components.',
-      tone: 'warning',
+      tone: 'primary',
     },
     {
-      Icon: SpedometerMax,
+      Icon: SpeedometerMax,
       title: 'Performance-first',
       description: 'Tree-shakeable bundle, lazy primitives, and zero runtime CSS-in-JS overhead.',
-      tone: 'danger',
+      tone: 'warning',
     },
     {
       Icon: Rocket,
@@ -455,7 +431,7 @@ function FeaturesSection() {
   ]
 
   return (
-    <section className='border-slate-200/70 border-y bg-slate-50/50 px-6 py-20 md:py-28'>
+    <section className='relative px-6 py-20 md:py-28'>
       <Container>
         <SectionHeader
           eyebrow='Why Core UI'
@@ -463,7 +439,7 @@ function FeaturesSection() {
           title='Built for serious product teams'
         />
 
-        <div className='mt-12 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-3'>
+        <div className='home-feature-grid mt-12'>
           {features.map(feature => (
             <FeatureCard key={feature.title} {...feature} />
           ))}
@@ -474,21 +450,13 @@ function FeaturesSection() {
 }
 
 function FeatureCard({ Icon, title, description, tone }: FeatureItem) {
-  const toneClasses: Record<FeatureTone, string> = {
-    primary: 'text-primary bg-primary/10',
-    success: 'text-success-600 bg-success/10',
-    info: 'text-info-600 bg-info/10',
-    warning: 'text-warning-700 bg-warning/10',
-    danger: 'text-danger bg-danger/10',
-  }
-
   return (
-    <div className='group relative bg-white p-7 transition-colors hover:bg-slate-50/80'>
-      <div className={clsx('inline-flex size-11 items-center justify-center rounded-xl', toneClasses[tone])}>
+    <div className='home-feature'>
+      <div className={clsx('home-feature-icon', `tone-${tone}`)}>
         <Icon className='size-6' />
       </div>
-      <h3 className='mt-5 font-semibold text-base text-slate-900'>{title}</h3>
-      <p className='mt-2 text-slate-600 text-sm leading-relaxed'>{description}</p>
+      <h3 className='mt-5 font-semibold text-base text-slate-100'>{title}</h3>
+      <p className='mt-2 text-slate-400 text-sm leading-relaxed'>{description}</p>
     </div>
   )
 }
@@ -514,15 +482,10 @@ function InstallSection() {
 
 function InstallCard({ className }: { className?: string }) {
   return (
-    <div
-      className={clsx(
-        'flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white',
-        className
-      )}
-    >
-      <div className='flex items-center gap-2 border-slate-200 border-b px-5 py-3'>
+    <div className={clsx('home-install-card', className)}>
+      <div className='home-install-card-header'>
         <TerminalIcon className='size-4 text-slate-500' />
-        <span className='font-medium text-slate-700 text-sm'>Install</span>
+        <span className='font-medium text-sm'>Install</span>
       </div>
       <Tabs className='flex-1' defaultValue='pnpm'>
         <Tabs.List className='px-2 pt-2'>
@@ -545,10 +508,9 @@ function InstallCard({ className }: { className?: string }) {
         </Tabs.Panel>
       </Tabs>
 
-      <div className='border-slate-200 border-t bg-slate-50/60 p-5'>
-        <p className='text-slate-600 text-xs leading-relaxed'>
-          Peers: <code className='rounded bg-slate-200/60 px-1 font-mono'>react</code>{' '}
-          <code className='rounded bg-slate-200/60 px-1 font-mono'>react-dom</code>{' '}
+      <div className='home-install-card-footer'>
+        <p>
+          Peers: <code>react</code> <code>react-dom</code>{' '}
           <span className='text-slate-500'>&gt;= 19.0.0</span>
         </p>
       </div>
@@ -556,111 +518,38 @@ function InstallCard({ className }: { className?: string }) {
   )
 }
 
+const EXAMPLE_CODE_HTML = [
+  '<span class="tk-keyword">import</span> <span class="tk-punct">{</span> <span class="tk-component">Modal</span><span class="tk-punct">,</span> <span class="tk-component">Button</span> <span class="tk-punct">}</span> <span class="tk-keyword">from</span> <span class="tk-string">\'@polyms/core-ui\'</span>',
+  '',
+  '<span class="tk-keyword">export function</span> <span class="tk-attr">App</span><span class="tk-punct">() {</span>',
+  '  <span class="tk-keyword">return</span> <span class="tk-punct">(</span>',
+  '    <span class="tk-bracket">&lt;</span><span class="tk-component">Modal</span><span class="tk-bracket">&gt;</span>',
+  '      <span class="tk-bracket">&lt;</span><span class="tk-component">Modal.Trigger</span> <span class="tk-attr">variant</span><span class="tk-punct">=</span><span class="tk-string">"primary"</span><span class="tk-bracket">&gt;</span>',
+  '        Open dialog',
+  '      <span class="tk-bracket">&lt;/</span><span class="tk-component">Modal.Trigger</span><span class="tk-bracket">&gt;</span>',
+  '      <span class="tk-bracket">&lt;</span><span class="tk-component">Modal.Content</span> <span class="tk-attr">size</span><span class="tk-punct">=</span><span class="tk-string">"lg"</span><span class="tk-bracket">&gt;</span>',
+  '        <span class="tk-bracket">&lt;</span><span class="tk-component">Modal.Header</span><span class="tk-bracket">&gt;</span>Confirm<span class="tk-bracket">&lt;/</span><span class="tk-component">Modal.Header</span><span class="tk-bracket">&gt;</span>',
+  '        <span class="tk-bracket">&lt;</span><span class="tk-component">Modal.Body</span><span class="tk-bracket">&gt;</span>Save changes?<span class="tk-bracket">&lt;/</span><span class="tk-component">Modal.Body</span><span class="tk-bracket">&gt;</span>',
+  '        <span class="tk-bracket">&lt;</span><span class="tk-component">Modal.Footer</span><span class="tk-bracket">&gt;</span>',
+  '          <span class="tk-bracket">&lt;</span><span class="tk-component">Button</span> <span class="tk-attr">variant</span><span class="tk-punct">=</span><span class="tk-string">"primary"</span><span class="tk-bracket">&gt;</span>Save<span class="tk-bracket">&lt;/</span><span class="tk-component">Button</span><span class="tk-bracket">&gt;</span>',
+  '        <span class="tk-bracket">&lt;/</span><span class="tk-component">Modal.Footer</span><span class="tk-bracket">&gt;</span>',
+  '      <span class="tk-bracket">&lt;/</span><span class="tk-component">Modal.Content</span><span class="tk-bracket">&gt;</span>',
+  '    <span class="tk-bracket">&lt;/</span><span class="tk-component">Modal</span><span class="tk-bracket">&gt;</span>',
+  '  <span class="tk-punct">)</span>',
+  '<span class="tk-punct">}</span>',
+].join('\n')
+
 function ExampleCard({ className }: { className?: string }) {
   return (
-    <div
-      className={clsx(
-        'overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-slate-900/5 shadow-xl',
-        className
-      )}
-    >
-      <div className='flex items-center gap-2 border-slate-800 border-b bg-slate-900 px-5 py-3'>
-        <span className='size-2.5 rounded-full bg-rose-400/80' />
-        <span className='size-2.5 rounded-full bg-amber-400/80' />
-        <span className='size-2.5 rounded-full bg-emerald-400/80' />
-        <span className='ms-2 font-mono text-slate-400 text-xs'>App.tsx</span>
+    <div className={clsx('home-example-card', className)}>
+      <div className='home-example-card-header'>
+        <span className='home-dot close' />
+        <span className='home-dot minimize' />
+        <span className='home-dot maximize' />
+        <span className='label'>App.tsx</span>
       </div>
-      <pre className='overflow-x-auto p-6 font-mono text-[13px] text-slate-100 leading-relaxed'>
-        <code>
-          <span className='text-violet-300'>import</span> <span className='text-slate-300'>{'{'}</span>{' '}
-          <span className='text-sky-300'>Modal</span>
-          <span className='text-slate-300'>,</span> <span className='text-sky-300'>Button</span>{' '}
-          <span className='text-slate-300'>{'}'}</span> <span className='text-violet-300'>from</span>{' '}
-          <span className='text-emerald-300'>'@polyms/core-ui'</span>
-          {'\n\n'}
-          <span className='text-violet-300'>export function</span> <span className='text-amber-200'>App</span>
-          <span className='text-slate-300'>() {'{'}</span>
-          {'\n'}
-          {'  '}
-          <span className='text-violet-300'>return</span> <span className='text-slate-300'>(</span>
-          {'\n'}
-          {'    '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Modal</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'      '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Modal.Trigger</span> <span className='text-amber-200'>variant</span>
-          <span className='text-slate-300'>=</span>
-          <span className='text-emerald-300'>"primary"</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'        '}Open dialog
-          {'\n'}
-          {'      '}
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Modal.Trigger</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'      '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Modal.Content</span> <span className='text-amber-200'>size</span>
-          <span className='text-slate-300'>=</span>
-          <span className='text-emerald-300'>"lg"</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'        '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Modal.Header</span>
-          <span className='text-slate-400'>&gt;</span>Confirm
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Modal.Header</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'        '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Modal.Body</span>
-          <span className='text-slate-400'>&gt;</span>Save changes?
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Modal.Body</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'        '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Modal.Footer</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'          '}
-          <span className='text-slate-400'>&lt;</span>
-          <span className='text-sky-300'>Button</span> <span className='text-amber-200'>variant</span>
-          <span className='text-slate-300'>=</span>
-          <span className='text-emerald-300'>"primary"</span>
-          <span className='text-slate-400'>&gt;</span>Save
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Button</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'        '}
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Modal.Footer</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'      '}
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Modal.Content</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'    '}
-          <span className='text-slate-400'>&lt;/</span>
-          <span className='text-sky-300'>Modal</span>
-          <span className='text-slate-400'>&gt;</span>
-          {'\n'}
-          {'  '}
-          <span className='text-slate-300'>)</span>
-          {'\n'}
-          <span className='text-slate-300'>{'}'}</span>
-        </code>
+      <pre className='home-example-code'>
+        <code dangerouslySetInnerHTML={{ __html: EXAMPLE_CODE_HTML }} />
       </pre>
     </div>
   )
@@ -668,9 +557,9 @@ function ExampleCard({ className }: { className?: string }) {
 
 function CodeBlock({ children }: { children: React.ReactNode }) {
   return (
-    <div className='flex items-center justify-between gap-3 rounded-lg bg-slate-950 px-4 py-3 font-mono text-slate-100 text-sm'>
+    <div className='home-cmd'>
       <span className='truncate'>
-        <span className='text-primary-300'>$</span> {children}
+        <span className='home-cmd-prompt'>$</span> {children}
       </span>
       <CopyHintButton text={String(children)} />
     </div>
@@ -701,11 +590,11 @@ function CopyHintButton({ text }: { text: string }) {
   return (
     <button
       aria-label='Copy command'
-      className='shrink-0 rounded-md p-1.5 text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100'
+      className={clsx('home-cmd-copy', copied && 'copied')}
       onClick={handleCopy}
       type='button'
     >
-      {copied ? <CheckIcon className='size-4 text-success-400' /> : <CopyIcon className='size-4' />}
+      {copied ? <CheckIcon className='size-4' /> : <CopyIcon className='size-4' />}
     </button>
   )
 }
@@ -721,7 +610,7 @@ function MetricsSection() {
   return (
     <section className='px-6 py-10 md:py-16'>
       <Container>
-        <div className='grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:grid-cols-4'>
+        <div className='home-metric-grid'>
           {metrics.map(metric => (
             <MetricCell key={metric.label} {...metric} />
           ))}
@@ -733,11 +622,9 @@ function MetricsSection() {
 
 function MetricCell({ value, label, sub }: MetricItem) {
   return (
-    <div className='bg-white p-6 md:p-8'>
-      <div className='bg-linear-to-b from-slate-900 to-primary-600 bg-clip-text font-semibold text-4xl text-transparent tracking-tight md:text-5xl'>
-        {value}
-      </div>
-      <div className='mt-2 font-medium text-slate-900 text-sm'>{label}</div>
+    <div className='home-metric-cell'>
+      <div className='home-metric-value'>{value}</div>
+      <div className='mt-2 font-medium text-slate-100 text-sm'>{label}</div>
       <div className='text-slate-500 text-xs'>{sub}</div>
     </div>
   )
@@ -747,28 +634,27 @@ function CTASection() {
   return (
     <section className='px-6 pt-16 pb-24 md:pt-24 md:pb-32'>
       <Container>
-        <div className='relative overflow-hidden rounded-3xl border border-slate-200 bg-linear-to-br from-white via-primary-50/60 to-info-50/40 p-10 md:p-16'>
+        <div className='home-cta'>
           <div
             aria-hidden='true'
-            className='absolute top-0 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-primary/10 blur-3xl'
+            className='home-decor-glow top-0 left-1/2 h-72 w-xl -translate-x-1/2 bg-primary/20'
           />
+          <div aria-hidden='true' className='home-decor-glow right-0 -bottom-32 h-72 w-72 bg-primary/10' />
           <div className='relative grid items-end gap-8 md:grid-cols-[1fr_auto]'>
             <div>
-              <span className='inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-3 py-1 font-medium text-primary-700 text-xs'>
+              <span className='home-cta-pill'>
                 <MagicStick3 className='size-3.5' />
                 Ready when you are
               </span>
-              <h2 className='mt-4 max-w-2xl text-balance font-semibold text-3xl text-slate-900 tracking-tight md:text-5xl'>
+              <h2 className='mt-4 max-w-2xl text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-5xl'>
                 Stop reinventing the same primitives.
                 <br />
-                <span className='bg-linear-to-r from-primary-600 to-info-500 bg-clip-text text-transparent'>
-                  Start shipping product.
-                </span>
+                <span className='home-cta-accent'>Start shipping product.</span>
               </h2>
-              <p className='mt-4 max-w-xl text-slate-600 md:text-lg'>
+              <p className='mt-4 max-w-xl text-slate-400 md:text-lg'>
                 Open source. MIT licensed. Built in the open by{' '}
                 <a
-                  className='link link-primary'
+                  className='home-cta-link'
                   href='https://polyms.dev'
                   rel='noopener noreferrer'
                   target='_blank'
@@ -784,7 +670,7 @@ function CTASection() {
                 <ArrowRightIcon className='size-4' />
               </Link>
               <a
-                className='btn btn-light btn-xl rounded-full px-6'
+                className='home-btn-glass lg'
                 href='https://github.com/polyms/core-ui'
                 rel='noopener noreferrer'
                 target='_blank'
@@ -802,32 +688,32 @@ function CTASection() {
 
 function FooterSection() {
   return (
-    <footer className='border-slate-200 border-t bg-white'>
+    <footer className='border-slate-800 border-t bg-slate-950'>
       <Container className='flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center'>
         <div className='flex items-center gap-3'>
           <img alt='Polyms' className='size-7' src='/favicon.png' />
           <div>
-            <div className='font-semibold text-slate-900'>Polyms Core UI</div>
+            <div className='font-semibold text-slate-100'>Polyms</div>
             <div className='text-slate-500 text-xs'>© 2026 Polyms. MIT Licensed.</div>
           </div>
         </div>
 
-        <div className='flex flex-wrap items-center gap-x-6 gap-y-2 text-slate-600 text-sm'>
-          <Link className='link link-light' to='/design-system'>
+        <div className='flex flex-wrap items-center gap-x-6 gap-y-2 text-sm'>
+          <Link className='home-footer-link' to='/design-system'>
             Components
           </Link>
-          <Link className='link link-light' to='/typography'>
+          <Link className='home-footer-link' to='/typography'>
             Typography
           </Link>
           <a
-            className='link link-light'
+            className='home-footer-link'
             href='https://github.com/polyms/core-ui'
             rel='noopener noreferrer'
             target='_blank'
           >
             GitHub
           </a>
-          <a className='link link-light' href='https://polyms.dev' rel='noopener noreferrer' target='_blank'>
+          <a className='home-footer-link' href='https://polyms.dev' rel='noopener noreferrer' target='_blank'>
             polyms.dev
           </a>
         </div>
@@ -839,13 +725,11 @@ function FooterSection() {
 function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
   return (
     <div className='mx-auto max-w-2xl text-center'>
-      <div className='inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 font-medium text-primary-700 text-xs'>
-        {eyebrow}
-      </div>
-      <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-900 tracking-tight md:text-4xl'>
+      <div className='home-section-eyebrow'>{eyebrow}</div>
+      <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-4xl'>
         {title}
       </h2>
-      <p className='mt-3 text-balance text-slate-600 md:text-lg'>{subtitle}</p>
+      <p className='mt-3 text-balance text-slate-400 md:text-lg'>{subtitle}</p>
     </div>
   )
 }
@@ -933,7 +817,7 @@ function TerminalIcon({ className }: IconProps) {
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-type FeatureTone = 'primary' | 'success' | 'info' | 'warning' | 'danger'
+type FeatureTone = 'primary' | 'success' | 'warning'
 
 type FeatureItem = {
   Icon: React.ComponentType<IconProps>
