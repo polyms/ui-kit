@@ -1,11 +1,21 @@
 import { MouseLeftClick06Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Spinner } from '@polyms/core'
+import { useEffect, useRef } from 'react'
 
 export default function ButtonDefault() {
+  const ref = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    setTimeout(() => {
+      ref.current?.focus()
+      console.log(ref.current?.innerHTML)
+    }, 100)
+  }, [ref.current])
+
   return (
     <div className='m-auto grid grid-cols-2 gap-4'>
-      <Button outlined rounded size='xl'>
+      <Button outlined ref={ref} rounded size='xl'>
         <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
         Click me
       </Button>

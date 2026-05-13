@@ -110,6 +110,18 @@ describe('Button', () => {
     expect(ref.current).toBeInstanceOf(HTMLButtonElement)
   })
 
+  it('forwards ref to the button when tooltip is set', async () => {
+    const ref = { current: null }
+    render(
+      <Button ref={ref} tooltip='Hint' type='button'>
+        With tip
+      </Button>
+    )
+    await waitFor(() => {
+      expect(ref.current).toBeInstanceOf(HTMLButtonElement)
+    })
+  })
+
   it('SSR maps tooltip onto native title', () => {
     const html = renderToString(
       <Button tooltip='Mẹo nhanh' type='button'>

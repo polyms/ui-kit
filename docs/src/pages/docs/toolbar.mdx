@@ -1,0 +1,142 @@
+---
+type: Navigation
+title: Toolbar
+apis:
+  - separator: Toolbar (Root)
+  - name: orientation
+    default: horizontal
+    values: horizontal | vertical
+    description: The orientation of the toolbar. Controls keyboard navigation and layout.
+  - name: loopFocus
+    default: 'true'
+    values: boolean
+    description: When true, keyboard navigation wraps focus to the other end once the end is reached.
+  - name: disabled
+    default: '-'
+    values: boolean
+    description: When true, all controls inside the toolbar are disabled.
+  - separator: Toolbar.Button
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: When true the button is disabled.
+  - name: focusableWhenDisabled
+    default: 'true'
+    values: boolean
+    description: When true the item remains focusable while disabled.
+  - name: nativeButton
+    default: 'true'
+    values: boolean
+    description: Whether the component renders a native <button> element when replacing it via render. Set false for non-button tags.
+  - name: render
+    default: '-'
+    values: 'ReactElement | (props, state) => ReactElement'
+    description: Replace the rendered element or compose with another component (e.g. Toggle, Menu.Trigger, Select.Trigger).
+  - separator: Toolbar.Link
+  - name: render
+    default: '-'
+    values: 'ReactElement | (props, state) => ReactElement'
+    description: Replace the rendered element with a custom anchor or composed component.
+  - separator: Toolbar.Input
+  - name: defaultValue
+    default: '-'
+    values: string | number | string[]
+    description: Initial value for uncontrolled usage.
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: When true the input is disabled.
+  - name: focusableWhenDisabled
+    default: 'true'
+    values: boolean
+    description: When true the input remains focusable while disabled.
+  - separator: Toolbar.Group
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: When true all controls inside the group are disabled.
+  - separator: Toolbar.Separator
+  - name: orientation
+    default: horizontal
+    values: horizontal | vertical
+    description: The orientation of the separator. Use vertical inside a horizontal toolbar and vice versa.
+---
+
+import Story from './-views/toolbar/ToolbarDefault.tsx'
+import code from './-views/toolbar/ToolbarDefault.tsx?raw'
+import VerticalStory from './-views/toolbar/ToolbarVertical.tsx'
+import verticalCode from './-views/toolbar/ToolbarVertical.tsx?raw'
+
+A container for grouping a related set of buttons, toggles, links, and inputs. Toolbar provides roving keyboard focus, accessible labelling, and seamless composition with other Base UI primitives.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Toolbar } from '@polyms/core'
+
+<Toolbar aria-label='Formatting'>
+  <Toolbar.Group aria-label='Text formatting'>
+    <Toolbar.Button>Bold</Toolbar.Button>
+    <Toolbar.Button>Italic</Toolbar.Button>
+  </Toolbar.Group>
+  <Toolbar.Separator orientation='vertical' />
+  <Toolbar.Link href='#'>Docs</Toolbar.Link>
+</Toolbar>
+```
+
+## Composition
+
+`Toolbar.Button` is the primary slot for any clickable control. Use the `render` prop to compose it with other primitives so they inherit toolbar keyboard navigation:
+
+```tsx
+import { Toggle, ToggleGroup, Toolbar } from '@polyms/core'
+
+<Toolbar>
+  <ToggleGroup className='toolbar-group' aria-label='Alignment'>
+    <Toolbar.Button render={<Toggle />} value='left'>Left</Toolbar.Button>
+    <Toolbar.Button render={<Toggle />} value='right'>Right</Toolbar.Button>
+  </ToggleGroup>
+</Toolbar>
+```
+
+The same pattern applies to `Menu.Trigger`, `Select.Trigger`, `Popover.Trigger`, `Dialog.Trigger`, and `AlertDialog.Trigger`.
+
+For tooltips, do the opposite — pass the toolbar item as the `render` of `Tooltip.Trigger`:
+
+```tsx
+<Toolbar>
+  <Tooltip>
+    <Tooltip.Trigger render={<Toolbar.Button />}>Bold</Tooltip.Trigger>
+    <Tooltip.Content>Toggle bold</Tooltip.Content>
+  </Tooltip>
+</Toolbar>
+```
+
+## Vertical orientation
+
+Pass `orientation='vertical'` to switch keyboard navigation to the up/down keys and stack items vertically. Use a horizontal `Toolbar.Separator` inside a vertical toolbar.
+
+<CodePreview code={verticalCode}>
+  <VerticalStory />
+</CodePreview>
+
+## Behavior
+
+- **Roving focus** — Only one toolbar item is in the tab order at a time.
+- **Keyboard navigation** — Arrow keys move focus between items, `Home`/`End` jump to the edges; focus loops by default (set `loopFocus={false}` to disable).
+- **Disabled items** — Stay focusable by default so screen readers can announce them. Set `focusableWhenDisabled={false}` to skip them while navigating.
+- **Inputs** — Place `Toolbar.Input` last in a horizontal toolbar so the left/right keys keep working as a text-cursor inside the input.
+
+## Guidelines
+
+- Always provide `aria-label` (or `aria-labelledby`) on `Toolbar` and on each toolbar group so screen readers can announce purpose.
+- Group related controls with `Toolbar.Group` (or `ToggleGroup` when you need exclusive selection).
+- Use one `Toolbar.Input` per horizontal toolbar and place it at the end of the row.
+
+## API Reference
+
+<APIReference />

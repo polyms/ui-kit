@@ -1,15 +1,18 @@
 import { Select } from '@base-ui/react/select'
+import { forwardRef } from 'react'
 
-export const SelectItem = ({ children, checked, ...props }: SelectItemProps) => {
-  return (
-    <Select.Item className='select-item' {...props}>
-      <Select.ItemIndicator className='select-item-indicator'>
-        <TickIcon />
-      </Select.ItemIndicator>
-      <Select.ItemText className='select-item-text'>{children}</Select.ItemText>
-    </Select.Item>
-  )
-}
+export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
+  ({ children, checked, ...props }, ref) => {
+    return (
+      <Select.Item className='select-item' {...props} ref={ref}>
+        <Select.ItemIndicator className='select-item-indicator'>
+          <TickIcon />
+        </Select.ItemIndicator>
+        <Select.ItemText className='select-item-text'>{children}</Select.ItemText>
+      </Select.Item>
+    )
+  }
+)
 
 type SelectItemProps = Select.Item.Props & { checked?: boolean }
 
