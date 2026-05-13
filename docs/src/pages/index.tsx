@@ -1,20 +1,17 @@
 /** biome-ignore-all lint/style/useNamingConvention: Icon component prop */
 
+import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/core'
 import {
   Accessibility,
-  Buildings,
   Code2,
-  DiagramUp,
-  GamepadOld,
+  Layers,
   MagicStick3,
-  MonitorSmartphone,
+  Palette,
   Rocket,
-  RulerCrossPen,
   SpedometerMax,
-  Structure,
-  Widget5,
 } from '@solar-icons/react-perf/BoldDuotone'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 
 export const Route = createFileRoute('/')({
@@ -28,802 +25,925 @@ export const Route = createFileRoute('/')({
 
 type IconProps = { className?: string }
 
-// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────
-
-function WindowIcon({ className }: IconProps) {
-  return (
-    <svg className={className} fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <rect
-        fill='currentColor'
-        height='18'
-        opacity='0.2'
-        rx='2'
-        stroke='currentColor'
-        strokeWidth='1.5'
-        width='18'
-        x='3'
-        y='3'
-      />
-      <path d='M3 9H21' stroke='currentColor' strokeWidth='1.5' />
-      <circle cx='6.5' cy='6' fill='currentColor' r='0.5' />
-      <circle cx='8.5' cy='6' fill='currentColor' r='0.5' />
-    </svg>
-  )
+type SectionProps = {
+  className?: string
+  children: React.ReactNode
 }
 
-function ChatIcon({ className }: IconProps) {
-  return (
-    <svg className={className} fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <path
-        d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22Z'
-        fill='currentColor'
-        opacity='0.2'
-        stroke='currentColor'
-        strokeWidth='1.5'
-      />
-    </svg>
-  )
-}
-
-function BookmarkIcon({ className }: IconProps) {
-  return (
-    <svg className={className} fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <path
-        d='M4 9C4 6.17157 4 4.75736 4.87868 3.87868C5.75736 3 7.17157 3 10 3H14C16.8284 3 18.2426 3 19.1213 3.87868C20 4.75736 20 6.17157 20 9V20.5C20 21.3284 19.3284 22 18.5 22C18.2373 22 17.9823 21.9115 17.7782 21.7488L12 17L6.22183 21.7488C6.01768 21.9115 5.76271 22 5.5 22C4.67157 22 4 21.3284 4 20.5V9Z'
-        fill='currentColor'
-        opacity='0.2'
-        stroke='currentColor'
-        strokeWidth='1.5'
-      />
-    </svg>
-  )
-}
-
-function RecordIcon({ className }: IconProps) {
-  return (
-    <svg className={className} fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <circle
-        cx='12'
-        cy='12'
-        fill='currentColor'
-        opacity='0.2'
-        r='10'
-        stroke='currentColor'
-        strokeWidth='1.5'
-      />
-      <circle cx='12' cy='12' fill='currentColor' r='4' />
-    </svg>
-  )
-}
-
-function TabsIcon({ className }: IconProps) {
-  return (
-    <svg className={className} fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <rect
-        fill='currentColor'
-        height='18'
-        opacity='0.2'
-        rx='2'
-        stroke='currentColor'
-        strokeWidth='1.5'
-        width='18'
-        x='3'
-        y='3'
-      />
-      <path d='M3 9H21' stroke='currentColor' strokeWidth='1.5' />
-      <path d='M7.5 6H9.5' stroke='currentColor' strokeLinecap='round' strokeWidth='1.5' />
-      <path d='M12 6H14' stroke='currentColor' strokeLinecap='round' strokeWidth='1.5' />
-    </svg>
-  )
-}
-
-function MenuIcon({ className }: IconProps) {
-  return (
-    <svg className={className} fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-      <path d='M4 7H20' stroke='currentColor' strokeLinecap='round' strokeWidth='1.5' />
-      <path d='M4 12H20' stroke='currentColor' strokeLinecap='round' strokeWidth='1.5' />
-      <path d='M4 17H20' stroke='currentColor' strokeLinecap='round' strokeWidth='1.5' />
-    </svg>
-  )
-}
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 function RouteComponent() {
   return (
-    <main className='landing'>
-      {/* Animated background */}
-      <div className='pointer-events-none fixed inset-0 z-0'>
-        <div className='absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-purple-500/5 dark:from-blue-500/10 dark:to-purple-500/10' />
-        <AnimatedOrbs />
-      </div>
-
-      <div className='relative z-10'>
-        {/* Hero Section */}
-        <HeroSection />
-
-        {/* Features */}
-        <FeaturesSection />
-
-        {/* Quick Start */}
-        <QuickStartSection />
-
-        {/* Code Example */}
-        <CodeExampleSection />
-
-        {/* Use Cases */}
-        <UseCasesSection />
-
-        {/* Performance */}
-        <PerformanceSection />
-
-        {/* Component Showcase */}
-        <ComponentShowcaseSection />
-
-        {/* CTA */}
-        <CTASection />
-
-        {/* Footer */}
-        <FooterSection />
-      </div>
+    <main className='landing relative isolate overflow-x-clip bg-white text-slate-900'>
+      <BackgroundDecor />
+      <LandingNav />
+      <HeroSection />
+      <ComponentShowcaseSection />
+      <FeaturesSection />
+      <InstallSection />
+      <MetricsSection />
+      <CTASection />
+      <FooterSection />
     </main>
   )
 }
 
-function AnimatedOrbs() {
+function BackgroundDecor() {
   return (
-    <>
-      <div className='absolute -top-96 -left-96 h-96 w-96 animate-pulse rounded-full bg-linear-to-br from-blue-400/20 to-transparent blur-3xl dark:from-blue-500/30' />
-      <div className='absolute -right-96 -bottom-96 h-96 w-96 animate-pulse rounded-full bg-linear-to-tl from-purple-400/20 to-transparent blur-3xl dark:from-purple-500/30' />
-      <div className='absolute top-1/2 left-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-linear-to-r from-blue-400/10 to-purple-400/10 blur-3xl dark:from-blue-500/20 dark:to-purple-500/20' />
-    </>
+    <div aria-hidden='true' className='pointer-events-none fixed inset-0 -z-10 overflow-hidden'>
+      <div
+        className='absolute inset-0 opacity-[0.35]'
+        style={{
+          backgroundImage: 'radial-gradient(var(--color-slate-300) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%)',
+        }}
+      />
+      <div className='absolute -top-48 left-1/2 h-112 w-240 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl' />
+      <div className='absolute top-72 -right-40 h-96 w-96 rounded-full bg-info/10 blur-3xl' />
+    </div>
+  )
+}
+
+function Container({ children, className }: SectionProps) {
+  return <div className={clsx('mx-auto w-full max-w-6xl px-6', className)}>{children}</div>
+}
+
+function LandingNav() {
+  return (
+    <header className='sticky top-0 z-30 border-slate-200/70 border-b bg-white/70 backdrop-blur-md'>
+      <Container className='flex h-14 items-center gap-6'>
+        <Link className='flex items-center gap-2' to='/'>
+          <img alt='Polyms' className='size-7' src='/favicon.png' />
+          <span className='font-semibold text-slate-900 tracking-tight'>Polyms</span>
+          <span className='badge badge-primary rounded-full font-semibold'>Core UI</span>
+        </Link>
+
+        <nav className='hidden items-center gap-1 text-slate-600 text-sm md:flex'>
+          <Link
+            className='rounded-md px-3 py-1.5 transition-colors hover:bg-slate-100 hover:text-slate-900'
+            to='/design-system'
+          >
+            Components
+          </Link>
+          <Link
+            className='rounded-md px-3 py-1.5 transition-colors hover:bg-slate-100 hover:text-slate-900'
+            to='/design-system'
+          >
+            Docs
+          </Link>
+          <Link
+            className='rounded-md px-3 py-1.5 transition-colors hover:bg-slate-100 hover:text-slate-900'
+            to='/typography'
+          >
+            Typography
+          </Link>
+        </nav>
+
+        <div className='ms-auto flex items-center gap-2'>
+          <a
+            aria-label='GitHub repository'
+            className='btn btn-light btn-sm hidden rounded-full sm:inline-flex'
+            href='https://github.com/polyms/core-ui'
+            rel='noopener noreferrer'
+            target='_blank'
+          >
+            <GitHubIcon className='size-4' />
+            <span className='hidden sm:inline'>GitHub</span>
+          </a>
+          <Link className='btn btn-primary btn-sm rounded-full' to='/design-system'>
+            Get started
+            <ArrowRightIcon className='size-3.5' />
+          </Link>
+        </div>
+      </Container>
+    </header>
   )
 }
 
 function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!sectionRef.current) return
-      const rect = sectionRef.current.getBoundingClientRect()
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <section
-      className='relative overflow-hidden px-6 py-24 md:py-40'
-      ref={sectionRef}
-      style={{
-        backgroundPosition: `${mousePosition.x * 0.05}px ${mousePosition.y * 0.05}px`,
-      }}
-    >
-      {/* Glow effect on mouse position */}
-      <div
-        className='pointer-events-none absolute h-96 w-96 rounded-full bg-linear-to-r from-blue-400/10 to-purple-400/10 blur-3xl transition-opacity duration-300'
-        style={{
-          left: `${mousePosition.x - 192}px`,
-          top: `${mousePosition.y - 192}px`,
-        }}
-      />
-
-      <div className='container relative mx-auto'>
-        <div className='mx-auto max-w-3xl text-center'>
-          {/* Badge with animation */}
-          <div className='mb-6 inline-block'>
-            <div className='relative'>
-              <div className='absolute inset-0 rounded-full bg-linear-to-r from-blue-500 to-purple-500 opacity-0 blur-lg transition-opacity duration-500 hover:opacity-100' />
-              <div className='relative rounded-full border border-blue-200 bg-linear-to-r from-blue-50 to-purple-50 px-4 py-2 font-medium text-blue-700 text-sm dark:border-blue-900 dark:bg-linear-to-r dark:from-blue-950 dark:to-purple-950 dark:text-blue-300'>
-                ✨ Enterprise-grade UI components
-              </div>
-            </div>
-          </div>
-
-          {/* Animated heading */}
-          <h1 className='mb-6 font-bold text-5xl leading-tight tracking-tight md:text-7xl'>
-            <span className='block bg-linear-to-b from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent transition-all duration-500 hover:from-blue-600 hover:via-purple-600 hover:to-blue-600 dark:from-white dark:via-slate-300 dark:to-white dark:hover:from-blue-400 dark:hover:via-purple-400 dark:hover:to-blue-400'>
-              Production-Ready
-            </span>
-            <span className='block animate-pulse bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent'>
-              Design System
-            </span>
-          </h1>
-
-          <p className='mb-10 text-slate-600 text-xl leading-tight md:text-2xl dark:text-slate-400'>
-            Enterprise-grade React components built with TypeScript, accessibility in mind, and zero
-            compromises on performance. Trusted by teams building at scale.
-          </p>
-
-          <div className='flex flex-wrap items-center justify-center gap-4'>
-            <GlowingButton className='btn btn-primary btn-lg' to='/design-system'>
-              Get Started →
-            </GlowingButton>
-            <a
-              className='btn btn-secondary btn-lg border-2 border-slate-300 bg-white transition-all duration-300 hover:border-blue-500 hover:bg-slate-50 hover:shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-400 dark:hover:bg-slate-800'
-              href='https://github.com/polyms/core-ui'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function GlowingButton({
-  to,
-  children,
-  className,
-}: {
-  to: string
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <div className='relative'>
-      <div className='absolute inset-0 rounded-lg bg-linear-to-r from-blue-500 via-purple-500 to-blue-500 opacity-0 blur-lg transition-all duration-500 hover:opacity-75' />
-      <Link className={`${className} relative transition-all duration-300 hover:shadow-2xl`} to={to}>
-        {children}
-      </Link>
-    </div>
-  )
-}
-
-function FeaturesSection() {
-  const features = [
-    {
-      Icon: MagicStick3,
-      title: 'LLM-Ready Support',
-      description:
-        'Built with AI workflows in mind. Includes prompt files and structured outputs for LLM integration',
-      gradient: 'from-blue-500/10 to-cyan-500/10',
-      iconBg: 'from-blue-100 to-cyan-100 border-blue-500 dark:from-blue-900/30 dark:to-cyan-900/30',
-      iconColor: 'text-blue-600 dark:text-blue-400',
-    },
-    {
-      Icon: Widget5,
-      title: 'Component Library',
-      description: 'Includes polished UI elements like modals, popovers, tabs, and form controls',
-      gradient: 'from-purple-500/10 to-pink-500/10',
-      iconBg: 'from-purple-100 to-pink-100 border-purple-500 dark:from-purple-900/30 dark:to-pink-900/30',
-      iconColor: 'text-purple-600 dark:text-purple-400',
-    },
-    {
-      Icon: SpedometerMax,
-      title: 'Design-Ready UI',
-      description: 'Speed up design flow with pre-built, accessible components ready to ship',
-      gradient: 'from-orange-500/10 to-amber-500/10',
-      iconBg: 'from-orange-50 to-orange-200 border-orange-500 dark:from-orange-900/30 dark:to-amber-900/30',
-      iconColor: 'text-orange-600 dark:text-orange-400',
-    },
-    {
-      Icon: Accessibility,
-      title: 'Accessible by Default',
-      description: 'WCAG 2.1 AA compliant with screen reader support and keyboard navigation built-in',
-      gradient: 'from-emerald-500/10 to-teal-500/10',
-      iconBg: 'from-emerald-100 to-teal-100 border-emerald-500 dark:from-emerald-900/30 dark:to-teal-900/30',
-      iconColor: 'text-emerald-600 dark:text-emerald-400',
-    },
-    {
-      Icon: Code2,
-      title: 'TypeScript Support',
-      description: 'Full type safety out of the box for better DX and fewer runtime errors',
-      gradient: 'from-violet-500/10 to-purple-500/10',
-      iconBg: 'from-violet-100 to-purple-100 border-violet-500 dark:from-violet-900/30 dark:to-purple-900/30',
-      iconColor: 'text-violet-600 dark:text-violet-400',
-    },
-    {
-      Icon: Rocket,
-      title: 'Quick Start Setup',
-      description: 'Well-structured components help teams kick off projects without starting from scratch',
-      gradient: 'from-rose-500/10 to-red-500/10',
-      iconBg: 'from-rose-100 to-red-100 border-rose-500 dark:from-rose-900/30 dark:to-red-900/30',
-      iconColor: 'text-rose-600 dark:text-rose-400',
-    },
-    {
-      Icon: RulerCrossPen,
-      title: 'Adaptive by Design',
-      description: 'Built to look great on every device, with theme options that fit any brand',
-      gradient: 'from-sky-500/10 to-blue-500/10',
-      iconBg: 'from-sky-100 to-blue-100 border-sky-500 dark:from-sky-900/30 dark:to-blue-900/30',
-      iconColor: 'text-sky-600 dark:text-sky-400',
-    },
-    {
-      Icon: Structure,
-      title: 'Flexible Structure',
-      description: 'Easy to tweak, rearrange, or build on top—ideal for teams that need room to grow',
-      gradient: 'from-fuchsia-500/10 to-pink-500/10',
-      iconBg: 'from-fuchsia-100 to-pink-100 border-fuchsia-500 dark:from-fuchsia-900/30 dark:to-pink-900/30',
-      iconColor: 'text-fuchsia-600 dark:text-fuchsia-400',
-    },
-  ]
-
-  return (
-    <section className='relative px-6 py-24 md:py-32'>
-      <div className='container mx-auto'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='mb-4 font-bold text-4xl text-slate-900 md:text-5xl dark:text-white'>
-            Built for Production
-          </h2>
-          <p className='text-lg text-slate-600 dark:text-slate-400'>
-            From layouts to interactions, every detail is built to deliver clarity, speed, and seamless user
-            experience
-          </p>
-        </div>
-
-        <div className='mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {features.map((feature, idx) => (
-            <FeatureCard index={idx} key={feature.title} {...feature} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function FeatureCard({
-  Icon,
-  title,
-  description,
-  index,
-  gradient,
-  iconBg,
-  iconColor,
-}: {
-  Icon: React.ComponentType<IconProps>
-  title: string
-  description: string
-  index: number
-  gradient: string
-  iconBg: string
-  iconColor: string
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setTimeout(() => setIsVisible(true), index * 100)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [index])
-
-  return (
-    <div
-      className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-700 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-      }`}
-      ref={ref}
-    >
-      {/* Gradient overlay on hover */}
-      <div
-        className={`absolute inset-0 bg-linear-to-br ${gradient} opacity-0 transition-all duration-300 group-hover:opacity-100`}
-      />
-
-      <div className='relative'>
-        <div
-          className={`mb-4 inline-flex items-center justify-center rounded-xl border border-dashed bg-linear-to-br ${iconBg} p-3 transition-all duration-300 group-hover:scale-110`}
+    <section className='relative px-6 pt-20 pb-16 md:pt-28 md:pb-24'>
+      <Container className='flex flex-col items-center text-center'>
+        <a
+          className='group mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-slate-700 text-xs shadow-sm backdrop-blur-sm transition-all hover:border-primary/50 hover:text-primary-700'
+          href='https://github.com/polyms/core-ui/releases'
+          rel='noopener noreferrer'
+          target='_blank'
         >
-          <Icon className={`h-10 w-10 ${iconColor}`} />
+          <span className='inline-flex size-1.5 rounded-full bg-primary' />
+          <span className='font-medium'>v1.0 · MIT Licensed</span>
+          <span aria-hidden='true' className='text-slate-300'>
+            ·
+          </span>
+          <span className='text-slate-500'>Now on React 19</span>
+          <ArrowRightIcon className='size-3 translate-x-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-primary' />
+        </a>
+
+        <h1 className='max-w-3xl text-balance font-semibold text-5xl tracking-tight md:text-7xl'>
+          <span className='bg-linear-to-b from-slate-900 to-slate-700 bg-clip-text text-transparent'>
+            Production-ready
+          </span>
+          <br />
+          <span className='bg-linear-to-r from-primary-600 via-primary-500 to-info-500 bg-clip-text text-transparent'>
+            React components
+          </span>
+        </h1>
+
+        <p className='mt-6 max-w-2xl text-balance text-lg text-slate-600 leading-relaxed md:text-xl'>
+          Type-safe, accessible, and composable primitives built on{' '}
+          <span className='font-medium text-slate-900'>Base UI</span> and{' '}
+          <span className='font-medium text-slate-900'>Tailwind CSS</span>. Copy what you need, theme what you
+          want — ship faster.
+        </p>
+
+        <div className='mt-9 flex flex-wrap items-center justify-center gap-3'>
+          <Link className='btn btn-primary btn-xl rounded-full px-5' to='/design-system'>
+            Browse components
+            <ArrowRightIcon className='size-4' />
+          </Link>
+          <a
+            className='btn btn-light btn-xl rounded-full px-5'
+            href='https://github.com/polyms/core-ui'
+            rel='noopener noreferrer'
+            target='_blank'
+          >
+            <GitHubIcon className='size-4' />
+            Star on GitHub
+          </a>
         </div>
-        <h3 className='mb-2 font-bold text-lg text-slate-900 dark:text-white'>{title}</h3>
-        <p className='text-slate-600 text-sm leading-relaxed dark:text-slate-400'>{description}</p>
-      </div>
-    </div>
+
+        <div className='mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-500 text-sm'>
+          <HeroChip label='30+ components' />
+          <HeroChip label='100% TypeScript' />
+          <HeroChip label='WCAG 2.1 AA' />
+          <HeroChip label='Tree-shakeable' />
+        </div>
+      </Container>
+    </section>
   )
 }
 
-function CodeExampleSection() {
+function HeroChip({ label }: { label: string }) {
   return (
-    <section className='relative overflow-hidden px-6 py-24 md:py-32'>
-      {/* Gradient background */}
-      <div className='pointer-events-none absolute inset-0'>
-        <div className='absolute top-0 right-0 h-96 w-96 rounded-full bg-linear-to-bl from-blue-400/10 to-transparent blur-3xl' />
-      </div>
-
-      <div className='container relative mx-auto'>
-        <div className='mx-auto max-w-4xl'>
-          <div className='mb-12 text-center'>
-            <h2 className='mb-4 font-bold text-4xl text-slate-900 md:text-5xl dark:text-white'>
-              Simple & Intuitive APIs
-            </h2>
-            <p className='text-lg text-slate-600 dark:text-slate-400'>
-              Code that reads like English, no surprises
-            </p>
-          </div>
-
-          <div className='overflow-hidden rounded-2xl border border-slate-200 shadow-2xl transition-all duration-300 hover:shadow-blue-500/20 dark:border-slate-700 dark:shadow-blue-500/10 dark:hover:shadow-blue-500/20'>
-            {/* Header */}
-            <div className='flex items-center gap-3 border-slate-200 border-b bg-linear-to-r from-slate-100 to-slate-50 px-6 py-4 dark:border-slate-700 dark:from-slate-800 dark:to-slate-900'>
-              <div className='h-3 w-3 rounded-full bg-red-500 transition-transform hover:scale-125' />
-              <div className='h-3 w-3 rounded-full bg-yellow-500 transition-transform hover:scale-125' />
-              <div className='h-3 w-3 rounded-full bg-green-500 transition-transform hover:scale-125' />
-              <span className='ml-auto font-medium text-slate-600 text-sm dark:text-slate-400'>App.tsx</span>
-            </div>
-
-            {/* Code */}
-            <div className='overflow-x-auto bg-slate-900 p-8'>
-              <pre className='font-mono text-slate-100 text-sm leading-relaxed'>
-                <code>{`import { Modal, Button } from '@polyms/core'
-
-export function App() {
-  return (
-    <Modal>
-      <Modal.Trigger className="btn btn-primary">
-        Open Dialog
-      </Modal.Trigger>
-      <Modal.Content>
-        <Modal.Header>Confirm Action</Modal.Header>
-        <Modal.Body>
-          Are you sure you want to proceed?
-        </Modal.Body>
-        <Modal.Footer>
-          <Modal.Close>Cancel</Modal.Close>
-          <Button variant="primary">
-            Confirm
-          </Button>
-        </Modal.Footer>
-      </Modal.Content>
-    </Modal>
-  )
-}`}</code>
-              </pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <span className='inline-flex items-center gap-2'>
+      <CheckIcon className='size-4 text-success' />
+      {label}
+    </span>
   )
 }
 
 function ComponentShowcaseSection() {
-  const components = [
-    { title: 'Modal', link: '/docs/modal', Icon: WindowIcon },
-    { title: 'Popover', link: '/docs/popover', Icon: ChatIcon },
-    { title: 'Tooltip', link: '/docs/tooltip', Icon: BookmarkIcon },
-    { title: 'Button', link: '/docs/button', Icon: RecordIcon },
-    { title: 'Tabs', link: '/docs/tabs', Icon: TabsIcon },
-    { title: 'Select', link: '/docs/select', Icon: MenuIcon },
+  return (
+    <section className='px-6 py-16 md:py-24'>
+      <Container>
+        <SectionHeader
+          eyebrow='Live preview'
+          subtitle='Real components, not screenshots. Hover, click, focus — everything works.'
+          title='See the design system in motion'
+        />
+
+        <div className='mt-12 grid auto-rows-[12rem] grid-cols-1 gap-4 sm:grid-cols-6'>
+          <ShowcaseCard className='sm:col-span-3 sm:row-span-2 sm:h-auto' label='Button' to='/docs/button'>
+            <ButtonsPreview />
+          </ShowcaseCard>
+
+          <ShowcaseCard className='sm:col-span-3' label='Tabs' to='/docs/tabs'>
+            <TabsPreview />
+          </ShowcaseCard>
+
+          <ShowcaseCard className='sm:col-span-3' label='Popover · Tooltip' to='/docs/popover'>
+            <PopoverPreview />
+          </ShowcaseCard>
+
+          <ShowcaseCard className='sm:col-span-2' label='Switch' to='/docs/switch'>
+            <SwitchPreview />
+          </ShowcaseCard>
+
+          <ShowcaseCard className='sm:col-span-2' label='Select' to='/docs/select'>
+            <SelectPreview />
+          </ShowcaseCard>
+
+          <ShowcaseCard className='sm:col-span-2' label='Menu' to='/docs/menu'>
+            <MenuPreview />
+          </ShowcaseCard>
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function ShowcaseCard({
+  children,
+  label,
+  to,
+  className,
+}: {
+  children: React.ReactNode
+  label: string
+  to: string
+  className?: string
+}) {
+  return (
+    <article
+      className={clsx(
+        'group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5',
+        className
+      )}
+    >
+      <div className='flex flex-1 items-center justify-center p-6'>{children}</div>
+      <div className='flex items-center justify-between border-slate-200/80 border-t bg-slate-50/60 px-4 py-2.5'>
+        <span className='font-medium text-slate-700 text-xs uppercase tracking-wider'>{label}</span>
+        <Link
+          aria-label={`Open ${label} docs`}
+          className='link link-light inline-flex items-center gap-1 text-xs'
+          to={to}
+        >
+          Open
+          <ArrowRightIcon className='size-3 transition-transform group-hover:translate-x-0.5' />
+        </Link>
+      </div>
+    </article>
+  )
+}
+
+function ButtonsPreview() {
+  return (
+    <div className='flex w-full flex-col items-center gap-4'>
+      <div className='flex flex-wrap items-center justify-center gap-2'>
+        <Button rounded variant='primary'>
+          Primary
+        </Button>
+        <Button rounded variant='success'>
+          Success
+        </Button>
+        <Button rounded variant='warning'>
+          Warning
+        </Button>
+        <Button rounded variant='danger'>
+          Danger
+        </Button>
+      </div>
+      <div className='flex flex-wrap items-center justify-center gap-2'>
+        <Button outlined rounded variant='primary'>
+          Outlined
+        </Button>
+        <Button rounded size='sm' variant='dark'>
+          Small
+        </Button>
+        <Button rounded size='lg' variant='primary'>
+          Large
+        </Button>
+      </div>
+      <div className='flex flex-wrap items-center justify-center gap-2'>
+        <span className='badge badge-primary'>primary</span>
+        <span className='badge badge-success'>success</span>
+        <span className='badge badge-warning'>warning</span>
+        <span className='badge badge-danger'>danger</span>
+        <span className='badge badge-light'>light</span>
+      </div>
+    </div>
+  )
+}
+
+function TabsPreview() {
+  return (
+    <Tabs className='w-full' defaultValue='overview'>
+      <Tabs.List>
+        <Tabs.Tab value='overview'>Overview</Tabs.Tab>
+        <Tabs.Tab value='settings'>Settings</Tabs.Tab>
+        <Tabs.Tab value='billing'>Billing</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel className='pt-3 text-slate-600 text-sm' value='overview'>
+        Build accessible tabs with animated indicator out of the box.
+      </Tabs.Panel>
+      <Tabs.Panel className='pt-3 text-slate-600 text-sm' value='settings'>
+        Compose with forms, popovers, and menus.
+      </Tabs.Panel>
+      <Tabs.Panel className='pt-3 text-slate-600 text-sm' value='billing'>
+        Keyboard navigation and ARIA roles included.
+      </Tabs.Panel>
+    </Tabs>
+  )
+}
+
+function PopoverPreview() {
+  return (
+    <div className='flex flex-wrap items-center justify-center gap-4'>
+      <Popover>
+        <Popover.Trigger className='btn btn-primary rounded-full'>Open popover</Popover.Trigger>
+        <Popover.Content
+          description='Composable, focus-trapped, and animated.'
+          side='bottom'
+          title='Hello there'
+        />
+      </Popover>
+
+      <Tooltip.Provider>
+        <Tooltip side='bottom' title='Tooltips work too'>
+          <button className='btn btn-light rounded-full' type='button'>
+            Hover me
+          </button>
+        </Tooltip>
+      </Tooltip.Provider>
+    </div>
+  )
+}
+
+function SwitchPreview() {
+  return (
+    <div className='flex w-full flex-col gap-3 text-slate-700 text-sm'>
+      <div className='flex items-center justify-between gap-3'>
+        <span>Notifications</span>
+        <Switch defaultChecked />
+      </div>
+      <div className='flex items-center justify-between gap-3'>
+        <span>Dark mode</span>
+        <Switch />
+      </div>
+      <div className='flex items-center justify-between gap-3 text-slate-400'>
+        <span>Beta features</span>
+        <Switch defaultChecked disabled />
+      </div>
+    </div>
+  )
+}
+
+function SelectPreview() {
+  return (
+    <Select defaultValue='vite' items={frameworks}>
+      <Select.Trigger className='w-full' placeholder='Pick a stack'>
+        {item => item?.label ?? 'Pick a stack'}
+      </Select.Trigger>
+      <Select.Content>
+        {frameworks.map(item => (
+          <Select.Item key={item.value} value={item.value}>
+            {item.label}
+          </Select.Item>
+        ))}
+      </Select.Content>
+    </Select>
+  )
+}
+
+const frameworks = [
+  { label: 'Vite', value: 'vite' },
+  { label: 'Next.js', value: 'next' },
+  { label: 'Remix', value: 'remix' },
+  { label: 'Astro', value: 'astro' },
+]
+
+function MenuPreview() {
+  return (
+    <Menu>
+      <Menu.Trigger className='btn btn-primary outlined rounded-full'>Actions</Menu.Trigger>
+      <Menu.Content title='Quick actions'>
+        <Menu.Item>
+          Edit
+          <Menu.Command meta sequence='E' />
+        </Menu.Item>
+        <Menu.Item>
+          Duplicate
+          <Menu.Command meta sequence='D' />
+        </Menu.Item>
+        <Menu.Separator />
+        <Menu.Item variant='danger'>Delete</Menu.Item>
+      </Menu.Content>
+    </Menu>
+  )
+}
+
+function FeaturesSection() {
+  const features: FeatureItem[] = [
+    {
+      Icon: Code2,
+      title: 'Type-safe by default',
+      description: 'Strict TypeScript with full IntelliSense on every prop and compound subcomponent.',
+      tone: 'primary',
+    },
+    {
+      Icon: Accessibility,
+      title: 'Accessible out of the box',
+      description: 'Built on Base UI primitives — keyboard nav, ARIA, focus management included.',
+      tone: 'success',
+    },
+    {
+      Icon: Layers,
+      title: 'Composable architecture',
+      description: 'Dot-notation compound components (`Modal.Header`, `Field.Control`) for clear intent.',
+      tone: 'info',
+    },
+    {
+      Icon: Palette,
+      title: 'Themeable tokens',
+      description: 'CSS variables and Tailwind v4 — swap palettes per brand without forking components.',
+      tone: 'warning',
+    },
+    {
+      Icon: SpedometerMax,
+      title: 'Performance-first',
+      description: 'Tree-shakeable bundle, lazy primitives, and zero runtime CSS-in-JS overhead.',
+      tone: 'danger',
+    },
+    {
+      Icon: Rocket,
+      title: 'Ready for AI workflows',
+      description: 'Ships with `AI.md` consumer notes so assistants compose UI the right way.',
+      tone: 'primary',
+    },
   ]
 
   return (
-    <section className='bg-linear-to-b from-slate-50 to-white px-6 py-24 md:py-32 dark:from-slate-900 dark:to-slate-950'>
-      <div className='container mx-auto'>
-        <div className='mx-auto max-w-3xl text-center'>
-          <h2 className='mb-4 font-bold text-4xl text-slate-900 md:text-5xl dark:text-white'>
-            Comprehensive Component Library
-          </h2>
-          <p className='mb-16 text-lg text-slate-600 dark:text-slate-400'>
-            Carefully crafted components for every UI need
-          </p>
-        </div>
+    <section className='border-slate-200/70 border-y bg-slate-50/50 px-6 py-20 md:py-28'>
+      <Container>
+        <SectionHeader
+          eyebrow='Why Core UI'
+          subtitle='Every primitive is opinionated where it matters — accessibility, types, semantics — and flexible everywhere else.'
+          title='Built for serious product teams'
+        />
 
-        <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-          {components.map((comp, idx) => (
-            <ComponentShowcaseCard index={idx} key={comp.title} {...comp} />
+        <div className='mt-12 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-3'>
+          {features.map(feature => (
+            <FeatureCard key={feature.title} {...feature} />
           ))}
         </div>
-
-        <div className='mt-12 text-center'>
-          <GlowingButton
-            className='btn btn-primary btn-lg inline-flex items-center gap-2'
-            to='/design-system'
-          >
-            Explore All Components →
-          </GlowingButton>
-        </div>
-      </div>
+      </Container>
     </section>
+  )
+}
+
+function FeatureCard({ Icon, title, description, tone }: FeatureItem) {
+  const toneClasses: Record<FeatureTone, string> = {
+    primary: 'text-primary bg-primary/10',
+    success: 'text-success-600 bg-success/10',
+    info: 'text-info-600 bg-info/10',
+    warning: 'text-warning-700 bg-warning/10',
+    danger: 'text-danger bg-danger/10',
+  }
+
+  return (
+    <div className='group relative bg-white p-7 transition-colors hover:bg-slate-50/80'>
+      <div className={clsx('inline-flex size-11 items-center justify-center rounded-xl', toneClasses[tone])}>
+        <Icon className='size-6' />
+      </div>
+      <h3 className='mt-5 font-semibold text-base text-slate-900'>{title}</h3>
+      <p className='mt-2 text-slate-600 text-sm leading-relaxed'>{description}</p>
+    </div>
+  )
+}
+
+function InstallSection() {
+  return (
+    <section className='px-6 py-20 md:py-28'>
+      <Container>
+        <SectionHeader
+          eyebrow='Get started'
+          subtitle='Install once, import the components you need from a single barrel. No deep imports required.'
+          title='Up and running in 30 seconds'
+        />
+
+        <div className='mt-12 grid gap-6 lg:grid-cols-5'>
+          <InstallCard className='lg:col-span-2' />
+          <ExampleCard className='lg:col-span-3' />
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function InstallCard({ className }: { className?: string }) {
+  return (
+    <div
+      className={clsx(
+        'flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white',
+        className
+      )}
+    >
+      <div className='flex items-center gap-2 border-slate-200 border-b px-5 py-3'>
+        <TerminalIcon className='size-4 text-slate-500' />
+        <span className='font-medium text-slate-700 text-sm'>Install</span>
+      </div>
+      <Tabs className='flex-1' defaultValue='pnpm'>
+        <Tabs.List className='px-2 pt-2'>
+          <Tabs.Tab value='pnpm'>pnpm</Tabs.Tab>
+          <Tabs.Tab value='npm'>npm</Tabs.Tab>
+          <Tabs.Tab value='yarn'>yarn</Tabs.Tab>
+          <Tabs.Tab value='bun'>bun</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel className='px-5 py-5' value='pnpm'>
+          <CodeBlock>pnpm add @polyms/core-ui</CodeBlock>
+        </Tabs.Panel>
+        <Tabs.Panel className='px-5 py-5' value='npm'>
+          <CodeBlock>npm install @polyms/core-ui</CodeBlock>
+        </Tabs.Panel>
+        <Tabs.Panel className='px-5 py-5' value='yarn'>
+          <CodeBlock>yarn add @polyms/core-ui</CodeBlock>
+        </Tabs.Panel>
+        <Tabs.Panel className='px-5 py-5' value='bun'>
+          <CodeBlock>bun add @polyms/core-ui</CodeBlock>
+        </Tabs.Panel>
+      </Tabs>
+
+      <div className='border-slate-200 border-t bg-slate-50/60 p-5'>
+        <p className='text-slate-600 text-xs leading-relaxed'>
+          Peers: <code className='rounded bg-slate-200/60 px-1 font-mono'>react</code>{' '}
+          <code className='rounded bg-slate-200/60 px-1 font-mono'>react-dom</code>{' '}
+          <span className='text-slate-500'>&gt;= 19.0.0</span>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function ExampleCard({ className }: { className?: string }) {
+  return (
+    <div
+      className={clsx(
+        'overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-slate-900/5 shadow-xl',
+        className
+      )}
+    >
+      <div className='flex items-center gap-2 border-slate-800 border-b bg-slate-900 px-5 py-3'>
+        <span className='size-2.5 rounded-full bg-rose-400/80' />
+        <span className='size-2.5 rounded-full bg-amber-400/80' />
+        <span className='size-2.5 rounded-full bg-emerald-400/80' />
+        <span className='ms-2 font-mono text-slate-400 text-xs'>App.tsx</span>
+      </div>
+      <pre className='overflow-x-auto p-6 font-mono text-[13px] text-slate-100 leading-relaxed'>
+        <code>
+          <span className='text-violet-300'>import</span> <span className='text-slate-300'>{'{'}</span>{' '}
+          <span className='text-sky-300'>Modal</span>
+          <span className='text-slate-300'>,</span> <span className='text-sky-300'>Button</span>{' '}
+          <span className='text-slate-300'>{'}'}</span> <span className='text-violet-300'>from</span>{' '}
+          <span className='text-emerald-300'>'@polyms/core-ui'</span>
+          {'\n\n'}
+          <span className='text-violet-300'>export function</span> <span className='text-amber-200'>App</span>
+          <span className='text-slate-300'>() {'{'}</span>
+          {'\n'}
+          {'  '}
+          <span className='text-violet-300'>return</span> <span className='text-slate-300'>(</span>
+          {'\n'}
+          {'    '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Modal</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'      '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Modal.Trigger</span> <span className='text-amber-200'>variant</span>
+          <span className='text-slate-300'>=</span>
+          <span className='text-emerald-300'>"primary"</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'        '}Open dialog
+          {'\n'}
+          {'      '}
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Modal.Trigger</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'      '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Modal.Content</span> <span className='text-amber-200'>size</span>
+          <span className='text-slate-300'>=</span>
+          <span className='text-emerald-300'>"lg"</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'        '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Modal.Header</span>
+          <span className='text-slate-400'>&gt;</span>Confirm
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Modal.Header</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'        '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Modal.Body</span>
+          <span className='text-slate-400'>&gt;</span>Save changes?
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Modal.Body</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'        '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Modal.Footer</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'          '}
+          <span className='text-slate-400'>&lt;</span>
+          <span className='text-sky-300'>Button</span> <span className='text-amber-200'>variant</span>
+          <span className='text-slate-300'>=</span>
+          <span className='text-emerald-300'>"primary"</span>
+          <span className='text-slate-400'>&gt;</span>Save
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Button</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'        '}
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Modal.Footer</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'      '}
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Modal.Content</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'    '}
+          <span className='text-slate-400'>&lt;/</span>
+          <span className='text-sky-300'>Modal</span>
+          <span className='text-slate-400'>&gt;</span>
+          {'\n'}
+          {'  '}
+          <span className='text-slate-300'>)</span>
+          {'\n'}
+          <span className='text-slate-300'>{'}'}</span>
+        </code>
+      </pre>
+    </div>
+  )
+}
+
+function CodeBlock({ children }: { children: React.ReactNode }) {
+  return (
+    <div className='flex items-center justify-between gap-3 rounded-lg bg-slate-950 px-4 py-3 font-mono text-slate-100 text-sm'>
+      <span className='truncate'>
+        <span className='text-primary-300'>$</span> {children}
+      </span>
+      <CopyHintButton text={String(children)} />
+    </div>
+  )
+}
+
+function CopyHintButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
+  }, [])
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      if (timerRef.current) clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => setCopied(false), 1500)
+    } catch {
+      // noop — clipboard may be unavailable
+    }
+  }
+
+  return (
+    <button
+      aria-label='Copy command'
+      className='shrink-0 rounded-md p-1.5 text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100'
+      onClick={handleCopy}
+      type='button'
+    >
+      {copied ? <CheckIcon className='size-4 text-success-400' /> : <CopyIcon className='size-4' />}
+    </button>
+  )
+}
+
+function MetricsSection() {
+  const metrics: MetricItem[] = [
+    { value: '30+', label: 'Components', sub: 'production-ready' },
+    { value: '100%', label: 'TypeScript', sub: 'strict mode' },
+    { value: 'WCAG', label: 'AA compliant', sub: 'on every primitive' },
+    { value: '0', label: 'Runtime CSS-in-JS', sub: 'just Tailwind + CSS' },
+  ]
+
+  return (
+    <section className='px-6 py-10 md:py-16'>
+      <Container>
+        <div className='grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 lg:grid-cols-4'>
+          {metrics.map(metric => (
+            <MetricCell key={metric.label} {...metric} />
+          ))}
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function MetricCell({ value, label, sub }: MetricItem) {
+  return (
+    <div className='bg-white p-6 md:p-8'>
+      <div className='bg-linear-to-b from-slate-900 to-primary-600 bg-clip-text font-semibold text-4xl text-transparent tracking-tight md:text-5xl'>
+        {value}
+      </div>
+      <div className='mt-2 font-medium text-slate-900 text-sm'>{label}</div>
+      <div className='text-slate-500 text-xs'>{sub}</div>
+    </div>
   )
 }
 
 function CTASection() {
   return (
-    <section className='relative overflow-hidden px-6 py-24 md:py-32'>
-      {/* Gradient backgrounds */}
-      <div className='pointer-events-none absolute inset-0'>
-        <div className='absolute -top-40 -left-40 h-80 w-80 animate-pulse rounded-full bg-blue-400/20 blur-3xl' />
-        <div className='absolute -right-40 -bottom-40 h-80 w-80 animate-pulse rounded-full bg-purple-400/20 blur-3xl' />
-      </div>
-
-      <div className='container relative mx-auto'>
-        <div className='mx-auto max-w-2xl overflow-hidden rounded-3xl border border-blue-200/50 bg-linear-to-br from-blue-50 via-purple-50 to-blue-50 p-12 text-center backdrop-blur transition-all duration-300 hover:border-blue-400/50 dark:border-blue-900/50 dark:from-blue-950/50 dark:via-purple-950/50 dark:to-blue-950/50 dark:hover:border-blue-400/50'>
-          {/* Shine effect */}
-          <div className='pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 hover:translate-x-full dark:via-white/5' />
-
-          <h2 className='mb-4 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text font-bold text-4xl text-transparent md:text-5xl dark:from-blue-400 dark:to-purple-400'>
-            Ready to Build Something Great?
-          </h2>
-          <p className='mb-8 text-lg text-slate-600 dark:text-slate-300'>
-            Join thousands of developers building production applications with Core UI
-          </p>
-          <div className='flex flex-wrap items-center justify-center gap-4'>
-            <GlowingButton className='btn btn-primary btn-lg' to='/design-system'>
-              Start Building →
-            </GlowingButton>
-            <a
-              className='btn btn-secondary btn-lg border-2 border-slate-300 bg-white transition-all duration-300 hover:border-blue-500 hover:shadow-lg dark:border-slate-600 dark:bg-slate-900 dark:hover:border-blue-400'
-              href='https://github.com/polyms/core-ui'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              Star on GitHub ⭐
-            </a>
+    <section className='px-6 pt-16 pb-24 md:pt-24 md:pb-32'>
+      <Container>
+        <div className='relative overflow-hidden rounded-3xl border border-slate-200 bg-linear-to-br from-white via-primary-50/60 to-info-50/40 p-10 md:p-16'>
+          <div
+            aria-hidden='true'
+            className='absolute top-0 left-1/2 h-72 w-xl -translate-x-1/2 rounded-full bg-primary/10 blur-3xl'
+          />
+          <div className='relative grid items-end gap-8 md:grid-cols-[1fr_auto]'>
+            <div>
+              <span className='inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-3 py-1 font-medium text-primary-700 text-xs'>
+                <MagicStick3 className='size-3.5' />
+                Ready when you are
+              </span>
+              <h2 className='mt-4 max-w-2xl text-balance font-semibold text-3xl text-slate-900 tracking-tight md:text-5xl'>
+                Stop reinventing the same primitives.
+                <br />
+                <span className='bg-linear-to-r from-primary-600 to-info-500 bg-clip-text text-transparent'>
+                  Start shipping product.
+                </span>
+              </h2>
+              <p className='mt-4 max-w-xl text-slate-600 md:text-lg'>
+                Open source. MIT licensed. Built in the open by{' '}
+                <a
+                  className='link link-primary'
+                  href='https://polyms.dev'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  Polyms
+                </a>
+                .
+              </p>
+            </div>
+            <div className='flex flex-wrap items-center gap-3 md:flex-col md:items-stretch'>
+              <Link className='btn btn-primary btn-xl rounded-full px-6' to='/design-system'>
+                Get started
+                <ArrowRightIcon className='size-4' />
+              </Link>
+              <a
+                className='btn btn-light btn-xl rounded-full px-6'
+                href='https://github.com/polyms/core-ui'
+                rel='noopener noreferrer'
+                target='_blank'
+              >
+                <GitHubIcon className='size-4' />
+                Star on GitHub
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
-  )
-}
-
-function QuickStartSection() {
-  const steps = [
-    {
-      number: '01',
-      title: 'Install',
-      description: 'Add Core UI to your project in seconds',
-      code: 'npm install @polyms/core',
-    },
-    {
-      number: '02',
-      title: 'Import',
-      description: 'Import the components you need',
-      code: 'import { Button } from "@polyms/core"',
-    },
-    {
-      number: '03',
-      title: 'Use',
-      description: 'Start building immediately',
-      code: '<Button>Click me</Button>',
-    },
-    {
-      number: '04',
-      title: 'Deploy',
-      description: 'Ship with confidence',
-      code: 'npm run build && npm run deploy',
-    },
-  ]
-
-  return (
-    <section className='relative bg-slate-50 px-6 py-24 md:py-32 dark:bg-slate-900'>
-      <div className='container mx-auto'>
-        <div className='mx-auto mb-16 max-w-3xl text-center'>
-          <h2 className='mb-4 font-bold text-4xl text-slate-900 md:text-5xl dark:text-white'>
-            Get Started in Minutes
-          </h2>
-          <p className='text-lg text-slate-600 dark:text-slate-400'>Simple setup, no complexity required</p>
-        </div>
-
-        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {steps.map(step => (
-            <div
-              className='group rounded-xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:border-blue-400 hover:shadow-lg dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-400'
-              key={step.number}
-            >
-              <div className='mb-3 inline-block rounded-lg bg-linear-to-br from-blue-100 to-purple-100 px-3 py-1 font-bold text-blue-600 dark:from-blue-900/50 dark:to-purple-900/50 dark:text-blue-300'>
-                {step.number}
-              </div>
-              <h3 className='mb-2 font-bold text-lg text-slate-900 dark:text-white'>{step.title}</h3>
-              <p className='mb-4 text-slate-600 text-sm dark:text-slate-400'>{step.description}</p>
-              <code className='block overflow-x-auto rounded bg-slate-900 px-3 py-2 font-mono text-slate-100 text-xs dark:bg-slate-950'>
-                {step.code}
-              </code>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function UseCasesSection() {
-  const usecases = [
-    {
-      Icon: Buildings,
-      title: 'Enterprise SaaS',
-      description: 'Build complex dashboards with hundreds of components. Core UI handles the heavy lifting.',
-      features: ['Type-safe', 'High Performance', 'Accessible'],
-    },
-    {
-      Icon: MonitorSmartphone,
-      title: 'Admin Panels',
-      description: 'Responsive design built-in. Perfect for internal tools and dashboards.',
-      features: ['Responsive', 'Mobile-friendly', 'Lightweight'],
-    },
-    {
-      Icon: GamepadOld,
-      title: 'Interactive UIs',
-      description: 'Animation support with Framer Motion. Create delightful user experiences.',
-      features: ['Smooth Animations', 'Interactive', 'Customizable'],
-    },
-    {
-      Icon: DiagramUp,
-      title: 'Data Apps',
-      description: 'Perfect for analytics and data visualization. Tables, charts, and more.',
-      features: ['Scalable', 'Theme-able', 'Dark Mode'],
-    },
-  ]
-
-  return (
-    <section className='relative bg-linear-to-b from-blue-50 to-slate-50 px-6 py-24 md:py-32 dark:from-blue-950/20 dark:to-slate-900'>
-      <div className='container mx-auto'>
-        <div className='mx-auto mb-16 max-w-3xl text-center'>
-          <h2 className='mb-4 font-bold text-4xl text-slate-900 md:text-5xl dark:text-white'>
-            Perfect for Every Project
-          </h2>
-          <p className='text-lg text-slate-600 dark:text-slate-400'>
-            No matter what you're building, Core UI has you covered
-          </p>
-        </div>
-
-        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {usecases.map(item => (
-            <div
-              className='group rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-xl dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-400'
-              key={item.title}
-            >
-              <div className='mb-3 inline-flex text-primary transition-transform duration-300 group-hover:scale-110'>
-                <item.Icon className='h-12 w-12' />
-              </div>
-              <h3 className='mb-2 font-bold text-lg text-slate-900 dark:text-white'>{item.title}</h3>
-              <p className='mb-4 text-slate-600 text-sm dark:text-slate-400'>{item.description}</p>
-              <div className='flex flex-wrap gap-2'>
-                {item.features.map(feature => (
-                  <span
-                    className='rounded-full bg-blue-100 px-2 py-1 font-medium text-blue-700 text-xs dark:bg-blue-900/50 dark:text-blue-300'
-                    key={feature}
-                  >
-                    {feature}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function PerformanceSection() {
-  const metrics = [
-    { label: 'Bundle Size', value: '23KB', sublabel: 'gzipped' },
-    { label: 'Lighthouse Score', value: '98', sublabel: 'average' },
-    { label: 'Components', value: '30+', sublabel: 'production-ready' },
-    { label: 'TypeScript', value: '100%', sublabel: 'covered' },
-  ]
-
-  return (
-    <section className='relative px-6 py-24 md:py-32'>
-      <div className='container mx-auto'>
-        <div className='mx-auto mb-16 max-w-3xl text-center'>
-          <h2 className='mb-4 font-bold text-4xl text-slate-900 md:text-5xl dark:text-white'>
-            Performance Optimized
-          </h2>
-          <p className='text-lg text-slate-600 dark:text-slate-400'>
-            Built for speed, accessibility, and excellent user experience
-          </p>
-        </div>
-
-        <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-4'>
-          {metrics.map(metric => (
-            <div
-              className='group overflow-hidden rounded-2xl border border-slate-200 bg-linear-to-br from-white to-slate-50 p-8 text-center transition-all duration-300 hover:border-blue-400 hover:shadow-lg dark:border-slate-700 dark:from-slate-800 dark:to-slate-900 dark:hover:border-blue-400'
-              key={metric.label}
-            >
-              <div className='mb-3 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text font-bold text-5xl text-transparent'>
-                {metric.value}
-              </div>
-              <p className='mb-1 font-bold text-slate-900 dark:text-white'>{metric.label}</p>
-              <p className='text-slate-600 text-sm dark:text-slate-400'>{metric.sublabel}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ComponentShowcaseCard({
-  title,
-  link,
-  Icon,
-  index,
-}: {
-  title: string
-  link: string
-  Icon: React.ComponentType<IconProps>
-  index: number
-}) {
-  const ref = useRef<HTMLAnchorElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setTimeout(() => setIsVisible(true), index * 80)
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [index])
-
-  return (
-    <Link
-      className={`group relative overflow-hidden rounded-2xl border border-slate-200 bg-linear-to-br from-white to-slate-50 p-6 transition-all duration-700 dark:border-slate-700 dark:from-slate-800 dark:to-slate-900 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-      }`}
-      ref={ref}
-      to={link}
-    >
-      {/* Background gradient */}
-      <div className='absolute inset-0 bg-linear-to-br from-blue-500/0 to-purple-500/0 transition-all duration-300 group-hover:from-blue-500/10 group-hover:to-purple-500/10' />
-
-      {/* Border glow */}
-      <div className='absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-        <div className='absolute inset-0 rounded-2xl border border-blue-400/50 blur-sm' />
-      </div>
-
-      <div className='relative'>
-        <div className='mb-3 inline-flex text-primary transition-all duration-300 group-hover:scale-125'>
-          <Icon className='h-12 w-12' />
-        </div>
-        <h3 className='font-bold text-lg text-slate-900 transition-colors duration-300 group-hover:text-primary dark:text-white dark:group-hover:text-primary'>
-          {title}
-        </h3>
-      </div>
-
-      {/* Arrow indicator */}
-      <div className='absolute top-1/2 right-6 -translate-y-1/2 text-2xl opacity-0 transition-all duration-300 group-hover:right-4 group-hover:opacity-100'>
-        →
-      </div>
-    </Link>
   )
 }
 
 function FooterSection() {
   return (
-    <footer className='bg-slate-50 dark:border-slate-800 dark:bg-slate-900'>
-      <div className='container relative mx-auto overflow-hidden pt-16 pb-20 text-center'>
-        <span
-          aria-hidden='true'
-          className='pointer-events-none absolute inset-0 flex select-none items-center justify-center font-black text-[clamp(3rem,20vw,12rem)] text-slate-900/5 uppercase'
-        >
-          Polyms
-        </span>
-        <p>
-          Built with ❤️ by{' '}
+    <footer className='border-slate-200 border-t bg-white'>
+      <Container className='flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center'>
+        <div className='flex items-center gap-3'>
+          <img alt='Polyms' className='size-7' src='/favicon.png' />
+          <div>
+            <div className='font-semibold text-slate-900'>Polyms Core UI</div>
+            <div className='text-slate-500 text-xs'>© 2026 Polyms. MIT Licensed.</div>
+          </div>
+        </div>
+
+        <div className='flex flex-wrap items-center gap-x-6 gap-y-2 text-slate-600 text-sm'>
+          <Link className='link link-light' to='/design-system'>
+            Components
+          </Link>
+          <Link className='link link-light' to='/typography'>
+            Typography
+          </Link>
           <a
-            className='font-medium transition-colors hover:text-primary dark:hover:text-primary'
-            href='https://polyms.app'
+            className='link link-light'
+            href='https://github.com/polyms/core-ui'
             rel='noopener noreferrer'
             target='_blank'
           >
-            Polyms
+            GitHub
           </a>
-        </p>
-        <p className='mt-2'>© 2026. Open source. MIT License.</p>
-      </div>
+          <a className='link link-light' href='https://polyms.dev' rel='noopener noreferrer' target='_blank'>
+            polyms.dev
+          </a>
+        </div>
+      </Container>
     </footer>
   )
+}
+
+function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
+  return (
+    <div className='mx-auto max-w-2xl text-center'>
+      <div className='inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 font-medium text-primary-700 text-xs'>
+        {eyebrow}
+      </div>
+      <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-900 tracking-tight md:text-4xl'>
+        {title}
+      </h2>
+      <p className='mt-3 text-balance text-slate-600 md:text-lg'>{subtitle}</p>
+    </div>
+  )
+}
+
+// ── Icons ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+function ArrowRightIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden='true'
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth='2'
+      viewBox='0 0 24 24'
+    >
+      <path d='M5 12h14' />
+      <path d='m13 5 7 7-7 7' />
+    </svg>
+  )
+}
+
+function CheckIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden='true'
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth='2.25'
+      viewBox='0 0 24 24'
+    >
+      <path d='m5 12 5 5L20 7' />
+    </svg>
+  )
+}
+
+function CopyIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden='true'
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth='1.75'
+      viewBox='0 0 24 24'
+    >
+      <rect height='13' rx='2' ry='2' width='13' x='9' y='9' />
+      <path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' />
+    </svg>
+  )
+}
+
+function GitHubIcon({ className }: IconProps) {
+  return (
+    <svg aria-hidden='true' className={className} fill='currentColor' viewBox='0 0 24 24'>
+      <path d='M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.69-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.94 10.94 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.35.78 1.04.78 2.11v3.13c0 .31.21.67.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z' />
+    </svg>
+  )
+}
+
+function TerminalIcon({ className }: IconProps) {
+  return (
+    <svg
+      aria-hidden='true'
+      className={className}
+      fill='none'
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth='2'
+      viewBox='0 0 24 24'
+    >
+      <path d='m4 17 6-6-6-6' />
+      <path d='M12 19h8' />
+    </svg>
+  )
+}
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type FeatureTone = 'primary' | 'success' | 'info' | 'warning' | 'danger'
+
+type FeatureItem = {
+  Icon: React.ComponentType<IconProps>
+  title: string
+  description: string
+  tone: FeatureTone
+}
+
+type MetricItem = {
+  value: string
+  label: string
+  sub: string
 }

@@ -1,7 +1,7 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
-import { forwardRef, Suspense, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { Tooltip } from '../tooltip'
 
 // const TooltipLazy = lazy(async () => {
