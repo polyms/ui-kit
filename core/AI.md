@@ -312,6 +312,98 @@ Notes:
 - `thead.bg-neutral` is supported for compatibility in table CSS, but it maps to slate-like styling. For new code, keep using the **slate** rules in this file.
 - For new generated code, prioritize CSS-only classes above before introducing custom one-off class names for equivalent behavior.
 
+## Interactive state utilities (`item-*`)
+
+The `item-*` classes encode the **idle → hover → active** transparent palette used across the design system. They turn any block into a *ghost-style* interactive surface (transparent idle, tinted hover) **without rewriting hover/active rules every time**.
+
+Reach for them whenever you build:
+
+- **Nav items** (sidebar links, navbar links, breadcrumbs, tab-like rows)
+- **Interactive chips / tags** (clickable, dismissible, counters with `:hover`)
+- **List rows** that highlight on hover (command palette items, mention rows, file rows)
+- **Custom segmented controls / toolbar-style buttons** outside of `<Toolbar>`
+- **Status-tinted action rows** (e.g. a destructive "Move to trash" row)
+
+### Variants
+
+| Class | Idle | Hover (with `(hover: hover)`) | `:active` / `.active` |
+| -- | -- | -- | -- |
+| **`item-primary`** | transparent, inherits color | `bg-primary-700/10` + `text-primary-700` | `bg-primary-700/10` + `text-primary-700` |
+| **`item-success`** | transparent + `text-success-600` | `bg-success-100` + `text-success-700` | `bg-success-200` + `text-success-700` |
+| **`item-info`** | transparent + `text-info-600` | `bg-info-500/5` + `text-info-600` | `bg-info-500/5` + `text-info-600` |
+| **`item-warning`** | transparent + `text-warning-500` | `bg-warning-100` + `text-warning-600` | `bg-warning-200` + `text-warning-600` |
+| **`item-danger`** | transparent + `text-danger-500` | `bg-danger-100` + `text-danger-600` | `bg-danger-200` + `text-danger-600` |
+| **`item-light`** | transparent + `text-slate-600` | `bg-slate-100` + `text-slate-900` | `bg-slate-200` + `text-slate-900` |
+| **`item-dark`** | transparent + `text-slate-300` | `bg-slate-700` + white | `bg-slate-800` + white |
+
+Properties of the family:
+
+1. **They only own color + background-color** (idle / hover / active). Layout — **padding, font-size, border-radius, gap, width, icon size** — stays the responsibility of the consumer (Tailwind utilities or your own CSS).
+2. **Hover** is gated by `@media (hover: hover)` so touch devices don't get stuck on a hover style.
+3. **Selected state** is opt-in via the **`.active`** class. `item-*` styles `.active` identically to `:active`, so a router-driven menu item only needs `clsx('item-primary', isCurrent && 'active')`.
+4. **Disabled state** is **not** part of `item-*`. Add `disabled:opacity-50 disabled:pointer-events-none` (or your own disabled token) on `<button>` / `<a aria-disabled>`.
+
+### Examples
+
+```tsx
+{/* Sidebar / nav item with router-driven active state */}
+<a
+  href='/dashboard'
+  className={clsx(
+    'item-primary flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium',
+    isActive && 'active',
+  )}
+>
+  <DashboardIcon />
+  Dashboard
+</a>
+
+{/* Interactive filter chip with a counter */}
+<button
+  type='button'
+  className='item-light inline-flex items-center gap-1 rounded-full border border-slate-300 px-3 py-1 text-xs'
+>
+  In progress
+  <span className='font-semibold'>12</span>
+</button>
+
+{/* Status row — destructive action */}
+<button
+  type='button'
+  className='item-danger flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium'
+>
+  Move to trash
+  <kbd className='text-xs'>⌫</kbd>
+</button>
+
+{/* Custom segmented control / ad-hoc toolbar */}
+<div className='inline-flex gap-1 rounded-lg border border-slate-200 p-1'>
+  <button type='button' className='item-primary rounded-md px-2 py-1 text-sm active'>Bold</button>
+  <button type='button' className='item-primary rounded-md px-2 py-1 text-sm'>Italic</button>
+  <button type='button' className='item-primary rounded-md px-2 py-1 text-sm'>Underline</button>
+</div>
+
+{/* Top navbar links */}
+<nav className='flex items-center gap-1'>
+  <a className='item-light rounded-md px-3 py-2 text-sm' href='/'>Home</a>
+  <a className='item-light rounded-md px-3 py-2 text-sm active' href='/docs'>Docs</a>
+  <a className='item-light rounded-md px-3 py-2 text-sm' href='/pricing'>Pricing</a>
+</nav>
+```
+
+### Rules for AI code generation
+
+1. **Default to `item-*`** instead of hand-writing `hover:bg-slate-100` / `hover:bg-primary-100` chains for any new chip, counter, nav item, breadcrumb item, segmented control, or list row that needs ghost-style interactivity. Using arbitrary Tailwind palettes (`hover:bg-blue-50`, `hover:bg-zinc-100`, `hover:bg-rose-50`, …) here is the same kind of drift as the **slate vs neutral** rule earlier — `item-*` is the single source of truth for **transparent → tinted** interaction tones.
+2. **Pick the variant by intent, not aesthetics**: `primary` for default brand emphasis, `success` / `warning` / `danger` for status-tinted rows, `info` for soft informational accents, `light` for neutral chrome, `dark` for surfaces on dark backgrounds.
+3. **Selected state = `.active`**, not `data-active` / `aria-selected` styling. `item-*` already styles `.active` identically to `:active`. Combine with router state, e.g. ``clsx('item-primary', match && 'active')``.
+4. **Don't fight the family.** If you find yourself adding `hover:bg-*` / `hover:text-*` next to an `item-*` class to "fix" the color, **swap the variant** instead.
+5. **Static vs interactive separation:**
+   - Use **`.badge` + `.badge-{tone}`** for **static** labels (status pills, counts that don't react to pointer events).
+   - Use **`item-*`** for **interactive** surfaces (button / anchor / `role='button'`).
+   - A chip that is both visually a badge **and** clickable can compose them: `class='badge badge-light item-light rounded-full'` — but only if the hover behavior is desired.
+6. **Compound components first.** If a Polyms component already exists (`Button`, `Toolbar`, `Tabs`, `Menu`, `Field`, …), prefer it. `item-*` is for **ad-hoc** surfaces (custom nav row, custom chip, breadcrumb item, …) where no exported component fits.
+7. **Stay tokenized for variants on internal CSS.** Inside your own component CSS, you can mirror this pattern with CSS variables and `color-mix(in oklab, var(--your-variant) 10%, transparent)` — that's exactly how `.toolbar-button` and `.btn` are built. Don't inline raw hex values.
+
 ## Conventions when composing UI
 
 - Prefer exports from **`@polyms/core-ui`** before reimplementing the same patterns.

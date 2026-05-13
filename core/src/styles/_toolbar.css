@@ -1,11 +1,18 @@
 .toolbar {
+  /* Transparent palette tokens (mirrors `.item-primary` pattern in _utilities.css) */
+  --toolbar-variant-color: var(--color-primary-700);
+  --toolbar-bg-hover: color-mix(in oklab, var(--toolbar-variant-color) 10%, transparent);
+  --toolbar-bg-active: color-mix(in oklab, var(--toolbar-variant-color) 15%, transparent);
+  --toolbar-bg-pressed: color-mix(in oklab, var(--toolbar-variant-color) 12%, transparent);
+  --toolbar-focus-ring: color-mix(in oklab, var(--color-primary-500) 35%, transparent);
+
   display: flex;
   align-items: center;
   gap: 0.25rem;
   padding: 0.25rem;
   border: 1px solid var(--color-slate-200);
   border-radius: 0.5rem;
-  background-color: #fff;
+  background-color: transparent;
   color: var(--color-slate-900);
   box-sizing: border-box;
   font-size: 0.875rem;
@@ -82,30 +89,30 @@
     border-color 150ms ease;
 
   @media (hover: hover) {
-    &:hover:not([data-disabled]):not([data-pressed]) {
-      background-color: var(--color-slate-100);
-      color: var(--color-slate-900);
+    &:hover:not([data-disabled]):not([data-pressed]):not([data-popup-open]) {
+      background-color: var(--toolbar-bg-hover);
+      color: var(--toolbar-variant-color);
     }
   }
 
   &:active:not([data-disabled]) {
-    background-color: var(--color-slate-200);
-    color: var(--color-slate-900);
+    background-color: var(--toolbar-bg-active);
+    color: var(--toolbar-variant-color);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-primary-500);
+    outline: 2px solid var(--toolbar-focus-ring);
     outline-offset: -1px;
   }
 
   &[data-pressed] {
-    background-color: var(--color-primary-50);
-    color: var(--color-primary-700);
+    background-color: var(--toolbar-bg-pressed);
+    color: var(--toolbar-variant-color);
   }
 
   &[data-popup-open] {
-    background-color: var(--color-slate-100);
-    color: var(--color-slate-900);
+    background-color: var(--toolbar-bg-hover);
+    color: var(--toolbar-variant-color);
   }
 
   &[data-disabled] {
@@ -135,22 +142,29 @@
   height: 2rem;
   padding-inline: 0.5rem;
   border-radius: 0.375rem;
+  background-color: transparent;
   color: var(--color-slate-600);
   font-size: 0.8125rem;
   text-decoration: none;
   outline: none;
-  transition: color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
 
   @media (hover: hover) {
     &:hover {
-      color: var(--color-primary-600);
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      background-color: var(--toolbar-bg-hover);
+      color: var(--toolbar-variant-color);
     }
   }
 
+  &:active {
+    background-color: var(--toolbar-bg-active);
+    color: var(--toolbar-variant-color);
+  }
+
   &:focus-visible {
-    outline: 2px solid var(--color-primary-500);
+    outline: 2px solid var(--toolbar-focus-ring);
     outline-offset: 2px;
   }
 }
@@ -183,7 +197,7 @@
 
   &:focus-visible {
     border-color: var(--color-primary-500);
-    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-primary-500) 25%, transparent);
+    box-shadow: 0 0 0 2px var(--toolbar-focus-ring);
   }
 
   &[data-disabled] {

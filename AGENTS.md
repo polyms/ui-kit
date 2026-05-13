@@ -91,6 +91,8 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 - **Tailwind** + `clsx()`; class có thể bị sort bởi Biome.
 - Style component: file **`core/src/styles/_tên-component.css`** và pattern import hiện có.
 - **Màu xám:** dùng **`--color-slate-*`**, không dùng `--color-neutral-*` (ví dụ `var(--color-slate-400)`).
+- **Phối transparent (idle/hover/active):** mọi component có state kiểu *ghost* (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`core/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
+- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/AI.md`** (section *CSS-only UI classes* và *Interactive state utilities (`item-*`)*) để consumer biết.
 
 ### Component & state
 
