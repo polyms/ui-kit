@@ -1,5 +1,6 @@
-import { Alert, Button, Modal, type ModalSize, useBoolean } from '@polyms/core'
+import { Alert, Button, Modal, type ModalSize } from '@polyms/core'
 import { useState } from 'react'
+import { useBoolean } from 'usehooks-ts'
 
 const sizes = ['sm', undefined, 'lg', 'xl'] as ModalSize[]
 

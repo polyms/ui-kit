@@ -17,11 +17,11 @@ const backend = [
 export default function SelectDefault() {
   return (
     <div className='m-auto'>
-      <Select multiple>
+      <Select items={[...frontend, ...backend]} multiple>
         <Select.Trigger placeholder='Select...'>{item => item.label}</Select.Trigger>
         <Select.Content>
           {frontend.map(item => (
-            <Select.Item key={item.value} value={item.label}>
+            <Select.Item key={item.label} value={item.value}>
               {item.label}
             </Select.Item>
           ))}
@@ -29,7 +29,7 @@ export default function SelectDefault() {
           <Select.Group>
             <Select.GroupLabel>Backend</Select.GroupLabel>
             {backend.map(item => (
-              <Select.Item key={item.value} value={item.label}>
+              <Select.Item key={item.label} value={item.value}>
                 {item.label}
               </Select.Item>
             ))}

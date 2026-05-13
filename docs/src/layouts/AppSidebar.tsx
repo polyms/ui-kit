@@ -12,10 +12,11 @@ import {
   Share08Icon,
   ThreeDScaleIcon,
 } from '@hugeicons/core-free-icons'
-import { Collapsible, Field, useBoolean, useEventCallback, useToggle } from '@polyms/core'
+import { Collapsible, Field } from '@polyms/core'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useImperativeHandle, useMemo, useState } from 'react'
+import { useBoolean, useEventCallback, useToggle } from 'usehooks-ts'
 import { Icon } from '../components/Icons'
 
 export function AppSidebar({ ref }: AppSidebarProps) {

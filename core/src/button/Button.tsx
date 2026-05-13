@@ -72,11 +72,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     })
 
     if (useRichTooltip && mounted) {
-      return (
-        <Suspense fallback={button}>
-          <Tooltip title={tooltip}>{button}</Tooltip>
-        </Suspense>
-      )
+      return <Tooltip title={tooltip}>{button}</Tooltip>
     }
 
     return button

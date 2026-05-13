@@ -14,7 +14,6 @@ Everything comes from **one entry**: `@polyms/core-ui` (`index.mjs` / `index.d.t
 
 - **Polyms components** — e.g. `Button`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `Tabs`, `Avatar`, …
 - **Re-exports from Base UI** — e.g. `Accordion`, `NavigationMenu`, `Toggle`, `ToggleGroup`, plus **`useRender`** from `@base-ui/react/use-render`.
-- **Hooks** — **usehooks-ts** is re-exported (e.g. `useBoolean`, `useEventCallback` — confirm names in types).
 - **Programmatic modals** — **`useModalStore`** with **`showModal`** / **`closeModal`** on the store (see modal types in `index.d.ts`).
 - **Code-splitting** — **`dynamic`** (lazy loader) if present in your version — confirm in `index.d.ts`.
 
