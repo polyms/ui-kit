@@ -1,9 +1,9 @@
 .card {
-  @apply overflow-clip rounded-xl;
+  @apply flex flex-col overflow-clip rounded-xl;
 
   border: 1px var(--tw-border-style, solid) var(--color-slate-300);
 }
 
 .card-body {
-  @apply p-4;
+  @apply flex flex-col p-4;
 }

@@ -30,10 +30,12 @@
     cursor: pointer;
     transform: translateY(-50%);
 
-    @apply text-slate-400;
+    @apply flex items-center justify-center text-slate-400;
 
-    &:hover {
-      color: var(--color-slate-900);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-slate-900);
+      }
     }
   }
 
