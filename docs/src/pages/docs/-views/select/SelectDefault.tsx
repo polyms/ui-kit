@@ -18,7 +18,9 @@ export default function SelectDefault() {
   return (
     <div className='m-auto'>
       <Select items={[...frontend, ...backend]} multiple>
-        <Select.Trigger placeholder='Select...'>{item => item.label}</Select.Trigger>
+        <Select.Trigger className='rounded-full' placeholder='Select...'>
+          {item => item.label}
+        </Select.Trigger>
         <Select.Content>
           {frontend.map(item => (
             <Select.Item key={item.label} value={item.value}>

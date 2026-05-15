@@ -15,16 +15,20 @@ apis:
     default: '-'
     values: boolean
     description: Applies error styling to the field and shows validation feedback.
-  - name: disabled
-    default: '-'
-    values: boolean
-    description: Disables the field, preventing user interaction and applying reduced opacity.
   - separator: Field.Label
   - name: render
     default: <label/>
     values: ReactElement | (props, state) => ReactNode
     description: Overrides the default label element. Pass a React element or render function for advanced customization.
   - separator: Field.Control
+  - name: disabled
+    default: '-'
+    values: boolean
+    description: Prevents interaction; applies muted background, border, and reduced opacity.
+  - name: readOnly
+    default: '-'
+    values: boolean
+    description: Shows the value without editing; muted background and no hover or focus ring.
   - name: rounded
     default: '-'
     values: boolean
@@ -48,6 +52,8 @@ apis:
 import Story from './-views/field/FieldDefault.tsx'
 import code from './-views/field/FieldDefault.tsx?raw'
 import Sizes from './-views/field/FieldSizes.tsx'
+import States from './-views/field/FieldStates.tsx'
+import statesCode from './-views/field/FieldStates.tsx?raw'
 
 A flexible form field wrapper that combines labels, inputs, descriptions, and validation feedback into a cohesive component. Use it to collect user input such as text, email, passwords, or search queries with proper accessibility and visual hierarchy.
 
@@ -72,6 +78,26 @@ import { Field } from '@polyms/core'
 Fields come in 6 different sizes to match various UI contexts. The default size provides balanced proportions for standard forms.
 
 <Sizes/ >
+
+## Disabled and read-only
+
+Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs block interaction and use reduced opacity; read-only inputs keep the value readable with a muted background and suppress hover border and focus ring styling.
+
+<CodePreview code={statesCode}>
+  <States />
+</CodePreview>
+
+```tsx
+<Field>
+  <Field.Label>Email</Field.Label>
+  <Field.Control disabled value="me@example.com" />
+</Field>
+
+<Field>
+  <Field.Label>Account ID</Field.Label>
+  <Field.Control readOnly value="usr_8f2k9x" />
+</Field>
+```
 
 ## API Reference
 
