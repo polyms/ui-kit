@@ -33,6 +33,10 @@ apis:
     default: '-'
     values: boolean
     description: Makes the input field fully rounded (pill shape) when set to true.
+  - name: debounce
+    default: '-'
+    values: number
+    description: Milliseconds to wait before calling onChange after the last change event. Omit or use 0 for immediate updates (same pattern as Field.Floating).
   - name: render
     default: <input/>
     values: ReactElement | (props, state) => ReactNode
@@ -47,6 +51,23 @@ apis:
     default: <p/>
     values: ReactElement | (props, state) => ReactNode
     description: Overrides the default paragraph element. Pass a React element or render function for advanced customization.
+  - separator: Field.Floating
+  - name: label
+    default: '-'
+    values: ReactNode
+    description: Label text for the floating label pattern.
+  - name: placeholder
+    default: '-'
+    values: ReactNode
+    description: Helper text rendered via Field.Description below the input.
+  - name: debounce
+    default: '-'
+    values: number
+    description: Milliseconds to debounce onChange. Omit for immediate updates on each change.
+  - name: onChange
+    default: '-'
+    values: '(event: ChangeEvent<HTMLInputElement>) => void'
+    description: Fires when the value changes; delayed by debounce when debounce is set.
 ---
 
 import Story from './-views/field/FieldDefault.tsx'
@@ -54,6 +75,8 @@ import code from './-views/field/FieldDefault.tsx?raw'
 import Sizes from './-views/field/FieldSizes.tsx'
 import States from './-views/field/FieldStates.tsx'
 import statesCode from './-views/field/FieldStates.tsx?raw'
+import Floating from './-views/field/FieldFloatingDemo.tsx'
+import floatingCode from './-views/field/FieldFloatingDemo.tsx?raw'
 
 A flexible form field wrapper that combines labels, inputs, descriptions, and validation feedback into a cohesive component. Use it to collect user input such as text, email, passwords, or search queries with proper accessibility and visual hierarchy.
 
@@ -85,6 +108,36 @@ Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs bl
 
 <CodePreview code={statesCode}>
   <States />
+</CodePreview>
+
+## Debounced `onChange` on `Field.Control`
+
+Pass **`debounce`** (milliseconds) on **`Field.Control`** to delay **`onChange`** until typing pauses—useful for filtering or validation without work on every keystroke. Omit **`debounce`** or use **`0`** for synchronous **`onChange`** (native behavior).
+
+```tsx
+<Field>
+  <Field.Label>Search</Field.Label>
+  <Field.Control debounce={300} onChange={(e) => console.log(e.target.value)} />
+</Field>
+```
+
+## Floating label
+
+**`Field.Floating`** bundles a floating-label input with optional helper text. Pass **`debounce`** when you want **`onChange`** to fire after a quiet period; omit it for updates on every change. Use **`placeholder`** for the description below the field, not the HTML placeholder (the input uses a blank placeholder so the label can animate).
+
+```tsx
+import { Field } from '@polyms/core'
+
+<Field.Floating
+  label="Search"
+  placeholder="Results update as you type"
+  debounce={400}
+  onChange={(e) => console.log(e.target.value)}
+/>
+```
+
+<CodePreview code={floatingCode}>
+  <Floating />
 </CodePreview>
 
 ## API Reference

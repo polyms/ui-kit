@@ -1,6 +1,7 @@
 @import './_root.css';
 @import './_layouts.css';
 @import './_preflight.css' layer(base);
+@import './_accordion.css' layer(components);
 @import './_alert.css' layer(components);
 @import './_avatar.css' layer(components);
 @import './_badge.css' layer(components);

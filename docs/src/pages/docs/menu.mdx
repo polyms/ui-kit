@@ -37,6 +37,31 @@ apis:
     default: '-'
     values: danger
     description: Applies danger styling (e.g., for destructive actions).
+  - separator: Menu.Command
+  - name: meta
+    default: '-'
+    values: boolean
+    description: Renders the ⌘ (Command) modifier key label.
+  - name: ctrl
+    default: '-'
+    values: boolean
+    description: Renders the ⌃ (Control) modifier key label.
+  - name: alt
+    default: '-'
+    values: boolean
+    description: Renders the ⌥ (Option/Alt) modifier key label.
+  - name: shift
+    default: '-'
+    values: boolean
+    description: Renders the ⇧ (Shift) modifier key label.
+  - name: sequence
+    default: '-'
+    values: string
+    description: Key caps after modifiers; use + between simultaneous keys (e.g. L+I).
+  - name: children
+    default: '-'
+    values: ReactNode
+    description: Custom shortcut text instead of generated modifier + sequence labels.
 ---
 
 import Story from './-views/menu/MenuDefault.tsx'
@@ -67,6 +92,25 @@ import { Menu } from '@polyms/core'
 ## Composition
 
 Menu supports rich composition with submenus, grouping, and separators for organizing complex action lists.
+
+### Keyboard shortcuts
+
+Display shortcut hints on the trailing edge of an item with **`Menu.Command`**. Pass modifier flags or a custom **`sequence`**; alternatively pass **`children`** for fully custom labels.
+
+```tsx
+<Menu.Item>
+  Save
+  <Menu.Command meta sequence="S" />
+</Menu.Item>
+<Menu.Item>
+  Paste
+  <Menu.Command meta sequence="V" />
+</Menu.Item>
+<Menu.Item>
+  Developer tools
+  <Menu.Command meta shift sequence="I" />
+</Menu.Item>
+```
 
 ### With Submenu
 

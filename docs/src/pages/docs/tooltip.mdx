@@ -59,6 +59,44 @@ import { Tooltip } from '@polyms/core'
 </Tooltip.Provider>
 ```
 
+## Controlled tooltips
+
+Control visibility when the anchor is driven by another component (e.g. forced open during onboarding):
+
+```tsx
+import { Tooltip } from '@polyms/core'
+import { useState } from 'react'
+
+function ControlledTooltip() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Tooltip.Provider>
+      <Tooltip open={open} onOpenChange={setOpen} title="Step 1: Connect your repo">
+        <button type="button">Guide me</button>
+      </Tooltip>
+    </Tooltip.Provider>
+  )
+}
+```
+
+## Provider delays
+
+Wrap siblings in **`Tooltip.Provider`** to tune hover timing app-wide:
+
+```tsx
+<Tooltip.Provider delay={300} closeDelay={100}>
+  <Tooltip title="Fast hint">…</Tooltip>
+  <Tooltip title="Another hint">…</Tooltip>
+</Tooltip.Provider>
+```
+
+**`delay`** (default **600ms**) is the open delay; **`closeDelay`** (default **0**) waits before hiding after pointer leave.
+
+## Disabled tooltips
+
+Set **`disabled`** on **`Tooltip`** to suppress open on hover/focus while keeping the child interactive (or use a disabled child without a tooltip).
+
 ## API Reference
 
 <APIReference />

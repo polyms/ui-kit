@@ -28,10 +28,34 @@ apis:
     default: 'false'
     values: boolean
     description: Enables scrolling inside the modal body instead of the entire modal.
+  - separator: useModalStore.showModal(id, element, options?)
+  - name: id
+    default: '-'
+    values: string
+    description: Unique key for the modal instance. Reusing an id replaces the previous entry.
+  - name: element
+    default: '-'
+    values: ReactNode
+    description: Modal content, typically a Modal.Content tree with Header, Body, and Footer.
+  - name: options.onClose
+    default: '-'
+    values: '(reason?) => void'
+    description: Called when the modal finishes closing (after the exit animation).
+  - separator: useModalStore.closeModal(id, reason?)
+  - name: id
+    default: '-'
+    values: string
+    description: The id passed to showModal. Starts close animation then removes the modal after 300ms.
+  - name: reason
+    default: '-'
+    values: Dialog close reason
+    description: Optional close reason forwarded to onClose (e.g. escape press, outside click).
 ---
 
 import Story from './-views/modal/ModalDefault.tsx'
 import code from './-views/modal/ModalDefault.tsx?raw'
+import Programmatic from './-views/modal/ModalProgrammatic.tsx'
+import programmaticCode from './-views/modal/ModalProgrammatic.tsx?raw'
 
 Modals display focused content in a layer above the main interface, requiring user interaction before proceeding. They're ideal for confirmations, forms, or detailed information. This component is based on the [WAI-ARIA Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
 
@@ -145,6 +169,52 @@ By default, long content causes the entire modal to scroll. Enable `scrollable` 
 - **Shift + Tab**: Cycle backwards through focusable elements
 
 Focus is automatically trapped within the modal when open and restored to the trigger element when closed.
+
+## Programmatic modals
+
+Open modals from event handlers, data loaders, or global state without a declarative **`Modal.Trigger`**. The store API uses **Zustand** (peer dependency — install **`zustand`** in your app).
+
+1. Mount **`Modal.Container`** once near the root of your app (same level as your router outlet).
+2. Call **`useModalStore.getState().showModal(id, element, options?)`** with a stable **`id`** and a **`Modal.Content`** tree.
+3. Close with **`Modal.Close`**, **`closeModal(id)`**, or Escape / backdrop (handled by **`Modal.Container`**).
+
+```tsx
+import { Button, Modal, useModalStore } from '@polyms/core'
+
+function App() {
+  return (
+    <>
+      <Modal.Container />
+      <YourRoutes />
+    </>
+  )
+}
+
+function DeleteButton() {
+  const open = () =>
+    useModalStore.getState().showModal(
+      'delete-item',
+      <Modal.Content size="sm">
+        <Modal.Header>Delete item?</Modal.Header>
+        <Modal.Body>This cannot be undone.</Modal.Body>
+        <Modal.Footer>
+          <Modal.Close>Cancel</Modal.Close>
+          <Button onClick={() => useModalStore.getState().closeModal('delete-item')}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal.Content>
+    )
+
+  return <Button onClick={open}>Delete</Button>
+}
+```
+
+**Animation:** **`closeModal`** sets **`open: false`** first, then removes the entry after **300ms** so exit transitions can finish.
+
+<CodePreview code={programmaticCode}>
+  <Programmatic />
+</CodePreview>
 
 ## API Reference
 

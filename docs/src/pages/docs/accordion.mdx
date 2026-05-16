@@ -1,0 +1,143 @@
+---
+type: Layout
+title: Accordion
+apis:
+  - separator: Accordion
+  - name: defaultValue
+    default: '-'
+    values: unknown[]
+    description: Uncontrolled initial open item value(s). Must match Accordion.Item value props. Use an array; when multiple is false, a single-element array is typical.
+  - name: value
+    default: '-'
+    values: unknown[]
+    description: Controlled open value(s). Pair with onValueChange.
+  - name: onValueChange
+    default: '-'
+    values: '(value, eventDetails) => void'
+    description: Fired when the open set changes. eventDetails includes reason, cancel, and trigger from Base UI.
+  - name: multiple
+    default: false
+    values: boolean
+    description: When true, more than one panel can be open at once.
+  - name: disabled
+    default: false
+    values: boolean
+    description: Disables the entire accordion (all items).
+  - name: orientation
+    default: vertical
+    values: vertical | horizontal
+    description: Affects roving focus (arrow keys) and panel width vs height animation.
+  - name: hiddenUntilFound
+    default: false
+    values: boolean
+    description: Uses hidden="until-found" so in-page search can find and expand panel content.
+  - name: loopFocus
+    default: true
+    values: boolean
+    description: When false, arrow key focus does not wrap from last to first item.
+  - name: keepMounted
+    default: false
+    values: boolean
+    description: Keeps closed panels in the DOM (panels still collapse with height/width transitions when CSS is set up).
+  - separator: Accordion.Item
+  - name: value
+    default: (auto id)
+    values: unknown
+    description: Stable id for this item; required for defaultValue/value to target it. Omitted values get an auto-generated id (not suitable for controlled defaultValue).
+  - name: title
+    default: '-'
+    values: ReactNode
+    description: Core-UI shorthand when set, renders Header, Trigger (title), and Panel; children become panel body (styled wrapper). Omit title to compose Header/Trigger/Panel yourself.
+  - name: disabled
+    default: false
+    values: boolean
+    description: Disables this item only.
+  - name: onOpenChange
+    default: '-'
+    values: '(open, eventDetails) => void'
+    description: Fired when this item opens or closes.
+  - separator: Accordion.Header
+  - name: render
+    default: <h3 />
+    values: ReactElement | function
+    description: Replace the default heading element (for example render={<div />} for a non-heading wrapper).
+  - separator: Accordion.Trigger
+  - name: nativeButton
+    default: true
+    values: boolean
+    description: When using render with a non-button element, set to false so semantics stay correct.
+  - separator: Accordion.Panel
+  - name: keepMounted
+    default: false
+    values: boolean
+    description: Per-panel override; inherits from the Accordion root when unset.
+  - name: hiddenUntilFound
+    default: false
+    values: boolean
+    description: Per-panel override for find-in-page behavior.
+---
+
+import Story from './-views/accordion/AccordionDefault.tsx'
+import code from './-views/accordion/AccordionDefault.tsx?raw'
+
+Compound accordion built on **[Base UI Accordion](https://base-ui.com/react/components/accordion)**. **`Accordion`** (root), **`Accordion.Item`**, **`Header`**, **`Trigger`**, and **`Panel`** apply bundled classes (**`accordion`**, **`accordion-item`**, …) so motion and layout work once package styles are loaded. Override or extend with **`className`** as usual.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+### Shorthand (`title` on Item)
+
+When **`title`** is set, **`Header`**, **`Trigger`**, and **`Panel`** are created for you; **`children`** are rendered inside the panel (with default padding and body text color).
+
+```tsx
+import { Accordion } from '@polyms/core'
+
+<Accordion defaultValue={['billing']}>
+  <Accordion.Item title="Shipping" value="shipping">
+    Free shipping on orders over $50…
+  </Accordion.Item>
+  <Accordion.Item title="Billing" value="billing">
+    We accept major cards…
+  </Accordion.Item>
+</Accordion>
+```
+
+### Full composition
+
+Use the same tree as Base UI when you need custom trigger content, icons, or non-heading headers.
+
+```tsx
+import { Accordion } from '@polyms/core'
+
+<Accordion defaultValue={['shipping']}>
+  <Accordion.Item value="shipping">
+    <Accordion.Header>
+      <Accordion.Trigger>Shipping</Accordion.Trigger>
+    </Accordion.Header>
+    <Accordion.Panel>
+      <p className="text-slate-600 text-sm">Delivery details…</p>
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+```
+
+Default **`className`** shells are already merged on each part; add utilities on the **`Accordion`** root (for example max width) or on any subpart for one-off layout.
+
+## Types
+
+Export aliases include **`AccordionRootProps`**, **`AccordionItemProps`** (includes **`title`**), **`AccordionHeaderProps`**, **`AccordionTriggerProps`**, **`AccordionPanelProps`**, and a merged **`Accordion`** namespace (for example **`Accordion.Item.Props`**) alongside the value export.
+
+## Motion and CSS
+
+Panels animate with Base UI’s **`--accordion-panel-height`** and **`--accordion-panel-width`** (horizontal **`orientation`**). Closed panels use **`data-starting-style`** / **`data-ending-style`** during transitions. Import the library stylesheet (or Tailwind entry) so **`_accordion.css`** rules apply.
+
+## Controlled vs uncontrolled
+
+Use **`defaultValue`** for uncontrolled mode, or **`value`** + **`onValueChange`** when open sections must follow routing or external state. Set **`multiple`** on the **`Accordion`** root to keep several values in the open set.
+
+## API Reference
+
+<APIReference />

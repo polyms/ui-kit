@@ -1,0 +1,48 @@
+---
+type: Actions
+title: Dynamic import
+apis:
+  - separator: dynamic(importFunc, options?)
+  - name: importFunc
+    default: '-'
+    values: '() => Promise<{ default: Component }>'
+    description: Factory passed to React.lazy. Must resolve a module with a default export.
+  - name: options.LoadingComponent
+    default: 'null'
+    values: ReactNode
+    description: Fallback shown inside Suspense while the chunk loads.
+---
+
+import Story from './-views/dynamic/DynamicDefault.tsx'
+import code from './-views/dynamic/DynamicDefault.tsx?raw'
+
+Wrap **`React.lazy`** and **`Suspense`** for code-split routes, heavy widgets, or federated remotes. Import as **`dynamic`** or **`LazyComponentLoader`** (same helper).
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { dynamic, Spinner } from '@polyms/core'
+
+const SettingsPanel = dynamic(
+  () => import('./SettingsPanel'),
+  { LoadingComponent: <Spinner size={24} /> }
+)
+
+function Page() {
+  return <SettingsPanel />
+}
+```
+
+The returned component forwards refs and props to the lazily loaded default export.
+
+## Module Federation
+
+When building with Vite Module Federation, use the same **`dynamic()`** helper for remote entry components so loading states stay consistent. See the library **`module-federation`** plugin in the core package build pipeline.
+
+## API Reference
+
+<APIReference />

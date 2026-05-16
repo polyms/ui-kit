@@ -81,12 +81,26 @@ Prefer **`tooltip`** over a manual **`title`** when you want that behavior. If y
 ```tsx
 import { Button } from '@polyms/core'
 
-<Button tooltip="Save changes to the server" variant="primary">
+<Button rounded tooltip="Save changes to the server" variant="primary">
   Save
 </Button>
 ```
 
 <ButtonTooltip />
+
+## Polymorphic `render`
+
+Use **`render`** to keep button styles on another element (for example a client router link):
+
+```tsx
+import { Button } from '@polyms/core'
+
+<Button render={<a href="/settings" />} variant="primary">
+  Account settings
+</Button>
+```
+
+You can also pass a render function for advanced prop merging. See [useRender](/docs/use-render) for the underlying pattern.
 
 ## API Reference
 

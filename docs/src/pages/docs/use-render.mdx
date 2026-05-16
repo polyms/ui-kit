@@ -1,0 +1,74 @@
+---
+type: Guide
+title: useRender
+apis:
+  - separator: useRender(options)
+  - name: defaultTagName
+    default: '-'
+    values: string
+    description: HTML tag when render is not provided.
+  - name: render
+    default: '-'
+    values: ReactElement | (props, state) => ReactNode
+    description: Element or function to replace the default tag while merging props.
+  - name: props
+    default: '-'
+    values: object
+    description: Props merged onto the rendered element (including className).
+  - separator: useRender.ComponentProps<'tag'>
+  - name: render
+    default: '-'
+    values: ReactElement | (props, state) => ReactNode
+    description: Included on Polyms components that support polymorphic composition.
+---
+
+import Story from './-views/use-render/UseRenderDefault.tsx'
+import code from './-views/use-render/UseRenderDefault.tsx?raw'
+
+Re-exported **`useRender`** from **@base-ui/react** powers the **`render`** prop on **`Button`**, **`Field`**, **`Breadcrumb`**, **`Modal`**, and other primitives. Use it when the same styles must apply to a different element (router link, custom tag) without forking the component.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Typing
+
+```tsx
+import { useRender } from '@polyms/core'
+
+type CardProps = useRender.ComponentProps<'div'>
+
+export function Card({ className, render, ...props }: CardProps) {
+  return useRender({
+    defaultTagName: 'div',
+    render,
+    props: { ...props, className: clsx('card', className) },
+  })
+}
+```
+
+## Button as anchor
+
+```tsx
+import { Button } from '@polyms/core'
+
+<Button render={<a href="/settings" />} variant="primary">
+  Settings
+</Button>
+```
+
+## Breadcrumb item customization
+
+```tsx
+import { Breadcrumb } from '@polyms/core'
+
+<Breadcrumb.Item render={<span className="breadcrumb-item" />} active>
+  Current page
+</Breadcrumb.Item>
+```
+
+React 19 components pass **`ref`** through **`props.ref`** into **`useRender`** — no **`forwardRef`** required for this pattern.
+
+## API Reference
+
+<APIReference />

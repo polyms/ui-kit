@@ -4,8 +4,8 @@ import { Button } from '@polyms/core'
 
 export default function ButtonTooltip() {
   return (
-    <div className='card flex flex-wrap items-center gap-4 p-4'>
-      <Button tooltip='Save changes to the server' variant='primary'>
+    <div className='card card-body items-center gap-4'>
+      <Button rounded tooltip='Save changes to the server' variant='primary'>
         Save
       </Button>
       <Button icon rounded tooltip='Dismiss'>

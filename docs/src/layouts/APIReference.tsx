@@ -1,8 +1,8 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: dup prop name */
 import { metadataByRoute } from 'virtual:mdx-navigation'
-import { Accordion } from '@base-ui/react/accordion'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
+import { Accordion } from '@polyms/core'
 import { useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useMemo } from 'react'
@@ -18,7 +18,7 @@ export default function APIReference() {
 
   return (
     <div className='card mt-4'>
-      <Accordion.Root className='accordion' multiple>
+      <Accordion className='accordion' multiple>
         <Accordion.Item className='accordion-item border-solid bg-slate-100' disabled value='_header'>
           <Accordion.Header className='accordion-header font-semibold' render={<div />}>
             <Accordion.Trigger className='accordion-trigger font-semibold' disabled>
@@ -66,7 +66,7 @@ export default function APIReference() {
             </Accordion.Item>
           )
         })}
-      </Accordion.Root>
+      </Accordion>
     </div>
   )
 }

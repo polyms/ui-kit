@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { fireEvent, render } from '@testing-library/react'
+import { describe, expect, it, vi } from 'vitest'
 import { FieldControl } from './FieldControl'
 import { FieldRoot } from './FieldRoot'
 
@@ -129,6 +129,41 @@ describe('FieldControl', () => {
       expect(input).toHaveAttribute('type', type)
       unmount()
     })
+  })
+
+  it('debounces onChange when debounce is set', () => {
+    vi.useFakeTimers()
+    const onChange = vi.fn()
+    const { container } = render(
+      <FieldRoot>
+        <FieldControl debounce={300} onChange={onChange} />
+      </FieldRoot>
+    )
+    const input = container.querySelector('input') as HTMLInputElement
+    fireEvent.change(input, { target: { value: 'a' } })
+    expect(onChange).not.toHaveBeenCalled()
+    vi.advanceTimersByTime(300)
+    expect(onChange).toHaveBeenCalledTimes(1)
+    vi.useRealTimers()
+  })
+
+  it('coalesces rapid changes when debounce is set', () => {
+    vi.useFakeTimers()
+    const onChange = vi.fn()
+    const { container } = render(
+      <FieldRoot>
+        <FieldControl debounce={300} onChange={onChange} />
+      </FieldRoot>
+    )
+    const input = container.querySelector('input') as HTMLInputElement
+    fireEvent.change(input, { target: { value: 'a' } })
+    vi.advanceTimersByTime(100)
+    fireEvent.change(input, { target: { value: 'ab' } })
+    vi.advanceTimersByTime(100)
+    fireEvent.change(input, { target: { value: 'abc' } })
+    vi.advanceTimersByTime(300)
+    expect(onChange).toHaveBeenCalledTimes(1)
+    vi.useRealTimers()
   })
 
   it('supports all prop combinations', () => {

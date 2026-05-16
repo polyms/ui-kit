@@ -24,7 +24,7 @@ export type FieldFloatingProps = {
 
 export const FieldFloating: React.FC<FieldFloatingProps> = ({
   onChange,
-  debounce = 500,
+  debounce,
   className,
   label,
   children,

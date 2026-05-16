@@ -1,0 +1,118 @@
+.accordion {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  &[data-orientation='horizontal'] {
+    flex-flow: row wrap;
+    gap: 0 1rem;
+  }
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--color-slate-200);
+
+  &:last-child {
+    border-bottom-width: 0;
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+  }
+
+  .accordion[data-orientation='horizontal'] > & {
+    flex: 1 1 auto;
+    min-width: 12rem;
+    border-bottom: none;
+    border-right: 1px solid var(--color-slate-200);
+
+    &:last-child {
+      border-right-width: 0;
+    }
+  }
+}
+
+.accordion-header {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.accordion-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 0;
+  margin: 0;
+  background: none;
+  appearance: none;
+  padding-block: 0.75rem;
+  padding-inline: 0;
+  text-align: start;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: var(--color-slate-900);
+  cursor: pointer;
+  user-select: none;
+
+  &[data-disabled] {
+    cursor: not-allowed;
+  }
+
+  @media (hover: hover) {
+    &:hover:not([data-disabled]) {
+      color: var(--color-primary-600);
+    }
+  }
+
+  &:focus-visible {
+    border-radius: 0.25rem;
+    outline: 2px solid var(--color-primary-100);
+    outline-offset: 2px;
+  }
+}
+
+.accordion-panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  margin: 0;
+  height: var(--accordion-panel-height);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-slate-600);
+  transition: height 200ms ease-out;
+
+  &[hidden]:not([hidden='until-found']) {
+    display: none;
+  }
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    height: 0;
+  }
+
+  &:focus-visible {
+    border-radius: 0.25rem;
+    outline: 2px solid var(--color-primary-100);
+    outline-offset: 2px;
+  }
+}
+
+.accordion[data-orientation='horizontal'] .accordion-panel {
+  height: auto;
+  width: var(--accordion-panel-width);
+  transition: width 200ms ease-out;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    width: 0;
+    height: auto;
+  }
+}

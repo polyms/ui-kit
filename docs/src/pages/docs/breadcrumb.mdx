@@ -54,6 +54,23 @@ import { Breadcrumb } from '@polyms/core'
 
 The last item in the breadcrumb trail typically represents the current page and should be marked with the `active` prop. Active items are styled differently and are not clickable.
 
+### Custom elements with `render`
+
+Override the list container or an item wrapper when integrating a router **`Link`** or design-system tag:
+
+```tsx
+import { Breadcrumb } from '@polyms/core'
+
+<Breadcrumb render={<ol className="breadcrumb flex gap-2" />}>
+  <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+  <Breadcrumb.Item render={<span className="breadcrumb-item" />} active>
+    Settings
+  </Breadcrumb.Item>
+</Breadcrumb>
+```
+
+Pass a React element to **`render`**; props and **`className`** are merged by **`useRender`**.
+
 ### Accessibility
 
 Breadcrumbs automatically include proper ARIA attributes:

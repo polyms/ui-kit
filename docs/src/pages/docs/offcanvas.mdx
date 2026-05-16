@@ -153,6 +153,10 @@ The offcanvas smoothly slides in from the selected edge of the viewport with a b
 
 `swipeDirection` accepts `left`, `right`, `up`, or `down`. A left drawer appears on the left edge and dismisses to the left; a down drawer appears on the bottom edge and dismisses downward.
 
+### Responsive behavior (mobile)
+
+On viewports **below 768px** wide, **`Offcanvas`** always uses a **bottom drawer** (`swipeDirection: 'down'`), regardless of the `swipeDirection` you pass. This matches common mobile patterns (sheet from the bottom). On **md+** breakpoints, your `swipeDirection` prop is respected for side panels.
+
 ### Click Outside to Close
 
 Users can click on the backdrop to dismiss the offcanvas, providing an intuitive way to close it.
