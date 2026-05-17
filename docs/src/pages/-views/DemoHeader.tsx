@@ -17,7 +17,7 @@ export const Header = () => {
       <img
         alt='Polyms'
         className='size-9 shrink-0 rounded-lg shadow-sm ring-1 ring-slate-200/80'
-        src='/favicon.png'
+        src='/favicon-180x180.png'
       />
       <Field className='min-w-0 max-w-full'>
         <HugeiconsIcon
