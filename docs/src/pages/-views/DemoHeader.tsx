@@ -2,6 +2,7 @@ import { SearchList02Icon, SearchRemoveIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Field } from '@polyms/core'
 import React from 'react'
+import { FaviconFit } from '../../assets/FaviconFit'
 
 export const Header = () => {
   const [user, setUser] = React.useState<{ name: string }>()
@@ -14,11 +15,7 @@ export const Header = () => {
       className='flex w-full min-w-0 max-w-full flex-nowrap items-center gap-3 border-slate-200/90 border-b border-dashed bg-white/85 px-5 py-2 backdrop-blur-md md:gap-4 md:px-8'
       id='app-navigation'
     >
-      <img
-        alt='Polyms'
-        className='size-9 shrink-0 rounded-lg shadow-sm ring-1 ring-slate-200/80'
-        src='/favicon-180x180.png'
-      />
+      <FaviconFit className='size-9 shrink-0 rounded-lg shadow-sm ring-1 ring-slate-200/80' />
       <Field className='min-w-0 max-w-full'>
         <HugeiconsIcon
           className='icon-start'

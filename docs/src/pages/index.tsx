@@ -13,6 +13,7 @@ import {
 import { createFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
+import { FaviconFit } from '../assets/FaviconFit'
 import homePageStylesUrl from '../styles/home.page.css?url'
 
 export const Route = createFileRoute('/')({
@@ -71,10 +72,10 @@ function LandingNav() {
   return (
     <header className='home-nav'>
       <Container className='flex h-14 items-center gap-6'>
-        <Link className='flex items-center gap-2' to='/'>
-          <img alt='Polyms' className='size-7' src='/favicon-180x180.png' />
-          <span className='font-semibold text-slate-100 tracking-tight'>Polyms</span>
-          <span className='home-nav-tag'>Core UI</span>
+        <Link className='flex items-center' to='/'>
+          <FaviconFit className='h-10 w-auto' hexCenterColor='#fff' />
+          <span className='ms-1 mb-1.5 font-semibold text-slate-100 tracking-tight'>olyms</span>
+          <span className='home-nav-tag ms-2'>Core UI</span>
         </Link>
 
         <nav className='hidden items-center gap-1 md:flex'>
@@ -690,10 +691,10 @@ function FooterSection() {
   return (
     <footer className='border-slate-800 border-t bg-slate-950'>
       <Container className='flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center'>
-        <div className='flex items-center gap-3'>
-          <img alt='Polyms' className='size-7' src='/favicon-180x180.png' />
-          <div>
-            <div className='font-semibold text-slate-100'>Polyms</div>
+        <div className='flex items-center'>
+          <FaviconFit className='h-20 w-auto' hexCenterColor='#fff' />
+          <div className='ms-1'>
+            <div className='font-semibold text-2xl text-slate-100'>olyms</div>
             <div className='text-slate-500 text-xs'>© 2026 Polyms. MIT Licensed.</div>
           </div>
         </div>
