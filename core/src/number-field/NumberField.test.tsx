@@ -30,7 +30,7 @@ describe('NumberField', () => {
 
   it('does not render label when label prop not provided', () => {
     const { container } = render(<NumberField />)
-    const label = container.querySelector('.number-field-label')
+    const label = container.querySelector('.field-label')
     expect(label).not.toBeInTheDocument()
   })
 
@@ -61,19 +61,19 @@ describe('NumberField', () => {
 
   it('generates id when id prop not provided', () => {
     const { container } = render(<NumberField />)
-    const root = container.querySelector('.field-input')
-    expect(root).toHaveAttribute('id')
+    const input = container.querySelector('.number-field-input')
+    expect(input).toHaveAttribute('id')
   })
 
   it('uses provided id prop', () => {
     const { container } = render(<NumberField id='my-number' />)
-    const root = container.querySelector('.field-input')
-    expect(root).toHaveAttribute('id', 'my-number')
+    const input = container.querySelector('.number-field-input')
+    expect(input).toHaveAttribute('id', 'my-number')
   })
 
   it('label htmlFor matches number field id', () => {
     const { container } = render(<NumberField id='test-number' label='Count' />)
-    const label = container.querySelector('.number-field-label')
+    const label = container.querySelector('.field-label')
     expect(label).toHaveAttribute('for', 'test-number')
   })
 
@@ -83,16 +83,22 @@ describe('NumberField', () => {
     expect(scrubArea).toBeInTheDocument()
   })
 
-  it('input has rounded-full class', () => {
-    const { container } = render(<NumberField />)
-    const input = container.querySelector('.number-field-input')
-    expect(input).toHaveClass('rounded-full')
+  it('applies rounded-full on root when rounded prop is true', () => {
+    const { container } = render(<NumberField rounded />)
+    const root = container.querySelector('.number-field')
+    expect(root).toHaveClass('rounded-full')
   })
 
-  it('input has field-input class', () => {
+  it('does not apply rounded-full when rounded prop is false', () => {
+    const { container } = render(<NumberField rounded={false} />)
+    const root = container.querySelector('.number-field')
+    expect(root).not.toHaveClass('rounded-full')
+  })
+
+  it('input has field-control class', () => {
     const { container } = render(<NumberField />)
     const input = container.querySelector('.number-field-input')
-    expect(input).toHaveClass('field-input')
+    expect(input).toHaveClass('field-control')
   })
 
   it('supports all size variants', () => {

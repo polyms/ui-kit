@@ -36,8 +36,12 @@ apis:
     description: Label text. When provided, enables interactive scrubbing on label drag.
   - name: size
     default: 'md'
-    values: sm | md | lg
-    description: Field size variant.
+    values: sm | lg | xl | 2xl | 3xl
+    description: Field size variant (same scale as `Field`).
+  - name: rounded
+    default: 'false'
+    values: boolean
+    description: Pill shape on the input + increment control (`.rounded-full` on root).
 ---
 
 import Story from './-views/field/NumberFieldDefault.tsx'

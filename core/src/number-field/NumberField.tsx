@@ -8,12 +8,13 @@ import type { FieldRootProps } from '../field/FieldRoot'
 
 type NumberFieldProps = Base.Root.Props & {
   label?: string
+  rounded?: boolean
   size?: FieldRootProps['size']
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export const NumberField = ({ id: propId, className, label, size, ...props }: NumberFieldProps) => {
+export const NumberField = ({ id: propId, className, label, rounded, size, ...props }: NumberFieldProps) => {
   const genId = useId()
   const id = propId ?? genId
 
@@ -21,20 +22,21 @@ export const NumberField = ({ id: propId, className, label, size, ...props }: Nu
     <Base.Root
       {...props}
       className={clsx('number-field field', className, {
+        'rounded-full': rounded,
         [`field-${size}`]: size,
       })}
       id={id}
     >
-      {label && (
-        <Base.ScrubArea className='number-field-scrub-area field-label'>
-          <label className='number-field-label' htmlFor={id}>
+      {label ? (
+        <Base.ScrubArea className='number-field-scrub-area'>
+          <label className='field-label' htmlFor={id}>
             {label}
           </label>
           <Base.ScrubAreaCursor className='number-field-scrub-area-cursor'>
             <CursorGrowIcon />
           </Base.ScrubAreaCursor>
         </Base.ScrubArea>
-      )}
+      ) : null}
 
       <Base.Group className='number-field-group'>
         <Base.Input className='number-field-input field-control' />

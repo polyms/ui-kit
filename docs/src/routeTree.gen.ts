@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './pages/__root'
+import { Route as FormsRouteImport } from './pages/forms'
 import { Route as DemoRouteImport } from './pages/demo'
 import { Route as SplatRouteImport } from './pages/$'
 import { Route as IndexRouteImport } from './pages/index'
 
+const FormsRoute = FormsRouteImport.update({
+  id: '/forms',
+  path: '/forms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/demo': typeof DemoRoute
+  '/forms': typeof FormsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/demo': typeof DemoRoute
+  '/forms': typeof FormsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/demo': typeof DemoRoute
+  '/forms': typeof FormsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/demo'
+  fullPaths: '/' | '/$' | '/demo' | '/forms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/demo'
-  id: '__root__' | '/' | '/$' | '/demo'
+  to: '/' | '/$' | '/demo' | '/forms'
+  id: '__root__' | '/' | '/$' | '/demo' | '/forms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
   DemoRoute: typeof DemoRoute
+  FormsRoute: typeof FormsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/forms': {
+      id: '/forms'
+      path: '/forms'
+      fullPath: '/forms'
+      preLoaderRoute: typeof FormsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo': {
       id: '/demo'
       path: '/demo'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
   DemoRoute: DemoRoute,
+  FormsRoute: FormsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

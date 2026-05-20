@@ -220,6 +220,10 @@ export function AppSidebar({ ref }: AppSidebarProps) {
                       <Icon className='size-4 text-slate-600' icon={GoogleDocIcon} />
                       Page Demo
                     </Link>
+                    <Link className='nav-item' to='/forms'>
+                      <Icon className='size-4 text-slate-600' icon={GoogleDocIcon} />
+                      Forms preview
+                    </Link>
                   </div>
                 </Collapsible.Panel>
               </Collapsible>
