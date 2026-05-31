@@ -198,6 +198,8 @@
 }
 
 .field-label {
+  @apply inline-flex items-center gap-1;
+
   font-size: 12px;
   font-weight: 600;
   line-height: 1rem;

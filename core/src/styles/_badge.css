@@ -56,7 +56,7 @@
 
 .badge-light {
   --badge-border: var(--color-slate-300);
-  --badge-bg: var(--color-slate-50);
+  --badge-bg: var(--color-slate-100);
   --badge-color: var(--color-slate-900);
 }
 
