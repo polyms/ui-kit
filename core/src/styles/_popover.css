@@ -40,6 +40,7 @@
 }
 
 .popover {
+  z-index: var(--zindex-popover);
   width: var(--positioner-width);
   height: var(--positioner-height);
   max-width: var(--available-width);
@@ -48,10 +49,14 @@
 .popover-popup {
   box-sizing: border-box;
   padding: 1rem 1.5rem;
+  border: 1px solid var(--color-slate-200);
   border-radius: 0.5rem;
   background-color: canvas;
   color: var(--color-slate-900);
   transform-origin: var(--transform-origin);
+  box-shadow:
+    0 10px 15px -3px color-mix(in oklab, var(--color-slate-900) 10%, transparent),
+    0 4px 6px -4px color-mix(in oklab, var(--color-slate-900) 10%, transparent);
   transition:
     transform 150ms,
     opacity 150ms;
@@ -59,23 +64,12 @@
   width: var(--popup-width, auto);
   height: var(--popup-height, auto);
   max-width: 500px;
+  outline: none;
 
   &[data-starting-style],
   &[data-ending-style] {
     opacity: 0;
-    transform: scale(0.9);
-  }
-
-  @media (prefers-color-scheme: light) {
-    outline: 1px solid var(--color-slate-200);
-    box-shadow:
-      0 10px 15px -3px var(--color-slate-200),
-      0 4px 6px -4px var(--color-slate-200);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    outline: 1px solid var(--color-slate-300);
-    outline-offset: -1px;
+    transform: scale(0.95);
   }
 }
 

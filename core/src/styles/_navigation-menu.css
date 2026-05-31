@@ -1,0 +1,432 @@
+.navigation-menu-list {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-slate-200);
+  background-color: canvas;
+  list-style: none;
+}
+
+.navigation-menu-list-bare {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.navigation-menu-trigger {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--color-slate-800);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.125rem;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  outline: 0;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+
+  &::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset-inline: 1rem;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-primary-700) 30%, transparent),
+      color-mix(in oklab, var(--color-primary-700) 80%, transparent),
+      var(--color-primary-700)
+    );
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 300ms ease-out;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
+      color: var(--color-primary-700);
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &[data-popup-open] {
+    background-color: color-mix(in oklab, var(--color-primary-700) 15%, transparent);
+    color: var(--color-primary-700);
+  }
+
+  &[data-popup-open]::after {
+    transform: scaleX(1);
+  }
+
+  &:focus-visible {
+    background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
+    color: var(--color-primary-700);
+    outline: none;
+  }
+
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  &:disabled,
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.navigation-menu-trigger-lg {
+  gap: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.navigation-menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: 0.125rem;
+  color: var(--color-slate-500);
+  transition:
+    color 300ms ease,
+    transform 300ms ease;
+
+  &[data-popup-open] {
+    color: var(--color-primary-700);
+    transform: rotate(180deg);
+  }
+}
+
+.navigation-menu-trigger:hover .navigation-menu-icon,
+.navigation-menu-trigger:focus-visible .navigation-menu-icon {
+  color: var(--color-primary-700);
+}
+
+.navigation-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  transition:
+    opacity var(--navigation-menu-duration, 0.3s) var(--navigation-menu-easing, ease),
+    translate var(--navigation-menu-duration, 0.3s) var(--navigation-menu-easing, ease);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+
+  &[data-starting-style][data-activation-direction='left'] {
+    translate: -50% 0;
+  }
+
+  &[data-starting-style][data-activation-direction='right'] {
+    translate: 50% 0;
+  }
+
+  &[data-ending-style][data-activation-direction='left'] {
+    translate: 50% 0;
+  }
+
+  &[data-ending-style][data-activation-direction='right'] {
+    translate: -50% 0;
+  }
+
+  &[data-starting-style][data-activation-direction='up'] {
+    translate: 0 -25%;
+  }
+
+  &[data-starting-style][data-activation-direction='down'] {
+    translate: 0 25%;
+  }
+}
+
+.navigation-menu-group-label {
+  padding: 0.25rem 0.5rem;
+  color: var(--color-slate-500);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.navigation-menu-separator {
+  border: 0;
+  background-color: var(--color-slate-200);
+
+  &[data-orientation='horizontal'] {
+    height: 1px;
+    margin-block: 0.25rem;
+  }
+
+  &[data-orientation='vertical'] {
+    width: 1px;
+    align-self: stretch;
+    margin-inline: 0.25rem;
+  }
+}
+
+.navigation-menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--color-slate-200);
+  border-radius: 0.5rem;
+  color: var(--color-slate-600);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.navigation-menu-link {
+  position: relative;
+  display: block;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--color-slate-900);
+  text-decoration: none;
+  outline: 0;
+  transition: background-color 150ms ease;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-slate-100);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -1px;
+  }
+
+  &[data-active] {
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-900);
+  }
+}
+
+/* Variant: danger — destructive row with danger-tinted hover/focus/active states. */
+.navigation-menu-link-danger {
+  color: var(--color-danger-600);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
+      color: var(--color-danger-700);
+    }
+  }
+
+  &:focus-visible {
+    background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
+    color: var(--color-danger-700);
+    outline-color: var(--color-danger);
+  }
+
+  &[data-active] {
+    background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
+    color: var(--color-danger-700);
+  }
+}
+
+/* Variant: soft — primary-tinted card-style item with dashed→solid border on hover/focus/active. */
+.navigation-menu-link-soft {
+  border: 1px dashed color-mix(in oklab, var(--color-primary) 30%, transparent);
+  border-radius: 0.75rem;
+  background-color: color-mix(in oklab, var(--color-primary) 5%, transparent);
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    border-style 200ms ease;
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--color-primary);
+      border-style: solid;
+      background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+    }
+  }
+
+  &:focus-visible {
+    border-color: var(--color-primary);
+    border-style: solid;
+    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+    outline: none;
+  }
+
+  &[data-active] {
+    border-color: var(--color-primary);
+    border-style: solid;
+    background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
+    color: var(--color-primary-700);
+  }
+}
+
+.navigation-menu-positioner {
+  --navigation-menu-duration: 0.35s;
+  --navigation-menu-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: var(--zindex-popover);
+  width: var(--positioner-width);
+  height: var(--positioner-height);
+  max-width: var(--available-width);
+  transition:
+    top var(--navigation-menu-duration) var(--navigation-menu-easing),
+    left var(--navigation-menu-duration) var(--navigation-menu-easing),
+    right var(--navigation-menu-duration) var(--navigation-menu-easing),
+    bottom var(--navigation-menu-duration) var(--navigation-menu-easing);
+
+  &[data-instant] {
+    transition: none;
+  }
+
+  /* Invisible hover bridge so the popup doesn't close when the pointer crosses the gap. */
+  &::before {
+    content: '';
+    position: absolute;
+  }
+
+  &[data-side='bottom']::before {
+    top: -10px;
+    inset-inline: 0;
+    height: 10px;
+  }
+
+  &[data-side='top']::before {
+    bottom: -10px;
+    inset-inline: 0;
+    height: 10px;
+  }
+
+  &[data-side='left']::before {
+    right: -10px;
+    inset-block: 0;
+    width: 10px;
+  }
+
+  &[data-side='right']::before {
+    left: -10px;
+    inset-block: 0;
+    width: 10px;
+  }
+}
+
+.navigation-menu-popup {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: var(--popup-width);
+  height: var(--popup-height);
+  border: 1px solid color-mix(in oklab, var(--color-primary-700) 12%, transparent);
+  border-radius: 1rem;
+  background-color: color-mix(in oklab, canvas 96%, transparent);
+  color: var(--color-slate-900);
+  outline: none;
+  backdrop-filter: blur(16px);
+  transform-origin: var(--transform-origin);
+  box-shadow:
+    0 20px 25px -5px color-mix(in oklab, var(--color-primary-700) 15%, transparent),
+    0 8px 10px -6px color-mix(in oklab, var(--color-primary-700) 15%, transparent);
+  transition:
+    opacity var(--navigation-menu-duration) var(--navigation-menu-easing),
+    transform var(--navigation-menu-duration) var(--navigation-menu-easing),
+    width var(--navigation-menu-duration) var(--navigation-menu-easing),
+    height var(--navigation-menu-duration) var(--navigation-menu-easing);
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-primary-700) 30%, transparent),
+      color-mix(in oklab, var(--color-primary-700) 70%, transparent),
+      var(--color-primary-700)
+    );
+  }
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    transform: translateY(0.25rem) scale(0.98);
+  }
+
+  &[data-ending-style] {
+    transition-duration: 150ms;
+  }
+}
+
+.navigation-menu-arrow {
+  display: flex;
+  transition:
+    left var(--navigation-menu-duration) var(--navigation-menu-easing),
+    right var(--navigation-menu-duration) var(--navigation-menu-easing);
+
+  &[data-side='top'] {
+    bottom: -8px;
+    rotate: 180deg;
+  }
+
+  &[data-side='bottom'] {
+    top: -8px;
+    rotate: 0deg;
+  }
+
+  &[data-side='left'] {
+    right: -13px;
+    rotate: 90deg;
+  }
+
+  &[data-side='right'] {
+    left: -13px;
+    rotate: -90deg;
+  }
+}
+
+.navigation-menu-arrow-fill {
+  fill: canvas;
+}
+
+.navigation-menu-arrow-outer {
+  fill: var(--color-slate-200);
+}
+
+.navigation-menu-arrow-inner {
+  fill: transparent;
+}
+
+.navigation-menu-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}

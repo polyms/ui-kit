@@ -141,7 +141,7 @@
   margin: -0.25rem -0.25rem -0.25rem 0;
   pointer-events: none;
   opacity: 0.8;
-  shrink: 0;
+  flex-shrink: 0;
 
   svg {
     width: 1.125rem;
@@ -149,9 +149,12 @@
   }
 }
 
+.select-positioner {
+  z-index: var(--zindex-popover);
+}
+
 .select-popup {
   position: relative;
-  z-index: 50;
   border-radius: 0.5rem;
   border: 1px solid var(--color-border, #e5e7eb);
   background-color: var(--color-popover, canvas);

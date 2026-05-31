@@ -160,7 +160,7 @@ body {
 
     .nav-item {
       @apply relative flex items-center gap-2 rounded-lg p-2 text-left text-sm;
-      @apply w-full cursor-pointer font-semibold no-underline;
+      @apply w-full cursor-pointer font-semibold no-underline outline-none;
 
       &:not(.active):not(:active) {
         @apply text-neutral-600;

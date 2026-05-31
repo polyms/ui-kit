@@ -1,5 +1,5 @@
 import { Button } from '@polyms/core'
-import { Code2, Layers, MagicStick3, Palette } from '@solar-icons/react-perf/BoldDuotone'
+import { ChartSquare, Code2, Layers, MagicStick3 } from '@solar-icons/react-perf/BoldDuotone'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
 import type { ComponentType } from 'react'
@@ -23,21 +23,21 @@ type DemoFeature = {
 const features: DemoFeature[] = [
   {
     description:
-      'The top bar with logo, search box, and action group — close to a real application shell to test layout and spacing.',
+      'Sticky app header with the bare-variant NavigationMenu — Accounts, Cards, Transfers and Investments share a single animated viewport.',
     icon: Layers,
-    title: 'App chrome',
+    title: 'Mega menu shell',
   },
   {
     description:
-      'Sample login/logout flow with local state, suitable for testing button, ghost hover, and font hierarchy.',
+      'Local-state login/logout flow next to the search field — perfect for stress-testing button variants, ghost hover and focus rings.',
     icon: MagicStick3,
     title: 'Stateful interactions',
   },
   {
     description:
-      'Use components from @polyms/core and the slate scale of the design system to keep consistent with the documentation.',
-    icon: Palette,
-    title: 'Token & component',
+      'Balance cards, virtual card visuals, recipient avatars and CSS bar charts — all rendered with @polyms/core tokens and the slate scale.',
+    icon: ChartSquare,
+    title: 'Data-driven content',
   },
 ]
 
@@ -46,25 +46,38 @@ function Page() {
     <>
       <Header />
 
-      <div className='docs-demo-shell isolate overflow-x-clip bg-slate-50 text-slate-900'>
+      <div className='docs-demo-shell relative isolate overflow-x-clip bg-slate-50 text-slate-900'>
         <div aria-hidden className='pointer-events-none absolute inset-0 overflow-hidden'>
+          <div
+            className='mask-[linear-gradient(to_bottom,black_55%,transparent)] absolute inset-x-0 top-0 h-144 [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)]'
+            style={{
+              backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+                '<svg width="42" height="44" viewBox="0 0 42 44" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="#94a3b8" fill-opacity="0.06"><path d="M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z"/></g></g></svg>'
+              )}")`,
+            }}
+          />
           <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl' />
           <div className='absolute top-48 -right-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl' />
           <div className='absolute top-80 -left-16 h-64 w-64 rounded-full bg-slate-300/40 blur-3xl' />
         </div>
 
         <main className='relative flex min-h-0 min-w-0 flex-1 flex-col'>
-          <section className='mx-auto w-full max-w-5xl px-5 pt-10 pb-14 md:px-8 md:pt-14 md:pb-20'>
+          <section className='mx-auto w-full max-w-5xl px-5 pt-12 pb-14 md:px-8 md:pt-20 md:pb-20'>
             <div className='inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-3 py-1 font-medium text-slate-600 text-xs shadow-sm ring-1 ring-slate-100/80 backdrop-blur-sm'>
               <span className='flex size-1.5 rounded-full bg-success-500 shadow-[0_0_0_3px_var(--color-success-100)]' />
               Playground
             </div>
 
             <h1 className='mt-6 max-w-3xl font-semibold text-3xl text-slate-900 tracking-tight md:text-4xl lg:text-5xl'>
-              Demo shell modern for Core UI
+              A fintech-style shell, powered by Core UI
             </h1>
             <p className='mt-4 max-w-3xl text-pretty text-base text-slate-600 leading-relaxed md:text-lg'>
-              This page simulates a small application shell: sticky header, search, and auth flow.
+              Sticky header with a real <span className='font-semibold text-slate-800'>mega menu</span>,
+              global search and an auth flow — composed entirely from{' '}
+              <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[0.85em] text-slate-800'>
+                @polyms/core
+              </code>{' '}
+              primitives.
             </p>
 
             <div className='mt-8 flex flex-wrap items-center gap-3'>

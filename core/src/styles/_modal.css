@@ -40,6 +40,7 @@
 
 .modal-content {
   @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-white bg-clip-padding outline-none;
+  @apply ring-4 ring-white/30;
 
   /* overflow: hidden; */
   border-radius: 1.5rem;

@@ -397,8 +397,16 @@ function FormsPage() {
     <>
       <Header />
 
-      <div className='docs-demo-shell isolate overflow-x-clip bg-slate-50 text-slate-900'>
+      <div className='docs-demo-shell relative isolate overflow-x-clip bg-slate-50 text-slate-900'>
         <div aria-hidden className='pointer-events-none absolute inset-0 overflow-hidden'>
+          <div
+            className='mask-[linear-gradient(to_bottom,black_55%,transparent)] absolute inset-x-0 top-0 h-144 [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)]'
+            style={{
+              backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
+                '<svg width="42" height="44" viewBox="0 0 42 44" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="#94a3b8" fill-opacity="0.06"><path d="M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z"/></g></g></svg>'
+              )}")`,
+            }}
+          />
           <div className='absolute -top-20 left-1/3 h-96 w-96 rounded-full bg-primary/10 blur-3xl' />
           <div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-slate-300/30 blur-3xl' />
         </div>

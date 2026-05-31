@@ -12,8 +12,8 @@ This file ships inside the npm package so AI assistants and developers follow th
 
 Everything comes from **one entry**: `@polyms/core-ui` (`index.mjs` / `index.d.ts`).
 
-- **Polyms components** — `Button`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `Tabs`, `Toolbar`, `Avatar`, …
-- **Re-exports from Base UI** — `Accordion`, `NavigationMenu`, `Toggle`, `ToggleGroup`, **`useRender`** (from `@base-ui/react/use-render`).
+- **Polyms components** — `Button`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `NavigationMenu`, `Tabs`, `Toolbar`, `Avatar`, …
+- **Re-exports from Base UI** — `Accordion`, `Toggle`, `ToggleGroup`, **`useRender`** (from `@base-ui/react/use-render`).
 - **Programmatic modals** — **`useModalStore`** with **`showModal`** / **`closeModal`** (see types in `index.d.ts`).
 - **Code-splitting** — **`dynamic`** (lazy loader) — confirm availability in `index.d.ts`.
 
@@ -51,6 +51,7 @@ Prefer **dot access** on the root export; never invent standalone top-level impo
 | Field | `Field`, `Field.Label`, `Field.Control`, `Field.Description`, `Field.Feedback`, `Field.Floating` |
 | Select | `Select`, `Select.Trigger`, `Select.Content`, `Select.Item`, `Select.Group`, … |
 | Menu | `Menu`, `Menu.Trigger`, `Menu.Content`, `Menu.Item`, … |
+| NavigationMenu | `NavigationMenu`, `NavigationMenu.List`, `NavigationMenu.Item`, `NavigationMenu.Trigger`, `NavigationMenu.Icon`, `NavigationMenu.Content`, `NavigationMenu.GroupLabel`, `NavigationMenu.Separator`, `NavigationMenu.Footer`, `NavigationMenu.Link`, `NavigationMenu.Viewport` |
 | Offcanvas | `Offcanvas`, `Offcanvas.Trigger`, `Offcanvas.Content`, `Offcanvas.Header`, … |
 | Tabs | `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel` |
 | Toolbar | `Toolbar`, `Toolbar.Button`, `Toolbar.Link`, `Toolbar.Input`, `Toolbar.Group`, `Toolbar.Separator` |
@@ -122,6 +123,125 @@ Submenus use `Menu.SubmenuRoot` + `Menu.SubmenuTrigger` + nested `Menu.Content`:
     <Menu.Item>PNG</Menu.Item>
   </Menu.Content>
 </Menu.SubmenuRoot>
+```
+
+#### NavigationMenu
+
+Site-header / mega-menu surface. Each `NavigationMenu.Item` holds its own `Trigger` + `Content`, but **all** items render into a single shared `NavigationMenu.Viewport` that you place once at the end of the root. Keep the tree intact — don't try to portal the popup yourself.
+
+```tsx
+<NavigationMenu>
+  <NavigationMenu.List>
+    <NavigationMenu.Item value='products'>
+      <NavigationMenu.Trigger>
+        Products
+        <NavigationMenu.Icon />
+      </NavigationMenu.Trigger>
+      <NavigationMenu.Content>
+        <NavigationMenu.Link href='/launchpad'>Launchpad</NavigationMenu.Link>
+        <NavigationMenu.Link href='/analytics'>Analytics</NavigationMenu.Link>
+      </NavigationMenu.Content>
+    </NavigationMenu.Item>
+
+    <NavigationMenu.Item value='pricing'>
+      <NavigationMenu.Link href='/pricing' variant='trigger'>Pricing</NavigationMenu.Link>
+    </NavigationMenu.Item>
+  </NavigationMenu.List>
+
+  <NavigationMenu.Viewport />
+</NavigationMenu>
+```
+
+Use `NavigationMenu.List variant='bare'` when the surrounding app header already owns chrome (sticky background, border, blur, container sizing). The default list renders its own rounded shell; `bare` removes the list border/background/padding while keeping the flex layout.
+
+Pass `size='lg'` on `NavigationMenu.Trigger` and on `NavigationMenu.Link variant='trigger'` for roomier site-header nav items. This matches marketing/header nav sizing without hand-written `text-base` / `leading-*` overrides.
+
+```tsx
+<NavigationMenu.List variant='bare'>
+  <NavigationMenu.Item value='about'>
+    <NavigationMenu.Trigger size='lg'>
+      About
+      <NavigationMenu.Icon />
+    </NavigationMenu.Trigger>
+    <NavigationMenu.Content>{/* mega menu */}</NavigationMenu.Content>
+  </NavigationMenu.Item>
+
+  <NavigationMenu.Item>
+    <NavigationMenu.Link href='/contact-us' size='lg' variant='trigger'>
+      Contact
+    </NavigationMenu.Link>
+  </NavigationMenu.Item>
+</NavigationMenu.List>
+```
+
+`NavigationMenu.Link` accepts a `render` prop for router integration (`<NextLink />`, `<TanStackLink />`, …). Use `active` to mark the current page (`aria-current='page'` is set automatically). `closeOnClick` defaults to `true` — override with `closeOnClick={false}` for links that shouldn't dismiss the popup.
+
+**`variant` on `NavigationMenu.Link`:**
+
+- `variant='soft'` — card-style row (primary-tinted background + dashed → solid border on hover/focus/active). Use **inside** `NavigationMenu.Content` for discoverable mega-menu rows. The default link style stays plain (slate hover) so dense menus don't feel noisy.
+- `variant='danger'` — destructive row styling. Use for sign-out, revoke, or delete actions inside a popup.
+- `variant='trigger'` — pill styling matching `NavigationMenu.Trigger`. Use for **static entries inside `NavigationMenu.List`** (e.g. *Pricing*, *Login*) so they share padding, radius, hover tint, and the animated underline with sibling triggers. **Do not** hand-roll `className='navigation-menu-trigger'` — the variant handles class composition and keeps alignment pixel-perfect.
+
+```tsx
+{/* Card row inside a mega menu */}
+<NavigationMenu.Link href='/community' variant='soft'>
+  Community
+</NavigationMenu.Link>
+
+{/* Destructive row inside a mega menu */}
+<NavigationMenu.Link href='/revoke-access' variant='danger'>
+  Revoke access
+</NavigationMenu.Link>
+
+{/* Static entry alongside Trigger items */}
+<NavigationMenu.Item>
+  <NavigationMenu.Link href='/pricing' variant='trigger'>Pricing</NavigationMenu.Link>
+</NavigationMenu.Item>
+```
+
+Use `NavigationMenu.GroupLabel`, `NavigationMenu.Separator`, and `NavigationMenu.Footer` to structure mega menu content without repeating raw utility bundles.
+
+- **`GroupLabel`** — uppercase muted column header. Pair with a `<ul>` of links underneath.
+- **`Separator`** — thin slate divider rendered as `<hr>`. Pass `orientation='vertical'` to split columns inside a flex row instead of stacking sections vertically.
+- **`Footer`** — bottom strip with a dashed slate border, laid out as `flex justify-between`. Use for changelog teasers, sales CTAs, or "View all → " links.
+
+```tsx
+<NavigationMenu.Content>
+  <NavigationMenu.GroupLabel>Products</NavigationMenu.GroupLabel>
+  <NavigationMenu.Link href='/launchpad'>Launchpad</NavigationMenu.Link>
+  <NavigationMenu.Separator />
+  <NavigationMenu.Footer>
+    <span>Postgres branching is now GA.</span>
+    <a className='link link-primary' href='/changelog'>Read changelog</a>
+  </NavigationMenu.Footer>
+</NavigationMenu.Content>
+```
+
+Split columns with a vertical separator inside a flex row:
+
+```tsx
+<NavigationMenu.Content>
+  <div className='flex gap-3'>
+    <ul className='m-0 flex flex-col gap-0.5 p-0 list-none'>
+      {/* column 1 links */}
+    </ul>
+    <NavigationMenu.Separator orientation='vertical' />
+    <ul className='m-0 flex flex-col gap-0.5 p-0 list-none'>
+      {/* column 2 links */}
+    </ul>
+  </div>
+</NavigationMenu.Content>
+```
+
+`NavigationMenu.Icon` renders the default rotating chevron. Pass `children` to swap it out (e.g. a HugeIcons / Lucide arrow) — the 180° open-state rotation still applies.
+
+```tsx
+<NavigationMenu.Trigger>
+  Products
+  <NavigationMenu.Icon>
+    <HugeiconsIcon icon={ArrowDown01Icon} size={12} strokeWidth={2} />
+  </NavigationMenu.Icon>
+</NavigationMenu.Trigger>
 ```
 
 #### Toolbar
