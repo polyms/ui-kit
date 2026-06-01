@@ -1,0 +1,72 @@
+---
+type: Data input
+title: Radio
+apis:
+  - separator: RadioGroup
+  - name: value
+    default: '-'
+    values: string
+    description: Controlled selected value.
+  - name: defaultValue
+    default: '-'
+    values: string
+    description: Initial selected value for uncontrolled usage.
+  - name: onValueChange
+    default: '-'
+    values: '(value: string) => void'
+    description: Fires when the selected radio changes.
+  - name: orientation
+    default: vertical
+    values: vertical | horizontal
+    description: Controls stacked or inline layout.
+  - name: name
+    default: '-'
+    values: string
+    description: Shared form field name for the group.
+  - name: size
+    default: '-'
+    values: sm | lg | xl
+    description: Default size applied to child radios.
+  - name: variant
+    default: primary
+    values: primary | success | info | warning | danger | dark
+    description: Default semantic tone applied to child radios.
+  - separator: Radio
+  - name: value
+    default: '-'
+    values: string
+    description: Unique option value inside the group.
+  - name: disabled
+    default: '-'
+    values: boolean
+    description: Prevents selecting the option.
+---
+
+import Story from './-views/radio/RadioDefault.tsx'
+import code from './-views/radio/RadioDefault.tsx?raw'
+import Variants from './-views/radio/RadioVariants.tsx'
+
+Use `RadioGroup` and `Radio` when exactly one option should be selected.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Radio, RadioGroup } from '@polyms/core'
+
+<RadioGroup name='plan' onValueChange={setPlan} value={plan}>
+  <Radio value='free'>Free</Radio>
+  <Radio value='pro'>Pro</Radio>
+</RadioGroup>
+```
+
+## Variants
+
+<Variants />
+
+## API Reference
+
+<APIReference />

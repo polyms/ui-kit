@@ -12,7 +12,7 @@ This file ships inside the npm package so AI assistants and developers follow th
 
 Everything comes from **one entry**: `@polyms/core-ui` (`index.mjs` / `index.d.ts`).
 
-- **Polyms components** — `Button`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `NavigationMenu`, `Tabs`, `Toolbar`, `Avatar`, …
+- **Polyms components** — `Button`, `Checkbox`, `Radio`, `RadioGroup`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `NavigationMenu`, `Tabs`, `Toolbar`, `Avatar`, …
 - **Re-exports from Base UI** — `Accordion`, `Toggle`, `ToggleGroup`, **`useRender`** (from `@base-ui/react/use-render`).
 - **Programmatic modals** — **`useModalStore`** with **`showModal`** / **`closeModal`** (see types in `index.d.ts`).
 - **Code-splitting** — **`dynamic`** (lazy loader) — confirm availability in `index.d.ts`.
@@ -366,6 +366,43 @@ Badge / card example:
   </div>
 </div>
 ```
+
+Checkbox / radio example:
+
+```tsx
+import { Checkbox, Field, Radio, RadioGroup } from '@polyms/core-ui'
+
+{/* Single agreement checkbox. Use the component, not raw .checkbox markup. */}
+<Checkbox checked={accepted} onCheckedChange={setAccepted}>
+  Tôi đồng ý điều khoản dịch vụ
+</Checkbox>
+
+{/* Indeterminate parent row */}
+<Checkbox checked={allChecked} indeterminate={someChecked && !allChecked} onCheckedChange={setAll}>
+  Tất cả thông báo
+</Checkbox>
+
+{/* Radio group inline */}
+<RadioGroup name='currency' onValueChange={setValue} orientation='horizontal' value={value}>
+  {options.map(opt => (
+    <Radio key={opt.value} value={opt.value}>
+      {opt.label}
+    </Radio>
+  ))}
+</RadioGroup>
+
+{/* Wrap a radio/checkbox group inside Field for label + description + invalid state */}
+<Field invalid={hasError}>
+  <Field.Label>Phương thức thanh toán</Field.Label>
+  <RadioGroup name='pm' onValueChange={setPaymentMethod} value={paymentMethod}>
+    <Radio value='card'>Thẻ tín dụng</Radio>
+    <Radio value='bank'>Chuyển khoản</Radio>
+  </RadioGroup>
+  <Field.Description>Có thể đổi sau ở trang Billing.</Field.Description>
+</Field>
+```
+
+`Checkbox` / `Radio` support sizes (`sm`, `lg`, `xl`) and tones (`primary`, `success`, `info`, `warning`, `danger`, `dark`). `RadioGroup` accepts `orientation='horizontal' | 'vertical'`, plus group-level `size` / `variant` defaults for child radios. CSS classes `.checkbox`, `.radio`, `.radio-group`, and `.check-group` remain available for advanced custom rendering, but prefer React components for accessibility and state attributes.
 
 ## Interactive state utilities (`item-*`)
 

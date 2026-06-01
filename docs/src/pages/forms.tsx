@@ -6,10 +6,10 @@ import {
   UserIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Field, NumberField, Select } from '@polyms/core'
+import { Button, Checkbox, Field, NumberField, Radio, RadioGroup, Select } from '@polyms/core'
 import { createFileRoute } from '@tanstack/react-router'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { Header } from './-views/DemoHeader'
 
@@ -69,6 +69,7 @@ function PreviewSection({
 function LoginFormCase() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [remember, setRemember] = useState(true)
 
   return (
     <form
@@ -101,20 +102,17 @@ function LoginFormCase() {
         />
         <Field.Description>Tối thiểu 8 ký tự, có chữ hoa và số.</Field.Description>
       </Field>
-      <div className='flex flex-col gap-2 pt-1 sm:flex-row sm:items-center'>
-        <Button
-          className='w-full sm:flex-1'
-          disabled={!email || !password}
-          rounded
-          type='submit'
-          variant='primary'
-        >
-          Đăng nhập
-        </Button>
-        <Button className='w-full sm:w-auto' outlined rounded type='button' variant='light'>
+      <div className='flex items-center justify-between gap-3'>
+        <Checkbox checked={remember} onCheckedChange={setRemember}>
+          Ghi nhớ đăng nhập
+        </Checkbox>
+        <a className='link link-primary text-xs' href='#forgot'>
           Quên mật khẩu?
-        </Button>
+        </a>
       </div>
+      <Button className='w-full' disabled={!email || !password} rounded type='submit' variant='primary'>
+        Đăng nhập
+      </Button>
     </form>
   )
 }
@@ -362,6 +360,171 @@ function SizeAlignmentCase() {
   )
 }
 
+const notificationItems = [
+  { id: 'product', label: 'Cập nhật sản phẩm', desc: 'Tính năng mới, ra mắt và bản vá.' },
+  { id: 'security', label: 'Cảnh báo bảo mật', desc: 'Đăng nhập lạ, đổi mật khẩu.' },
+  { id: 'billing', label: 'Hoá đơn & thanh toán', desc: 'Sao kê hàng tháng, thẻ hết hạn.' },
+] as const
+
+function NotificationPreferencesCase() {
+  const [checked, setChecked] = useState<Record<string, boolean>>({
+    product: true,
+    security: true,
+    billing: false,
+  })
+
+  const allChecked = useMemo(() => notificationItems.every(i => checked[i.id]), [checked])
+  const noneChecked = useMemo(() => notificationItems.every(i => !checked[i.id]), [checked])
+  return (
+    <div className='mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-slate-200/70 bg-white p-5'>
+      <Checkbox
+        checked={allChecked}
+        className='border-slate-100 border-b pb-3'
+        indeterminate={!allChecked && !noneChecked}
+        onCheckedChange={next => setChecked(Object.fromEntries(notificationItems.map(i => [i.id, next])))}
+        size='lg'
+      >
+        <span className='font-semibold'>Tất cả thông báo</span>
+      </Checkbox>
+      <div className='flex flex-col gap-2 ps-7'>
+        {notificationItems.map(i => (
+          <Checkbox
+            checked={!!checked[i.id]}
+            key={i.id}
+            onCheckedChange={next => setChecked(prev => ({ ...prev, [i.id]: next }))}
+          >
+            <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
+              <span>{i.label}</span>
+              <span className='font-normal text-slate-500 text-xs'>{i.desc}</span>
+            </span>
+          </Checkbox>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const planCardOptions = [
+  { id: 'free', name: 'Free', price: '$0', desc: '1 dự án · cá nhân.' },
+  { id: 'pro', name: 'Pro', price: '$19', desc: 'Team nhỏ · không giới hạn dự án.' },
+  { id: 'enterprise', name: 'Enterprise', price: 'Custom', desc: 'SSO · audit log · SLA.' },
+]
+
+function PlanRadioCardsCase() {
+  const [selected, setSelected] = useState('pro')
+
+  return (
+    <Field>
+      <Field.Label>Chọn gói thanh toán</Field.Label>
+      <RadioGroup className='mt-1 grid gap-3 sm:grid-cols-3' onValueChange={setSelected} value={selected}>
+        {planCardOptions.map(plan => (
+          <Radio
+            className={clsx(
+              'radio cursor-pointer rounded-xl border bg-white p-4 transition',
+              'hover:border-primary-600/60',
+              'data-checked:border-primary-600 data-checked:bg-primary-50/40',
+              'data-checked:ring-3 data-checked:ring-primary-600/15',
+              selected === plan.id ? 'border-primary-600' : 'border-slate-200'
+            )}
+            key={plan.id}
+            value={plan.id}
+          >
+            <span className='flex min-w-0 flex-1 flex-col gap-1'>
+              <span className='flex items-baseline justify-between gap-2'>
+                <span className='font-semibold'>{plan.name}</span>
+                <span className='font-semibold tabular-nums'>{plan.price}</span>
+              </span>
+              <span className='font-normal text-slate-500 text-xs leading-snug'>{plan.desc}</span>
+            </span>
+          </Radio>
+        ))}
+      </RadioGroup>
+      <Field.Description>Có thể nâng cấp hoặc đổi gói bất kỳ lúc nào.</Field.Description>
+    </Field>
+  )
+}
+
+const checkVariants: { variant: '' | 'success' | 'info' | 'warning' | 'danger'; label: string }[] = [
+  { variant: '', label: 'primary' },
+  { variant: 'success', label: 'success' },
+  { variant: 'info', label: 'info' },
+  { variant: 'warning', label: 'warning' },
+  { variant: 'danger', label: 'danger' },
+]
+
+const checkSizes: { size: 'sm' | '' | 'lg' | 'xl'; label: string }[] = [
+  { size: 'sm', label: 'sm' },
+  { size: '', label: 'default' },
+  { size: 'lg', label: 'lg' },
+  { size: 'xl', label: 'xl' },
+]
+
+function CheckRadioGalleryCase() {
+  const [variantChoice, setVariantChoice] = useState('primary')
+
+  return (
+    <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-2'>
+        <span className='font-medium text-slate-500 text-xs uppercase tracking-wider'>Sizes</span>
+        <div className='flex flex-wrap items-end gap-x-6 gap-y-3'>
+          {checkSizes.map(({ size, label }) => (
+            <Checkbox defaultChecked key={`cb-${label}`} size={size || undefined}>
+              {label}
+            </Checkbox>
+          ))}
+          <span aria-hidden className='h-6 w-px self-center bg-slate-200' />
+          {checkSizes.map(({ size, label }) => (
+            <RadioGroup defaultValue='default' key={`rd-group-${label}`} name={`gallery-size-${label}`}>
+              <Radio size={size || undefined} value={label}>
+                {label}
+              </Radio>
+            </RadioGroup>
+          ))}
+        </div>
+      </div>
+
+      <div className='flex flex-col gap-2'>
+        <span className='font-medium text-slate-500 text-xs uppercase tracking-wider'>Variants</span>
+        <div className='flex flex-wrap items-center gap-x-6 gap-y-3'>
+          {checkVariants.map(({ variant, label }) => (
+            <Checkbox defaultChecked key={`vcb-${label}`} variant={variant || undefined}>
+              {label}
+            </Checkbox>
+          ))}
+        </div>
+        <RadioGroup
+          className='check-group check-group-inline'
+          name='gallery-variant'
+          onValueChange={setVariantChoice}
+          orientation='horizontal'
+          value={variantChoice}
+        >
+          {checkVariants.map(({ variant, label }) => (
+            <Radio key={`vrd-${label}`} value={label} variant={variant || undefined}>
+              {label}
+            </Radio>
+          ))}
+        </RadioGroup>
+      </div>
+
+      <div className='flex flex-col gap-2'>
+        <span className='font-medium text-slate-500 text-xs uppercase tracking-wider'>States</span>
+        <div className='flex flex-wrap items-center gap-x-6 gap-y-3'>
+          <Checkbox>Bỏ chọn</Checkbox>
+          <Checkbox defaultChecked>Đã chọn</Checkbox>
+          <Checkbox disabled>Disabled</Checkbox>
+          <Checkbox defaultChecked disabled>
+            Disabled · checked
+          </Checkbox>
+          <Field className='inline-flex w-auto' invalid>
+            <Checkbox>Field invalid</Checkbox>
+          </Field>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ModalFooterCase() {
   const [date, setDate] = useState('')
 
@@ -476,6 +639,27 @@ function FormsPage() {
               title='7. Footer dialog'
             >
               <ModalFooterCase />
+            </PreviewSection>
+
+            <PreviewSection
+              description='Checkbox group có parent indeterminate: hữu ích cho cấu hình quyền & notification preferences.'
+              title='8. Tuỳ chọn thông báo (checkbox + indeterminate)'
+            >
+              <NotificationPreferencesCase />
+            </PreviewSection>
+
+            <PreviewSection
+              description='Radio cards giữ class .radio cho input, layout custom — selected có viền primary + ring nhẹ.'
+              title='9. Chọn gói (radio cards)'
+            >
+              <PlanRadioCardsCase />
+            </PreviewSection>
+
+            <PreviewSection
+              description='Sizes (sm / default / lg / xl) · variants (primary / success / info / warning / danger) · disabled · invalid.'
+              title='10. Gallery checkbox & radio'
+            >
+              <CheckRadioGalleryCase />
             </PreviewSection>
           </section>
         </main>

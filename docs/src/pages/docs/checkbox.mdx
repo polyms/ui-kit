@@ -1,0 +1,71 @@
+---
+type: Data input
+title: Checkbox
+apis:
+  - name: checked
+    default: '-'
+    values: boolean
+    description: Controls whether the checkbox is selected.
+  - name: defaultChecked
+    default: false
+    values: boolean
+    description: Initial selected state for uncontrolled usage.
+  - name: indeterminate
+    default: false
+    values: boolean
+    description: Renders the mixed state for parent rows.
+  - name: onCheckedChange
+    default: '-'
+    values: '(checked: boolean) => void'
+    description: Fires when the checked state changes.
+  - name: size
+    default: '-'
+    values: sm | lg | xl
+    description: Controls the checkbox box size and label typography.
+  - name: variant
+    default: primary
+    values: primary | success | info | warning | danger | dark
+    description: Selects the semantic color token.
+  - name: disabled
+    default: '-'
+    values: boolean
+    description: Prevents interaction and applies muted styling.
+---
+
+import Story from './-views/checkbox/CheckboxDefault.tsx'
+import code from './-views/checkbox/CheckboxDefault.tsx?raw'
+import Variants from './-views/checkbox/CheckboxVariants.tsx'
+
+Use `Checkbox` for binary choices, agreements, and parent rows with mixed state.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Checkbox } from '@polyms/core'
+
+<Checkbox checked={accepted} onCheckedChange={setAccepted}>
+  Accept terms
+</Checkbox>
+```
+
+## Indeterminate
+
+Pass `indeterminate` for parent rows when only some child items are selected.
+
+```tsx
+<Checkbox checked={allChecked} indeterminate={someChecked && !allChecked} onCheckedChange={setAll}>
+  Select all
+</Checkbox>
+```
+
+## Variants
+
+<Variants />
+
+## API Reference
+
+<APIReference />
