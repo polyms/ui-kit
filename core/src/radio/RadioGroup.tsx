@@ -1,7 +1,7 @@
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group'
 import clsx from 'clsx'
-import { RadioProvider } from './RadioContext'
 import type { RadioSize, RadioVariant } from './Radio'
+import { RadioProvider } from './RadioContext'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 

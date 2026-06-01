@@ -1,16 +1,16 @@
 import { Avatar } from '@polyms/core'
 
-const avatarSrc = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#94a3b8" />
-      <stop offset="1" stop-color="#e2e8f0" />
-    </linearGradient>
-  </defs>
-  <rect width="80" height="80" rx="40" fill="url(#g)" />
-  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle"
-    font-family="ui-sans-serif, system-ui" font-size="28" fill="#0f172a">JD</text>
-</svg>`)}`
+// const avatarSrc = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+//   <defs>
+//     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+//       <stop offset="0" stop-color="#94a3b8" />
+//       <stop offset="1" stop-color="#e2e8f0" />
+//     </linearGradient>
+//   </defs>
+//   <rect width="80" height="80" rx="40" fill="url(#g)" />
+//   <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle"
+//     font-family="ui-sans-serif, system-ui" font-size="28" fill="#0f172a">JD</text>
+// </svg>`)}`
 
 export default function AvatarDefault() {
   return (

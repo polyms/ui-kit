@@ -27,7 +27,7 @@ describe('Radio', () => {
 
   it('applies group size and variant to radio items', () => {
     render(
-      <RadioGroup size='lg' variant='danger' value='delete'>
+      <RadioGroup size='lg' value='delete' variant='danger'>
         <Radio value='delete'>Delete account</Radio>
       </RadioGroup>
     )
