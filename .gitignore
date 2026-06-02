@@ -106,3 +106,4 @@ doc_build/
 .claude/worktrees
 .claude/settings.local.json
 .nx/polygraph
+.venv-rembg

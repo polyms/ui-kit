@@ -1,5 +1,7 @@
 /** biome-ignore-all lint/style/useNamingConvention: Icon component prop */
 
+import { GithubIcon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/core'
 import {
   Accessibility,
@@ -38,14 +40,17 @@ function RouteComponent() {
   return (
     <>
       <link href={homePageStylesUrl} precedence='high' rel='stylesheet' />
+      <div className='home-scanline' />
       <main className='landing relative isolate overflow-x-clip bg-slate-950 text-slate-100'>
         <BackgroundDecor />
         <LandingNav />
         <HeroSection />
         <ComponentShowcaseSection />
         <FeaturesSection />
+        <ThemingSection />
         <InstallSection />
         <MetricsSection />
+        <FaqSection />
         <CTASection />
         <FooterSection />
       </main>
@@ -95,7 +100,7 @@ function LandingNav() {
             rel='noopener noreferrer'
             target='_blank'
           >
-            <GitHubIcon className='size-4' />
+            <HugeiconsIcon className='size-4' icon={GithubIcon} />
             <span className='hidden sm:inline'>GitHub</span>
           </a>
           <Link className='btn btn-primary btn-sm rounded-full' to='/design-system'>
@@ -110,69 +115,80 @@ function LandingNav() {
 
 function HeroSection() {
   return (
-    <section className='relative px-6 pt-20 pb-16 md:pt-28 md:pb-24'>
-      <Container className='flex flex-col items-center text-center'>
-        <a
-          className='home-hero-pill mb-7'
-          href='https://github.com/polyms/core-ui/releases'
-          rel='noopener noreferrer'
-          target='_blank'
-        >
-          <span className='home-hero-pulse' />
-          <span className='font-medium'>v1.0 · MIT Licensed</span>
-          <span aria-hidden='true' className='sep'>
-            ·
-          </span>
-          <span className='text-slate-500'>Now on React 19</span>
-          <ArrowRightIcon className='arrow' />
-        </a>
-
-        <h1 className='max-w-3xl text-balance font-semibold text-5xl tracking-tight md:text-7xl'>
-          <span className='home-hero-title-mute'>Production-ready</span>
-          <br />
-          <span className='home-hero-title-accent'>React components</span>
-        </h1>
-
-        <p className='mt-6 max-w-2xl text-balance text-lg text-slate-400 leading-relaxed md:text-xl'>
-          Type-safe, accessible, and composable primitives built on{' '}
-          <span className='font-medium text-slate-200'>Base UI</span> and{' '}
-          <span className='font-medium text-slate-200'>Tailwind CSS</span>. Copy what you need, theme what you
-          want — ship faster.
-        </p>
-
-        <div className='mt-9 flex flex-wrap items-center justify-center gap-3'>
-          <Link className='btn btn-primary btn-xl rounded-full px-5' to='/design-system'>
-            Browse components
-            <ArrowRightIcon className='size-4' />
-          </Link>
-          <a
-            className='home-btn-glass md'
-            href='https://github.com/polyms/core-ui'
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            <GitHubIcon className='size-4' />
-            Star on GitHub
-          </a>
+    <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-[700px] items-center overflow-hidden'>
+      {/* Background Marquee */}
+      <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -translate-y-1/2'>
+        <div className='home-marquee-container'>
+          <div className='home-marquee-content'>
+            <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
+              EDGY {'//'}
+            </span>
+            <span className='home-text-outline-neon px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-transparent italic md:px-8'>
+              UNCOMPROMISING {'//'}
+            </span>
+            <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
+              POLYMS CORE UI {'//'}
+            </span>
+            <span className='home-text-outline-neon px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-transparent italic md:px-8'>
+              CYBERPUNK {'//'}
+            </span>
+            <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
+              EDGY {'//'}
+            </span>
+            <span className='home-text-outline-neon px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-transparent italic md:px-8'>
+              UNCOMPROMISING {'//'}
+            </span>
+            <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
+              POLYMS CORE UI {'//'}
+            </span>
+            <span className='home-text-outline-neon px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-transparent italic md:px-8'>
+              CYBERPUNK {'//'}
+            </span>
+          </div>
         </div>
+      </div>
 
-        <div className='mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-500 text-sm'>
-          <HeroChip label='30+ components' />
-          <HeroChip label='100% TypeScript' />
-          <HeroChip label='WCAG 2.1 AA' />
-          <HeroChip label='Tree-shakeable' />
+      <Container className='relative z-10 w-full'>
+        <div className='relative z-30 max-w-4xl'>
+          <h1 className='text-balance font-black uppercase leading-[0.85] tracking-tighter'>
+            <span className='block text-[clamp(4rem,15vw,8rem)] text-slate-100 mix-blend-difference drop-shadow-2xl'>
+              STRICT.
+            </span>
+            <span className='home-text-outline-neon relative z-20 -mt-1 block text-[clamp(5rem,18vw,10rem)] md:-mt-3 lg:-mt-6'>
+              EDGY.
+            </span>
+            <span className='relative z-10 mt-1 block text-[clamp(2.5rem,10vw,6.5rem)] text-primary-400 drop-shadow-[0_0_20px_rgba(var(--color-primary-500),0.8)] md:mt-2 lg:mt-0'>
+              PRODUCTION-READY.
+            </span>
+          </h1>
+
+          <p className='mt-6 max-w-xl text-balance border-primary-500 border-l-4 bg-black/40 p-3 font-medium text-base text-slate-300 drop-shadow-md backdrop-blur-sm md:mt-8 md:p-4 md:text-lg lg:text-xl'>
+            Type-safe, accessible, and composable primitives built on{' '}
+            <span className='text-white'>Base UI</span> and{' '}
+            <span className='text-white'>Tailwind CSS v4</span>. No rounded corners, no safe bets.
+          </p>
+
+          <div className='mt-8 flex flex-wrap items-center gap-6 md:mt-10 md:gap-8'>
+            <Link className='home-cyber-btn' to='/design-system'>
+              Browse components
+            </Link>
+            <a
+              className='font-bold text-slate-300 text-sm uppercase tracking-widest transition-all hover:text-white hover:drop-shadow-[0_0_10px_#fff]'
+              href='https://github.com/polyms/core-ui'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Star on GitHub {'//'}
+            </a>
+          </div>
         </div>
       </Container>
-    </section>
-  )
-}
 
-function HeroChip({ label }: { label: string }) {
-  return (
-    <span className='inline-flex items-center gap-2'>
-      <CheckIcon className='size-4 text-primary-400' />
-      {label}
-    </span>
+      {/* Breakout Mascot */}
+      <div className='home-mascot-breakout'>
+        <img alt='Polyms Anime Mascot' className='w-full' src='/mascot.png' />
+      </div>
+    </section>
   )
 }
 
@@ -186,7 +202,7 @@ function ComponentShowcaseSection() {
           title='See the design system in motion'
         />
 
-        <div className='mt-12 grid auto-rows-[12rem] grid-cols-1 gap-4 sm:grid-cols-6'>
+        <div className='mt-12 grid auto-rows-[13rem] grid-cols-1 gap-6 sm:grid-cols-6'>
           <ShowcaseCard className='sm:col-span-3 sm:row-span-2 sm:h-auto' label='Button' to='/docs/button'>
             <ButtonsPreview />
           </ShowcaseCard>
@@ -462,6 +478,80 @@ function FeatureCard({ Icon, title, description, tone }: FeatureItem) {
   )
 }
 
+function ThemingSection() {
+  return (
+    <section className='border-slate-800/60 border-y bg-slate-900/30 px-6 py-20 md:py-28'>
+      <Container>
+        <div className='grid items-center gap-12 lg:grid-cols-2'>
+          <div>
+            <div className='home-section-eyebrow'>Theming API</div>
+            <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-4xl'>
+              Make it yours in minutes.
+            </h2>
+            <p className='mt-4 max-w-xl text-slate-400 md:text-lg'>
+              Polyms Core UI is built on CSS variables. You don't need to fork the library to match your
+              brand. Just tweak a few variables and the entire design system adapts seamlessly.
+            </p>
+            <ul className='mt-8 space-y-4 text-slate-300'>
+              <li className='flex items-center gap-3'>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-400'>
+                  <Palette className='size-4' />
+                </div>
+                <span>No complex CSS-in-JS configurations</span>
+              </li>
+              <li className='flex items-center gap-3'>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-400'>
+                  <MagicStick3 className='size-4' />
+                </div>
+                <span>Tailwind CSS v4 ready out of the box</span>
+              </li>
+              <li className='flex items-center gap-3'>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-400'>
+                  <Layers className='size-4' />
+                </div>
+                <span>
+                  Dynamic colors via{' '}
+                  <code className='rounded bg-primary/10 px-1 py-0.5 text-primary-300 text-xs'>
+                    color-mix()
+                  </code>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className='relative'>
+            <div className='home-example-card border-primary/20 shadow-2xl shadow-primary/5'>
+              <div className='home-example-card-header'>
+                <span className='home-dot close' />
+                <span className='home-dot minimize' />
+                <span className='home-dot maximize' />
+                <span className='label'>theme.css</span>
+              </div>
+              <pre className='home-example-code'>
+                <code dangerouslySetInnerHTML={{ __html: THEME_CODE_HTML }} />
+              </pre>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+const THEME_CODE_HTML = [
+  '<span class="tk-keyword">:root</span> <span class="tk-punct">{</span>',
+  '  <span class="tk-bracket">/* Brand colors */</span>',
+  '  <span class="tk-attr">--color-primary-500</span><span class="tk-punct">:</span> <span class="tk-string">#8b5cf6</span><span class="tk-punct">;</span>',
+  '  <span class="tk-attr">--color-slate-900</span><span class="tk-punct">:</span> <span class="tk-string">#0f172a</span><span class="tk-punct">;</span>',
+  '',
+  '  <span class="tk-bracket">/* Geometry */</span>',
+  '  <span class="tk-attr">--radius-base</span><span class="tk-punct">:</span> <span class="tk-string">0.75rem</span><span class="tk-punct">;</span>',
+  '<span class="tk-punct">}</span>',
+  '',
+  '<span class="tk-keyword">.dark</span> <span class="tk-punct">{</span>',
+  '  <span class="tk-attr">--color-primary-500</span><span class="tk-punct">:</span> <span class="tk-string">#a78bfa</span><span class="tk-punct">;</span>',
+  '<span class="tk-punct">}</span>',
+].join('\n')
+
 function InstallSection() {
   return (
     <section className='px-6 py-20 md:py-28'>
@@ -631,6 +721,50 @@ function MetricCell({ value, label, sub }: MetricItem) {
   )
 }
 
+function FaqSection() {
+  return (
+    <section className='px-6 py-20 md:py-28'>
+      <Container>
+        <SectionHeader
+          eyebrow='FAQ'
+          subtitle='Everything you need to know about Polyms Core UI.'
+          title='Frequently asked questions'
+        />
+        <div className='mx-auto mt-12 max-w-3xl space-y-4'>
+          <FaqItem
+            answer='Yes, Polyms is framework-agnostic when it comes to bundlers. It works perfectly with Vite, Next.js (App Router), Remix, and any modern React framework.'
+            question='Is it compatible with Next.js or Vite?'
+          />
+          <FaqItem
+            answer='Yes, Polyms is built on top of Tailwind CSS v4. You will need it to properly compile the utility classes used by the components.'
+            question='Do I need to install Tailwind CSS?'
+          />
+          <FaqItem
+            answer='Absolutely. We build our primitives on top of Base UI, which handles complex ARIA states, focus management, and keyboard navigation according to WAI-ARIA guidelines.'
+            question='Is it fully accessible?'
+          />
+          <FaqItem
+            answer='Polyms is designed specifically for building complex, edgy, and highly interactive interfaces without sacrificing accessibility. It strikes the perfect balance between strict design systems and chaotic creativity.'
+            question='Why another component library?'
+          />
+        </div>
+      </Container>
+    </section>
+  )
+}
+
+function FaqItem({ question, answer }: { question: string; answer: string }) {
+  return (
+    <div className='rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur-sm transition-colors hover:border-slate-700 hover:bg-slate-800/40'>
+      <h3 className='flex items-center gap-3 font-medium text-lg text-slate-100'>
+        <span className='text-primary-400'>Q.</span>
+        {question}
+      </h3>
+      <p className='ms-7 mt-2 text-slate-400 leading-relaxed'>{answer}</p>
+    </div>
+  )
+}
+
 function CTASection() {
   return (
     <section className='px-6 pt-16 pb-24 md:pt-24 md:pb-32'>
@@ -723,9 +857,19 @@ function FooterSection() {
   )
 }
 
-function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
+function SectionHeader({
+  eyebrow,
+  title,
+  subtitle,
+  align = 'center',
+}: {
+  eyebrow: string
+  title: string
+  subtitle: string
+  align?: 'center' | 'left'
+}) {
   return (
-    <div className='mx-auto max-w-2xl text-center'>
+    <div className={clsx('max-w-2xl', align === 'center' ? 'mx-auto text-center' : 'text-left')}>
       <div className='home-section-eyebrow'>{eyebrow}</div>
       <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-4xl'>
         {title}

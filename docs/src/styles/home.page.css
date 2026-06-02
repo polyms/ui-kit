@@ -116,24 +116,103 @@
   @apply bg-linear-to-r from-primary-700 via-primary-400 to-primary-300 bg-clip-text text-transparent;
 }
 
+/* ── Cyber-Brutalism Extensions ──────────────────────────────────────────────────────────────────────── */
+
+.home-text-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
+}
+.home-text-outline-neon {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-primary-400);
+  filter: drop-shadow(0 0 10px var(--color-primary-500));
+}
+
+.home-marquee-container {
+  @apply relative left-[-5vw] z-10 flex w-[110vw] overflow-hidden border-y border-primary-500/50 bg-primary-900/40 py-4 backdrop-blur-md;
+  transform: rotate(-3deg);
+  box-shadow: 0 0 40px rgba(var(--color-primary-500), 0.3);
+}
+
+.home-marquee-content {
+  @apply flex whitespace-nowrap;
+  animation: scroll-marquee 20s linear infinite;
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.home-cyber-btn {
+  @apply relative z-30 inline-flex cursor-pointer items-center gap-2 px-8 py-4 font-bold tracking-widest text-primary-50 uppercase transition-all duration-500;
+
+  /* Tinted Glass effect */
+  @apply border border-primary-300/30 bg-primary-500/15 backdrop-blur-md;
+
+  /* Geometric Leaf */
+  @apply rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg;
+
+  /* Subtle glow */
+  box-shadow: 0 0 16px color-mix(in srgb, var(--color-primary-500) 15%, transparent);
+}
+
+.home-cyber-btn:hover {
+  @apply scale-102 border-primary-200/50 bg-primary-500/20 text-white;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--color-primary-500) 25%, transparent);
+}
+
+.home-scanline {
+  @apply pointer-events-none fixed inset-0 z-50 opacity-15;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 100% 4px;
+}
+
+.home-mascot-breakout {
+  @apply pointer-events-none absolute top-0 right-0 z-20 opacity-70 md:right-[-20px] lg:top-[5%] lg:right-[-5%] lg:opacity-100;
+  width: clamp(150px, 50vw, 600px);
+  animation: mascot-float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 60px rgba(var(--color-primary-500), 0.5));
+}
+
+@keyframes mascot-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-2deg);
+  }
+}
+
 /* ── Section header ──────────────────────────────────────────────────────────────────────────────────── */
 
 .home-section-eyebrow {
-  @apply inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary-300;
+  @apply inline-flex items-center gap-2 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-primary/20 bg-primary/10 px-5 py-1.5 text-xs font-bold tracking-widest uppercase text-primary-300;
 }
 
 /* ── Showcase card (white card on dark bg) ───────────────────────────────────────────────────────────── */
 
 .home-showcase-card {
-  @apply relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-white transition-all duration-300;
+  @apply relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40 backdrop-blur-md transition-all duration-500;
 }
 
 .home-showcase-card:hover {
-  @apply border-primary/40 shadow-lg shadow-primary/10;
+  @apply -translate-y-2 border-primary/40 shadow-2xl shadow-primary/10;
 }
 
 .home-showcase-card-footer {
-  @apply flex items-center justify-between border-t border-slate-200/80 bg-slate-50/60 px-4 py-2.5;
+  @apply flex items-center justify-between border-t border-slate-800/80 bg-slate-950/60 px-4 py-3 backdrop-blur-md;
 }
 
 /* ── Features grid ───────────────────────────────────────────────────────────────────────────────────── */
