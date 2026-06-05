@@ -20,31 +20,31 @@ const profiles = [
 export default function LinkDefault() {
   return (
     <div className='m-auto grid max-w-3xl gap-8 px-4 md:grid-cols-2 md:gap-10'>
-      <div className='flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'>
-        <div className='font-semibold text-slate-900'>Inline links</div>
-        <p className='mt-1 text-slate-500 text-xs'>
-          Anchors styled with <code className='text-slate-700'>.link</code> variants beside body copy.
+      <div className='flex flex-col rounded-2xl border border-line bg-body p-6 shadow-sm'>
+        <div className='font-semibold text-fg'>Inline links</div>
+        <p className='mt-1 text-muted text-xs'>
+          Anchors styled with <code className='text-fg'>.link</code> variants beside body copy.
         </p>
-        <div className='mt-6 space-y-4 border-slate-100 border-t pt-5 text-sm'>
-          <p className='text-slate-600'>
+        <div className='mt-6 space-y-4 border-line border-t pt-5 text-sm'>
+          <p className='text-muted'>
             Default:{' '}
             <a className='link' href='https://polyms.dev/'>
               View badges
             </a>
           </p>
-          <p className='text-slate-600'>
+          <p className='text-muted'>
             Primary:{' '}
             <a className='link link-primary' href='https://polyms.dev/'>
               Open card docs
             </a>
           </p>
-          <p className='text-slate-600'>
+          <p className='text-muted'>
             Danger:{' '}
             <a className='link link-danger' href='https://polyms.dev/'>
               Remove item
             </a>
           </p>
-          <p className='text-slate-600'>
+          <p className='text-muted'>
             Light:{' '}
             <a className='link link-light' href='https://polyms.dev/'>
               Secondary action
@@ -55,16 +55,15 @@ export default function LinkDefault() {
 
       <div className='flex flex-col gap-4'>
         <div>
-          <div className='font-semibold text-slate-900'>Stretched link</div>
-          <p className='mt-1 text-slate-500 text-xs'>
-            Cards use <code className='text-slate-700'>.stretched-link</code> so the whole surface is
-            clickable.
+          <div className='font-semibold text-fg'>Stretched link</div>
+          <p className='mt-1 text-muted text-xs'>
+            Cards use <code className='text-fg'>.stretched-link</code> so the whole surface is clickable.
           </p>
         </div>
 
         {profiles.map(person => (
           <div
-            className='relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-[box-shadow,border-color] hover:border-slate-300 hover:shadow-md'
+            className='relative overflow-hidden rounded-2xl border border-line bg-body p-4 shadow-sm transition-[box-shadow,border-color] hover:shadow-md'
             key={person.name}
           >
             <div className='flex gap-4'>
@@ -78,8 +77,8 @@ export default function LinkDefault() {
                 </Avatar.Fallback>
               </Avatar>
               <div className='min-w-0 flex-1'>
-                <div className='font-medium text-slate-900'>{person.name}</div>
-                <p className='text-slate-500 text-xs'>{person.role}</p>
+                <div className='font-medium text-fg'>{person.name}</div>
+                <p className='text-muted text-xs'>{person.role}</p>
               </div>
             </div>
             <a className='link link-primary stretched-link mt-3 inline-block text-sm' href={person.href}>

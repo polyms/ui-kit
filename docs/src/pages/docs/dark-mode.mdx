@@ -1,0 +1,156 @@
+---
+type: Layout
+title: Dark mode
+apis:
+  - separator: Theme scope
+  - name: dark
+    default: '-'
+    values: className
+    description: Class-based dark scope. Add to `<html>` or any ancestor; descendants pick up dark token values.
+  - separator: Surface utilities
+  - name: bg-body
+    default: '-'
+    values: className
+    description: Page background — maps to `--color-body` / `--body`.
+  - name: text-body
+    default: '-'
+    values: className
+    description: Text color using the body token (same source as `bg-body`).
+  - name: text-fg
+    default: '-'
+    values: className
+    description: Primary foreground text — `--color-fg` / `--fg`.
+  - name: text-muted
+    default: '-'
+    values: className
+    description: Secondary / caption text — `--color-muted` / `--muted`.
+  - name: bg-surface
+    default: '-'
+    values: className
+    description: Raised surface (card, panel) — `--color-surface` / `--surface`.
+  - name: bg-surface-2
+    default: '-'
+    values: className
+    description: Elevated surface (popover, menu, select popup) — `--color-surface-2` / `--surface-2`.
+  - name: bg-input
+    default: '-'
+    values: className
+    description: Form control background — `--color-input` / `--input`.
+  - name: border-line
+    default: '-'
+    values: className
+    description: Default divider border color — `--color-line` / `--line`.
+  - separator: CSS variables (light → dark)
+  - name: --body
+    default: '#ffffff'
+    values: '#2e3440'
+    description: Page canvas background. Light defaults to white; dark uses Nord nord0 (Polar Night).
+  - name: --fg
+    default: slate-900
+    values: '#eceff4'
+    description: Primary foreground text — Nord nord6 (Snow Storm).
+  - name: --surface
+    default: slate-100
+    values: '#434c5e'
+    description: Raised surface above the body — Nord nord2.
+  - name: --surface-2
+    default: '#ffffff'
+    values: '#3b4252'
+    description: Elevated popup layer — Nord nord1.
+  - name: --muted
+    default: slate-500
+    values: '#c0c8d4'
+    description: Secondary / caption text — slate-derived midtone tuned for AA contrast on body.
+  - name: --line
+    default: slate-300
+    values: '#4c566a'
+    description: Default divider and border color — Nord nord3.
+  - name: --input
+    default: '#ffffff'
+    values: '#3b4252'
+    description: Form control background — Nord nord1.
+---
+
+import Story from './-views/dark-mode/DarkModeDefault.tsx'
+import code from './-views/dark-mode/DarkModeDefault.tsx?raw'
+import Tokens from './-views/dark-mode/DarkModeTokens.tsx'
+import Utilities from './-views/dark-mode/DarkModeUtilities.tsx'
+
+Class-based dark mode for **`@polyms/core-ui`**. Add **`.dark`** to `<html>` (or any wrapper) and semantic utilities switch between light and dark palettes at runtime — no CSS rebuild.
+
+Dark body background defaults to **`#2e3440`** (Nord Polar Night). Tokens live in **`core/src/styles/_root.css`**; Tailwind v4 **`@theme inline`** keeps **`var()`** resolution at runtime. Built-in components use these tokens and auto-invert when the theme toggles.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Setup
+
+Enable dark mode by adding the class to the document root (or a subtree):
+
+```html
+<html class="dark">
+```
+
+Optional sync with system preference:
+
+```tsx
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+document.documentElement.classList.toggle('dark', prefersDark)
+```
+
+`color-scheme` is set automatically (`light` on `:root`, `dark` on `.dark`) so native controls and scrollbars follow the theme.
+
+## Tokens
+
+Seven CSS variables drive the entire theme. Override them anywhere in your app to customize the palette:
+
+```css
+.dark {
+  --body: #1a1b26;
+  --surface: #24283b;
+  --surface-2: #1f2335;
+  --input: #1f2335;
+}
+```
+
+<Tokens />
+
+## Utilities
+
+Short semantic classes for app shells and custom layout — prefer these over hardcoded slate/white when building theme-aware UI:
+
+```tsx
+<div className='bg-body text-fg min-h-dvh'>
+  <header className='border-line border-b bg-surface px-4 py-3'>
+    <h1 className='font-semibold'>Dashboard</h1>
+    <p className='text-muted text-sm'>Welcome back</p>
+  </header>
+  <main className='p-4'>
+    <div className='rounded-lg border border-line bg-surface p-4'>
+      <p className='text-fg'>Card content</p>
+      <p className='text-muted text-sm'>Supporting detail</p>
+    </div>
+  </main>
+</div>
+```
+
+<Utilities />
+
+**`html`** and **`body`** already use **`bg-body text-fg`** from preflight — toggling **`.dark`** on `<html>` updates the whole page background.
+
+## Tailwind dark variant
+
+The library registers **`@custom-variant dark (&:is(.dark *))`** in **`core/src/styles/tailwind.css`**. Use **`dark:`** for one-off overrides in app-specific layout:
+
+```tsx
+<div className='bg-white dark:bg-surface text-slate-900 dark:text-fg border border-slate-200 dark:border-line'>
+  …
+</div>
+```
+
+Works with responsive and state variants: **`md:dark:bg-surface`**, **`hover:dark:bg-surface`**, etc.
+
+## API Reference
+
+<APIReference />

@@ -35,7 +35,7 @@
   }
 
   &.link-light {
-    color: var(--color-slate-500);
+    color: var(--muted);
 
     &:hover,
     &:focus,
@@ -45,7 +45,7 @@
 
     &:active,
     &:visited {
-      color: var(--color-slate-900);
+      color: var(--fg);
     }
   }
 }
@@ -54,5 +54,41 @@
   &::after {
     content: '';
     @apply absolute inset-0 z-10 cursor-pointer;
+  }
+}
+
+/* Dark-mode overrides: shade sáng (-300 default, -100/-200 visited) cho contrast với body Nord. */
+.dark {
+  .link {
+    &:active,
+    &:visited {
+      color: var(--color-primary-200);
+    }
+
+    &.link-primary {
+      color: var(--color-primary-300);
+
+      &:active,
+      &:visited {
+        color: var(--color-primary-100);
+      }
+    }
+
+    &.link-danger {
+      color: var(--color-danger-300);
+
+      &:active,
+      &:visited {
+        color: var(--color-danger-200);
+      }
+    }
+
+    &.link-light {
+      &:hover,
+      &:focus,
+      &:focus-visible {
+        color: var(--color-primary-400);
+      }
+    }
   }
 }

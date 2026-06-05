@@ -109,7 +109,7 @@ export default function TableDefault() {
                   />
                   <div className='leading-tight'>
                     <p className='font-medium'>{order.name}</p>
-                    <p className='text-slate-500 text-xs'>{order.email}</p>
+                    <p className='text-muted text-xs'>{order.email}</p>
                   </div>
                 </div>
               </td>

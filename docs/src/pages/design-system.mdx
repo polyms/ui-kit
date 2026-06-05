@@ -64,7 +64,7 @@ export const colorVariants = [
           <td>
             <code className='text-nowrap'>{row.name}</code>
           </td>
-          <td className='text-sm text-slate-600'>{row.description}</td>
+          <td className='text-muted text-sm'>{row.description}</td>
         </tr>
       ))}
     </tbody>
@@ -273,7 +273,7 @@ export const colorVariants = [
     </tr>
     <tr>
       <td>
-        slate <span className='text-xs text-slate-500'>(gray ramp)</span>
+        slate <span className='text-muted text-xs'>(gray ramp)</span>
       </td>
       <td>
         <div className='size-10 rounded-lg bg-slate-50 outline -outline-offset-1 outline-black/10' />
@@ -320,7 +320,7 @@ export const colorVariants = [
 
 **Do not** substitute unrelated Tailwind families (`emerald-*`, `rose-*`, `amber-*`, …) when you mean **success**, **danger**, or **warning**—that drifts away from the contract used by **`btn-*`**, **`badge-*`**, and **`alert-*`**.
 
-#### Slate vs `neutral`
+#### Slate vs neutral
 
 Apps that compose this library should use **`text-slate-*`**, **`bg-slate-*`**, **`border-slate-*`**, and **`var(--color-slate-50)` … `var(--color-slate-950)`** for generic gray UI. Avoid **`neutral-*`** utilities and **`var(--color-neutral-*)`** next to core-ui components so borders, text, and surfaces stay on the same hue and contrast curve.
 
@@ -394,7 +394,7 @@ export const borderRadiusScale = [
             <code className='text-nowrap'>{row.class}</code>
           </td>
           <td className='text-sm text-nowrap'>{row.value}</td>
-          <td className='text-sm text-slate-600'>{row.usage}</td>
+          <td className='text-muted text-sm'>{row.usage}</td>
         </tr>
       ))}
     </tbody>
@@ -429,7 +429,7 @@ export const breakpoints = [
             <code className='text-nowrap'>{row.name}</code>
           </td>
           <td className='text-nowrap'>{row.value}</td>
-          <td className='text-sm text-slate-600'>{row.description}</td>
+          <td className='text-muted text-sm'>{row.description}</td>
         </tr>
       ))}
     </tbody>
@@ -498,7 +498,7 @@ export const zIndexLayers = [
             <code className='text-nowrap text-xs'>{row.token}</code>
           </td>
           <td className='text-nowrap'>{row.value}</td>
-          <td className='text-sm text-slate-600'>{row.description}</td>
+          <td className='text-muted text-sm'>{row.description}</td>
         </tr>
       ))}
     </tbody>
@@ -511,7 +511,7 @@ export const zIndexLayers = [
 <header className='sticky top-0 z-sticky'>…</header>
 ```
 
-## CSS-only patterns and `item-*`
+## CSS-only patterns and item-*
 
 Several patterns are **CSS classes only** (no dedicated React export). They are part of the public surface once **`@polyms/core-ui`** styles are loaded:
 

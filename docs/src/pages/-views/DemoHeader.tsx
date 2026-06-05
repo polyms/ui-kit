@@ -19,8 +19,10 @@ import {
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Field, NavigationMenu } from '@polyms/core'
+import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import React from 'react'
 import { FaviconFit } from '../../assets/FaviconFit'
+import { useAppStore } from '../../stores/app.store'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -137,6 +139,9 @@ const allocations: Allocation[] = [
 ]
 
 export const Header = () => {
+  const theme = useAppStore(state => state.theme)
+  const toggleTheme = useAppStore(state => state.toggleTheme)
+  const isDark = theme === 'dark'
   const [user, setUser] = React.useState<{ name: string }>()
   const onLogin = () => setUser({ name: 'Tifa Lockhart' })
   const onLogout = () => setUser(undefined)
@@ -144,10 +149,10 @@ export const Header = () => {
 
   return (
     <header
-      className='sticky top-0 z-30 flex w-full min-w-0 max-w-full flex-nowrap items-center gap-3 border-slate-200/80 border-b bg-white/80 px-5 py-2.5 backdrop-blur-md backdrop-saturate-150 md:gap-4 md:px-8'
-      id='app-navigation'
+      className='sticky top-0 z-30 flex w-full min-w-0 max-w-full flex-nowrap items-center gap-3 border-slate-200/80 border-b bg-white/80 px-5 py-2.5 backdrop-blur-md backdrop-saturate-150 md:gap-4 md:px-8 dark:border-line/60 dark:bg-surface/70'
+      id='demo-app-header'
     >
-      <FaviconFit className='size-8 shrink-0 rounded-lg shadow-sm ring-1 ring-slate-200/80' />
+      <FaviconFit className='size-8 shrink-0 rounded-lg shadow-sm ring-1 ring-slate-200/80 dark:ring-line/60' />
 
       <NavigationMenu className='min-w-0 shrink-0' closeDelay={120} delay={100}>
         <NavigationMenu.List className='mb-0 list-none' variant='bare'>
@@ -181,7 +186,7 @@ export const Header = () => {
                                 ? 'bg-success/10 text-success'
                                 : row.tone === 'warning'
                                   ? 'bg-warning/10 text-warning'
-                                  : 'bg-slate-100 text-slate-700'
+                                  : 'bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'
                           }`}
                         >
                           <HugeiconsIcon icon={row.icon} size={18} strokeWidth={2} />
@@ -191,7 +196,7 @@ export const Header = () => {
                             <span className='truncate'>{row.label}</span>
                             <span className='shrink-0 tabular-nums'>{row.balance}</span>
                           </span>
-                          <span className='flex items-center justify-between gap-2 text-slate-500 text-xs'>
+                          <span className='flex items-center justify-between gap-2 text-muted text-xs'>
                             <span className='truncate'>{row.type}</span>
                             <span className='shrink-0'>{row.hint}</span>
                           </span>
@@ -257,7 +262,7 @@ export const Header = () => {
                 <ul className='m-0 flex list-none flex-col gap-0.5 p-0'>
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#manage'>
-                      <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700'>
+                      <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
                         <HugeiconsIcon icon={CreditCardIcon} size={15} strokeWidth={2} />
                       </span>
                       <span className='font-medium text-sm'>Manage cards</span>
@@ -270,7 +275,7 @@ export const Header = () => {
                       </span>
                       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                         <span className='font-medium text-sm'>Add a new card</span>
-                        <span className='text-slate-500 text-xs'>Virtual or physical</span>
+                        <span className='text-muted text-xs'>Virtual or physical</span>
                       </span>
                     </NavigationMenu.Link>
                   </li>
@@ -281,13 +286,13 @@ export const Header = () => {
                       </span>
                       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                         <span className='font-medium text-sm'>Spending limits</span>
-                        <span className='text-slate-500 text-xs'>Set daily caps</span>
+                        <span className='text-muted text-xs'>Set daily caps</span>
                       </span>
                     </NavigationMenu.Link>
                   </li>
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#freeze'>
-                      <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700'>
+                      <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
                         <HugeiconsIcon icon={ReceiptTextIcon} size={15} strokeWidth={2} />
                       </span>
                       <span className='flex min-w-0 flex-1 items-center justify-between gap-2'>
@@ -321,14 +326,14 @@ export const Header = () => {
                       </span>
                       <span className='flex flex-col gap-0.5'>
                         <span className='font-semibold text-sm'>{action.label}</span>
-                        <span className='text-slate-500 text-xs leading-snug'>{action.description}</span>
+                        <span className='text-muted text-xs leading-snug'>{action.description}</span>
                       </span>
                     </NavigationMenu.Link>
                   ))}
                 </div>
 
-                <div className='flex flex-col gap-2 rounded-xl border border-slate-200 px-3 py-2.5'>
-                  <span className='flex items-center justify-between text-[11px] text-slate-500 uppercase tracking-wider'>
+                <div className='flex flex-col gap-2 rounded-xl border border-slate-200 px-3 py-2.5 dark:border-line'>
+                  <span className='flex items-center justify-between text-[11px] text-muted uppercase tracking-wider'>
                     Recent recipients
                     <a className='link link-primary text-[11px] normal-case tracking-normal' href='#contacts'>
                       Manage
@@ -344,7 +349,7 @@ export const Header = () => {
                         {person.initials}
                       </span>
                     ))}
-                    <span className='inline-flex size-9 items-center justify-center rounded-full bg-slate-100 font-medium text-slate-600 text-xs'>
+                    <span className='inline-flex size-9 items-center justify-center rounded-full bg-slate-100 font-medium text-slate-600 text-xs dark:bg-surface dark:text-fg'>
                       +12
                     </span>
                   </div>
@@ -354,19 +359,19 @@ export const Header = () => {
                   {recentTransfers.map(t => (
                     <li key={t.who}>
                       <NavigationMenu.Link className='flex items-center gap-3' href='#tx'>
-                        <span className='flex size-8 items-center justify-center rounded-full bg-slate-100 text-slate-700'>
+                        <span className='flex size-8 items-center justify-center rounded-full bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
                           <HugeiconsIcon icon={Exchange02Icon} size={14} strokeWidth={2} />
                         </span>
                         <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                           <span className='flex items-center justify-between gap-2 font-medium text-sm'>
                             <span className='truncate'>{t.who}</span>
                             <span
-                              className={`shrink-0 tabular-nums ${t.positive ? 'text-success' : 'text-slate-900'}`}
+                              className={`shrink-0 tabular-nums ${t.positive ? 'text-success' : 'text-slate-900 dark:text-fg'}`}
                             >
                               {t.amount}
                             </span>
                           </span>
-                          <span className='truncate text-slate-500 text-xs'>{t.detail}</span>
+                          <span className='truncate text-muted text-xs'>{t.detail}</span>
                         </span>
                       </NavigationMenu.Link>
                     </li>
@@ -383,13 +388,13 @@ export const Header = () => {
             </NavigationMenu.Trigger>
             <NavigationMenu.Content>
               <div className='flex w-md flex-col gap-3'>
-                <div className='flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4'>
+                <div className='flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 dark:border-line dark:bg-surface'>
                   <div className='flex items-end justify-between gap-2'>
                     <div className='flex flex-col gap-0.5'>
-                      <span className='text-[11px] text-slate-500 uppercase tracking-wider'>
-                        Portfolio value
+                      <span className='text-[11px] text-muted uppercase tracking-wider'>Portfolio value</span>
+                      <span className='font-semibold text-slate-900 text-xl tabular-nums dark:text-fg'>
+                        $48,392.20
                       </span>
-                      <span className='font-semibold text-slate-900 text-xl tabular-nums'>$48,392.20</span>
                     </div>
                     <span className='inline-flex items-center gap-1 rounded-full bg-success/15 px-2 py-0.5 font-semibold text-[11px] text-success-700 tabular-nums'>
                       <HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
@@ -407,7 +412,7 @@ export const Header = () => {
                       />
                     ))}
                   </div>
-                  <div className='flex items-center justify-between text-[11px] text-slate-500'>
+                  <div className='flex items-center justify-between text-[11px] text-muted'>
                     <span>7 days</span>
                     <span className='inline-flex items-center gap-1'>
                       <HugeiconsIcon icon={ChartIncreaseIcon} size={10} strokeWidth={2.5} />
@@ -417,19 +422,19 @@ export const Header = () => {
                 </div>
 
                 <div className='flex flex-col gap-2'>
-                  <span className='px-1 text-[11px] text-slate-500 uppercase tracking-wider'>
+                  <span className='px-1 text-[11px] text-muted uppercase tracking-wider'>
                     Asset allocation
                   </span>
                   <ul className='m-0 flex list-none flex-col gap-2 p-0'>
                     {allocations.map(a => (
                       <li className='flex flex-col gap-1' key={a.label}>
                         <span className='flex items-center justify-between gap-2 text-xs'>
-                          <span className='font-medium text-slate-700'>{a.label}</span>
-                          <span className='text-slate-500 tabular-nums'>
+                          <span className='font-medium text-slate-700 dark:text-fg'>{a.label}</span>
+                          <span className='text-muted tabular-nums'>
                             {a.weight}% · {a.value}
                           </span>
                         </span>
-                        <span className='h-1.5 overflow-hidden rounded-full bg-slate-100'>
+                        <span className='h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-line'>
                           <span
                             className={`block h-full rounded-full ${a.bar}`}
                             style={{ width: `${a.weight}%` }}
@@ -455,7 +460,7 @@ export const Header = () => {
             </NavigationMenu.Content>
           </NavigationMenu.Item>
 
-          <span aria-hidden='true' className='mx-1 h-5 w-px bg-slate-200' />
+          <span aria-hidden='true' className='mx-1 h-5 w-px bg-slate-200 dark:bg-line' />
 
           <NavigationMenu.Item>
             <NavigationMenu.Link
@@ -495,6 +500,19 @@ export const Header = () => {
       </Field>
 
       <div className='flex min-w-0 shrink-0 items-center gap-2'>
+        <Button
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          className='hidden lg:inline-flex'
+          icon
+          onClick={toggleTheme}
+          outlined
+          rounded
+          size='lg'
+          variant='light'
+        >
+          {isDark ? <Sun className='size-4' /> : <Moon className='size-4' />}
+        </Button>
+
         {user ? (
           <>
             <span className='welcome min-w-0 truncate text-sm'>

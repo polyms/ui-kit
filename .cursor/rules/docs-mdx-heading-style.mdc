@@ -1,0 +1,27 @@
+---
+description: MDX documentation heading style
+globs: docs/src/pages/**/*.mdx
+alwaysApply: false
+---
+
+# MDX Heading Style
+
+Do not use inline code marks in Markdown headings.
+
+Bad:
+
+```mdx
+## Tailwind `dark:` variant
+## Polymorphic `render`
+### Custom elements with `render`
+```
+
+Good:
+
+```mdx
+## Tailwind dark variant
+## Polymorphic render
+### Custom elements with render
+```
+
+Keep code formatting in the body content immediately below the heading when the exact symbol matters.

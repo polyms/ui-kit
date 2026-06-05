@@ -1,5 +1,6 @@
 .toast {
-  --toast-bg: #fff;
+  --toast-bg: var(--body);
+  --toast-color: var(--fg);
   --gap: 0.75rem;
   --peek: 0.75rem;
   --scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
@@ -17,7 +18,7 @@
   position: absolute;
   margin: 0 auto;
   box-sizing: border-box;
-  border: 1px solid var(--toast-border, var(--color-slate-300));
+  border: 1px solid var(--toast-border, var(--line));
   border-radius: 0.75rem;
   background: var(--toast-bg);
   color: var(--toast-color);
@@ -136,11 +137,12 @@
 }
 
 .toast-close {
-  @apply flex items-center justify-center bg-white transition-all duration-200;
+  @apply flex items-center justify-center transition-all duration-200;
   @apply absolute -top-1 -right-1 z-10 opacity-0;
 
+  background-color: var(--body);
   padding-block: 0.25rem;
-  border: 1px solid var(--toast-border, var(--color-slate-300));
+  border: 1px solid var(--toast-border, var(--line));
   color: var(--toast-color);
   border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
 
@@ -196,4 +198,31 @@
   --toast-border: var(--color-warning-600);
   --toast-bg: var(--color-warning-50);
   --toast-color: var(--color-warning-700);
+}
+
+/* Dark-mode overrides: text shade sáng (-200), tint mạnh hơn (18%). */
+.dark {
+  .toast-info {
+    --toast-border: var(--color-primary-500);
+    --toast-bg: color-mix(in oklab, var(--color-primary) 18%, transparent);
+    --toast-color: var(--color-primary-200);
+  }
+
+  .toast-success {
+    --toast-border: var(--color-success-500);
+    --toast-bg: color-mix(in oklab, var(--color-success) 18%, transparent);
+    --toast-color: var(--color-success-200);
+  }
+
+  .toast-warning {
+    --toast-border: var(--color-warning-500);
+    --toast-bg: color-mix(in oklab, var(--color-warning) 18%, transparent);
+    --toast-color: var(--color-warning-200);
+  }
+
+  .toast-danger {
+    --toast-border: var(--color-danger-500);
+    --toast-bg: color-mix(in oklab, var(--color-danger) 18%, transparent);
+    --toast-color: var(--color-danger-200);
+  }
 }

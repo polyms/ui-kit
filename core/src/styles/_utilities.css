@@ -4,46 +4,46 @@
 
 /* Border utilities */
 .border-light {
-  border: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-t-light {
-  border-top: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-top: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-r-light {
-  border-right: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-right: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-b-light {
-  border-bottom: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-bottom: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-l-light {
-  border-left: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-left: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-s-light {
-  border-inline-start: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-inline-start: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-e-light {
-  border-inline-end: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-inline-end: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-x-light {
-  border-left: 1px var(--tw-border-style, solid) var(--color-slate-300);
-  border-right: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-left: 1px var(--tw-border-style, solid) var(--line);
+  border-right: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-y-light {
-  border-top: 1px var(--tw-border-style, solid) var(--color-slate-300);
-  border-bottom: 1px var(--tw-border-style, solid) var(--color-slate-300);
+  border-top: 1px var(--tw-border-style, solid) var(--line);
+  border-bottom: 1px var(--tw-border-style, solid) var(--line);
 }
 
 /* Background utilities */
 .bg-light {
-  background-color: var(--color-slate-50);
+  background-color: var(--surface);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -73,14 +73,14 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-success-700);
-      background-color: var(--color-success-100);
+      background-color: color-mix(in oklab, var(--color-success) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-success-700);
-    background-color: var(--color-success-200);
+    background-color: color-mix(in oklab, var(--color-success) 18%, transparent);
   }
 }
 
@@ -90,13 +90,15 @@
 
   &:hover {
     @media (hover: hover) {
-      @apply bg-info-500/5 text-info-600;
+      color: var(--color-info-600);
+      background-color: color-mix(in oklab, var(--color-info) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
-    @apply bg-info-500/5 text-info-600;
+    color: var(--color-info-600);
+    background-color: color-mix(in oklab, var(--color-info) 18%, transparent);
   }
 }
 
@@ -107,14 +109,14 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-warning-600);
-      background-color: var(--color-warning-100);
+      background-color: color-mix(in oklab, var(--color-warning) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-warning-600);
-    background-color: var(--color-warning-200);
+    background-color: color-mix(in oklab, var(--color-warning) 18%, transparent);
   }
 }
 
@@ -125,49 +127,49 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-danger-600);
-      background-color: var(--color-danger-100);
+      background-color: color-mix(in oklab, var(--color-danger) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-danger-600);
-    background-color: var(--color-danger-200);
+    background-color: color-mix(in oklab, var(--color-danger) 18%, transparent);
   }
 }
 
 .item-light {
-  color: var(--color-slate-600);
+  color: var(--muted);
   background-color: transparent;
 
   &:hover {
     @media (hover: hover) {
-      color: var(--color-slate-900);
-      background-color: var(--color-slate-100);
+      color: var(--fg);
+      background-color: var(--surface);
     }
   }
 
   &:active,
   &.active {
-    color: var(--color-slate-900);
+    color: var(--fg);
     background-color: var(--color-slate-200);
   }
 }
 
 .item-dark {
-  color: var(--color-slate-300);
+  color: var(--muted);
   background-color: transparent;
 
   &:hover {
     @media (hover: hover) {
       color: #fff;
-      background-color: var(--color-slate-700);
+      background-color: color-mix(in oklab, var(--fg) 90%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: #fff;
-    background-color: var(--color-slate-800);
+    background-color: color-mix(in oklab, var(--fg) 90%, transparent);
   }
 }

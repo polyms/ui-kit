@@ -44,24 +44,57 @@
 
 .badge-warning {
   --badge-border: var(--color-warning-600);
-  --badge-bg: var(--color-warning-50);
+  --badge-bg: color-mix(in oklab, var(--color-warning) 10%, transparent);
   --badge-color: var(--color-warning-700);
 }
 
 .badge-danger {
   --badge-border: var(--color-danger-600);
-  --badge-bg: var(--color-danger-50);
+  --badge-bg: color-mix(in oklab, var(--color-danger) 10%, transparent);
   --badge-color: var(--color-danger-700);
 }
 
 .badge-light {
-  --badge-border: var(--color-slate-300);
-  --badge-bg: var(--color-slate-100);
-  --badge-color: var(--color-slate-900);
+  --badge-border: var(--line);
+  --badge-bg: var(--surface);
+  --badge-color: var(--fg);
 }
 
 .badge-dark {
-  --badge-border: var(--color-slate-900);
-  --badge-bg: var(--color-slate-900);
-  --badge-color: #fff;
+  --badge-border: #3b4252;
+  --badge-bg: #3b4252;
+  --badge-color: #eceff4;
+}
+
+/* Dark-mode overrides: text shade sáng (-200), tint mạnh hơn (18%). */
+.dark {
+  .badge-primary {
+    --badge-border: var(--color-primary-500);
+    --badge-bg: color-mix(in oklab, var(--color-primary) 18%, transparent);
+    --badge-color: var(--color-primary-200);
+  }
+
+  .badge-success {
+    --badge-border: var(--color-success-500);
+    --badge-bg: color-mix(in oklab, var(--color-success) 18%, transparent);
+    --badge-color: var(--color-success-200);
+  }
+
+  .badge-info {
+    --badge-border: var(--color-info-500);
+    --badge-bg: color-mix(in oklab, var(--color-info) 18%, transparent);
+    --badge-color: var(--color-info-200);
+  }
+
+  .badge-warning {
+    --badge-border: var(--color-warning-500);
+    --badge-bg: color-mix(in oklab, var(--color-warning) 18%, transparent);
+    --badge-color: var(--color-warning-200);
+  }
+
+  .badge-danger {
+    --badge-border: var(--color-danger-500);
+    --badge-bg: color-mix(in oklab, var(--color-danger) 18%, transparent);
+    --badge-color: var(--color-danger-200);
+  }
 }

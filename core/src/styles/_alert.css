@@ -19,8 +19,10 @@
 
 .alert-dismissible {
   .alert-close {
-    @apply absolute -top-1 -right-1 z-10 flex items-center justify-center bg-white transition-all duration-200;
+    @apply absolute -top-1 -right-1 z-10 flex items-center justify-center transition-all duration-200;
     @apply opacity-0;
+
+    background-color: var(--body);
 
     padding-block: 0.25rem;
     border: 1px solid var(--alert-border);
@@ -69,15 +71,48 @@
 }
 
 .alert-light {
-  --alert-border: var(--color-slate-300);
-  --alert-bg: var(--color-slate-50);
-  --alert-color: var(--color-slate-900);
+  --alert-border: var(--line);
+  --alert-bg: var(--surface);
+  --alert-color: var(--fg);
 }
 
 .alert-dark {
-  --alert-border: var(--color-slate-900);
-  --alert-bg: var(--color-slate-900);
-  --alert-color: #fff;
+  --alert-border: #3b4252;
+  --alert-bg: #3b4252;
+  --alert-color: #eceff4;
+}
+
+/* Dark-mode overrides: text dùng shade sáng (-200), tint mạnh hơn (18%) để contrast với body Nord. */
+.dark {
+  .alert-primary {
+    --alert-border: var(--color-primary-500);
+    --alert-bg: color-mix(in oklab, var(--color-primary) 18%, transparent);
+    --alert-color: var(--color-primary-200);
+  }
+
+  .alert-success {
+    --alert-border: var(--color-success-500);
+    --alert-bg: color-mix(in oklab, var(--color-success) 18%, transparent);
+    --alert-color: var(--color-success-200);
+  }
+
+  .alert-info {
+    --alert-border: var(--color-info-500);
+    --alert-bg: color-mix(in oklab, var(--color-info) 18%, transparent);
+    --alert-color: var(--color-info-200);
+  }
+
+  .alert-warning {
+    --alert-border: var(--color-warning-500);
+    --alert-bg: color-mix(in oklab, var(--color-warning) 18%, transparent);
+    --alert-color: var(--color-warning-200);
+  }
+
+  .alert-danger {
+    --alert-border: var(--color-danger-500);
+    --alert-bg: color-mix(in oklab, var(--color-danger) 18%, transparent);
+    --alert-color: var(--color-danger-200);
+  }
 }
 
 .alert-badge {

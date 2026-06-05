@@ -7,7 +7,7 @@ export default function CheckboxDefault() {
   const [accepted, setAccepted] = useState(false)
 
   return (
-    <div className='m-auto flex max-w-sm flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm'>
+    <div className='m-auto flex max-w-sm flex-col gap-3 rounded-2xl border border-line bg-body p-5 shadow-sm'>
       <Checkbox checked={accepted} onCheckedChange={setAccepted}>
         Tôi đồng ý với điều khoản dịch vụ
       </Checkbox>

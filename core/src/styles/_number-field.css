@@ -44,23 +44,38 @@
 
 .number-field-decrement,
 .number-field-increment {
-  @apply inline-flex items-center justify-center border border-slate-300 bg-white transition-colors;
-  @apply hover:bg-slate-50 active:bg-slate-100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background-color: var(--input);
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
   flex-shrink: 0;
   align-self: stretch;
   width: 2.5rem;
   min-height: calc(var(--input-padding-y) * 2 + var(--input-lh) + 2px);
   padding: 0;
-  color: var(--color-slate-700);
+  color: var(--fg);
   user-select: none;
   cursor: pointer;
 
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background-color: var(--surface);
+    }
+  }
+
+  &:active:not(:disabled) {
+    background-color: color-mix(in oklab, var(--fg) 8%, transparent);
+  }
+
   &:disabled {
-    @apply cursor-not-allowed opacity-50;
+    cursor: not-allowed;
+    opacity: 0.5;
 
     &:hover {
-      @apply bg-white;
+      background-color: var(--input);
     }
   }
 

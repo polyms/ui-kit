@@ -122,12 +122,12 @@ const faqs = [
 <div className="space-y-2">
   {faqs.map((faq, i) => (
     <Collapsible key={i} className="border rounded-lg">
-      <Collapsible.Trigger className="w-full p-4 text-left font-medium hover:bg-slate-50">
+      <Collapsible.Trigger className="w-full p-4 text-left font-medium hover:bg-surface">
         <ChevronIcon className="collapsible-icon mr-2" />
         {faq.q}
       </Collapsible.Trigger>
       <Collapsible.Panel>
-        <div className="p-4 pt-0 text-slate-600">
+        <div className="p-4 pt-0 text-muted">
           {faq.a}
         </div>
       </Collapsible.Panel>

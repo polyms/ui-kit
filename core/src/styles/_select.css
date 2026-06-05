@@ -13,9 +13,9 @@
   padding: calc(0.375rem - 1px) calc(0.5rem - 1px);
   margin: 0;
   border-radius: var(--control-radius);
-  border: 1px solid var(--color-slate-300);
-  background-color: var(--color-background, #fff);
-  color: var(--color-foreground, #000);
+  border: 1px solid var(--line);
+  background-color: var(--input);
+  color: var(--fg);
   font-family: inherit;
   font-size: 0.875rem;
   line-height: 1.125rem;
@@ -38,7 +38,7 @@
 
   @media (hover: hover) {
     &:hover:not([data-disabled]) {
-      background-color: var(--color-slate-50);
+      background-color: var(--surface);
     }
   }
 
@@ -48,7 +48,7 @@
 
   &:focus-visible {
     border-color: var(--color-primary-500);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-primary) 35%, transparent);
   }
 
   &[aria-invalid] {
@@ -57,7 +57,7 @@
 
   &[aria-invalid]:focus-visible {
     border-color: var(--color-danger-600);
-    box-shadow: 0 0 0 3px var(--color-danger-500);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-danger) 35%, transparent);
   }
 
   &[data-disabled] {
@@ -68,6 +68,7 @@
   [data-placeholder] {
     display: inline-flex;
     flex-grow: 1;
+    color: var(--muted);
   }
 
   &.select-sm {
@@ -140,12 +141,18 @@
   display: flex;
   margin: -0.25rem -0.25rem -0.25rem 0;
   pointer-events: none;
-  opacity: 0.8;
+  color: var(--muted);
   flex-shrink: 0;
+  transition: color 0.15s ease;
 
   svg {
     width: 1.125rem;
     height: 1.125rem;
+  }
+
+  .select:hover:not([data-disabled]) &,
+  .select[data-popup-open] & {
+    color: var(--fg);
   }
 }
 
@@ -156,12 +163,12 @@
 .select-popup {
   position: relative;
   border-radius: 0.5rem;
-  border: 1px solid var(--color-border, #e5e7eb);
-  background-color: var(--color-popover, canvas);
-  color: var(--color-foreground, #000);
+  border: 1px solid var(--line);
+  background-color: var(--surface-2);
+  color: var(--fg);
   font-size: 0.875rem;
   padding: 0.25rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px color-mix(in oklab, #000 15%, transparent);
   overflow: hidden;
   max-height: var(--available-height);
   min-width: var(--anchor-width);
@@ -172,18 +179,15 @@
     inset: 0;
     border-radius: calc(0.5rem - 1px);
     pointer-events: none;
-    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06);
+    box-shadow: 0 -1px 0 color-mix(in oklab, var(--fg) 6%, transparent);
   }
 
-  @media (prefers-color-scheme: light) {
-    outline: 1px solid var(--color-slate-200);
-    box-shadow:
-      0 10px 15px -3px var(--color-slate-200),
-      0 4px 6px -4px var(--color-slate-200);
-  }
+  outline: 1px solid var(--line);
+  box-shadow:
+    0 10px 15px -3px color-mix(in oklab, #000 12%, transparent),
+    0 4px 6px -4px color-mix(in oklab, #000 8%, transparent);
 
-  @media (prefers-color-scheme: dark) {
-    outline: 1px solid var(--color-slate-300);
+  .dark & {
     outline-offset: -1px;
   }
 
@@ -225,18 +229,18 @@
 }
 
 .select-arrow-fill {
-  fill: canvas;
+  fill: var(--surface-2);
 }
 
 .select-arrow-outer-stroke {
-  @media (prefers-color-scheme: light) {
-    fill: var(--color-slate-200);
-  }
+  fill: var(--line);
 }
 
 .select-arrow-inner-stroke {
-  @media (prefers-color-scheme: dark) {
-    fill: var(--color-slate-300);
+  fill: transparent;
+
+  .dark & {
+    fill: var(--line);
   }
 }
 
@@ -257,8 +261,8 @@
   scroll-margin-block: 0.5rem;
 
   &[data-highlighted] {
-    background-color: var(--color-accent, #f3f4f6);
-    color: var(--color-accent-foreground, #000);
+    background-color: var(--surface);
+    color: var(--fg);
   }
 
   &[data-disabled] {
@@ -302,7 +306,7 @@
 .select-separator {
   height: 1px;
   margin: 0.25rem 0.5rem;
-  background-color: var(--color-border, #e5e7eb);
+  background-color: var(--line);
 }
 
 .select-group {
@@ -321,7 +325,7 @@
   padding: 0.375rem 0.5rem;
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-slate-500);
+  color: var(--muted);
   text-align: left;
   display: block;
   user-select: none;
@@ -360,45 +364,5 @@
     width: 1.125rem;
     height: 1.125rem;
     position: relative;
-  }
-}
-
-.select-arrow {
-  display: flex;
-
-  &[data-side='top'] {
-    bottom: -8px;
-    rotate: 180deg;
-  }
-
-  &[data-side='bottom'] {
-    top: -8px;
-    rotate: 0deg;
-  }
-
-  &[data-side='left'] {
-    right: -13px;
-    rotate: 90deg;
-  }
-
-  &[data-side='right'] {
-    left: -13px;
-    rotate: -90deg;
-  }
-}
-
-.select-arrow-fill {
-  fill: canvas;
-}
-
-.select-arrow-outer-stroke {
-  @media (prefers-color-scheme: light) {
-    fill: var(--color-slate-200);
-  }
-}
-
-.select-arrow-inner-stroke {
-  @media (prefers-color-scheme: dark) {
-    fill: var(--color-slate-300);
   }
 }

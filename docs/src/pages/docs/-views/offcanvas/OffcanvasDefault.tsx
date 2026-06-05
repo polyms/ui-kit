@@ -34,19 +34,19 @@ export default function OffcanvasDefault() {
             </Offcanvas.Description>
             <Offcanvas.Body>
               <div className='space-y-4'>
-                <section className='rounded-lg border border-slate-200 p-4'>
+                <section className='rounded-lg border border-line p-4'>
                   <div className='flex items-center justify-between'>
-                    <p className='font-semibold text-slate-900 text-sm'>Sprint Health</p>
+                    <p className='font-semibold text-fg text-sm'>Sprint Health</p>
                     <span className='badge badge-warning rounded-full'>2 At Risk</span>
                   </div>
-                  <p className='mt-1 text-slate-600 text-sm'>
+                  <p className='mt-1 text-muted text-sm'>
                     18/24 tickets completed, 2 items are at risk due to API dependencies.
                   </p>
                 </section>
 
-                <section className='rounded-lg border border-slate-200 p-4'>
-                  <p className='font-semibold text-slate-900 text-sm'>Owners</p>
-                  <ul className='mt-2 space-y-2 text-slate-700 text-sm'>
+                <section className='rounded-lg border border-line p-4'>
+                  <p className='font-semibold text-fg text-sm'>Owners</p>
+                  <ul className='mt-2 space-y-2 text-fg text-sm'>
                     {teamMembers.map(member => (
                       <li className='flex items-center justify-between' key={member}>
                         <span>{member}</span>
@@ -56,10 +56,10 @@ export default function OffcanvasDefault() {
                   </ul>
                 </section>
 
-                <section className='rounded-lg border border-slate-200 p-4'>
+                <section className='rounded-lg border border-line p-4'>
                   <div className='flex items-center gap-2'>
                     <HugeiconsIcon icon={Sent02Icon} size={16} strokeWidth={2} />
-                    <p className='font-semibold text-slate-900 text-sm'>Quick Actions</p>
+                    <p className='font-semibold text-fg text-sm'>Quick Actions</p>
                   </div>
                   <div className='mt-2 flex flex-wrap gap-2'>
                     {quickActions.map(action => (

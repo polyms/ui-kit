@@ -38,3 +38,6 @@
 @source inline('shadow-{base,raised,overlay,sticky,popout,bottom}');
 @source inline('link,link-{primary,light,dark}');
 @source inline('container{-5xl,}');
+@source inline('{hover:,focus:,dark:,}bg-{body,surface,surface-2,input}');
+@source inline('{hover:,focus:,dark:,}text-{fg,body,muted}');
+@source inline('{hover:,focus:,dark:,}border-line');

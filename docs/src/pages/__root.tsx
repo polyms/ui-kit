@@ -3,21 +3,13 @@
 import { Toast } from '@polyms/core'
 import { createRootRoute, Outlet, useRouterState } from '@tanstack/react-router'
 import { useRef } from 'react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import { AppSidebar } from '../layouts/AppSidebar'
+import { DocsFloatingDock } from '../layouts/DocsFloatingDock'
 
-const AppNavigation = ({ onToggleSidebar }: NavigationProps) => {
-  return (
-    <div id='app-navigation'>
-      <button
-        className='ml-auto inline-flex items-center justify-center rounded-md border border-slate-300 px-2 py-1 font-medium text-xs md:hidden'
-        onClick={onToggleSidebar}
-        type='button'
-      >
-        Menu
-      </button>
-    </div>
-  )
-}
+import '../stores/app.store'
+
+const PLAYGROUND_PATHS = new Set(['/demo', '/forms'])
 
 const Name = () => {
   return (
@@ -32,10 +24,12 @@ const Name = () => {
 const Root = () => {
   const appSidebarRef = useRef<AppSidebar.Ref>(null)
   const router = useRouterState()
-  const layout = router.matches[router.matches.length - 1]?.staticData?.layout
-  const isLandingLayout = layout === 'landing'
+  const pathname = useRouterState({ select: s => s.location.pathname })
+  const isBelowLg = useMediaQuery('(max-width: 1023.98px)')
+  const routeLayout = router.matches[router.matches.length - 1]?.staticData?.layout
+  const isPlaygroundRoute = PLAYGROUND_PATHS.has(pathname)
+  const isLandingLayout = routeLayout === 'landing' || (isPlaygroundRoute && isBelowLg)
 
-  // Apply class to root element
   if (typeof document !== 'undefined') {
     const root = document.getElementById('root')
     root?.classList.toggle('landing', isLandingLayout)
@@ -46,6 +40,8 @@ const Root = () => {
     return (
       <Toast>
         <Outlet />
+        {isBelowLg && <AppSidebar drawerOnly ref={appSidebarRef} />}
+        <DocsFloatingDock sidebarRef={isBelowLg ? appSidebarRef : undefined} variant='landing' />
         <Toast.Container />
       </Toast>
     )
@@ -54,9 +50,12 @@ const Root = () => {
   return (
     <Toast>
       <Name />
-      <AppNavigation onToggleSidebar={() => appSidebarRef.current?.toggleSidebar()} />
+      <div id='app-navigation' />
       <AppSidebar ref={appSidebarRef} />
-      <Outlet />
+      <main className='docs-outlet'>
+        <Outlet />
+      </main>
+      <DocsFloatingDock sidebarRef={appSidebarRef} variant='docs' />
       <Toast.Container />
     </Toast>
   )
@@ -75,6 +74,3 @@ declare module '@tanstack/react-router' {
   }
 }
 
-type NavigationProps = {
-  onToggleSidebar?: AppSidebar.Ref['toggleSidebar']
-}

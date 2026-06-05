@@ -10,7 +10,7 @@
 }
 
 .accordion-item {
-  border-bottom: 1px solid var(--color-slate-200);
+  border-bottom: 1px solid var(--line);
 
   &:last-child {
     border-bottom-width: 0;
@@ -24,7 +24,7 @@
     flex: 1 1 auto;
     min-width: 12rem;
     border-bottom: none;
-    border-right: 1px solid var(--color-slate-200);
+    border-right: 1px solid var(--line);
 
     &:last-child {
       border-right-width: 0;
@@ -49,15 +49,18 @@
   background: none;
   appearance: none;
   padding-block: 0.75rem;
-  padding-inline: 0;
+  padding-inline: 0.5rem;
   text-align: start;
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.25rem;
-  color: var(--color-slate-900);
+  color: var(--fg);
   cursor: pointer;
   user-select: none;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
 
   &[data-disabled] {
     cursor: not-allowed;
@@ -66,12 +69,13 @@
   @media (hover: hover) {
     &:hover:not([data-disabled]) {
       color: var(--color-primary-600);
+      background-color: color-mix(in oklab, var(--color-primary) 6%, transparent);
     }
   }
 
   &:focus-visible {
     border-radius: 0.25rem;
-    outline: 2px solid var(--color-primary-100);
+    outline: 2px solid color-mix(in oklab, var(--color-primary) 25%, transparent);
     outline-offset: 2px;
   }
 }
@@ -86,7 +90,7 @@
   height: var(--accordion-panel-height);
   font-size: 0.875rem;
   line-height: 1.25rem;
-  color: var(--color-slate-600);
+  color: var(--muted);
   transition: height 200ms ease-out;
 
   &[hidden]:not([hidden='until-found']) {
@@ -100,7 +104,7 @@
 
   &:focus-visible {
     border-radius: 0.25rem;
-    outline: 2px solid var(--color-primary-100);
+    outline: 2px solid color-mix(in oklab, var(--color-primary) 25%, transparent);
     outline-offset: 2px;
   }
 }

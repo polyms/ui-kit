@@ -8,7 +8,7 @@ export default function RadioDefault() {
 
   return (
     <RadioGroup
-      className='m-auto rounded-2xl border border-slate-200 bg-white p-5 shadow-sm'
+      className='m-auto rounded-2xl border border-line bg-body p-5 shadow-sm'
       onValueChange={setPlan}
       value={plan}
     >

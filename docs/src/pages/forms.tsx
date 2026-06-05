@@ -55,12 +55,12 @@ function PreviewSection({
     <section
       className={clsx(
         'rounded-2xl border border-slate-200/90 bg-white/90 p-6 shadow-sm ring-1 ring-slate-100/80',
-        'md:p-8',
+        'md:p-8 dark:border-line dark:bg-surface/80 dark:ring-line/40',
         className
       )}
     >
-      <h2 className='font-semibold text-lg text-slate-900 tracking-tight'>{title}</h2>
-      <p className='mt-1 max-w-2xl text-pretty text-slate-600 text-sm leading-relaxed'>{description}</p>
+      <h2 className='font-semibold text-fg text-lg tracking-tight'>{title}</h2>
+      <p className='mt-1 max-w-2xl text-pretty text-muted text-sm leading-relaxed'>{description}</p>
       <div className='mt-6'>{children}</div>
     </section>
   )
@@ -251,7 +251,7 @@ function CreateWorkspaceCase() {
           value={seats}
         />
       </div>
-      <div className='flex flex-wrap items-center justify-end gap-2 border-slate-200/80 border-t pt-4'>
+      <div className='flex flex-wrap items-center justify-end gap-2 border-slate-200/80 border-t pt-4 dark:border-line'>
         <Button rounded type='button'>
           Hủy
         </Button>
@@ -322,16 +322,16 @@ function SizeAlignmentCase() {
     <div className='overflow-x-auto'>
       <table className='table-borderless table w-full min-w-xl text-left align-middle text-sm'>
         <thead>
-          <tr className='text-slate-500'>
+          <tr className='text-muted'>
             <th className='w-24 pb-3 font-medium'>Size</th>
             <th className='pb-3 font-medium'>Field + Button (pill)</th>
             <th className='pb-3 font-medium'>Field + Button (góc chuẩn)</th>
           </tr>
         </thead>
-        <tbody className='divide-y divide-slate-100'>
+        <tbody className='divide-y divide-slate-100 dark:divide-line'>
           {sizeRows.map(({ label, fieldSize, buttonSize }) => (
             <tr key={label}>
-              <td className='py-4 font-mono text-slate-600 text-xs'>{label}</td>
+              <td className='py-4 font-mono text-muted text-xs'>{label}</td>
               <td className='py-4 pe-4'>
                 <div className='flex max-w-md flex-wrap items-center gap-2'>
                   <Field className='min-w-0 flex-1' size={fieldSize}>
@@ -395,7 +395,7 @@ function NotificationPreferencesCase() {
           >
             <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
               <span>{i.label}</span>
-              <span className='font-normal text-slate-500 text-xs'>{i.desc}</span>
+              <span className='font-normal text-muted text-xs'>{i.desc}</span>
             </span>
           </Checkbox>
         ))}
@@ -434,7 +434,7 @@ function PlanRadioCardsCase() {
                 <span className='font-semibold'>{plan.name}</span>
                 <span className='font-semibold tabular-nums'>{plan.price}</span>
               </span>
-              <span className='font-normal text-slate-500 text-xs leading-snug'>{plan.desc}</span>
+              <span className='font-normal text-muted text-xs leading-snug'>{plan.desc}</span>
             </span>
           </Radio>
         ))}
@@ -465,7 +465,7 @@ function CheckRadioGalleryCase() {
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
-        <span className='font-medium text-slate-500 text-xs uppercase tracking-wider'>Sizes</span>
+        <span className='font-medium text-muted text-xs uppercase tracking-wider'>Sizes</span>
         <div className='flex flex-wrap items-end gap-x-6 gap-y-3'>
           {checkSizes.map(({ size, label }) => (
             <Checkbox defaultChecked key={`cb-${label}`} size={size || undefined}>
@@ -484,7 +484,7 @@ function CheckRadioGalleryCase() {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <span className='font-medium text-slate-500 text-xs uppercase tracking-wider'>Variants</span>
+        <span className='font-medium text-muted text-xs uppercase tracking-wider'>Variants</span>
         <div className='flex flex-wrap items-center gap-x-6 gap-y-3'>
           {checkVariants.map(({ variant, label }) => (
             <Checkbox defaultChecked key={`vcb-${label}`} variant={variant || undefined}>
@@ -508,7 +508,7 @@ function CheckRadioGalleryCase() {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <span className='font-medium text-slate-500 text-xs uppercase tracking-wider'>States</span>
+        <span className='font-medium text-muted text-xs uppercase tracking-wider'>States</span>
         <div className='flex flex-wrap items-center gap-x-6 gap-y-3'>
           <Checkbox>Bỏ chọn</Checkbox>
           <Checkbox defaultChecked>Đã chọn</Checkbox>
@@ -529,9 +529,9 @@ function ModalFooterCase() {
   const [date, setDate] = useState('')
 
   return (
-    <div className='mx-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-lg ring-1 ring-slate-100'>
-      <h3 className='font-semibold text-base text-slate-900'>Lên lịch xuất bản</h3>
-      <p className='mt-1 text-slate-600 text-sm'>Footer modal: field và nút cùng hàng, căn đáy.</p>
+    <div className='mx-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-lg ring-1 ring-slate-100 dark:border-line dark:bg-surface dark:ring-line/40'>
+      <h3 className='font-semibold text-base text-fg'>Lên lịch xuất bản</h3>
+      <p className='mt-1 text-muted text-sm'>Footer modal: field và nút cùng hàng, căn đáy.</p>
       <Field className='mt-5'>
         <Field.Label>Ngày giờ</Field.Label>
         <HugeiconsIcon className='icon-start' icon={Calendar03Icon} strokeWidth={2} />
@@ -557,10 +557,10 @@ function ModalFooterCase() {
 
 function FormsPage() {
   return (
-    <>
+    <div className='playground-page flex min-h-0 min-w-0 flex-1 flex-col'>
       <Header />
 
-      <div className='docs-demo-shell relative isolate overflow-x-clip bg-slate-50 text-slate-900'>
+      <div className='docs-demo-shell relative isolate flex-1 overflow-x-clip bg-body text-fg'>
         <div aria-hidden className='pointer-events-none absolute inset-0 overflow-hidden'>
           <div
             className='mask-[linear-gradient(to_bottom,black_55%,transparent)] absolute inset-x-0 top-0 h-144 [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)]'
@@ -571,19 +571,19 @@ function FormsPage() {
             }}
           />
           <div className='absolute -top-20 left-1/3 h-96 w-96 rounded-full bg-primary/10 blur-3xl' />
-          <div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-slate-300/30 blur-3xl' />
+          <div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-slate-300/30 blur-3xl dark:bg-slate-700/30' />
         </div>
 
         <main className='relative flex min-h-0 min-w-0 flex-1 flex-col'>
-          <section className='mx-auto w-full max-w-5xl px-5 pt-10 pb-8 md:px-8 md:pt-12'>
-            <div className='inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-3 py-1 font-medium text-slate-600 text-xs shadow-sm ring-1 ring-slate-100/80'>
+          <section className='mx-auto w-full max-w-5xl px-5 pt-12 pb-14 md:px-8 md:pt-20 md:pb-20'>
+            <div className='inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-3 py-1 font-medium text-slate-600 text-xs shadow-sm ring-1 ring-slate-100/80 backdrop-blur-sm dark:border-line dark:bg-surface/80 dark:text-muted dark:ring-line/40'>
               <span className='flex size-1.5 rounded-full bg-primary-500' />
               Forms playground
             </div>
-            <h1 className='mt-5 font-semibold text-3xl text-slate-900 tracking-tight md:text-4xl'>
+            <h1 className='mt-6 max-w-3xl font-semibold text-3xl text-fg tracking-tight md:text-4xl lg:text-5xl'>
               Field × Button trên cùng một trang
             </h1>
-            <p className='mt-3 max-w-3xl text-pretty text-base text-slate-600 leading-relaxed'>
+            <p className='mt-4 max-w-3xl text-pretty text-base text-muted leading-relaxed md:text-lg'>
               Preview các layout form thường gặp trong app thật — đăng nhập, lọc danh sách, tạo bản ghi, cài
               đặt và bảng so size — để so chiều cao, bo góc (<code className='text-xs'>--control-radius</code>
               ) và căn hàng giữa input và nút.
@@ -634,7 +634,7 @@ function FormsPage() {
             </PreviewSection>
 
             <PreviewSection
-              className='bg-slate-100/50'
+              className='bg-slate-100/50 dark:bg-surface/50'
               description='Khối giả lập modal: field full width, action bar bên phải.'
               title='7. Footer dialog'
             >
@@ -664,6 +664,6 @@ function FormsPage() {
           </section>
         </main>
       </div>
-    </>
+    </div>
   )
 }

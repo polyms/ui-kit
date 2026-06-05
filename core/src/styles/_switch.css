@@ -15,7 +15,7 @@
     opacity 200ms ease-in-out;
   position: relative;
   flex-shrink: 0;
-  background-color: var(--color-slate-200);
+  background-color: var(--line);
   /* knob translate distance (horizontal) */
   --switch-knob-x: 0;
 
@@ -41,7 +41,7 @@
     height: 1rem;
     border-radius: 99px;
     border: 1px solid transparent;
-    background-color: #fff; /* default knob color */
+    background-color: var(--body); /* default knob color */
     transform: translate(var(--switch-knob-x), -50%);
     transition:
       width 200ms ease-in-out,
@@ -80,5 +80,5 @@
 }
 
 .switch-label {
-  @apply ms-3 text-sm font-medium text-slate-900 dark:text-slate-300;
+  @apply ms-3 text-sm font-medium text-fg;
 }

@@ -1,7 +1,7 @@
 html,
 body {
   scroll-behavior: smooth;
-  @apply bg-white;
+  @apply bg-body text-fg;
   font-optical-sizing: auto;
   font-weight: 400;
 }

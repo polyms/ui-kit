@@ -1,11 +1,11 @@
 .skeleton {
-  background-color: var(--color-slate-100);
+  background-color: var(--surface);
   /* The shine that's going to move across the skeleton: */
   background-image: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 30),
-    rgba(255, 255, 255, 0)
+    transparent,
+    color-mix(in oklab, var(--fg) 10%, transparent),
+    transparent
   );
   background-size: 80px 100%; /* width of the shine */
   background-repeat: no-repeat; /* No need to repeat the shine effect */

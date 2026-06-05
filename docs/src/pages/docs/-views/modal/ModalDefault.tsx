@@ -36,7 +36,7 @@ export default function ModalDefault() {
                       Full Name
                     </label>
                     <input
-                      className='w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20'
+                      className='w-full rounded-lg border border-line bg-input px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20'
                       defaultValue='John Doe'
                       id='fullName'
                       placeholder='Enter your name'
@@ -48,7 +48,7 @@ export default function ModalDefault() {
                       Email Address
                     </label>
                     <input
-                      className='w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20'
+                      className='w-full rounded-lg border border-line bg-input px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20'
                       defaultValue='john@example.com'
                       id='email'
                       placeholder='you@example.com'
@@ -60,7 +60,7 @@ export default function ModalDefault() {
                       Bio
                     </label>
                     <textarea
-                      className='w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20'
+                      className='w-full rounded-lg border border-line bg-input px-3 py-2 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20'
                       defaultValue='Software engineer passionate about building great products.'
                       id='bio'
                       placeholder='Tell us about yourself'
@@ -71,20 +71,20 @@ export default function ModalDefault() {
               </div>
 
               {/* Preferences Section */}
-              <div className='border-slate-200 border-t pt-6'>
+              <div className='border-line border-t pt-6'>
                 <h3 className='mb-3 font-semibold text-lg'>Preferences</h3>
                 <div className='space-y-3'>
                   <label className='flex items-center gap-3'>
-                    <input className='h-4 w-4 rounded border-slate-300 text-primary-600' type='checkbox' />
+                    <input className='h-4 w-4 rounded border-line text-primary-600' type='checkbox' />
                     <span className='text-sm'>Receive email notifications</span>
                   </label>
                   <label className='flex items-center gap-3'>
-                    <input className='h-4 w-4 rounded border-slate-300 text-primary-600' type='checkbox' />
+                    <input className='h-4 w-4 rounded border-line text-primary-600' type='checkbox' />
                     <span className='text-sm'>Enable dark mode automatically</span>
                   </label>
                   <label className='flex items-center gap-3'>
                     <input
-                      className='h-4 w-4 rounded border-slate-300 text-primary-600'
+                      className='h-4 w-4 rounded border-line text-primary-600'
                       defaultChecked
                       type='checkbox'
                     />
@@ -94,9 +94,9 @@ export default function ModalDefault() {
               </div>
 
               {/* Nested Modal Demo */}
-              <div className='border-slate-200 border-t pt-6'>
+              <div className='border-line border-t pt-6'>
                 <h3 className='mb-3 font-semibold text-lg'>Advanced Settings</h3>
-                <p className='mb-4 text-slate-600 text-sm'>
+                <p className='mb-4 text-muted text-sm'>
                   Configure advanced options and integrations. Click below to open additional settings in a
                   nested modal.
                 </p>
@@ -116,7 +116,7 @@ export default function ModalDefault() {
                                 API Key
                               </label>
                               <input
-                                className='w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 font-mono text-sm'
+                                className='w-full rounded-lg border border-line bg-surface px-3 py-2 font-mono text-sm'
                                 defaultValue='sk_live_51H...'
                                 id='apiKey'
                                 readOnly
@@ -129,15 +129,15 @@ export default function ModalDefault() {
                           </div>
                         </div>
 
-                        <div className='border-slate-200 border-t pt-6'>
+                        <div className='border-line border-t pt-6'>
                           <h4 className='mb-3 font-medium'>Webhooks</h4>
                           <div className='space-y-3'>
-                            <div className='rounded-lg border border-slate-200 p-3'>
+                            <div className='rounded-lg border border-line p-3'>
                               <div className='mb-2 flex items-center justify-between'>
                                 <code className='text-sm'>https://api.example.com/webhook</code>
                                 <span className='badge badge-primary rounded-full'>Active</span>
                               </div>
-                              <div className='text-slate-600 text-xs'>Created 2 days ago</div>
+                              <div className='text-muted text-xs'>Created 2 days ago</div>
                             </div>
                             <Button rounded size='sm' variant='primary'>
                               Add Webhook
@@ -145,7 +145,7 @@ export default function ModalDefault() {
                           </div>
                         </div>
 
-                        <div className='border-slate-200 border-t pt-6'>
+                        <div className='border-line border-t pt-6'>
                           <Alert badge='⚠️ Danger Zone' className='space-y-3' variant='danger'>
                             <p className='text-sm'>
                               Delete your account and all associated data. This action cannot be undone.
@@ -170,9 +170,9 @@ export default function ModalDefault() {
               </div>
 
               {/* Additional Info */}
-              <div className='border-slate-200 border-t pt-6'>
+              <div className='border-line border-t pt-6'>
                 <h3 className='mb-3 font-semibold text-lg'>About This Modal</h3>
-                <div className='space-y-3 text-slate-600 text-sm'>
+                <div className='space-y-3 text-muted text-sm'>
                   <p>
                     This modal demonstrates scrollable content with multiple sections, form inputs, and nested
                     modals. The modal supports different sizes (sm, md, lg, xl, full) and can be centered or

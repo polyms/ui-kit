@@ -31,11 +31,11 @@
     cursor: pointer;
     transform: translateY(-50%);
 
-    @apply flex items-center justify-center text-slate-400;
+    color: var(--muted);
 
     @media (hover: hover) {
       &:hover {
-        color: var(--color-slate-900);
+        color: var(--fg);
       }
     }
   }
@@ -111,8 +111,9 @@
   line-height: var(--input-lh);
   min-height: calc(var(--input-padding-y) * 2 + var(--input-lh) + 2px);
   border-radius: var(--control-radius, 0.25rem);
-  border: 1px solid var(--color-slate-300);
-  color: var(--color-slate-900);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  background-color: var(--input);
   background-clip: padding-box;
   appearance: none;
   transition:
@@ -122,7 +123,7 @@
   @apply w-full;
 
   &::placeholder {
-    color: var(--color-slate-400);
+    color: var(--muted);
     /* font-style: italic; */
   }
 
@@ -130,16 +131,16 @@
   &[disabled] {
     cursor: not-allowed;
     opacity: 0.5;
-    color: var(--color-slate-500);
-    background-color: var(--color-slate-50);
-    border-color: var(--color-slate-200);
+    color: var(--muted);
+    background-color: var(--surface);
+    border-color: var(--line);
   }
 
   &[readonly] {
     cursor: default;
-    color: var(--color-slate-700);
-    background-color: var(--color-slate-50);
-    border-color: var(--color-slate-200);
+    color: var(--fg);
+    background-color: var(--surface);
+    border-color: var(--line);
   }
 
   &:hover:not(:disabled):not([disabled]):not([readonly]),
@@ -171,12 +172,12 @@
     &[disabled] {
       cursor: not-allowed;
       opacity: 0.5;
-      color: var(--color-slate-500);
-      background-color: var(--color-slate-50);
-      border-color: var(--color-slate-200);
+      color: var(--muted);
+      background-color: var(--surface);
+      border-color: var(--line);
 
       &::placeholder {
-        color: var(--color-slate-400);
+        color: var(--muted);
       }
     }
   }
@@ -212,7 +213,7 @@
 }
 
 .field-description {
-  color: var(--color-slate-400);
+  color: var(--muted);
   font-size: 12px;
   font-weight: 500;
   line-height: 1rem;
@@ -236,7 +237,7 @@
   --check-fs: 0.875rem;
   --check-color: var(--color-primary-600);
   --check-on-color: #fff;
-  --check-border: var(--color-slate-300);
+  --check-border: var(--line);
 
   display: inline-flex;
   align-items: flex-start;
@@ -244,7 +245,7 @@
   font-size: var(--check-fs);
   line-height: var(--check-lh);
   font-weight: 500;
-  color: var(--color-slate-900);
+  color: var(--fg);
   cursor: pointer;
   user-select: none;
 
@@ -257,7 +258,7 @@
     height: var(--check-size);
     margin: calc((var(--check-lh) - var(--check-size)) / 2) 0 0;
     border: 1px solid var(--check-border);
-    background-color: #fff;
+    background-color: var(--input);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -322,11 +323,11 @@
     &[disabled] {
       cursor: not-allowed;
       opacity: 0.55;
-      background-color: var(--color-slate-100);
+      background-color: var(--surface);
 
       &:checked,
       &:indeterminate {
-        background-color: color-mix(in oklab, var(--check-color) 50%, var(--color-slate-200));
+        background-color: color-mix(in oklab, var(--check-color) 50%, var(--surface));
         border-color: transparent;
       }
     }
@@ -334,12 +335,12 @@
 
   &[data-disabled] {
     cursor: not-allowed;
-    color: var(--color-slate-500);
+    color: var(--muted);
 
     .checkbox-indicator,
     .radio-indicator {
       opacity: 0.55;
-      background-color: var(--color-slate-100);
+      background-color: var(--surface);
     }
   }
 
@@ -347,7 +348,7 @@
   &[data-disabled][data-indeterminate] {
     .checkbox-indicator,
     .radio-indicator {
-      background-color: color-mix(in oklab, var(--check-color) 50%, var(--color-slate-200));
+      background-color: color-mix(in oklab, var(--check-color) 50%, var(--surface));
       border-color: transparent;
     }
   }
@@ -355,7 +356,7 @@
   &:has(input:disabled),
   &:has(input[disabled]) {
     cursor: not-allowed;
-    color: var(--color-slate-500);
+    color: var(--muted);
   }
 
   /* Sizes */
@@ -404,7 +405,8 @@
 
   &.checkbox-dark,
   &.radio-dark {
-    --check-color: var(--color-slate-800);
+    --check-color: var(--fg);
+    --check-on-color: var(--body);
   }
 }
 
@@ -507,9 +509,9 @@
     background: transparent;
     padding: 1.25rem 0 0.25rem 0;
     font-size: 0.875rem;
-    color: var(--color-slate-900);
+    color: var(--fg);
     border: none;
-    border-bottom: 2px solid var(--color-slate-300);
+    border-bottom: 2px solid var(--line);
     outline: none;
     transition: border-color 0.3s ease-in-out;
 
@@ -532,7 +534,7 @@
     z-index: -10;
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--color-slate-500);
+    color: var(--muted);
     transform-origin: top left;
     transform: translateY(-1rem) scale(0.85);
     transition:

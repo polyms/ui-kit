@@ -28,10 +28,10 @@ export function MdxLayout({ children }: { children: React.ReactNode }) {
   const metadata: PageMetadata | undefined = metadataByRoute[activePath]
 
   return (
-    <main className='min-w-0 flex-row px-8 pb-8'>
-      <div className='docs min-w-0 flex-1 pe-6'>
+    <div className='docs-page flex min-w-0 flex-row px-4 pt-6 pb-8 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0'>
+      <div className='docs min-w-0 flex-1 xl:pe-6'>
         {/* {metadata?.type && (
-            <span className='mb-4 inline-block font-semibold text-neutral-500 text-xs uppercase tracking-wide'>
+            <span className='mb-4 inline-block font-semibold text-slate-500 text-xs uppercase tracking-wide'>
               {metadata.type}
             </span>
           )} */}
@@ -41,7 +41,7 @@ export function MdxLayout({ children }: { children: React.ReactNode }) {
       <aside className='hidden xl:flex xl:w-72 xl:shrink-0 xl:flex-col'>
         <DocsToc />
       </aside>
-    </main>
+    </div>
   )
 }
 

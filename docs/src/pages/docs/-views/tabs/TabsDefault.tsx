@@ -10,15 +10,15 @@ export default function TabsDefault() {
       </Tabs.List>
       <Tabs.Panel value='profile'>
         <h3 className='mb-2 font-semibold text-lg'>Profile Settings</h3>
-        <p className='text-slate-600'>Manage your public profile information and how others see you.</p>
+        <p className='text-muted'>Manage your public profile information and how others see you.</p>
       </Tabs.Panel>
       <Tabs.Panel value='account'>
         <h3 className='mb-2 font-semibold text-lg'>Account Settings</h3>
-        <p className='text-slate-600'>Update your account preferences, password, and security options.</p>
+        <p className='text-muted'>Update your account preferences, password, and security options.</p>
       </Tabs.Panel>
       <Tabs.Panel value='notifications'>
         <h3 className='mb-2 font-semibold text-lg'>Notification Preferences</h3>
-        <p className='text-slate-600'>Choose how and when you want to receive notifications from us.</p>
+        <p className='text-muted'>Choose how and when you want to receive notifications from us.</p>
       </Tabs.Panel>
     </Tabs>
   )

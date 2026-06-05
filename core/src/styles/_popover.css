@@ -8,24 +8,24 @@
   padding: 0;
   margin: 0;
   outline: 0;
-  border: 1px solid var(--color-slate-200);
+  border: 1px solid var(--line);
   border-radius: 0.375rem;
-  background-color: var(--color-slate-50);
-  color: var(--color-slate-900);
+  background-color: var(--surface);
+  color: var(--fg);
   user-select: none;
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--color-slate-100);
+      background-color: color-mix(in oklab, var(--fg) 6%, transparent);
     }
   }
 
   &:active {
-    background-color: var(--color-slate-100);
+    background-color: color-mix(in oklab, var(--fg) 8%, transparent);
   }
 
   &[data-popup-open] {
-    background-color: var(--color-slate-100);
+    background-color: color-mix(in oklab, var(--fg) 8%, transparent);
   }
 
   &:focus-visible {
@@ -51,12 +51,12 @@
   padding: 1rem 1.5rem;
   border: 1px solid var(--color-slate-200);
   border-radius: 0.5rem;
-  background-color: canvas;
-  color: var(--color-slate-900);
+  background-color: var(--surface-2);
+  color: var(--fg);
   transform-origin: var(--transform-origin);
   box-shadow:
-    0 10px 15px -3px color-mix(in oklab, var(--color-slate-900) 10%, transparent),
-    0 4px 6px -4px color-mix(in oklab, var(--color-slate-900) 10%, transparent);
+    0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
+    0 4px 6px -4px color-mix(in oklab, #000 10%, transparent);
   transition:
     transform 150ms,
     opacity 150ms;
@@ -98,7 +98,7 @@
 }
 
 .popover-arrow-fill {
-  fill: canvas;
+  fill: var(--surface-2);
 }
 
 .popover-arrow-outer {

@@ -14,7 +14,7 @@ export default function FieldFloatingDemo() {
         onChange={e => setQuery(e.target.value)}
         placeholder='Type to search (debounced)'
       />
-      <p className='mt-2 text-slate-500 text-xs'>Debounced value: {query || '—'}</p>
+      <p className='mt-2 text-muted text-xs'>Debounced value: {query || '—'}</p>
     </div>
   )
 }

@@ -220,7 +220,7 @@ export default function NavigationMenuDefault() {
                                     </span>
                                   )}
                                 </span>
-                                <span className='truncate text-slate-500 text-xs'>{item.description}</span>
+                                <span className='truncate text-muted text-xs'>{item.description}</span>
                               </span>
                             </NavigationMenu.Link>
                           </li>
@@ -231,9 +231,9 @@ export default function NavigationMenuDefault() {
                 </div>
 
                 <NavigationMenu.Footer>
-                  <span className='flex items-center gap-2 text-slate-600 text-xs'>
+                  <span className='flex items-center gap-2 text-muted text-xs'>
                     <HugeiconsIcon className='text-primary' icon={StarIcon} size={14} strokeWidth={2} />
-                    <strong className='font-semibold text-slate-800'>Postgres branching</strong>
+                    <strong className='font-semibold text-fg'>Postgres branching</strong>
                     is now in general availability.
                   </span>
                   <a className='link link-primary inline-flex items-center gap-1 text-xs' href='#changelog'>
@@ -252,7 +252,7 @@ export default function NavigationMenuDefault() {
             </NavigationMenu.Trigger>
             <NavigationMenu.Content>
               <div className='grid w-136 grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-3'>
-                <div className='flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4'>
+                <div className='flex flex-col gap-3 rounded-xl border border-line bg-surface p-4'>
                   <div className='flex items-center gap-2'>
                     <HugeiconsIcon className='text-warning' icon={StarIcon} size={14} strokeWidth={2.5} />
                     <HugeiconsIcon className='text-warning' icon={StarIcon} size={14} strokeWidth={2.5} />
@@ -260,7 +260,7 @@ export default function NavigationMenuDefault() {
                     <HugeiconsIcon className='text-warning' icon={StarIcon} size={14} strokeWidth={2.5} />
                     <HugeiconsIcon className='text-warning' icon={StarIcon} size={14} strokeWidth={2.5} />
                   </div>
-                  <blockquote className='m-0 text-slate-700 text-sm italic leading-snug'>
+                  <blockquote className='m-0 text-fg text-sm italic leading-snug'>
                     "We replaced four internal tools with Polyms in a single sprint."
                   </blockquote>
                   <div className='flex items-center gap-2'>
@@ -268,14 +268,14 @@ export default function NavigationMenuDefault() {
                       LD
                     </span>
                     <span className='flex flex-col gap-0.5'>
-                      <span className='font-medium text-slate-900 text-xs'>Linh Đoàn</span>
-                      <span className='text-[11px] text-slate-500'>Head of Eng · Sophie Farm</span>
+                      <span className='font-medium text-fg text-xs'>Linh Đoàn</span>
+                      <span className='text-[11px] text-muted'>Head of Eng · Sophie Farm</span>
                     </span>
                   </div>
-                  <dl className='m-0 grid grid-cols-3 gap-2 border-slate-200 border-t pt-3'>
+                  <dl className='m-0 grid grid-cols-3 gap-2 border-line border-t pt-3'>
                     {customerStats.map(stat => (
                       <div className='flex flex-col gap-0.5' key={stat.label}>
-                        <dt className='text-[10px] text-slate-500 uppercase tracking-wider'>{stat.label}</dt>
+                        <dt className='text-[10px] text-muted uppercase tracking-wider'>{stat.label}</dt>
                         <dd className='m-0 font-semibold text-primary text-sm'>{stat.value}</dd>
                       </div>
                     ))}
@@ -294,7 +294,7 @@ export default function NavigationMenuDefault() {
                         />
                         <span className='flex min-w-0 flex-col gap-0.5'>
                           <span className='font-medium text-sm'>{item.title}</span>
-                          <span className='text-slate-500 text-xs'>{item.description}</span>
+                          <span className='text-muted text-xs'>{item.description}</span>
                         </span>
                       </NavigationMenu.Link>
                     </li>
@@ -323,7 +323,7 @@ export default function NavigationMenuDefault() {
                         />
                         <span className='flex min-w-0 flex-col gap-0.5'>
                           <span className='font-medium text-sm'>{item.title}</span>
-                          <span className='text-slate-500 text-xs'>{item.description}</span>
+                          <span className='text-muted text-xs'>{item.description}</span>
                         </span>
                       </NavigationMenu.Link>
                     </li>
@@ -363,7 +363,7 @@ export default function NavigationMenuDefault() {
                     >
                       <HugeiconsIcon className='text-primary' icon={item.icon} size={18} strokeWidth={2} />
                       <span className='font-semibold text-sm'>{item.title}</span>
-                      <span className='col-span-2 text-slate-600 text-xs leading-snug'>
+                      <span className='col-span-2 text-muted text-xs leading-snug'>
                         {item.description}
                       </span>
                     </NavigationMenu.Link>
@@ -402,7 +402,7 @@ export default function NavigationMenuDefault() {
                 {/* Text column */}
                 <div className='flex min-w-0 flex-col gap-2'>
                   <p className='font-extrabold text-base text-primary leading-tight'>Pricing</p>
-                  <p className='line-clamp-3 text-slate-600 text-xs leading-relaxed'>
+                  <p className='line-clamp-3 text-muted text-xs leading-relaxed'>
                     Choose the plan that fits your team — start free, scale with usage-based add-ons, and
                     unlock SSO, audit logs, and priority support as you grow.
                   </p>

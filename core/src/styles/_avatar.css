@@ -10,8 +10,8 @@
     justify-content: center;
     overflow: hidden;
     border-radius: 9999px;
-    background-color: var(--color-slate-100);
-    color: var(--color-slate-700);
+    background-color: var(--surface);
+    color: var(--fg);
   }
 
   .avatar-image {

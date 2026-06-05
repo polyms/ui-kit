@@ -1,7 +1,7 @@
 @layer base {
   .btn {
     --control-radius: 0.25rem;
-    --btn-color: var(--color-slate-900);
+    --btn-color: var(--fg);
     --btn-variant-color: var(--color-primary-600);
     --btn-hover-color: var(--btn-color);
     --btn-active-color: var(--btn-color);
@@ -48,6 +48,8 @@
 
     &.btn-icon {
       --btn-padding-x: var(--btn-padding-y);
+
+      @apply shrink-0;
     }
 
     &.outlined,
@@ -78,17 +80,18 @@
       cursor: not-allowed;
 
       &.outlined {
-        --btn-border-color: var(--color-neutral-400);
+        --btn-border-color: var(--line);
       }
     }
 
     &.btn-light {
-      --btn-bg-color: var(--color-slate-100);
+      --btn-bg-color: var(--surface);
+      --btn-color: var(--fg);
       --btn-hover-color: var(--color-primary-600);
       --btn-active-color: var(--color-primary-700);
 
       &.outlined {
-        --btn-border-color: var(--color-slate-300);
+        --btn-border-color: var(--line);
         --btn-border-hover-color: var(--color-primary-600);
         --btn-border-active-color: var(--color-primary-700);
       }
@@ -125,7 +128,7 @@
 
       &.outlined {
         --btn-color: var(--btn-variant-color);
-        --btn-bg-color: #fff;
+        --btn-bg-color: var(--body);
         --btn-border-color: var(--btn-variant-color);
 
         --btn-bg-hover-color: color-mix(in oklab, var(--btn-variant-color) 10%, transparent);
@@ -189,7 +192,7 @@
       --btn-active-color: var(--color-primary-700);
 
       &.outlined {
-        --btn-border-color: var(--color-slate-300);
+        --btn-border-color: var(--line);
         --btn-border-hover-color: var(--color-primary-600);
         --btn-hover-color: var(--color-primary-600);
         --btn-active-color: var(--color-primary-700);

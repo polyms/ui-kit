@@ -39,8 +39,10 @@
 }
 
 .modal-content {
-  @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-white bg-clip-padding outline-none;
+  @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-clip-padding outline-none;
   @apply ring-4 ring-white/30;
+
+  background-color: var(--body);
 
   /* overflow: hidden; */
   border-radius: 1.5rem;
@@ -99,7 +101,7 @@
   @apply z-10 flex p-2;
   @apply cursor-pointer rounded-full outline-0;
   @apply text-slate-300 hover:bg-slate-50/10 hover:text-slate-50;
-  @apply focus:text-slate-400;
+  @apply border border-dashed border-transparent focus:border-slate-300;
 
   position: absolute;
   top: -1.5rem;

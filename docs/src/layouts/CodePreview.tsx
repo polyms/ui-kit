@@ -15,8 +15,8 @@ export function CodePreview({ code, children }: { code: string; children: React.
   }, [code])
 
   return (
-    <Tabs className='mt-4 w-full overflow-clip rounded-xl border border-neutral-400' defaultValue='preview'>
-      <Tabs.List className='bg-slate-50 px-8'>
+    <Tabs className='mt-4 w-full overflow-clip rounded-xl border border-line' defaultValue='preview'>
+      <Tabs.List className='bg-surface px-8'>
         <Tabs.Tab value='preview'>
           <svg
             className='me-1 text-primary/70'

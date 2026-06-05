@@ -1,6 +1,4 @@
 @theme {
-  --color-body: #1f2124;
-
   --color-primary: var(--color-primary-700);
   --color-primary-50: theme(colors.cyan.50);
   --color-primary-100: theme(colors.cyan.100);
@@ -101,8 +99,28 @@
   }
 }
 
+@theme inline {
+  --color-body: var(--body);
+  --color-fg: var(--fg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-input: var(--input);
+}
+
 @layer base {
   :root {
+    --body: #ffffff;
+    --fg: var(--color-slate-900);
+    --surface: var(--color-slate-100);
+    --surface-2: #ffffff;
+    --muted: var(--color-slate-500);
+    --line: var(--color-slate-300);
+    --input: #ffffff;
+
+    color-scheme: light;
+
     --shadow-base: var(--shadow-base);
     --shadow-raised: var(--shadow-raised);
     --shadow-overlay: var(--shadow-overlay);
@@ -125,5 +143,17 @@
 
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  .dark {
+    --body: #2e3440;
+    --fg: #eceff4;
+    --surface: #434c5e;
+    --surface-2: #3b4252;
+    --muted: #c0c8d4;
+    --line: #4c566a;
+    --input: #3b4252;
+
+    color-scheme: dark;
   }
 }

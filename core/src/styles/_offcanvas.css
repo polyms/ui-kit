@@ -51,8 +51,8 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-background, #fff);
-  color: var(--color-foreground, #000);
+  background-color: var(--body);
+  color: var(--fg);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   will-change: transform;
@@ -82,14 +82,14 @@
 
   &[data-swipe-direction='up'] {
     top: 0;
-    border-bottom: 1px solid var(--color-slate-300);
+    border-bottom: 1px solid var(--line);
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
   }
 
   &[data-swipe-direction='down'] {
     bottom: 0;
-    border-top: 1px solid var(--color-slate-300);
+    border-top: 1px solid var(--line);
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
   }
@@ -105,12 +105,12 @@
 
   &[data-swipe-direction='left'] {
     left: 0;
-    border-right: 1px solid var(--color-slate-300);
+    border-right: 1px solid var(--line);
   }
 
   &[data-swipe-direction='right'] {
     right: 0;
-    border-left: 1px solid var(--color-slate-300);
+    border-left: 1px solid var(--line);
   }
 
   &[data-starting-style][data-swipe-direction='up'],
@@ -154,7 +154,7 @@
   width: 2.5rem;
   height: 0.25rem;
   border-radius: 999px;
-  background-color: var(--color-slate-300);
+  background-color: var(--line);
 }
 
 .offcanvas-scrollbar {
@@ -175,7 +175,7 @@
 
 .offcanvas-scrollbar-thumb {
   border-radius: inherit;
-  background-color: var(--color-slate-300);
+  background-color: var(--line);
 }
 
 .offcanvas-heading {
@@ -190,7 +190,7 @@
 .offcanvas-description {
   padding: 0 1.25rem 1.25rem;
   font-size: 0.875rem;
-  color: var(--color-slate-700);
+  color: var(--muted);
 
   .offcanvas-heading + & {
     padding-top: 0;
@@ -208,20 +208,22 @@
   top: 1rem;
   right: 0.5rem;
   padding: 0.25rem;
-  color: var(--color-slate-400);
+  color: var(--muted);
   cursor: pointer;
   transition: all 150ms;
   outline: none;
 
   @apply flex items-center justify-center rounded-full;
 
-  &:hover {
-    color: var(--color-slate-900);
-    background-color: var(--color-slate-100);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--fg);
+      background-color: var(--surface);
+    }
   }
 
   &:focus-visible {
-    color: var(--color-slate-900);
+    color: var(--fg);
     outline: 2px solid var(--color-primary-500);
     outline-offset: 2px;
   }
@@ -250,8 +252,8 @@
     border-radius: 0.625rem 0.625rem 0 0;
     overflow: hidden;
     outline: none;
-    background-color: #fff;
-    color: var(--color-gray-900);
+    background-color: var(--body);
+    color: var(--fg);
     user-select: none;
     transition: all 150ms;
     transform: translate3d(
@@ -269,7 +271,7 @@
     grid-template-columns: 2.5rem 1fr 2.5rem;
     align-items: center;
     padding: 0.5rem 0.75rem;
-    background-color: #fff;
+    background-color: var(--body);
     touch-action: none;
     user-select: none;
   }
@@ -290,12 +292,12 @@
     right: 0.75rem;
     z-index: 2;
     padding: 0;
-    color: var(--color-gray-600);
+    color: var(--muted);
     transition: color 150ms;
 
     &:hover {
       background-color: transparent;
-      color: var(--color-gray-900);
+      color: var(--fg);
     }
   }
 
@@ -335,7 +337,7 @@
     padding: 0 0.75rem;
     font-size: 1rem;
     line-height: 1.5rem;
-    color: var(--color-gray-600);
+    color: var(--muted);
   }
 
   .offcanvas-body {

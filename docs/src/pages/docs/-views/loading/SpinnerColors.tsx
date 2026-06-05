@@ -14,7 +14,7 @@ export default function SpinnerColors() {
       {colors.map(({ name, color, subColor }) => (
         <div className='flex flex-col items-center gap-2' key={name}>
           <Spinner color={color} size={32} subColor={subColor} />
-          <span className='text-slate-600 text-xs'>{name}</span>
+          <span className='text-muted text-xs'>{name}</span>
         </div>
       ))}
     </div>

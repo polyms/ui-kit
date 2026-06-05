@@ -9,7 +9,7 @@ const SlowPanel = dynamic(
         resolve({
           default: function SlowPanelLoaded() {
             return (
-              <p className='text-slate-600 text-sm'>
+              <p className='text-muted text-sm'>
                 This panel was loaded with <code>React.lazy</code> and <code>Suspense</code>.
               </p>
             )

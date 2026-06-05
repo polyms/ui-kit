@@ -41,6 +41,55 @@ Express intent via named tones; **do not** substitute raw Tailwind palettes (`ro
 
 Default to `primary / success / warning / danger / light / dark` (and **slate** for neutral chrome) for all new code. Only use other Tailwind color families for explicitly documented, non-semantic accents.
 
+## Dark mode
+
+Class-based dark mode via **`.dark`** on `<html>` or any ancestor. Tailwind v4 custom variant is preconfigured: `@custom-variant dark (&:is(.dark *))`.
+
+```html
+<html class="dark">
+```
+
+Semantic surface tokens resolve at runtime through `@theme inline` — no rebuild needed when toggling theme.
+
+| Utility | Role |
+| ------- | ---- |
+| **`bg-body`** / **`text-body`** | Page background |
+| **`text-fg`** | Primary text |
+| **`text-muted`** | Secondary / caption text |
+| **`bg-surface`** | Raised surface (card, panel) |
+| **`bg-surface-2`** | Elevated surface (popover, menu, select popup) |
+| **`bg-input`** | Form control background |
+| **`border-line`** | Default divider border |
+
+| Token | Light | Dark |
+| ----- | ----- | ---- |
+| `--body` | `#ffffff` | `#2e3440` (Nord nord0) |
+| `--fg` | slate-900 | `#eceff4` (Nord nord6) |
+| `--surface` | slate-100 | `#434c5e` (Nord nord2) |
+| `--surface-2` | `#ffffff` | `#3b4252` (Nord nord1) |
+| `--muted` | slate-500 | `#c0c8d4` |
+| `--line` | slate-300 | `#4c566a` (Nord nord3) |
+| `--input` | `#ffffff` | `#3b4252` (Nord nord1) |
+
+`color-scheme` is set automatically (`light` on `:root`, `dark` on `.dark`) so native form controls and scrollbars follow the theme.
+
+Built-in components use these semantic tokens — override them in a `.dark` scope to rebrand the entire library without touching component CSS.
+
+```tsx
+<div className='bg-body text-fg min-h-dvh'>
+  <header className='border-line border-b bg-surface px-4 py-3'>
+    <h1 className='font-semibold'>Dashboard</h1>
+    <p className='text-muted text-sm'>Welcome back</p>
+  </header>
+</div>
+```
+
+Use Tailwind **`dark:`** only for one-off overrides in app-specific layout:
+
+```tsx
+<div className='bg-white dark:bg-surface text-slate-900 dark:text-fg'>…</div>
+```
+
 ## Compound components
 
 Prefer **dot access** on the root export; never invent standalone top-level imports like `ModalHeader`.
@@ -330,6 +379,7 @@ These patterns are CSS classes only — no React component export. When no expor
 - **Typography:** `.h1` … `.h6`.
 - **Z-index:** `.z-dropdown`, `.z-sticky`, `.z-fixed`, `.z-toolbar`, `.z-offcanvas`, `.z-modal`, `.z-popover`, `.z-tooltip`, `.z-toast`, …
 - **Layout:** `.@page`, `.container-page` (container-query based page layout).
+- **Theme:** `.dark` (class-based dark mode scope); **`bg-body`**, **`text-fg`**, **`text-muted`**, **`bg-surface`**, **`border-line`** (semantic surface tokens).
 - **Utilities:** `.border-light`, `.border-{t|r|b|l|s|e|x|y}-light`, `.bg-light`, state classes `.item-primary` … `.item-dark`.
 
 Table example:

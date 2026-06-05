@@ -5,9 +5,9 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Host",
+      "name": "Debug Docs",
       "request": "launch",
-      "runtimeArgs": ["nx", "serve", "ui"],
+      "runtimeArgs": ["nx", "serve", "docs"],
       "runtimeExecutable": "pnpm",
       "console": "internalConsole",
       "skipFiles": ["<node_internals>/**"],

@@ -19,7 +19,7 @@ export default function APIReference() {
   return (
     <div className='card mt-4'>
       <Accordion className='accordion' multiple>
-        <Accordion.Item className='accordion-item border-solid bg-slate-100' disabled value='_header'>
+        <Accordion.Item className='accordion-item border-solid bg-surface' disabled value='_header'>
           <Accordion.Header className='accordion-header font-semibold' render={<div />}>
             <Accordion.Trigger className='accordion-trigger font-semibold' disabled>
               <span></span>
@@ -61,7 +61,7 @@ export default function APIReference() {
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel className='accordion-panel'>
-                <p className='p-2 ps-10 text-slate-700 text-sm'>{prop.description}</p>
+                <p className='p-2 ps-10 text-fg text-sm'>{prop.description}</p>
               </Accordion.Panel>
             </Accordion.Item>
           )
