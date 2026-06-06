@@ -19,10 +19,8 @@ import {
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Field, NavigationMenu } from '@polyms/core'
-import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import React from 'react'
 import { FaviconFit } from '../../assets/FaviconFit'
-import { useAppStore } from '../../stores/app.store'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -139,9 +137,6 @@ const allocations: Allocation[] = [
 ]
 
 export const Header = () => {
-  const theme = useAppStore(state => state.theme)
-  const toggleTheme = useAppStore(state => state.toggleTheme)
-  const isDark = theme === 'dark'
   const [user, setUser] = React.useState<{ name: string }>()
   const onLogin = () => setUser({ name: 'Tifa Lockhart' })
   const onLogout = () => setUser(undefined)
@@ -500,19 +495,6 @@ export const Header = () => {
       </Field>
 
       <div className='flex min-w-0 shrink-0 items-center gap-2'>
-        <Button
-          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-          className='hidden lg:inline-flex'
-          icon
-          onClick={toggleTheme}
-          outlined
-          rounded
-          size='lg'
-          variant='light'
-        >
-          {isDark ? <Sun className='size-4' /> : <Moon className='size-4' />}
-        </Button>
-
         {user ? (
           <>
             <span className='welcome min-w-0 truncate text-sm'>

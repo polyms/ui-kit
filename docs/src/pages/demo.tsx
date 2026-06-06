@@ -8,6 +8,7 @@ import { Header } from './-views/DemoHeader'
 
 export const Route = createFileRoute('/demo')({
   component: Page,
+  staticData: { layout: 'playground' },
 })
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────

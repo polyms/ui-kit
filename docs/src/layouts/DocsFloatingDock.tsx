@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { useMemo, type RefObject } from 'react'
 import { Icon } from '../components/Icons'
 import { useDocsToc } from '../hooks/useDocsToc'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAppStore } from '../stores/app.store'
 import type { AppSidebar } from './AppSidebar'
 import { FloatingDock, type DockAction } from './FloatingDock'
@@ -69,6 +70,8 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
   const toggleTheme = useAppStore(state => state.toggleTheme)
   const isDark = theme === 'dark'
   const { toc } = useDocsToc()
+  // The TOC aside is visible from xl up, so the dock's TOC popover is redundant there.
+  const isTocAsideVisible = useMediaQuery('(min-width: 1280px)')
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -105,7 +108,7 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
 
     const docsActions: DockAction[] = [topAction, themeAction, { type: 'divider', id: 'divider' }, menuAction]
 
-    if (toc.length > 0) {
+    if (toc.length > 0 && !isTocAsideVisible) {
       docsActions.push({
         type: 'popover',
         id: 'toc',
@@ -116,7 +119,7 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
     }
 
     return docsActions
-  }, [variant, isDark, toggleTheme, sidebarRef, toc.length])
+  }, [variant, isDark, toggleTheme, sidebarRef, toc.length, isTocAsideVisible])
 
   return <FloatingDock actions={actions} />
 }

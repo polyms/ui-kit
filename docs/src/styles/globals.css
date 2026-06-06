@@ -167,6 +167,21 @@ body {
       }
     }
 
+    /* Playground (demo/forms) on desktop: keep the docs sidebar, but let the
+       page's own app header sit flush at the top instead of below the empty
+       navigation strip. */
+    &.playground {
+      @media (min-width: 1024px) {
+        grid-template-areas:
+          'name main-content'
+          'app-sidebar main-content';
+
+        #app-navigation {
+          display: none;
+        }
+      }
+    }
+
     &.landing {
       @apply flex flex-col;
       overflow-x: clip;

@@ -15,6 +15,7 @@ import { Header } from './-views/DemoHeader'
 
 export const Route = createFileRoute('/forms')({
   component: FormsPage,
+  staticData: { layout: 'playground' },
 })
 
 // ── Data ───────────────────────────────────────────────────────────────────────────────────────────────────

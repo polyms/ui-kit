@@ -10,22 +10,36 @@ export function DocsToc() {
   const { toc, visibleIds, primaryActiveId, scrollToTop, scrollToHeading } = useDocsToc()
 
   useEffect(() => {
-    if (!primaryActiveId) return
-
-    const primaryTocItem = document.getElementById(`toc-${primaryActiveId}`)
     const indicator = document.querySelector('.toc-indicator') as HTMLElement | null
-    const listRect = primaryTocItem?.closest('.toc-list')?.getBoundingClientRect()
+    if (!indicator) return
 
-    if (!primaryTocItem || !indicator || !listRect) {
-      if (indicator) indicator.style.opacity = '0'
+    // Indicator spans the full range of currently visible headings (multi-item),
+    // not just the primary one.
+    const visibleItems = toc.filter(item => visibleIds.has(item.url.replace('#', '')))
+    const firstItem = visibleItems[0]
+    const lastItem = visibleItems[visibleItems.length - 1]
+    if (!firstItem || !lastItem) {
+      indicator.style.opacity = '0'
       return
     }
 
-    const itemRect = primaryTocItem.getBoundingClientRect()
-    indicator.style.top = `${itemRect.top - listRect.top}px`
-    indicator.style.height = `${itemRect.height}px`
+    const firstId = firstItem.url.replace('#', '')
+    const lastId = lastItem.url.replace('#', '')
+    const firstTocItem = document.getElementById(`toc-${firstId}`)
+    const lastTocItem = document.getElementById(`toc-${lastId}`)
+    const listRect = firstTocItem?.closest('.toc-list')?.getBoundingClientRect()
+
+    if (!firstTocItem || !lastTocItem || !listRect) {
+      indicator.style.opacity = '0'
+      return
+    }
+
+    const top = firstTocItem.getBoundingClientRect().top - listRect.top
+    const bottom = lastTocItem.getBoundingClientRect().bottom - listRect.top
+    indicator.style.top = `${top}px`
+    indicator.style.height = `${bottom - top}px`
     indicator.style.opacity = '1'
-  }, [primaryActiveId])
+  }, [toc, visibleIds, primaryActiveId])
 
   if (!toc?.length) return null
 
