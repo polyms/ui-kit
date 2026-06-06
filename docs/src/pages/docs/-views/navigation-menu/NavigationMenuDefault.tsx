@@ -363,9 +363,7 @@ export default function NavigationMenuDefault() {
                     >
                       <HugeiconsIcon className='text-primary' icon={item.icon} size={18} strokeWidth={2} />
                       <span className='font-semibold text-sm'>{item.title}</span>
-                      <span className='col-span-2 text-muted text-xs leading-snug'>
-                        {item.description}
-                      </span>
+                      <span className='col-span-2 text-muted text-xs leading-snug'>{item.description}</span>
                     </NavigationMenu.Link>
                   </li>
                 ))}

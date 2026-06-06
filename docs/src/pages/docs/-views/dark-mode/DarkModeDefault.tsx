@@ -26,9 +26,7 @@ export default function DarkModeDefault() {
         </Button>
       </div>
 
-      <div
-        className={`overflow-hidden rounded-xl border border-line ${theme === 'dark' ? 'dark' : ''}`}
-      >
+      <div className={`overflow-hidden rounded-xl border border-line ${theme === 'dark' ? 'dark' : ''}`}>
         <div className='bg-body p-5'>
           <h3 className='font-semibold text-fg'>Account overview</h3>
           <p className='mt-1 text-muted text-sm'>Balance and recent activity on your primary account.</p>

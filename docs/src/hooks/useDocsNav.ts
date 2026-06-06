@@ -1,10 +1,10 @@
 import { pages } from 'virtual:mdx-navigation'
 import {
   AiChemistry02Icon,
+  ChatFeedback01Icon,
   CursorMagicSelection04Icon,
   GoogleDocIcon,
   InputCursorTextIcon,
-  ChatFeedback01Icon,
   Share08Icon,
   ThreeDScaleIcon,
 } from '@hugeicons/core-free-icons'

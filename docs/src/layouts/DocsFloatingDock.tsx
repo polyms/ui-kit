@@ -1,13 +1,13 @@
 import { ListViewIcon, Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icons'
 import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import clsx from 'clsx'
-import { useMemo, type RefObject } from 'react'
+import { type RefObject, useMemo } from 'react'
 import { Icon } from '../components/Icons'
 import { useDocsToc } from '../hooks/useDocsToc'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAppStore } from '../stores/app.store'
 import type { AppSidebar } from './AppSidebar'
-import { FloatingDock, type DockAction } from './FloatingDock'
+import { type DockAction, FloatingDock } from './FloatingDock'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
