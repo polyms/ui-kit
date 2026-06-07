@@ -15,6 +15,7 @@ Everything comes from **one entry**: `@polyms/core-ui` (`index.mjs` / `index.d.t
 - **Polyms components** — `Button`, `Checkbox`, `Radio`, `RadioGroup`, `Field`, `Modal`, `Select`, `Toast`, `Offcanvas`, `Menu`, `NavigationMenu`, `Tabs`, `Toolbar`, `Avatar`, …
 - **Re-exports from Base UI** — `Accordion`, `Toggle`, `ToggleGroup`, **`useRender`** (from `@base-ui/react/use-render`).
 - **Programmatic modals** — **`useModalStore`** with **`showModal`** / **`closeModal`** (see types in `index.d.ts`).
+- **Programmatic offcanvas** — **`useOffcanvasStore`** with **`showOffcanvas`** / **`closeOffcanvas`** (see types in `index.d.ts`).
 - **Code-splitting** — **`dynamic`** (lazy loader) — confirm availability in `index.d.ts`.
 
 Do **not** use deep imports like `@polyms/core-ui/button`; use the barrel export.
@@ -101,7 +102,7 @@ Prefer **dot access** on the root export; never invent standalone top-level impo
 | Select | `Select`, `Select.Trigger`, `Select.Content`, `Select.Item`, `Select.Group`, … |
 | Menu | `Menu`, `Menu.Trigger`, `Menu.Content`, `Menu.Item`, … |
 | NavigationMenu | `NavigationMenu`, `NavigationMenu.List`, `NavigationMenu.Item`, `NavigationMenu.Trigger`, `NavigationMenu.Icon`, `NavigationMenu.Content`, `NavigationMenu.GroupLabel`, `NavigationMenu.Separator`, `NavigationMenu.Footer`, `NavigationMenu.Link`, `NavigationMenu.Viewport` |
-| Offcanvas | `Offcanvas`, `Offcanvas.Trigger`, `Offcanvas.Content`, `Offcanvas.Header`, … |
+| Offcanvas | `Offcanvas`, `Offcanvas.Trigger`, `Offcanvas.Content`, `Offcanvas.Header`, `Offcanvas.Title`, `Offcanvas.Description`, `Offcanvas.Body`, `Offcanvas.Close`, `Offcanvas.Container` |
 | Tabs | `Tabs`, `Tabs.List`, `Tabs.Tab`, `Tabs.Panel` |
 | Toolbar | `Toolbar`, `Toolbar.Button`, `Toolbar.Link`, `Toolbar.Input`, `Toolbar.Group`, `Toolbar.Separator` |
 | Toast | `Toast`, `Toast.Container`; **`Toast.useToastManager`** for imperative use |
@@ -342,15 +343,85 @@ export function App() {
 }
 ```
 
-## Programmatic modals (Zustand)
+## Programmatic overlays (Zustand)
 
-Use **`useModalStore`** (`showModal` / `closeModal`). **zustand** is external — install it in the consumer:
+**`useModalStore`** and **`useOffcanvasStore`** share the same imperative pattern: mount the matching **`.Container`** once, then call **`show*`** / **`close*`** from anywhere via **`getState()`**. **zustand** is external — install it in the consumer:
 
 ```bash
 pnpm add zustand
 ```
 
-Mount **`Modal.Container`** once in the tree when using `showModal`; otherwise content will not appear.
+### Modal
+
+Mount **`Modal.Container`** once in the tree when using **`showModal`**; otherwise content will not appear.
+
+```tsx
+import { Button, Modal, useModalStore } from '@polyms/core-ui'
+
+function App() {
+  return (
+    <>
+      <Modal.Container />
+      {/* routes / layout */}
+    </>
+  )
+}
+
+function DeleteButton() {
+  const open = () =>
+    useModalStore.getState().showModal(
+      'delete-item',
+      <Modal.Content size='sm'>
+        <Modal.Header>Delete item?</Modal.Header>
+        <Modal.Body>This cannot be undone.</Modal.Body>
+        <Modal.Footer>
+          <Modal.Close>Cancel</Modal.Close>
+          <Button onClick={() => useModalStore.getState().closeModal('delete-item')}>Delete</Button>
+        </Modal.Footer>
+      </Modal.Content>,
+      { onClose: reason => console.log('closed:', reason) }
+    )
+
+  return <Button onClick={open}>Delete</Button>
+}
+```
+
+**`closeModal`** sets **`open: false`** first, then removes the entry after **300ms** so exit transitions can finish.
+
+### Offcanvas
+
+Mount **`Offcanvas.Container`** once when using **`showOffcanvas`**.
+
+```tsx
+import { Button, Offcanvas, useOffcanvasStore } from '@polyms/core-ui'
+
+function App() {
+  return (
+    <>
+      <Offcanvas.Container />
+      {/* routes / layout */}
+    </>
+  )
+}
+
+function NotificationsButton() {
+  const open = () =>
+    useOffcanvasStore.getState().showOffcanvas(
+      'notifications',
+      <Offcanvas.Content>
+        <Offcanvas.Header>
+          <Offcanvas.Title>Notifications</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>You're all caught up.</Offcanvas.Body>
+      </Offcanvas.Content>,
+      { onClose: reason => console.log('closed:', reason) }
+    )
+
+  return <Button onClick={open}>Notifications</Button>
+}
+```
+
+**`closeOffcanvas`** follows the same **300ms** exit animation before unmount. Close via **`Offcanvas.Close`**, **`closeOffcanvas(id)`**, Escape, backdrop click, or swipe (handled by **`Offcanvas.Container`**).
 
 ## Imports
 

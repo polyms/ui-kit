@@ -470,9 +470,9 @@ export const zIndexLayers = [
     util: 'z-modal-backdrop',
     token: '--zindex-modal-backdrop',
     value: '3000',
-    description: 'Modal and bottom-sheet backdrop',
+    description: 'Modal backdrop',
   },
-  { util: 'z-modal', token: '--zindex-modal', value: '3005', description: 'Modal / bottom-sheet content' },
+  { util: 'z-modal', token: '--zindex-modal', value: '3005', description: 'Modal content' },
   { util: 'z-popover', token: '--zindex-popover', value: '4010', description: 'Popovers' },
   { util: 'z-tooltip', token: '--zindex-tooltip', value: '4020', description: 'Tooltips' },
   { util: 'z-toast', token: '--zindex-toast', value: '5000', description: 'Toasts (top layer)' },
@@ -560,11 +560,6 @@ Components use **compound (dot) notation** — keep **Trigger → Content → se
   <Field.Control />
   <Field.Description>We never share your email.</Field.Description>
 </Field>
-
-<BottomSheet>
-  <BottomSheet.Trigger>Open sheet</BottomSheet.Trigger>
-  <BottomSheet.Content title='Actions'>{/* mobile-first panel */}</BottomSheet.Content>
-</BottomSheet>
 ```
 
 ### Built-in surfaces
@@ -611,6 +606,7 @@ Base UI and Polyms wrappers expose **`data-*`** hooks for state and placement. P
 
 - **Toast:** wrap the app with **`Toast`** and render **`Toast.Container`** where toasts should portal.
 - **Programmatic modals:** **`useModalStore`** (**`showModal`** / **`closeModal`**) requires **`zustand`** in the consumer app and a mounted **`Modal.Container`** when using the store API.
+- **Programmatic offcanvas:** **`useOffcanvasStore`** (**`showOffcanvas`** / **`closeOffcanvas`**) follows the same pattern — requires **`zustand`** and a mounted **`Offcanvas.Container`** when using the store API.
 
 ## Usage Guidelines
 
@@ -634,7 +630,6 @@ Choose by **interaction and attention**:
 
 - **Modal** — Blocking, focused work; centered dialog pattern with **`Modal.Content`** sizing and header/body/footer slots.
 - **Offcanvas** — Navigation and supplementary panels that slide from an edge.
-- **BottomSheet** — **Mobile-first** sheet (title bar, optional back/close); theme uses the same **modal-tier** z-index variables as dialogs so layers stay consistent.
 - **Popover** — Contextual, non-blocking content.
 - **Tooltip** — Short hints on hover/focus.
 

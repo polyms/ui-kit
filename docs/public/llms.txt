@@ -34,7 +34,6 @@ core-ui/
 ├── core/                           # Component library (main package)
 │   ├── src/
 │   │   ├── alert/                 # Alert components
-│   │   ├── bottom-sheet/          # Mobile bottom sheet
 │   │   ├── breadcrumb/            # Breadcrumb navigation
 │   │   ├── button/                # Button component
 │   │   ├── field/                 # Form field components with validation
@@ -614,7 +613,6 @@ This enables:
 | Component | Description | Key Props | Use Case |
 |-----------|-------------|-----------|----------|
 | `Alert` | Notification banner | `variant`, `dismissible` | Status messages, warnings |
-| `BottomSheet` | Mobile drawer from bottom | `open`, `onOpenChange` | Mobile actions, filters |
 | `Breadcrumb` | Navigation trail | `items`, `separator` | Page hierarchy |
 | `Button` | Clickable button | `variant`, `size`, `disabled` | Actions, forms |
 | `Field` | Form field wrapper | `label`, `error`, `required` | Form inputs with validation |

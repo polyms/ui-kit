@@ -28,10 +28,34 @@ apis:
     default: 'true'
     values: boolean
     description: When true, displays a backdrop overlay behind the offcanvas.
+  - separator: useOffcanvasStore.showOffcanvas(id, element, options?)
+  - name: id
+    default: '-'
+    values: string
+    description: Unique key for the offcanvas instance. Reusing an id replaces the previous entry.
+  - name: element
+    default: '-'
+    values: ReactNode
+    description: Offcanvas content, typically an Offcanvas.Content tree with Header, Body, and Close.
+  - name: options.onClose
+    default: '-'
+    values: '(reason?) => void'
+    description: Called when the offcanvas finishes closing (after the exit animation).
+  - separator: useOffcanvasStore.closeOffcanvas(id, reason?)
+  - name: id
+    default: '-'
+    values: string
+    description: The id passed to showOffcanvas. Starts close animation then removes the panel after 300ms.
+  - name: reason
+    default: '-'
+    values: Drawer close reason
+    description: Optional close reason forwarded to onClose (e.g. escape press, outside click, swipe).
 ---
 
 import Story from './-views/offcanvas/OffcanvasDefault.tsx'
 import code from './-views/offcanvas/OffcanvasDefault.tsx?raw'
+import Programmatic from './-views/offcanvas/OffcanvasProgrammatic.tsx'
+import programmaticCode from './-views/offcanvas/OffcanvasProgrammatic.tsx?raw'
 
 Offcanvas panels slide in from the edge of the viewport to display supplementary content, navigation menus, or settings. They provide a focused workspace without leaving the current page context.
 
@@ -168,6 +192,49 @@ Users can click on the backdrop to dismiss the offcanvas, providing an intuitive
 - **Shift + Tab**: Cycle backwards through focusable elements
 
 Focus is automatically trapped within the offcanvas when open and restored to the trigger element when closed.
+
+## Programmatic offcanvas
+
+Open panels from event handlers, data loaders, or global state without a declarative **`Offcanvas.Trigger`**. The store API uses **Zustand** (peer dependency — install **`zustand`** in your app).
+
+1. Mount **`Offcanvas.Container`** once near the root of your app (same level as your router outlet).
+2. Call **`useOffcanvasStore.getState().showOffcanvas(id, element, options?)`** with a stable **`id`** and an **`Offcanvas.Content`** tree.
+3. Close with **`Offcanvas.Close`**, **`closeOffcanvas(id)`**, or Escape / backdrop / swipe (handled by **`Offcanvas.Container`**).
+
+```tsx
+import { Button, Offcanvas, useOffcanvasStore } from '@polyms/core'
+
+function App() {
+  return (
+    <>
+      <Offcanvas.Container />
+      <YourRoutes />
+    </>
+  )
+}
+
+function NotificationsButton() {
+  const open = () =>
+    useOffcanvasStore.getState().showOffcanvas(
+      'notifications',
+      <Offcanvas.Content>
+        <Offcanvas.Header>
+          <Offcanvas.Title>Notifications</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>You're all caught up.</Offcanvas.Body>
+      </Offcanvas.Content>,
+      { onClose: (reason) => console.log('closed:', reason) }
+    )
+
+  return <Button onClick={open}>Notifications</Button>
+}
+```
+
+**Animation:** **`closeOffcanvas`** sets **`open: false`** first, then removes the entry after **300ms** so exit transitions can finish.
+
+<CodePreview code={programmaticCode}>
+  <Programmatic />
+</CodePreview>
 
 ## API Reference
 

@@ -5,7 +5,6 @@
 @import './_alert.css' layer(components);
 @import './_avatar.css' layer(components);
 @import './_badge.css' layer(components);
-@import './_bottom-sheet.css' layer(components);
 @import './_breadcrumb.css' layer(components);
 @import './_button.css';
 @import './_card.css' layer(components);
