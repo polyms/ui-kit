@@ -132,10 +132,12 @@ Keep the documented component tree intact. Use the root → **Trigger** → **Co
 
 `Offcanvas.Description` must be a **direct child of `Offcanvas.Content`** — not nested inside `Offcanvas.Title`. Bundled CSS uses `.offcanvas-heading + .offcanvas-description`; do not insert `Offcanvas.Body` between `Header` and `Description`.
 
+Use **`size`** on **`Offcanvas.Content`** (`sm` | `md` | `lg` | `xl` | `2xl` | `3xl` | `full`) to control panel width (left/right) or height (up/down). On mobile, the panel remains a full-width bottom drawer regardless of `size`.
+
 ```tsx
 <Offcanvas>
   <Offcanvas.Trigger>Open</Offcanvas.Trigger>
-  <Offcanvas.Content>
+  <Offcanvas.Content size="lg">
     <Offcanvas.Header>
       <Offcanvas.Title>Panel title</Offcanvas.Title>
     </Offcanvas.Header>
@@ -317,6 +319,8 @@ Wrap clickable items in **`Toolbar.Button`** for roving focus and `data-disabled
 </Toolbar>
 ```
 
+You can also pass the `Button` component (`render={<Button icon tooltip='Bold' />}`) to reuse its icon sizing and tooltip. The toolbar owns the shell: `.toolbar-button` overrides `.btn` for geometry (padding is reconciled so `icon` stays square) and flattens `variant`/`outlined` colors to keep items uniform — use `Button` here for its `icon`/`tooltip` API, not for a colored variant.
+
 For tooltips, pass `Toolbar.Button` to `Tooltip.Trigger` via its `render` prop. Place `Toolbar.Input` at the **end** of a horizontal toolbar to preserve text-cursor key behavior. Always provide `aria-label` on `Toolbar` and each `Toolbar.Group`.
 
 ### Built-in surfaces: no redundant utilities
@@ -446,6 +450,7 @@ These patterns are CSS classes only — no React component export. When no expor
 - **Badge:** `.badge`, sizes (`.badge-lg`, `.badge-xl`), tones (`.badge-primary`, `.badge-success`, `.badge-info`, `.badge-warning`, `.badge-danger`, `.badge-light`, `.badge-dark`).
 - **Card:** `.card`, `.card-body`.
 - **Link:** `.link`, `.link-primary`, `.link-danger`, `.link-light`, `.stretched-link`.
+- **Toggle:** `.toggle`, `.toggle-group` — the `Toggle` / `ToggleGroup` exports (re-exported from Base UI) ship unstyled; add these classes to apply the design-system ghost-button styling and segmented-group container.
 - **Skeleton:** `.skeleton`.
 - **Typography:** `.h1` … `.h6`.
 - **Z-index:** `.z-dropdown`, `.z-sticky`, `.z-fixed`, `.z-toolbar`, `.z-offcanvas`, `.z-modal`, `.z-popover`, `.z-tooltip`, `.z-toast`, …

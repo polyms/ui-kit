@@ -1,0 +1,113 @@
+.toggle {
+  /* Transparent palette tokens (mirrors `.item-primary` & `.toolbar-button`) */
+  --toggle-variant-color: var(--color-primary-700);
+  --toggle-bg-hover: color-mix(in oklab, var(--toggle-variant-color) 10%, transparent);
+  --toggle-bg-active: color-mix(in oklab, var(--toggle-variant-color) 15%, transparent);
+  --toggle-bg-pressed: color-mix(in oklab, var(--toggle-variant-color) 12%, transparent);
+  --toggle-bg-pressed-hover: color-mix(in oklab, var(--toggle-variant-color) 18%, transparent);
+  --toggle-bg-pressed-active: color-mix(in oklab, var(--toggle-variant-color) 24%, transparent);
+  --toggle-focus-ring: color-mix(in oklab, var(--color-primary-500) 35%, transparent);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-width: 2rem;
+  height: 2rem;
+  padding-inline: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 100ms ease;
+
+  @media (hover: hover) {
+    &:hover:not([data-disabled]):not([data-pressed]) {
+      background-color: var(--toggle-bg-hover);
+      color: var(--toggle-variant-color);
+    }
+  }
+
+  /* Press-down micro-interaction: applies in both idle & pressed states. */
+  &:active:not([data-disabled]) {
+    background-color: var(--toggle-bg-active);
+    color: var(--toggle-variant-color);
+    transform: scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--toggle-focus-ring);
+    outline-offset: -1px;
+  }
+
+  &[data-pressed] {
+    background-color: var(--toggle-bg-pressed);
+    color: var(--toggle-variant-color);
+
+    /* Pressed surfaces still react to hover/active so the on-state feels alive. */
+    @media (hover: hover) {
+      &:hover:not([data-disabled]) {
+        background-color: var(--toggle-bg-pressed-hover);
+      }
+    }
+
+    &:active:not([data-disabled]) {
+      background-color: var(--toggle-bg-pressed-active);
+    }
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* When composed with Button via `render={<Button icon />}`, defer horizontal
+     padding to the Button token so `.btn-icon` stays square (mirrors `.toolbar-button.btn`). */
+  &.btn {
+    padding-inline: var(--btn-padding-x);
+  }
+}
+
+/* Toggle group: collapse items into a unified segmented pill */
+.toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background-color: transparent;
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &[data-disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  > .toggle {
+    border-radius: 0.25rem;
+  }
+}
+
+/* Dark-mode override: accent dùng shade sáng (-300) cho contrast với body Nord. */
+.dark .toggle {
+  --toggle-variant-color: var(--color-primary-300);
+  --toggle-focus-ring: color-mix(in oklab, var(--color-primary-400) 45%, transparent);
+}

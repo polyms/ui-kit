@@ -105,6 +105,20 @@ import { Toggle, ToggleGroup, Toolbar } from '@polyms/core'
 
 The same pattern applies to `Menu.Trigger`, `Select.Trigger`, `Popover.Trigger`, `Dialog.Trigger`, and `AlertDialog.Trigger`.
 
+You can also render the `Button` component to reuse its icon sizing and tooltip:
+
+```tsx
+import { Button, Toolbar } from '@polyms/core'
+
+<Toolbar>
+  <Toolbar.Button render={<Button icon tooltip='Bold' />}>
+    <HugeiconsIcon icon={TextBoldIcon} size={16} strokeWidth={2} />
+  </Toolbar.Button>
+</Toolbar>
+```
+
+The toolbar owns the visual shell, so `.toolbar-button` wins over `.btn` for geometry and the ghost palette — `Button` `variant`/`outlined` colors are intentionally flattened to keep toolbar items uniform. Horizontal padding is reconciled automatically, so `icon` buttons stay square. Use `Button` here for its `icon`, `tooltip`, and `render`-friendly API rather than for a colored variant.
+
 For tooltips, do the opposite — pass the toolbar item as the `render` of `Tooltip.Trigger`:
 
 ```tsx

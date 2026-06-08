@@ -1,4 +1,4 @@
-import { Button } from '@polyms/core'
+import { Button, Offcanvas, type OffcanvasSize } from '@polyms/core'
 import { ChartSquare, Code2, Layers, MagicStick3 } from '@solar-icons/react-perf/BoldDuotone'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
@@ -17,6 +17,12 @@ type DemoFeature = {
   description: string
   icon: ComponentType<{ className?: string }>
   title: string
+}
+
+type OffcanvasSizeSpec = {
+  size: OffcanvasSize
+  width: string
+  height: string
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -40,6 +46,16 @@ const features: DemoFeature[] = [
     icon: ChartSquare,
     title: 'Data-driven content',
   },
+]
+
+const offcanvasSizes: OffcanvasSizeSpec[] = [
+  { size: 'sm', width: '300px', height: '40%' },
+  { size: 'md', width: '360px', height: '60%' },
+  { size: 'lg', width: '480px', height: '75%' },
+  { size: 'xl', width: '640px', height: '90%' },
+  { size: '2xl', width: '768px', height: '90%' },
+  { size: '3xl', width: '896px', height: '90%' },
+  { size: 'full', width: '100%', height: '100%' },
 ]
 
 function Page() {
@@ -145,6 +161,73 @@ function Page() {
                   centered with consistent horizontal padding.
                 </p>
               </div>
+            </div>
+          </section>
+
+          <section className='mx-auto w-full max-w-5xl px-5 pb-20 md:px-8'>
+            <div className='flex flex-col gap-1'>
+              <div className='flex flex-wrap items-center gap-2'>
+                <h2 className='font-semibold text-fg text-xl tracking-tight'>Offcanvas sizes</h2>
+                <span className='badge badge-primary rounded-full font-semibold'>Live</span>
+              </div>
+              <p className='max-w-2xl text-pretty text-muted text-sm leading-relaxed'>
+                Trigger each panel to test the real{' '}
+                <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-xs dark:bg-surface dark:text-fg'>
+                  size
+                </code>{' '}
+                token on{' '}
+                <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-xs dark:bg-surface dark:text-fg'>
+                  Offcanvas.Content
+                </code>
+                . These are right-edge drawers, so the value maps to width; on viewports below 768px every panel
+                falls back to a full-width bottom sheet.
+              </p>
+            </div>
+
+            <div className='mt-5 flex flex-wrap gap-3'>
+              {offcanvasSizes.map(({ size, width, height }) => (
+                <Offcanvas key={size} swipeDirection='right'>
+                  <Offcanvas.Trigger className='btn btn-light outlined rounded-full uppercase'>
+                    {size}
+                  </Offcanvas.Trigger>
+                  <Offcanvas.Content size={size}>
+                    <Offcanvas.Header>
+                      <Offcanvas.Title>
+                        <span className='flex items-center gap-2'>
+                          Offcanvas
+                          <span className='badge badge-primary rounded-full uppercase'>{size}</span>
+                        </span>
+                      </Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Description>
+                      Right-edge drawer rendered with{' '}
+                      <code className='font-mono'>size=&quot;{size}&quot;</code> — {width} wide on desktop (height{' '}
+                      {height} when used as an up/down drawer), capped at 90% of the viewport.
+                    </Offcanvas.Description>
+                    <Offcanvas.Body>
+                      <div className='space-y-4'>
+                        <section className='rounded-lg border border-line p-4'>
+                          <p className='font-semibold text-fg text-sm'>Resolved dimensions</p>
+                          <dl className='mt-2 space-y-1 text-sm'>
+                            <div className='flex items-center justify-between'>
+                              <dt className='text-muted'>Width (left/right)</dt>
+                              <dd className='font-mono text-fg'>{width}</dd>
+                            </div>
+                            <div className='flex items-center justify-between'>
+                              <dt className='text-muted'>Height (up/down)</dt>
+                              <dd className='font-mono text-fg'>{height}</dd>
+                            </div>
+                          </dl>
+                        </section>
+                        <p className='text-muted text-sm leading-relaxed'>
+                          Resize the window or drag the panel to verify the scroll area, sticky header and swipe
+                          dismissal behave at this size.
+                        </p>
+                      </div>
+                    </Offcanvas.Body>
+                  </Offcanvas.Content>
+                </Offcanvas>
+              ))}
             </div>
           </section>
         </main>

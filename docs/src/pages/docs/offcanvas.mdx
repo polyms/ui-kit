@@ -28,6 +28,10 @@ apis:
     default: 'true'
     values: boolean
     description: When true, displays a backdrop overlay behind the offcanvas.
+  - name: size
+    default: '-'
+    values: sm | md | lg | xl | 2xl | 3xl | full
+    description: Controls panel width (left/right) or height (up/down). On mobile, the panel remains full-width bottom drawer.
   - separator: useOffcanvasStore.showOffcanvas(id, element, options?)
   - name: id
     default: '-'
@@ -163,6 +167,22 @@ Remove the backdrop overlay for a less intrusive experience.
     <Offcanvas.Body>
       Menu content
     </Offcanvas.Body>
+  </Offcanvas.Content>
+</Offcanvas>
+```
+
+### Size
+
+Use `size` on `Offcanvas.Content` to control panel width for left/right drawers or height for up/down drawers. Values: `sm` (300px), `md` (360px), `lg` (480px), `xl` (640px), `2xl` (768px), `3xl` (896px), `full` (100%). When omitted, defaults to 360px width / 90% height.
+
+```tsx
+<Offcanvas swipeDirection="right">
+  <Offcanvas.Trigger>Wide panel</Offcanvas.Trigger>
+  <Offcanvas.Content size="lg">
+    <Offcanvas.Header>
+      <Offcanvas.Title>Settings</Offcanvas.Title>
+    </Offcanvas.Header>
+    <Offcanvas.Body>Wide settings panel</Offcanvas.Body>
   </Offcanvas.Content>
 </Offcanvas>
 ```

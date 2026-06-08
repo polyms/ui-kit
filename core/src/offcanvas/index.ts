@@ -9,6 +9,7 @@ import { OffcanvasTitle } from './OffcanvasTitle'
 import { OffcanvasTrigger } from './OffcanvasTrigger'
 
 export * from './OffcanvasContainer'
+export type { OffcanvasSize } from './OffcanvasContent'
 export * from './offcanvas.store'
 
 export const Offcanvas = Object.assign(Root, {

@@ -72,7 +72,7 @@
   &[data-swipe-direction='down'] {
     left: 0;
     right: 0;
-    max-height: 90%;
+    max-height: var(--offcanvas-height, 90%);
     transform: translate3d(
       0,
       calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px)),
@@ -98,7 +98,7 @@
   &[data-swipe-direction='right'] {
     top: 0;
     bottom: 0;
-    width: 360px;
+    width: var(--offcanvas-width, 360px);
     max-width: 90%;
     transform: translate3d(var(--drawer-swipe-movement-x, 0px), 0, 0);
   }
@@ -131,6 +131,46 @@
   &[data-starting-style][data-swipe-direction='right'],
   &[data-ending-style][data-swipe-direction='right'] {
     transform: translate3d(100%, 0, 0);
+  }
+}
+
+.offcanvas-sm {
+  --offcanvas-width: 300px;
+  --offcanvas-height: 40%;
+}
+
+.offcanvas-md {
+  --offcanvas-width: 360px;
+  --offcanvas-height: 60%;
+}
+
+.offcanvas-lg {
+  --offcanvas-width: 480px;
+  --offcanvas-height: 75%;
+}
+
+.offcanvas-xl {
+  --offcanvas-width: 640px;
+  --offcanvas-height: 90%;
+}
+
+.offcanvas-2xl {
+  --offcanvas-width: 768px;
+  --offcanvas-height: 90%;
+}
+
+.offcanvas-3xl {
+  --offcanvas-width: 896px;
+  --offcanvas-height: 90%;
+}
+
+.offcanvas-full {
+  --offcanvas-width: 100%;
+  --offcanvas-height: 100%;
+
+  &[data-swipe-direction='left'],
+  &[data-swipe-direction='right'] {
+    max-width: 100%;
   }
 }
 

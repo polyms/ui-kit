@@ -1,0 +1,151 @@
+---
+type: Actions
+title: Toggle
+apis:
+  - separator: Toggle
+  - name: defaultPressed
+    default: 'false'
+    values: boolean
+    description: The default pressed state when the component mounts in uncontrolled mode.
+  - name: pressed
+    default: '-'
+    values: boolean
+    description: The controlled pressed state. Use with onPressedChange for controlled behavior.
+  - name: onPressedChange
+    default: '-'
+    values: '(pressed: boolean, details) => void'
+    description: Callback fired when the pressed state changes.
+  - name: value
+    default: '-'
+    values: string
+    description: A unique string that identifies the toggle when used inside a ToggleGroup.
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: When true, prevents interaction with the toggle and applies disabled styling.
+  - name: render
+    default: '-'
+    values: 'ReactElement | (props, state) => ReactElement'
+    description: Replace the rendered element or compose with another component (e.g. Toolbar.Button, Tooltip.Trigger).
+  - separator: ToggleGroup
+  - name: defaultValue
+    default: '-'
+    values: string[]
+    description: Initial array of pressed toggle values for uncontrolled mode.
+  - name: value
+    default: '-'
+    values: string[]
+    description: The controlled array of pressed toggle values. Use with onValueChange.
+  - name: onValueChange
+    default: '-'
+    values: '(value: string[], details) => void'
+    description: Callback fired when the set of pressed toggles changes.
+  - name: multiple
+    default: 'false'
+    values: boolean
+    description: When false only one item can be pressed at a time; when true multiple items can be pressed.
+  - name: orientation
+    default: horizontal
+    values: horizontal | vertical
+    description: The orientation of the group. Controls arrow-key navigation and layout.
+  - name: loopFocus
+    default: 'true'
+    values: boolean
+    description: When true, keyboard navigation wraps focus to the other end once the end is reached.
+  - name: disabled
+    default: 'false'
+    values: boolean
+    description: When true, disables every toggle inside the group.
+---
+
+import Story from './-views/toggle/ToggleDefault.tsx'
+import code from './-views/toggle/ToggleDefault.tsx?raw'
+import GroupStory from './-views/toggle/ToggleGroupStory.tsx'
+import groupCode from './-views/toggle/ToggleGroupStory.tsx?raw'
+
+A two-state button that can be on or off. Use it for binary settings where the control itself reflects the state — like bold, mute, or favorite — and pair it with an icon for a compact, immediate-feedback action.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Toggle } from '@polyms/core'
+
+<Toggle className='toggle' aria-label='Bold'>
+  B
+</Toggle>
+```
+
+The `Toggle` and `ToggleGroup` primitives are unstyled by default — add the `toggle` (and `toggle-group`) class to apply the design-system styling shown here.
+
+## Controlled vs Uncontrolled
+
+### Uncontrolled
+
+Use `defaultPressed` to set the initial state and let the component manage itself:
+
+```tsx
+<Toggle className='toggle' defaultPressed aria-label='Favorite' />
+```
+
+### Controlled
+
+Drive the pressed state externally with `pressed` and `onPressedChange`:
+
+```tsx
+const [pressed, setPressed] = useState(false)
+
+<Toggle
+  className='toggle'
+  pressed={pressed}
+  onPressedChange={setPressed}
+  aria-label='Mute'
+/>
+```
+
+## Toggle group
+
+Wrap related toggles in a `ToggleGroup` to share state. By default the group is exclusive (single selection, like a segmented control); pass `multiple` to allow several toggles to be pressed at once.
+
+<CodePreview code={groupCode}>
+  <GroupStory />
+</CodePreview>
+
+```tsx
+import { Toggle, ToggleGroup } from '@polyms/core'
+
+<ToggleGroup className='toggle-group' aria-label='Alignment' defaultValue={['left']}>
+  <Toggle className='toggle' value='left'>Left</Toggle>
+  <Toggle className='toggle' value='center'>Center</Toggle>
+  <Toggle className='toggle' value='right'>Right</Toggle>
+</ToggleGroup>
+```
+
+## Composition
+
+`Toggle` composes with other primitives through the `render` prop. Inside a `Toolbar`, pass it to `Toolbar.Button` so it inherits roving keyboard focus:
+
+```tsx
+import { Toggle, ToggleGroup, Toolbar } from '@polyms/core'
+
+<Toolbar>
+  <ToggleGroup className='toolbar-group' aria-label='Alignment'>
+    <Toolbar.Button render={<Toggle />} value='left'>Left</Toolbar.Button>
+    <Toolbar.Button render={<Toggle />} value='right'>Right</Toolbar.Button>
+  </ToggleGroup>
+</Toolbar>
+```
+
+## Guidelines
+
+- Always provide an `aria-label` (or visible text) so screen readers can announce the toggle's purpose.
+- Prefer a Switch when the action takes effect immediately on a setting; use a Toggle when the button itself represents an on/off state (e.g. formatting tools).
+- Give every `Toggle` inside a `ToggleGroup` a unique `value`.
+- Use `multiple` for independent options and the default exclusive mode for mutually exclusive choices.
+
+## API Reference
+
+<APIReference />

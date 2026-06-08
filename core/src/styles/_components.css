@@ -24,6 +24,7 @@
 @import './_table.css' layer(components);
 @import './_tabs.css' layer(components);
 @import './_toast.css' layer(components);
+@import './_toggle.css' layer(components);
 @import './_toolbar.css' layer(components);
 @import './_tooltip.css' layer(components);
 @import './_typography.css' layer(components);
