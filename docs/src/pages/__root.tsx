@@ -26,6 +26,7 @@ const Root = () => {
   const routeLayout = router.matches[router.matches.length - 1]?.staticData?.layout
   const isPlaygroundRoute = routeLayout === 'playground'
   const isLandingLayout = routeLayout === 'landing' || (isPlaygroundRoute && !isDesktop)
+  const isHomePage = router.location.pathname === '/'
 
   if (typeof document !== 'undefined') {
     const root = document.getElementById('root')
@@ -39,7 +40,9 @@ const Root = () => {
       <Toast>
         <Outlet />
         {isDesktop && <AppSidebar drawerOnly ref={appSidebarRef} />}
-        <DocsFloatingDock sidebarRef={isDesktop ? appSidebarRef : undefined} variant='landing' />
+        {!isHomePage && (
+          <DocsFloatingDock sidebarRef={isDesktop ? appSidebarRef : undefined} variant='landing' />
+        )}
         <Toast.Container />
       </Toast>
     )
