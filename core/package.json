@@ -1,6 +1,6 @@
 {
   "name": "@polyms/core-ui",
-  "version": "0.4.25",
+  "version": "0.4.26",
   "type": "module",
   "bin": {
     "core-ui-skill": "./scripts/add-skill.mjs"

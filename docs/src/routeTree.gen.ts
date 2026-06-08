@@ -18,12 +18,12 @@ const FormsRoute = FormsRouteImport.update({
   id: '/forms',
   path: '/forms',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./pages/forms.lazy').then((d) => d.Route))
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./pages/demo.lazy').then((d) => d.Route))
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
