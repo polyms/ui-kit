@@ -8,6 +8,7 @@ const root = ReactDom.createRoot(document.getElementById('root') as HTMLElement)
 const router = createRouter({
   routeTree,
   basepath: '/',
+  defaultPreload: 'intent',
   defaultErrorComponent: ({ error }: { error: Error }) => {
     // Render an error message
     return <div>{error.message}</div>

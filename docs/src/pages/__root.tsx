@@ -1,7 +1,7 @@
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { Toast } from '@polyms/core'
-import { createRootRoute, Outlet, useRouterState } from '@tanstack/react-router'
+import { createRootRoute, Link, Outlet, useRouterState } from '@tanstack/react-router'
 import { useRef } from 'react'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { AppSidebar } from '../layouts/AppSidebar'
@@ -12,8 +12,10 @@ import '../stores/app.store'
 const Name = () => {
   return (
     <div id='app-name'>
-      <img alt='logo' className='h-10 shrink-0' src='/favicon.svg' />
-      <strong className='text-xl'>Polyms</strong>
+      <Link aria-label='Polyms home' className='flex items-center gap-2' to='/'>
+        <img alt='logo' className='h-10 shrink-0' src='/favicon.svg' />
+        <strong className='text-xl'>Polyms</strong>
+      </Link>
       <span className='badge badge-primary whitespace-nowrap rounded-full px-4 font-bold'>Design system</span>
     </div>
   )
