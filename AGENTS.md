@@ -92,7 +92,7 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 - Style component: file **`core/src/styles/_tên-component.css`** và pattern import hiện có.
 - **Màu xám:** dùng **`--color-slate-*`**, không dùng `--color-neutral-*` (ví dụ `var(--color-slate-400)`).
 - **Phối transparent (idle/hover/active):** mọi component có state kiểu *ghost* (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`core/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
-- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/AI.md`** (section *CSS-only UI classes* và *Interactive state utilities (`item-*`)*) để consumer biết.
+- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/skills/core-ui/css-utilities.md`** (section *CSS-Only Classes* và *Interactive State Utilities*) để consumer agents biết.
 
 ### Component & state
 
@@ -172,9 +172,11 @@ Plugin/virtual module: dùng **`gray-matter`** cho frontmatter; virtual ID trong
 
 ---
 
-## Tài liệu cho consumer (`AI.md`)
+## Tài liệu cho consumer agent (`core-ui` skill)
 
-File **`core/AI.md`** được copy vào **`dist/core`** khi build (cùng cơ chế `*.md` trong Vite) và đi kèm package **`@polyms/core-ui`**. Khi đổi cách tiêu thụ công khai (import style, peer deps, quy ước compose UI), cập nhật **`core/AI.md`** và **`core/README.md`** cho đồng bộ.
+Thư mục **`core/skills/core-ui/`** là nguồn chính cho agent guidance consumer và được copy vào **`dist/core/skills/core-ui`** khi build. Khi đổi cách tiêu thụ công khai (import style, peer deps, quy ước compose UI), cập nhật skill tương ứng trong **`core/skills/core-ui/`** và **`core/README.md`** cho đồng bộ.
+
+Repo này tự dùng cùng skill qua symlink **`.agents/skills/core-ui`** trỏ về **`core/skills/core-ui`**; không tạo bản copy thứ hai để tránh drift.
 
 ---
 

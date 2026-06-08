@@ -1,0 +1,89 @@
+---
+type: Guide
+title: AI Agent Skill
+---
+
+**Polyms Core UI** ships a bundled **agent skill** so AI coding assistants (Cursor, Claude Code, and other `AGENTS.md`-aware tools) follow the same composition rules you do: barrel imports, slate grays, semantic tones, compound component trees, programmatic overlays, and the CSS-only utilities. Instead of pasting conventions into every prompt, install the skill once into your repository.
+
+## What the skill contains
+
+The skill is split for progressive disclosure — agents load only the part relevant to the task:
+
+- **SKILL.md** — hard rules and the app-shell checklist.
+- **components.md** — compound trees for Modal, Offcanvas, Menu, NavigationMenu, Toolbar, Field, Select, Tabs, plus `useRender`.
+- **theming.md** — slate vs neutral, semantic tones, dark mode tokens, logical-direction spacing.
+- **css-utilities.md** — table, badge, card, link, and the `item-*` interaction recipe.
+- **setup.md** — install, styles, Toast, and programmatic Modal/Offcanvas wiring.
+
+## Install the skill
+
+After adding the package, run the bundled installer from your repository root:
+
+```bash
+pnpm exec core-ui-skill
+```
+
+```bash
+npx core-ui-skill
+```
+
+The installer copies the skill into the discovery folders that agents read:
+
+- `.cursor/skills/core-ui` — Cursor
+- `.claude/skills/core-ui` — Claude Code
+- `.agents/skills/core-ui` — generic `AGENTS.md` tools
+
+## Options
+
+```bash
+core-ui-skill [options]
+```
+
+- **`--target <all|cursor|claude|agents>`** — install one target instead of all (default: `all`).
+- **`--cwd <path>`** — repository root to install into (default: current directory).
+- **`--force`** — overwrite an existing installed skill.
+- **`--dry-run`** — print planned changes without writing files.
+- **`-h`, `--help`** — show usage.
+
+Install for a single tool:
+
+```bash
+core-ui-skill --target cursor
+```
+
+Preview without writing:
+
+```bash
+core-ui-skill --dry-run
+```
+
+## Keep it in sync
+
+The skill is versioned with the package, so re-run the installer after upgrading `@polyms/core-ui`. Add a script so the whole team syncs the same way:
+
+```json
+{
+  "scripts": {
+    "core-ui:skill": "core-ui-skill --force"
+  }
+}
+```
+
+```bash
+pnpm core-ui:skill
+```
+
+## Verify
+
+After installing, your agent should automatically apply the rules when you work with `@polyms/core-ui`. Confirm the files exist:
+
+```bash
+ls .cursor/skills/core-ui
+```
+
+If a rule ever disagrees with the TypeScript types for your installed version, trust **`node_modules/@polyms/core-ui/index.d.ts`**.
+
+## Next steps
+
+- [Installation](/installation) — package, peers, and styles.
+- [Design System](/design-system) — color tokens, slate vs neutral, CSS-only surface classes.

@@ -44,7 +44,12 @@ export default defineConfig(async ({ mode }) => {
     plugins: [
       react(),
       nxViteTsPaths(),
-      nxCopyAssetsPlugin(['*.md', { input: 'src/styles', glob: '**/*', output: 'styles' }]),
+      nxCopyAssetsPlugin([
+        '*.md',
+        { input: 'src/styles', glob: '**/*', output: 'styles' },
+        { input: 'skills', glob: '**/*', output: 'skills' },
+        { input: 'scripts', glob: '**/*', output: 'scripts' },
+      ]),
       tailwindcssVite(),
       dts({
         entryRoot: 'src',

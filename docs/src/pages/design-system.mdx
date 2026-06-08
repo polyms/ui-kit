@@ -3,7 +3,7 @@ type: Guide
 title: Design System
 ---
 
-**Polyms Core UI** (`@polyms/core-ui`) is a modular React component library shipped from this monorepo: **React 19**, **TypeScript (strict)**, **Tailwind CSS 4**, primitives from **@base-ui/react**, and **Floating UI** where overlays need positioning. This page summarizes the **visual and interaction contracts** consumers and contributors should follow; the npm package also ships **`core/AI.md`** with the same consumption rules—if anything disagrees with **`index.d.ts`** for your installed version, trust the types.
+**Polyms Core UI** (`@polyms/core-ui`) is a modular React component library shipped from this monorepo: **React 19**, **TypeScript (strict)**, **Tailwind CSS 4**, primitives from **@base-ui/react**, and **Floating UI** where overlays need positioning. This page summarizes the **visual and interaction contracts** consumers and contributors should follow; the npm package also ships a bundled **`core-ui` agent skill** installer so AI agents can load the same rules—if anything disagrees with **`index.d.ts`** for your installed version, trust the types.
 
 ## Philosophy
 
@@ -334,7 +334,7 @@ Spacing follows **Tailwind CSS 4**’s default scale (typically **0.25rem** step
 </div>
 ```
 
-For **RTL-friendly** layouts, prefer **logical** utilities — `ms-*` / `me-*`, `ps-*` / `pe-*`, `border-s-*` / `border-e-*` — over physical `ml` / `mr` / `pl` / `pr` in new code (see **`core/AI.md`** in the package).
+For **RTL-friendly** layouts, prefer **logical** utilities — `ms-*` / `me-*`, `ps-*` / `pe-*`, `border-s-*` / `border-e-*` — over physical `ml` / `mr` / `pl` / `pr` in new code (the bundled **`core-ui` agent skill** carries the same guidance for consumers).
 
 ### Border Radius
 
@@ -523,7 +523,7 @@ Several patterns are **CSS classes only** (no dedicated React export). They are 
 
 **`item-*`** classes implement the shared **ghost** interaction recipe (transparent idle → tinted hover/active) for nav rows, chips, list rows, and ad-hoc controls. Variants: **`item-primary`**, **`item-success`**, **`item-info`**, **`item-warning`**, **`item-danger`**, **`item-light`**, **`item-dark`**. Combine with **`.active`** for a persistent selected state (same look as `:active`). Prefer these over one-off `hover:bg-*` chains so tones stay aligned with buttons and menus.
 
-Full tables, examples, and AI-generation rules live in **`core/AI.md`** (shipped in the npm package).
+Full tables and examples live in this page; AI-generation rules live in the bundled **`core-ui` agent skill** installed with **`core-ui-skill`**.
 
 ## Component Architecture
 

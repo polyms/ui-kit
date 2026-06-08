@@ -442,7 +442,7 @@ function FeaturesSection() {
     {
       Icon: Rocket,
       title: 'Ready for AI workflows',
-      description: 'Ships with `AI.md` consumer notes so assistants compose UI the right way.',
+      description: 'Ships with a `core-ui` agent skill so assistants compose UI the right way.',
       tone: 'primary',
     },
   ]
