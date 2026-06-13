@@ -25,6 +25,40 @@ Common compound roots:
 | Toolbar | `Toolbar`, `Toolbar.Button`, `Toolbar.Link`, `Toolbar.Input`, `Toolbar.Group`, `Toolbar.Separator` |
 | Toast | `Toast`, `Toast.Container`; use `Toast.useToastManager` for imperative toast flows |
 
+## Button
+
+The most-used primitive. `Button` wraps a native `<button>` through `useRender`, so it accepts all native button attributes (`disabled`, `type`, `onClick`, …) plus the `render` prop for polymorphism. With no `variant`, it renders the ghost style (`btn-ghost`).
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `variant` | `'primary' \| 'success' \| 'info' \| 'warning' \| 'danger' \| 'dark' \| 'light'` | — (ghost) | Maps to `btn-*` classes; omit for the transparent ghost button. |
+| `size` | `'xs' \| 'sm' \| 'lg' \| 'xl' \| '2xl' \| '3xl'` | — (base) | Adds `btn-<size>`; omit for the default medium size. |
+| `rounded` | `boolean` | `false` | Pill shape (`rounded-full`). |
+| `icon` | `boolean` | `false` | Square icon-only button (`btn-icon`); pair with an `aria-label`. |
+| `outlined` | `boolean` | `false` | Outline style for the chosen variant. |
+| `active` | `boolean` | `false` | Forces the active/pressed visual state. |
+| `tooltip` | `string` | — | Rich tooltip; falls back to the native `title` before hydration. |
+| `disabled` | `boolean` | `false` | Native attribute; disables interaction and applies disabled styling. |
+| `render` | `useRender` render prop | — | Render as another element (e.g. an `<a>` or router link) while keeping button styling. |
+
+```tsx
+import { Button } from '@polyms/core-ui'
+
+<Button variant='primary' size='lg' onClick={save}>
+  Save changes
+</Button>
+
+<Button variant='danger' outlined disabled>
+  Delete
+</Button>
+
+<Button icon rounded aria-label='Add item'>
+  <PlusIcon />
+</Button>
+```
+
+When `render` is provided, the default `type='button'` is dropped so the target element keeps its own semantics.
+
 ## Modal
 
 `Modal.Content` owns the portal/backdrop/shell and accepts props such as `size`, `centered`, and `scrollable`. `Modal.Header` renders the close button by default.
@@ -190,6 +224,34 @@ import { Checkbox, Field, Radio, RadioGroup } from '@polyms/core-ui'
 ```
 
 `Checkbox`, `Radio`, and `RadioGroup` support sizes and variants. Use `Field` for labels, descriptions, feedback, and invalid state.
+
+### Form submit typing
+
+When wrapping `Field` trees in a native `<form>`, type the submit handler with React's namespaced event type and call `preventDefault` for client-side handling. On `@types/react` 19, the correct type is `React.FormEvent<HTMLFormElement>`. Prefer the inline `React.FormEvent` form over a named `import { FormEvent } from 'react'`. (Note: `React.SubmitEvent` does not exist in `@types/react` 19.x — using it is a compile error.)
+
+```tsx
+import { Button, Field } from '@polyms/core-ui'
+
+function SignInForm() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    // submit data…
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Field required>
+        <Field.Label>Email</Field.Label>
+        <Field.Control name='email' type='email' />
+      </Field>
+      <Button type='submit' variant='primary'>Sign in</Button>
+    </form>
+  )
+}
+```
+
+For inline handlers, the event parameter is already inferred — no annotation needed: `onSubmit={(event) => event.preventDefault()}`.
 
 ## Select And Tabs
 
