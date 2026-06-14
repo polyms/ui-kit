@@ -3,7 +3,23 @@ type: Guide
 title: Installation
 ---
 
-**Polyms Core UI** ships on npm as **`@polyms/core-ui`**. After install you need **React 19+**, the **package styles**, and component imports from the **single barrel** `@polyms/core-ui`. For composition rules (slate grays, compound trees, CSS-only helpers) see [Design System](/design-system). The tarball also includes the **`core-ui-skill`** installer for AI agent guidance (see [AI Agent Skill](/agent-skill))—when in doubt, prefer **`index.d.ts`** for the version you installed.
+**Polyms Core UI** ships through **GitHub Packages** as **`@polyms/core-ui`**. After install you need **React 19+**, the **package styles**, and component imports from the **single barrel** `@polyms/core-ui`. For composition rules (slate grays, compound trees, CSS-only helpers) see [Design System](/design-system). The tarball also includes the **`core-ui-skill`** installer for AI agent guidance (see [AI Agent Skill](/agent-skill))—when in doubt, prefer **`index.d.ts`** for the version you installed.
+
+## Configure the registry
+
+The `@polyms` scope is hosted on **GitHub Packages**, which requires authentication to install — even though the package is public. Point the scope at the GitHub registry and add a token in a `.npmrc` at your project root (or `~/.npmrc`):
+
+```ini
+@polyms:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+always-auth=true
+```
+
+`GITHUB_TOKEN` must be a GitHub **Personal Access Token** with the `read:packages` scope. Keep the literal `${GITHUB_TOKEN}` in `.npmrc` and export the secret in your shell or CI environment so the token never gets committed:
+
+```bash
+export GITHUB_TOKEN=ghp_your_token_here
+```
 
 ## Install the package
 

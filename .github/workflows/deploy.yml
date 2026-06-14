@@ -96,7 +96,7 @@ jobs:
 
       - name: Publish to GitHub Packages
         run: |
-          echo "@polyms:registry=https://npm.pkg.github.com/polyms" >> .npmrc
+          echo "@polyms:registry=https://npm.pkg.github.com" >> .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
           echo "always-auth=true" >> .npmrc
-          pnpm publish dist/core --no-git-checks --registry=https://npm.pkg.github.com
+          pnpm publish dist/core --no-git-checks

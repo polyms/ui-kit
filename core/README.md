@@ -1,40 +1,49 @@
-# core
+# @polyms/core-ui
 
-This library was generated with [Nx](https://nx.dev).
+Modular React 19 UI component library for the **Polyms ecosystem** — compound components, semantic theming, programmatic overlays, and Tailwind CSS 4 utilities.
 
-## Link local
+Built with Nx + Vite. Distributed via **GitHub Packages**.
 
-Add to package.json
+## Install
 
-```json
-"@polyms/core-ui": "file:./dist/core"
+This package is published to GitHub Packages under the `@polyms` scope, so consumers must point the scope at the GitHub registry and authenticate (required even for public packages).
+
+Add a `.npmrc` to the consumer repo:
+
+```ini
+@polyms:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+always-auth=true
 ```
 
-## Agent skill
-
-Install the `@polyms/core-ui` agent skill into a consumer repository so Cursor, Claude Code, and other agents can load usage rules automatically:
+`GITHUB_TOKEN` is a GitHub Personal Access Token with the `read:packages` scope. Then install:
 
 ```bash
-pnpm exec core-ui-skill
+pnpm add @polyms/core-ui
 ```
 
-The installer copies the skill to `.cursor/skills/core-ui`, `.claude/skills/core-ui`, and `.agents/skills/core-ui`. Use `--target cursor`, `--target claude`, or `--target agents` to install only one target.
+## Peer dependencies
 
-Add a script to `package.json` so the team can re-run it after upgrading the package:
+- `react` >= 19.0.0
+- `react-dom` >= 19.0.0
 
-```json
-{
-  "scripts": {
-    "polyms:skill": "core-ui-skill --force"
-  }
-}
+Install `zustand` in the host app when using programmatic modals or offcanvas stores:
+
+```bash
+pnpm add zustand
 ```
 
-Then run `pnpm polyms:skill` to sync the skill with the installed version.
+## Usage
 
-## Inputs
+Import components from the package barrel — avoid deep imports.
 
-Use exported React components for form primitives:
+```tsx
+import { Button, Field, Modal } from '@polyms/core-ui'
+```
+
+When unsure a symbol exists, open `node_modules/@polyms/core-ui/index.d.ts`.
+
+### Inputs
 
 ```tsx
 import { Checkbox, Radio, RadioGroup } from '@polyms/core-ui'
@@ -48,3 +57,57 @@ import { Checkbox, Radio, RadioGroup } from '@polyms/core-ui'
   <Radio value='pro'>Pro</Radio>
 </RadioGroup>
 ```
+
+## Styles
+
+Components rely on the CSS shipped with the package. Load the Tailwind 4 source entry so tokens and layers align with your own setup:
+
+```ts
+import '@polyms/core-ui/styles/tailwind.css'
+```
+
+## Agent skill
+
+Install the `@polyms/core-ui` agent skill into a consumer repository so Cursor, Claude Code, and other agents load usage rules automatically:
+
+```bash
+pnpm exec core-ui-skill
+```
+
+The installer copies the skill to `.cursor/skills/core-ui`, `.claude/skills/core-ui`, and `.agents/skills/core-ui`. Use `--target cursor`, `--target claude`, or `--target agents` to install only one target.
+
+Add a script so the team can re-sync after upgrading the package:
+
+```json
+{
+  "scripts": {
+    "polyms:skill": "core-ui-skill --force"
+  }
+}
+```
+
+## Link locally (dev / dogfooding)
+
+After building the library to `dist/core`, point the consumer `package.json` at the folder:
+
+```json
+"@polyms/core-ui": "file:./dist/core"
+```
+
+Build with:
+
+```bash
+pnpm exec nx build core
+```
+
+## Release
+
+Releases are independent per project (see `nx.json`). Versioning runs a build first, then tags `core@{version}`; pushing that tag triggers the GitHub Packages publish workflow.
+
+```bash
+pnpm exec nx release version patch --projects=core
+```
+
+## License
+
+MIT

@@ -1,82 +1,77 @@
 # Core UI
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Modular React 19 UI component library for the **Polyms ecosystem** — compound components, semantic theming, programmatic overlays, and Tailwind CSS 4 utilities.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+Open source, distributed via **GitHub Packages** as [`@polyms/core-ui`](./core/README.md).
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/react-standalone-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+Monorepo powered by **Nx** + **pnpm**, formatted and linted with **Biome**.
 
-## Finish your CI setup
+## Packages
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/Mq4r7DNh51)
+| Path     | Package           | Description                                                              |
+| -------- | ----------------- | ------------------------------------------------------------------------ |
+| `core/`  | `@polyms/core-ui` | Reusable React components + styles. Built with Vite → `dist/core`.       |
+| `docs/`  | —                 | Documentation site (TanStack Router + MDX, live demos). GitHub Pages.    |
 
+## Tech stack
 
-## Run tasks
+React 19 · TypeScript (strict) · Vite 8 · Tailwind CSS 4 · `@base-ui/react` · Floating UI · Zustand · Vitest + Testing Library.
 
-To run the dev server for your app, use:
+## Getting started
 
-```sh
-npx nx serve core
+```bash
+pnpm install
 ```
 
-To create a production bundle:
-
-```sh
-npx nx build core
+```bash
+pnpm dev          # serve the docs site
+pnpm build        # build @polyms/core-ui → dist/core
+pnpm test         # run Vitest for core
+pnpm check        # Biome lint + format check
+pnpm check:fix    # apply Biome fixes
 ```
 
-To see all available targets to run for a project, run:
+Run a task directly through Nx when needed:
 
-```sh
-npx nx show project core
+```bash
+pnpm exec nx serve core      # dev server for the library
+pnpm exec nx build docs      # build the docs site
+pnpm exec nx show project core
+pnpm exec nx graph
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Consuming the library
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+See [`core/README.md`](./core/README.md) for install (GitHub Packages auth), peer dependencies, styles, and usage. Quick version:
 
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/react:app demo
+```ini
+# consumer .npmrc
+@polyms:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+always-auth=true
 ```
 
-To generate a new library, use:
-
-```sh
-npx nx g @nx/react:lib mylib
+```bash
+pnpm add @polyms/core-ui
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+> GitHub Packages requires authentication to install, even for public packages — by design for the Polyms ecosystem.
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Release & publish
 
+Releases are independent per project (`nx.json`). Versioning builds first, then tags `core@{version}`; pushing that tag triggers the **Build and Deploy** workflow which publishes `@polyms/core-ui` to GitHub Packages.
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+pnpm exec nx release version patch --projects=core
+git push --follow-tags
+```
 
-## Install Nx Console
+The docs site deploys to GitHub Pages on push to the `docs` branch.
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## Contributing
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Read [`AGENTS.md`](./AGENTS.md) — the single source of truth for conventions, file structure, styling rules, and testing patterns for both human contributors and AI agents.
 
-## Useful links
+## License
 
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/react-standalone-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+[MIT](./LICENSE) © Polyms

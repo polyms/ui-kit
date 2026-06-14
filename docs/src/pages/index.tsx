@@ -822,6 +822,8 @@ function CTASection() {
 }
 
 function FooterSection() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className='border-slate-800 border-t bg-slate-950'>
       <Container className='flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center'>
@@ -829,7 +831,7 @@ function FooterSection() {
           <FaviconFit className='h-20 w-auto' hexCenterColor='#fff' />
           <div className='ms-1'>
             <div className='font-semibold text-2xl text-slate-100'>olyms</div>
-            <div className='text-slate-500 text-xs'>© 2026 Polyms. MIT Licensed.</div>
+            <div className='text-slate-500 text-xs'>© 2024-{currentYear} Polyms. MIT Licensed.</div>
           </div>
         </div>
 
