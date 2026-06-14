@@ -1,6 +1,6 @@
 {
   "name": "@polyms/core-ui",
-  "version": "0.4.27",
+  "version": "0.4.28",
   "description": "Modular React 19 UI component library for the Polyms ecosystem — compound components, semantic theming, and Tailwind CSS 4 utilities.",
   "license": "MIT",
   "author": "Polyms",
