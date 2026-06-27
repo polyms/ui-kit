@@ -1,4 +1,4 @@
-import { NumberField } from '@polyms/core'
+import { NumberField } from '@polyms/core-ui'
 
 export default function NumberFieldDefault() {
   return (

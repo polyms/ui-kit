@@ -72,7 +72,7 @@ A two-state button that can be on or off. Use it for binary settings where the c
 ## Usage
 
 ```tsx
-import { Toggle } from '@polyms/core'
+import { Toggle } from '@polyms/core-ui'
 
 <Toggle className='toggle' aria-label='Bold'>
   B
@@ -115,7 +115,7 @@ Wrap related toggles in a `ToggleGroup` to share state. By default the group is 
 </CodePreview>
 
 ```tsx
-import { Toggle, ToggleGroup } from '@polyms/core'
+import { Toggle, ToggleGroup } from '@polyms/core-ui'
 
 <ToggleGroup className='toggle-group' aria-label='Alignment' defaultValue={['left']}>
   <Toggle className='toggle' value='left'>Left</Toggle>
@@ -129,7 +129,7 @@ import { Toggle, ToggleGroup } from '@polyms/core'
 `Toggle` composes with other primitives through the `render` prop. Inside a `Toolbar`, pass it to `Toolbar.Button` so it inherits roving keyboard focus:
 
 ```tsx
-import { Toggle, ToggleGroup, Toolbar } from '@polyms/core'
+import { Toggle, ToggleGroup, Toolbar } from '@polyms/core-ui'
 
 <Toolbar>
   <ToggleGroup className='toolbar-group' aria-label='Alignment'>

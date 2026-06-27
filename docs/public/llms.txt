@@ -33,10 +33,13 @@ Core-UI is a modular, component-driven UI library designed for production use. I
 core-ui/
 ├── core/                           # Component library (main package)
 │   ├── src/
+│   │   ├── accordion/             # Accordion expand/collapse sections
 │   │   ├── alert/                 # Alert components
 │   │   ├── breadcrumb/            # Breadcrumb navigation
 │   │   ├── button/                # Button component
+│   │   ├── collapsible/           # Single expand/collapse region
 │   │   ├── field/                 # Form field components with validation
+│   │   ├── loading/               # Spinner loading indicator
 │   │   ├── modal/                 # Modal/Dialog with Zustand store
 │   │   ├── offcanvas/             # Offcanvas/Drawer
 │   │   ├── popover/               # Popover component
@@ -52,6 +55,7 @@ core-ui/
 │   │   │   └── ...
 │   │   ├── Icons.tsx              # Icon components
 │   │   └── index.ts               # Main exports
+│   ├── skills/core-ui/            # Agent skill (copied to dist/core/skills on build)
 │   ├── plugins/
 │   │   └── module-federation.plugin.ts  # Vite module federation
 │   ├── vite.config.mts            # Vite config for library
@@ -75,8 +79,7 @@ core-ui/
 │   └── public/
 │       └── llms.txt             # This file
 │
-├── .github/
-│   └── copilot-instructions.md  # GitHub Copilot context (MUST READ)
+├── AGENTS.md                      # AI agent & contributor guidelines (source of truth)
 ├── nx.json                      # Nx workspace config
 ├── pnpm-workspace.yaml          # PNPM workspace config
 └── tsconfig.base.json           # Base TypeScript config
@@ -495,7 +498,7 @@ npx nx affected:test                # Test affected projects
    ## Usage
    
    ```tsx
-   import { NewComponent } from '@polyms/core'
+   import { NewComponent } from '@polyms/core-ui'
    
    <NewComponent>Content</NewComponent>
    ```
@@ -509,7 +512,7 @@ npx nx affected:test                # Test affected projects
 
 3. **Live Examples:**
    ```mdx
-   import { NewComponent } from '@polyms/core'
+   import { NewComponent } from '@polyms/core-ui'
    
    <NewComponent>
      Live example!
@@ -612,19 +615,23 @@ This enables:
 
 | Component | Description | Key Props | Use Case |
 |-----------|-------------|-----------|----------|
-| `Alert` | Notification banner | `variant`, `dismissible` | Status messages, warnings |
-| `Breadcrumb` | Navigation trail | `items`, `separator` | Page hierarchy |
-| `Button` | Clickable button | `variant`, `size`, `disabled` | Actions, forms |
-| `Field` | Form field wrapper | `label`, `error`, `required` | Form inputs with validation |
-| `Modal` | Dialog overlay | `open`, `onOpenChange` | Confirmations, forms |
-| `Offcanvas` | Side drawer | `placement`, `open` | Navigation, filters |
-| `Popover` | Floating content | `trigger`, `placement` | Tooltips, menus |
-| `Select` | Dropdown selector | `value`, `options`, `onChange` | Single/multi select |
+| `Accordion` | Expand/collapse sections | `defaultValue`, `value`, `multiple`, `title` shorthand | FAQ, settings panels |
+| `Alert` | Inline status banner | `variant`, `onDismiss`, `badge`, `Alert.Heading` | Page feedback, warnings |
+| `Breadcrumb` | Navigation trail | compound `Breadcrumb.Item` | Page hierarchy |
+| `Button` | Clickable button | `variant`, `size`, `render` | Actions, forms |
+| `Collapsible` | Single show/hide region | `open`, `defaultOpen`, `Collapsible.Trigger/Panel` | Progressive disclosure |
+| `Field` | Form field compound | `Field.Label`, `Field.Control`, validation | Form inputs with validation |
+| `Modal` | Dialog overlay | compound tree, `showModal` | Confirmations, forms |
+| `NumberField` | Numeric stepper | `label`, `min`, `max`, `step`, scrub on label | Quantities, amounts |
+| `Offcanvas` | Side drawer | compound tree, `showOffcanvas`, `swipeDirection` | Navigation, filters |
+| `Popover` | Floating content | compound tree | Menus, contextual panels |
+| `Select` | Dropdown selector | compound tree | Single/multi select |
+| `Spinner` | Loading indicator | `size`, `color`, `subColor` | Async pending UI |
 | `Switch` | Toggle control | `checked`, `onCheckedChange` | Settings, features |
-| `Tabs` | Tabbed interface | `value`, `onValueChange` | Content sections |
-| `Toast` | Temporary notification | `variant`, `duration` | Success, error messages |
-| `Tooltip` | Hover hint | `content`, `placement` | Help text |
-| `NumberField` | Numeric input | `min`, `max`, `step` | Quantities, prices |
+| `Tabs` | Tabbed interface | `Tabs.Tab` + `Tabs.Panel` per `value` | Content sections |
+| `Toast` | Temporary notification | `Toast.useToastManager` | Success, error messages |
+| `Tooltip` | Hover hint | compound tree | Help text |
+| `dynamic` | Code-split helper | `loadingComponent` Suspense fallback | Lazy routes, federated remotes |
 
 ### Component Composition Pattern
 
@@ -633,35 +640,69 @@ All complex components follow compound component pattern:
 ```tsx
 // Modal Example
 <Modal>
-  <Modal.Trigger>Open</Modal.Trigger>
+  <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
   <Modal.Content>
     <Modal.Header>Title</Modal.Header>
     <Modal.Body>Content</Modal.Body>
     <Modal.Footer>
-      <Modal.Close>Cancel</Modal.Close>
-      <Button>Confirm</Button>
+      <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+      <Button variant='primary'>Confirm</Button>
     </Modal.Footer>
   </Modal.Content>
 </Modal>
 
 // Offcanvas Example
-<Offcanvas placement="right">
-  <Offcanvas.Trigger>Menu</Offcanvas.Trigger>
+<Offcanvas swipeDirection='right'>
+  <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Menu</Offcanvas.Trigger>
   <Offcanvas.Content>
-    <Offcanvas.Close />
-    <nav>...</nav>
+    <Offcanvas.Header>
+      <Offcanvas.Title>Navigation</Offcanvas.Title>
+    </Offcanvas.Header>
+    <Offcanvas.Body>
+      <nav>...</nav>
+    </Offcanvas.Body>
   </Offcanvas.Content>
 </Offcanvas>
 
 // Tabs Example
 <Tabs defaultValue="tab1">
   <Tabs.List>
-    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
+    <Tabs.Tab value="tab1">Tab 1</Tabs.Tab>
+    <Tabs.Tab value="tab2">Tab 2</Tabs.Tab>
   </Tabs.List>
   <Tabs.Panel value="tab1">Content 1</Tabs.Panel>
   <Tabs.Panel value="tab2">Content 2</Tabs.Panel>
 </Tabs>
+
+// Accordion Example (shorthand title on Item)
+<Accordion defaultValue={['billing']}>
+  <Accordion.Item title="Shipping" value="shipping">
+    Free shipping on orders over $50.
+  </Accordion.Item>
+  <Accordion.Item title="Billing" value="billing">
+    Invoices are emailed after checkout.
+  </Accordion.Item>
+</Accordion>
+
+// Accordion Example (full composition; use multiple for several open panels)
+<Accordion defaultValue={['notifications']} multiple>
+  <Accordion.Item value="notifications">
+    <Accordion.Header>
+      <Accordion.Trigger>Notifications</Accordion.Trigger>
+    </Accordion.Header>
+    <Accordion.Panel>
+      Panel body — padding via accordion-panel-body wrapper
+    </Accordion.Panel>
+  </Accordion.Item>
+</Accordion>
+
+// dynamic() — React.lazy + Suspense
+import { dynamic, Spinner } from '@polyms/core-ui'
+
+const SettingsPanel = dynamic(
+  () => import('./SettingsPanel'),
+  { loadingComponent: <Spinner size={24} /> }
+)
 ```
 
 ## Complete Component Examples
@@ -1510,9 +1551,32 @@ console.log('Middleware data:', middlewareData)
 - **Layouts**: Use `staticData.layout = 'landing'` to disable sidebar
 - **Code Format**: 110-character separators with exact format
 
+## Agent skill (`core/skills/core-ui`)
+
+Bundled skill for AI coding assistants — install with `pnpm exec core-ui-skill` (copies to `.cursor/skills/core-ui`, `.claude/skills/core-ui`, `.agents/skills/core-ui`). Docs page: `/docs/agent-skill`.
+
+**Entry:** `SKILL.md` (`name: core-ui`) — routing table, hard rules, workflow. Reference files use `description` frontmatter only (no second `name`).
+
+| File | Covers |
+| --- | --- |
+| `setup.md` | Install, styles, app shell, Toast |
+| `field.md` | Field / Field.Floating, validation |
+| `modal.md` | Modal, Offcanvas, programmatic overlays |
+| `components.md` | Button, Menu, Select, Tabs, Switch, Accordion, Collapsible, Alert, NumberField, Spinner, `dynamic`, Avatar, Breadcrumb, Toast, useRender |
+| `theming.md` | Slate grays, semantic tones, dark mode |
+| `css-utilities.md` | table, badge, link, `item-*` interaction recipe |
+| `quality.md` | Task read, anti-slop, copy tells, pre-flight |
+| `redesign.md` | Migrate existing screens to core-ui |
+| `brandkit.md` | Brand tokens in code |
+
+**Pairs:** form in modal/offcanvas → read `field.md` + `modal.md`. Blocking confirmation → Modal, not Toast.
+
+Maintainers: update skill files when public API or CSS utilities change; see `AGENTS.md`.
+
 ## Resources
 
-- **GitHub Copilot Instructions**: `.github/copilot-instructions.md` (MUST READ for full context)
+- **Agent guidelines**: `AGENTS.md` at repo root (source of truth for contributors and AI agents)
+- **Agent skill docs**: `docs/src/pages/agent-skill.mdx` (live: `/docs/agent-skill`)
 - Base UI: https://base-ui.com
 - Tailwind CSS: https://tailwindcss.com
 - TanStack Router: https://tanstack.com/router
@@ -1525,6 +1589,7 @@ console.log('Middleware data:', middlewareData)
 ## See Also
 
 For complete project guidelines and AI coding agent instructions, see:
-- `.github/copilot-instructions.md` - Comprehensive coding guidelines
-- Root `llms.txt` - Workspace-level context
-- Component READMEs - Component-specific documentation
+- `AGENTS.md` — monorepo conventions, component structure, testing, MDX docs
+- `core/skills/core-ui/SKILL.md` — consumer agent skill entry (shipped in package)
+- `docs/src/pages/agent-skill.mdx` — skill install and file map
+- Component MDX under `docs/src/pages/docs/` — live demos in `-views/`

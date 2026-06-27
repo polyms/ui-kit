@@ -43,7 +43,7 @@ describe('BreadcrumbItem', () => {
   it('applies link-dark class to link', () => {
     render(<BreadcrumbItem href='/home'>Home</BreadcrumbItem>)
     const link = screen.getByRole('link', { name: /home/i })
-    expect(link).toHaveClass('link-dark')
+    expect(link).toHaveClass('link', 'link-dark')
   })
 
   it('renders as text when no href provided', () => {
@@ -63,10 +63,36 @@ describe('BreadcrumbItem', () => {
     expect(link).toHaveAttribute('title', 'Go to home')
   })
 
-  it('sets aria-current to page by default', () => {
+  it('sets aria-current to page when item has no href', () => {
     const { container } = render(<BreadcrumbItem>Home</BreadcrumbItem>)
     const li = container.querySelector('li')
     expect(li).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('sets aria-current to page when active is true', () => {
+    const { container } = render(
+      <BreadcrumbItem active href='/current'>
+        Current
+      </BreadcrumbItem>
+    )
+    const li = container.querySelector('li')
+    expect(li).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('does not set aria-current on ancestor links', () => {
+    const { container } = render(<BreadcrumbItem href='/home'>Home</BreadcrumbItem>)
+    const li = container.querySelector('li')
+    expect(li).not.toHaveAttribute('aria-current')
+  })
+
+  it('does not set aria-current when active is false', () => {
+    const { container } = render(
+      <BreadcrumbItem active={false}>
+        Not current
+      </BreadcrumbItem>
+    )
+    const li = container.querySelector('li')
+    expect(li).not.toHaveAttribute('aria-current')
   })
 
   it('accepts custom className and merges with breadcrumb-item class', () => {
@@ -91,11 +117,12 @@ describe('BreadcrumbItem', () => {
     const link = screen.getByRole('link', { name: /current/i })
     expect(link).toHaveAttribute('href', '/current')
     expect(link).toHaveAttribute('title', 'Current page')
-    expect(link).toHaveClass('link-dark')
+    expect(link).toHaveClass('link', 'link-dark')
     const li = link.parentElement
     expect(li).toHaveClass('breadcrumb-item')
     expect(li).toHaveClass('active')
     expect(li).toHaveClass('custom')
+    expect(li).toHaveAttribute('aria-current', 'page')
   })
 
   it('renders multiple items in breadcrumb trail', () => {
@@ -108,5 +135,8 @@ describe('BreadcrumbItem', () => {
     )
     const items = container.querySelectorAll('.breadcrumb-item')
     expect(items).toHaveLength(3)
+    expect(items[0]).not.toHaveAttribute('aria-current')
+    expect(items[1]).not.toHaveAttribute('aria-current')
+    expect(items[2]).toHaveAttribute('aria-current', 'page')
   })
 })

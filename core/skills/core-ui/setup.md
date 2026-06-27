@@ -1,3 +1,9 @@
+---
+description: >-
+Wire @polyms/core-ui in consumer apps — install, styles import, app shell, Toast, Modal.Container, Offcanvas.Container,
+  programmatic showModal/showOffcanvas (zustand), core-ui-skill installer. Read for new app, install, containers, toast.
+---
+
 # Setup
 
 Use this when wiring `@polyms/core-ui` into a consumer app.
@@ -34,88 +40,45 @@ Consumers must import the package styles. Pick one path based on the app build p
 
 Trust the installed package files for exact paths because the hashed CSS filename changes by release.
 
-## Toast
+## App shell
 
-Mount `Toast.Container` once under `Toast`.
+Recommended consumer root — mount programmatic overlay containers once. Install **`zustand`** when using `useModalStore` / `useOffcanvasStore`.
 
 ```tsx
-import { Toast } from '@polyms/core-ui'
+import { Modal, Offcanvas, Toast } from '@polyms/core-ui'
 
 export function App() {
   return (
     <Toast>
-      {/* routes/layout */}
+      <Modal.Container />
+      <Offcanvas.Container />
+      <main>{/* routes/layout */}</main>
       <Toast.Container />
     </Toast>
   )
 }
 ```
 
-## Programmatic Modal
+Omit `Modal.Container` / `Offcanvas.Container` if you only use declarative `<Modal>` / `<Offcanvas>` trees (no `showModal` / `showOffcanvas`).
 
-Mount `Modal.Container` once before using `showModal`.
+## Toast
 
-```tsx
-import { Button, Modal, useModalStore } from '@polyms/core-ui'
+Provider + **`Toast.Container`** under **`Toast`**. Patterns and `Toast.useToastManager()`: **[components.md#toast](components.md#toast)**. Shell with overlay containers: [App shell](#app-shell).
 
-function App() {
-  return (
-    <>
-      <Modal.Container />
-      {/* routes/layout */}
-    </>
-  )
-}
+## Programmatic overlays
 
-function DeleteButton() {
-  const open = () =>
-    useModalStore.getState().showModal(
-      'delete-item',
-      <Modal.Content size='sm'>
-        <Modal.Header>Delete item?</Modal.Header>
-        <Modal.Body>This cannot be undone.</Modal.Body>
-        <Modal.Footer>
-          <Modal.Close>Cancel</Modal.Close>
-          <Button onClick={() => useModalStore.getState().closeModal('delete-item')} variant='danger'>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal.Content>
-    )
+1. Mount **`Modal.Container`** and/or **`Offcanvas.Container`** once ([App shell](#app-shell)).
+2. Call `useModalStore.getState().showModal(id, <Modal.Content>…</Modal.Content>)` or `useOffcanvasStore.getState().showOffcanvas(id, <Offcanvas.Content>…</Offcanvas.Content>)`.
+3. `closeModal` / `closeOffcanvas` animate out, then unmount after **300ms**.
 
-  return <Button onClick={open}>Delete</Button>
-}
+Full compound trees, `Modal.Close` patterns, and anti-patterns: **[modal.md#programmatic-overlays](modal.md#programmatic-overlays)**.
+
+## Agent skill
+
+Consumer apps can install the bundled agent skill so assistants follow the same composition rules:
+
+```bash
+pnpm exec core-ui-skill
 ```
 
-`closeModal` sets `open: false` first, then removes the entry after 300ms so exit transitions can finish.
-
-## Programmatic Offcanvas
-
-Mount `Offcanvas.Container` once before using `showOffcanvas`.
-
-```tsx
-import { Offcanvas, useOffcanvasStore } from '@polyms/core-ui'
-
-function App() {
-  return (
-    <>
-      <Offcanvas.Container />
-      {/* routes/layout */}
-    </>
-  )
-}
-
-function openNotifications() {
-  useOffcanvasStore.getState().showOffcanvas(
-    'notifications',
-    <Offcanvas.Content>
-      <Offcanvas.Header>
-        <Offcanvas.Title>Notifications</Offcanvas.Title>
-      </Offcanvas.Header>
-      <Offcanvas.Body>You're all caught up.</Offcanvas.Body>
-    </Offcanvas.Content>
-  )
-}
-```
-
-`closeOffcanvas` follows the same 300ms exit animation before unmount. Close via `Offcanvas.Close`, `closeOffcanvas(id)`, Escape, backdrop click, or swipe handled by `Offcanvas.Container`.
+Copies the bundled skill into `.cursor/skills/core-ui`, `.claude/skills/core-ui`, and `.agents/skills/core-ui`. Re-run after upgrading `@polyms/core-ui`.

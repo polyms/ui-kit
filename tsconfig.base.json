@@ -28,7 +28,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@polyms/core": ["core/src/index.ts"],
+      "@polyms/core-ui": ["core/src/index.ts"],
       "~plugins/*": ["plugins/*"]
     }
   },

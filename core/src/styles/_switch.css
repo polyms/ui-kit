@@ -82,3 +82,7 @@
 .switch-label {
   @apply ms-3 text-sm font-medium text-fg;
 }
+
+.switch-label-start .switch-label {
+  @apply ms-0 me-auto pe-3;
+}

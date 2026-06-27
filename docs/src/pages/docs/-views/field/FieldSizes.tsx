@@ -1,6 +1,6 @@
 import { Eraser01Icon, SearchList02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Field } from '@polyms/core'
+import { Field } from '@polyms/core-ui'
 import { nanoid } from 'nanoid'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 

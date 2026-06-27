@@ -1,6 +1,6 @@
 import { SearchList02Icon, Sent02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Offcanvas } from '@polyms/core'
+import { Button, Offcanvas } from '@polyms/core-ui'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -17,7 +17,7 @@ export default function OffcanvasDefault() {
     <div className='m-auto grid grid-cols-2 gap-4'>
       {directions.map(direction => (
         <Offcanvas key={direction} swipeDirection={direction}>
-          <Offcanvas.Trigger className='btn btn-primary'>Open {direction}</Offcanvas.Trigger>
+          <Offcanvas.Trigger render={<Button variant='primary' />}>Open {direction}</Offcanvas.Trigger>
           <Offcanvas.Content closeButton>
             <Offcanvas.Header>
               <Offcanvas.Title>
@@ -63,9 +63,9 @@ export default function OffcanvasDefault() {
                   </div>
                   <div className='mt-2 flex flex-wrap gap-2'>
                     {quickActions.map(action => (
-                      <button className='btn btn-primary btn-sm rounded-full' key={action} type='button'>
+                      <Button key={action} rounded size='sm' variant='primary'>
                         {action}
-                      </button>
+                      </Button>
                     ))}
                   </div>
                 </section>

@@ -6,7 +6,7 @@ import {
   UserIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Checkbox, Field, NumberField, Radio, RadioGroup, Select } from '@polyms/core'
+import { Button, Checkbox, Field, NumberField, Radio, RadioGroup, Select } from '@polyms/core-ui'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'

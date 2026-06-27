@@ -1,4 +1,4 @@
-import { Radio, RadioGroup, type RadioVariant } from '@polyms/core'
+import { Radio, RadioGroup, type RadioVariant } from '@polyms/core-ui'
 import { useState } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────

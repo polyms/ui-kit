@@ -1,4 +1,4 @@
-import { Button, Toast } from '@polyms/core'
+import { Button, Toast } from '@polyms/core-ui'
 
 const ToastDefault = () => {
   const toastManager = Toast.useToastManager()
@@ -6,7 +6,6 @@ const ToastDefault = () => {
   return (
     <div className='m-auto grid grid-cols-2 gap-4'>
       <Button
-        content='center'
         onClick={() =>
           toastManager.add({
             title: 'Changes saved',
@@ -23,7 +22,6 @@ const ToastDefault = () => {
         Success Toast
       </Button>
       <Button
-        content='center'
         onClick={() =>
           toastManager.add({
             title: 'Connection failed',
@@ -40,7 +38,6 @@ const ToastDefault = () => {
         Error Toast
       </Button>
       <Button
-        content='center'
         onClick={() =>
           toastManager.add({
             title: 'New update available',
@@ -57,7 +54,6 @@ const ToastDefault = () => {
         Info Toast
       </Button>
       <Button
-        content='center'
         onClick={() =>
           toastManager.add({
             title: 'Storage almost full',
@@ -74,7 +70,6 @@ const ToastDefault = () => {
         Warning Toast
       </Button>
       <Button
-        content='center'
         onClick={() => {
           toastManager.promise(
             new Promise(resolve => {
@@ -112,7 +107,6 @@ const ToastDefault = () => {
         Promise Toast
       </Button>
       <Button
-        content='center'
         onClick={() => {
           const id = toastManager.add({
             timeout: 0,

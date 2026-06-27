@@ -137,7 +137,7 @@ For a **fintech app-shell** variant — `variant='bare'` list inside a sticky pa
 ## Usage
 
 ```tsx
-import { NavigationMenu } from '@polyms/core'
+import { NavigationMenu } from '@polyms/core-ui'
 
 <NavigationMenu>
   <NavigationMenu.List>
@@ -257,7 +257,7 @@ Use `GroupLabel`, `Separator`, and `Footer` to keep mega menu panels consistent 
 Drive the open item externally — useful for guided tours, analytics, or syncing with the URL.
 
 ```tsx
-import { NavigationMenu } from '@polyms/core'
+import { NavigationMenu } from '@polyms/core-ui'
 import { useState } from 'react'
 
 function ControlledNavigation() {
@@ -283,7 +283,7 @@ Wrap `NavigationMenu.Link` with your router's component via the `render` prop:
 
 ```tsx
 import { Link as RouterLink } from '@tanstack/react-router'
-import { NavigationMenu } from '@polyms/core'
+import { NavigationMenu } from '@polyms/core-ui'
 
 function NavLink({ href, ...props }: NavigationMenu.Link.Props & { href: string }) {
   return <NavigationMenu.Link render={<RouterLink to={href} />} {...props} />

@@ -1,4 +1,4 @@
-import { Select } from '@polyms/core'
+import { Select } from '@polyms/core-ui'
 
 const frontend = [
   { label: 'Next.js', value: 'next' },

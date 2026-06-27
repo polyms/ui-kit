@@ -21,13 +21,15 @@ export const BreadcrumbItem: FC<BreadcrumbItemProps> = ({
   render,
   ...props
 }) => {
+  const isCurrentPage = active ?? !href
+
   const defaultProps = {
-    'aria-current': 'page' as const,
+    ...(isCurrentPage ? { 'aria-current': 'page' as const } : {}),
     className: clsx('breadcrumb-item', active && 'active', className),
   }
 
   const content = href ? (
-    <a className='link-dark' href={href} title={title}>
+    <a className='link link-dark' href={href} title={title}>
       {children}
     </a>
   ) : (

@@ -1,4 +1,4 @@
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 
 import { useAppStore } from '../../stores/app.store'

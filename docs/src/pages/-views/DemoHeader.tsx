@@ -18,7 +18,7 @@ import {
   Wallet01Icon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Field, NavigationMenu } from '@polyms/core'
+import { Button, Field, NavigationMenu } from '@polyms/core-ui'
 import React from 'react'
 import { FaviconFit } from '../../assets/FaviconFit'
 

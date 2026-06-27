@@ -66,22 +66,34 @@ Modals display focused content in a layer above the main interface, requiring us
 ## Usage
 
 ```tsx
-import { Modal } from '@polyms/core'
+import { Button, Modal } from '@polyms/core-ui'
 
 <Modal>
-  <Modal.Trigger>Open Modal</Modal.Trigger>
-  <Modal.Content>
+  <Modal.Trigger render={<Button variant='primary' />}>Open Modal</Modal.Trigger>
+  <Modal.Content size='lg' scrollable>
     <Modal.Header>Confirmation</Modal.Header>
     <Modal.Body>
       Are you sure you want to proceed with this action?
     </Modal.Body>
     <Modal.Footer>
-      <Modal.Close>Cancel</Modal.Close>
-      <Button variant="primary">Confirm</Button>
+      <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+      <Button variant='primary'>Confirm</Button>
     </Modal.Footer>
   </Modal.Content>
 </Modal>
 ```
+
+Put the title in **`Modal.Header`** — `Modal.Content` has no `title` prop. Style **`Modal.Trigger`** and footer **`Modal.Close`** with **`render={<Button … />}`**. Use **`scrollable`** when the body holds a long form.
+
+## Common mistakes
+
+- Hand-built `fixed inset-0` overlays instead of `Modal.Content`
+- `btn-*` classes on `Modal.Trigger` or `Modal.Close` without `render={<Button />}`
+- Footer dismiss as plain `Button` instead of `Modal.Close`
+- `title` on `Modal.Content`
+- Long forms without `scrollable`
+- `showModal` without `Modal.Container` mounted
+- Importing `ModalHeader` / `ModalBody` as separate symbols
 
 ## Composition
 
@@ -90,7 +102,7 @@ Modals support flexible composition with Header, Body, and Footer sections for o
 ### With Controlled State
 
 ```tsx
-import { Modal } from '@polyms/core'
+import { Button, Modal } from '@polyms/core-ui'
 import { useState } from 'react'
 
 export default function ControlledModal() {
@@ -98,14 +110,14 @@ export default function ControlledModal() {
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <Modal.Trigger>Open</Modal.Trigger>
+      <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
       <Modal.Content size="lg">
         <Modal.Header>Controlled Modal</Modal.Header>
         <Modal.Body>
           This modal's state is controlled externally.
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setOpen(false)}>Close</Button>
+          <Modal.Close render={<Button rounded />}>Close</Modal.Close>
         </Modal.Footer>
       </Modal.Content>
     </Modal>
@@ -118,13 +130,15 @@ export default function ControlledModal() {
 Modals can be nested to create multi-step flows or additional confirmation dialogs.
 
 ```tsx
+import { Button, Modal } from '@polyms/core-ui'
+
 <Modal>
-  <Modal.Trigger>Open Parent</Modal.Trigger>
+  <Modal.Trigger render={<Button variant='primary' />}>Open Parent</Modal.Trigger>
   <Modal.Content>
     <Modal.Header>Parent Modal</Modal.Header>
     <Modal.Body>
       <Modal>
-        <Modal.Trigger>Open Nested</Modal.Trigger>
+        <Modal.Trigger render={<Button outlined variant='primary' />}>Open Nested</Modal.Trigger>
         <Modal.Content size="sm">
           <Modal.Header>Nested Modal</Modal.Header>
           <Modal.Body>
@@ -179,7 +193,7 @@ Open modals from event handlers, data loaders, or global state without a declara
 3. Close with **`Modal.Close`**, **`closeModal(id)`**, or Escape / backdrop (handled by **`Modal.Container`**).
 
 ```tsx
-import { Button, Modal, useModalStore } from '@polyms/core'
+import { Button, Modal, useModalStore } from '@polyms/core-ui'
 
 function App() {
   return (
@@ -198,8 +212,8 @@ function DeleteButton() {
         <Modal.Header>Delete item?</Modal.Header>
         <Modal.Body>This cannot be undone.</Modal.Body>
         <Modal.Footer>
-          <Modal.Close>Cancel</Modal.Close>
-          <Button onClick={() => useModalStore.getState().closeModal('delete-item')}>
+          <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+          <Button onClick={() => useModalStore.getState().closeModal('delete-item')} variant='danger'>
             Delete
           </Button>
         </Modal.Footer>

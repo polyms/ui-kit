@@ -1,4 +1,4 @@
-import { Button, Collapsible } from '@polyms/core'
+import { Button, Collapsible } from '@polyms/core-ui'
 import { useState } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────

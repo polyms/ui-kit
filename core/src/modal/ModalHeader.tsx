@@ -17,7 +17,7 @@ export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
       <Dialog.Title {...props} className={clsx('modal-header', className)} ref={ref} render={<div />}>
         {children}
 
-        {close && <ModalClose />}
+        {close && <ModalClose className='modal-close' />}
       </Dialog.Title>
     )
   }

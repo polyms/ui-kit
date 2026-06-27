@@ -324,6 +324,92 @@ export const colorVariants = [
 
 Apps that compose this library should use **`text-slate-*`**, **`bg-slate-*`**, **`border-slate-*`**, and **`var(--color-slate-50)` … `var(--color-slate-950)`** for generic gray UI. Avoid **`neutral-*`** utilities and **`var(--color-neutral-*)`** next to core-ui components so borders, text, and surfaces stay on the same hue and contrast curve.
 
+### Brand theming
+
+Ship your product accent through the **`primary`** ramp. The library defaults to cyan; consumers remap **`--color-primary-50` … `--color-primary-950`** in app CSS **after** importing package styles — do not edit files inside `node_modules`.
+
+**You own (brand)**
+
+| Token | Role |
+| --- | --- |
+| `--color-primary-*` | Buttons, links, `link-primary`, `item-primary`, focus emphasis |
+| `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input` | Optional page chrome tuning (test light and `.dark`) |
+
+**Keep semantic (intent)**
+
+| Family | Role |
+| --- | --- |
+| `success`, `warning`, `danger`, `info` | Status and validation — do not recolor for brand flair |
+| `slate-*` | Gray chrome next to library components |
+
+```css
+/* src/styles/theme.css */
+@import '@polyms/core-ui/styles/tailwind.css';
+
+@theme {
+  /* Example: indigo brand — define a full 50–950 ramp for hover/active states */
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  /* …remaining steps… */
+}
+
+:root {
+  --body: #ffffff;
+  --fg: var(--color-slate-900);
+}
+
+.dark {
+  --body: #2e3440;
+  --fg: #eceff4;
+}
+```
+
+Import `theme.css` once at the app entry (before or as your main global stylesheet). Components such as **`Button variant='primary'`**, **`link link-primary`**, and **`item-primary`** pick up the new ramp automatically.
+
+**Component touchpoints**
+
+| UI | Pattern |
+| --- | --- |
+| Primary action | `Button variant='primary'` |
+| Secondary / nav | `item-primary` + `.active` for current page |
+| Inline links | `link link-primary` |
+| Status | `badge-success` / `badge-danger` — not `badge-primary` for errors |
+| Forms | `Field` with conversational labels; destructive actions use `variant='danger'` |
+
+**BRAND.md (recommended)**
+
+Commit a short **`BRAND.md`** beside your theme file so humans and agents share the same contract:
+
+```markdown
+# Brand — YourProduct
+
+## Tokens
+- Primary: `--color-primary-700` = `#4338ca`
+- Light surfaces: `--body`, `--fg` as in theme.css
+- Dark: `.dark` overrides documented in theme.css
+
+## Component mapping
+- CTA: `Button variant='primary'`
+- Nav active: `item-primary active`
+- Links: `link link-primary`
+- Destructive: `Button variant='danger'` — never brand primary
+
+## Do not
+- Remap `danger` / `success` for branding
+- Use `neutral-*` for chrome
+- Restyle `Modal.Content` / `Menu.Content` shells with ad-hoc Tailwind
+```
+
+After `pnpm exec core-ui-skill`, agents load **`brandkit.md`** from the installed skill with the full checklist and pre-flight. Re-run the installer when you upgrade `@polyms/core-ui`.
+
+**Brand checklist**
+
+- [ ] Full enough `primary-*` ramp for hover and active states
+- [ ] Light and dark modes both readable (WCAG AA on primary CTAs)
+- [ ] One accent across the app shell — no per-screen hex drift
+- [ ] Semantic tones still mean success / warning / danger
+
 ### Spacing System
 
 Spacing follows **Tailwind CSS 4**’s default scale (typically **0.25rem** steps via `1` = `0.25rem`, etc.).
@@ -539,17 +625,20 @@ Full tables and examples live in this page; AI-generation rules live in the bund
 Components use **compound (dot) notation** — keep **Trigger → Content → semantic slots** (`Header`, `Body`, `Footer`, `Item`, …) in the documented order so accessibility and bundled CSS selectors stay valid.
 
 ```tsx
+import { Alert, Button, Field, Modal } from '@polyms/core-ui'
+
 <Alert variant='success' onDismiss={handleDismiss}>
   <Alert.Heading>Success!</Alert.Heading>
   Payment processed successfully.
 </Alert>
 
 <Modal>
-  <Modal.Trigger>Open</Modal.Trigger>
-  <Modal.Content size='lg' title='Account settings'>
+  <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
+  <Modal.Content size='lg' scrollable>
     <Modal.Header>Account settings</Modal.Header>
     <Modal.Body>{/* primary content */}</Modal.Body>
     <Modal.Footer>
+      <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
       <Button variant='primary'>Save</Button>
     </Modal.Footer>
   </Modal.Content>

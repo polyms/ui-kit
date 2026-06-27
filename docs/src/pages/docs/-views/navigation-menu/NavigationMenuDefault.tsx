@@ -25,7 +25,7 @@ import {
   WorkflowCircle01Icon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react'
-import { NavigationMenu } from '@polyms/core'
+import { NavigationMenu } from '@polyms/core-ui'
 import clsx from 'clsx'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────

@@ -7,13 +7,18 @@ title: AI Agent Skill
 
 ## What the skill contains
 
-The skill is split for progressive disclosure — agents load only the part relevant to the task:
+The skill is split for progressive disclosure — agents load only the part relevant to the task. **`SKILL.md`** carries `name: core-ui` (skill identifier). Reference files (`field.md`, `modal.md`, …) use **`description`** frontmatter only — not a second `name`, per [Cursor skill conventions](https://cursor.com/docs/context/skills).
 
-- **SKILL.md** — hard rules and the app-shell checklist.
-- **components.md** — compound trees for Modal, Offcanvas, Menu, NavigationMenu, Toolbar, Field, Select, Tabs, plus `useRender`.
+- **SKILL.md** — entry: **skill routing** (keyword → file), hard rules, workflow.
+- **components.md** — `Button`, Toast, compound trees (Menu, NavigationMenu, Toolbar, Select, Tabs, Checkbox, Radio, Switch, Popover, Tooltip, Avatar, Breadcrumb, Accordion, Alert, NumberField, Collapsible, Spinner, `dynamic`), `useRender`; Field → **field.md**; Modal & Offcanvas → **modal.md**.
 - **theming.md** — slate vs neutral, semantic tones, dark mode tokens, logical-direction spacing.
 - **css-utilities.md** — table, badge, card, link, and the `item-*` interaction recipe.
-- **setup.md** — install, styles, Toast, and programmatic Modal/Offcanvas wiring.
+- **setup.md** — install, styles, app shell, Toast; programmatic wiring points to **modal.md#programmatic-overlays**.
+- **quality.md** — task inference, anti-slop, copy tells, visual consistency (shape/typography), list primitive choice, output completeness (no truncation), field label copy, pre-flight checks.
+- **redesign.md** — migrate existing app screens to `@polyms/core-ui` (Scan → Diagnose → Fix, preserve vs overhaul, audit checklist, redesign pre-flight).
+- **brandkit.md** — map brand identity to `primary-*` and semantic tokens, component touchpoints, optional `BRAND.md`, brand pre-flight (code implementation, not image generation).
+- **field.md** — `Field` vs `Field.Floating`, child order, icons, validation, anti-patterns.
+- **modal.md** — Modal & Offcanvas (same overlay pattern): trees, programmatic `showModal` / `showOffcanvas`, anti-patterns. Compose with **field.md** when body has forms.
 
 ## Install the skill
 
@@ -83,7 +88,22 @@ ls .cursor/skills/core-ui
 
 If a rule ever disagrees with the TypeScript types for your installed version, trust **`node_modules/@polyms/core-ui/index.d.ts`**.
 
+## Brand kit in your repo
+
+For product branding (accent color, surfaces, component mapping), add two files in the consumer app:
+
+1. **`src/styles/theme.css`** — import `@polyms/core-ui/styles/tailwind.css`, then override `--color-primary-*` and optional surface tokens. See [Design System — Brand theming](/design-system#brand-theming).
+2. **`BRAND.md`** (repo root or `docs/`) — strategy, token hex values, and which components express the brand. Agents read this when **`brandkit.md`** is installed via the skill.
+
+Prompt example for Cursor or Claude Code:
+
+```text
+Follow core-ui brandkit.md. Our BRAND.md is at ./BRAND.md. Update theme.css primary ramp to match.
+```
+
+The skill file **`brandkit.md`** ships inside `.cursor/skills/core-ui/` (and sibling paths) after install — it is the machine-readable counterpart to your human **`BRAND.md`**.
+
 ## Next steps
 
 - [Installation](/installation) — package, peers, and styles.
-- [Design System](/design-system) — color tokens, slate vs neutral, CSS-only surface classes.
+- [Design System](/design-system) — color tokens, brand theming, slate vs neutral, CSS-only surface classes.

@@ -1,4 +1,4 @@
-import { Field } from '@polyms/core'
+import { Field } from '@polyms/core-ui'
 import { useState } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────

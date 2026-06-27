@@ -38,7 +38,7 @@ Display the current page's location within a navigational hierarchy. Breadcrumbs
 ## Usage
 
 ```tsx
-import { Breadcrumb } from '@polyms/core'
+import { Breadcrumb } from '@polyms/core-ui'
 
 <Breadcrumb>
   <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -59,7 +59,7 @@ The last item in the breadcrumb trail typically represents the current page and 
 Override the list container or an item wrapper when integrating a router **`Link`** or design-system tag:
 
 ```tsx
-import { Breadcrumb } from '@polyms/core'
+import { Breadcrumb } from '@polyms/core-ui'
 
 <Breadcrumb render={<ol className="breadcrumb flex gap-2" />}>
   <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -75,7 +75,8 @@ Pass a React element to **`render`**; props and **`className`** are merged by **
 
 Breadcrumbs automatically include proper ARIA attributes:
 - Uses `<nav>` and `<ol>` for semantic HTML structure
-- Active items include `aria-current="page"` for screen readers
+- Only the current page item gets `aria-current="page"` (`active` prop, or no `href` on the last crumb)
+- Ancestor items with `href` are plain links without `aria-current`
 - Each item is a list item (`<li>`) for proper navigation structure
 
 ## API Reference

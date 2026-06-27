@@ -12,6 +12,18 @@ apis:
     default: '-'
     values: className
     description: Primary emphasis with medium weight.
+  - name: link-success
+    default: '-'
+    values: className
+    description: Positive or success emphasis.
+  - name: link-info
+    default: '-'
+    values: className
+    description: Informational emphasis.
+  - name: link-warning
+    default: '-'
+    values: className
+    description: Caution or warning emphasis.
   - name: link-danger
     default: '-'
     values: className
@@ -20,6 +32,10 @@ apis:
     default: '-'
     values: className
     description: Muted default; brightens on hover.
+  - name: link-dark
+    default: '-'
+    values: className
+    description: Slate emphasis with medium weight; brightens on hover. Used in breadcrumb trails.
   - separator: Pattern
   - name: stretched-link
     default: '-'
@@ -38,6 +54,8 @@ Text links and “clickable card” pattern. CSS-only — use on **`a`** (or ele
 
 ## Usage
 
+Combine **`link`** with a flavor class. Semantic tones mirror **`badge-*`** variants.
+
 ```tsx
 <a className='link link-primary' href='/docs'>
   Documentation
@@ -45,8 +63,20 @@ Text links and “clickable card” pattern. CSS-only — use on **`a`** (or ele
 ```
 
 ```tsx
+<a className='link link-success' href='/status'>
+  View status
+</a>
+```
+
+```tsx
 <a className='link link-danger' href='https://polyms.dev/'>
   Delete
+</a>
+```
+
+```tsx
+<a className='link link-light' href='/settings'>
+  Secondary action
 </a>
 ```
 
@@ -66,7 +96,9 @@ Text links and “clickable card” pattern. CSS-only — use on **`a`** (or ele
 
 ## Notes
 
-- **`link-primary`**, **`link-danger`**, **`link-light`** are used together with **`link`** (nested selector in CSS).
+- Flavor classes (**`link-primary`**, **`link-success`**, **`link-info`**, **`link-warning`**, **`link-danger`**, **`link-light`**, **`link-dark`**) are nested under **`link`** in CSS — always pair them with the base class.
+- **`link-light`** and **`link-dark`** also shift color on hover/focus; other flavors keep their tone on hover and rely on underline for affordance.
+- Dark mode uses lighter shades for contrast on Nord body backgrounds.
 - **`stretched-link`** uses **`::after`** with **`absolute inset-0`**; keep **`z-index`** of other controls above if needed.
 
 ## API Reference

@@ -1,6 +1,6 @@
 import { MoonIcon, Notification03Icon, StarIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Toggle } from '@polyms/core'
+import { Toggle } from '@polyms/core-ui'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

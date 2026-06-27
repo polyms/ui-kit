@@ -2,7 +2,7 @@
 import { metadataByRoute } from 'virtual:mdx-navigation'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Accordion } from '@polyms/core'
+import { Accordion } from '@polyms/core-ui'
 import { useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useMemo } from 'react'
@@ -17,7 +17,7 @@ export default function APIReference() {
   )
 
   return (
-    <div className='card mt-4'>
+    <div className='api-reference card mt-4'>
       <Accordion className='accordion' multiple>
         <Accordion.Item className='accordion-item border-solid bg-surface' disabled value='_header'>
           <Accordion.Header className='accordion-header font-semibold' render={<div />}>
@@ -61,7 +61,7 @@ export default function APIReference() {
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel className='accordion-panel'>
-                <p className='p-2 ps-10 text-fg text-sm'>{prop.description}</p>
+                <p className='text-fg text-sm'>{prop.description}</p>
               </Accordion.Panel>
             </Accordion.Item>
           )

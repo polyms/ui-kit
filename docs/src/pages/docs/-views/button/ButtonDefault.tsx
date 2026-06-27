@@ -1,6 +1,6 @@
 import { MouseLeftClick06Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Spinner } from '@polyms/core'
+import { Button, Spinner } from '@polyms/core-ui'
 import { useEffect, useRef } from 'react'
 
 export default function ButtonDefault() {

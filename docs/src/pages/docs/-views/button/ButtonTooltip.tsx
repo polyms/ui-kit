@@ -1,6 +1,6 @@
 import { Cancel01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 
 export default function ButtonTooltip() {
   return (

@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@polyms/core'
+import { Breadcrumb } from '@polyms/core-ui'
 
 const Default = () => (
   <Breadcrumb className='m-auto'>

@@ -1,4 +1,4 @@
-import { Checkbox } from '@polyms/core'
+import { Checkbox } from '@polyms/core-ui'
 import { useState } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────

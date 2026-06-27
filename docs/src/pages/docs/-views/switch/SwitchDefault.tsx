@@ -1,4 +1,4 @@
-import { Switch } from '@polyms/core'
+import { Switch } from '@polyms/core-ui'
 
 export default function SwitchStory() {
   return (

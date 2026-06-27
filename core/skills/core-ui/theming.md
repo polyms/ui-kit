@@ -1,3 +1,9 @@
+---
+description: >-
+  @polyms/core-ui theming — slate chrome, semantic tones (primary, danger, …), dark mode, bg-body, text-fg, item-*
+  ghost surfaces, logical-direction spacing. Read for dark mode, theme, colors, contrast.
+---
+
 # Theming
 
 `@polyms/core-ui` uses semantic tokens, Tailwind v4 utilities, and class-based dark mode.
@@ -65,6 +71,10 @@ Default token values:
 ```
 
 Use Tailwind `dark:` only for app-specific one-off overrides.
+
+Consumer brand accents: override `--color-primary-*` in app CSS after importing library styles. See [brandkit.md](brandkit.md).
+
+Before shipping, verify hierarchy and contrast in **both** light and dark modes. See [quality.md](quality.md#pre-flight-check).
 
 ## Transparent Interactive States
 

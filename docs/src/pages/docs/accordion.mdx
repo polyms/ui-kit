@@ -79,6 +79,10 @@ apis:
 
 import Story from './-views/accordion/AccordionDefault.tsx'
 import code from './-views/accordion/AccordionDefault.tsx?raw'
+import ComposedStory from './-views/accordion/AccordionComposed.tsx'
+import composedCode from './-views/accordion/AccordionComposed.tsx?raw'
+import MultipleStory from './-views/accordion/AccordionMultiple.tsx'
+import multipleCode from './-views/accordion/AccordionMultiple.tsx?raw'
 
 Compound accordion built on **[Base UI Accordion](https://base-ui.com/react/components/accordion)**. **`Accordion`** (root), **`Accordion.Item`**, **`Header`**, **`Trigger`**, and **`Panel`** apply bundled classes (**`accordion`**, **`accordion-item`**, …) so motion and layout work once package styles are loaded. Override or extend with **`className`** as usual.
 
@@ -93,7 +97,7 @@ Compound accordion built on **[Base UI Accordion](https://base-ui.com/react/comp
 When **`title`** is set, **`Header`**, **`Trigger`**, and **`Panel`** are created for you; **`children`** are rendered inside the panel (with default padding and body text color).
 
 ```tsx
-import { Accordion } from '@polyms/core'
+import { Accordion } from '@polyms/core-ui'
 
 <Accordion defaultValue={['billing']}>
   <Accordion.Item title="Shipping" value="shipping">
@@ -109,22 +113,44 @@ import { Accordion } from '@polyms/core'
 
 Use the same tree as Base UI when you need custom trigger content, icons, or non-heading headers.
 
-```tsx
-import { Accordion } from '@polyms/core'
+<CodePreview code={composedCode}>
+  <ComposedStory />
+</CodePreview>
 
-<Accordion defaultValue={['shipping']}>
-  <Accordion.Item value="shipping">
+```tsx
+import { Accordion } from '@polyms/core-ui'
+
+<Accordion defaultValue={['notifications']}>
+  <Accordion.Item value="notifications">
     <Accordion.Header>
-      <Accordion.Trigger>Shipping</Accordion.Trigger>
+      <Accordion.Trigger>How will you notify me?</Accordion.Trigger>
     </Accordion.Header>
     <Accordion.Panel>
-      <p className="text-muted text-sm">Delivery details…</p>
+      Delivery details…
     </Accordion.Panel>
   </Accordion.Item>
 </Accordion>
 ```
 
 Default **`className`** shells are already merged on each part; add utilities on the **`Accordion`** root (for example max width) or on any subpart for one-off layout.
+
+### Multiple open sections
+
+Pass **`multiple`** on the root so more than one panel can stay open. **`defaultValue`** and controlled **`value`** are arrays of item **`value`** strings.
+
+<CodePreview code={multipleCode}>
+  <MultipleStory />
+</CodePreview>
+
+```tsx
+import { Accordion } from '@polyms/core-ui'
+
+<Accordion defaultValue={['shipping', 'returns']} multiple>
+  <Accordion.Item title="Shipping" value="shipping">…</Accordion.Item>
+  <Accordion.Item title="Billing" value="billing">…</Accordion.Item>
+  <Accordion.Item title="Returns" value="returns">…</Accordion.Item>
+</Accordion>
+```
 
 ## Types
 

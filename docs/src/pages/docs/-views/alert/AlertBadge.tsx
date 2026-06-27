@@ -1,4 +1,4 @@
-import { Alert, Toast } from '@polyms/core'
+import { Alert, Toast } from '@polyms/core-ui'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

@@ -1,4 +1,4 @@
-import { Popover } from '@polyms/core'
+import { Popover } from '@polyms/core-ui'
 import clsx from 'clsx'
 import { type ReactNode, useState } from 'react'
 

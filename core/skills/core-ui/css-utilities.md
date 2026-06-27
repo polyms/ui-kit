@@ -1,3 +1,9 @@
+---
+description: >-
+  @polyms/core-ui CSS-only utilities — table, badge, card, link, item-* interaction, typography h1–h6, z-index.
+  Read for table, badge, item-*, link utilities when no exported React primitive fits.
+---
+
 # CSS Utilities
 
 Some design-system surfaces are CSS classes only. When no exported React component exists, use semantic HTML plus these classes instead of inventing component APIs.
@@ -8,12 +14,13 @@ Some design-system surfaces are CSS classes only. When no exported React compone
 - Badge: `.badge`, `.badge-lg`, `.badge-xl`, `.badge-primary`, `.badge-success`, `.badge-info`, `.badge-warning`, `.badge-danger`, `.badge-light`, `.badge-dark`.
 - Card: `.card`, `.card-body`.
 - Link: `.link`, `.link-primary`, `.link-danger`, `.link-light`, `.stretched-link`.
+- Alert (in alert body): `.alert-link`.
 - Toggle: `.toggle`, `.toggle-group` for Base UI `Toggle` and `ToggleGroup`.
 - Checkbox/radio advanced rendering: `.checkbox`, `.radio`, `.radio-group`, `.check-group`. Prefer React components for accessibility and state attributes.
 - Skeleton: `.skeleton`.
 - Typography: `.h1` through `.h6`.
 - Z-index: `.z-dropdown`, `.z-sticky`, `.z-fixed`, `.z-toolbar`, `.z-offcanvas`, `.z-modal`, `.z-popover`, `.z-tooltip`, `.z-toast`.
-- Layout: `.@page`, `.container-page`.
+- Layout: `.@page` (container query root — `className='@page'` in JSX), `.container-page`.
 - Theme: `.dark`, `bg-body`, `text-fg`, `text-muted`, `bg-surface`, `border-line`.
 - Chrome helpers: `.border-light`, `.border-{t|r|b|l|s|e|x|y}-light`, `.bg-light`.
 - State: `.item-primary` through `.item-dark`.
@@ -36,6 +43,32 @@ Some design-system surfaces are CSS classes only. When no exported React compone
   </tbody>
 </table>
 ```
+
+## Typography
+
+Use `.h1` through `.h6` for page and section titles — not ad-hoc `text-2xl` / `text-xl` mixes for the same level.
+
+```tsx
+<h1 className='h1'>Settings</h1>
+<h2 className='h2'>Profile</h2>
+<p className='text-muted'>Update how others see you on this workspace.</p>
+```
+
+See [quality.md — Visual consistency](quality.md#visual-consistency) for heading discipline.
+
+## Lists and collections
+
+Prefer structured primitives over long styled `<div>` stacks:
+
+| Situation | Class / component |
+| --- | --- |
+| Columnar data | `.table` (see [Table](#table)) |
+| Sectioned content | `Tabs`, `Accordion` |
+| Single disclosure | `Collapsible` |
+| Per-row actions | `Menu` |
+| Toolbar filters above list | `Toolbar` + `Field.Floating` |
+
+Full decision table: [quality.md — Lists and collections](quality.md#lists-and-collections).
 
 ## Badge And Card
 

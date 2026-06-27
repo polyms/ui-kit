@@ -1,6 +1,6 @@
 import { MouseLeftClick06Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 import { nanoid } from 'nanoid'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 

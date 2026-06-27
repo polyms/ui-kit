@@ -1,4 +1,4 @@
-import { Spinner } from '@polyms/core'
+import { Spinner } from '@polyms/core-ui'
 
 export default function SpinnerColors() {
   const colors = [

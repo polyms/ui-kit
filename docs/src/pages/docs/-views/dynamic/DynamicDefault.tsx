@@ -1,4 +1,4 @@
-import { dynamic, Spinner } from '@polyms/core'
+import { Button, dynamic, Spinner } from '@polyms/core-ui'
 import type { ComponentType } from 'react'
 import { useState } from 'react'
 
@@ -27,9 +27,9 @@ export default function DynamicDefault() {
 
   return (
     <div className='m-auto flex max-w-md flex-col gap-4'>
-      <button className='btn btn-primary rounded-full px-6' onClick={() => setShow(true)} type='button'>
+      <Button className='px-6' onClick={() => setShow(true)} rounded variant='primary'>
         Load lazy panel
-      </button>
+      </Button>
       {show && <SlowPanel />}
     </div>
   )

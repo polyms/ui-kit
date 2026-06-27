@@ -20,9 +20,7 @@ export const AccordionItem = ({ className, children, title, ...props }: Accordio
         <AccordionHeader>
           <AccordionTrigger>{title}</AccordionTrigger>
         </AccordionHeader>
-        <AccordionPanel>
-          <div className='p-2 text-slate-600 text-sm'>{children}</div>
-        </AccordionPanel>
+        <AccordionPanel>{children}</AccordionPanel>
       </>
     ) : (
       children

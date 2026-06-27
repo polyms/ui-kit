@@ -1,4 +1,4 @@
-import { Button, Offcanvas, type OffcanvasSize } from '@polyms/core'
+import { Button, Offcanvas, type OffcanvasSize } from '@polyms/core-ui'
 import { ChartSquare, Code2, Layers, MagicStick3 } from '@solar-icons/react-perf/BoldDuotone'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
@@ -41,7 +41,7 @@ const features: DemoFeature[] = [
   },
   {
     description:
-      'Balance cards, virtual card visuals, recipient avatars and CSS bar charts — all rendered with @polyms/core tokens and the slate scale.',
+      'Balance cards, virtual card visuals, recipient avatars and CSS bar charts — all rendered with @polyms/core-ui tokens and the slate scale.',
     icon: ChartSquare,
     title: 'Data-driven content',
   },
@@ -98,12 +98,15 @@ function Page() {
             </p>
 
             <div className='mt-8 flex flex-wrap items-center gap-3'>
-              <Link
-                className='btn btn-primary btn-md rounded-full px-5 shadow-primary/20 shadow-sm'
-                to='/design-system'
+              <Button
+                className='px-5 shadow-primary/20 shadow-sm'
+                render={<Link to='/design-system' />}
+                rounded
+                size='lg'
+                variant='primary'
               >
                 Open Design system
-              </Link>
+              </Button>
               <Button
                 outlined
                 render={
@@ -186,7 +189,7 @@ function Page() {
             <div className='mt-5 flex flex-wrap gap-3'>
               {offcanvasSizes.map(({ size, width, height }) => (
                 <Offcanvas key={size} swipeDirection='right'>
-                  <Offcanvas.Trigger className='btn btn-light outlined rounded-full uppercase'>
+                  <Offcanvas.Trigger render={<Button className='uppercase' outlined rounded variant='light' />}>
                     {size}
                   </Offcanvas.Trigger>
                   <Offcanvas.Content size={size}>

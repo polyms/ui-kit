@@ -36,7 +36,7 @@ Expandable container that shows and hides content. Perfect for FAQs, detailed in
 ## Usage
 
 ```tsx
-import { Collapsible } from '@polyms/core'
+import { Collapsible } from '@polyms/core-ui'
 
 <Collapsible defaultOpen>
   <Collapsible.Trigger>
@@ -61,7 +61,9 @@ The root component that manages the collapsible state.
 Button or element that toggles the panel visibility. Can contain icons, text, or any custom content.
 
 ```tsx
-<Collapsible.Trigger className="btn btn-ghost">
+import { Button, Collapsible } from '@polyms/core-ui'
+
+<Collapsible.Trigger render={<Button variant='ghost' />}>
   <ChevronIcon className="collapsible-icon" />
   Toggle content
 </Collapsible.Trigger>
@@ -177,8 +179,10 @@ The `.collapsible-icon` class automatically rotates 90° when the panel is open:
 ### Custom Trigger Styling
 
 ```tsx
+import { Button, Collapsible } from '@polyms/core-ui'
+
 <Collapsible>
-  <Collapsible.Trigger className="btn btn-primary w-full">
+  <Collapsible.Trigger render={<Button className='w-full' variant='primary' />}>
     Custom styled trigger
   </Collapsible.Trigger>
   <Collapsible.Panel>

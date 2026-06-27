@@ -2,7 +2,7 @@
 
 import { GithubIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/core'
+import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/core-ui'
 import {
   Accessibility,
   Code2,
@@ -103,10 +103,10 @@ function LandingNav() {
             <HugeiconsIcon className='size-4' icon={GithubIcon} />
             <span className='hidden sm:inline'>GitHub</span>
           </a>
-          <Link className='btn btn-primary btn-sm rounded-full' to='/design-system'>
+          <Button render={<Link to='/design-system' />} rounded size='sm' variant='primary'>
             Get started
             <ArrowRightIcon className='size-3.5' />
-          </Link>
+          </Button>
         </div>
       </Container>
     </header>
@@ -325,7 +325,7 @@ function PopoverPreview() {
   return (
     <div className='flex flex-wrap items-center justify-center gap-4'>
       <Popover>
-        <Popover.Trigger className='btn btn-primary rounded-full'>Open popover</Popover.Trigger>
+        <Popover.Trigger render={<Button rounded variant='primary' />}>Open popover</Popover.Trigger>
         <Popover.Content
           description='Composable, focus-trapped, and animated.'
           side='bottom'
@@ -335,9 +335,9 @@ function PopoverPreview() {
 
       <Tooltip.Provider>
         <Tooltip side='bottom' title='Tooltips work too'>
-          <button className='btn btn-light rounded-full' type='button'>
+          <Button outlined rounded variant='light'>
             Hover me
-          </button>
+          </Button>
         </Tooltip>
       </Tooltip.Provider>
     </div>
@@ -390,7 +390,7 @@ const frameworks = [
 function MenuPreview() {
   return (
     <Menu>
-      <Menu.Trigger className='btn btn-primary outlined rounded-full'>Actions</Menu.Trigger>
+      <Menu.Trigger render={<Button outlined rounded variant='primary' />}>Actions</Menu.Trigger>
       <Menu.Content title='Quick actions'>
         <Menu.Item>
           Edit
@@ -800,10 +800,10 @@ function CTASection() {
               </p>
             </div>
             <div className='flex flex-wrap items-center gap-3 md:flex-col md:items-stretch'>
-              <Link className='btn btn-primary btn-xl rounded-full px-6' to='/design-system'>
+              <Button className='px-6' render={<Link to='/design-system' />} rounded size='xl' variant='primary'>
                 Get started
                 <ArrowRightIcon className='size-4' />
-              </Link>
+              </Button>
               <a
                 className='home-btn-glass lg'
                 href='https://github.com/polyms/core-ui'

@@ -1,4 +1,4 @@
-import { Button, Offcanvas, useOffcanvasStore } from '@polyms/core'
+import { Button, Offcanvas, useOffcanvasStore } from '@polyms/core-ui'
 
 const OFFCANVAS_ID = 'programmatic-demo'
 
@@ -19,14 +19,7 @@ export default function OffcanvasProgrammatic() {
               <p className='font-semibold text-fg text-sm'>Deployment finished</p>
               <p className='mt-1 text-muted text-sm'>Production build shipped successfully.</p>
             </section>
-            <Button
-              content='center'
-              onClick={() => useOffcanvasStore.getState().closeOffcanvas(OFFCANVAS_ID)}
-              rounded
-              variant='primary'
-            >
-              Mark all as read
-            </Button>
+            <Offcanvas.Close render={<Button rounded variant='primary' />}>Mark all as read</Offcanvas.Close>
           </div>
         </Offcanvas.Body>
       </Offcanvas.Content>,
@@ -41,7 +34,7 @@ export default function OffcanvasProgrammatic() {
   return (
     <>
       <Offcanvas.Container />
-      <Button className='m-auto' content='center' onClick={showPanel} rounded size='xl' variant='primary'>
+      <Button className='m-auto' onClick={showPanel} rounded size='xl' variant='primary'>
         Open programmatic offcanvas
       </Button>
     </>

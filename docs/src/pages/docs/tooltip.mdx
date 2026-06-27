@@ -50,11 +50,11 @@ Display brief, contextual information when users hover or focus on an element. T
 ## Usage
 
 ```tsx
-import { Tooltip } from '@polyms/core'
+import { Button, Tooltip } from '@polyms/core-ui'
 
 <Tooltip.Provider>
   <Tooltip title="Helpful information" side="top">
-    <button>Hover me</button>
+    <Button outlined>Hover me</Button>
   </Tooltip>
 </Tooltip.Provider>
 ```
@@ -64,7 +64,7 @@ import { Tooltip } from '@polyms/core'
 Control visibility when the anchor is driven by another component (e.g. forced open during onboarding):
 
 ```tsx
-import { Tooltip } from '@polyms/core'
+import { Button, Tooltip } from '@polyms/core-ui'
 import { useState } from 'react'
 
 function ControlledTooltip() {
@@ -73,7 +73,7 @@ function ControlledTooltip() {
   return (
     <Tooltip.Provider>
       <Tooltip open={open} onOpenChange={setOpen} title="Step 1: Connect your repo">
-        <button type="button">Guide me</button>
+        <Button outlined>Guide me</Button>
       </Tooltip>
     </Tooltip.Provider>
   )

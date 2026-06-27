@@ -1,4 +1,15 @@
-import { Avatar } from '@polyms/core'
+import { Avatar } from '@polyms/core-ui'
+
+const inlineLinks = [
+  { label: 'Default', className: 'link', text: 'View badges' },
+  { label: 'Primary', className: 'link link-primary', text: 'Open card docs' },
+  { label: 'Success', className: 'link link-success', text: 'View status' },
+  { label: 'Info', className: 'link link-info', text: 'Learn more' },
+  { label: 'Warning', className: 'link link-warning', text: 'Review changes' },
+  { label: 'Danger', className: 'link link-danger', text: 'Remove item' },
+  { label: 'Light', className: 'link link-light', text: 'Secondary action' },
+  { label: 'Dark', className: 'link link-dark', text: 'Breadcrumb trail' },
+] as const
 
 const profiles = [
   {
@@ -26,30 +37,14 @@ export default function LinkDefault() {
           Anchors styled with <code className='text-fg'>.link</code> variants beside body copy.
         </p>
         <div className='mt-6 space-y-4 border-line border-t pt-5 text-sm'>
-          <p className='text-muted'>
-            Default:{' '}
-            <a className='link' href='https://polyms.dev/'>
-              View badges
-            </a>
-          </p>
-          <p className='text-muted'>
-            Primary:{' '}
-            <a className='link link-primary' href='https://polyms.dev/'>
-              Open card docs
-            </a>
-          </p>
-          <p className='text-muted'>
-            Danger:{' '}
-            <a className='link link-danger' href='https://polyms.dev/'>
-              Remove item
-            </a>
-          </p>
-          <p className='text-muted'>
-            Light:{' '}
-            <a className='link link-light' href='https://polyms.dev/'>
-              Secondary action
-            </a>
-          </p>
+          {inlineLinks.map(item => (
+            <p className='text-muted' key={item.label}>
+              {item.label}:{' '}
+              <a className={item.className} href='https://polyms.dev/'>
+                {item.text}
+              </a>
+            </p>
+          ))}
         </div>
       </div>
 

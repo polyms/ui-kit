@@ -1,6 +1,6 @@
 import { Eraser01Icon, MailAtSign02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Field } from '@polyms/core'
+import { Field } from '@polyms/core-ui'
 import { useMemo, useRef, useState } from 'react'
 
 export default function FieldDefault() {
@@ -11,7 +11,7 @@ export default function FieldDefault() {
 
   return (
     <Field className='m-auto w-1/2' invalid={showError} required>
-      <Field.Label>{'Let me know your email?'}</Field.Label>
+      <Field.Label>Let me know your email?</Field.Label>
       <HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
       <HugeiconsIcon
         className='icon-end origin-top rotate-180'
@@ -24,12 +24,12 @@ export default function FieldDefault() {
       />
       <Field.Control
         onChange={e => setValue(e.target.value)}
-        placeholder={'me@example.com'}
+        placeholder='tifa.lockhart@polyms.dev'
         ref={ref}
         rounded
         value={value}
       />
-      <Field.Description>{"We'll never share your email with anyone else."}</Field.Description>
+      <Field.Description>We'll never share your email with anyone else.</Field.Description>
       <Field.Feedback>This field is required</Field.Feedback>
     </Field>
   )

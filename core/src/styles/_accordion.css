@@ -10,7 +10,7 @@
 }
 
 .accordion-item {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px dashed var(--line);
 
   &:last-child {
     border-bottom-width: 0;
@@ -24,7 +24,7 @@
     flex: 1 1 auto;
     min-width: 12rem;
     border-bottom: none;
-    border-right: 1px solid var(--line);
+    border-right: 1px dashed var(--line);
 
     &:last-child {
       border-right-width: 0;
@@ -107,6 +107,11 @@
     outline: 2px solid color-mix(in oklab, var(--color-primary) 25%, transparent);
     outline-offset: 2px;
   }
+}
+
+.accordion-panel-body {
+  padding-block: 0 0.75rem;
+  padding-inline: 0.5rem;
 }
 
 .accordion[data-orientation='horizontal'] .accordion-panel {

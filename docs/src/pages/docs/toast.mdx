@@ -42,7 +42,7 @@ Display brief, non-blocking feedback messages to users about the outcome of an a
 ## Usage
 
 ```tsx
-import { Toast } from '@polyms/core'
+import { Button, Toast } from '@polyms/core-ui'
 
 // Wrap your app with Toast provider
 function App() {
@@ -59,13 +59,18 @@ function MyComponent() {
   const toastManager = Toast.useToastManager()
 
   return (
-    <button onClick={() => toastManager.add({
-      title: 'Success!',
-      description: 'Your changes have been saved.',
-      type: 'success'
-    })}>
+    <Button
+      onClick={() =>
+        toastManager.add({
+          title: 'Success!',
+          description: 'Your changes have been saved.',
+          type: 'success',
+        })
+      }
+      variant='primary'
+    >
       Save Changes
-    </button>
+    </Button>
   )
 }
 ```

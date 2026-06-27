@@ -55,7 +55,7 @@ Trigger an action or event, such as submitting a Form, opening a Dialog, canceli
 ## Usage
 
 ```tsx
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 
 <Button>Click me</Button>
 ```
@@ -79,7 +79,7 @@ Pass **`tooltip`** for a short hint. During SSR and the first client render, the
 Prefer **`tooltip`** over a manual **`title`** when you want that behavior. If you only need the browser default tooltip and no floating UI, use **`title`** alone.
 
 ```tsx
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 
 <Button rounded tooltip="Save changes to the server" variant="primary">
   Save
@@ -93,7 +93,7 @@ import { Button } from '@polyms/core'
 Use **`render`** to keep button styles on another element (for example a client router link):
 
 ```tsx
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 
 <Button render={<a href="/settings" />} variant="primary">
   Account settings

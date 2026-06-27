@@ -76,10 +76,10 @@ Menus display a list of actions or options triggered by a button. They support n
 ## Usage
 
 ```tsx
-import { Menu } from '@polyms/core'
+import { Button, Menu } from '@polyms/core-ui'
 
 <Menu>
-  <Menu.Trigger>Options</Menu.Trigger>
+  <Menu.Trigger render={<Button variant='primary' outlined />}>Options</Menu.Trigger>
   <Menu.Content>
     <Menu.Item>Edit</Menu.Item>
     <Menu.Item>Duplicate</Menu.Item>
@@ -115,8 +115,10 @@ Display shortcut hints on the trailing edge of an item with **`Menu.Command`**. 
 ### With Submenu
 
 ```tsx
+import { Button, Menu } from '@polyms/core-ui'
+
 <Menu>
-  <Menu.Trigger>File</Menu.Trigger>
+  <Menu.Trigger render={<Button variant='primary' outlined />}>File</Menu.Trigger>
   <Menu.Content>
     <Menu.Item>New File</Menu.Item>
     <Menu.Item>Open...</Menu.Item>
@@ -139,8 +141,10 @@ Display shortcut hints on the trailing edge of an item with **`Menu.Command`**. 
 ### With Groups
 
 ```tsx
+import { Button, Menu } from '@polyms/core-ui'
+
 <Menu>
-  <Menu.Trigger>View</Menu.Trigger>
+  <Menu.Trigger render={<Button variant='primary' outlined />}>View</Menu.Trigger>
   <Menu.Content>
     <Menu.Group>
       <Menu.GroupLabel>Appearance</Menu.GroupLabel>
@@ -162,8 +166,10 @@ Display shortcut hints on the trailing edge of an item with **`Menu.Command`**. 
 Control menu placement with `side` and `align` props on `Menu.Content`.
 
 ```tsx
+import { Button, Menu } from '@polyms/core-ui'
+
 <Menu>
-  <Menu.Trigger>Options</Menu.Trigger>
+  <Menu.Trigger render={<Button variant='primary' outlined />}>Options</Menu.Trigger>
   <Menu.Content side='right' align='start' sideOffset={12}>
     <Menu.Item>Edit</Menu.Item>
     <Menu.Item>Delete</Menu.Item>

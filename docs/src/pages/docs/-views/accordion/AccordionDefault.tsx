@@ -1,4 +1,4 @@
-import { Accordion } from '@polyms/core'
+import { Accordion } from '@polyms/core-ui'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

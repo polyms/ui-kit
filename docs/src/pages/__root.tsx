@@ -1,6 +1,6 @@
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
-import { Toast } from '@polyms/core'
+import { Toast } from '@polyms/core-ui'
 import { createRootRoute, Link, Outlet, useRouterState } from '@tanstack/react-router'
 import { useRef } from 'react'
 import { useMediaQuery } from '../hooks/useMediaQuery'

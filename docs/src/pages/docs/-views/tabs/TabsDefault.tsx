@@ -1,4 +1,4 @@
-import { Tabs } from '@polyms/core'
+import { Tabs } from '@polyms/core-ui'
 
 export default function TabsDefault() {
   return (

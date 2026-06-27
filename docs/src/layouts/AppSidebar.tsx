@@ -5,7 +5,7 @@ import {
   SearchList02Icon,
   SearchRemoveIcon,
 } from '@hugeicons/core-free-icons'
-import { Collapsible, Field, NavigationMenu } from '@polyms/core'
+import { Collapsible, Field, NavigationMenu } from '@polyms/core-ui'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useImperativeHandle, useState } from 'react'

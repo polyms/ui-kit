@@ -22,6 +22,10 @@ apis:
     default: '-'
     values: string
     description: Optional label text displayed next to the switch.
+  - name: labelPos
+    default: end
+    values: start | end
+    description: Label placement relative to the switch. Use start to render the label before the switch.
   - name: variant
     default: '-'
     values: primary
@@ -40,7 +44,7 @@ Toggle between two mutually exclusive states, typically on and off. Switches pro
 ## Usage
 
 ```tsx
-import { Switch } from '@polyms/core'
+import { Switch } from '@polyms/core-ui'
 
 <Switch label="Enable notifications" defaultChecked />
 ```

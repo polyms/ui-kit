@@ -7,10 +7,10 @@ apis:
     default: '-'
     values: '() => Promise<{ default: Component }>'
     description: Factory passed to React.lazy. Must resolve a module with a default export.
-  - name: options.LoadingComponent
+  - name: options.loadingComponent
     default: 'null'
     values: ReactNode
-    description: Fallback shown inside Suspense while the chunk loads.
+    description: Suspense fallback while the chunk loads.
 ---
 
 import Story from './-views/dynamic/DynamicDefault.tsx'
@@ -25,11 +25,11 @@ Wrap **`React.lazy`** and **`Suspense`** for code-split routes, heavy widgets, o
 ## Usage
 
 ```tsx
-import { dynamic, Spinner } from '@polyms/core'
+import { dynamic, Spinner } from '@polyms/core-ui'
 
 const SettingsPanel = dynamic(
   () => import('./SettingsPanel'),
-  { LoadingComponent: <Spinner size={24} /> }
+  { loadingComponent: <Spinner size={24} /> }
 )
 
 function Page() {

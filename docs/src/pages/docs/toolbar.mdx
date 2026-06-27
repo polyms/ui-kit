@@ -76,7 +76,7 @@ A container for grouping a related set of buttons, toggles, links, and inputs. T
 ## Usage
 
 ```tsx
-import { Toolbar } from '@polyms/core'
+import { Toolbar } from '@polyms/core-ui'
 
 <Toolbar aria-label='Formatting'>
   <Toolbar.Group aria-label='Text formatting'>
@@ -93,7 +93,7 @@ import { Toolbar } from '@polyms/core'
 `Toolbar.Button` is the primary slot for any clickable control. Use the `render` prop to compose it with other primitives so they inherit toolbar keyboard navigation:
 
 ```tsx
-import { Toggle, ToggleGroup, Toolbar } from '@polyms/core'
+import { Toggle, ToggleGroup, Toolbar } from '@polyms/core-ui'
 
 <Toolbar>
   <ToggleGroup className='toolbar-group' aria-label='Alignment'>
@@ -108,7 +108,7 @@ The same pattern applies to `Menu.Trigger`, `Select.Trigger`, `Popover.Trigger`,
 You can also render the `Button` component to reuse its icon sizing and tooltip:
 
 ```tsx
-import { Button, Toolbar } from '@polyms/core'
+import { Button, Toolbar } from '@polyms/core-ui'
 
 <Toolbar>
   <Toolbar.Button render={<Button icon tooltip='Bold' />}>

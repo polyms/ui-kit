@@ -1,4 +1,4 @@
-import { Checkbox, type CheckboxVariant } from '@polyms/core'
+import { Checkbox, type CheckboxVariant } from '@polyms/core-ui'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

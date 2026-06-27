@@ -1,4 +1,4 @@
-import { Breadcrumb, Button } from '@polyms/core'
+import { Breadcrumb, Button } from '@polyms/core-ui'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

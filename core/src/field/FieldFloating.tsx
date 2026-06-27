@@ -18,7 +18,7 @@ export type FieldFloatingProps = {
   className?: string
   children?: ReactNode
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'placeholder'>
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

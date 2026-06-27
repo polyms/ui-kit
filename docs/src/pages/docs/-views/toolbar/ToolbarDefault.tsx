@@ -9,7 +9,7 @@ import {
   TextUnderlineIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Toggle, ToggleGroup, Toolbar } from '@polyms/core'
+import { Toggle, ToggleGroup, Toolbar } from '@polyms/core-ui'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 

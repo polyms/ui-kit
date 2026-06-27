@@ -46,10 +46,10 @@ export const OffcanvasContent = forwardRef<HTMLDivElement, OffcanvasContentProps
                 <div className='offcanvas-mobile-header'>
                   <div aria-hidden className='offcanvas-mobile-header-spacer' />
                   <div aria-hidden className='offcanvas-mobile-handle' />
-                  {closeButton && <OffcanvasClose aria-label='Close' />}
+                  {closeButton && <OffcanvasClose aria-label='Close' className='offcanvas-close' />}
                 </div>
                 <Drawer.Content className='offcanvas-content-inner'>
-                  {closeButton && <OffcanvasClose aria-label='Close' />}
+                  {closeButton && <OffcanvasClose aria-label='Close' className='offcanvas-close' />}
                   {children}
                 </Drawer.Content>
               </Drawer.Popup>

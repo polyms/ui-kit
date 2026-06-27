@@ -1,4 +1,4 @@
-import { Alert, Toast } from '@polyms/core'
+import { Alert, Toast } from '@polyms/core-ui'
 
 export default function AlertDefault() {
   const toastManager = Toast.useToastManager()

@@ -1,4 +1,4 @@
-import { Spinner } from '@polyms/core'
+import { Spinner } from '@polyms/core-ui'
 
 export default function SpinnerSizes() {
   const sizes = [12, 16, 20, 24, 32, 40, 48]

@@ -31,6 +31,7 @@ File **nguồn chính** cho Cursor, Claude, các IDE tích hợp AI, và bất k
 - `docs/src/pages/` — route file-based + **`.mdx`** (nhóm theo thư mục, ví dụ `pages/docs/button.mdx`).
 - `docs/src/pages/docs/-views/` — demo/preview cho tài liệu.
 - `docs/src/layouts/` — `AppSidebar.tsx`, `DocsToc.tsx`, `CodePreview.tsx`, …
+- `docs/src/styles/` — CSS riêng site docs (ví dụ **`_details.css`** — API Reference accordion scoped `.api-reference`; giữ comment section trong file).
 - `docs/plugins/mdxNavigation.plugin.ts` — sinh module ảo **`virtual:mdx-navigation`** (scan MDX, frontmatter `title`, nhóm theo cây thư mục).
 - `docs/src/mdx-navigation.d.ts` — khai báo TypeScript cho module ảo.
 - `docs/vite.config.mts` — Vite cho site docs.
@@ -93,6 +94,7 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 - **Màu xám:** dùng **`--color-slate-*`**, không dùng `--color-neutral-*` (ví dụ `var(--color-slate-400)`).
 - **Phối transparent (idle/hover/active):** mọi component có state kiểu *ghost* (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`core/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
 - **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/skills/core-ui/css-utilities.md`** (section *CSS-Only Classes* và *Interactive State Utilities*) để consumer agents biết.
+- **Comment section trong file CSS:** `core/src/styles/_*.css`, `docs/src/styles/_*.css`, … thường có comment phân vùng ngắn trước block rule (ví dụ `/* Trigger button styling */`, `/* Panel styling */` trong **`docs/src/styles/_details.css`**). **Không tự ý xóa** các comment kiểu này khi refactor, scope selector, hay format — chúng giúp điều hướng file dài. Khi thêm block rule mới cùng file, tiếp tục pattern tương tự nếu block tách rõ concern; chỉ bỏ comment khi xóa hẳn block rule đi kèm.
 
 ### Component & state
 

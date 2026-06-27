@@ -1,4 +1,4 @@
-import { Tabs } from '@polyms/core'
+import { Tabs } from '@polyms/core-ui'
 import { useEffect, useState } from 'react'
 import { codeToHtml } from 'shiki'
 

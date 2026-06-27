@@ -1,13 +1,13 @@
 import { ArrowDown01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 
-import { Menu } from '@polyms/core'
+import { Button, Menu } from '@polyms/core-ui'
 
 export default function MenuDefault() {
   return (
     <div className='mt-4 flex w-full justify-between gap-xl'>
       <Menu defaultOpen>
-        <Menu.Trigger className='btn btn-primary outlined btn-lg mx-auto pe-2xs'>
+        <Menu.Trigger render={<Button className='mx-auto pe-2xs' outlined size='lg' variant='primary' />}>
           Song
           <HugeiconsIcon height={18} icon={ArrowDown01Icon} strokeWidth={2} width={18} />
         </Menu.Trigger>

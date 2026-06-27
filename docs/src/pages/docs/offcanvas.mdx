@@ -70,10 +70,10 @@ Offcanvas panels slide in from the edge of the viewport to display supplementary
 ## Usage
 
 ```tsx
-import { Offcanvas } from '@polyms/core'
+import { Button, Offcanvas } from '@polyms/core-ui'
 
 <Offcanvas>
-  <Offcanvas.Trigger>Open Menu</Offcanvas.Trigger>
+  <Offcanvas.Trigger render={<Button variant='primary' />}>Open Menu</Offcanvas.Trigger>
   <Offcanvas.Content>
     <Offcanvas.Header>
       <Offcanvas.Title>Navigation</Offcanvas.Title>
@@ -92,15 +92,17 @@ Offcanvas supports flexible composition with Header, Title, Description, Body, a
 ### Complete Example
 
 ```tsx
+import { Button, Offcanvas } from '@polyms/core-ui'
+
 <Offcanvas>
-  <Offcanvas.Trigger>Settings</Offcanvas.Trigger>
+  <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Settings</Offcanvas.Trigger>
   <Offcanvas.Content>
     <Offcanvas.Header>
       <Offcanvas.Title>Settings</Offcanvas.Title>
-      <Offcanvas.Description>
-        Manage your preferences
-      </Offcanvas.Description>
     </Offcanvas.Header>
+    <Offcanvas.Description>
+      Manage your preferences
+    </Offcanvas.Description>
     <Offcanvas.Body>
       <div>Settings content goes here</div>
     </Offcanvas.Body>
@@ -113,14 +115,14 @@ Offcanvas supports flexible composition with Header, Title, Description, Body, a
 Use `swipeDirection` on `Offcanvas` to choose which viewport edge the panel uses. The value also controls the dismissal gesture and exit animation.
 
 ```tsx
-import { Offcanvas } from '@polyms/core'
+import { Button, Offcanvas } from '@polyms/core-ui'
 
 export default function DirectionOffcanvas() {
   return (
     <div className="m-auto grid grid-cols-2 gap-4">
       {(['left', 'right', 'up', 'down'] as const).map((direction) => (
         <Offcanvas key={direction} swipeDirection={direction}>
-          <Offcanvas.Trigger className="btn btn-primary">
+          <Offcanvas.Trigger render={<Button variant='primary' />}>
             Open {direction}
           </Offcanvas.Trigger>
           <Offcanvas.Content>
@@ -143,13 +145,17 @@ export default function DirectionOffcanvas() {
 Hide the close button when you need explicit user action to close.
 
 ```tsx
+import { Button, Offcanvas } from '@polyms/core-ui'
+
 <Offcanvas>
-  <Offcanvas.Trigger>Confirm</Offcanvas.Trigger>
+  <Offcanvas.Trigger render={<Button variant='primary' />}>Confirm</Offcanvas.Trigger>
   <Offcanvas.Content closeButton={false}>
-    <Offcanvas.Header>Confirmation Required</Offcanvas.Header>
+    <Offcanvas.Header>
+      <Offcanvas.Title>Confirmation Required</Offcanvas.Title>
+    </Offcanvas.Header>
     <Offcanvas.Body>
-      <Button>Confirm</Button>
-      <Offcanvas.Close>Cancel</Offcanvas.Close>
+      <Button variant='primary'>Confirm</Button>
+      <Offcanvas.Close render={<Button rounded />}>Cancel</Offcanvas.Close>
     </Offcanvas.Body>
   </Offcanvas.Content>
 </Offcanvas>
@@ -160,10 +166,14 @@ Hide the close button when you need explicit user action to close.
 Remove the backdrop overlay for a less intrusive experience.
 
 ```tsx
+import { Button, Offcanvas } from '@polyms/core-ui'
+
 <Offcanvas>
-  <Offcanvas.Trigger>Quick Menu</Offcanvas.Trigger>
+  <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Quick Menu</Offcanvas.Trigger>
   <Offcanvas.Content backdrop={false}>
-    <Offcanvas.Header>Quick Actions</Offcanvas.Header>
+    <Offcanvas.Header>
+      <Offcanvas.Title>Quick Actions</Offcanvas.Title>
+    </Offcanvas.Header>
     <Offcanvas.Body>
       Menu content
     </Offcanvas.Body>
@@ -176,8 +186,10 @@ Remove the backdrop overlay for a less intrusive experience.
 Use `size` on `Offcanvas.Content` to control panel width for left/right drawers or height for up/down drawers. Values: `sm` (300px), `md` (360px), `lg` (480px), `xl` (640px), `2xl` (768px), `3xl` (896px), `full` (100%). When omitted, defaults to 360px width / 90% height.
 
 ```tsx
+import { Button, Offcanvas } from '@polyms/core-ui'
+
 <Offcanvas swipeDirection="right">
-  <Offcanvas.Trigger>Wide panel</Offcanvas.Trigger>
+  <Offcanvas.Trigger render={<Button variant='primary' />}>Wide panel</Offcanvas.Trigger>
   <Offcanvas.Content size="lg">
     <Offcanvas.Header>
       <Offcanvas.Title>Settings</Offcanvas.Title>
@@ -222,7 +234,7 @@ Open panels from event handlers, data loaders, or global state without a declara
 3. Close with **`Offcanvas.Close`**, **`closeOffcanvas(id)`**, or Escape / backdrop / swipe (handled by **`Offcanvas.Container`**).
 
 ```tsx
-import { Button, Offcanvas, useOffcanvasStore } from '@polyms/core'
+import { Button, Offcanvas, useOffcanvasStore } from '@polyms/core-ui'
 
 function App() {
   return (

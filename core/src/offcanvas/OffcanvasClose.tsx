@@ -7,11 +7,13 @@ type OffcanvasCloseProps = Drawer.Close.Props
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export const OffcanvasClose = forwardRef<HTMLButtonElement, OffcanvasCloseProps>((props, ref) => (
-  <Drawer.Close className='offcanvas-close' ref={ref} {...props}>
-    <CloseIcon height={20} width={20} />
-  </Drawer.Close>
-))
+export const OffcanvasClose = forwardRef<HTMLButtonElement, OffcanvasCloseProps>(
+  ({ children, ...props }, ref) => (
+    <Drawer.Close ref={ref} title='Close' {...props}>
+      {children ?? <CloseIcon height={20} width={20} />}
+    </Drawer.Close>
+  )
+)
 
 const CloseIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg

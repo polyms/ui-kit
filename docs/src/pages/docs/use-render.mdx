@@ -34,7 +34,7 @@ Re-exported **`useRender`** from **@base-ui/react** powers the **`render`** prop
 ## Typing
 
 ```tsx
-import { useRender } from '@polyms/core'
+import { useRender } from '@polyms/core-ui'
 
 type CardProps = useRender.ComponentProps<'div'>
 
@@ -50,7 +50,7 @@ export function Card({ className, render, ...props }: CardProps) {
 ## Button as anchor
 
 ```tsx
-import { Button } from '@polyms/core'
+import { Button } from '@polyms/core-ui'
 
 <Button render={<a href="/settings" />} variant="primary">
   Settings
@@ -60,7 +60,7 @@ import { Button } from '@polyms/core'
 ## Breadcrumb item customization
 
 ```tsx
-import { Breadcrumb } from '@polyms/core'
+import { Breadcrumb } from '@polyms/core-ui'
 
 <Breadcrumb.Item render={<span className="breadcrumb-item" />} active>
   Current page
