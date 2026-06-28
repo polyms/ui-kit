@@ -98,9 +98,14 @@ const toggle = <Toggle className='toggle' defaultPressed aria-label='Favorite' /
 Drive the pressed state externally with `pressed` and `onPressedChange`:
 
 ```tsx
-const [pressed, setPressed] = useState(false)
+import { Toggle } from '@polyms/core-ui'
+import { useState } from 'react'
 
-const toggle = <Toggle className='toggle' pressed={pressed} onPressedChange={setPressed} aria-label='Mute' />
+export default function ControlledToggle() {
+  const [pressed, setPressed] = useState(false)
+
+  return <Toggle className='toggle' pressed={pressed} onPressedChange={setPressed} aria-label='Mute' />
+}
 ```
 
 ## Toggle group

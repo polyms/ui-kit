@@ -1,16 +1,13 @@
 ---
 description: >-
-  Migrate existing app screens to @polyms/core-ui — Scan, Detect mode, Diagnose, Fix, preservation rules, redesign
-  pre-flight. Read for redesign, migrate, refresh, legacy, overhaul, re-skin, preserve brand, swap to core-ui.
+  Redesign existing screens with @polyms/core-ui. Use when migrating, refreshing, or re-skinning legacy UI.
+  Greenfield → components.md; package source → quality.md#maintainer.
+disable-model-invocation: true
 ---
 
 # Redesign with @polyms/core-ui
 
-Rewrite of [Taste Skill redesign](https://www.tasteskill.dev/) (`redesign-existing-projects`) for **product UI migration** — dashboards, settings, forms, tables, toolbars, overlays.
-
-Use this file when **upgrading existing app screens** to `@polyms/core-ui`. For greenfield screens, read [components.md](components.md) and [quality.md](quality.md). For **package source** work, read [quality.md#maintainer](quality.md#maintainer) instead.
-
-`@polyms/core-ui` **is** the target design system. Do not install shadcn/ui, Fluent, or parallel component libraries during a redesign.
+For **upgrading existing app screens** to `@polyms/core-ui`. `@polyms/core-ui` **is** the target design system — do not install shadcn/ui, Fluent, or parallel libraries during a redesign.
 
 ## Workflow
 

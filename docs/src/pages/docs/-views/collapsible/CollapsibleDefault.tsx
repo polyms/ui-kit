@@ -1,3 +1,5 @@
+import { ArrowRight01Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Collapsible } from '@polyms/core-ui'
 import { useState } from 'react'
 
@@ -9,16 +11,9 @@ export default function CollapsibleDefault() {
   return (
     <div className='grid grid-cols-2 gap-4 p-6'>
       {/* Uncontrolled */}
-      <Collapsible className='rounded-lg border border-line' defaultOpen>
+      <Collapsible className='overflow-clip rounded-lg border border-line' defaultOpen>
         <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium transition-colors hover:bg-surface'>
-          <svg
-            className='collapsible-icon h-4 w-4 transition-transform'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-          >
-            <path d='M9 5l7 7-7 7' strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} />
-          </svg>
+          <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
           Uncontrolled Collapsible (Default Open)
         </Collapsible.Trigger>
         <Collapsible.Panel>
@@ -30,16 +25,9 @@ export default function CollapsibleDefault() {
       </Collapsible>
 
       {/* Controlled */}
-      <Collapsible className='rounded-lg border border-line' onOpenChange={setOpen} open={open}>
+      <Collapsible className='overflow-clip rounded-lg border border-line' onOpenChange={setOpen} open={open}>
         <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium transition-colors hover:bg-surface'>
-          <svg
-            className='collapsible-icon h-4 w-4 transition-transform'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-          >
-            <path d='M9 5l7 7-7 7' strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} />
-          </svg>
+          <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
           Controlled Collapsible ({open ? 'Open' : 'Closed'})
         </Collapsible.Trigger>
         <Collapsible.Panel>
@@ -63,31 +51,24 @@ export default function CollapsibleDefault() {
 
       {/* FAQ Example */}
       <div className='col-span-2 space-y-2'>
-        <h3 className='mb-2 font-semibold text-fg'>FAQ Example</h3>
+        <h3 className='h3 mb-2'>FAQ Example</h3>
         {[
           {
             q: 'What is a Collapsible component?',
-            a: 'A collapsible is a UI pattern that shows and hides content. Perfect for FAQs, details, and reducing visual clutter.',
+            a: 'A collapsible shows and hides content on demand — useful for FAQs, order details, and progressive disclosure.',
           },
           {
             q: 'How do I customize the styling?',
-            a: 'You can apply custom classes to any part of the component. The trigger can be styled like any button element.',
+            a: 'Style the trigger with className or render={<Button … />}. Panel padding and borders are yours to layout.',
           },
           {
             q: 'Does it support nested collapsibles?',
-            a: 'Yes! You can nest collapsibles inside other collapsible panels for hierarchical content.',
+            a: 'Yes. Nest Collapsible roots inside Collapsible.Panel for hierarchical content.',
           },
         ].map(faq => (
-          <Collapsible className='rounded-lg border border-line' key={faq.q}>
+          <Collapsible className='overflow-clip rounded-lg border border-line' key={faq.q}>
             <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium transition-colors hover:bg-surface'>
-              <svg
-                className='collapsible-icon h-4 w-4 shrink-0 transition-transform'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path d='M9 5l7 7-7 7' strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} />
-              </svg>
+              <HugeiconsIcon className='collapsible-icon shrink-0' icon={ArrowRight01Icon} size={16} />
               {faq.q}
             </Collapsible.Trigger>
             <Collapsible.Panel>

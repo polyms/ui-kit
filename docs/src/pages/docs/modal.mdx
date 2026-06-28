@@ -154,10 +154,33 @@ const modal = (
 Control modal width with the `size` prop on `Modal.Content`. The `full` size makes the modal occupy the entire viewport.
 
 ```tsx
-const small = <Modal.Content size='sm'>Small modal</Modal.Content>
-const large = <Modal.Content size='lg'>Large modal</Modal.Content>
-const xl = <Modal.Content size='xl'>Extra large modal</Modal.Content>
-const full = <Modal.Content size='full'>Full screen modal</Modal.Content>
+const smallModal = (
+  <Modal.Content size='sm'>
+    <Modal.Header>Small modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+
+const largeModal = (
+  <Modal.Content size='lg'>
+    <Modal.Header>Large modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+
+const xlModal = (
+  <Modal.Content size='xl'>
+    <Modal.Header>Extra large modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+
+const fullModal = (
+  <Modal.Content size='full'>
+    <Modal.Header>Full screen modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
 ```
 
 ## Scrollable Content

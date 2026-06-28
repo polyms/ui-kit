@@ -1,16 +1,13 @@
 ---
 description: >-
-  Implement brand identity in code on @polyms/core-ui — primary token map, light/dark surfaces, BRAND.md, component
-  touchpoints, brand pre-flight. Read for brand, rebrand, theme.css, accent, identity. Not brand image generation.
+  Brand kit for @polyms/core-ui — primary accent, surfaces, BRAND.md tokens. Not brand image generation.
+  Migrating old screens → also load redesign.md.
+disable-model-invocation: true
 ---
 
 # Brand Kit → @polyms/core-ui
 
-Rewrite of [Taste Skill brandkit](https://www.tasteskill.dev/) for **implementing brand identity in code** — not generating identity-deck images.
-
-Use this file when a consumer app needs a **coherent brand layer** on top of `@polyms/core-ui`: primary accent, surfaces, voice, and component applications. For migrating old screens, also read [redesign.md](redesign.md). For day-to-day UI rules, read [theming.md](theming.md) and [quality.md](quality.md).
-
-If the user explicitly wants **brand-guidelines board images**, use Taste Skill `brandkit` externally. This skill covers **tokens, composition, and shippable UI**.
+A **token map + application rules** so every screen reads as one product. For day-to-day color rules: [theming.md](theming.md). For migrating existing screens: [redesign.md](redesign.md).
 
 ## Core principle
 
@@ -204,6 +201,8 @@ When the user wants a portable brand doc in the consumer repo, create `BRAND.md`
 Skill agent checklist (authoritative — not the `BRAND.md` template above):
 
 ## Brand pre-flight
+
+Run before shipping branded shell changes. **If any item fails, the brand pass is not done.**
 
 - [ ] `@polyms/core-ui` styles imported; overrides live in **consumer** CSS only
 - [ ] `primary-*` ramp complete enough for hover/active (`btn-*`, `item-primary` use `primary-700` / mixes)

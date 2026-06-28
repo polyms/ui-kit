@@ -1,12 +1,12 @@
 ---
 description: >-
-  @polyms/core-ui CSS-only utilities — table, badge, card, link, item-* interaction, typography h1–h6, z-index.
-  Read for table, badge, item-*, link utilities when no exported React primitive fits.
+  CSS-only utilities — table, badge, card, link, item-* interaction states, typography h1–h6.
+  Use when no React component fits: tables, badges, ghost nav rows, skeleton.
 ---
 
 # CSS Utilities
 
-Some design-system surfaces are CSS classes only. When no exported React component exists, use semantic HTML plus these classes instead of inventing component APIs.
+When no exported React component exists, use semantic HTML + these classes.
 
 ## CSS-Only Classes
 

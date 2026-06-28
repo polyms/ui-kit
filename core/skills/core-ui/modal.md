@@ -1,16 +1,14 @@
 ---
 description: >-
-  @polyms/core-ui Modal and Offcanvas — same overlay pattern (Container, showModal, showOffcanvas), compound trees,
-  scrollable, render Button on triggers. Read for modal, dialog, offcanvas, drawer, confirmation. Form in body → field.md.
+  Modal and Offcanvas overlays. Use when building a dialog, drawer, confirmation,
+  delete confirm, or calling showModal/showOffcanvas. Form inside overlay → also load field.md.
 ---
 
 # Modal & Offcanvas
 
-Deep reference for **`Modal`** and **`Offcanvas`** — same overlay pattern (compound tree, portal shell, programmatic store + **`Container`**), different layout (centered dialog vs edge panel).
+Same overlay pattern — compound tree, portal shell, programmatic store + **`Container`** — different layout: `Modal` centers, `Offcanvas` slides from an edge.
 
-Read for **dialogs**, **drawers**, **confirmations**, **`showModal`**, **`showOffcanvas`**.
-
-Setup: [setup.md](setup.md). `Button` + `render` on triggers: [components.md#compose-button-through-render](components.md#compose-button-through-render). Forms inside body: [field.md](field.md) — compose at usage site.
+Setup: [setup.md](setup.md). `Button` + `render` on triggers: [button.md](button.md#compose-button-through-render). Forms inside body: [field.md](field.md).
 
 ## Choose which
 
@@ -38,17 +36,19 @@ Both: declarative `<Root>` + `Trigger` + `Content` tree, or `use*Store.getState(
 ```tsx
 import { Button, Modal } from '@polyms/core-ui'
 
-;<Modal>
-  <Modal.Trigger render={<Button variant='primary' />}>Edit profile</Modal.Trigger>
-  <Modal.Content size='lg' scrollable>
-    <Modal.Header>Edit profile</Modal.Header>
-    <Modal.Body>{/* Field trees — field.md */}</Modal.Body>
-    <Modal.Footer>
-      <Modal.Close render={<Button rounded size='xl' />}>Cancel</Modal.Close>
-      <Button variant='primary'>Save</Button>
-    </Modal.Footer>
-  </Modal.Content>
-</Modal>
+const editProfileModal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Edit profile</Modal.Trigger>
+    <Modal.Content size='lg' scrollable>
+      <Modal.Header>Edit profile</Modal.Header>
+      <Modal.Body>{/* Field trees — field.md */}</Modal.Body>
+      <Modal.Footer>
+        <Modal.Close render={<Button rounded size='xl' />}>Cancel</Modal.Close>
+        <Button variant='primary'>Save</Button>
+      </Modal.Footer>
+    </Modal.Content>
+  </Modal>
+)
 ```
 
 | Rule                       | Detail                                                                                                            |
@@ -77,19 +77,21 @@ No `Offcanvas.Footer` — actions live in `Offcanvas.Body` or header area.
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-;<Offcanvas swipeDirection='right'>
-  <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Open filters</Offcanvas.Trigger>
-  <Offcanvas.Content size='lg'>
-    <Offcanvas.Header>
-      <Offcanvas.Title>Filters</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Description>Optional subtitle.</Offcanvas.Description>
-    <Offcanvas.Body>
-      {/* Field trees or lists — field.md */}
-      <Offcanvas.Close render={<Button rounded />}>Done</Offcanvas.Close>
-    </Offcanvas.Body>
-  </Offcanvas.Content>
-</Offcanvas>
+const filtersOffcanvas = (
+  <Offcanvas swipeDirection='right'>
+    <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Open filters</Offcanvas.Trigger>
+    <Offcanvas.Content size='lg'>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Filters</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Description>Optional subtitle.</Offcanvas.Description>
+      <Offcanvas.Body>
+        {/* Field trees or lists — field.md */}
+        <Offcanvas.Close render={<Button rounded />}>Done</Offcanvas.Close>
+      </Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
 ```
 
 | Rule                 | Detail                                                                                                                              |
@@ -183,8 +185,10 @@ function openNotifications() {
 
 ## Pre-flight
 
-- [ ] Correct primitive — Modal vs Offcanvas
-- [ ] Full compound tree (Modal: Header, Body, Footer; Offcanvas: Header, Description placement, Body)
-- [ ] Matching `Container` mounted if using `showModal` / `showOffcanvas`
-- [ ] `Modal.Trigger`, footer `Modal.Close`, `Offcanvas.Trigger`, and body `Offcanvas.Close` use `render={<Button … />}` when styled as buttons (not built-in offcanvas icon chrome)
-- [ ] `scrollable` on `Modal.Content` when body is long or has forms
+- [ ] **Primitive** — `Modal` (blocking, centered) vs `Offcanvas` (edge panel) matches intent ([Choose which](#choose-which)).
+- [ ] **Compound tree** — Modal: `Header` + `Body` + `Footer`; Offcanvas: `Header` + `Description` (direct child of `Content`, before `Body`) + `Body`; no invented flat imports.
+- [ ] **Container** — matching `Modal.Container` / `Offcanvas.Container` mounted when using `showModal` / `showOffcanvas` ([setup.md#app-shell](setup.md#app-shell)).
+- [ ] **Button triggers** — `Modal.Trigger`, footer `Modal.Close`, `Offcanvas.Trigger`, body `Offcanvas.Close` use `render={<Button … />}` with `children` for labeled actions — not `className='btn …'` on primitives ([button.md](button.md#compose-button-through-render)).
+- [ ] **Scroll** — `scrollable` on `Modal.Content` when body has a long form or list.
+
+**Done when:** the overlay uses a full compound tree; programmatic flows have a mounted `Container`; every styled trigger/close is traceable to `render={<Button … />}`; long bodies won't clip without `scrollable`.

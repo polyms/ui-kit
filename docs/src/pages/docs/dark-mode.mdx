@@ -146,11 +146,7 @@ const layout = (
 After importing **`@polyms/core-ui`** styles, use Tailwind **`dark:`** for one-off overrides in app-specific layout:
 
 ```tsx
-const layout = (
-  <div className='bg-white dark:bg-surface text-slate-900 dark:text-fg border border-slate-200 dark:border-line'>
-    …
-  </div>
-)
+const layout = <div className='border border-line bg-body text-fg dark:bg-surface'>…</div>
 ```
 
 Works with responsive and state variants: **`md:dark:bg-surface`**, **`hover:dark:bg-surface`**, etc.

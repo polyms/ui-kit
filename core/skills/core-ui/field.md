@@ -1,22 +1,20 @@
 ---
 description: >-
-  @polyms/core-ui Field deep reference — compound Field.Label/Control/Feedback, Field.Floating, icons, validation,
-  textarea, debounce, native forms. Read for form, input, field, validation. Label tone in quality.md#field-label-copy.
+  Field and Field.Floating. Use when building forms, inputs, validation, textarea, or debounced search.
+  Label tone → quality.md#field-label-copy. Form in overlay → also load modal.md.
 ---
 
 # Field
 
-Deep reference for **`Field`** and **`Field.Floating`**. Read when the task involves **forms**, **inputs**, **validation**, **textarea**, or **debounced search**.
-
-Compound overview and other components: [components.md](components.md). Label tone: [quality.md](quality.md#field-label-copy).
+Compound overview: [components.md](components.md). Label tone: [quality.md](quality.md#field-label-copy).
 
 ## Choose the right API
 
-| Intent                                                   | Use                                                                        |
-| -------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Settings, signup, checkout, validation errors            | **`Field`** compound tree                                                  |
-| Toolbar / table search, floating label, debounced filter | **`Field.Floating`** (standalone)                                          |
-| Quantities, steppers, label scrub                        | **`NumberField`** — [components.md#numberfield](components.md#numberfield) |
+| Intent                                                   | Use                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------ |
+| Settings, signup, checkout, validation errors            | **`Field`** compound tree                              |
+| Toolbar / table search, floating label, debounced filter | **`Field.Floating`** (standalone)                      |
+| Quantities, steppers, label scrub                        | **`NumberField`** — [inputs.md](inputs.md#numberfield) |
 
 **`Field.Floating` is not a child of `Field`.** Do not nest them.
 
@@ -31,12 +29,14 @@ Import from the barrel: `Field`, `Field.Label`, `Field.Control`, `Field.Descript
 ```tsx
 import { Field } from '@polyms/core-ui'
 
-;<Field required invalid={hasError} name='email'>
-  <Field.Label>Let me know your email?</Field.Label>
-  <Field.Control type='email' placeholder='tifa.lockhart@polyms.dev' />
-  <Field.Description>We'll only use this for account updates.</Field.Description>
-  <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
-</Field>
+const emailField = (
+  <Field required invalid={hasError} name='email'>
+    <Field.Label>Let me know your email?</Field.Label>
+    <Field.Control type='email' placeholder='tifa.lockhart@polyms.dev' />
+    <Field.Description>We'll only use this for account updates.</Field.Description>
+    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+  </Field>
+)
 ```
 
 ### Child order and icons
@@ -134,7 +134,9 @@ For validation UI, use compound **`Field`** or show errors via `children`.
 
 ## Pre-flight
 
-- [ ] Compound `Field` vs `Field.Floating` vs raw input — correct choice
-- [ ] `invalid` / `required` / `size` / `name` on root; control props on `Field.Control`
-- [ ] `Field.Feedback` + `defaultShowOnError` when showing errors
-- [ ] Conversational `Field.Label` on user-facing forms
+- [ ] **API choice** — `Field` compound vs `Field.Floating` vs `NumberField` vs raw input matches intent ([Choose the right API](#choose-the-right-api)).
+- [ ] **Props on correct node** — `invalid` / `required` / `size` / `name` on `Field` root; `disabled`, `debounce`, `type`, etc. on `Field.Control`; never `invalid` on `Field.Control`.
+- [ ] **Error visibility** — `Field.Feedback` present when showing validation; `defaultShowOnError` when message must stay visible after blur.
+- [ ] **Label tone** — user-facing `Field.Label` is conversational, not marketing ([quality.md#field-label-copy](quality.md#field-label-copy)).
+
+**Done when:** every field in the tree uses the correct API; you can point to each prop on its documented node; labels read naturally on a real form screen.

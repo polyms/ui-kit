@@ -1,7 +1,8 @@
 ---
 description: >-
-  @polyms/core-ui product UI quality — task read, anti-slop, copy tells, visual consistency, list primitives,
-  output completeness, pre-flight. Read for shipped UI, demos, -views/, field label tone. Not marketing landing pages.
+  Product UI quality for @polyms/core-ui. Use when shipping screens, demos, -views/, pre-flight checks,
+  or fixing anti-slop / field label tone. Not marketing landing pages.
+disable-model-invocation: true
 ---
 
 # Product UI Quality
@@ -16,26 +17,29 @@ Infer the task before writing code. State one line:
 
 **"Reading this as: \<surface> for \<audience>, using @polyms/core-ui, \<density> density."**
 
-| Signal                                                                  | Surface    | What to do                                                                                                         |
-| ----------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| Form, field, validation                                                 | App screen | [field.md](field.md) + [quality.md#field-label-copy](quality.md#field-label-copy)                                  |
-| Button, CTA, icon button                                                | App screen | [components.md#button](components.md#button)                                                                       |
-| Toast, notification                                                     | App screen | [setup.md#toast](setup.md#toast) · [components.md#toast](components.md#toast)                                      |
-| Modal, Offcanvas, dialog, drawer, delete confirm                        | App screen | [modal.md](modal.md) — not Toast for blocking confirm                                                              |
-| Form in modal/offcanvas, modal form, filter panel, side panel with form | App screen | [field.md](field.md) + [modal.md](modal.md); `scrollable` on `Modal.Content` when long                             |
-| Switch, Popover, Tooltip                                                | App screen | [components.md#switch](components.md#switch) · [popover](components.md#popover) · [tooltip](components.md#tooltip) |
-| Table, tabular data                                                     | App screen | [css-utilities.md#table](css-utilities.md#table)                                                                   |
-| Select, Tabs, Menu, Toolbar, nav, settings                              | App screen | [components.md](components.md) · [select](components.md#select) · [tabs](components.md#tabs)                       |
-| Accordion, FAQ, expand/collapse sections                                | App screen | [components.md#accordion](components.md#accordion) · single unit → [collapsible](components.md#collapsible)        |
-| Alert, banner, inline status                                            | App screen | [components.md#alert](components.md#alert)                                                                         |
-| NumberField, quantity, stepper                                          | App screen | [components.md#numberfield](components.md#numberfield)                                                             |
-| Spinner, loading, pending fetch                                         | App screen | [components.md#spinner](components.md#spinner) · `.skeleton` → [css-utilities.md](css-utilities.md)                |
-| Code split, lazy import, federated remote                               | App setup  | [components.md#dynamic-import](components.md#dynamic-import)                                                       |
-| New consumer app shell                                                  | App setup  | Read [setup.md](setup.md); mount overlay containers once                                                           |
-| New consumer app / brand theming                                        | Brand kit  | Read [brandkit.md](brandkit.md); map accent to `primary-*`                                                         |
-| Docs live demo (`-views/`)                                              | Docs demo  | Real compound trees; `@polyms/core-ui` barrel — [Sample Data and Docs Demos](#sample-data-and-docs-demos)          |
-| Extend or restyle existing screen                                       | Redesign   | Read [redesign.md](redesign.md); run Scan → Diagnose → Fix                                                         |
-| Library component or CSS in the package source                          | Maintainer | [Maintainer](#maintainer)                                                                                          |
+Full keyword → file routing: **[SKILL.md#skill-routing](SKILL.md#skill-routing)**. Use the table below to infer surface and density — not as a second routing source.
+
+| Signal                                                                  | Surface    | What to do                                                                                                |
+| ----------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
+| Form, field, validation                                                 | App screen | [field.md](field.md) + [quality.md#field-label-copy](quality.md#field-label-copy)                         |
+| Button, CTA, icon button                                                | App screen | [button.md](button.md)                                                                                    |
+| Toast, notification                                                     | App screen | [setup.md#toast](setup.md#toast) · [display.md](display.md#toast)                                         |
+| Modal, Offcanvas, dialog, drawer, delete confirm                        | App screen | [modal.md](modal.md) — not Toast for blocking confirm                                                     |
+| Form in modal/offcanvas, modal form, filter panel, side panel with form | App screen | [field.md](field.md) + [modal.md](modal.md); `scrollable` on `Modal.Content` when long                    |
+| Checkbox, Radio, RadioGroup                                             | App screen | [inputs.md](inputs.md#field-checkbox-radio)                                                               |
+| Switch, Toggle, ToggleGroup, Popover, Tooltip                           | App screen | [inputs.md](inputs.md#switch) · [inputs.md](inputs.md#toggle) · [overlays.md](overlays.md)                |
+| Table, tabular data                                                     | App screen | [css-utilities.md#table](css-utilities.md#table)                                                          |
+| Select, Tabs, Menu, Toolbar, nav, settings                              | App screen | [navigation.md](navigation.md) · [inputs.md](inputs.md#select) · [navigation.md](navigation.md#tabs)      |
+| Accordion, FAQ, expand/collapse sections                                | App screen | [display.md](display.md#accordion) · single unit → [display.md](display.md#collapsible)                   |
+| Alert, banner, inline status                                            | App screen | [display.md](display.md#alert)                                                                            |
+| NumberField, quantity, stepper                                          | App screen | [inputs.md](inputs.md#numberfield)                                                                        |
+| Spinner, loading, pending fetch                                         | App screen | [display.md](display.md#spinner) · `.skeleton` → [css-utilities.md](css-utilities.md)                     |
+| Code split, lazy import, federated remote                               | App setup  | [components.md#dynamic-import](components.md#dynamic-import)                                              |
+| New consumer app shell                                                  | App setup  | Read [setup.md](setup.md); mount overlay containers once                                                  |
+| New consumer app / brand theming                                        | Brand kit  | Read [brandkit.md](brandkit.md); map accent to `primary-*`                                                |
+| Docs live demo (`-views/`)                                              | Docs demo  | Real compound trees; `@polyms/core-ui` barrel — [Sample Data and Docs Demos](#sample-data-and-docs-demos) |
+| Extend or restyle existing screen                                       | Redesign   | Read [redesign.md](redesign.md); run Scan → Diagnose → Fix                                                |
+| Library component or CSS in the package source                          | Maintainer | [Maintainer](#maintainer)                                                                                 |
 
 ## Maintainer
 
@@ -105,7 +109,7 @@ Avoid LLM-default patterns that fight this design system:
 - **No div-based fake UI** — do not simulate a modal, dropdown, or data table with styled `<div>`s when the library provides the real component.
 - **No parallel button/input styles** — use **`Button`** / `Field.*` / `item-*`, not one-off `rounded-lg bg-blue-600 px-4` or hand-written `btn size-xl`.
 - **No invented Button props** — there is no `content` prop; use `size`, `variant`, `rounded`, `outlined`.
-- **No `className='btn …'` on `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close`** — use `render={<Button … />}` (built-in offcanvas icon chrome is library-owned; see [modal.md](modal.md), [components.md#compose-button-through-render](components.md#compose-button-through-render)).
+- **No `className='btn …'` on `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close`** — use `render={<Button … />}` (built-in offcanvas icon chrome is library-owned; see [modal.md](modal.md), [button.md](button.md#compose-button-through-render)).
 - **No large Tailwind bundles on library shells** — `Modal.Content`, `Menu.Content`, `Select.Content`, etc. are already styled.
 - **No hand-rolled SVG icons** — use `@hugeicons/react` + `@hugeicons/core-free-icons` (same as docs demos). One icon family per screen.
 - **No arbitrary z-index spam** — use `.z-modal`, `.z-dropdown`, `.z-tooltip`, `.z-toast` from [css-utilities.md](css-utilities.md).
@@ -149,7 +153,7 @@ Live component-library demos should:
 2. Use **interactive state** where the component expects it (`open`, `invalid`, `disabled`, `checked`).
 3. Use **natural field labels** on user-facing forms (see [Field label copy](#field-label-copy)); keep descriptions and feedback concrete, not marketing prose.
 4. Match **import style** of sibling demos (`@polyms/core-ui` barrel).
-5. Style overlay/menu triggers with **`render={<Button … />}`** — not `className='btn …'` on primitives (see [components.md#compose-button-through-render](components.md#compose-button-through-render)).
+5. Style overlay/menu triggers with **`render={<Button … />}`** — not `className='btn …'` on primitives (see [button.md](button.md#compose-button-through-render)).
 6. **Accordion demos:** plain text in `Accordion.Panel` — no extra `<p>` for padding; do not override core `accordion-*` with unscoped docs CSS.
 7. **Collapsible demos:** custom padding on trigger/panel is OK — unlike `Accordion.Panel`, there is no built-in body wrapper.
 8. **New demos:** `@hugeicons/react` for icons — avoid new inline SVG chevrons in `-views/`.

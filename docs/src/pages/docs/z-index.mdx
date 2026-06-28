@@ -68,18 +68,18 @@ Named stacking helpers backed by **`--zindex-*`** CSS variables. Use these class
 ## Usage
 
 ```tsx
-
 const layout = (
-<div className='fixed inset-0 z-modal-backdrop bg-slate-900/40' aria-hidden />
-<div className='fixed z-modal rounded-xl bg-white p-6 shadow-overlay' role='dialog'>
-  …
-</div>
-
+  <>
+    <div className='fixed inset-0 z-modal-backdrop bg-slate-900/40' aria-hidden />
+    <div className='fixed z-modal rounded-xl bg-body p-6 shadow-overlay' role='dialog'>
+      …
+    </div>
+  </>
 )
 ```
 
 ```tsx
-const header = <header className='sticky top-0 z-sticky border-slate-200 border-b bg-white'>…</header>
+const header = <header className='sticky top-0 z-sticky border-line border-b bg-body'>…</header>
 ```
 
 ## Tokens

@@ -716,29 +716,30 @@ Components use **compound (dot) notation** — keep **Trigger → Content → se
 import { Alert, Button, Field, Modal } from '@polyms/core-ui'
 
 const alert = (
-<Alert variant='success' onDismiss={handleDismiss}>
-  <Alert.Heading>Success!</Alert.Heading>
-  Payment processed successfully.
-</Alert>
+  <>
+    <Alert variant='success' onDismiss={handleDismiss}>
+      <Alert.Heading>Success!</Alert.Heading>
+      Payment processed successfully.
+    </Alert>
 
-<Modal>
-  <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
-  <Modal.Content size='lg' scrollable>
-    <Modal.Header>Account settings</Modal.Header>
-    <Modal.Body>{/* primary content */}</Modal.Body>
-    <Modal.Footer>
-      <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-      <Button variant='primary'>Save</Button>
-    </Modal.Footer>
-  </Modal.Content>
-</Modal>
+    <Modal>
+      <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
+      <Modal.Content size='lg' scrollable>
+        <Modal.Header>Account settings</Modal.Header>
+        <Modal.Body>{/* primary content */}</Modal.Body>
+        <Modal.Footer>
+          <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+          <Button variant='primary'>Save</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
 
-<Field name='email'>
-  <Field.Label>Email</Field.Label>
-  <Field.Control />
-  <Field.Description>We never share your email.</Field.Description>
-</Field>
-
+    <Field name='email'>
+      <Field.Label>Email</Field.Label>
+      <Field.Control />
+      <Field.Description>We never share your email.</Field.Description>
+    </Field>
+  </>
 )
 ```
 

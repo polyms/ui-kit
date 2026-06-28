@@ -64,11 +64,14 @@ const switch = <Switch defaultChecked label='Dark mode' />
 Control the switch state externally using `checked` and `onChange` :
 
 ```tsx
-const [enabled, setEnabled] = useState(false)
+import { Switch } from '@polyms/core-ui'
+import { useState } from 'react'
 
-const switch = (
-  <Switch checked={enabled} onChange={(e) => setEnabled(e.target.checked)} label='Enable feature' />
-)
+export default function ControlledSwitch() {
+  const [enabled, setEnabled] = useState(false)
+
+  return <Switch checked={enabled} onChange={(e) => setEnabled(e.target.checked)} label='Enable feature' />
+}
 ```
 
 ## API Reference

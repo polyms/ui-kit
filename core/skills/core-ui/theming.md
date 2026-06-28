@@ -1,12 +1,10 @@
 ---
 description: >-
-  @polyms/core-ui theming — slate chrome, semantic tones (primary, danger, …), dark mode, bg-body, text-fg, item-*
-  ghost surfaces, logical-direction spacing. Read for dark mode, theme, colors, contrast.
+  Theming — slate chrome, semantic tones, dark mode, bg-body/text-fg tokens, item-* ghost surfaces.
+  Use when setting colors, toggling dark mode, or using semantic utilities.
 ---
 
 # Theming
-
-`@polyms/core-ui` uses semantic tokens, Tailwind v4 utilities, and class-based dark mode.
 
 ## Colors
 

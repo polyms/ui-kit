@@ -42,7 +42,7 @@ const collapsible = (
   <Collapsible defaultOpen>
     <Collapsible.Trigger>Show more details</Collapsible.Trigger>
     <Collapsible.Panel>
-      <div className='p-4'>Hidden content that expands and collapses</div>
+      <div className='border-line border-t p-4 text-muted'>Hidden content that expands and collapses</div>
     </Collapsible.Panel>
   </Collapsible>
 )
@@ -59,11 +59,13 @@ The root component that manages the collapsible state.
 Button or element that toggles the panel visibility. Can contain icons, text, or any custom content.
 
 ```tsx
+import { ArrowRight01Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Collapsible } from '@polyms/core-ui'
 
 const collapsibleTrigger = (
-  <Collapsible.Trigger render={<Button variant='ghost' />}>
-    <ChevronIcon className='collapsible-icon' />
+  <Collapsible.Trigger render={<Button />}>
+    <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
     Toggle content
   </Collapsible.Trigger>
 )
@@ -76,7 +78,7 @@ The content container that expands and collapses. Automatically handles height t
 ```tsx
 const collapsiblePanel = (
   <Collapsible.Panel>
-    <div className='p-4 border-t'>Your collapsible content here</div>
+    <div className='border-line border-t p-4'>Your collapsible content here</div>
   </Collapsible.Panel>
 )
 ```
@@ -101,14 +103,19 @@ const collapsible = (
 Control the open state externally using `open` and `onOpenChange`:
 
 ```tsx
-const [isOpen, setIsOpen] = useState(false)
+import { Collapsible } from '@polyms/core-ui'
+import { useState } from 'react'
 
-const collapsible = (
-  <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-    <Collapsible.Trigger>{isOpen ? 'Hide' : 'Show'} details</Collapsible.Trigger>
-    <Collapsible.Panel>Controlled content</Collapsible.Panel>
-  </Collapsible>
-)
+export default function ControlledCollapsible() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Collapsible.Trigger>{isOpen ? 'Hide' : 'Show'} details</Collapsible.Trigger>
+      <Collapsible.Panel>Controlled content</Collapsible.Panel>
+    </Collapsible>
+  )
+}
 ```
 
 ## Examples
@@ -116,26 +123,30 @@ const collapsible = (
 ### FAQ Accordion
 
 ```tsx
+import { ArrowRight01Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { Collapsible } from '@polyms/core-ui'
+
 const faqs = [
-  { q: 'What is Core-UI?', a: 'A production-ready React component library...' },
-  { q: 'Is it free?', a: 'Yes, Core-UI is open source under MIT license...' },
+  { q: 'How do shipping updates work?', a: 'We email tracking when your order leaves the warehouse.' },
+  { q: 'Can I change the delivery address?', a: 'Yes, until the order status shows In transit.' },
 ]
 
-<div className="space-y-2">
-  {faqs.map((faq, i) => (
-    <Collapsible key={i} className="border rounded-lg">
-      <Collapsible.Trigger className="w-full p-4 text-left font-medium hover:bg-surface">
-        <ChevronIcon className="collapsible-icon mr-2" />
-        {faq.q}
-      </Collapsible.Trigger>
-      <Collapsible.Panel>
-        <div className="p-4 pt-0 text-muted">
-          {faq.a}
-        </div>
-      </Collapsible.Panel>
-    </Collapsible>
-  ))}
-</div>
+const faqList = (
+  <div className='space-y-2'>
+    {faqs.map((faq) => (
+      <Collapsible className='rounded-lg border border-line' key={faq.q}>
+        <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium hover:bg-surface'>
+          <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
+          {faq.q}
+        </Collapsible.Trigger>
+        <Collapsible.Panel>
+          <div className='border-line border-t p-4 pt-0 text-muted'>{faq.a}</div>
+        </Collapsible.Panel>
+      </Collapsible>
+    ))}
+  </div>
+)
 ```
 
 ### With Custom Icon Rotation
@@ -143,10 +154,14 @@ const faqs = [
 The `.collapsible-icon` class automatically rotates 90° when the panel is open:
 
 ```tsx
-const collapsible = (
+import { ArrowRight01Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { Collapsible } from '@polyms/core-ui'
+
+const collapsibleWithIcon = (
   <Collapsible>
     <Collapsible.Trigger className='flex items-center gap-2'>
-      <ChevronRightIcon className='collapsible-icon transition-transform' />
+      <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
       Expand section
     </Collapsible.Trigger>
     <Collapsible.Panel>Content with rotating icon</Collapsible.Panel>
@@ -161,11 +176,11 @@ const collapsible = (
   <Collapsible>
     <Collapsible.Trigger>Parent section</Collapsible.Trigger>
     <Collapsible.Panel>
-      <div className='p-4'>
+      <div className='border-line border-t p-4 text-muted'>
         <Collapsible>
           <Collapsible.Trigger>Nested section</Collapsible.Trigger>
           <Collapsible.Panel>
-            <div className='p-4'>Nested content</div>
+            <div className='border-line border-t p-4 text-muted'>Nested content</div>
           </Collapsible.Panel>
         </Collapsible>
       </div>

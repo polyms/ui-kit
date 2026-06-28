@@ -43,22 +43,23 @@ Provide contextual feedback messages for typical user actions with a handful of 
 ```tsx
 import { Alert } from '@polyms/core-ui'
 
-const alert = (
-<Alert variant="primary">
-  <Alert.Heading>Success!</Alert.Heading>
-  Your changes have been saved successfully.
-</Alert>
+const alerts = (
+  <>
+    <Alert variant='primary'>
+      <Alert.Heading>Success!</Alert.Heading>
+      Your changes have been saved successfully.
+    </Alert>
 
-<Alert variant="danger" onDismiss={() => console.log('Dismissed')}>
-  <Alert.Heading>Error occurred</Alert.Heading>
-  Please check your input and try again.
-</Alert>
+    <Alert variant='danger' onDismiss={() => console.log('Dismissed')}>
+      <Alert.Heading>Error occurred</Alert.Heading>
+      Please check your input and try again.
+    </Alert>
 
-<Alert variant="info" badge="New">
-  <Alert.Heading>Policy update</Alert.Heading>
-  Review the latest changes to our terms of service.
-</Alert>
-
+    <Alert variant='info' badge='New'>
+      <Alert.Heading>Policy update</Alert.Heading>
+      Review the latest changes to our terms of service.
+    </Alert>
+  </>
 )
 ```
 

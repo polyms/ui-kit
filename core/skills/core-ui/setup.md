@@ -1,12 +1,9 @@
 ---
-description: >-
-Wire @polyms/core-ui in consumer apps — install, styles import, app shell, Toast, Modal.Container, Offcanvas.Container,
-  programmatic showModal/showOffcanvas (zustand), core-ui-skill installer. Read for new app, install, containers, toast.
+description: Wire @polyms/core-ui into a new consumer app — install, styles, app shell, Toast/Modal/Offcanvas containers.
+disable-model-invocation: true
 ---
 
 # Setup
-
-Use this when wiring `@polyms/core-ui` into a consumer app.
 
 ## Install
 
@@ -63,7 +60,7 @@ Omit `Modal.Container` / `Offcanvas.Container` if you only use declarative `<Mod
 
 ## Toast
 
-Provider + **`Toast.Container`** under **`Toast`**. Patterns and `Toast.useToastManager()`: **[components.md#toast](components.md#toast)**. Shell with overlay containers: [App shell](#app-shell).
+Provider + **`Toast.Container`** under **`Toast`**. Patterns and `Toast.useToastManager()`: **[display.md](display.md#toast)**. Shell with overlay containers: [App shell](#app-shell).
 
 ## Programmatic overlays
 
