@@ -12,17 +12,20 @@ import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin'
 import { stripFrontmatter } from './plugins/stripFrontmatter.plugin'
 
 export default defineConfig({
-  root: __dirname,
+  // Uncomment this if you are using workers.
+  // worker: {
+  //  plugins: [ nxViteTsPaths() ],
+  // },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    emptyOutDir: true,
+    outDir: '../dist/docs',
+    reportCompressedSize: true,
+  },
   // base: '/',
   cacheDir: '../node_modules/.vite/docs',
-  server: {
-    port: 4200,
-    host: 'localhost',
-  },
-  preview: {
-    port: 4300,
-    host: 'localhost',
-  },
   plugins: [
     react(),
     nxViteTsPaths(),
@@ -37,17 +40,14 @@ export default defineConfig({
     svgr({ include: '**/*.svg' }),
     tailwindcssVite(),
   ],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
-  build: {
-    outDir: '../dist/docs',
-    emptyOutDir: true,
-    reportCompressedSize: true,
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
+  preview: {
+    host: 'localhost',
+    port: 4300,
+  },
+  root: __dirname,
+  server: {
+    host: 'localhost',
+    port: 4200,
   },
   // test: {
   //   watch: false,

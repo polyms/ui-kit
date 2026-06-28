@@ -27,52 +27,85 @@ export default defineConfig(async ({ mode }) => {
   const outDir = path.join(__dirname, process.env.OUTDIR ?? '../dist/core')
 
   return {
-    root: __dirname,
-    cacheDir: '../node_modules/.vite/core',
-    server: {
-      port: 5173,
-      host: '0.0.0.0',
-    },
-    preview: {
-      port: 6173,
-      host: '0.0.0.0',
-      allowedHosts: ['local.polyms.app'],
-      headers: {
-        'Access-Control-Allow-Origin': '*',
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true,
       },
+      cssCodeSplit: true,
+      emptyOutDir: true,
+      lib: {
+        // Could also be a dictionary or array of multiple entry points.
+        entry: { index: 'src/index.ts', style: 'src/styles/tailwind.css' },
+        fileName: (format, entryName) => {
+          const extMap: Partial<Record<typeof format, string>> = {
+            es: 'mjs',
+            umd: 'js',
+          }
+          return `${entryName}.${extMap[format]}`
+        },
+        // Change this to the formats you want to support.
+        // Don't forget to update your package.json as well.
+        formats: ['es' as const],
+        name: 'core',
+      },
+      manifest: true,
+      outDir,
+      reportCompressedSize: true,
+      // Rolldown preserves `require()` for externals; browser bundles need `import` (see rolldown.rs bundling-cjs).
+      // Keep react out of top-level `external` here — handled by esmExternalRequirePlugin's own list.
+      rolldownOptions: {
+        external: ['use-sync-external-store', 'zustand'],
+        output: {
+          assetFileNames: assetInfo => {
+            if (assetInfo.names.some(name => name.endsWith('.css'))) {
+              return isLocal ? 'styles.css' : 'styles-[hash].css'
+            }
+            return '[name]-[hash][extname]'
+          },
+          chunkFileNames(chunkInfo) {
+            if (chunkInfo.name === 'index' && chunkInfo.facadeModuleId) {
+              const match = chunkInfo.facadeModuleId.match(/\/([^/]*)(?=\/index.ts)/)
+              if (match) return `${match[1]}-[hash].mjs`
+            }
+            return '[name]-[hash].mjs'
+          },
+          entryFileNames: '[name].mjs',
+          footer: chunk => (chunk.isEntry ? footer(mode, version) : ''),
+          globals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+            'react/jsx-runtime': 'jsxRuntime',
+          },
+        },
+        plugins: [
+          esmExternalRequirePlugin({
+            external: [/^react(-dom)?(\/.+)?$/],
+          }),
+        ],
+        treeshake: true,
+      },
+      sourcemap: isLocal,
+    },
+    cacheDir: '../node_modules/.vite/core',
+    define: {
+      __UI_VERSION__: JSON.stringify(version),
+      'process.env.NODE_ENV': JSON.stringify('production'),
     },
     plugins: [
       react(),
       nxViteTsPaths(),
       nxCopyAssetsPlugin([
         '*.md',
-        { input: 'src/styles', glob: '**/*', output: 'styles' },
-        { input: 'skills', glob: '**/*', output: 'skills' },
-        { input: 'scripts', glob: '**/*', output: 'scripts' },
+        { glob: '**/*', input: 'src/styles', output: 'styles' },
+        { glob: '**/*', input: 'skills', output: 'skills' },
+        { glob: '**/*', input: 'scripts', output: 'scripts' },
       ]),
       tailwindcssVite(),
       dts({
-        entryRoot: 'src',
-        staticImport: true,
-        insertTypesEntry: true,
-        strictOutput: true,
-        clearPureImport: true,
-        tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
-        outDir,
-        // bundledPackages: ['@base-ui/react'],
-        beforeWriteFile(filePath, content) {
-          const matchs = content.match(/(?:node_modules\/)?@base-ui\/react(\/esm)?/g)
-          if (!matchs) return { filePath, content }
-
-          const newPath = path.relative(path.dirname(filePath), `${outDir}/base/`)
-          const modifiedContent = content.replaceAll(matchs[0], newPath === 'base' ? './base' : newPath)
-
-          return { filePath, content: modifiedContent }
-        },
         afterBuild: async () => {
           // Copy @base-ui/react types to dist
           const fs = await import('node:fs/promises')
-          const baseUiPath = path.resolve(__dirname, '../node_modules/@base-ui/react/esm')
+          const baseUiPath = path.resolve(__dirname, '../node_modules/@base-ui/react')
           const destPath = path.join(outDir, 'base')
 
           const copyDir = async (src: string, dest: string) => {
@@ -93,8 +126,33 @@ export default defineConfig(async ({ mode }) => {
 
           await copyDir(baseUiPath, destPath)
         },
+        // bundledPackages: ['@base-ui/react'],
+        beforeWriteFile(filePath, content) {
+          const matchs = content.match(/(?:node_modules\/)?@base-ui\/react?/g)
+          if (!matchs) return { content, filePath }
+
+          const newPath = path.relative(path.dirname(filePath), `${outDir}/base/`)
+          const modifiedContent = content.replaceAll(matchs[0], newPath === 'base' ? './base' : newPath)
+
+          return { content: modifiedContent, filePath }
+        },
+        clearPureImport: true,
+        entryRoot: 'src',
+        insertTypesEntry: true,
+        outDirs: outDir,
+        staticImport: true,
+        strictOutput: true,
+        tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
       }),
     ].filter(Boolean),
+    preview: {
+      allowedHosts: ['local.polyms.app'],
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+      host: '0.0.0.0',
+      port: 6173,
+    },
     // Uncomment this if you are using workers.
     // worker: {
     //  plugins: [ nxViteTsPaths() ],
@@ -104,68 +162,10 @@ export default defineConfig(async ({ mode }) => {
     resolve: {
       dedupe: ['react', 'react-dom'],
     },
-    define: {
-      __UI_VERSION__: JSON.stringify(version),
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    },
-    build: {
-      sourcemap: isLocal,
-      manifest: true,
-      outDir,
-      emptyOutDir: true,
-      reportCompressedSize: true,
-      commonjsOptions: {
-        transformMixedEsModules: true,
-      },
-      cssCodeSplit: true,
-      lib: {
-        // Could also be a dictionary or array of multiple entry points.
-        entry: { index: 'src/index.ts', style: 'src/styles/tailwind.css' },
-        name: 'core',
-        fileName: (format, entryName) => {
-          const extMap: Partial<Record<typeof format, string>> = {
-            umd: 'js',
-            es: 'mjs',
-          }
-          return `${entryName}.${extMap[format]}`
-        },
-        // Change this to the formats you want to support.
-        // Don't forget to update your package.json as well.
-        formats: ['es' as const],
-      },
-      // Rolldown preserves `require()` for externals; browser bundles need `import` (see rolldown.rs bundling-cjs).
-      // Keep react out of top-level `external` here — handled by esmExternalRequirePlugin's own list.
-      rolldownOptions: {
-        plugins: [
-          esmExternalRequirePlugin({
-            external: [/^react(-dom)?(\/.+)?$/],
-          }),
-        ],
-        external: ['use-sync-external-store', 'zustand'],
-        treeshake: true,
-        output: {
-          entryFileNames: '[name].mjs',
-          chunkFileNames(chunkInfo) {
-            if (chunkInfo.name === 'index' && chunkInfo.facadeModuleId) {
-              const match = chunkInfo.facadeModuleId.match(/\/([^/]*)(?=\/index.ts)/)
-              if (match) return `${match[1]}-[hash].mjs`
-            }
-            return '[name]-[hash].mjs'
-          },
-          assetFileNames: assetInfo => {
-            if (assetInfo.names.some(name => name.endsWith('.css'))) {
-              return isLocal ? 'styles.css' : 'styles-[hash].css'
-            }
-            return '[name]-[hash][extname]'
-          },
-          footer: chunk => (chunk.isEntry ? footer(mode, version) : ''),
-          globals: {
-            react: 'React',
-            'react-dom': 'ReactDOM',
-            'react/jsx-runtime': 'jsxRuntime',
-          },
-        },
-      },
+    root: __dirname,
+    server: {
+      host: '0.0.0.0',
+      port: 5173,
     },
     // css: {
     //   preprocessorOptions: {
