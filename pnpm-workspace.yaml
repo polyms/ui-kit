@@ -3,6 +3,8 @@ allowBuilds:
   esbuild: true
   msw: false
   nx: true
+minimumReleaseAgeExclude:
+  - prettier@3.9.1
 onlyBuiltDependencies:
   - '@swc/core'
   - '@tailwindcss/oxide'
