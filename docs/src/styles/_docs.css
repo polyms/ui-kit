@@ -31,12 +31,12 @@
 
   h2.h2::before,
   h3.h3::before {
-    @apply absolute rounded-full bg-primary/50;
+    bottom: -3px;
+    width: 2rem;
+    height: 3px;
 
     content: '';
-    height: 3px;
-    width: 2rem;
-    bottom: -3px;
+    @apply absolute rounded-full bg-primary/50;
   }
 
   pre + p {

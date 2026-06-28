@@ -5,7 +5,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import tailwindcssVite from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
-import { defineConfig, esmExternalRequirePlugin } from 'vite'
+import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
 import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin'
