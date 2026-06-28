@@ -17,29 +17,24 @@ Infer the task before writing code. State one line:
 
 **"Reading this as: \<surface> for \<audience>, using @polyms/core-ui, \<density> density."**
 
-Full keyword → file routing: **[SKILL.md#skill-routing](SKILL.md#skill-routing)**. Use the table below to infer surface and density — not as a second routing source.
+**Routing:** match keywords → load every file from **[SKILL.md#skill-routing](SKILL.md#skill-routing)** only. This section classifies surface and density — it does not list component files.
 
-| Signal                                                                  | Surface    | What to do                                                                                                |
-| ----------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- |
-| Form, field, validation                                                 | App screen | [field.md](field.md) + [quality.md#field-label-copy](quality.md#field-label-copy)                         |
-| Button, CTA, icon button                                                | App screen | [button.md](button.md)                                                                                    |
-| Toast, notification                                                     | App screen | [setup.md#toast](setup.md#toast) · [display.md](display.md#toast)                                         |
-| Modal, Offcanvas, dialog, drawer, delete confirm                        | App screen | [modal.md](modal.md) — not Toast for blocking confirm                                                     |
-| Form in modal/offcanvas, modal form, filter panel, side panel with form | App screen | [field.md](field.md) + [modal.md](modal.md); `scrollable` on `Modal.Content` when long                    |
-| Checkbox, Radio, RadioGroup                                             | App screen | [inputs.md](inputs.md#field-checkbox-radio)                                                               |
-| Switch, Toggle, ToggleGroup, Popover, Tooltip                           | App screen | [inputs.md](inputs.md#switch) · [inputs.md](inputs.md#toggle) · [overlays.md](overlays.md)                |
-| Table, tabular data                                                     | App screen | [css-utilities.md#table](css-utilities.md#table)                                                          |
-| Select, Tabs, Menu, Toolbar, nav, settings                              | App screen | [navigation.md](navigation.md) · [inputs.md](inputs.md#select) · [navigation.md](navigation.md#tabs)      |
-| Accordion, FAQ, expand/collapse sections                                | App screen | [display.md](display.md#accordion) · single unit → [display.md](display.md#collapsible)                   |
-| Alert, banner, inline status                                            | App screen | [display.md](display.md#alert)                                                                            |
-| NumberField, quantity, stepper                                          | App screen | [inputs.md](inputs.md#numberfield)                                                                        |
-| Spinner, loading, pending fetch                                         | App screen | [display.md](display.md#spinner) · `.skeleton` → [css-utilities.md](css-utilities.md)                     |
-| Code split, lazy import, federated remote                               | App setup  | [components.md#dynamic-import](components.md#dynamic-import)                                              |
-| New consumer app shell                                                  | App setup  | Read [setup.md](setup.md); mount overlay containers once                                                  |
-| New consumer app / brand theming                                        | Brand kit  | Read [brandkit.md](brandkit.md); map accent to `primary-*`                                                |
-| Docs live demo (`-views/`)                                              | Docs demo  | Real compound trees; `@polyms/core-ui` barrel — [Sample Data and Docs Demos](#sample-data-and-docs-demos) |
-| Extend or restyle existing screen                                       | Redesign   | Read [redesign.md](redesign.md); run Scan → Diagnose → Fix                                                |
-| Library component or CSS in the package source                          | Maintainer | [Maintainer](#maintainer)                                                                                 |
+| Surface        | When                                                               | Density hint                                                                      |
+| -------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| **App screen** | Forms, tables, dashboards, settings, nav chrome in a product route | [Visual Density](#visual-density) — comfortable (default), compact, dense cockpit |
+| **App setup**  | Install, styles import, app shell, containers, code split          | N/A — [setup.md](setup.md)                                                        |
+| **Brand kit**  | Rebrand, `theme.css`, primary tokens                               | Usually comfortable — [brandkit.md](brandkit.md)                                  |
+| **Docs demo**  | `-views/`, MDX live preview in the docs site                       | Comfortable — [Sample Data and Docs Demos](#sample-data-and-docs-demos)           |
+| **Redesign**   | Migrate or refresh an existing consumer screen                     | Pick in Scan — [redesign.md](redesign.md)                                         |
+| **Maintainer** | Change package primitives, styles, or compound APIs in `core/`     | N/A — [Maintainer](#maintainer)                                                   |
+
+**Pairs & cross-cutting** (load both; also in [SKILL.md](SKILL.md)):
+
+- Form in overlay → [field.md](field.md) + [modal.md](modal.md)
+- Rebrand existing app → [redesign.md](redesign.md) then [brandkit.md](brandkit.md)
+- Responsive layout on Toolbar/Tabs or mobile-first pass → [Responsive and mobile-first](#responsive-and-mobile-first) + topical files from SKILL routing
+
+**Disambiguation:** blocking delete/confirm → **Modal**, not Toast. `side panel` **with form fields** → field + modal; layout `panel` chrome → app layout.
 
 ## Maintainer
 
@@ -57,13 +52,75 @@ If the task is ambiguous between **preserve existing UI** vs **visual overhaul**
 
 Product UI does not use marketing "variance" dials. Pick density intentionally:
 
-| Density                   | When                                   | Spacing                                       | Data display                                                                     |
-| ------------------------- | -------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Comfortable** (default) | Settings, onboarding, marketing-in-app | `py-6`–`py-8` sections, readable line length  | Cards and grouped fields OK                                                      |
-| **Compact**               | Tables, admin lists, toolbars          | Tighter `gap-2`/`gap-3`, less wrapper padding | Prefer `.table`, plain rows, `Toolbar` — avoid nested card boxes                 |
-| **Dense cockpit**         | Dashboards, monitoring                 | Minimal chrome between metrics                | `font-mono` for numbers; 1px `border-line` separators instead of card-per-metric |
+| Density                   | When                                   | Spacing                                       | Data display                                                                                       |
+| ------------------------- | -------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Comfortable** (default) | Settings, onboarding, marketing-in-app | `py-6`–`py-8` sections, readable line length  | Cards and grouped fields OK                                                                        |
+| **Compact**               | Tables, admin lists, toolbars          | Tighter `gap-2`/`gap-3`, less wrapper padding | Prefer `.table`, plain rows, `Toolbar` — avoid nested card boxes                                   |
+| **Dense cockpit**         | Dashboards, monitoring                 | Minimal chrome between metrics                | `font-mono` or `tabular-nums` for metrics; 1px `border-line` separators instead of card-per-metric |
 
 High-density screens: **do not** wrap every metric in identical card boxes. Let data breathe with spacing and dividers.
+
+## Responsive and mobile-first
+
+Product UI ships on phones, tablets, and desktops. **Default styles for narrow viewports**, then add `sm:` / `md:` / `lg:` for wider — do not design desktop-first and bolt on `max-md:` fixes later.
+
+`@polyms/core-ui` owns component chrome; **your app owns page layout** (shell, grids, sidebars, table wrappers). Do not restyle library shells to “fix” responsive — wrap or recompose instead.
+
+### Page shell
+
+```tsx
+<div className='min-h-dvh bg-body text-fg'>
+  <header className='border-line border-b bg-surface px-4 py-3 md:px-6'>…</header>
+  <main className='mx-auto w-full max-w-6xl px-4 py-6 md:px-6 md:py-8'>{/* routes */}</main>
+</div>
+```
+
+| Rule                   | Detail                                                                                                                              |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Viewport height**    | `min-h-dvh` on page shells — not `h-screen` (mobile URL bar jump). See [theming.md](theming.md).                                    |
+| **Content width**      | `max-w-*` + `mx-auto` on app wrappers — avoid edge-to-edge prose and forms on ultra-wide monitors (~65ch for readable copy blocks). |
+| **Horizontal padding** | `px-4` mobile, `md:px-6` (or match your shell) — keeps `Field` and `.table` off the screen edge.                                    |
+| **Zoom**               | Never disable pinch-zoom in viewport meta (`user-scalable=no`, `maximum-scale=1`).                                                  |
+
+### Breakpoints (Tailwind v4 defaults)
+
+Use the project’s Tailwind scale consistently — avoid one-off `@media (max-width: 812px)` unless matching library behavior.
+
+| Prefix         | Min width       | Typical use                                          |
+| -------------- | --------------- | ---------------------------------------------------- |
+| (default)      | under 640px     | Single column, full-width fields, stacked toolbars   |
+| `sm:`          | 640px           | Tighter grids, inline meta rows                      |
+| `md:`          | 768px           | Two-column forms, persistent sidebar, inline filters |
+| `lg:`          | 1024px          | Wide tables without horizontal scroll, mega menus    |
+| `xl:` / `2xl:` | 1280px / 1536px | Dashboard max-width, marketing-in-app hero bands     |
+
+**Library note:** `Offcanvas` becomes a **bottom sheet** below **768px** (`max-width: 767px` in package CSS) — do not fight with custom width on small screens; see [modal.md](modal.md#offcanvas).
+
+### Layout by surface
+
+| Surface         | Mobile-first pattern                                                                                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Forms**       | One column; `md:grid md:grid-cols-2 md:gap-4` only for independent pairs (city/state). Long flows → `Accordion` sections ([display.md](display.md#accordion)).                                   |
+| **Tables**      | Wrap in `overflow-x-auto`; keep `.table` — intentional horizontal scroll inside the wrapper, not on `<body>`.                                                                                    |
+| **Toolbars**    | `flex flex-wrap gap-2` or scrollable row; icon `Button` → `size='lg'` ([button.md](button.md#touch-targets)). Dense rows → [navigation.md#responsive-toolbar](navigation.md#responsive-toolbar). |
+| **Tabs**        | `overflow-x-auto` + optional `scrollbar-none` on list wrapper; `orientation='vertical'` settings rail at `md:` — [navigation.md#responsive-tabs](navigation.md#responsive-tabs).                 |
+| **Primary nav** | Collapse to `Menu` / `Offcanvas` / drawer; do not cram 8+ top-level items on a 375px row.                                                                                                        |
+| **Filters**     | `Offcanvas` or `Modal` on narrow; inline `Field.Floating` + chips at `md:` when space allows.                                                                                                    |
+| **Modals**      | `scrollable` on `Modal.Content` for long forms; footer actions stack with `flex flex-col-reverse gap-2 sm:flex-row sm:justify-end` when labels are long.                                         |
+
+### Inputs and touch
+
+- Semantic `type` + `autoComplete` on `Field.Control` — [field.md](field.md#input-types-mobile), [field.md](field.md#autofill-autocomplete).
+- Touch targets ~44×44px — [button.md](button.md#touch-targets).
+- Do not rely on **hover-only** affordances; tap/click must work ([overlays.md](overlays.md) — `Tooltip` supplements, does not replace labels).
+
+### Anti-patterns
+
+- Entire page `overflow-x-hidden` masking broken layout instead of fixing grid/table wrappers.
+- `w-[1200px]` or fixed `px` containers that force horizontal scroll on mobile.
+- Desktop sidebar + squeezed main column on phones — collapse nav or move to `Offcanvas`.
+- Three-column dashboard grids at default breakpoint — start single column, add columns at `md:` / `lg:`.
+- Shrinking library `Button` / `Field` with ad-hoc `scale-75` or `text-xs` to fit — pick density ([Visual Density](#visual-density)) and `size` props instead.
 
 ## Visual consistency
 
@@ -238,7 +295,9 @@ Run before shipping UI. If any item fails, fix before delivering.
 - [ ] **Button contrast**: label readable on `btn-*` background (WCAG AA ~4.5:1).
 - [ ] **Form contrast**: `Field` labels, placeholders, focus rings, and `Field.Feedback` readable on `bg-body` / `bg-input`.
 - [ ] Icon-only controls have accessible names.
+- [ ] **Visible focus** — do not remove focus rings (`outline-none` without a replacement); library focus styles stay intact.
 - [ ] Focus order sane in modals, menus, and toolbars.
+- [ ] **One primary CTA** per screen — at most one `Button variant='primary'` (or equivalent) with the same intent; secondary actions use ghost/outlined/light.
 
 ### Theme
 
@@ -249,12 +308,14 @@ Run before shipping UI. If any item fails, fix before delivering.
 ### Layout and polish
 
 - [ ] Spacing rhythm consistent (`gap-*`, section padding not random).
+- [ ] **Mobile-first** — default layout works at ~375px; wider breakpoints add columns, not `max-md:` patches ([Responsive and mobile-first](#responsive-and-mobile-first)).
+- [ ] Page shell uses `min-h-dvh`; content has sensible `max-w-*` and horizontal padding.
 - [ ] **One shape system** — library `rounded` props / defaults; no random `rounded-*` mix on the same screen ([Visual consistency](#visual-consistency)).
 - [ ] **Heading levels** use `.h1`–`.h6` consistently ([css-utilities.md#typography](css-utilities.md#typography)).
 - [ ] Long lists use `.table`, `Tabs`, or `Menu` — not a lazy `divide-y` div stack ([Lists and collections](#lists-and-collections)).
-- [ ] Mobile layout collapses cleanly (no horizontal overflow on forms/tables without scroll intent).
+- [ ] Tables wrapped in `overflow-x-auto` when needed; no unintentional horizontal scroll on `<body>`.
 - [ ] Tables use `.table` utilities when showing tabular data.
-- [ ] No duplicate primary actions with the same intent on one screen.
+- [ ] **One primary CTA** — no duplicate `variant='primary'` buttons with the same intent ([Accessibility and contrast](#accessibility-and-contrast)).
 
 ### Docs demos (when applicable)
 

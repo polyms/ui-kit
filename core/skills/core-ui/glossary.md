@@ -1,3 +1,8 @@
+---
+description: >-
+  Core-ui jargon — compound tree, useRender, item-*, semantic tones, Container, barrel import, built-in shell.
+---
+
 # Glossary
 
 Core-ui jargon — load when a term below appears in the task or generated code.

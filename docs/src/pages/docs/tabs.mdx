@@ -37,6 +37,10 @@ apis:
 
 import Story from './-views/tabs/TabsDefault.tsx'
 import code from './-views/tabs/TabsDefault.tsx?raw'
+import ScrollStory from './-views/tabs/TabsScroll.tsx'
+import scrollCode from './-views/tabs/TabsScroll.tsx?raw'
+import SettingsStory from './-views/tabs/TabsSettingsVertical.tsx'
+import settingsCode from './-views/tabs/TabsSettingsVertical.tsx?raw'
 
 Organize and navigate between related content groups without leaving the page. Tabs provide a clean interface for switching between different views while maintaining context and reducing cognitive load.
 
@@ -79,6 +83,58 @@ Tabs support full keyboard navigation for accessibility:
 - **Home** - Move to first tab
 - **End** - Move to last tab
 - **Tab** - Move focus to/from the tab panel
+
+## Responsive layout
+
+Tab labels do not wrap by default. When you have several peer tabs on a phone-width layout, wrap **`Tabs.List`** in a horizontal scroll container. For settings-style pages with many sections, switch to **`orientation='vertical'`** and let the list become a side rail from your **`md:`** breakpoint.
+
+### Scrollable tab list
+
+<CodePreview code={scrollCode}>
+  <ScrollStory />
+</CodePreview>
+
+```tsx
+import { Tabs } from '@polyms/core-ui'
+
+const filterTabs = (
+  <Tabs defaultValue='all'>
+    <div className='-mx-4 overflow-x-auto px-4 scrollbar-none md:mx-0 md:overflow-visible md:px-0'>
+      <Tabs.List className='w-max min-w-full'>
+        <Tabs.Tab value='all'>All</Tabs.Tab>
+        <Tabs.Tab value='open'>Open</Tabs.Tab>
+        <Tabs.Tab value='pending'>Pending review</Tabs.Tab>
+      </Tabs.List>
+    </div>
+    <Tabs.Panel value='all'>…</Tabs.Panel>
+    <Tabs.Panel value='open'>…</Tabs.Panel>
+    <Tabs.Panel value='pending'>…</Tabs.Panel>
+  </Tabs>
+)
+```
+
+### Vertical settings rail
+
+<CodePreview code={settingsCode}>
+  <SettingsStory />
+</CodePreview>
+
+```tsx
+import { Tabs } from '@polyms/core-ui'
+
+const settingsTabs = (
+  <Tabs className='flex flex-col gap-4 md:flex-row md:gap-6' defaultValue='profile' orientation='vertical'>
+    <Tabs.List className='w-full shrink-0 md:w-48'>
+      <Tabs.Tab value='profile'>Profile</Tabs.Tab>
+      <Tabs.Tab value='account'>Account</Tabs.Tab>
+    </Tabs.List>
+    <div className='min-w-0 flex-1'>
+      <Tabs.Panel value='profile'>…</Tabs.Panel>
+      <Tabs.Panel value='account'>…</Tabs.Panel>
+    </div>
+  </Tabs>
+)
+```
 
 ## API Reference
 

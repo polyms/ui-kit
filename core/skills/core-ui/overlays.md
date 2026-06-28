@@ -1,3 +1,8 @@
+---
+description: >-
+  Popover and Tooltip — lightweight overlays. Blocking flows → modal.md. Toolbar tooltips → navigation.md.
+---
+
 # Popover & Tooltip
 
 Lightweight overlays — **not** modals. Blocking dialogs → [modal.md](modal.md).

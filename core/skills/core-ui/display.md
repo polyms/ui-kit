@@ -1,3 +1,8 @@
+---
+description: >-
+  Toast, Alert, Avatar, Accordion, Collapsible, Spinner — inline and transient feedback. Toast a11y and vs Modal.
+---
+
 # Display
 
 Toast, Alert, Avatar, Accordion, Collapsible, Spinner — inline and transient feedback.
@@ -32,6 +37,13 @@ toastManager.add({
 Mount **`Toast.Container`** once under **`Toast`**. Full app-shell wiring (with Modal/Offcanvas containers): [setup.md](setup.md#app-shell).
 
 Deep reference for Modal/Offcanvas overlays: **[modal.md](modal.md)** — Toast is not a dialog; do not use it for confirmations that block workflow.
+
+| Rule               | Detail                                                                                                                                                                                        |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Non-blocking**   | Toast does not trap focus — use **`Modal`** for delete confirm and irreversible actions.                                                                                                      |
+| **Auto-dismiss**   | Default **`timeout`** is **5000** ms; set `timeout: 0` only when the user must read or act (e.g. undo).                                                                                       |
+| **Screen readers** | Keep `title` / `description` concise — Base UI announces via a live region; do not rely on toast alone for critical errors that need a persistent **`Alert`** or inline **`Field.Feedback`**. |
+| **Undo / retry**   | Prefer `type: 'actions'` with one clear action — not a second toast stacked on the first.                                                                                                     |
 
 ## Alert
 
@@ -133,15 +145,16 @@ const faqAccordion = (
 </Accordion>
 ```
 
-| Rule                    | Detail                                                                                                                |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **`title` shorthand**   | On `Accordion.Item` — auto-builds Header, Trigger, Panel                                                              |
-| **Panel content**       | Text or blocks in `Accordion.Panel`; padding via inner `accordion-panel-body` — no wrapper `<p>` for spacing          |
-| **`value`**             | Required per item; matches `defaultValue` / controlled `value` on root                                                |
-| **`multiple`**          | Several panels open at once — value arrays on root                                                                    |
-| **vs Tabs**             | Accordion = vertical FAQ/settings; Tabs = peer sections — [navigation.md](navigation.md#tabs)                         |
-| **vs Collapsible**      | Accordion = grouped items, roving focus, optional `multiple`; Collapsible = one toggle unit with fully custom trigger |
-| **Maintainer docs CSS** | Scope API Reference accordion grid under `.api-reference` only — [quality.md#maintainer](quality.md#maintainer)       |
+| Rule                       | Detail                                                                                                                |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **`title` shorthand**      | On `Accordion.Item` — auto-builds Header, Trigger, Panel                                                              |
+| **Panel content**          | Text or blocks in `Accordion.Panel`; padding via inner `accordion-panel-body` — no wrapper `<p>` for spacing          |
+| **`value`**                | Required per item; matches `defaultValue` / controlled `value` on root                                                |
+| **`multiple`**             | Several panels open at once — value arrays on root                                                                    |
+| **vs Tabs**                | Accordion = vertical FAQ/settings; Tabs = peer sections — [navigation.md](navigation.md#tabs)                         |
+| **vs Collapsible**         | Accordion = grouped items, roving focus, optional `multiple`; Collapsible = one toggle unit with fully custom trigger |
+| **Progressive disclosure** | Long settings or FAQ — collapse secondary sections in `Accordion` instead of showing every field at once              |
+| **Maintainer docs CSS**    | Scope API Reference accordion grid under `.api-reference` only — [quality.md#maintainer](quality.md#maintainer)       |
 
 ## Collapsible
 

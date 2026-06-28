@@ -165,11 +165,22 @@ function openNotifications() {
 
 ## Composing with other components
 
-| Body content        | Read                                                                                                       |
-| ------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Form fields         | [field.md](field.md) — in `Modal.Body` or `Offcanvas.Body`; `scrollable` on `Modal.Content` for long forms |
-| Destructive confirm | `Button variant='danger'` in `Modal.Footer` or body actions                                                |
-| Tables / lists      | [css-utilities.md](css-utilities.md) `.table` in body                                                      |
+| Body content        | Read                                                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Form fields         | [field.md](field.md) — in `Modal.Body` or `Offcanvas.Body`; `scrollable` on `Modal.Content` for long forms           |
+| Destructive confirm | `Button variant='danger'` in `Modal.Footer` or body actions                                                          |
+| Tables / lists      | [css-utilities.md](css-utilities.md) `.table` in body                                                                |
+| Unsaved changes     | When the form is dirty, intercept `onOpenChange` / backdrop / swipe — confirm in a nested **`Modal`** before dismiss |
+
+### Unsaved changes in overlays
+
+Forms in **`Modal.Body`** or **`Offcanvas.Body`** often need a guard before dismiss:
+
+1. Track **dirty** state (any field changed since open).
+2. On backdrop click, Escape, swipe, or **`Modal.Close`** / **`Offcanvas.Close`**: if dirty, open a small confirm **`Modal`** (`Discard changes?` / `Keep editing`) instead of closing immediately.
+3. Save success → clear dirty → then close the overlay.
+
+Use controlled **`open`** + **`onOpenChange`** when the guard is non-trivial; programmatic flows can swap `showModal` content to the confirm tree on the same `id`.
 
 ---
 
@@ -190,5 +201,6 @@ function openNotifications() {
 - [ ] **Container** — matching `Modal.Container` / `Offcanvas.Container` mounted when using `showModal` / `showOffcanvas` ([setup.md#app-shell](setup.md#app-shell)).
 - [ ] **Button triggers** — `Modal.Trigger`, footer `Modal.Close`, `Offcanvas.Trigger`, body `Offcanvas.Close` use `render={<Button … />}` with `children` for labeled actions — not `className='btn …'` on primitives ([button.md](button.md#compose-button-through-render)).
 - [ ] **Scroll** — `scrollable` on `Modal.Content` when body has a long form or list.
+- [ ] **Unsaved guard** — dirty forms confirm before backdrop / Escape / swipe dismiss ([Unsaved changes in overlays](#unsaved-changes-in-overlays)).
 
 **Done when:** the overlay uses a full compound tree; programmatic flows have a mounted `Container`; every styled trigger/close is traceable to `render={<Button … />}`; long bodies won't clip without `scrollable`.

@@ -1,7 +1,7 @@
 ---
 description: >-
   Redesign existing screens with @polyms/core-ui. Use when migrating, refreshing, or re-skinning legacy UI.
-  Greenfield → components.md; package source → quality.md#maintainer.
+  Greenfield → SKILL.md#skill-routing; package source → quality.md#maintainer.
 disable-model-invocation: true
 ---
 
@@ -21,14 +21,14 @@ Scan → Detect mode → Diagnose → Fix (priority order) → Redesign pre-flig
 
 Read the codebase before editing:
 
-| Check                                                                  | Why                                                           |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `package.json` — is `@polyms/core-ui` installed?                       | Run [setup.md](setup.md) first if missing                     |
-| Styles entry — `styles-<hash>.css` or `styles/tailwind.css` imported?  | Unstyled primitives if CSS is missing                         |
-| `Modal.Container` / `Offcanvas.Container` / `Toast.Container` mounted? | Programmatic overlays break without containers                |
-| Styling method — Tailwind v4, plain CSS, mixed inline                  | Match existing app patterns; use DS tokens on top             |
-| Screen inventory — buttons, inputs, tables, menus, modals per route    | Map each to the closest [components.md](components.md) export |
-| Analytics hooks — `name`, `data-*`, button labels, section IDs         | Preservation list for Fix phase                               |
+| Check                                                                  | Why                                                                                     |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `package.json` — is `@polyms/core-ui` installed?                       | Run [setup.md](setup.md) first if missing                                               |
+| Styles entry — `styles-<hash>.css` or `styles/tailwind.css` imported?  | Unstyled primitives if CSS is missing                                                   |
+| `Modal.Container` / `Offcanvas.Container` / `Toast.Container` mounted? | Programmatic overlays break without containers                                          |
+| Styling method — Tailwind v4, plain CSS, mixed inline                  | Match existing app patterns; use DS tokens on top                                       |
+| Screen inventory — buttons, inputs, tables, menus, modals per route    | Map each to the closest topic file via [SKILL.md#skill-routing](SKILL.md#skill-routing) |
+| Analytics hooks — `name`, `data-*`, button labels, section IDs         | Preservation list for Fix phase                                                         |
 
 Declare one line before changing code:
 
@@ -70,7 +70,7 @@ List concrete problems before fixing. Group findings under the headings below.
 - Body text or form columns too wide (target ~65ch for readable prose blocks)
 - App content stretched edge-to-edge on wide screens — add a sensible `max-w-*` wrapper you own
 - Comfortable screens packed like a cockpit, or dense tables wrapped in redundant `.card` boxes
-- `h-screen` causing mobile viewport jump — prefer `min-h-dvh` on page shells
+- `h-screen` causing mobile viewport jump — prefer `min-h-dvh` on page shells ([quality.md#responsive-and-mobile-first](quality.md#responsive-and-mobile-first))
 
 #### Color and theme
 
@@ -83,7 +83,7 @@ List concrete problems before fixing. Group findings under the headings below.
 #### Layout (product UI)
 
 - Tables without `.table` utilities when showing tabular data
-- Horizontal overflow on mobile forms/tables without intentional scroll
+- Horizontal overflow on mobile forms/tables without intentional scroll — see [quality.md#responsive-and-mobile-first](quality.md#responsive-and-mobile-first)
 - Toolbar actions misaligned or missing `aria-label` on `Toolbar` / `Toolbar.Group`
 - Duplicate primary actions with the same intent on one screen
 - Three identical cards as the only empty-state pattern
@@ -164,12 +164,12 @@ Get explicit approval before:
 
 ## Decision tree
 
-| Situation                                           | Approach                                                                                         |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| IA, routes, and content are sound; UI is just dated | **Preserve** — steps 1–7 only                                                                    |
-| Broken mobile layout, no DS, ad-hoc everything      | **Overhaul** visuals — strict content/IA preservation                                            |
-| New screen in an existing app                       | **Greenfield screen** — [components.md](components.md) + [quality.md](quality.md)                |
-| Brand identity itself is changing                   | Treat as greenfield; read [brandkit.md](brandkit.md) for token map — do not force-fit old tokens |
+| Situation                                           | Approach                                                                                            |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| IA, routes, and content are sound; UI is just dated | **Preserve** — steps 1–7 only                                                                       |
+| Broken mobile layout, no DS, ad-hoc everything      | **Overhaul** visuals — strict content/IA preservation                                               |
+| New screen in an existing app                       | **Greenfield screen** — [SKILL.md#skill-routing](SKILL.md#skill-routing) + [quality.md](quality.md) |
+| Brand identity itself is changing                   | Treat as greenfield; read [brandkit.md](brandkit.md) for token map — do not force-fit old tokens    |
 
 ## Redesign pre-flight
 

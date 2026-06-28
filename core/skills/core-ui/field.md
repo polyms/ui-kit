@@ -78,7 +78,47 @@ Omit `debounce` for controlled submit forms.
 
 ### Validation
 
-`Field.Feedback` shows when **`invalid`** and focused/hovered. Use **`defaultShowOnError`** to keep the message visible.
+`Field.Feedback` shows when **`invalid`** and focused/hovered. Use **`defaultShowOnError`** to keep the message visible after blur.
+
+| Rule                 | Detail                                                                                                                                   |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **When to validate** | On **blur** or **submit** — not on every keystroke unless the field is a live search/filter (`Field.Floating` + `debounce`).             |
+| **Error copy**       | State cause + fix in `Field.Feedback` — not only `Invalid input` ([quality.md#copy-tells-product-ui](quality.md#copy-tells-product-ui)). |
+| **Submit focus**     | After failed submit, move focus to the **first** `invalid` `Field` control so keyboard users land on the problem.                        |
+
+### Input types (mobile)
+
+Set semantic **`type`** on `Field.Control` so mobile picks the right keyboard:
+
+| `type`     | Use                                                     |
+| ---------- | ------------------------------------------------------- |
+| `email`    | Email addresses                                         |
+| `tel`      | Phone numbers                                           |
+| `number`   | Numeric entry (prefer **`NumberField`** for steppers)   |
+| `url`      | Links                                                   |
+| `password` | Secrets — pair with show/hide in app chrome when needed |
+
+### Autofill (`autoComplete`)
+
+`Field.Control` forwards native input attributes — set **`autoComplete`** so browsers and password managers can suggest values. Pair with **`name`** on the `Field` root (wired to the control automatically).
+
+| Field                              | Typical `autoComplete`                               |
+| ---------------------------------- | ---------------------------------------------------- |
+| Email (login)                      | `email`                                              |
+| Email (signup)                     | `email`                                              |
+| Password (login)                   | `current-password`                                   |
+| Password (new / reset)             | `new-password`                                       |
+| Name                               | `name` or `given-name` / `family-name`               |
+| Phone                              | `tel`                                                |
+| Address                            | `street-address`, `postal-code`, `country`           |
+| One-time code                      | `one-time-code`                                      |
+| Search / filter (`Field.Floating`) | `off` when suggestions would clash with live results |
+
+| Rule                      | Detail                                                                                                                                        |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Do not blanket `off`**  | Login, signup, checkout, and address forms should enable autofill — disabling hurts mobile UX and password managers.                          |
+| **vs custom suggestions** | Browser autofill ≠ typeahead UI. Enum picks → **`Select`**; searchable lists → app logic or `Menu` — not extra markup inside `Field.Control`. |
+| **`datalist`**            | Rare — `render={<input list='…' />}` only when a fixed short suggestion list is enough; prefer **`Select`** for real option lists.            |
 
 ### Native forms
 
@@ -137,6 +177,10 @@ For validation UI, use compound **`Field`** or show errors via `children`.
 - [ ] **API choice** — `Field` compound vs `Field.Floating` vs `NumberField` vs raw input matches intent ([Choose the right API](#choose-the-right-api)).
 - [ ] **Props on correct node** — `invalid` / `required` / `size` / `name` on `Field` root; `disabled`, `debounce`, `type`, etc. on `Field.Control`; never `invalid` on `Field.Control`.
 - [ ] **Error visibility** — `Field.Feedback` present when showing validation; `defaultShowOnError` when message must stay visible after blur.
+- [ ] **Validation timing** — errors on blur/submit, not per-keystroke (except debounced search fields).
+- [ ] **Submit focus** — first invalid field receives focus after a failed submit.
+- [ ] **Mobile types** — `email` / `tel` / `url` / `password` on `Field.Control` when the input type is known.
+- [ ] **Autofill** — `autoComplete` set on login/signup/address fields; `off` only on search/filter where suggestions conflict.
 - [ ] **Label tone** — user-facing `Field.Label` is conversational, not marketing ([quality.md#field-label-copy](quality.md#field-label-copy)).
 
 **Done when:** every field in the tree uses the correct API; you can point to each prop on its documented node; labels read naturally on a real form screen.
