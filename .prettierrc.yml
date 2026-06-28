@@ -4,22 +4,3 @@ jsxSingleQuote: true
 useTabs: false
 semi: false
 trailingComma: es5
-plugins:
-  - prettier-plugin-tailwindcss
-
-tailwindStylesheet: ./core/src/styles/tailwind.css
-
-overrides:
-  - files:
-      - '*.yml'
-      - '*.yaml'
-    options:
-      parser: yaml
-      plugins:
-        - '@prettier/plugin-xml'
-      xmlSelfClosingSpace: true
-      xmlSortAttributesByKey: true
-  - files:
-      - 'tailwind.css'
-    options:
-      printWidth: 200

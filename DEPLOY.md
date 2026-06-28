@@ -79,17 +79,20 @@ npx serve
 ## Troubleshooting
 
 **Build fails:**
+
 - Check Node.js version (use `.nvmrc` if provided)
 - Verify all dependencies in `package.json`
 - Run `pnpm install` locally first
 
 **404 on routes:**
+
 - Ensure SPA routing is configured (handled by Vite)
 - Check `index.html` exists in output directory
 
 ## Nx Monorepo Notes
 
 Since this is an Nx monorepo:
+
 - Vercel detects the root `package.json`
 - Build command uses `nx` to build only `docs` project
 - Output directory points to `dist/docs` (not root)

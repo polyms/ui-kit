@@ -12,11 +12,11 @@ Compound overview and other components: [components.md](components.md). Label to
 
 ## Choose the right API
 
-| Intent | Use |
-| --- | --- |
-| Settings, signup, checkout, validation errors | **`Field`** compound tree |
-| Toolbar / table search, floating label, debounced filter | **`Field.Floating`** (standalone) |
-| Quantities, steppers, label scrub | **`NumberField`** — [components.md#numberfield](components.md#numberfield) |
+| Intent                                                   | Use                                                                        |
+| -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Settings, signup, checkout, validation errors            | **`Field`** compound tree                                                  |
+| Toolbar / table search, floating label, debounced filter | **`Field.Floating`** (standalone)                                          |
+| Quantities, steppers, label scrub                        | **`NumberField`** — [components.md#numberfield](components.md#numberfield) |
 
 **`Field.Floating` is not a child of `Field`.** Do not nest them.
 
@@ -31,7 +31,7 @@ Import from the barrel: `Field`, `Field.Label`, `Field.Control`, `Field.Descript
 ```tsx
 import { Field } from '@polyms/core-ui'
 
-<Field required invalid={hasError} name='email'>
+;<Field required invalid={hasError} name='email'>
   <Field.Label>Let me know your email?</Field.Label>
   <Field.Control type='email' placeholder='tifa.lockhart@polyms.dev' />
   <Field.Description>We'll only use this for account updates.</Field.Description>
@@ -54,11 +54,11 @@ Icons are **siblings** of `Field.Control`, not nested inside it. With a visible 
 
 ### Props on the right node
 
-| Prop | Where |
-| --- | --- |
-| `invalid`, `required`, `size`, `name` | **`Field`** root |
-| `disabled`, `readOnly`, `rounded`, `debounce`, `type`, `value`, `onChange` | **`Field.Control`** |
-| `defaultShowOnError` | **`Field.Feedback`** |
+| Prop                                                                       | Where                |
+| -------------------------------------------------------------------------- | -------------------- |
+| `invalid`, `required`, `size`, `name`                                      | **`Field`** root     |
+| `disabled`, `readOnly`, `rounded`, `debounce`, `type`, `value`, `onChange` | **`Field.Control`**  |
+| `defaultShowOnError`                                                       | **`Field.Feedback`** |
 
 Never put `invalid` on `Field.Control`. Never use raw `<label htmlFor=…>` outside the tree.
 
@@ -71,7 +71,7 @@ Never put `invalid` on `Field.Control`. Never use raw `<label htmlFor=…>` outs
 ### Debounced onChange
 
 ```tsx
-<Field.Control debounce={300} onChange={e => filter(e.target.value)} />
+<Field.Control debounce={300} onChange={(e) => filter(e.target.value)} />
 ```
 
 Omit `debounce` for controlled submit forms.
@@ -104,16 +104,16 @@ Compact floating-label input for search/filter — separate component, not a `Fi
   label='Search'
   placeholder='Results update as you type'
   debounce={400}
-  onChange={e => setQuery(e.target.value)}
+  onChange={(e) => setQuery(e.target.value)}
 />
 ```
 
-| Prop | Meaning |
-| --- | --- |
-| `label` | Floating label (not `Field.Label`) |
+| Prop          | Meaning                                                                 |
+| ------------- | ----------------------------------------------------------------------- |
+| `label`       | Floating label (not `Field.Label`)                                      |
 | `placeholder` | Helper below input via `Field.Description` — **not** HTML `placeholder` |
-| `debounce` | ms before `onChange` |
-| `children` | Extra nodes below description |
+| `debounce`    | ms before `onChange`                                                    |
+| `children`    | Extra nodes below description                                           |
 
 Inner input uses `placeholder=' '` for label animation.
 

@@ -32,8 +32,8 @@
 }
 
 .border-x-light {
-  border-left: 1px var(--tw-border-style, solid) var(--line);
   border-right: 1px var(--tw-border-style, solid) var(--line);
+  border-left: 1px var(--tw-border-style, solid) var(--line);
 }
 
 .border-y-light {

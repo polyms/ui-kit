@@ -18,8 +18,8 @@
   --table-border-width: 1px;
 
   width: 100%;
-  vertical-align: top;
   font-size: 0.875rem;
+  vertical-align: top;
 
   /* 
   // Target th & td
@@ -113,12 +113,12 @@
 
 .table-bordered {
   > :not(caption) > * {
-    border-width: var(--table-border-width) 0;
     border-color: var(--table-border-color);
+    border-width: var(--table-border-width) 0;
 
     > * {
-      border-width: 0 var(--table-border-width);
       border-color: var(--table-border-color);
+      border-width: 0 var(--table-border-width);
     }
   }
 }
@@ -178,7 +178,7 @@
 
 thead.thead-light {
   tr > th {
-    border-bottom: 1px solid var(--line);
     background-color: var(--surface);
+    border-bottom: 1px solid var(--line);
   }
 }

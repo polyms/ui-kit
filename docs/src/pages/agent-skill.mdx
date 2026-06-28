@@ -3,26 +3,63 @@ type: Guide
 title: AI Agent Skill
 ---
 
-**Polyms Core UI** ships a bundled **agent skill** so AI coding assistants (Cursor, Claude Code, and other `AGENTS.md`-aware tools) follow the same composition rules you do: barrel imports, slate grays, semantic tones, compound component trees, programmatic overlays, and the CSS-only utilities. Instead of pasting conventions into every prompt, install the skill once into your repository.
+After you install **`@polyms/core-ui`**, you can add a bundled **agent skill** so AI coding assistants — Cursor, Claude Code, and other tools that read `AGENTS.md` — compose UI the same way this library expects. Install it once in your repository instead of pasting conventions into every prompt. For the visual and composition rules the skill enforces, see [Design System](/design-system).
 
-## What the skill contains
+## What you get
 
-The skill is split for progressive disclosure — agents load only the part relevant to the task. **`SKILL.md`** carries `name: core-ui` (skill identifier). Reference files (`field.md`, `modal.md`, …) use **`description`** frontmatter only — not a second `name`, per [Cursor skill conventions](https://cursor.com/docs/context/skills).
+The skill teaches your assistant how to work with Core UI in common product tasks:
 
-- **SKILL.md** — entry: **skill routing** (keyword → file), hard rules, workflow.
-- **components.md** — `Button`, Toast, compound trees (Menu, NavigationMenu, Toolbar, Select, Tabs, Checkbox, Radio, Switch, Popover, Tooltip, Avatar, Breadcrumb, Accordion, Alert, NumberField, Collapsible, Spinner, `dynamic`), `useRender`; Field → **field.md**; Modal & Offcanvas → **modal.md**.
-- **theming.md** — slate vs neutral, semantic tones, dark mode tokens, logical-direction spacing.
-- **css-utilities.md** — table, badge, card, link, and the `item-*` interaction recipe.
-- **setup.md** — install, styles, app shell, Toast; programmatic wiring points to **modal.md#programmatic-overlays**.
-- **quality.md** — task inference, anti-slop, copy tells, visual consistency (shape/typography), list primitive choice, output completeness (no truncation), field label copy, pre-flight checks.
-- **redesign.md** — migrate existing app screens to `@polyms/core-ui` (Scan → Diagnose → Fix, preserve vs overhaul, audit checklist, redesign pre-flight).
-- **brandkit.md** — map brand identity to `primary-*` and semantic tokens, component touchpoints, optional `BRAND.md`, brand pre-flight (code implementation, not image generation).
-- **field.md** — `Field` vs `Field.Floating`, child order, icons, validation, anti-patterns.
-- **modal.md** — Modal & Offcanvas (same overlay pattern): trees, programmatic `showModal` / `showOffcanvas`, anti-patterns. Compose with **field.md** when body has forms.
+export const skillBenefits = [
+  {
+    situation: 'Building new UI (forms, modals, menus, …)',
+    helps: 'Correct component trees and APIs — no invented props or imports',
+  },
+  {
+    situation: 'Theming and dark mode',
+    helps: 'Slate grays, semantic tones, and tokens that stay aligned with the library',
+  },
+  {
+    situation: 'Migrating existing screens',
+    helps: 'A structured redesign flow with checks before you ship',
+  },
+  {
+    situation: 'Brand and accent colors',
+    helps: 'Mapping your identity to theme tokens and a shared BRAND.md',
+  },
+  {
+    situation: 'Reviewing generated UI',
+    helps: 'Clearer copy, consistent visuals, and pre-flight checks',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th>Situation</th>
+        <th>What the skill helps with</th>
+      </tr>
+    </thead>
+    <tbody>
+      {skillBenefits.map((row, index) => (
+        <tr key={index}>
+          <td className='align-top text-nowrap'>{row.situation}</td>
+          <td className='text-muted text-sm'>{row.helps}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+The installer copies the skill into the folders your tools discover automatically:
+
+- `.cursor/skills/core-ui` — Cursor
+- `.claude/skills/core-ui` — Claude Code
+- `.agents/skills/core-ui` — generic `AGENTS.md` tools
 
 ## Install the skill
 
-After adding the package, run the bundled installer from your repository root:
+You need **`@polyms/core-ui`** in the project first — see [Installation](/installation). From your repository root, run the bundled installer:
 
 ```bash
 pnpm exec core-ui-skill
@@ -32,22 +69,16 @@ pnpm exec core-ui-skill
 npx core-ui-skill
 ```
 
-The installer copies the skill into the discovery folders that agents read:
-
-- `.cursor/skills/core-ui` — Cursor
-- `.claude/skills/core-ui` — Claude Code
-- `.agents/skills/core-ui` — generic `AGENTS.md` tools
-
 ## Options
 
 ```bash
 core-ui-skill [options]
 ```
 
-- **`--target <all|cursor|claude|agents>`** — install one target instead of all (default: `all`).
+- **`--target <all|cursor|claude|agents>`** — install for one tool only (default: all).
 - **`--cwd <path>`** — repository root to install into (default: current directory).
-- **`--force`** — overwrite an existing installed skill.
-- **`--dry-run`** — print planned changes without writing files.
+- **`--force`** — overwrite an existing skill (useful after upgrading the package or re-syncing the team).
+- **`--dry-run`** — show what would be written without changing files.
 - **`-h`, `--help`** — show usage.
 
 Install for a single tool:
@@ -64,7 +95,7 @@ core-ui-skill --dry-run
 
 ## Keep it in sync
 
-The skill is versioned with the package, so re-run the installer after upgrading `@polyms/core-ui`. Add a script so the whole team syncs the same way:
+The skill ships with the package and updates when you upgrade **`@polyms/core-ui`**. Re-run the installer after each upgrade. Add a script so everyone on the team syncs the same way:
 
 ```json
 {
@@ -80,28 +111,29 @@ pnpm core-ui:skill
 
 ## Verify
 
-After installing, your agent should automatically apply the rules when you work with `@polyms/core-ui`. Confirm the files exist:
+Confirm the skill is on disk:
 
 ```bash
 ls .cursor/skills/core-ui
 ```
 
-If a rule ever disagrees with the TypeScript types for your installed version, trust **`node_modules/@polyms/core-ui/index.d.ts`**.
+Then try a real prompt in your assistant — for example:
+
+```text
+Create a login form with Field, a primary submit Button, and inline validation errors.
+```
+
+The output should use `@polyms/core-ui` imports and match the patterns in the [Design System](/design-system). If anything disagrees with your installed version, trust **`node_modules/@polyms/core-ui/index.d.ts`**.
 
 ## Brand kit in your repo
 
-For product branding (accent color, surfaces, component mapping), add two files in the consumer app:
+To keep AI-generated UI on-brand, add a theme file (for example `src/styles/theme.css`) and a short **`BRAND.md`** in your app with accent colors, surfaces, and which components carry the brand. Full setup and examples: [Design System — Brand theming](/design-system#brand-theming).
 
-1. **`src/styles/theme.css`** — import `@polyms/core-ui/styles/tailwind.css`, then override `--color-primary-*` and optional surface tokens. See [Design System — Brand theming](/design-system#brand-theming).
-2. **`BRAND.md`** (repo root or `docs/`) — strategy, token hex values, and which components express the brand. Agents read this when **`brandkit.md`** is installed via the skill.
-
-Prompt example for Cursor or Claude Code:
+Example prompt:
 
 ```text
-Follow core-ui brandkit.md. Our BRAND.md is at ./BRAND.md. Update theme.css primary ramp to match.
+Our BRAND.md is at ./BRAND.md. Update theme.css so the primary ramp matches our brand tokens.
 ```
-
-The skill file **`brandkit.md`** ships inside `.cursor/skills/core-ui/` (and sibling paths) after install — it is the machine-readable counterpart to your human **`BRAND.md`**.
 
 ## Next steps
 

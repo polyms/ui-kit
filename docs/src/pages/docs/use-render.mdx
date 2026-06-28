@@ -25,7 +25,7 @@ apis:
 import Story from './-views/use-render/UseRenderDefault.tsx'
 import code from './-views/use-render/UseRenderDefault.tsx?raw'
 
-Re-exported **`useRender`** from **@base-ui/react** powers the **`render`** prop on **`Button`**, **`Field`**, **`Breadcrumb`**, **`Modal`**, and other primitives. Use it when the same styles must apply to a different element (router link, custom tag) without forking the component.
+**`useRender`** powers the **`render`** prop on **`Button`**, **`Field`**, **`Breadcrumb`**, **`Modal`**, and other components. Use it when the same styles must apply to a different element (router link, custom tag) without rebuilding the component.
 
 <CodePreview code={code}>
   <Story />
@@ -52,9 +52,11 @@ export function Card({ className, render, ...props }: CardProps) {
 ```tsx
 import { Button } from '@polyms/core-ui'
 
-<Button render={<a href="/settings" />} variant="primary">
-  Settings
-</Button>
+const button = (
+  <Button render={<a href='/settings' />} variant='primary'>
+    Settings
+  </Button>
+)
 ```
 
 ## Breadcrumb item customization
@@ -62,12 +64,12 @@ import { Button } from '@polyms/core-ui'
 ```tsx
 import { Breadcrumb } from '@polyms/core-ui'
 
-<Breadcrumb.Item render={<span className="breadcrumb-item" />} active>
-  Current page
-</Breadcrumb.Item>
+const breadcrumbItem = (
+  <Breadcrumb.Item render={<span className='breadcrumb-item' />} active>
+    Current page
+  </Breadcrumb.Item>
+)
 ```
-
-React 19 components pass **`ref`** through **`props.ref`** into **`useRender`** — no **`forwardRef`** required for this pattern.
 
 ## API Reference
 

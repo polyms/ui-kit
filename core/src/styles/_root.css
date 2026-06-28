@@ -1,3 +1,4 @@
+/** biome-ignore-all assist/source/useSortedProperties: biome sorts properties alphabetically */
 @theme {
   --color-primary: var(--color-primary-700);
   --color-primary-50: theme(colors.cyan.50);

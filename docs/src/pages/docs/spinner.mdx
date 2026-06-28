@@ -38,9 +38,12 @@ A loading indicator that provides visual feedback to users during asynchronous o
 ```tsx
 import { Spinner } from '@polyms/core-ui'
 
+const spinner = (
 <Spinner />
 <Spinner size={24} />
 <Spinner color='#3b82f6' subColor='#93c5fd' />
+
+)
 ```
 
 ## Sizes
@@ -70,21 +73,25 @@ Customize spinner colors to match your brand or indicate different states using 
 **Button States:**
 
 ```tsx
-<Button disabled>
-  <Spinner size={16} color='white' subColor='rgba(255,255,255,0.3)' />
-  <span className='ms-2'>Loading...</span>
-</Button>
+const button = (
+  <Button disabled>
+    <Spinner size={16} color='white' subColor='rgba(255,255,255,0.3)' />
+    <span className='ms-2'>Loading...</span>
+  </Button>
+)
 ```
 
 **Overlay:**
 
 ```tsx
-<div className='relative'>
-  <div className='absolute inset-0 z-10 flex items-center justify-center bg-white/80'>
-    <Spinner size={32} />
+const layout = (
+  <div className='relative'>
+    <div className='absolute inset-0 z-10 flex items-center justify-center bg-white/80'>
+      <Spinner size={32} />
+    </div>
+    {/* Your content */}
   </div>
-  {/* Your content */}
-</div>
+)
 ```
 
 ## API Reference

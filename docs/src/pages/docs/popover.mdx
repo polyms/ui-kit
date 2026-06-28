@@ -52,16 +52,16 @@ Popovers display rich content in a floating panel when triggered by user interac
 ```tsx
 import { Button, Popover } from '@polyms/core-ui'
 
-<Popover>
-  <Popover.Trigger render={<Button variant='primary' />}>
-    Click me
-  </Popover.Trigger>
-  <Popover.Content
-    title="Popover Title"
-    description="This is a popover with some helpful information."
-    side="top"
-  />
-</Popover>
+const popover = (
+  <Popover>
+    <Popover.Trigger render={<Button variant='primary' />}>Click me</Popover.Trigger>
+    <Popover.Content
+      title='Popover Title'
+      description='This is a popover with some helpful information.'
+      side='top'
+    />
+  </Popover>
+)
 ```
 
 ## Composition
@@ -76,11 +76,9 @@ import { Button, Popover } from '@polyms/core-ui'
 export default function CustomPopover() {
   return (
     <Popover>
-      <Popover.Trigger render={<Button variant='primary' />}>
-        Settings
-      </Popover.Trigger>
-      <Popover.Content title="Quick Settings" side="bottom">
-        <div className="flex flex-col gap-2 p-2">
+      <Popover.Trigger render={<Button variant='primary' />}>Settings</Popover.Trigger>
+      <Popover.Content title='Quick Settings' side='bottom'>
+        <div className='flex flex-col gap-2 p-2'>
           <Button size='sm'>Dark Mode</Button>
           <Button size='sm'>Notifications</Button>
           <Button size='sm'>Privacy</Button>
@@ -103,15 +101,13 @@ export default function ControlledPopover() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="flex gap-4">
+    <div className='flex gap-4'>
       <Popover open={open} onOpenChange={setOpen}>
-        <Popover.Trigger render={<Button variant='primary' />}>
-          Controlled Popover
-        </Popover.Trigger>
+        <Popover.Trigger render={<Button variant='primary' />}>Controlled Popover</Popover.Trigger>
         <Popover.Content
-          title="Controlled"
+          title='Controlled'
           description="This popover's state is controlled externally."
-          side="top"
+          side='top'
         />
       </Popover>
 
@@ -133,16 +129,10 @@ import { Button, Popover } from '@polyms/core-ui'
 export default function PopoverWithClose() {
   return (
     <Popover>
-      <Popover.Trigger render={<Button variant='primary' />}>
-        Open Popover
-      </Popover.Trigger>
-      <Popover.Content title="Dismissible Popover" side="right">
-        <p className="text-sm mb-2">
-          Click the close button to dismiss this popover.
-        </p>
-        <Popover.Close render={<Button className='w-full' size='sm' variant='light' />}>
-          Close
-        </Popover.Close>
+      <Popover.Trigger render={<Button variant='primary' />}>Open Popover</Popover.Trigger>
+      <Popover.Content title='Dismissible Popover' side='right'>
+        <p className='text-sm mb-2'>Click the close button to dismiss this popover.</p>
+        <Popover.Close render={<Button className='w-full' size='sm' variant='light' />}>Close</Popover.Close>
       </Popover.Content>
     </Popover>
   )

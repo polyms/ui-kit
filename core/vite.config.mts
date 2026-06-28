@@ -152,13 +152,13 @@ export default defineConfig(async ({ mode }) => {
             }
             return '[name]-[hash].mjs'
           },
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.names.some((name) => name.endsWith('.css'))) {
+          assetFileNames: assetInfo => {
+            if (assetInfo.names.some(name => name.endsWith('.css'))) {
               return isLocal ? 'styles.css' : 'styles-[hash].css'
             }
             return '[name]-[hash][extname]'
           },
-          footer: (chunk) => (chunk.isEntry ? footer(mode, version) : ''),
+          footer: chunk => (chunk.isEntry ? footer(mode, version) : ''),
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',

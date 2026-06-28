@@ -1,11 +1,11 @@
 .breadcrumb {
   display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
   gap: 1.25rem;
+  align-items: center;
+  padding: 0;
+  margin: 0;
   overflow-x: auto;
+  list-style: none;
 
   .breadcrumb-item {
     position: relative;
@@ -16,22 +16,22 @@
 
   .breadcrumb-item + .breadcrumb-item {
     &::before {
-      content: '';
       position: absolute;
       top: 50%;
-      transform: translateY(-50%) translateX(-100%) translateX(-0.125rem);
       width: 1rem;
       height: 1rem;
-      background-color: currentColor;
       color: var(--muted);
-      mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2IiBmaWxsPSJub25lIj48cGF0aCBkPSJNNS45NDA0MyAxMy4yOEwxMC4yODcxIDguOTMzM0MxMC44MDA0IDguNDE5OTcgMTAuODAwNCA3LjU3OTk3IDEwLjI4NzEgNy4wNjY2NEw1Ljk0MDQzIDIuNzE5OTciIHN0cm9rZT0iIzFGMjEyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+');
-      mask-size: 1rem;
-      mask-repeat: no-repeat;
-      mask-position: center;
+      content: '';
+      background-color: currentColor;
       -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2IiBmaWxsPSJub25lIj48cGF0aCBkPSJNNS45NDA0MyAxMy4yOEwxMC4yODcxIDguOTMzM0MxMC44MDA0IDguNDE5OTcgMTAuODAwNCA3LjU3OTk3IDEwLjI4NzEgNy4wNjY2NEw1Ljk0MDQzIDIuNzE5OTciIHN0cm9rZT0iIzFGMjEyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+');
-      -webkit-mask-size: 1rem;
+      mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2IiBmaWxsPSJub25lIj48cGF0aCBkPSJNNS45NDA0MyAxMy4yOEwxMC4yODcxIDguOTMzM0MxMC44MDA0IDguNDE5OTcgMTAuODAwNCA3LjU3OTk3IDEwLjI4NzEgNy4wNjY2NEw1Ljk0MDQzIDIuNzE5OTciIHN0cm9rZT0iIzFGMjEyNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+');
       -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
       -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: 1rem;
+      mask-size: 1rem;
+      transform: translateY(-50%) translateX(-100%) translateX(-0.125rem);
     }
   }
 }

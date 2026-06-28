@@ -7,7 +7,15 @@
 pnpm-lock.yaml
 .npmrc
 **/build/
+*.js
+*.mjs
 *.tsx
+*.jsx
 *.ts
+*.mts
 *.json
 *.html
+*.css
+*.svg
+*.webmanifest
+.agents/skills/

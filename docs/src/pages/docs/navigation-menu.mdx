@@ -74,7 +74,7 @@ apis:
   - name: closeOnClick
     default: 'true'
     values: boolean
-    description: Close the navigation menu after the link is clicked. Polyms defaults this to true (override with closeOnClick={false} if needed).
+    description: Close the navigation menu after the link is clicked. Defaults to true; set closeOnClick={false} to keep the menu open.
   - name: variant
     default: '-'
     values: danger | soft | trigger
@@ -118,7 +118,7 @@ apis:
 import Story from './-views/navigation-menu/NavigationMenuDefault.tsx'
 import code from './-views/navigation-menu/NavigationMenuDefault.tsx?raw'
 
-Navigation Menu is a multi-item navigation surface designed for site headers and **mega menus**. Triggers share a single popup that smoothly animates between item sizes and slides content based on the activation direction. Built on top of [Base UI Navigation Menu](https://base-ui.com/react/components/navigation-menu).
+Navigation Menu is a multi-item navigation surface for site headers and **mega menus**. Triggers share a single popup that smoothly animates between item sizes and slides content based on the activation direction.
 
 <CodePreview code={code}>
   <Story />
@@ -127,34 +127,36 @@ Navigation Menu is a multi-item navigation surface designed for site headers and
 The example above composes a **featured gradient card**, multi-column link sections with **per-item badges**, a quoted testimonial with a stats panel, and an inline **footer CTA strip** — all sitting inside the single shared `NavigationMenu.Viewport`, so transitions between items stay smooth. A few patterns worth lifting from it:
 
 - **Featured tile** — wrap a `NavigationMenu.Link` with custom utility classes (`group`, `relative`, gradient `style`) to render a hero card. Auto-close on click still fires because it's a real `Link`.
-- **Per-item badges** — use the design-system `badge` + tone classes (`badge-primary`, `badge-success`, …) for status pills next to titles instead of hand-rolled spans.
+- **Per-item badges** — use **`badge`** tone classes (`badge-primary`, `badge-success`, …) for status pills next to titles instead of hand-rolled spans.
 - **Section labels** — use `NavigationMenu.GroupLabel` above each column. Keep items inside a `<ul>` so each link is a real list item.
 - **Footer strip** — use `NavigationMenu.Footer` after the grid for changelog teasers or sales CTAs. It animates with the rest of the popup.
-- **Mixed link variants** — pair plain `Link`s for dense rows with `variant='soft'` for discoverable cards; `variant='danger'` for destructive rows; `variant='trigger'` for static *Pricing* / *Login* entries in the top list.
+- **Mixed link variants** — pair plain `Link`s for dense rows with `variant='soft'` for discoverable cards; `variant='danger'` for destructive rows; `variant='trigger'` for static _Pricing_ / _Login_ entries in the top list.
 
-For a **fintech app-shell** variant — `variant='bare'` list inside a sticky page header, with balance cards, quick-action grids, and mini analytics — see the [Demo playground](/demo).
+For a **fintech app-shell** variant — `variant='bare'` list inside a sticky page header, with balance cards, quick-action grids, and mini analytics — see the [Demo playground](/demo) page.
 
 ## Usage
 
 ```tsx
 import { NavigationMenu } from '@polyms/core-ui'
 
-<NavigationMenu>
-  <NavigationMenu.List>
-    <NavigationMenu.Item value='products'>
-      <NavigationMenu.Trigger>
-        Products
-        <NavigationMenu.Icon />
-      </NavigationMenu.Trigger>
-      <NavigationMenu.Content>
-        <NavigationMenu.Link href='/launchpad'>Launchpad</NavigationMenu.Link>
-        <NavigationMenu.Link href='/analytics'>Analytics</NavigationMenu.Link>
-      </NavigationMenu.Content>
-    </NavigationMenu.Item>
-  </NavigationMenu.List>
+const navigationMenu = (
+  <NavigationMenu>
+    <NavigationMenu.List>
+      <NavigationMenu.Item value='products'>
+        <NavigationMenu.Trigger>
+          Products
+          <NavigationMenu.Icon />
+        </NavigationMenu.Trigger>
+        <NavigationMenu.Content>
+          <NavigationMenu.Link href='/launchpad'>Launchpad</NavigationMenu.Link>
+          <NavigationMenu.Link href='/analytics'>Analytics</NavigationMenu.Link>
+        </NavigationMenu.Content>
+      </NavigationMenu.Item>
+    </NavigationMenu.List>
 
-  <NavigationMenu.Viewport />
-</NavigationMenu>
+    <NavigationMenu.Viewport />
+  </NavigationMenu>
+)
 ```
 
 Each `Content` is teleported into the single `Viewport` you drop at the end of the root, so transitions between items stay smooth and accessible. `NavigationMenu.Viewport` is the all-in-one Polyms shell — it wires up the portal, positioner, popup, and arrow for you.
@@ -166,47 +168,51 @@ Each `Content` is teleported into the single `Viewport` you drop at the end of t
 Use `NavigationMenu.List variant='bare'` when the surrounding app header already owns the nav chrome (container width, sticky background, border, blur, etc.). Pair it with `size='lg'` on `NavigationMenu.Trigger` and trigger-style links for roomier marketing/header navigation.
 
 ```tsx
-<NavigationMenu delay={100} closeDelay={120}>
-  <NavigationMenu.List variant='bare'>
-    <NavigationMenu.Item value='about'>
-      <NavigationMenu.Trigger size='lg'>
-        About
+const navigationMenu = (
+  <NavigationMenu delay={100} closeDelay={120}>
+    <NavigationMenu.List variant='bare'>
+      <NavigationMenu.Item value='about'>
+        <NavigationMenu.Trigger size='lg'>
+          About
+          <NavigationMenu.Icon />
+        </NavigationMenu.Trigger>
+        <NavigationMenu.Content>{/* mega menu */}</NavigationMenu.Content>
+      </NavigationMenu.Item>
+
+      <NavigationMenu.Item>
+        <NavigationMenu.Link href='/contact-us' size='lg' variant='trigger'>
+          Contact
+        </NavigationMenu.Link>
+      </NavigationMenu.Item>
+    </NavigationMenu.List>
+
+    <NavigationMenu.Viewport arrow={false} />
+  </NavigationMenu>
+)
+```
+
+### With a static link
+
+Render a `NavigationMenu.Link` directly inside `NavigationMenu.Item` (without a trigger/content pair) for a plain navigation entry — perfect for **Pricing**, **Login**, etc. Pass **`variant='trigger'`** so it inherits the same pill padding, radius, hover, and animated underline as `NavigationMenu.Trigger` and stays perfectly aligned inside the list.
+
+```tsx
+const navigationMenuList = (
+  <NavigationMenu.List>
+    <NavigationMenu.Item value='products'>
+      <NavigationMenu.Trigger>
+        Products
         <NavigationMenu.Icon />
       </NavigationMenu.Trigger>
       <NavigationMenu.Content>{/* mega menu */}</NavigationMenu.Content>
     </NavigationMenu.Item>
 
     <NavigationMenu.Item>
-      <NavigationMenu.Link href='/contact-us' size='lg' variant='trigger'>
-        Contact
+      <NavigationMenu.Link href='/pricing' variant='trigger'>
+        Pricing
       </NavigationMenu.Link>
     </NavigationMenu.Item>
   </NavigationMenu.List>
-
-  <NavigationMenu.Viewport arrow={false} />
-</NavigationMenu>
-```
-
-### With a static link
-
-Render a `NavigationMenu.Link` directly inside `NavigationMenu.Item` (without a trigger/content pair) for a plain navigation entry — perfect for *Pricing*, *Login*, etc. Pass **`variant='trigger'`** so it inherits the same pill padding, radius, hover, and animated underline as `NavigationMenu.Trigger` and stays perfectly aligned inside the list.
-
-```tsx
-<NavigationMenu.List>
-  <NavigationMenu.Item value='products'>
-    <NavigationMenu.Trigger>
-      Products
-      <NavigationMenu.Icon />
-    </NavigationMenu.Trigger>
-    <NavigationMenu.Content>{/* mega menu */}</NavigationMenu.Content>
-  </NavigationMenu.Item>
-
-  <NavigationMenu.Item>
-    <NavigationMenu.Link href='/pricing' variant='trigger'>
-      Pricing
-    </NavigationMenu.Link>
-  </NavigationMenu.Item>
-</NavigationMenu.List>
+)
 ```
 
 ### Link variants
@@ -214,23 +220,25 @@ Render a `NavigationMenu.Link` directly inside `NavigationMenu.Item` (without a 
 By default, `NavigationMenu.Link` renders a plain row with a slate hover background. Use variants when a link needs stronger semantics: **`soft`** for discoverable card rows, **`danger`** for destructive actions, and **`trigger`** for static top-level entries.
 
 ```tsx
-<NavigationMenu.Content>
-  <NavigationMenu.Link href='/docs'>Documentation</NavigationMenu.Link>
+const navigationMenuContent = (
+  <NavigationMenu.Content>
+    <NavigationMenu.Link href='/docs'>Documentation</NavigationMenu.Link>
 
-  <NavigationMenu.Link href='/community' variant='soft'>
-    Community
-  </NavigationMenu.Link>
+    <NavigationMenu.Link href='/community' variant='soft'>
+      Community
+    </NavigationMenu.Link>
 
-  <NavigationMenu.Link active href='/showcase' variant='soft'>
-    Showcase
-  </NavigationMenu.Link>
+    <NavigationMenu.Link active href='/showcase' variant='soft'>
+      Showcase
+    </NavigationMenu.Link>
 
-  <NavigationMenu.Separator />
+    <NavigationMenu.Separator />
 
-  <NavigationMenu.Link href='/revoke-access' variant='danger'>
-    Revoke access
-  </NavigationMenu.Link>
-</NavigationMenu.Content>
+    <NavigationMenu.Link href='/revoke-access' variant='danger'>
+      Revoke access
+    </NavigationMenu.Link>
+  </NavigationMenu.Content>
+)
 ```
 
 `soft` reacts to `:hover`, `:focus-visible`, and `data-active` (set automatically by the `active` prop) — border flips to solid, background tints stronger. `danger` keeps the plain-row layout but swaps hover/focus/active states to the danger tone.
@@ -240,16 +248,20 @@ By default, `NavigationMenu.Link` renders a plain row with a slate hover backgro
 Use `GroupLabel`, `Separator`, and `Footer` to keep mega menu panels consistent without repeating utility bundles:
 
 ```tsx
-<NavigationMenu.Content>
-  <NavigationMenu.GroupLabel>Products</NavigationMenu.GroupLabel>
-  <NavigationMenu.Link href='/launchpad'>Launchpad</NavigationMenu.Link>
-  <NavigationMenu.Link href='/analytics'>Analytics</NavigationMenu.Link>
-  <NavigationMenu.Separator />
-  <NavigationMenu.Footer>
-    <span>Postgres branching is now GA.</span>
-    <a className='link link-primary' href='/changelog'>Read changelog</a>
-  </NavigationMenu.Footer>
-</NavigationMenu.Content>
+const navigationMenuContent = (
+  <NavigationMenu.Content>
+    <NavigationMenu.GroupLabel>Products</NavigationMenu.GroupLabel>
+    <NavigationMenu.Link href='/launchpad'>Launchpad</NavigationMenu.Link>
+    <NavigationMenu.Link href='/analytics'>Analytics</NavigationMenu.Link>
+    <NavigationMenu.Separator />
+    <NavigationMenu.Footer>
+      <span>Postgres branching is now GA.</span>
+      <a className='link link-primary' href='/changelog'>
+        Read changelog
+      </a>
+    </NavigationMenu.Footer>
+  </NavigationMenu.Content>
+)
 ```
 
 ### Controlled value
@@ -297,17 +309,19 @@ The `active` prop sets `aria-current='page'` automatically — drive it from you
 Nest a second `NavigationMenu` inside `NavigationMenu.Content` for multi-level mega menus. Nested roots render a `<div>` instead of `<nav>` and share hover coordination with the parent.
 
 ```tsx
-<NavigationMenu.Content>
-  <NavigationMenu>
-    <NavigationMenu.List>
-      <NavigationMenu.Item value='overview'>
-        <NavigationMenu.Trigger>Overview</NavigationMenu.Trigger>
-        <NavigationMenu.Content>{/* deeper links */}</NavigationMenu.Content>
-      </NavigationMenu.Item>
-    </NavigationMenu.List>
-    <NavigationMenu.Viewport />
-  </NavigationMenu>
-</NavigationMenu.Content>
+const navigationMenuContent = (
+  <NavigationMenu.Content>
+    <NavigationMenu>
+      <NavigationMenu.List>
+        <NavigationMenu.Item value='overview'>
+          <NavigationMenu.Trigger>Overview</NavigationMenu.Trigger>
+          <NavigationMenu.Content>{/* deeper links */}</NavigationMenu.Content>
+        </NavigationMenu.Item>
+      </NavigationMenu.List>
+      <NavigationMenu.Viewport />
+    </NavigationMenu>
+  </NavigationMenu.Content>
+)
 ```
 
 ## Positioning
@@ -315,13 +329,13 @@ Nest a second `NavigationMenu` inside `NavigationMenu.Content` for multi-level m
 Pass positioner props directly to `NavigationMenu.Viewport` — `side`, `align`, `sideOffset`, `collisionPadding`:
 
 ```tsx
-<NavigationMenu.Viewport align='start' side='bottom' sideOffset={12} />
+const navigationMenuViewport = <NavigationMenu.Viewport align='start' side='bottom' sideOffset={12} />
 ```
 
 Set `arrow={false}` to hide the pointer:
 
 ```tsx
-<NavigationMenu.Viewport arrow={false} />
+const navigationMenuViewport = <NavigationMenu.Viewport arrow={false} />
 ```
 
 ## Hover timing
@@ -329,9 +343,11 @@ Set `arrow={false}` to hide the pointer:
 Tune **`delay`** (open) and **`closeDelay`** (close) on the root to balance responsiveness against accidental triggers. Both default to **`50ms`**; raise `delay` to 150–300ms for forgiving hover targets, drop `closeDelay` to 0 for a snappier dismissal.
 
 ```tsx
-<NavigationMenu closeDelay={0} delay={200}>
-  {/* … */}
-</NavigationMenu>
+const navigationMenu = (
+  <NavigationMenu closeDelay={0} delay={200}>
+    {/* … */}
+  </NavigationMenu>
+)
 ```
 
 ## Keyboard Navigation

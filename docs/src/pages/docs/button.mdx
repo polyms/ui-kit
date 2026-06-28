@@ -57,7 +57,7 @@ Trigger an action or event, such as submitting a Form, opening a Dialog, canceli
 ```tsx
 import { Button } from '@polyms/core-ui'
 
-<Button>Click me</Button>
+const button = <Button>Click me</Button>
 ```
 
 ## Sizes
@@ -74,16 +74,18 @@ Buttons support multiple visual styles for different semantic meanings and conte
 
 ## Tooltip
 
-Pass **`tooltip`** for a short hint. During SSR and the first client render, the same text is applied as the native **`title`** attribute so HTML remains useful without JavaScript. After hydration, **`title`** is cleared and the library **`Tooltip`** wraps the button so the hint uses the design-system popup (positioning, delay, styling).
+Pass **`tooltip`** for a short hint. During SSR and the first client render, the same text is applied as the native **`title`** attribute so HTML remains useful without JavaScript. After hydration, **`title`** is cleared and the library **`Tooltip`** wraps the button for positioned, styled hints.
 
 Prefer **`tooltip`** over a manual **`title`** when you want that behavior. If you only need the browser default tooltip and no floating UI, use **`title`** alone.
 
 ```tsx
 import { Button } from '@polyms/core-ui'
 
-<Button rounded tooltip="Save changes to the server" variant="primary">
-  Save
-</Button>
+const button = (
+  <Button rounded tooltip='Save changes to the server' variant='primary'>
+    Save
+  </Button>
+)
 ```
 
 <ButtonTooltip />
@@ -95,9 +97,11 @@ Use **`render`** to keep button styles on another element (for example a client 
 ```tsx
 import { Button } from '@polyms/core-ui'
 
-<Button render={<a href="/settings" />} variant="primary">
-  Account settings
-</Button>
+const button = (
+  <Button render={<a href='/settings' />} variant='primary'>
+    Account settings
+  </Button>
+)
 ```
 
 You can also pass a render function for advanced prop merging. See [useRender](/docs/use-render) for the underlying pattern.

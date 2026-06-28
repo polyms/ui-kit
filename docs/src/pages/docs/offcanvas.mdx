@@ -72,17 +72,17 @@ Offcanvas panels slide in from the edge of the viewport to display supplementary
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-<Offcanvas>
-  <Offcanvas.Trigger render={<Button variant='primary' />}>Open Menu</Offcanvas.Trigger>
-  <Offcanvas.Content>
-    <Offcanvas.Header>
-      <Offcanvas.Title>Navigation</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Description>
-      Browse through the menu options below
-    </Offcanvas.Description>
-  </Offcanvas.Content>
-</Offcanvas>
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' />}>Open Menu</Offcanvas.Trigger>
+    <Offcanvas.Content>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Navigation</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Description>Browse through the menu options below</Offcanvas.Description>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
 ```
 
 ## Composition
@@ -94,20 +94,20 @@ Offcanvas supports flexible composition with Header, Title, Description, Body, a
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-<Offcanvas>
-  <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Settings</Offcanvas.Trigger>
-  <Offcanvas.Content>
-    <Offcanvas.Header>
-      <Offcanvas.Title>Settings</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Description>
-      Manage your preferences
-    </Offcanvas.Description>
-    <Offcanvas.Body>
-      <div>Settings content goes here</div>
-    </Offcanvas.Body>
-  </Offcanvas.Content>
-</Offcanvas>
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Settings</Offcanvas.Trigger>
+    <Offcanvas.Content>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Settings</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Description>Manage your preferences</Offcanvas.Description>
+      <Offcanvas.Body>
+        <div>Settings content goes here</div>
+      </Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
 ```
 
 ### Direction
@@ -119,19 +119,15 @@ import { Button, Offcanvas } from '@polyms/core-ui'
 
 export default function DirectionOffcanvas() {
   return (
-    <div className="m-auto grid grid-cols-2 gap-4">
+    <div className='m-auto grid grid-cols-2 gap-4'>
       {(['left', 'right', 'up', 'down'] as const).map((direction) => (
         <Offcanvas key={direction} swipeDirection={direction}>
-          <Offcanvas.Trigger render={<Button variant='primary' />}>
-            Open {direction}
-          </Offcanvas.Trigger>
+          <Offcanvas.Trigger render={<Button variant='primary' />}>Open {direction}</Offcanvas.Trigger>
           <Offcanvas.Content>
             <Offcanvas.Header>
               <Offcanvas.Title>{direction} offcanvas</Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Description>
-              This panel is placed on the {direction} edge.
-            </Offcanvas.Description>
+            <Offcanvas.Description>This panel is placed on the {direction} edge.</Offcanvas.Description>
           </Offcanvas.Content>
         </Offcanvas>
       ))}
@@ -147,18 +143,20 @@ Hide the close button when you need explicit user action to close.
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-<Offcanvas>
-  <Offcanvas.Trigger render={<Button variant='primary' />}>Confirm</Offcanvas.Trigger>
-  <Offcanvas.Content closeButton={false}>
-    <Offcanvas.Header>
-      <Offcanvas.Title>Confirmation Required</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Body>
-      <Button variant='primary'>Confirm</Button>
-      <Offcanvas.Close render={<Button rounded />}>Cancel</Offcanvas.Close>
-    </Offcanvas.Body>
-  </Offcanvas.Content>
-</Offcanvas>
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' />}>Confirm</Offcanvas.Trigger>
+    <Offcanvas.Content closeButton={false}>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Confirmation Required</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+        <Button variant='primary'>Confirm</Button>
+        <Offcanvas.Close render={<Button rounded />}>Cancel</Offcanvas.Close>
+      </Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
 ```
 
 ### Without Backdrop
@@ -168,17 +166,17 @@ Remove the backdrop overlay for a less intrusive experience.
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-<Offcanvas>
-  <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Quick Menu</Offcanvas.Trigger>
-  <Offcanvas.Content backdrop={false}>
-    <Offcanvas.Header>
-      <Offcanvas.Title>Quick Actions</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Body>
-      Menu content
-    </Offcanvas.Body>
-  </Offcanvas.Content>
-</Offcanvas>
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Quick Menu</Offcanvas.Trigger>
+    <Offcanvas.Content backdrop={false}>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Quick Actions</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>Menu content</Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
 ```
 
 ### Size
@@ -188,15 +186,17 @@ Use `size` on `Offcanvas.Content` to control panel width for left/right drawers 
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-<Offcanvas swipeDirection="right">
-  <Offcanvas.Trigger render={<Button variant='primary' />}>Wide panel</Offcanvas.Trigger>
-  <Offcanvas.Content size="lg">
-    <Offcanvas.Header>
-      <Offcanvas.Title>Settings</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Body>Wide settings panel</Offcanvas.Body>
-  </Offcanvas.Content>
-</Offcanvas>
+const offcanvas = (
+  <Offcanvas swipeDirection='right'>
+    <Offcanvas.Trigger render={<Button variant='primary' />}>Wide panel</Offcanvas.Trigger>
+    <Offcanvas.Content size='lg'>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Settings</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>Wide settings panel</Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
 ```
 
 ## Behavior

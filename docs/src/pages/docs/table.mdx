@@ -60,7 +60,7 @@ apis:
 import Story from './-views/table/TableDefault.tsx'
 import code from './-views/table/TableDefault.tsx?raw'
 
-Render structured data with semantic HTML and table utility classes. This is a CSS-only pattern, so there is no `Table` React component export.
+Style data tables with semantic HTML and utility classes. There is no **`Table`** React component — apply **`table`** and modifiers directly on **`<table>`**.
 
 <CodePreview code={code}>
   <Story />
@@ -69,27 +69,29 @@ Render structured data with semantic HTML and table utility classes. This is a C
 ## Usage
 
 ```tsx
-<table className='table'>
-  <thead className='thead-light'>
-    <tr>
-      <th scope='col'>Name</th>
-      <th scope='col'>Status</th>
-      <th scope='col'>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Order #1024</td>
-      <td>Paid</td>
-      <td>$128.00</td>
-    </tr>
-    <tr>
-      <td>Order #1025</td>
-      <td>Pending</td>
-      <td>$64.00</td>
-    </tr>
-  </tbody>
-</table>
+const table = (
+  <table className='table'>
+    <thead className='thead-light'>
+      <tr>
+        <th scope='col'>Name</th>
+        <th scope='col'>Status</th>
+        <th scope='col'>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Order #1024</td>
+        <td>Paid</td>
+        <td>$128.00</td>
+      </tr>
+      <tr>
+        <td>Order #1025</td>
+        <td>Pending</td>
+        <td>$64.00</td>
+      </tr>
+    </tbody>
+  </table>
+)
 ```
 
 ## Common combinations
@@ -97,44 +99,52 @@ Render structured data with semantic HTML and table utility classes. This is a C
 Use modifiers together on the same table:
 
 ```tsx
-<table className='table table-striped table-hover table-bordered'>
-  ...
-</table>
+const table = <table className='table table-striped table-hover table-bordered'>...</table>
 ```
 
 Compact and roomy density:
 
 ```tsx
+
+const table = (
 <table className='table table-sm'>...</table>
 <table className='table table-lg'>...</table>
+
+)
 ```
 
 Column striping:
 
 ```tsx
-<table className='table table-striped-columns'>...</table>
+const table = <table className='table table-striped-columns'>...</table>
 ```
 
 Active row or cell:
 
 ```tsx
+
+const tableRow = (
 <tr className='table-active'>...</tr>
 <td className='table-active'>...</td>
+
+)
 ```
 
 Caption at the top:
 
 ```tsx
-<table className='table caption-top'>
-  <caption>Recent orders</caption>
-  ...
-</table>
+const table = (
+  <table className='table caption-top'>
+    <caption>Recent orders</caption>
+    ...
+  </table>
+)
 ```
 
 ## Notes
 
-- Prefer `<thead className='thead-light'>` for the standard header treatment.
-- `thead.bg-neutral` is still supported for compatibility, but new code should use the slate-based header rules.
+- Prefer **`<thead className='thead-light'>`** for the standard header treatment.
+- Use **`slate-*`** header styling for new work; **`bg-neutral`** on **`thead`** remains supported for older markup.
 - For nested tables, apply `.table` to each table you want styled.
 
 ## API Reference

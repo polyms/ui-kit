@@ -16,26 +16,26 @@ Infer the task before writing code. State one line:
 
 **"Reading this as: \<surface> for \<audience>, using @polyms/core-ui, \<density> density."**
 
-| Signal | Surface | What to do |
-| --- | --- | --- |
-| Form, field, validation | App screen | [field.md](field.md) + [quality.md#field-label-copy](quality.md#field-label-copy) |
-| Button, CTA, icon button | App screen | [components.md#button](components.md#button) |
-| Toast, notification | App screen | [setup.md#toast](setup.md#toast) · [components.md#toast](components.md#toast) |
-| Modal, Offcanvas, dialog, drawer, delete confirm | App screen | [modal.md](modal.md) — not Toast for blocking confirm |
-| Form in modal/offcanvas, modal form, filter panel, side panel with form | App screen | [field.md](field.md) + [modal.md](modal.md); `scrollable` on `Modal.Content` when long |
-| Switch, Popover, Tooltip | App screen | [components.md#switch](components.md#switch) · [popover](components.md#popover) · [tooltip](components.md#tooltip) |
-| Table, tabular data | App screen | [css-utilities.md#table](css-utilities.md#table) |
-| Select, Tabs, Menu, Toolbar, nav, settings | App screen | [components.md](components.md) · [select](components.md#select) · [tabs](components.md#tabs) |
-| Accordion, FAQ, expand/collapse sections | App screen | [components.md#accordion](components.md#accordion) · single unit → [collapsible](components.md#collapsible) |
-| Alert, banner, inline status | App screen | [components.md#alert](components.md#alert) |
-| NumberField, quantity, stepper | App screen | [components.md#numberfield](components.md#numberfield) |
-| Spinner, loading, pending fetch | App screen | [components.md#spinner](components.md#spinner) · `.skeleton` → [css-utilities.md](css-utilities.md) |
-| Code split, lazy import, federated remote | App setup | [components.md#dynamic-import](components.md#dynamic-import) |
-| New consumer app shell | App setup | Read [setup.md](setup.md); mount overlay containers once |
-| New consumer app / brand theming | Brand kit | Read [brandkit.md](brandkit.md); map accent to `primary-*` |
-| Docs live demo (`-views/`) | Docs demo | Real compound trees; `@polyms/core-ui` barrel — [Sample Data and Docs Demos](#sample-data-and-docs-demos) |
-| Extend or restyle existing screen | Redesign | Read [redesign.md](redesign.md); run Scan → Diagnose → Fix |
-| Library component or CSS in the package source | Maintainer | [Maintainer](#maintainer) |
+| Signal                                                                  | Surface    | What to do                                                                                                         |
+| ----------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| Form, field, validation                                                 | App screen | [field.md](field.md) + [quality.md#field-label-copy](quality.md#field-label-copy)                                  |
+| Button, CTA, icon button                                                | App screen | [components.md#button](components.md#button)                                                                       |
+| Toast, notification                                                     | App screen | [setup.md#toast](setup.md#toast) · [components.md#toast](components.md#toast)                                      |
+| Modal, Offcanvas, dialog, drawer, delete confirm                        | App screen | [modal.md](modal.md) — not Toast for blocking confirm                                                              |
+| Form in modal/offcanvas, modal form, filter panel, side panel with form | App screen | [field.md](field.md) + [modal.md](modal.md); `scrollable` on `Modal.Content` when long                             |
+| Switch, Popover, Tooltip                                                | App screen | [components.md#switch](components.md#switch) · [popover](components.md#popover) · [tooltip](components.md#tooltip) |
+| Table, tabular data                                                     | App screen | [css-utilities.md#table](css-utilities.md#table)                                                                   |
+| Select, Tabs, Menu, Toolbar, nav, settings                              | App screen | [components.md](components.md) · [select](components.md#select) · [tabs](components.md#tabs)                       |
+| Accordion, FAQ, expand/collapse sections                                | App screen | [components.md#accordion](components.md#accordion) · single unit → [collapsible](components.md#collapsible)        |
+| Alert, banner, inline status                                            | App screen | [components.md#alert](components.md#alert)                                                                         |
+| NumberField, quantity, stepper                                          | App screen | [components.md#numberfield](components.md#numberfield)                                                             |
+| Spinner, loading, pending fetch                                         | App screen | [components.md#spinner](components.md#spinner) · `.skeleton` → [css-utilities.md](css-utilities.md)                |
+| Code split, lazy import, federated remote                               | App setup  | [components.md#dynamic-import](components.md#dynamic-import)                                                       |
+| New consumer app shell                                                  | App setup  | Read [setup.md](setup.md); mount overlay containers once                                                           |
+| New consumer app / brand theming                                        | Brand kit  | Read [brandkit.md](brandkit.md); map accent to `primary-*`                                                         |
+| Docs live demo (`-views/`)                                              | Docs demo  | Real compound trees; `@polyms/core-ui` barrel — [Sample Data and Docs Demos](#sample-data-and-docs-demos)          |
+| Extend or restyle existing screen                                       | Redesign   | Read [redesign.md](redesign.md); run Scan → Diagnose → Fix                                                         |
+| Library component or CSS in the package source                          | Maintainer | [Maintainer](#maintainer)                                                                                          |
 
 ## Maintainer
 
@@ -47,17 +47,17 @@ Infer the task before writing code. State one line:
 4. Docs-only accordion overrides (API Reference table grid) must stay scoped under **`.api-reference`** — never global `.accordion-trigger` rules that break live demos.
 5. **CSS section comments** in package and docs-site `styles/_*.css` — short block headers (e.g. `/* Trigger button styling */`, `/* Panel styling */`). Do not delete when refactoring, scoping selectors, or formatting; add the same style of comment for new distinct blocks; remove a section comment only when removing the rule block it labels.
 
-If the task is ambiguous between **preserve existing UI** vs **visual overhaul**, ask once: *"Giữ layout/brand hiện tại hay làm lại visual từ đầu?"*
+If the task is ambiguous between **preserve existing UI** vs **visual overhaul**, ask once: _"Giữ layout/brand hiện tại hay làm lại visual từ đầu?"_
 
 ## Visual Density
 
 Product UI does not use marketing "variance" dials. Pick density intentionally:
 
-| Density | When | Spacing | Data display |
-| --- | --- | --- | --- |
-| **Comfortable** (default) | Settings, onboarding, marketing-in-app | `py-6`–`py-8` sections, readable line length | Cards and grouped fields OK |
-| **Compact** | Tables, admin lists, toolbars | Tighter `gap-2`/`gap-3`, less wrapper padding | Prefer `.table`, plain rows, `Toolbar` — avoid nested card boxes |
-| **Dense cockpit** | Dashboards, monitoring | Minimal chrome between metrics | `font-mono` for numbers; 1px `border-line` separators instead of card-per-metric |
+| Density                   | When                                   | Spacing                                       | Data display                                                                     |
+| ------------------------- | -------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Comfortable** (default) | Settings, onboarding, marketing-in-app | `py-6`–`py-8` sections, readable line length  | Cards and grouped fields OK                                                      |
+| **Compact**               | Tables, admin lists, toolbars          | Tighter `gap-2`/`gap-3`, less wrapper padding | Prefer `.table`, plain rows, `Toolbar` — avoid nested card boxes                 |
+| **Dense cockpit**         | Dashboards, monitoring                 | Minimal chrome between metrics                | `font-mono` for numbers; 1px `border-line` separators instead of card-per-metric |
 
 High-density screens: **do not** wrap every metric in identical card boxes. Let data breathe with spacing and dividers.
 
@@ -85,15 +85,15 @@ One screen = one visual system. Do not mix ad-hoc Tailwind with library defaults
 
 Do not default to a tall `divide-y` stack of `<div>`s when a library primitive fits. See [css-utilities.md — Lists and collections](css-utilities.md#lists-and-collections).
 
-| Situation | Use |
-| --- | --- |
-| Tabular / sortable data | `.table` (+ `table-hover`, `table-striped` as needed) |
-| 5+ homogeneous rows with columns | `.table`, not repeated flex rows |
-| Grouped sections of content | `Tabs` or `Accordion` |
-| Single show/hide block | `Collapsible` |
-| Row actions menu | `Menu` on each row or `Toolbar` above table |
-| Filterable long list | `Field.Floating` + `.table` (or `Select` for enum filters) |
-| Avoid | 20+ `border-b` div rows; fake tables from styled `<div>` grids |
+| Situation                        | Use                                                            |
+| -------------------------------- | -------------------------------------------------------------- |
+| Tabular / sortable data          | `.table` (+ `table-hover`, `table-striped` as needed)          |
+| 5+ homogeneous rows with columns | `.table`, not repeated flex rows                               |
+| Grouped sections of content      | `Tabs` or `Accordion`                                          |
+| Single show/hide block           | `Collapsible`                                                  |
+| Row actions menu                 | `Menu` on each row or `Toolbar` above table                    |
+| Filterable long list             | `Field.Floating` + `.table` (or `Select` for enum filters)     |
+| Avoid                            | 20+ `border-b` div rows; fake tables from styled `<div>` grids |
 
 ## Anti-Slop (Product UI)
 
@@ -158,11 +158,11 @@ Live component-library demos should:
 
 `Field.Label` should sound like a person, not a database column — unless the screen is dense admin or data-entry.
 
-| Surface | Label tone | Examples |
-| --- | --- | --- |
-| Onboarding, signup, settings, profile | Conversational question or invite | `Let me know your email?`, `What should we call you?`, `When should we remind you?` |
-| Checkout, short flows | Friendly but direct | `Where should we send the receipt?`, `Cardholder name` |
-| Admin tables, filters, ERP-style forms | Terse noun or noun phrase | `Email`, `Status`, `SKU`, `Owner` |
+| Surface                                | Label tone                        | Examples                                                                            |
+| -------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------- |
+| Onboarding, signup, settings, profile  | Conversational question or invite | `Let me know your email?`, `What should we call you?`, `When should we remind you?` |
+| Checkout, short flows                  | Friendly but direct               | `Where should we send the receipt?`, `Cardholder name`                              |
+| Admin tables, filters, ERP-style forms | Terse noun or noun phrase         | `Email`, `Status`, `SKU`, `Owner`                                                   |
 
 **Prefer**
 

@@ -17,13 +17,13 @@ Use `slate` for gray UI chrome:
 
 Use semantic tones for intent:
 
-| Intent | Tone |
-| --- | --- |
-| Brand/default emphasis | `primary` |
-| Positive/completion | `success` |
-| Caution/at-risk | `warning` |
-| Error/destructive | `danger` |
-| Surfaces/contrast | `light`, `dark` |
+| Intent                 | Tone            |
+| ---------------------- | --------------- |
+| Brand/default emphasis | `primary`       |
+| Positive/completion    | `success`       |
+| Caution/at-risk        | `warning`       |
+| Error/destructive      | `danger`        |
+| Surfaces/contrast      | `light`, `dark` |
 
 Do not substitute raw palettes such as `rose-*`, `emerald-*`, `amber-*`, `zinc-*`, or `blue-*` for semantic roles unless the app explicitly documents them as one-off accents.
 
@@ -32,32 +32,32 @@ Do not substitute raw palettes such as `rose-*`, `emerald-*`, `amber-*`, `zinc-*
 Dark mode is class-based. Apply `.dark` on `<html>` or another ancestor.
 
 ```html
-<html class="dark">
+<html class="dark"></html>
 ```
 
 Prefer semantic surface utilities:
 
-| Utility | Role |
-| --- | --- |
-| `bg-body` / `text-body` | Page background |
-| `text-fg` | Primary text |
-| `text-muted` | Secondary text |
-| `bg-surface` | Raised surface |
-| `bg-surface-2` | Popover/menu/select surface |
-| `bg-input` | Form control background |
-| `border-line` | Default divider |
+| Utility                 | Role                        |
+| ----------------------- | --------------------------- |
+| `bg-body` / `text-body` | Page background             |
+| `text-fg`               | Primary text                |
+| `text-muted`            | Secondary text              |
+| `bg-surface`            | Raised surface              |
+| `bg-surface-2`          | Popover/menu/select surface |
+| `bg-input`              | Form control background     |
+| `border-line`           | Default divider             |
 
 Default token values:
 
-| Token | Light | Dark |
-| --- | --- | --- |
-| `--body` | `#ffffff` | `#2e3440` |
-| `--fg` | slate-900 | `#eceff4` |
-| `--surface` | slate-100 | `#434c5e` |
+| Token         | Light     | Dark      |
+| ------------- | --------- | --------- |
+| `--body`      | `#ffffff` | `#2e3440` |
+| `--fg`        | slate-900 | `#eceff4` |
+| `--surface`   | slate-100 | `#434c5e` |
 | `--surface-2` | `#ffffff` | `#3b4252` |
-| `--muted` | slate-500 | `#c0c8d4` |
-| `--line` | slate-300 | `#4c566a` |
-| `--input` | `#ffffff` | `#3b4252` |
+| `--muted`     | slate-500 | `#c0c8d4` |
+| `--line`      | slate-300 | `#4c566a` |
+| `--input`     | `#ffffff` | `#3b4252` |
 
 `color-scheme` is set automatically (`light` on `:root`, `dark` on `.dark`) so native controls and scrollbars follow the active theme.
 

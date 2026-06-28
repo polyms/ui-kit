@@ -80,37 +80,41 @@ function MyComponent() {
 Toasts support 5 different types for various feedback contexts. Each type displays a distinct icon and color scheme.
 
 ### Success Toast
+
 Used for confirming successful operations like saving data, completing uploads, or sending messages.
 
 ```tsx
 toastManager.add({
   title: 'File uploaded',
   description: 'Your document is now available.',
-  type: 'success'
+  type: 'success',
 })
 ```
 
 ### Warning Toast
+
 Alerts users to potential issues that require attention but aren't critical errors.
 
 ```tsx
 toastManager.add({
   description: 'Your session will expire in 5 minutes.',
-  type: 'warning'
+  type: 'warning',
 })
 ```
 
 ### Danger Toast
+
 Communicates errors or failed operations that need immediate user attention.
 
 ```tsx
 toastManager.add({
   description: 'Failed to save changes. Please try again.',
-  type: 'danger'
+  type: 'danger',
 })
 ```
 
 ### Action Toast
+
 Provides an actionable button for users to respond to the notification, such as undo operations.
 
 ```tsx
@@ -122,8 +126,8 @@ const id = toastManager.add({
     onClick: () => {
       toastManager.close(id)
       // Undo logic here
-    }
-  }
+    },
+  },
 })
 ```
 

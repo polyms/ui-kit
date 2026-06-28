@@ -1,23 +1,21 @@
 .modal {
-  @apply fixed top-0 left-0 flex h-full w-full flex-col overflow-x-hidden overflow-y-auto outline-none;
-
   z-index: var(--zindex-modal-backdrop);
+  @apply fixed top-0 left-0 flex h-full w-full flex-col overflow-x-hidden overflow-y-auto outline-none;
 }
 
 .modal-dialog {
+  z-index: var(--zindex-modal);
+  transition-duration: 300ms;
   @apply pointer-events-none relative flex w-full p-1 outline-0;
   @apply transition-all ease-out;
 
-  transition-duration: 300ms;
-  z-index: var(--zindex-modal);
-
   &[data-nested-dialog-open] {
     .modal-content::after {
-      content: '';
-      inset: -1px;
       position: absolute;
-      border-radius: inherit;
+      inset: -1px;
+      content: '';
       background-color: rgb(0 0 0 / 0.6);
+      border-radius: inherit;
     }
 
     .modal-close {
@@ -39,20 +37,19 @@
 }
 
 .modal-content {
-  @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-clip-padding outline-none;
-  @apply ring-4 ring-white/30;
-
   background-color: var(--body);
 
   /* overflow: hidden; */
   border-radius: 1.5rem;
+  @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-clip-padding outline-none;
+  @apply ring-4 ring-white/30;
 }
 
 .modal-backdrop {
-  @apply fixed inset-0 h-screen w-screen bg-black;
   z-index: var(--zindex-modal-backdrop);
   opacity: 0.8;
   transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
+  @apply fixed inset-0 h-screen w-screen bg-black;
 
   &[data-starting-style] {
     transition: opacity 150ms cubic-bezier(0.45, 1.005, 0, 1.005);
@@ -65,10 +62,9 @@
 }
 
 .modal-header {
+  font-size: 22px;
   @apply flex shrink-0 items-center gap-2 leading-5;
   @apply rounded-t-3xl p-5 font-semibold;
-
-  font-size: 22px;
 
   .modal-close {
     @apply self-start;
@@ -89,31 +85,29 @@
 }
 
 .modal-footer {
-  @apply flex shrink-0 flex-wrap items-center justify-end gap-2 backdrop-blur-lg;
-
   position: sticky;
   bottom: 0;
   padding: 0.5rem 1.5rem 1rem;
   border-radius: 1.5rem;
+  @apply flex shrink-0 flex-wrap items-center justify-end gap-2 backdrop-blur-lg;
 }
 
 .modal-close {
+  position: absolute;
+  top: -1.5rem;
+  left: 100%;
   @apply z-10 flex p-2;
   @apply cursor-pointer rounded-full outline-0;
   @apply text-slate-300 hover:bg-slate-50/10 hover:text-slate-50;
   @apply border border-dashed border-transparent focus:border-slate-300;
-
-  position: absolute;
-  top: -1.5rem;
-  left: 100%;
 }
 
 @media (min-width: 40rem) {
   .modal-dialog {
-    @apply mx-auto;
+    max-width: var(--container-lg);
 
     padding-block: 2rem;
-    max-width: var(--container-lg);
+    @apply mx-auto;
   }
 
   .modal-sm .modal-dialog {
@@ -155,18 +149,18 @@
 
 .modal-full {
   .modal-dialog {
-    max-width: none;
-    padding: 2rem 0 0 0;
-    height: 100dvh;
-    width: 100dvw;
     display: flex;
     flex-direction: column-reverse;
+    width: 100dvw;
+    max-width: none;
+    height: 100dvh;
+    padding: 2rem 0 0 0;
   }
 
   .modal-content {
-    border-end-end-radius: 0;
-    border-end-start-radius: 0;
     height: calc(100dvh - 2rem);
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
 
     .modal-body {
       overflow-y: auto;

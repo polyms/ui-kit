@@ -1,6 +1,6 @@
 @utility container {
-  margin-inline: auto;
   padding-inline: 2rem;
+  margin-inline: auto;
 }
 
 @utility container-5xl {
@@ -9,15 +9,14 @@
 
 @layer components {
   .\@page {
-    @apply @container;
-
     container-name: page;
+    @apply @container;
   }
 
   .container-page {
-    margin-inline: auto;
-    padding-inline: 1rem;
     width: 100%;
+    padding-inline: 1rem;
+    margin-inline: auto;
 
     @container page (width >= 40rem) {
       width: 40rem;

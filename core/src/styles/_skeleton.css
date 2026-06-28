@@ -7,9 +7,9 @@
     color-mix(in oklab, var(--fg) 10%, transparent),
     transparent
   );
-  background-size: 80px 100%; /* width of the shine */
   background-repeat: no-repeat; /* No need to repeat the shine effect */
   background-position: left -80px top 0; /* Place shine on the left side, with offset on the left based on the width of the shine - see background-size */
+  background-size: 80px 100%; /* width of the shine */
   animation: shine 1s ease infinite; /* increase animation time to see effect in 'slow-mo' */
 }
 

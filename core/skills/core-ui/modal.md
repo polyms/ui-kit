@@ -14,20 +14,20 @@ Setup: [setup.md](setup.md). `Button` + `render` on triggers: [components.md#com
 
 ## Choose which
 
-| Use | When |
-| --- | --- |
-| **`Modal`** | Confirmations, create/edit flows, focused tasks, nested dialogs |
+| Use             | When                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------- |
+| **`Modal`**     | Confirmations, create/edit flows, focused tasks, nested dialogs                       |
 | **`Offcanvas`** | Filters, detail panels, settings, nav, supplementary content without leaving the page |
 
 Both: declarative `<Root>` + `Trigger` + `Content` tree, or `use*Store.getState().show*(id, <Content>…)`. Mount matching **`Container`** once (see [setup.md](setup.md)).
 
-| | Modal | Offcanvas |
-| --- | --- | --- |
-| Container | `Modal.Container` | `Offcanvas.Container` |
-| Store | `useModalStore` | `useOffcanvasStore` |
-| Open | `showModal(id, element)` | `showOffcanvas(id, element)` |
-| Close | `Modal.Close`, `closeModal(id)` | `Offcanvas.Close`, `closeOffcanvas(id)` |
-| Dismiss | Escape, backdrop | Escape, backdrop, swipe (`swipeDirection` on root) |
+|           | Modal                           | Offcanvas                                          |
+| --------- | ------------------------------- | -------------------------------------------------- |
+| Container | `Modal.Container`               | `Offcanvas.Container`                              |
+| Store     | `useModalStore`                 | `useOffcanvasStore`                                |
+| Open      | `showModal(id, element)`        | `showOffcanvas(id, element)`                       |
+| Close     | `Modal.Close`, `closeModal(id)` | `Offcanvas.Close`, `closeOffcanvas(id)`            |
+| Dismiss   | Escape, backdrop                | Escape, backdrop, swipe (`swipeDirection` on root) |
 
 ---
 
@@ -38,7 +38,7 @@ Both: declarative `<Root>` + `Trigger` + `Content` tree, or `use*Store.getState(
 ```tsx
 import { Button, Modal } from '@polyms/core-ui'
 
-<Modal>
+;<Modal>
   <Modal.Trigger render={<Button variant='primary' />}>Edit profile</Modal.Trigger>
   <Modal.Content size='lg' scrollable>
     <Modal.Header>Edit profile</Modal.Header>
@@ -51,14 +51,14 @@ import { Button, Modal } from '@polyms/core-ui'
 </Modal>
 ```
 
-| Rule | Detail |
-| --- | --- |
+| Rule                       | Detail                                                                                                            |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | **Trigger / footer close** | `render={<Button … />}` with **`children`** for labeled footer close — not `className='btn …'` on primitive alone |
-| **Title** | `Modal.Header` only — no `title` on `Modal.Content` |
-| **Header close** | Icon `Modal.Close` in header when `close={true}` (default); `close={false}` to hide |
-| **Long body** | `scrollable` on `Modal.Content` |
-| **Full screen** | `size='full'`; often `centered={false}` |
-| **No fake dialogs** | No `fixed inset-0` div overlays |
+| **Title**                  | `Modal.Header` only — no `title` on `Modal.Content`                                                               |
+| **Header close**           | Icon `Modal.Close` in header when `close={true}` (default); `close={false}` to hide                               |
+| **Long body**              | `scrollable` on `Modal.Content`                                                                                   |
+| **Full screen**            | `size='full'`; often `centered={false}`                                                                           |
+| **No fake dialogs**        | No `fixed inset-0` div overlays                                                                                   |
 
 Controlled: `<Modal open={open} onOpenChange={setOpen}>`. Prefer `onOpenChange` over manual backdrop.
 
@@ -77,7 +77,7 @@ No `Offcanvas.Footer` — actions live in `Offcanvas.Body` or header area.
 ```tsx
 import { Button, Offcanvas } from '@polyms/core-ui'
 
-<Offcanvas swipeDirection='right'>
+;<Offcanvas swipeDirection='right'>
   <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Open filters</Offcanvas.Trigger>
   <Offcanvas.Content size='lg'>
     <Offcanvas.Header>
@@ -92,17 +92,17 @@ import { Button, Offcanvas } from '@polyms/core-ui'
 </Offcanvas>
 ```
 
-| Rule | Detail |
-| --- | --- |
-| **Trigger** | `render={<Button … />}` — same as `Modal.Trigger`; not `className='btn …'` on primitive alone |
-| **Description slot** | `Offcanvas.Description` is a **direct child** of `Offcanvas.Content` — not inside `Offcanvas.Title`, not after `Offcanvas.Body` |
-| **Body dismiss** | `Offcanvas.Close render={<Button … />}>` with **`children`** for labeled actions (e.g. Done) |
-| **Swipe** | `swipeDirection` on `Offcanvas` root: `left` \| `right` \| `up` \| `down` |
-| **No fake drawers** | No hand-rolled slide-in panels |
-| **Size** | `size` on `Offcanvas.Content`: `sm` … `3xl`, `full` — width (left/right) or height (up/down) |
-| **Mobile** | Full-width bottom drawer regardless of `size` |
-| **Close button** | `closeButton={false}` on `Offcanvas.Content` to hide built-in icon closes (mobile header + inner chrome) |
-| **Built-in close** | Library renders icon-only `Offcanvas.Close` with `className='offcanvas-close'` — do not restyle with `btn-*`; use `aria-label` only |
+| Rule                 | Detail                                                                                                                              |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Trigger**          | `render={<Button … />}` — same as `Modal.Trigger`; not `className='btn …'` on primitive alone                                       |
+| **Description slot** | `Offcanvas.Description` is a **direct child** of `Offcanvas.Content` — not inside `Offcanvas.Title`, not after `Offcanvas.Body`     |
+| **Body dismiss**     | `Offcanvas.Close render={<Button … />}>` with **`children`** for labeled actions (e.g. Done)                                        |
+| **Swipe**            | `swipeDirection` on `Offcanvas` root: `left` \| `right` \| `up` \| `down`                                                           |
+| **No fake drawers**  | No hand-rolled slide-in panels                                                                                                      |
+| **Size**             | `size` on `Offcanvas.Content`: `sm` … `3xl`, `full` — width (left/right) or height (up/down)                                        |
+| **Mobile**           | Full-width bottom drawer regardless of `size`                                                                                       |
+| **Close button**     | `closeButton={false}` on `Offcanvas.Content` to hide built-in icon closes (mobile header + inner chrome)                            |
+| **Built-in close**   | Library renders icon-only `Offcanvas.Close` with `className='offcanvas-close'` — do not restyle with `btn-*`; use `aria-label` only |
 
 Controlled: `<Offcanvas open={open} onOpenChange={setOpen}>`.
 
@@ -114,9 +114,9 @@ Programmatic API: [Programmatic overlays](#programmatic-overlays).
 
 Requires **`Modal.Container`** / **`Offcanvas.Container`** in the app shell ([setup.md#app-shell](setup.md#app-shell)) and **`zustand`** in the consumer app.
 
-| Store | Open | Close |
-| --- | --- | --- |
-| `useModalStore` | `showModal(id, <Modal.Content>…full tree…</Modal.Content>)` | `Modal.Close`, `closeModal(id)`, Escape, backdrop |
+| Store               | Open                                                          | Close                                                            |
+| ------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `useModalStore`     | `showModal(id, <Modal.Content>…full tree…</Modal.Content>)`   | `Modal.Close`, `closeModal(id)`, Escape, backdrop                |
 | `useOffcanvasStore` | `showOffcanvas(id, <Offcanvas.Content>…</Offcanvas.Content>)` | `Offcanvas.Close`, `closeOffcanvas(id)`, Escape, backdrop, swipe |
 
 `closeModal` / `closeOffcanvas` set `open: false` first, then remove the entry after **300ms** so exit transitions finish. Reusing an `id` replaces the previous panel.
@@ -134,10 +134,7 @@ function confirmDelete() {
       <Modal.Body>This cannot be undone.</Modal.Body>
       <Modal.Footer>
         <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-        <Button
-          onClick={() => useModalStore.getState().closeModal('delete-item')}
-          variant='danger'
-        >
+        <Button onClick={() => useModalStore.getState().closeModal('delete-item')} variant='danger'>
           Delete
         </Button>
       </Modal.Footer>
@@ -166,11 +163,11 @@ function openNotifications() {
 
 ## Composing with other components
 
-| Body content | Read |
-| --- | --- |
-| Form fields | [field.md](field.md) — in `Modal.Body` or `Offcanvas.Body`; `scrollable` on `Modal.Content` for long forms |
-| Destructive confirm | `Button variant='danger'` in `Modal.Footer` or body actions |
-| Tables / lists | [css-utilities.md](css-utilities.md) `.table` in body |
+| Body content        | Read                                                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Form fields         | [field.md](field.md) — in `Modal.Body` or `Offcanvas.Body`; `scrollable` on `Modal.Content` for long forms |
+| Destructive confirm | `Button variant='danger'` in `Modal.Footer` or body actions                                                |
+| Tables / lists      | [css-utilities.md](css-utilities.md) `.table` in body                                                      |
 
 ---
 

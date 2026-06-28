@@ -1,0 +1,73 @@
+---
+description: Docs site MDX — end-user voice, tables, and what to avoid
+globs: docs/**/*.mdx
+alwaysApply: false
+---
+
+# Docs MDX — end-user voice
+
+Audience: developers **using** `@polyms/core-ui` in their app. Not maintainers, not monorepo contributors.
+
+Also follow [docs-mdx-heading-style.mdc](docs-mdx-heading-style.mdc) (no inline code in headings).
+
+## Voice
+
+Write **what to do** and **why it helps the product UI** — not how the library is built.
+
+| Avoid (maintainer) | Prefer (end user) |
+| --- | --- |
+| `core/src/styles/_*.css`, monorepo paths | "Import `@polyms/core-ui` styles" |
+| Base UI / `@base-ui/react` / re-export internals | Component API and usage |
+| "bundled classes", `_accordion.css`, build pipeline | "Import package styles so motion applies" |
+| "design-system", "Core-UI shorthand", "Polyms defaults" | Plain product language |
+| Skill file maps, routing tables, agent skill internals | Install steps + links to Design System |
+| "consumers should", "this repo", "we ship" | "you", "your app", "the library" |
+
+**OK to keep:** `CSS-only` (no React export), WAI-ARIA pattern links, peer deps (`zustand`), `import from '@polyms/core-ui'`, API Reference frontmatter.
+
+## Tables
+
+GFM markdown tables (`| col | col |`) **do not render** in this MDX setup — they appear as one broken line.
+
+Use a JSX table (see `agent-skill.mdx`, `field.mdx`, `design-system.mdx`):
+
+```mdx
+export const rows = [
+  { a: 'Situation', b: 'What to do' },
+]
+
+<div className='card my-4'>
+  ...
+</div>
+```
+
+## TSX code fences (Prettier)
+
+Prettier inserts a leading `;` before JSX when `<Component` starts a line after `import` (ASI guard). Wrap snippets in a **`const` with a meaningful name** — not `example`.
+
+Name from the root JSX tag: `Field` → `field`, `Field.Floating` → `fieldFloating`, `Modal.Content` → `modalContent`, `<a>` → `link`, `<table>` → `table`.
+
+```tsx
+import { Field } from '@polyms/core-ui'
+
+const emailField = (
+  <Field required>
+    <Field.Label>Email</Field.Label>
+    <Field.Control />
+  </Field>
+)
+```
+
+Single-line: `const saveButton = <Button variant='primary'>Save</Button>`. Multiple sibling roots: `const shortcuts = (<>…</>)` or separate `const` per snippet (`const smallModal = …`). Helper: `node docs/scripts/wrap-mdx-jsx-examples.mjs`.
+
+## Page shape
+
+1. **Intro** — one short paragraph: what it is + when to use it.
+2. **CodePreview** demo (if component page).
+3. **Usage** — copy-paste examples from `@polyms/core-ui`.
+4. **Notes** (optional) — pitfalls for app authors, not file paths.
+5. **API Reference** — `<APIReference />` when frontmatter `apis` is set.
+
+## `-views/`
+
+Demo components under `docs/src/pages/docs/-views/` are site internals. Do not document `-views/` paths or plugin wiring in prose meant for package users.

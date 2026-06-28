@@ -60,13 +60,13 @@ See [quality.md — Visual consistency](quality.md#visual-consistency) for headi
 
 Prefer structured primitives over long styled `<div>` stacks:
 
-| Situation | Class / component |
-| --- | --- |
-| Columnar data | `.table` (see [Table](#table)) |
-| Sectioned content | `Tabs`, `Accordion` |
-| Single disclosure | `Collapsible` |
-| Per-row actions | `Menu` |
-| Toolbar filters above list | `Toolbar` + `Field.Floating` |
+| Situation                  | Class / component              |
+| -------------------------- | ------------------------------ |
+| Columnar data              | `.table` (see [Table](#table)) |
+| Sectioned content          | `Tabs`, `Accordion`            |
+| Single disclosure          | `Collapsible`                  |
+| Per-row actions            | `Menu`                         |
+| Toolbar filters above list | `Toolbar` + `Field.Floating`   |
 
 Full decision table: [quality.md — Lists and collections](quality.md#lists-and-collections).
 
@@ -92,15 +92,15 @@ Full decision table: [quality.md — Lists and collections](quality.md#lists-and
 
 Variant behavior:
 
-| Class | Idle | Hover | Active / `.active` |
-| --- | --- | --- | --- |
-| `item-primary` | transparent, inherits color | `bg-primary-700/10` + `text-primary-700` | same as hover |
-| `item-success` | `text-success-600` | `bg-success-100` + `text-success-700` | `bg-success-200` + `text-success-700` |
-| `item-info` | `text-info-600` | `bg-info-500/5` + `text-info-600` | same as hover |
-| `item-warning` | `text-warning-500` | `bg-warning-100` + `text-warning-600` | `bg-warning-200` + `text-warning-600` |
-| `item-danger` | `text-danger-500` | `bg-danger-100` + `text-danger-600` | `bg-danger-200` + `text-danger-600` |
-| `item-light` | `text-slate-600` | `bg-slate-100` + `text-slate-900` | `bg-slate-200` + `text-slate-900` |
-| `item-dark` | `text-slate-300` | `bg-slate-700` + white | `bg-slate-800` + white |
+| Class          | Idle                        | Hover                                    | Active / `.active`                    |
+| -------------- | --------------------------- | ---------------------------------------- | ------------------------------------- |
+| `item-primary` | transparent, inherits color | `bg-primary-700/10` + `text-primary-700` | same as hover                         |
+| `item-success` | `text-success-600`          | `bg-success-100` + `text-success-700`    | `bg-success-200` + `text-success-700` |
+| `item-info`    | `text-info-600`             | `bg-info-500/5` + `text-info-600`        | same as hover                         |
+| `item-warning` | `text-warning-500`          | `bg-warning-100` + `text-warning-600`    | `bg-warning-200` + `text-warning-600` |
+| `item-danger`  | `text-danger-500`           | `bg-danger-100` + `text-danger-600`      | `bg-danger-200` + `text-danger-600`   |
+| `item-light`   | `text-slate-600`            | `bg-slate-100` + `text-slate-900`        | `bg-slate-200` + `text-slate-900`     |
+| `item-dark`    | `text-slate-300`            | `bg-slate-700` + white                   | `bg-slate-800` + white                |
 
 Rules:
 

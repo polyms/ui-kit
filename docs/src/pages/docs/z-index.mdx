@@ -59,7 +59,7 @@ apis:
 import Story from './-views/z-index/ZIndexDefault.tsx'
 import code from './-views/z-index/ZIndexDefault.tsx?raw'
 
-Named stacking helpers backed by **`--zindex-*`** tokens on **`:root`** (`core/src/styles/_root.css`). Use these classes instead of ad-hoc numbers so overlays stay consistent with modal, offcanvas, tooltip, and toast styles in the library.
+Named stacking helpers backed by **`--zindex-*`** CSS variables. Use these classes instead of ad-hoc numbers so overlays stay consistent with modal, offcanvas, tooltip, and toast layers in the library.
 
 <CodePreview code={code}>
   <Story />
@@ -68,14 +68,18 @@ Named stacking helpers backed by **`--zindex-*`** tokens on **`:root`** (`core/s
 ## Usage
 
 ```tsx
+
+const layout = (
 <div className='fixed inset-0 z-modal-backdrop bg-slate-900/40' aria-hidden />
 <div className='fixed z-modal rounded-xl bg-white p-6 shadow-overlay' role='dialog'>
   …
 </div>
+
+)
 ```
 
 ```tsx
-<header className='sticky top-0 z-sticky border-slate-200 border-b bg-white'>…</header>
+const header = <header className='sticky top-0 z-sticky border-slate-200 border-b bg-white'>…</header>
 ```
 
 ## Tokens
@@ -171,7 +175,7 @@ Override the variables in your app theme if you need a different scale; the **`.
 
 ## Notes
 
-- Classes live in **`core/src/styles/_z-index.css`** (`@layer utilities`).
+- Override **`--zindex-*`** in your app theme if you need a different scale; the **`.z-*`** classes follow the updated tokens.
 - Stacking only compares elements within the same [stacking context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Stacking_context); a parent with **`transform`**, **`filter`**, or **`isolation`** can isolate children from global overlays.
 
 ## API Reference

@@ -8,10 +8,10 @@ Monorepo powered by **Nx** + **pnpm**, formatted and linted with **Biome**.
 
 ## Packages
 
-| Path     | Package           | Description                                                              |
-| -------- | ----------------- | ------------------------------------------------------------------------ |
-| `core/`  | `@polyms/core-ui` | Reusable React components + styles. Built with Vite → `dist/core`.       |
-| `docs/`  | —                 | Documentation site (TanStack Router + MDX, live demos). GitHub Pages.    |
+| Path    | Package           | Description                                                           |
+| ------- | ----------------- | --------------------------------------------------------------------- |
+| `core/` | `@polyms/core-ui` | Reusable React components + styles. Built with Vite → `dist/core`.    |
+| `docs/` | —                 | Documentation site (TanStack Router + MDX, live demos). GitHub Pages. |
 
 ## Tech stack
 

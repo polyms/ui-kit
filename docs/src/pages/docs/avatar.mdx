@@ -41,16 +41,14 @@ Displays a user's profile picture, initials, or fallback icon. Use it in headers
 ```tsx
 import { Avatar } from '@polyms/core-ui'
 
-<Avatar className='inline-flex h-10 w-10 overflow-hidden rounded-full bg-slate-100 text-slate-700'>
-  <Avatar.Image
-    src='/avatar.png'
-    alt='Tifa Lockhart'
-    className='h-full w-full object-cover'
-  />
-  <Avatar.Fallback className='flex h-full w-full items-center justify-center text-sm font-semibold'>
-    TL
-  </Avatar.Fallback>
-</Avatar>
+const avatar = (
+  <Avatar className='inline-flex h-10 w-10 overflow-hidden rounded-full bg-slate-100 text-slate-700'>
+    <Avatar.Image src='/avatar.png' alt='Tifa Lockhart' className='h-full w-full object-cover' />
+    <Avatar.Fallback className='flex h-full w-full items-center justify-center text-sm font-semibold'>
+      TL
+    </Avatar.Fallback>
+  </Avatar>
+)
 ```
 
 ## Fallback
@@ -60,4 +58,3 @@ import { Avatar } from '@polyms/core-ui'
 ## API Reference
 
 <APIReference />
-

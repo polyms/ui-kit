@@ -49,23 +49,19 @@ Organize and navigate between related content groups without leaving the page. T
 ```tsx
 import { Tabs } from '@polyms/core-ui'
 
-<Tabs defaultValue="profile">
-  <Tabs.List>
-    <Tabs.Tab value="profile">Profile</Tabs.Tab>
-    <Tabs.Tab value="settings">Settings</Tabs.Tab>
-    <Tabs.Tab value="notifications">Notifications</Tabs.Tab>
-  </Tabs.List>
-  
-  <Tabs.Panel value="profile">
-    Profile content goes here
-  </Tabs.Panel>
-  <Tabs.Panel value="settings">
-    Settings content goes here
-  </Tabs.Panel>
-  <Tabs.Panel value="notifications">
-    Notifications content goes here
-  </Tabs.Panel>
-</Tabs>
+const tabs = (
+  <Tabs defaultValue='profile'>
+    <Tabs.List>
+      <Tabs.Tab value='profile'>Profile</Tabs.Tab>
+      <Tabs.Tab value='settings'>Settings</Tabs.Tab>
+      <Tabs.Tab value='notifications'>Notifications</Tabs.Tab>
+    </Tabs.List>
+
+    <Tabs.Panel value='profile'>Profile content goes here</Tabs.Panel>
+    <Tabs.Panel value='settings'>Settings content goes here</Tabs.Panel>
+    <Tabs.Panel value='notifications'>Notifications content goes here</Tabs.Panel>
+  </Tabs>
+)
 ```
 
 ## Behavior
@@ -77,6 +73,7 @@ The tabs component includes an animated indicator that smoothly transitions betw
 ### Keyboard Navigation
 
 Tabs support full keyboard navigation for accessibility:
+
 - **Arrow Left/Right** - Navigate between tabs (horizontal orientation)
 - **Arrow Up/Down** - Navigate between tabs (vertical orientation)
 - **Home** - Move to first tab

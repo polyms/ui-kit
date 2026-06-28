@@ -7,19 +7,19 @@
   --input-icon-size: 1.25rem;
 
   position: relative;
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  line-height: var(--input-lh) !important;
-  border: none !important;
+  width: 100%;
   font-size: var(--input-fs);
   font-weight: 500;
+  line-height: var(--input-lh) !important;
+  border: none !important;
 
   &.prefix {
     display: flex;
-    @apply w-full xl:w-25;
     flex-shrink: 0;
+    @apply w-full xl:w-25;
   }
 
   .icon-start,
@@ -28,10 +28,10 @@
     top: calc(var(--input-padding-y) + var(--input-lh) / 2 + 1px);
     width: var(--input-icon-size);
     height: var(--input-icon-size);
-    cursor: pointer;
-    transform: translateY(-50%);
 
     color: var(--muted);
+    cursor: pointer;
+    transform: translateY(-50%);
 
     @media (hover: hover) {
       &:hover {
@@ -50,9 +50,9 @@
 
   &.required {
     .field-label::after {
-      content: '*';
-      color: var(--color-danger);
       margin-left: 0.25rem;
+      color: var(--color-danger);
+      content: '*';
     }
   }
 
@@ -106,20 +106,20 @@
 }
 
 .field-control {
-  font-family: inherit;
-  padding: var(--input-padding-y) var(--input-padding-x);
-  line-height: var(--input-lh);
   min-height: calc(var(--input-padding-y) * 2 + var(--input-lh) + 2px);
-  border-radius: var(--control-radius, 0.25rem);
-  border: 1px solid var(--line);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-family: inherit;
+  line-height: var(--input-lh);
   color: var(--fg);
+  appearance: none;
+  outline: none;
   background-color: var(--input);
   background-clip: padding-box;
-  appearance: none;
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius, 0.25rem);
   transition:
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
-  outline: none;
   @apply w-full;
 
   &::placeholder {
@@ -129,16 +129,16 @@
 
   &:disabled,
   &[disabled] {
-    cursor: not-allowed;
-    opacity: 0.5;
     color: var(--muted);
+    cursor: not-allowed;
     background-color: var(--surface);
     border-color: var(--line);
+    opacity: 0.5;
   }
 
   &[readonly] {
-    cursor: default;
     color: var(--fg);
+    cursor: default;
     background-color: var(--surface);
     border-color: var(--line);
   }
@@ -170,11 +170,11 @@
 
     &:disabled,
     &[disabled] {
-      cursor: not-allowed;
-      opacity: 0.5;
       color: var(--muted);
+      cursor: not-allowed;
       background-color: var(--surface);
       border-color: var(--line);
+      opacity: 0.5;
 
       &::placeholder {
         color: var(--muted);
@@ -183,10 +183,10 @@
   }
 
   &.rounded-full {
-    border-radius: 50rem;
+    padding-right: calc(var(--input-padding-x) + 0.25rem);
 
     padding-left: calc(var(--input-padding-x) + 0.25rem);
-    padding-right: calc(var(--input-padding-x) + 0.25rem);
+    border-radius: 50rem;
   }
 
   .icon-start ~ & {
@@ -199,11 +199,10 @@
 }
 
 .field-label {
-  @apply inline-flex items-center gap-1;
-
   font-size: 12px;
   font-weight: 600;
   line-height: 1rem;
+  @apply inline-flex items-center gap-1;
 
   & ~ .icon-start,
   & ~ .icon-end {
@@ -213,21 +212,21 @@
 }
 
 .field-description {
-  color: var(--muted);
   font-size: 12px;
   font-weight: 500;
   line-height: 1rem;
+  color: var(--muted);
   cursor: default;
 }
 
 .field-feedback {
   display: inline-flex;
-  font-size: 0.75rem;
-  background-color: var(--color-danger);
-  color: #fff;
-  border-radius: 0.25rem;
   padding: 0 0.5rem;
+  font-size: 0.75rem;
   line-height: 1.375rem;
+  color: #fff;
+  background-color: var(--color-danger);
+  border-radius: 0.25rem;
 }
 
 .checkbox,
@@ -240,11 +239,11 @@
   --check-border: var(--line);
 
   display: inline-flex;
-  align-items: flex-start;
   gap: 0.5rem;
+  align-items: flex-start;
   font-size: var(--check-fs);
-  line-height: var(--check-lh);
   font-weight: 500;
+  line-height: var(--check-lh);
   color: var(--fg);
   cursor: pointer;
   user-select: none;
@@ -252,18 +251,18 @@
   & > input,
   .checkbox-indicator,
   .radio-indicator {
-    appearance: none;
     flex-shrink: 0;
     width: var(--check-size);
     height: var(--check-size);
     margin: calc((var(--check-lh) - var(--check-size)) / 2) 0 0;
-    border: 1px solid var(--check-border);
-    background-color: var(--input);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    appearance: none;
     cursor: inherit;
     outline: none;
+    background-color: var(--input);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    border: 1px solid var(--check-border);
     transition:
       background-color 0.15s ease-in-out,
       border-color 0.15s ease-in-out,
@@ -302,15 +301,15 @@
 
     .checkbox-indicator,
     .radio-indicator {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--check-color) 20%, transparent);
       border-color: var(--check-color);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--check-color) 20%, transparent);
     }
   }
 
   & > input {
     &:focus-visible {
-      box-shadow: 0 0 0 3px color-mix(in oklab, var(--check-color) 20%, transparent);
       border-color: var(--check-color);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--check-color) 20%, transparent);
     }
 
     &:checked,
@@ -322,8 +321,8 @@
     &:disabled,
     &[disabled] {
       cursor: not-allowed;
-      opacity: 0.55;
       background-color: var(--surface);
+      opacity: 0.55;
 
       &:checked,
       &:indeterminate {
@@ -334,13 +333,13 @@
   }
 
   &[data-disabled] {
-    cursor: not-allowed;
     color: var(--muted);
+    cursor: not-allowed;
 
     .checkbox-indicator,
     .radio-indicator {
-      opacity: 0.55;
       background-color: var(--surface);
+      opacity: 0.55;
     }
   }
 
@@ -355,8 +354,8 @@
 
   &:has(input:disabled),
   &:has(input[disabled]) {
-    cursor: not-allowed;
     color: var(--muted);
+    cursor: not-allowed;
   }
 
   /* Sizes */
@@ -428,21 +427,26 @@
 
 .checkbox[data-checked] .checkbox-indicator {
   background-color: var(--check-color);
-  border-color: var(--check-color);
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M13.207 4.293a1 1 0 010 1.414l-6.5 6.5a1 1 0 01-1.414 0L2.793 9.707a1 1 0 011.414-1.414L6 10.086l5.793-5.793a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+  border-color: var(--check-color);
 }
 
 .checkbox[data-indeterminate] .checkbox-indicator {
   background-color: var(--check-color);
-  border-color: var(--check-color);
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3.5 8a1 1 0 011-1h7a1 1 0 110 2h-7a1 1 0 01-1-1z'/%3e%3c/svg%3e");
+  border-color: var(--check-color);
 }
 
 .radio > input {
   border-radius: 50%;
 
   &:checked {
-    background-image: radial-gradient(circle, var(--check-on-color) 0%, var(--check-on-color) 38%, transparent 42%);
+    background-image: radial-gradient(
+      circle,
+      var(--check-on-color) 0%,
+      var(--check-on-color) 38%,
+      transparent 42%
+    );
   }
 }
 
@@ -452,8 +456,13 @@
 
 .radio[data-checked] .radio-indicator {
   background-color: var(--check-color);
+  background-image: radial-gradient(
+    circle,
+    var(--check-on-color) 0%,
+    var(--check-on-color) 38%,
+    transparent 42%
+  );
   border-color: var(--check-color);
-  background-image: radial-gradient(circle, var(--check-on-color) 0%, var(--check-on-color) 38%, transparent 42%);
 }
 
 /* Inside an invalid field */
@@ -505,14 +514,14 @@
   input {
     display: block;
     width: 100%;
-    appearance: none;
-    background: transparent;
     padding: 1.25rem 0 0.25rem 0;
     font-size: 0.875rem;
     color: var(--fg);
+    appearance: none;
+    outline: none;
+    background: transparent;
     border: none;
     border-bottom: 2px solid var(--line);
-    outline: none;
     transition: border-color 0.3s ease-in-out;
 
     &::placeholder {
@@ -531,17 +540,17 @@
   label {
     position: absolute;
     bottom: 0.5rem;
+    left: auto;
     z-index: -10;
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--muted);
-    transform-origin: top left;
+    pointer-events: none;
     transform: translateY(-1rem) scale(0.85);
+    transform-origin: top left;
     transition:
       transform 0.3s ease-in-out,
       color 0.3s ease-in-out;
-    pointer-events: none;
-    left: auto;
   }
 
   input:placeholder-shown ~ label {
@@ -549,8 +558,8 @@
   }
 
   input:focus ~ label {
-    transform: translateY(-1rem) scale(0.85);
     left: 0;
+    transform: translateY(-1rem) scale(0.85);
     @apply text-primary-600;
   }
 

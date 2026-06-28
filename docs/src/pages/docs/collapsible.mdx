@@ -38,16 +38,14 @@ Expandable container that shows and hides content. Perfect for FAQs, detailed in
 ```tsx
 import { Collapsible } from '@polyms/core-ui'
 
-<Collapsible defaultOpen>
-  <Collapsible.Trigger>
-    Show more details
-  </Collapsible.Trigger>
-  <Collapsible.Panel>
-    <div className="p-4">
-      Hidden content that expands and collapses
-    </div>
-  </Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible defaultOpen>
+    <Collapsible.Trigger>Show more details</Collapsible.Trigger>
+    <Collapsible.Panel>
+      <div className='p-4'>Hidden content that expands and collapses</div>
+    </Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ## Compound Components
@@ -63,10 +61,12 @@ Button or element that toggles the panel visibility. Can contain icons, text, or
 ```tsx
 import { Button, Collapsible } from '@polyms/core-ui'
 
-<Collapsible.Trigger render={<Button variant='ghost' />}>
-  <ChevronIcon className="collapsible-icon" />
-  Toggle content
-</Collapsible.Trigger>
+const collapsibleTrigger = (
+  <Collapsible.Trigger render={<Button variant='ghost' />}>
+    <ChevronIcon className='collapsible-icon' />
+    Toggle content
+  </Collapsible.Trigger>
+)
 ```
 
 ### Collapsible.Panel
@@ -74,11 +74,11 @@ import { Button, Collapsible } from '@polyms/core-ui'
 The content container that expands and collapses. Automatically handles height transitions and accessibility attributes.
 
 ```tsx
-<Collapsible.Panel>
-  <div className="p-4 border-t">
-    Your collapsible content here
-  </div>
-</Collapsible.Panel>
+const collapsiblePanel = (
+  <Collapsible.Panel>
+    <div className='p-4 border-t'>Your collapsible content here</div>
+  </Collapsible.Panel>
+)
 ```
 
 ## Controlled vs Uncontrolled
@@ -88,10 +88,12 @@ The content container that expands and collapses. Automatically handles height t
 Use `defaultOpen` to set the initial state and let the component manage its own state:
 
 ```tsx
-<Collapsible defaultOpen>
-  <Collapsible.Trigger>FAQ Question</Collapsible.Trigger>
-  <Collapsible.Panel>Answer content</Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible defaultOpen>
+    <Collapsible.Trigger>FAQ Question</Collapsible.Trigger>
+    <Collapsible.Panel>Answer content</Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ### Controlled (For complex state management)
@@ -101,14 +103,12 @@ Control the open state externally using `open` and `onOpenChange`:
 ```tsx
 const [isOpen, setIsOpen] = useState(false)
 
-<Collapsible open={isOpen} onOpenChange={setIsOpen}>
-  <Collapsible.Trigger>
-    {isOpen ? 'Hide' : 'Show'} details
-  </Collapsible.Trigger>
-  <Collapsible.Panel>
-    Controlled content
-  </Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+    <Collapsible.Trigger>{isOpen ? 'Hide' : 'Show'} details</Collapsible.Trigger>
+    <Collapsible.Panel>Controlled content</Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ## Examples
@@ -143,35 +143,35 @@ const faqs = [
 The `.collapsible-icon` class automatically rotates 90° when the panel is open:
 
 ```tsx
-<Collapsible>
-  <Collapsible.Trigger className="flex items-center gap-2">
-    <ChevronRightIcon className="collapsible-icon transition-transform" />
-    Expand section
-  </Collapsible.Trigger>
-  <Collapsible.Panel>
-    Content with rotating icon
-  </Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible>
+    <Collapsible.Trigger className='flex items-center gap-2'>
+      <ChevronRightIcon className='collapsible-icon transition-transform' />
+      Expand section
+    </Collapsible.Trigger>
+    <Collapsible.Panel>Content with rotating icon</Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ### Nested Collapsibles
 
 ```tsx
-<Collapsible>
-  <Collapsible.Trigger>Parent section</Collapsible.Trigger>
-  <Collapsible.Panel>
-    <div className="p-4">
-      <Collapsible>
-        <Collapsible.Trigger>Nested section</Collapsible.Trigger>
-        <Collapsible.Panel>
-          <div className="p-4">
-            Nested content
-          </div>
-        </Collapsible.Panel>
-      </Collapsible>
-    </div>
-  </Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible>
+    <Collapsible.Trigger>Parent section</Collapsible.Trigger>
+    <Collapsible.Panel>
+      <div className='p-4'>
+        <Collapsible>
+          <Collapsible.Trigger>Nested section</Collapsible.Trigger>
+          <Collapsible.Panel>
+            <div className='p-4'>Nested content</div>
+          </Collapsible.Panel>
+        </Collapsible>
+      </div>
+    </Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ## Styling
@@ -181,14 +181,14 @@ The `.collapsible-icon` class automatically rotates 90° when the panel is open:
 ```tsx
 import { Button, Collapsible } from '@polyms/core-ui'
 
-<Collapsible>
-  <Collapsible.Trigger render={<Button className='w-full' variant='primary' />}>
-    Custom styled trigger
-  </Collapsible.Trigger>
-  <Collapsible.Panel>
-    Content
-  </Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible>
+    <Collapsible.Trigger render={<Button className='w-full' variant='primary' />}>
+      Custom styled trigger
+    </Collapsible.Trigger>
+    <Collapsible.Panel>Content</Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ### Panel Animation Control
@@ -196,12 +196,12 @@ import { Button, Collapsible } from '@polyms/core-ui'
 Disable animation by setting `animated={false}`:
 
 ```tsx
-<Collapsible animated={false}>
-  <Collapsible.Trigger>No animation</Collapsible.Trigger>
-  <Collapsible.Panel>
-    Instant toggle
-  </Collapsible.Panel>
-</Collapsible>
+const collapsible = (
+  <Collapsible animated={false}>
+    <Collapsible.Trigger>No animation</Collapsible.Trigger>
+    <Collapsible.Panel>Instant toggle</Collapsible.Panel>
+  </Collapsible>
+)
 ```
 
 ## Accessibility

@@ -1551,27 +1551,11 @@ console.log('Middleware data:', middlewareData)
 - **Layouts**: Use `staticData.layout = 'landing'` to disable sidebar
 - **Code Format**: 110-character separators with exact format
 
-## Agent skill (`core/skills/core-ui`)
+## Agent skill
 
-Bundled skill for AI coding assistants — install with `pnpm exec core-ui-skill` (copies to `.cursor/skills/core-ui`, `.claude/skills/core-ui`, `.agents/skills/core-ui`). Docs page: `/docs/agent-skill`.
+Install with `pnpm exec core-ui-skill` after adding `@polyms/core-ui`. Copies to `.cursor/skills/core-ui`, `.claude/skills/core-ui`, and `.agents/skills/core-ui`. End-user guide: `/agent-skill` (source: `docs/src/pages/agent-skill.mdx`).
 
-**Entry:** `SKILL.md` (`name: core-ui`) — routing table, hard rules, workflow. Reference files use `description` frontmatter only (no second `name`).
-
-| File | Covers |
-| --- | --- |
-| `setup.md` | Install, styles, app shell, Toast |
-| `field.md` | Field / Field.Floating, validation |
-| `modal.md` | Modal, Offcanvas, programmatic overlays |
-| `components.md` | Button, Menu, Select, Tabs, Switch, Accordion, Collapsible, Alert, NumberField, Spinner, `dynamic`, Avatar, Breadcrumb, Toast, useRender |
-| `theming.md` | Slate grays, semantic tones, dark mode |
-| `css-utilities.md` | table, badge, link, `item-*` interaction recipe |
-| `quality.md` | Task read, anti-slop, copy tells, pre-flight |
-| `redesign.md` | Migrate existing screens to core-ui |
-| `brandkit.md` | Brand tokens in code |
-
-**Pairs:** form in modal/offcanvas → read `field.md` + `modal.md`. Blocking confirmation → Modal, not Toast.
-
-Maintainers: update skill files when public API or CSS utilities change; see `AGENTS.md`.
+Helps AI assistants compose UI with correct component trees, theming, brand tokens, and quality checks. Re-run after upgrading the package.
 
 ## Resources
 
@@ -1591,5 +1575,5 @@ Maintainers: update skill files when public API or CSS utilities change; see `AG
 For complete project guidelines and AI coding agent instructions, see:
 - `AGENTS.md` — monorepo conventions, component structure, testing, MDX docs
 - `core/skills/core-ui/SKILL.md` — consumer agent skill entry (shipped in package)
-- `docs/src/pages/agent-skill.mdx` — skill install and file map
+- `docs/src/pages/agent-skill.mdx` — skill install guide for package users
 - Component MDX under `docs/src/pages/docs/` — live demos in `-views/`

@@ -1,13 +1,13 @@
 .navigation-menu-list {
   position: relative;
   display: inline-flex;
-  align-items: center;
   gap: 0.125rem;
+  align-items: center;
   padding: 0.25rem;
-  border-radius: 9999px;
-  border: 1px solid var(--line);
-  background-color: var(--surface-2);
   list-style: none;
+  background-color: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 9999px;
 
   &[data-orientation='vertical'] {
     flex-direction: column;
@@ -18,51 +18,51 @@
 
 .navigation-menu-list-bare {
   padding: 0;
+  background-color: transparent;
   border: 0;
   border-radius: 0;
-  background-color: transparent;
 }
 
 .navigation-menu-trigger {
-  box-sizing: border-box;
   position: relative;
+  box-sizing: border-box;
   display: inline-flex;
+  gap: 0.375rem;
   align-items: center;
   justify-content: center;
-  gap: 0.375rem;
   padding: 0.5rem 0.875rem;
   margin: 0;
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  background-color: transparent;
-  color: var(--fg);
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1.125rem;
-  text-decoration: none;
+  color: var(--fg);
   white-space: nowrap;
+  text-decoration: none;
   cursor: pointer;
   user-select: none;
   outline: 0;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 9999px;
   transition:
     background-color 200ms ease,
     color 200ms ease;
 
   &::after {
-    content: '';
-    pointer-events: none;
     position: absolute;
     inset-inline: 1rem;
     bottom: -1px;
     height: 2px;
-    border-radius: 9999px;
+    pointer-events: none;
+    content: '';
     background: linear-gradient(
       90deg,
       color-mix(in oklab, var(--color-primary-700) 30%, transparent),
       color-mix(in oklab, var(--color-primary-700) 80%, transparent),
       var(--color-primary-700)
     );
+    border-radius: 9999px;
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 300ms ease-out;
@@ -70,8 +70,8 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
       color: var(--color-primary-700);
+      background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
     }
 
     &:hover::after {
@@ -80,8 +80,8 @@
   }
 
   &[data-popup-open] {
-    background-color: color-mix(in oklab, var(--color-primary-700) 15%, transparent);
     color: var(--color-primary-700);
+    background-color: color-mix(in oklab, var(--color-primary-700) 15%, transparent);
   }
 
   &[data-popup-open]::after {
@@ -89,9 +89,9 @@
   }
 
   &:focus-visible {
-    background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
     color: var(--color-primary-700);
     outline: none;
+    background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
   }
 
   &:focus-visible::after {
@@ -100,8 +100,8 @@
 
   &:disabled,
   &[data-disabled] {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 
@@ -117,8 +117,8 @@
   border-radius: 0.5rem;
 
   &::after {
-    inset-inline: auto;
     inset-block: 0.5rem;
+    inset-inline: auto;
     right: -1px;
     bottom: auto;
     width: 2px;
@@ -176,10 +176,10 @@
 }
 
 .navigation-menu-content {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  box-sizing: border-box;
   width: 100%;
   padding: 0.5rem;
   transition:
@@ -218,17 +218,17 @@
 
 .navigation-menu-group-label {
   padding: 0.25rem 0.5rem;
-  color: var(--muted);
   font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1rem;
-  letter-spacing: 0.05em;
+  color: var(--muted);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .navigation-menu-separator {
-  border: 0;
   background-color: var(--line);
+  border: 0;
 
   &[data-orientation='horizontal'] {
     height: 1px;
@@ -236,33 +236,33 @@
   }
 
   &[data-orientation='vertical'] {
-    width: 1px;
     align-self: stretch;
+    width: 1px;
     margin-inline: 0.25rem;
   }
 }
 
 .navigation-menu-footer {
   display: flex;
+  gap: 0.75rem;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
   padding: 0.5rem 0.75rem;
-  border: 1px dashed var(--line);
-  border-radius: 0.5rem;
-  color: var(--muted);
   font-size: 0.75rem;
   line-height: 1rem;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 0.5rem;
 }
 
 .navigation-menu-link {
   position: relative;
   display: block;
   padding: 0.625rem 0.75rem;
-  border-radius: 0.5rem;
   color: var(--fg);
   text-decoration: none;
   outline: 0;
+  border-radius: 0.5rem;
   transition: background-color 150ms ease;
 
   @media (hover: hover) {
@@ -277,8 +277,8 @@
   }
 
   &[data-active] {
-    background-color: var(--surface);
     color: var(--fg);
+    background-color: var(--surface);
   }
 }
 
@@ -288,28 +288,28 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
       color: var(--color-danger-700);
+      background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
     }
   }
 
   &:focus-visible {
-    background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
     color: var(--color-danger-700);
     outline-color: var(--color-danger);
+    background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
   }
 
   &[data-active] {
-    background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
     color: var(--color-danger-700);
+    background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
   }
 }
 
 /* Variant: soft — primary-tinted card-style item with dashed→solid border on hover/focus/active. */
 .navigation-menu-link-soft {
+  background-color: color-mix(in oklab, var(--color-primary) 5%, transparent);
   border: 1px dashed color-mix(in oklab, var(--color-primary) 30%, transparent);
   border-radius: 0.75rem;
-  background-color: color-mix(in oklab, var(--color-primary) 5%, transparent);
   transition:
     background-color 200ms ease,
     border-color 200ms ease,
@@ -317,24 +317,24 @@
 
   @media (hover: hover) {
     &:hover {
+      background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
       border-color: var(--color-primary);
       border-style: solid;
-      background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
     }
   }
 
   &:focus-visible {
+    outline: none;
+    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
     border-color: var(--color-primary);
     border-style: solid;
-    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
-    outline: none;
   }
 
   &[data-active] {
+    color: var(--color-primary-700);
+    background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
     border-color: var(--color-primary);
     border-style: solid;
-    background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
-    color: var(--color-primary-700);
   }
 }
 
@@ -343,8 +343,8 @@
   --navigation-menu-easing: cubic-bezier(0.22, 1, 0.36, 1);
   z-index: var(--zindex-popover);
   width: var(--positioner-width);
-  height: var(--positioner-height);
   max-width: var(--available-width);
+  height: var(--positioner-height);
   transition:
     top var(--navigation-menu-duration) var(--navigation-menu-easing),
     left var(--navigation-menu-duration) var(--navigation-menu-easing),
@@ -357,31 +357,31 @@
 
   /* Invisible hover bridge so the popup doesn't close when the pointer crosses the gap. */
   &::before {
-    content: '';
     position: absolute;
+    content: '';
   }
 
   &[data-side='bottom']::before {
-    top: -10px;
     inset-inline: 0;
+    top: -10px;
     height: 10px;
   }
 
   &[data-side='top']::before {
-    bottom: -10px;
     inset-inline: 0;
+    bottom: -10px;
     height: 10px;
   }
 
   &[data-side='left']::before {
-    right: -10px;
     inset-block: 0;
+    right: -10px;
     width: 10px;
   }
 
   &[data-side='right']::before {
-    left: -10px;
     inset-block: 0;
+    left: -10px;
     width: 10px;
   }
 }
@@ -389,19 +389,19 @@
 .navigation-menu-popup {
   position: relative;
   box-sizing: border-box;
-  overflow: hidden;
   width: var(--popup-width);
   height: var(--popup-height);
-  border: 1px solid color-mix(in oklab, var(--color-primary-700) 12%, transparent);
-  border-radius: 1rem;
-  background-color: color-mix(in oklab, var(--surface-2) 96%, transparent);
+  overflow: hidden;
   color: var(--fg);
   outline: none;
-  backdrop-filter: blur(16px);
-  transform-origin: var(--transform-origin);
+  background-color: color-mix(in oklab, var(--surface-2) 96%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary-700) 12%, transparent);
+  border-radius: 1rem;
   box-shadow:
     0 20px 25px -5px color-mix(in oklab, var(--color-primary-700) 15%, transparent),
     0 8px 10px -6px color-mix(in oklab, var(--color-primary-700) 15%, transparent);
+  backdrop-filter: blur(16px);
+  transform-origin: var(--transform-origin);
   transition:
     opacity var(--navigation-menu-duration) var(--navigation-menu-easing),
     transform var(--navigation-menu-duration) var(--navigation-menu-easing),
@@ -409,12 +409,12 @@
     height var(--navigation-menu-duration) var(--navigation-menu-easing);
 
   &::before {
-    content: '';
     position: absolute;
-    z-index: 1;
     inset-inline: 0;
     top: 0;
+    z-index: 1;
     height: 3px;
+    content: '';
     background: linear-gradient(
       90deg,
       color-mix(in oklab, var(--color-primary-700) 30%, transparent),
@@ -494,19 +494,19 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
         color: var(--color-primary-300);
+        background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
       }
     }
 
     &[data-popup-open] {
-      background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
       color: var(--color-primary-300);
+      background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
     }
 
     &:focus-visible {
-      background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
       color: var(--color-primary-300);
+      background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
     }
   }
 
@@ -524,43 +524,43 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
         color: var(--color-danger-200);
+        background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
       }
     }
 
     &:focus-visible {
-      background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
       color: var(--color-danger-200);
       outline-color: var(--color-danger-400);
+      background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
     }
 
     &[data-active] {
-      background-color: color-mix(in oklab, var(--color-danger) 20%, transparent);
       color: var(--color-danger-200);
+      background-color: color-mix(in oklab, var(--color-danger) 20%, transparent);
     }
   }
 
   .navigation-menu-link-soft {
-    border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
     background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+    border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
 
     @media (hover: hover) {
       &:hover {
-        border-color: var(--color-primary-400);
         background-color: color-mix(in oklab, var(--color-primary) 18%, transparent);
+        border-color: var(--color-primary-400);
       }
     }
 
     &:focus-visible {
-      border-color: var(--color-primary-400);
       background-color: color-mix(in oklab, var(--color-primary) 18%, transparent);
+      border-color: var(--color-primary-400);
     }
 
     &[data-active] {
-      border-color: var(--color-primary-400);
-      background-color: color-mix(in oklab, var(--color-primary) 24%, transparent);
       color: var(--color-primary-300);
+      background-color: color-mix(in oklab, var(--color-primary) 24%, transparent);
+      border-color: var(--color-primary-400);
     }
   }
 

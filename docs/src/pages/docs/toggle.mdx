@@ -74,12 +74,14 @@ A two-state button that can be on or off. Use it for binary settings where the c
 ```tsx
 import { Toggle } from '@polyms/core-ui'
 
-<Toggle className='toggle' aria-label='Bold'>
-  B
-</Toggle>
+const toggle = (
+  <Toggle className='toggle' aria-label='Bold'>
+    B
+  </Toggle>
+)
 ```
 
-The `Toggle` and `ToggleGroup` primitives are unstyled by default — add the `toggle` (and `toggle-group`) class to apply the design-system styling shown here.
+Add the **`toggle`** and **`toggle-group`** classes to match the styling in the examples below.
 
 ## Controlled vs Uncontrolled
 
@@ -88,7 +90,7 @@ The `Toggle` and `ToggleGroup` primitives are unstyled by default — add the `t
 Use `defaultPressed` to set the initial state and let the component manage itself:
 
 ```tsx
-<Toggle className='toggle' defaultPressed aria-label='Favorite' />
+const toggle = <Toggle className='toggle' defaultPressed aria-label='Favorite' />
 ```
 
 ### Controlled
@@ -98,12 +100,7 @@ Drive the pressed state externally with `pressed` and `onPressedChange`:
 ```tsx
 const [pressed, setPressed] = useState(false)
 
-<Toggle
-  className='toggle'
-  pressed={pressed}
-  onPressedChange={setPressed}
-  aria-label='Mute'
-/>
+const toggle = <Toggle className='toggle' pressed={pressed} onPressedChange={setPressed} aria-label='Mute' />
 ```
 
 ## Toggle group
@@ -117,11 +114,19 @@ Wrap related toggles in a `ToggleGroup` to share state. By default the group is 
 ```tsx
 import { Toggle, ToggleGroup } from '@polyms/core-ui'
 
-<ToggleGroup className='toggle-group' aria-label='Alignment' defaultValue={['left']}>
-  <Toggle className='toggle' value='left'>Left</Toggle>
-  <Toggle className='toggle' value='center'>Center</Toggle>
-  <Toggle className='toggle' value='right'>Right</Toggle>
-</ToggleGroup>
+const toggleGroup = (
+  <ToggleGroup className='toggle-group' aria-label='Alignment' defaultValue={['left']}>
+    <Toggle className='toggle' value='left'>
+      Left
+    </Toggle>
+    <Toggle className='toggle' value='center'>
+      Center
+    </Toggle>
+    <Toggle className='toggle' value='right'>
+      Right
+    </Toggle>
+  </ToggleGroup>
+)
 ```
 
 ## Composition
@@ -131,12 +136,18 @@ import { Toggle, ToggleGroup } from '@polyms/core-ui'
 ```tsx
 import { Toggle, ToggleGroup, Toolbar } from '@polyms/core-ui'
 
-<Toolbar>
-  <ToggleGroup className='toolbar-group' aria-label='Alignment'>
-    <Toolbar.Button render={<Toggle />} value='left'>Left</Toolbar.Button>
-    <Toolbar.Button render={<Toggle />} value='right'>Right</Toolbar.Button>
-  </ToggleGroup>
-</Toolbar>
+const toolbar = (
+  <Toolbar>
+    <ToggleGroup className='toolbar-group' aria-label='Alignment'>
+      <Toolbar.Button render={<Toggle />} value='left'>
+        Left
+      </Toolbar.Button>
+      <Toolbar.Button render={<Toggle />} value='right'>
+        Right
+      </Toolbar.Button>
+    </ToggleGroup>
+  </Toolbar>
+)
 ```
 
 ## Guidelines

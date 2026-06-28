@@ -16,8 +16,8 @@
   }
 
   &.link-primary {
-    color: var(--color-primary-700);
     font-weight: 500;
+    color: var(--color-primary-700);
 
     &:active,
     &:visited {
@@ -77,8 +77,8 @@
   }
 
   &.link-dark {
-    color: var(--color-slate-700);
     font-weight: 500;
+    color: var(--color-slate-700);
 
     &:hover,
     &:focus,

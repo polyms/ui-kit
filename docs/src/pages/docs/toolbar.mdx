@@ -67,7 +67,7 @@ import code from './-views/toolbar/ToolbarDefault.tsx?raw'
 import VerticalStory from './-views/toolbar/ToolbarVertical.tsx'
 import verticalCode from './-views/toolbar/ToolbarVertical.tsx?raw'
 
-A container for grouping a related set of buttons, toggles, links, and inputs. Toolbar provides roving keyboard focus, accessible labelling, and seamless composition with other Base UI primitives.
+A container for grouping a related set of buttons, toggles, links, and inputs. Toolbar provides roving keyboard focus and accessible labelling for dense control clusters.
 
 <CodePreview code={code}>
   <Story />
@@ -78,14 +78,16 @@ A container for grouping a related set of buttons, toggles, links, and inputs. T
 ```tsx
 import { Toolbar } from '@polyms/core-ui'
 
-<Toolbar aria-label='Formatting'>
-  <Toolbar.Group aria-label='Text formatting'>
-    <Toolbar.Button>Bold</Toolbar.Button>
-    <Toolbar.Button>Italic</Toolbar.Button>
-  </Toolbar.Group>
-  <Toolbar.Separator orientation='vertical' />
-  <Toolbar.Link href='#'>Docs</Toolbar.Link>
-</Toolbar>
+const toolbar = (
+  <Toolbar aria-label='Formatting'>
+    <Toolbar.Group aria-label='Text formatting'>
+      <Toolbar.Button>Bold</Toolbar.Button>
+      <Toolbar.Button>Italic</Toolbar.Button>
+    </Toolbar.Group>
+    <Toolbar.Separator orientation='vertical' />
+    <Toolbar.Link href='#'>Docs</Toolbar.Link>
+  </Toolbar>
+)
 ```
 
 ## Composition
@@ -95,12 +97,18 @@ import { Toolbar } from '@polyms/core-ui'
 ```tsx
 import { Toggle, ToggleGroup, Toolbar } from '@polyms/core-ui'
 
-<Toolbar>
-  <ToggleGroup className='toolbar-group' aria-label='Alignment'>
-    <Toolbar.Button render={<Toggle />} value='left'>Left</Toolbar.Button>
-    <Toolbar.Button render={<Toggle />} value='right'>Right</Toolbar.Button>
-  </ToggleGroup>
-</Toolbar>
+const toolbar = (
+  <Toolbar>
+    <ToggleGroup className='toolbar-group' aria-label='Alignment'>
+      <Toolbar.Button render={<Toggle />} value='left'>
+        Left
+      </Toolbar.Button>
+      <Toolbar.Button render={<Toggle />} value='right'>
+        Right
+      </Toolbar.Button>
+    </ToggleGroup>
+  </Toolbar>
+)
 ```
 
 The same pattern applies to `Menu.Trigger`, `Select.Trigger`, `Popover.Trigger`, `Dialog.Trigger`, and `AlertDialog.Trigger`.
@@ -110,11 +118,13 @@ You can also render the `Button` component to reuse its icon sizing and tooltip:
 ```tsx
 import { Button, Toolbar } from '@polyms/core-ui'
 
-<Toolbar>
-  <Toolbar.Button render={<Button icon tooltip='Bold' />}>
-    <HugeiconsIcon icon={TextBoldIcon} size={16} strokeWidth={2} />
-  </Toolbar.Button>
-</Toolbar>
+const toolbar = (
+  <Toolbar>
+    <Toolbar.Button render={<Button icon tooltip='Bold' />}>
+      <HugeiconsIcon icon={TextBoldIcon} size={16} strokeWidth={2} />
+    </Toolbar.Button>
+  </Toolbar>
+)
 ```
 
 The toolbar owns the visual shell, so `.toolbar-button` wins over `.btn` for geometry and the ghost palette — `Button` `variant`/`outlined` colors are intentionally flattened to keep toolbar items uniform. Horizontal padding is reconciled automatically, so `icon` buttons stay square. Use `Button` here for its `icon`, `tooltip`, and `render`-friendly API rather than for a colored variant.
@@ -122,12 +132,14 @@ The toolbar owns the visual shell, so `.toolbar-button` wins over `.btn` for geo
 For tooltips, do the opposite — pass the toolbar item as the `render` of `Tooltip.Trigger`:
 
 ```tsx
-<Toolbar>
-  <Tooltip>
-    <Tooltip.Trigger render={<Toolbar.Button />}>Bold</Tooltip.Trigger>
-    <Tooltip.Content>Toggle bold</Tooltip.Content>
-  </Tooltip>
-</Toolbar>
+const toolbar = (
+  <Toolbar>
+    <Tooltip>
+      <Tooltip.Trigger render={<Toolbar.Button />}>Bold</Tooltip.Trigger>
+      <Tooltip.Content>Toggle bold</Tooltip.Content>
+    </Tooltip>
+  </Toolbar>
+)
 ```
 
 ## Vertical orientation

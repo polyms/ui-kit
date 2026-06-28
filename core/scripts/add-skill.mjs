@@ -29,7 +29,7 @@ Options:
   -h, --help                           Show help
 `
 
-const parseArgs = (argv) => {
+const parseArgs = argv => {
   const args = {
     cwd: process.cwd(),
     dryRun: false,
@@ -127,7 +127,7 @@ const run = async () => {
   }
 }
 
-run().catch((error) => {
+run().catch(error => {
   console.error(error.message)
   process.exitCode = 1
 })

@@ -65,38 +65,20 @@ import { useState } from 'react'
 export default function ControlledNumberField() {
   const [value, setValue] = useState(50)
 
-  return (
-    <NumberField
-      label='Quantity'
-      value={value}
-      onValueChange={setValue}
-      min={0}
-      max={100}
-    />
-  )
+  return <NumberField label='Quantity' value={value} onValueChange={setValue} min={0} max={100} />
 }
 ```
 
 ### With Constraints
 
 ```tsx
-<NumberField
-  label='Price ($)'
-  defaultValue={9.99}
-  min={0}
-  max={999.99}
-  step={0.01}
-/>
+const numberField = <NumberField label='Price ($)' defaultValue={9.99} min={0} max={999.99} step={0.01} />
 ```
 
 ### Without Label (No Scrubbing)
 
 ```tsx
-<NumberField
-  defaultValue={42}
-  min={0}
-  step={5}
-/>
+const numberField = <NumberField defaultValue={42} min={0} step={5} />
 ```
 
 ## Interactive Label Scrubbing

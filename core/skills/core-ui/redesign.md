@@ -24,14 +24,14 @@ Scan → Detect mode → Diagnose → Fix (priority order) → Redesign pre-flig
 
 Read the codebase before editing:
 
-| Check | Why |
-| --- | --- |
-| `package.json` — is `@polyms/core-ui` installed? | Run [setup.md](setup.md) first if missing |
-| Styles entry — `styles-<hash>.css` or `styles/tailwind.css` imported? | Unstyled primitives if CSS is missing |
-| `Modal.Container` / `Offcanvas.Container` / `Toast.Container` mounted? | Programmatic overlays break without containers |
-| Styling method — Tailwind v4, plain CSS, mixed inline | Match existing app patterns; use DS tokens on top |
-| Screen inventory — buttons, inputs, tables, menus, modals per route | Map each to the closest [components.md](components.md) export |
-| Analytics hooks — `name`, `data-*`, button labels, section IDs | Preservation list for Fix phase |
+| Check                                                                  | Why                                                           |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `package.json` — is `@polyms/core-ui` installed?                       | Run [setup.md](setup.md) first if missing                     |
+| Styles entry — `styles-<hash>.css` or `styles/tailwind.css` imported?  | Unstyled primitives if CSS is missing                         |
+| `Modal.Container` / `Offcanvas.Container` / `Toast.Container` mounted? | Programmatic overlays break without containers                |
+| Styling method — Tailwind v4, plain CSS, mixed inline                  | Match existing app patterns; use DS tokens on top             |
+| Screen inventory — buttons, inputs, tables, menus, modals per route    | Map each to the closest [components.md](components.md) export |
+| Analytics hooks — `name`, `data-*`, button labels, section IDs         | Preservation list for Fix phase                               |
 
 Declare one line before changing code:
 
@@ -41,13 +41,13 @@ Declare one line before changing code:
 
 Misclassifying the mode is the main source of bad redesign output.
 
-| Mode | When | Visual goal | IA / content |
-| --- | --- | --- | --- |
-| **Preserve** | Refresh look, keep brand recognition | Evolve spacing, tokens, primitives | Keep slugs, nav, field names, copy voice |
-| **Overhaul** | New visual language approved | Treat visuals like greenfield | Keep IA, routes, and content unless asked |
-| **Greenfield screen** | New route or empty shell | Full [quality.md](quality.md) rules | Design with product patterns from scratch |
+| Mode                  | When                                 | Visual goal                         | IA / content                              |
+| --------------------- | ------------------------------------ | ----------------------------------- | ----------------------------------------- |
+| **Preserve**          | Refresh look, keep brand recognition | Evolve spacing, tokens, primitives  | Keep slugs, nav, field names, copy voice  |
+| **Overhaul**          | New visual language approved         | Treat visuals like greenfield       | Keep IA, routes, and content unless asked |
+| **Greenfield screen** | New route or empty shell             | Full [quality.md](quality.md) rules | Design with product patterns from scratch |
 
-If ambiguous, ask **once**: *"Giữ brand/layout hiện tại hay làm lại visual từ đầu?"*
+If ambiguous, ask **once**: _"Giữ brand/layout hiện tại hay làm lại visual từ đầu?"_
 
 ### 3. Diagnose
 
@@ -132,16 +132,16 @@ Skip marketing-only diagnoses (hero zigzag, bento grids, parallax, logo walls) u
 
 Apply in order. **Stop when the brief is satisfied** — do not keep restyling for taste.
 
-| Step | Action | Risk |
-| --- | --- | --- |
-| 1 | **Setup** — package, styles, overlay containers ([setup.md](setup.md)) | Low |
-| 2 | **Component swap** — map ad-hoc markup to `@polyms/core-ui` primitives; keep compound trees intact | Low–medium |
-| 3 | **Semantic tokens** — `bg-body`, `text-fg`, `border-line`, `slate` chrome ([theming.md](theming.md)) | Low |
-| 4 | **Interactive surfaces** — `item-*` for ghost nav/actions; `btn-*` variants for actions | Low |
-| 5 | **Spacing and density** — align to Comfortable / Compact / Cockpit ([quality.md](quality.md#visual-density)) | Medium |
-| 6 | **Missing states** — loading, empty, error, disabled paths | Medium |
-| 7 | **Copy** — natural `Field.Label`, believable sample data, remove filler | Low |
-| 8 | **Layout / IA** — only when explicitly requested | High |
+| Step | Action                                                                                                       | Risk       |
+| ---- | ------------------------------------------------------------------------------------------------------------ | ---------- |
+| 1    | **Setup** — package, styles, overlay containers ([setup.md](setup.md))                                       | Low        |
+| 2    | **Component swap** — map ad-hoc markup to `@polyms/core-ui` primitives; keep compound trees intact           | Low–medium |
+| 3    | **Semantic tokens** — `bg-body`, `text-fg`, `border-line`, `slate` chrome ([theming.md](theming.md))         | Low        |
+| 4    | **Interactive surfaces** — `item-*` for ghost nav/actions; `btn-*` variants for actions                      | Low        |
+| 5    | **Spacing and density** — align to Comfortable / Compact / Cockpit ([quality.md](quality.md#visual-density)) | Medium     |
+| 6    | **Missing states** — loading, empty, error, disabled paths                                                   | Medium     |
+| 7    | **Copy** — natural `Field.Label`, believable sample data, remove filler                                      | Low        |
+| 8    | **Layout / IA** — only when explicitly requested                                                             | High       |
 
 Do **not** migrate fonts, add motion libraries, or restructure navigation unless the user asked. Extract existing brand accent before recoloring — brand purple stays purple.
 
@@ -167,12 +167,12 @@ Get explicit approval before:
 
 ## Decision tree
 
-| Situation | Approach |
-| --- | --- |
-| IA, routes, and content are sound; UI is just dated | **Preserve** — steps 1–7 only |
-| Broken mobile layout, no DS, ad-hoc everything | **Overhaul** visuals — strict content/IA preservation |
-| New screen in an existing app | **Greenfield screen** — [components.md](components.md) + [quality.md](quality.md) |
-| Brand identity itself is changing | Treat as greenfield; read [brandkit.md](brandkit.md) for token map — do not force-fit old tokens |
+| Situation                                           | Approach                                                                                         |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| IA, routes, and content are sound; UI is just dated | **Preserve** — steps 1–7 only                                                                    |
+| Broken mobile layout, no DS, ad-hoc everything      | **Overhaul** visuals — strict content/IA preservation                                            |
+| New screen in an existing app                       | **Greenfield screen** — [components.md](components.md) + [quality.md](quality.md)                |
+| Brand identity itself is changing                   | Treat as greenfield; read [brandkit.md](brandkit.md) for token map — do not force-fit old tokens |
 
 ## Redesign pre-flight
 

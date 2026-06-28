@@ -27,10 +27,7 @@ Wrap **`React.lazy`** and **`Suspense`** for code-split routes, heavy widgets, o
 ```tsx
 import { dynamic, Spinner } from '@polyms/core-ui'
 
-const SettingsPanel = dynamic(
-  () => import('./SettingsPanel'),
-  { loadingComponent: <Spinner size={24} /> }
-)
+const SettingsPanel = dynamic(() => import('./SettingsPanel'), { loadingComponent: <Spinner size={24} /> })
 
 function Page() {
   return <SettingsPanel />
@@ -41,7 +38,7 @@ The returned component forwards refs and props to the lazily loaded default expo
 
 ## Module Federation
 
-When building with Vite Module Federation, use the same **`dynamic()`** helper for remote entry components so loading states stay consistent. See the library **`module-federation`** plugin in the core package build pipeline.
+When loading remote modules (for example with Module Federation), use the same **`dynamic()`** helper so loading states stay consistent with the rest of your app.
 
 ## API Reference
 

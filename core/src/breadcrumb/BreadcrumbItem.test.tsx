@@ -86,11 +86,7 @@ describe('BreadcrumbItem', () => {
   })
 
   it('does not set aria-current when active is false', () => {
-    const { container } = render(
-      <BreadcrumbItem active={false}>
-        Not current
-      </BreadcrumbItem>
-    )
+    const { container } = render(<BreadcrumbItem active={false}>Not current</BreadcrumbItem>)
     const li = container.querySelector('li')
     expect(li).not.toHaveAttribute('aria-current')
   })

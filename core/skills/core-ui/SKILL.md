@@ -14,28 +14,28 @@ description: >-
 
 Load **every** matched file before generating code.
 
-| Triggers (keywords / intent) | Read |
-| --- | --- |
-| migrate, migration, redesign, refresh, modernise, legacy, overhaul, re-skin, preserve brand, swap to core-ui, existing screen, visual debt | [redesign.md](redesign.md) |
-| brand, rebrand, BRAND.md, theme.css, primary color, accent, identity | [brandkit.md](brandkit.md) |
-| new app, install, styles import, app shell, containers | [setup.md](setup.md) |
-| toast, notification, snackbar, Toast.useToastManager | [setup.md](setup.md#toast) · [components.md](components.md#toast) |
-| form, field, Field.Floating, textarea, debounce, validation | [field.md](field.md) · label tone [quality.md#field-label-copy](quality.md#field-label-copy) |
-| modal, dialog, offcanvas, drawer, showModal, showOffcanvas, blocking confirmation, delete confirm | [modal.md](modal.md) — not Toast / Popover / Tooltip |
-| form in modal/offcanvas, modal form, filter panel, side panel with form, create/edit in dialog | [field.md](field.md) + [modal.md](modal.md) |
-| Button, CTA, icon button, btn styling, render prop | [components.md#button](components.md#button) · [compose through render](components.md#compose-button-through-render) |
-| Menu, NavigationMenu, Toolbar, Checkbox, Radio, Select, Tabs, listbox, tab panel | [components.md](components.md) · [select](components.md#select) · [tabs](components.md#tabs) |
-| Switch, Popover, Tooltip, Toggle, ToggleGroup | [components.md#switch](components.md#switch) · [popover](components.md#popover) · [tooltip](components.md#tooltip) · [toggle](components.md#toggle) |
-| Avatar, Breadcrumb, Accordion, FAQ, expand/collapse | [components.md#avatar](components.md#avatar) · [breadcrumb](components.md#breadcrumb) · [accordion](components.md#accordion) · [collapsible](components.md#collapsible) |
-| Alert, banner, inline status, dismissible feedback | [components.md#alert](components.md#alert) |
-| NumberField, quantity, stepper, numeric input | [components.md#numberfield](components.md#numberfield) |
-| Spinner, loading indicator, async pending | [components.md#spinner](components.md#spinner) · layout placeholders → [css-utilities.md](css-utilities.md) |
-| dynamic import, React.lazy, code split, lazy route, module federation | [components.md#dynamic-import](components.md#dynamic-import) |
-| dark mode, slate, semantic tones, bg-body, text-fg | [theming.md](theming.md) |
-| table, badge, item-*, link utilities | [css-utilities.md](css-utilities.md) |
-| anti-slop, copy tells, output completeness, pre-flight, field label tone | [quality.md](quality.md) |
-| docs demo, `-views/`, MDX live preview | [quality.md#sample-data-and-docs-demos](quality.md#sample-data-and-docs-demos) |
-| library component, maintainer, change compound API | [quality.md#maintainer](quality.md#maintainer) |
+| Triggers (keywords / intent)                                                                                                               | Read                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| migrate, migration, redesign, refresh, modernise, legacy, overhaul, re-skin, preserve brand, swap to core-ui, existing screen, visual debt | [redesign.md](redesign.md)                                                                                                                                              |
+| brand, rebrand, BRAND.md, theme.css, primary color, accent, identity                                                                       | [brandkit.md](brandkit.md)                                                                                                                                              |
+| new app, install, styles import, app shell, containers                                                                                     | [setup.md](setup.md)                                                                                                                                                    |
+| toast, notification, snackbar, Toast.useToastManager                                                                                       | [setup.md](setup.md#toast) · [components.md](components.md#toast)                                                                                                       |
+| form, field, Field.Floating, textarea, debounce, validation                                                                                | [field.md](field.md) · label tone [quality.md#field-label-copy](quality.md#field-label-copy)                                                                            |
+| modal, dialog, offcanvas, drawer, showModal, showOffcanvas, blocking confirmation, delete confirm                                          | [modal.md](modal.md) — not Toast / Popover / Tooltip                                                                                                                    |
+| form in modal/offcanvas, modal form, filter panel, side panel with form, create/edit in dialog                                             | [field.md](field.md) + [modal.md](modal.md)                                                                                                                             |
+| Button, CTA, icon button, btn styling, render prop                                                                                         | [components.md#button](components.md#button) · [compose through render](components.md#compose-button-through-render)                                                    |
+| Menu, NavigationMenu, Toolbar, Checkbox, Radio, Select, Tabs, listbox, tab panel                                                           | [components.md](components.md) · [select](components.md#select) · [tabs](components.md#tabs)                                                                            |
+| Switch, Popover, Tooltip, Toggle, ToggleGroup                                                                                              | [components.md#switch](components.md#switch) · [popover](components.md#popover) · [tooltip](components.md#tooltip) · [toggle](components.md#toggle)                     |
+| Avatar, Breadcrumb, Accordion, FAQ, expand/collapse                                                                                        | [components.md#avatar](components.md#avatar) · [breadcrumb](components.md#breadcrumb) · [accordion](components.md#accordion) · [collapsible](components.md#collapsible) |
+| Alert, banner, inline status, dismissible feedback                                                                                         | [components.md#alert](components.md#alert)                                                                                                                              |
+| NumberField, quantity, stepper, numeric input                                                                                              | [components.md#numberfield](components.md#numberfield)                                                                                                                  |
+| Spinner, loading indicator, async pending                                                                                                  | [components.md#spinner](components.md#spinner) · layout placeholders → [css-utilities.md](css-utilities.md)                                                             |
+| dynamic import, React.lazy, code split, lazy route, module federation                                                                      | [components.md#dynamic-import](components.md#dynamic-import)                                                                                                            |
+| dark mode, slate, semantic tones, bg-body, text-fg                                                                                         | [theming.md](theming.md)                                                                                                                                                |
+| table, badge, item-*, link utilities                                                                                                       | [css-utilities.md](css-utilities.md)                                                                                                                                    |
+| anti-slop, copy tells, output completeness, pre-flight, field label tone                                                                   | [quality.md](quality.md)                                                                                                                                                |
+| docs demo, `-views/`, MDX live preview                                                                                                     | [quality.md#sample-data-and-docs-demos](quality.md#sample-data-and-docs-demos)                                                                                          |
+| library component, maintainer, change compound API                                                                                         | [quality.md#maintainer](quality.md#maintainer)                                                                                                                          |
 
 **Pairs:** rebrand existing app → **redesign.md** then **brandkit.md**. Form in overlay → **field.md** + **modal.md** (both pre-flights).
 

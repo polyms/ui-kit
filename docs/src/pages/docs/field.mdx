@@ -91,19 +91,50 @@ A flexible form field wrapper that combines labels, inputs, descriptions, and va
 ```tsx
 import { Field } from '@polyms/core-ui'
 
-<Field required>
-  <Field.Label>Let me know your email?</Field.Label>
-  <Field.Control placeholder='tifa.lockhart@polyms.dev' />
-  <Field.Description>We'll never share your email with anyone else.</Field.Description>
-</Field>
+const field = (
+  <Field required>
+    <Field.Label>Let me know your email?</Field.Label>
+    <Field.Control placeholder='tifa.lockhart@polyms.dev' />
+    <Field.Description>We'll never share your email with anyone else.</Field.Description>
+  </Field>
+)
 ```
 
 ## Field vs Field.Floating
 
-| Use **`Field`** (compound) | Use **`Field.Floating`** (standalone) |
-| --- | --- |
-| Settings, signup, modals, validation | Search bars, filters, debounced query |
-| `Field.Label` + `Field.Feedback` + icons | Floating label; `placeholder` prop = helper text below |
+export const fieldPatterns = [
+  {
+    pattern: 'Field (standard tree)',
+    useWhen: 'Settings, signup, modals, validation',
+    details: 'Field.Label + Field.Feedback + icons',
+  },
+  {
+    pattern: 'Field.Floating (standalone)',
+    useWhen: 'Search bars, filters, debounced query',
+    details: 'Floating label; placeholder prop = helper text below',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th>Pattern</th>
+        <th>Use when</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {fieldPatterns.map((row, index) => (
+        <tr key={index}>
+          <td className='align-top text-nowrap font-medium text-fg'>{row.pattern}</td>
+          <td className='text-muted text-sm'>{row.useWhen}</td>
+          <td className='text-muted text-sm'>{row.details}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 **`Field.Floating` is not a child of `Field`.** Do not nest them.
 
@@ -137,11 +168,14 @@ Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs bl
 Pass **`invalid`** on **`Field.Root`** to apply error styling (danger border, text, and focus ring). Add **`Field.Feedback`** for validation messages; it appears on focus or hover by default, or stays visible with **`defaultShowOnError`**.
 
 ```tsx
-<Field invalid={hasError} required>
-  <Field.Label>Email</Field.Label>
-  <Field.Control value={email} onChange={...} />
-  <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
-</Field>
+
+const field = (
+  <Field invalid={hasError} required>
+    <Field.Label>Email</Field.Label>
+    <Field.Control value={email} onChange={...} />
+    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+  </Field>
+)
 ```
 
 <CodePreview code={invalidCode}>
@@ -153,10 +187,12 @@ Pass **`invalid`** on **`Field.Root`** to apply error styling (danger border, te
 Pass **`debounce`** (milliseconds) on **`Field.Control`** to delay **`onChange`** until typing pauses—useful for filtering or validation without work on every keystroke. Omit **`debounce`** or use **`0`** for synchronous **`onChange`** (native behavior).
 
 ```tsx
-<Field>
-  <Field.Label>Search</Field.Label>
-  <Field.Control debounce={300} onChange={(e) => console.log(e.target.value)} />
-</Field>
+const field = (
+  <Field>
+    <Field.Label>Search</Field.Label>
+    <Field.Control debounce={300} onChange={(e) => console.log(e.target.value)} />
+  </Field>
+)
 ```
 
 ## Floating label
@@ -166,12 +202,14 @@ Pass **`debounce`** (milliseconds) on **`Field.Control`** to delay **`onChange`*
 ```tsx
 import { Field } from '@polyms/core-ui'
 
-<Field.Floating
-  label="Search"
-  placeholder="Results update as you type"
-  debounce={400}
-  onChange={(e) => console.log(e.target.value)}
-/>
+const fieldFloating = (
+  <Field.Floating
+    label='Search'
+    placeholder='Results update as you type'
+    debounce={400}
+    onChange={(e) => console.log(e.target.value)}
+  />
+)
 ```
 
 <CodePreview code={floatingCode}>

@@ -11,8 +11,8 @@ input {
 }
 
 button {
-  outline: none;
   cursor: pointer;
+  outline: none;
 }
 
 img,

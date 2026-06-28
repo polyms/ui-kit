@@ -3,7 +3,7 @@ type: Guide
 title: Installation
 ---
 
-**Polyms Core UI** ships through **GitHub Packages** as **`@polyms/core-ui`**. After install you need **React 19+**, the **package styles**, and component imports from the **single barrel** `@polyms/core-ui`. For composition rules (slate grays, compound trees, CSS-only helpers) see [Design System](/design-system). The tarball also includes the **`core-ui-skill`** installer for AI agent guidance (see [AI Agent Skill](/agent-skill))—when in doubt, prefer **`index.d.ts`** for the version you installed.
+**Polyms Core UI** is published on **GitHub Packages** as **`@polyms/core-ui`**. After install you need **React 19+**, the **package styles**, and component imports from **`@polyms/core-ui`**. For composition patterns (slate grays, compound components, CSS-only helpers) see [Design System](/design-system). The package also includes a **`core-ui-skill`** installer for AI assistants (see [AI Agent Skill](/agent-skill)) — when in doubt, prefer **`index.d.ts`** for the version you installed.
 
 ## Configure the registry
 
@@ -43,8 +43,8 @@ bun add @polyms/core-ui
 
 Peers declared by the library:
 
-- **`react`** ≥ 19.0.0  
-- **`react-dom`** ≥ 19.0.0  
+- **`react`** ≥ 19.0.0
+- **`react-dom`** ≥ 19.0.0
 
 Install them at the app level (or let your workspace manage versions). They are not bundled into `@polyms/core-ui`.
 
@@ -72,18 +72,18 @@ When unsure a symbol exists, open **`node_modules/@polyms/core-ui/index.d.ts`** 
 
 Using **`useModalStore`** with **`showModal`** / **`closeModal`** requires installing **`zustand`** in the host app (it is external to the library bundle). Mount **`Modal.Container`** once in your layout when using that flow. See the Modal docs page for the full pattern.
 
-## Link locally (monorepo / dogfooding)
+## Link locally for development
 
-After building the library to `dist/core`, point your consumer `package.json` at the folder:
+When developing against a local build, point your app's `package.json` at the built output folder:
 
 ```json
 "@polyms/core-ui": "file:./dist/core"
 ```
 
-Adjust the relative path so it resolves from the consumer app to the directory that contains the built `package.json` and assets.
+Adjust the relative path so it resolves from your app to the directory that contains the built `package.json` and assets.
 
 ## Next steps
 
-- [AI Agent Skill](/agent-skill) — install the bundled skill so AI assistants compose UI the right way.  
-- [Design System](/design-system) — color tokens, **slate** vs neutral, CSS-only surface classes.  
+- [AI Agent Skill](/agent-skill) — install the skill so AI assistants compose UI consistently.
+- [Design System](/design-system) — color tokens, **slate** vs neutral, CSS-only surface classes.
 - Component pages under **Actions**, **Data input**, **Navigation**, etc. in the sidebar.

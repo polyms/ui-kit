@@ -68,19 +68,19 @@ Modals display focused content in a layer above the main interface, requiring us
 ```tsx
 import { Button, Modal } from '@polyms/core-ui'
 
-<Modal>
-  <Modal.Trigger render={<Button variant='primary' />}>Open Modal</Modal.Trigger>
-  <Modal.Content size='lg' scrollable>
-    <Modal.Header>Confirmation</Modal.Header>
-    <Modal.Body>
-      Are you sure you want to proceed with this action?
-    </Modal.Body>
-    <Modal.Footer>
-      <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-      <Button variant='primary'>Confirm</Button>
-    </Modal.Footer>
-  </Modal.Content>
-</Modal>
+const modal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Open Modal</Modal.Trigger>
+    <Modal.Content size='lg' scrollable>
+      <Modal.Header>Confirmation</Modal.Header>
+      <Modal.Body>Are you sure you want to proceed with this action?</Modal.Body>
+      <Modal.Footer>
+        <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+        <Button variant='primary'>Confirm</Button>
+      </Modal.Footer>
+    </Modal.Content>
+  </Modal>
+)
 ```
 
 Put the title in **`Modal.Header`** — `Modal.Content` has no `title` prop. Style **`Modal.Trigger`** and footer **`Modal.Close`** with **`render={<Button … />}`**. Use **`scrollable`** when the body holds a long form.
@@ -111,11 +111,9 @@ export default function ControlledModal() {
   return (
     <Modal open={open} onOpenChange={setOpen}>
       <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
-      <Modal.Content size="lg">
+      <Modal.Content size='lg'>
         <Modal.Header>Controlled Modal</Modal.Header>
-        <Modal.Body>
-          This modal's state is controlled externally.
-        </Modal.Body>
+        <Modal.Body>This modal's state is controlled externally.</Modal.Body>
         <Modal.Footer>
           <Modal.Close render={<Button rounded />}>Close</Modal.Close>
         </Modal.Footer>
@@ -132,23 +130,23 @@ Modals can be nested to create multi-step flows or additional confirmation dialo
 ```tsx
 import { Button, Modal } from '@polyms/core-ui'
 
-<Modal>
-  <Modal.Trigger render={<Button variant='primary' />}>Open Parent</Modal.Trigger>
-  <Modal.Content>
-    <Modal.Header>Parent Modal</Modal.Header>
-    <Modal.Body>
-      <Modal>
-        <Modal.Trigger render={<Button outlined variant='primary' />}>Open Nested</Modal.Trigger>
-        <Modal.Content size="sm">
-          <Modal.Header>Nested Modal</Modal.Header>
-          <Modal.Body>
-            This is a nested modal dialog.
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
-    </Modal.Body>
-  </Modal.Content>
-</Modal>
+const modal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Open Parent</Modal.Trigger>
+    <Modal.Content>
+      <Modal.Header>Parent Modal</Modal.Header>
+      <Modal.Body>
+        <Modal>
+          <Modal.Trigger render={<Button outlined variant='primary' />}>Open Nested</Modal.Trigger>
+          <Modal.Content size='sm'>
+            <Modal.Header>Nested Modal</Modal.Header>
+            <Modal.Body>This is a nested modal dialog.</Modal.Body>
+          </Modal.Content>
+        </Modal>
+      </Modal.Body>
+    </Modal.Content>
+  </Modal>
+)
 ```
 
 ## Sizes
@@ -156,10 +154,10 @@ import { Button, Modal } from '@polyms/core-ui'
 Control modal width with the `size` prop on `Modal.Content`. The `full` size makes the modal occupy the entire viewport.
 
 ```tsx
-<Modal.Content size="sm">Small modal</Modal.Content>
-<Modal.Content size="lg">Large modal</Modal.Content>
-<Modal.Content size="xl">Extra large modal</Modal.Content>
-<Modal.Content size="full">Full screen modal</Modal.Content>
+const small = <Modal.Content size='sm'>Small modal</Modal.Content>
+const large = <Modal.Content size='lg'>Large modal</Modal.Content>
+const xl = <Modal.Content size='xl'>Extra large modal</Modal.Content>
+const full = <Modal.Content size='full'>Full screen modal</Modal.Content>
 ```
 
 ## Scrollable Content
@@ -167,13 +165,13 @@ Control modal width with the `size` prop on `Modal.Content`. The `full` size mak
 By default, long content causes the entire modal to scroll. Enable `scrollable` to scroll only the body section while keeping header and footer fixed.
 
 ```tsx
-<Modal.Content scrollable>
-  <Modal.Header>Fixed Header</Modal.Header>
-  <Modal.Body>
-    {/* Long content scrolls here */}
-  </Modal.Body>
-  <Modal.Footer>Fixed Footer</Modal.Footer>
-</Modal.Content>
+const modalContent = (
+  <Modal.Content scrollable>
+    <Modal.Header>Fixed Header</Modal.Header>
+    <Modal.Body>{/* Long content scrolls here */}</Modal.Body>
+    <Modal.Footer>Fixed Footer</Modal.Footer>
+  </Modal.Content>
+)
 ```
 
 ## Keyboard Navigation
@@ -208,7 +206,7 @@ function DeleteButton() {
   const open = () =>
     useModalStore.getState().showModal(
       'delete-item',
-      <Modal.Content size="sm">
+      <Modal.Content size='sm'>
         <Modal.Header>Delete item?</Modal.Header>
         <Modal.Body>This cannot be undone.</Modal.Body>
         <Modal.Footer>

@@ -3,26 +3,24 @@
 }
 
 .switch input {
-  cursor: pointer;
+  --switch-knob-x: 0;
+  position: relative;
+  flex-shrink: 0;
   width: 2.5rem;
   height: 1.25rem;
   margin: 0;
-  border-radius: 1.5em;
   appearance: none;
+  cursor: pointer;
+  background-color: var(--line);
+  border-radius: 1.5em;
   transition:
     background-color 200ms ease-in-out,
     box-shadow 200ms ease-in-out,
     opacity 200ms ease-in-out;
-  position: relative;
-  flex-shrink: 0;
-  background-color: var(--line);
-  /* knob translate distance (horizontal) */
-  --switch-knob-x: 0;
 
   &:checked {
-    background-color: var(--color-info-500);
-    /* track width (2.5rem) − knob (1rem) − 2×padding (0.25rem) */
     --switch-knob-x: 1.25rem;
+    background-color: var(--color-info-500);
   }
 
   &.disabled,
@@ -33,15 +31,15 @@
 
   /* Knob using pseudo-element (replaces background SVG) */
   &::before {
-    content: '';
     position: absolute;
     top: 50%;
     left: 0.125rem; /* knob padding from left */
     width: 1rem;
     height: 1rem;
-    border-radius: 99px;
-    border: 1px solid transparent;
+    content: '';
     background-color: var(--body); /* default knob color */
+    border: 1px solid transparent;
+    border-radius: 99px;
     transform: translate(var(--switch-knob-x), -50%);
     transition:
       width 200ms ease-in-out,

@@ -1,11 +1,10 @@
 .alert {
-  @apply relative mb-4 rounded-xl font-medium;
-
   padding: 0.75rem 1rem;
   font-size: 14px;
-  border: 1px solid var(--alert-border);
-  background-color: var(--alert-bg);
   color: var(--alert-color);
+  background-color: var(--alert-bg);
+  border: 1px solid var(--alert-border);
+  @apply relative mb-4 rounded-xl font-medium;
 }
 
 .alert-heading {
@@ -19,15 +18,13 @@
 
 .alert-dismissible {
   .alert-close {
+    padding-block: 0.25rem;
+    color: var(--alert-color);
+    background-color: var(--body);
+    border: 1px solid var(--alert-border);
+    border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
     @apply absolute -top-1 -right-1 z-10 flex items-center justify-center transition-all duration-200;
     @apply opacity-0;
-
-    background-color: var(--body);
-
-    padding-block: 0.25rem;
-    border: 1px solid var(--alert-border);
-    color: var(--alert-color);
-    border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
 
     &:hover {
       background-color: var(--alert-bg);
@@ -116,17 +113,17 @@
 }
 
 .alert-badge {
-  padding: 2px 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
   position: absolute;
   top: -1rem;
   left: 0.75rem;
+  padding: 2px 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  background-color: var(--alert-border);
   border-start-start-radius: 12px;
-  border-end-end-radius: 12px;
   border-start-end-radius: 4px;
   border-end-start-radius: 4px;
-  background-color: var(--alert-border);
+  border-end-end-radius: 12px;
 
   @apply inline-block font-semibold text-white;
 }

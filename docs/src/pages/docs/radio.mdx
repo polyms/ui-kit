@@ -57,10 +57,12 @@ Use `RadioGroup` and `Radio` when exactly one option should be selected.
 ```tsx
 import { Radio, RadioGroup } from '@polyms/core-ui'
 
-<RadioGroup name='plan' onValueChange={setPlan} value={plan}>
-  <Radio value='free'>Free</Radio>
-  <Radio value='pro'>Pro</Radio>
-</RadioGroup>
+const radioGroup = (
+  <RadioGroup name='plan' onValueChange={setPlan} value={plan}>
+    <Radio value='free'>Free</Radio>
+    <Radio value='pro'>Pro</Radio>
+  </RadioGroup>
+)
 ```
 
 ## Variants

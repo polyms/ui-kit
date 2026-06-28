@@ -36,15 +36,15 @@
   },
   "files": {
     "includes": [
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.js",
-      "**/*.jsx",
-      "**/*.json",
+      "**/*.{js,mjs,jsx,ts,mts,tsx,md,mdx,json,css,svg,html,webmanifest}",
+      "!**/_root.css",
       "!**/routeTree.gen.ts",
       "!**/.nx",
       "!**/.tanstack",
       "!**/node_modules",
+      "!**/.pnpm-store",
+      "!**/.venv-rembg",
+      "!**/.agents/skills",
       "!**/build",
       "!**/dist"
     ]
@@ -76,6 +76,7 @@
     "parser": { "interpolation": true }
   },
   "javascript": {
+    "experimentalEmbeddedSnippetsEnabled": true,
     "formatter": {
       "arrowParentheses": "asNeeded",
       "bracketSameLine": false,
@@ -96,7 +97,7 @@
     "rules": {
       "a11y": {
         "noSvgWithoutTitle": "off",
-        "recommended": true,
+        "preset": "recommended",
         "useKeyWithClickEvents": "error",
         "useValidAnchor": "error"
       },
@@ -119,7 +120,7 @@
           "options": { "attributes": ["classList"], "functions": ["clsx"] }
         }
       },
-      "recommended": true,
+      "preset": "recommended",
       "security": { "noDangerouslySetInnerHtml": "off" },
       "style": {
         "noDescendingSpecificity": "off",

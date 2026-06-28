@@ -54,7 +54,7 @@ Allow users to choose one or multiple options from a dropdown list. Select compo
 
 ## Usage
 
-Set **`items`** on **`Select`** so the trigger shows each option’s **`label`** (via Base UI **`Select.Value`**). Optional **`Select.Trigger`** children are forwarded to **`Select.Value`** as a formatter: **`(value) => ReactNode`**, where **`value`** is the selected **`string`**, or **`string[]`** when **`multiple`** — not an item object.
+Set **`items`** on **`Select`** so the trigger shows each option’s **`label`**. Optional **`Select.Trigger`** children format the displayed value: **`(value) => ReactNode`**, where **`value`** is the selected **`string`**, or **`string[]`** when **`multiple`** — not an item object.
 
 ```tsx
 import { Select } from '@polyms/core-ui'
@@ -114,9 +114,9 @@ const frameworks = [
       <Select.Item value="react">React</Select.Item>
       <Select.Item value="vue">Vue</Select.Item>
     </Select.Group>
-    
+
     <Select.Separator />
-    
+
     <Select.Group>
       <Select.GroupLabel>Backend</Select.GroupLabel>
       <Select.Item value="node">Node.js</Select.Item>

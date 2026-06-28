@@ -7,7 +7,7 @@ import Headings from './-views/typography/Headings'
 import { CodePreview } from '../layouts/CodePreview'
 import { Alert } from '@polyms/core-ui'
 
-**Polyms Core UI** bundles a heading scale as **CSS classes** (`h1`–`h6`, defined in `core/src/styles/_typography.css`) and relies on **Tailwind CSS 4** for size, weight, and alignment utilities. Prefer **semantic** `<h1>`–`<h6>` in markup and attach the matching class when you want this scale—for example `<h2 className='h2'>Section</h2>`. Muted chrome text should use the **slate** ramp (`text-slate-600`, …), not `neutral-*`, so it stays aligned with the rest of the system ([Design System](/design-system)).
+**Polyms Core UI** ships a heading scale as **CSS classes** (`h1`–`h6`) with **Tailwind CSS 4** for size, weight, and alignment utilities. Prefer **semantic** `<h1>`–`<h6>` in markup and attach the matching class when you want this scale—for example `<h2 className='h2'>Section</h2>`. Muted chrome text should use the **slate** ramp (`text-slate-600`, …), not `neutral-*`, so it stays aligned with the rest of the system ([Design System](/design-system)).
 
 ## Headings
 
@@ -79,10 +79,11 @@ Live computed **font-size** and **line-height** (viewport-dependent for `h1` / `
 
 ## Body text & Tailwind utilities
 
-Body copy in apps using this library typically follows **Tailwind** defaults (for example **`text-base`** with comfortable **`leading-*`**). The table below lists common **font-size** and **font-weight** utilities that match the workspace Tailwind inline safelist (`core/src/styles/tailwind.css`); use them next to components from **`@polyms/core-ui`**.
+Body copy in your app typically follows **Tailwind** defaults (for example **`text-base`** with comfortable **`leading-*`**). The table below lists common **font-size** and **font-weight** utilities available after you import **`@polyms/core-ui`** styles — use them alongside components from the package.
 
 <Alert variant='info' className='mb-4'>
-  **Readable body:** A common default is **`text-base`** (1rem) with line height from **`leading-normal`** or Tailwind’s default for that size—tune per layout, not only font size.
+  **Readable body:** A common default is **`text-base`** (1rem) with line height from **`leading-normal`** or
+  Tailwind’s default for that size—tune per layout, not only font size.
 </Alert>
 
 export const textUtilities = [
@@ -125,7 +126,7 @@ export const textUtilities = [
 
 ## Colored links
 
-Use the **`link`** base class together with a flavor class. These utilities match **`core/src/styles/_link.css`**: underline appears on **hover** / **focus**, and **visited** / **active** colors follow the semantic tokens. Full examples live on the [Link](/docs/link) page.
+Use the **`link`** base class together with a flavor class. Underline appears on **hover** / **focus**, and **visited** / **active** colors follow the semantic tokens. Full examples live on the [Link](/docs/link) page.
 
 Unlike bare **`text-primary-*`** utilities, **`link-*`** encodes interactive states for anchors.
 
@@ -148,7 +149,8 @@ export const coloredLinks = [
   {
     class: '.link-light',
     variant: 'link link-light',
-    description: 'Muted `--color-slate-500`; hover `--color-primary-600`; visited/active `--color-slate-900`.',
+    description:
+      'Muted `--color-slate-500`; hover `--color-primary-600`; visited/active `--color-slate-900`.',
   },
 ]
 
@@ -210,5 +212,6 @@ export const stretchedLinkCode = `<div className='card relative max-w-md'>
 </CodePreview>
 
 <Alert variant='info' className='mt-8' badge='::: TIP :::'>
-  The card (or other wrapper) must include **`relative`** so the overlay positions against it. Raise **`z-index`** on controls that must stay above the overlay.
+  The card (or other wrapper) must include **`relative`** so the overlay positions against it. Raise
+  **`z-index`** on controls that must stay above the overlay.
 </Alert>

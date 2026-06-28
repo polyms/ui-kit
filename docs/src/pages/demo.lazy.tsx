@@ -189,7 +189,9 @@ function Page() {
             <div className='mt-5 flex flex-wrap gap-3'>
               {offcanvasSizes.map(({ size, width, height }) => (
                 <Offcanvas key={size} swipeDirection='right'>
-                  <Offcanvas.Trigger render={<Button className='uppercase' outlined rounded variant='light' />}>
+                  <Offcanvas.Trigger
+                    render={<Button className='uppercase' outlined rounded variant='light' />}
+                  >
                     {size}
                   </Offcanvas.Trigger>
                   <Offcanvas.Content size={size}>

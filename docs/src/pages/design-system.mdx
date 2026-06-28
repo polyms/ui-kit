@@ -3,7 +3,7 @@ type: Guide
 title: Design System
 ---
 
-**Polyms Core UI** (`@polyms/core-ui`) is a modular React component library shipped from this monorepo: **React 19**, **TypeScript (strict)**, **Tailwind CSS 4**, primitives from **@base-ui/react**, and **Floating UI** where overlays need positioning. This page summarizes the **visual and interaction contracts** consumers and contributors should follow; the npm package also ships a bundled **`core-ui` agent skill** installer so AI agents can load the same rules—if anything disagrees with **`index.d.ts`** for your installed version, trust the types.
+**Polyms Core UI** (`@polyms/core-ui`) is a React component library for product UI: semantic colors, compound components, CSS utilities, and dark mode. This page summarizes the visual and interaction rules to follow when building screens with the package. For install steps see [Installation](/installation); for AI assistants see [AI Agent Skill](/agent-skill). When anything disagrees with your installed version, trust **`index.d.ts`**.
 
 ## Philosophy
 
@@ -11,9 +11,9 @@ The system is built on three principles:
 
 **Consistency** — One semantic palette (primary, success, warning, danger, informational accents, light/dark surfaces) plus a **slate** gray ramp for chrome, so composed UI stays visually aligned with bundled components.
 
-**Accessibility** — Semantic HTML, keyboard support, and ARIA patterns from **Base UI** primitives; target **WCAG 2.1 AA** for text contrast and focus behavior in product screens.
+**Accessibility** — Semantic HTML, keyboard support, and ARIA patterns built into components; target **WCAG 2.1 AA** for text contrast and focus behavior in your product screens.
 
-**Flexibility** — Themeable **CSS custom properties** (colors, z-index scale) and Tailwind utilities; prefer **component props** and **documented composition trees** over re-styling library-owned shells.
+**Flexibility** — Themeable **CSS custom properties** (colors, z-index scale) and Tailwind utilities; prefer **component props** and **documented composition trees** over restyling component shells with ad-hoc Tailwind.
 
 ## Foundation
 
@@ -34,14 +34,31 @@ border-danger-50
 ```
 
 export const colorVariants = [
-  { name: 'primary', color: 'bg-primary-500', description: 'Brand / default emphasis (buttons, links, key actions)' },
+  {
+    name: 'primary',
+    color: 'bg-primary-500',
+    description: 'Brand / default emphasis (buttons, links, key actions)',
+  },
   { name: 'success', color: 'bg-success-500', description: 'Positive completion and confirmations' },
   { name: 'info', color: 'bg-info-500', description: 'Soft informational accents (badges, hints)' },
   { name: 'warning', color: 'bg-warning-500', description: 'Caution and at-risk states' },
   { name: 'danger', color: 'bg-danger-500', description: 'Errors, validation, destructive actions' },
-  { name: 'light', color: 'bg-slate-100', description: 'Surface / contrast helpers (`badge-light`, subtle panels)' },
-  { name: 'dark', color: 'bg-slate-900', description: 'High-contrast surfaces and inverse chrome (`badge-dark`, …)' },
-  { name: 'slate', color: 'bg-slate-500', description: 'Default **gray ramp** for UI chrome — use `slate-*` / `var(--color-slate-*)`, not `neutral-*`' },
+  {
+    name: 'light',
+    color: 'bg-slate-100',
+    description: 'Surface / contrast helpers (`badge-light`, subtle panels)',
+  },
+  {
+    name: 'dark',
+    color: 'bg-slate-900',
+    description: 'High-contrast surfaces and inverse chrome (`badge-dark`, …)',
+  },
+  {
+    name: 'slate',
+    color: 'bg-slate-500',
+    description:
+      'Default **gray ramp** for UI chrome — use `slate-*` / `var(--color-slate-*)`, not `neutral-*`',
+  },
 ]
 
 <div className='card my-4'>
@@ -322,25 +339,73 @@ export const colorVariants = [
 
 #### Slate vs neutral
 
-Apps that compose this library should use **`text-slate-*`**, **`bg-slate-*`**, **`border-slate-*`**, and **`var(--color-slate-50)` … `var(--color-slate-950)`** for generic gray UI. Avoid **`neutral-*`** utilities and **`var(--color-neutral-*)`** next to core-ui components so borders, text, and surfaces stay on the same hue and contrast curve.
+In your app, use **`text-slate-*`**, **`bg-slate-*`**, **`border-slate-*`**, and **`var(--color-slate-50)` … `var(--color-slate-950)`** for generic gray UI. Avoid **`neutral-*`** utilities and **`var(--color-neutral-*)`** next to library components so borders, text, and surfaces stay on the same hue and contrast curve.
 
 ### Brand theming
 
-Ship your product accent through the **`primary`** ramp. The library defaults to cyan; consumers remap **`--color-primary-50` … `--color-primary-950`** in app CSS **after** importing package styles — do not edit files inside `node_modules`.
+Ship your product accent through the **`primary`** ramp. The library defaults to cyan; remap **`--color-primary-50` … `--color-primary-950`** in your app CSS **after** importing package styles — do not edit files inside `node_modules`.
 
 **You own (brand)**
 
-| Token | Role |
-| --- | --- |
-| `--color-primary-*` | Buttons, links, `link-primary`, `item-primary`, focus emphasis |
-| `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input` | Optional page chrome tuning (test light and `.dark`) |
+export const brandTokens = [
+  { token: '--color-primary-*', role: 'Buttons, links, link-primary, item-primary, focus emphasis' },
+  {
+    token: '--body, --fg, --surface, --surface-2, --muted, --line, --input',
+    role: 'Optional page chrome tuning (test light and .dark)',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Token</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {brandTokens.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap text-xs'>{row.token}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.role}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 **Keep semantic (intent)**
 
-| Family | Role |
-| --- | --- |
-| `success`, `warning`, `danger`, `info` | Status and validation — do not recolor for brand flair |
-| `slate-*` | Gray chrome next to library components |
+export const semanticFamilies = [
+  {
+    family: 'success, warning, danger, info',
+    role: 'Status and validation — do not recolor for brand flair',
+  },
+  { family: 'slate-*', role: 'Gray chrome next to library components' },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Family</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {semanticFamilies.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap'>{row.family}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.role}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 ```css
 /* src/styles/theme.css */
@@ -369,13 +434,34 @@ Import `theme.css` once at the app entry (before or as your main global styleshe
 
 **Component touchpoints**
 
-| UI | Pattern |
-| --- | --- |
-| Primary action | `Button variant='primary'` |
-| Secondary / nav | `item-primary` + `.active` for current page |
-| Inline links | `link link-primary` |
-| Status | `badge-success` / `badge-danger` — not `badge-primary` for errors |
-| Forms | `Field` with conversational labels; destructive actions use `variant='danger'` |
+export const brandTouchpoints = [
+  { ui: 'Primary action', pattern: "Button variant='primary'" },
+  { ui: 'Secondary / nav', pattern: 'item-primary + .active for current page' },
+  { ui: 'Inline links', pattern: 'link link-primary' },
+  { ui: 'Status', pattern: 'badge-success / badge-danger — not badge-primary for errors' },
+  { ui: 'Forms', pattern: "Field with conversational labels; destructive actions use variant='danger'" },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>UI</th>
+        <th>Pattern</th>
+      </tr>
+    </thead>
+    <tbody>
+      {brandTouchpoints.map((row, index) => (
+        <tr key={index}>
+          <td className='text-nowrap font-medium text-fg'>{row.ui}</td>
+          <td className='text-muted text-sm'>
+            <code>{row.pattern}</code>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 **BRAND.md (recommended)**
 
@@ -385,23 +471,26 @@ Commit a short **`BRAND.md`** beside your theme file so humans and agents share 
 # Brand — YourProduct
 
 ## Tokens
+
 - Primary: `--color-primary-700` = `#4338ca`
 - Light surfaces: `--body`, `--fg` as in theme.css
 - Dark: `.dark` overrides documented in theme.css
 
 ## Component mapping
+
 - CTA: `Button variant='primary'`
 - Nav active: `item-primary active`
 - Links: `link link-primary`
 - Destructive: `Button variant='danger'` — never brand primary
 
 ## Do not
+
 - Remap `danger` / `success` for branding
 - Use `neutral-*` for chrome
 - Restyle `Modal.Content` / `Menu.Content` shells with ad-hoc Tailwind
 ```
 
-After `pnpm exec core-ui-skill`, agents load **`brandkit.md`** from the installed skill with the full checklist and pre-flight. Re-run the installer when you upgrade `@polyms/core-ui`.
+After `pnpm exec core-ui-skill`, your AI assistant can follow the same brand rules — see [AI Agent Skill](/agent-skill). Re-run the installer when you upgrade `@polyms/core-ui`.
 
 **Brand checklist**
 
@@ -415,12 +504,10 @@ After `pnpm exec core-ui-skill`, agents load **`brandkit.md`** from the installe
 Spacing follows **Tailwind CSS 4**’s default scale (typically **0.25rem** steps via `1` = `0.25rem`, etc.).
 
 ```tsx
-<div className='p-4 gap-2 mb-6'>
-  {/* padding: 1rem, gap: 0.5rem, margin-bottom: 1.5rem */}
-</div>
+const layout = <div className='p-4 gap-2 mb-6'>{/* padding: 1rem, gap: 0.5rem, margin-bottom: 1.5rem */}</div>
 ```
 
-For **RTL-friendly** layouts, prefer **logical** utilities — `ms-*` / `me-*`, `ps-*` / `pe-*`, `border-s-*` / `border-e-*` — over physical `ml` / `mr` / `pl` / `pr` in new code (the bundled **`core-ui` agent skill** carries the same guidance for consumers).
+For **RTL-friendly** layouts, prefer **logical** utilities — `ms-*` / `me-*`, `ps-*` / `pe-*`, `border-s-*` / `border-e-*` — over physical `ml` / `mr` / `pl` / `pr` in new code. The [AI Agent Skill](/agent-skill) repeats this guidance for assistants.
 
 ### Border Radius
 
@@ -525,14 +612,16 @@ export const breakpoints = [
 Example:
 
 ```tsx
-<div className='p-4 md:p-6 lg:p-8'>
-  {/* Responsive padding: 1rem on mobile, 1.5rem on tablet, 2rem on desktop */}
-</div>
+const layout = (
+  <div className='p-4 md:p-6 lg:p-8'>
+    {/* Responsive padding: 1rem on mobile, 1.5rem on tablet, 2rem on desktop */}
+  </div>
+)
 ```
 
 ### Z-Index and Layering
 
-Stacking is centralized on **CSS variables** in the bundled theme (see `--zindex-*` in **`_root.css`**) and exposed as **utility classes** so overlays stay ordered across Modal, Offcanvas, Popover, Tooltip, and Toast.
+Stacking uses **`--zindex-*`** CSS variables exposed as utility classes so overlays stay ordered across Modal, Offcanvas, Popover, Tooltip, and Toast.
 
 export const zIndexLayers = [
   {
@@ -594,10 +683,10 @@ export const zIndexLayers = [
 **Ad-hoc stacking:** Tailwind’s numeric utilities (`z-0`, `z-10`, …) remain available for local layout, but **prefer the utilities above** for anything that competes with overlays so you don’t fight the global scale.
 
 ```tsx
-<header className='sticky top-0 z-sticky'>…</header>
+const header = <header className='sticky top-0 z-sticky'>…</header>
 ```
 
-## CSS-only patterns and item-*
+## CSS-only patterns and item-\*
 
 Several patterns are **CSS classes only** (no dedicated React export). They are part of the public surface once **`@polyms/core-ui`** styles are loaded:
 
@@ -609,24 +698,24 @@ Several patterns are **CSS classes only** (no dedicated React export). They are 
 
 **`item-*`** classes implement the shared **ghost** interaction recipe (transparent idle → tinted hover/active) for nav rows, chips, list rows, and ad-hoc controls. Variants: **`item-primary`**, **`item-success`**, **`item-info`**, **`item-warning`**, **`item-danger`**, **`item-light`**, **`item-dark`**. Combine with **`.active`** for a persistent selected state (same look as `:active`). Prefer these over one-off `hover:bg-*` chains so tones stay aligned with buttons and menus.
 
-Full tables and examples live in this page; AI-generation rules live in the bundled **`core-ui` agent skill** installed with **`core-ui-skill`**.
+See component pages for full examples. For AI-assisted UI, install the [AI Agent Skill](/agent-skill).
 
-## Component Architecture
+## Using components
 
-### Stack and exports
+### Imports and styles
 
 - **Single barrel import:** `import { Button, Modal, Field, … } from '@polyms/core-ui'` — avoid deep paths unless your toolchain explicitly supports them.
 - **Peers:** `react` and `react-dom` **>= 19**.
-- **Primitives:** Many building blocks re-export **@base-ui/react** (e.g. `Accordion`, `Toggle`, `ToggleGroup`); internal components use **`useRender`** from **`@base-ui/react/use-render`** for polymorphic `render` props.
-- **Styles:** Import the built **`styles-*.css`** from the package root, or the **Tailwind 4** entry **`styles/tailwind.css`** when compiling tokens in your app pipeline.
+- **Styles:** Import the built **`styles-*.css`** from the package, or **`styles/tailwind.css`** when compiling Tailwind 4 in your app (see [Installation](/installation)).
 
 ### Composition pattern
 
-Components use **compound (dot) notation** — keep **Trigger → Content → semantic slots** (`Header`, `Body`, `Footer`, `Item`, …) in the documented order so accessibility and bundled CSS selectors stay valid.
+Components use **compound (dot) notation** — keep **Trigger → Content → semantic slots** (`Header`, `Body`, `Footer`, `Item`, …) in the documented order so accessibility and default styling stay correct.
 
 ```tsx
 import { Alert, Button, Field, Modal } from '@polyms/core-ui'
 
+const alert = (
 <Alert variant='success' onDismiss={handleDismiss}>
   <Alert.Heading>Success!</Alert.Heading>
   Payment processed successfully.
@@ -649,6 +738,8 @@ import { Alert, Button, Field, Modal } from '@polyms/core-ui'
   <Field.Control />
   <Field.Description>We never share your email.</Field.Description>
 </Field>
+
+)
 ```
 
 ### Built-in surfaces
@@ -673,9 +764,9 @@ Components use CSS custom properties for themeable styling:
 }
 ```
 
-### Data attributes
+### Data attributes (advanced)
 
-Base UI and Polyms wrappers expose **`data-*`** hooks for state and placement. Prefer them in **component CSS** rather than ad-hoc global selectors:
+When writing custom CSS alongside library components, state and placement are exposed via **`data-*`** attributes:
 
 ```css
 [data-part='trigger'][data-state='open'] {
@@ -694,7 +785,7 @@ Base UI and Polyms wrappers expose **`data-*`** hooks for state and placement. P
 ### Toasts and imperative modals
 
 - **Toast:** wrap the app with **`Toast`** and render **`Toast.Container`** where toasts should portal.
-- **Programmatic modals:** **`useModalStore`** (**`showModal`** / **`closeModal`**) requires **`zustand`** in the consumer app and a mounted **`Modal.Container`** when using the store API.
+- **Programmatic modals:** **`useModalStore`** (**`showModal`** / **`closeModal`**) requires **`zustand`** in your app and a mounted **`Modal.Container`** when using the store API.
 - **Programmatic offcanvas:** **`useOffcanvasStore`** (**`showOffcanvas`** / **`closeOffcanvas`**) follows the same pattern — requires **`zustand`** and a mounted **`Offcanvas.Container`** when using the store API.
 
 ## Usage Guidelines

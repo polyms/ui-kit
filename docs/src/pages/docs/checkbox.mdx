@@ -47,9 +47,11 @@ Use `Checkbox` for binary choices, agreements, and parent rows with mixed state.
 ```tsx
 import { Checkbox } from '@polyms/core-ui'
 
-<Checkbox checked={accepted} onCheckedChange={setAccepted}>
-  Accept terms
-</Checkbox>
+const checkbox = (
+  <Checkbox checked={accepted} onCheckedChange={setAccepted}>
+    Accept terms
+  </Checkbox>
+)
 ```
 
 ## Indeterminate
@@ -57,9 +59,11 @@ import { Checkbox } from '@polyms/core-ui'
 Pass `indeterminate` for parent rows when only some child items are selected.
 
 ```tsx
-<Checkbox checked={allChecked} indeterminate={someChecked && !allChecked} onCheckedChange={setAll}>
-  Select all
-</Checkbox>
+const checkbox = (
+  <Checkbox checked={allChecked} indeterminate={someChecked && !allChecked} onCheckedChange={setAll}>
+    Select all
+  </Checkbox>
+)
 ```
 
 ## Variants

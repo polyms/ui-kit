@@ -20,30 +20,30 @@
 
 @layer components {
   .btn {
-    border: 1px solid transparent;
-    color: var(--btn-color);
-    background-color: var(--btn-bg-color);
-    padding: var(--btn-padding-y) var(--btn-padding-x);
-    border-radius: var(--control-radius);
-    font-size: 0.75rem;
-    font-family: inherit;
-    font-weight: 500;
-    line-height: var(--btn-lh);
-    min-height: calc(var(--btn-padding-y) * 2 + var(--btn-lh) + 2px);
     display: inline-flex;
-    white-space: nowrap;
     gap: 0.25rem;
     align-items: center;
     justify-content: center;
+    min-height: calc(var(--btn-padding-y) * 2 + var(--btn-lh) + 2px);
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: var(--btn-lh);
+    color: var(--btn-color);
+    white-space: nowrap;
     cursor: pointer;
-    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
+    background-color: var(--btn-bg-color);
+    border: 1px solid transparent;
+    border-radius: var(--control-radius);
 
     &.rounded-full:not(.btn-icon) {
-      padding-left: calc(var(--btn-padding-x) + 0.25rem);
       padding-right: calc(var(--btn-padding-x) + 0.25rem);
+      padding-left: calc(var(--btn-padding-x) + 0.25rem);
     }
 
     &.btn-icon {
@@ -54,14 +54,14 @@
 
     &.outlined,
     &:focus-visible {
-      border-color: var(--btn-border-color);
       outline: none;
+      border-color: var(--btn-border-color);
     }
 
     &:hover:not(:disabled):not([disabled]):not(:active):not(.active) {
       color: var(--btn-hover-color);
-      border-color: var(--btn-border-hover-color);
       background-color: var(--btn-bg-hover-color);
+      border-color: var(--btn-border-hover-color);
     }
 
     &:focus-visible:not(:disabled) {
@@ -71,13 +71,13 @@
     &:active:not(:disabled),
     &.active:not(:disabled) {
       color: var(--btn-active-color);
-      border-color: var(--btn-border-active-color);
       background-color: var(--btn-bg-active-color);
+      border-color: var(--btn-border-active-color);
     }
 
     &:disabled {
-      opacity: 0.35;
       cursor: not-allowed;
+      opacity: 0.35;
 
       &.outlined {
         --btn-border-color: var(--line);
@@ -225,9 +225,9 @@
     --control-radius: 0.5rem;
     --btn-padding-x: 0.75rem;
     --btn-padding-y: 0.5rem;
+    gap: 0.5rem;
 
     font-size: 0.875rem;
-    gap: 0.5rem;
 
     &.btn-icon {
       --btn-padding-x: var(--btn-padding-y);
@@ -239,9 +239,9 @@
     --btn-padding-x: 0.75rem;
     --btn-padding-y: 0.5rem;
     --btn-lh: 1.375rem;
+    gap: 0.5rem;
 
     font-size: 0.875rem;
-    gap: 0.5rem;
 
     &.btn-icon {
       --btn-padding-x: var(--btn-padding-y);
@@ -253,9 +253,9 @@
     --btn-padding-x: 1rem;
     --btn-padding-y: 0.625rem;
     --btn-lh: 1.625rem;
+    gap: 0.5rem;
 
     font-size: 1rem;
-    gap: 0.5rem;
 
     &.btn-icon {
       --btn-padding-x: var(--btn-padding-y);
@@ -267,9 +267,9 @@
     --btn-padding-x: 1.25rem;
     --btn-padding-y: 0.875rem;
     --btn-lh: 1.625rem;
+    gap: 0.5rem;
 
     font-size: 1rem;
-    gap: 0.5rem;
 
     &.btn-icon {
       --btn-padding-x: var(--btn-padding-y);

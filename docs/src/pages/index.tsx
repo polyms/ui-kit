@@ -800,7 +800,13 @@ function CTASection() {
               </p>
             </div>
             <div className='flex flex-wrap items-center gap-3 md:flex-col md:items-stretch'>
-              <Button className='px-6' render={<Link to='/design-system' />} rounded size='xl' variant='primary'>
+              <Button
+                className='px-6'
+                render={<Link to='/design-system' />}
+                rounded
+                size='xl'
+                variant='primary'
+              >
                 Get started
                 <ArrowRightIcon className='size-4' />
               </Button>

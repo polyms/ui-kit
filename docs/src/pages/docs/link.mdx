@@ -57,48 +57,58 @@ Text links and “clickable card” pattern. CSS-only — use on **`a`** (or ele
 Combine **`link`** with a flavor class. Semantic tones mirror **`badge-*`** variants.
 
 ```tsx
-<a className='link link-primary' href='/docs'>
-  Documentation
-</a>
+const link = (
+  <a className='link link-primary' href='/docs'>
+    Documentation
+  </a>
+)
 ```
 
 ```tsx
-<a className='link link-success' href='/status'>
-  View status
-</a>
+const link = (
+  <a className='link link-success' href='/status'>
+    View status
+  </a>
+)
 ```
 
 ```tsx
-<a className='link link-danger' href='https://polyms.dev/'>
-  Delete
-</a>
+const link = (
+  <a className='link link-danger' href='https://polyms.dev/'>
+    Delete
+  </a>
+)
 ```
 
 ```tsx
-<a className='link link-light' href='/settings'>
-  Secondary action
-</a>
+const link = (
+  <a className='link link-light' href='/settings'>
+    Secondary action
+  </a>
+)
 ```
 
 **Stretched link:** parent must be **`relative`** (e.g. **`card relative`**) so the overlay covers the whole block.
 
 ```tsx
-<div className='card relative'>
-  <div className='card-body'>
-    <h3>Title</h3>
-    <p>Preview…</p>
-    <a className='link link-primary stretched-link' href='/details'>
-      Details
-    </a>
+const layout = (
+  <div className='card relative'>
+    <div className='card-body'>
+      <h3>Title</h3>
+      <p>Preview…</p>
+      <a className='link link-primary stretched-link' href='/details'>
+        Details
+      </a>
+    </div>
   </div>
-</div>
+)
 ```
 
 ## Notes
 
 - Flavor classes (**`link-primary`**, **`link-success`**, **`link-info`**, **`link-warning`**, **`link-danger`**, **`link-light`**, **`link-dark`**) are nested under **`link`** in CSS — always pair them with the base class.
 - **`link-light`** and **`link-dark`** also shift color on hover/focus; other flavors keep their tone on hover and rely on underline for affordance.
-- Dark mode uses lighter shades for contrast on Nord body backgrounds.
+- Dark mode uses lighter link shades for contrast on dark backgrounds.
 - **`stretched-link`** uses **`::after`** with **`absolute inset-0`**; keep **`z-index`** of other controls above if needed.
 
 ## API Reference

@@ -21,21 +21,27 @@ Loading placeholder blocks. CSS-only — apply **`skeleton`** then Tailwind (or 
 ## Usage
 
 ```tsx
+
+const layout = (
 <div className='skeleton h-4 rounded-md' />
 <div className='skeleton size-12 rounded-full' />
 <div className='skeleton h-32 rounded-xl' />
+
+)
 ```
 
 Typical list row placeholder:
 
 ```tsx
-<div className='flex items-center gap-3'>
-  <div className='skeleton size-10 shrink-0 rounded-full' />
-  <div className='flex min-w-0 flex-1 flex-col gap-2'>
-    <div className='skeleton h-4 rounded-md' />
-    <div className='skeleton h-3 w-2/3 rounded-md' />
+const layout = (
+  <div className='flex items-center gap-3'>
+    <div className='skeleton size-10 shrink-0 rounded-full' />
+    <div className='flex min-w-0 flex-1 flex-col gap-2'>
+      <div className='skeleton h-4 rounded-md' />
+      <div className='skeleton h-3 w-2/3 rounded-md' />
+    </div>
   </div>
-</div>
+)
 ```
 
 ## Notes

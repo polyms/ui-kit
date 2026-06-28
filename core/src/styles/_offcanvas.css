@@ -5,11 +5,11 @@
   inset: 0;
   z-index: 50;
   background-color: rgb(0 0 0);
-  backdrop-filter: blur(4px);
   opacity: calc(var(--offcanvas-backdrop-opacity) * (1 - var(--drawer-swipe-progress, 0)));
-  transition-property: opacity, backdrop-filter;
-  transition-duration: 400ms;
+  backdrop-filter: blur(4px);
   transition-timing-function: ease;
+  transition-duration: 400ms;
+  transition-property: opacity, backdrop-filter;
 
   &[data-swiping] {
     transition-duration: 0ms;
@@ -27,8 +27,8 @@
 
 .offcanvas-viewport {
   position: fixed;
-  z-index: 51;
   inset: 0;
+  z-index: 51;
   pointer-events: none;
 }
 
@@ -51,14 +51,14 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: var(--body);
   color: var(--fg);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
-  will-change: transform;
-  transition-property: transform;
-  transition-duration: 400ms;
+  background-color: var(--body);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  transition-duration: 400ms;
+  transition-property: transform;
+  will-change: transform;
 
   &[data-swiping] {
     transition-duration: 0ms;
@@ -70,8 +70,8 @@
 
   &[data-swipe-direction='up'],
   &[data-swipe-direction='down'] {
-    left: 0;
     right: 0;
+    left: 0;
     max-height: var(--offcanvas-height, 90%);
     transform: translate3d(
       0,
@@ -193,8 +193,8 @@
 .offcanvas-mobile-handle {
   width: 2.5rem;
   height: 0.25rem;
-  border-radius: 999px;
   background-color: var(--line);
+  border-radius: 999px;
 }
 
 .offcanvas-scrollbar {
@@ -214,8 +214,8 @@
 }
 
 .offcanvas-scrollbar-thumb {
-  border-radius: inherit;
   background-color: var(--line);
+  border-radius: inherit;
 }
 
 .offcanvas-heading {
@@ -223,8 +223,8 @@
   align-items: center;
   padding: 1.25rem;
   font-size: 1rem;
-  line-height: 1.5rem;
   font-weight: 600;
+  line-height: 1.5rem;
 }
 
 .offcanvas-description {
@@ -238,8 +238,8 @@
 }
 
 .offcanvas-body {
-  padding: 1.25rem;
   flex: 1;
+  padding: 1.25rem;
   overflow-y: auto;
 }
 
@@ -250,8 +250,8 @@
   padding: 0.25rem;
   color: var(--muted);
   cursor: pointer;
-  transition: all 150ms;
   outline: none;
+  transition: all 150ms;
 
   @apply flex items-center justify-center rounded-full;
 
@@ -286,21 +286,21 @@
     max-width: none;
     min-height: auto;
     max-height: calc(95dvh + var(--offcanvas-mobile-bleed, 3rem));
-    margin-bottom: calc(var(--offcanvas-mobile-bleed, 3rem) * -1);
     padding-bottom: var(--offcanvas-mobile-bleed, 3rem);
-    border: 0;
-    border-radius: 0.625rem 0.625rem 0 0;
+    margin-bottom: calc(var(--offcanvas-mobile-bleed, 3rem) * -1);
     overflow: hidden;
-    outline: none;
-    background-color: var(--body);
     color: var(--fg);
     user-select: none;
-    transition: all 150ms;
+    outline: none;
+    background-color: var(--body);
+    border: 0;
+    border-radius: 0.625rem 0.625rem 0 0;
     transform: translate3d(
       0,
       max(0px, calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px))),
       0
     );
+    transition: all 150ms;
   }
 
   .offcanvas-mobile-header {
@@ -311,9 +311,9 @@
     grid-template-columns: 2.5rem 1fr 2.5rem;
     align-items: center;
     padding: 0.5rem 0.75rem;
-    background-color: var(--body);
     touch-action: none;
     user-select: none;
+    background-color: var(--body);
   }
 
   .offcanvas-mobile-handle {
@@ -327,17 +327,17 @@
   }
 
   .offcanvas-content-inner > .offcanvas-close {
-    display: flex;
     top: 0;
     right: 0.75rem;
     z-index: 2;
+    display: flex;
     padding: 0;
     color: var(--muted);
     transition: color 150ms;
 
     &:hover {
-      background-color: transparent;
       color: var(--fg);
+      background-color: transparent;
     }
   }
 
@@ -356,15 +356,15 @@
   }
 
   .offcanvas-heading {
-    touch-action: none;
-    user-select: none;
     display: flex;
-    align-items: center;
     gap: 0.5rem;
+    align-items: center;
     padding: 0 0.75rem 0.625rem;
     font-size: 14px;
-    line-height: 1.25rem;
     font-weight: 600;
+    line-height: 1.25rem;
+    touch-action: none;
+    user-select: none;
   }
 
   .offcanvas-title {
@@ -373,8 +373,8 @@
   }
 
   .offcanvas-description {
-    margin: 0 0 1.5rem;
     padding: 0 0.75rem;
+    margin: 0 0 1.5rem;
     font-size: 1rem;
     line-height: 1.5rem;
     color: var(--muted);

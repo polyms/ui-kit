@@ -10,8 +10,8 @@ export default function AccordionComposed() {
           <Accordion.Trigger>How will you notify me?</Accordion.Trigger>
         </Accordion.Header>
         <Accordion.Panel>
-          We email billing and security updates to tifa.lockhart@polyms.dev. Add more recipients in
-          workspace settings.
+          We email billing and security updates to tifa.lockhart@polyms.dev. Add more recipients in workspace
+          settings.
         </Accordion.Panel>
       </Accordion.Item>
       <Accordion.Item value='access'>

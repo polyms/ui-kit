@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/noInvalidPositionAtImportRule: page css */
 @reference './tailwind.css';
 @import './_docs.css' layer(components);
 @import './_floating-dock.css' layer(components);
@@ -22,12 +23,12 @@
   min-width: var(--rail-menu-width) !important;
   max-width: min(var(--rail-menu-width), calc(100vw - 2rem)) !important;
   max-height: min(24rem, 65dvh);
-  overflow: auto;
   padding: 0.375rem;
-  border-radius: 0.625rem;
-  border: 1px solid var(--docs-shell-line);
-  background-color: var(--docs-shell-bg);
+  overflow: auto;
   color: var(--docs-shell-fg);
+  background-color: var(--docs-shell-bg);
+  border: 1px solid var(--docs-shell-line);
+  border-radius: 0.625rem;
   box-shadow:
     4px 0 12px -2px rgb(0 0 0 / 0.35),
     0 4px 8px -4px rgb(0 0 0 / 0.25);
@@ -47,15 +48,15 @@
   }
 
   .floating-dock-popover-title {
-    margin: 0 0 0.375rem;
     padding: 0.125rem 0.5rem 0.375rem;
-    border-bottom: 1px dashed var(--docs-shell-line);
+    margin: 0 0 0.375rem;
     font-size: 0.625rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
     line-height: 1.25;
-    text-transform: uppercase;
     color: var(--docs-shell-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px dashed var(--docs-shell-line);
   }
 
   .floating-dock-nav-list {
@@ -66,34 +67,34 @@
   .navigation-menu-link.floating-dock-nav-item,
   .floating-dock-nav-item {
     display: flex;
-    width: 100%;
-    align-items: center;
     gap: 0.5rem;
+    align-items: center;
+    width: 100%;
     padding: 0.3125rem 0.5rem;
-    border-radius: 0.375rem;
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.35;
     color: var(--docs-shell-fg);
     text-decoration: none;
+    border-radius: 0.375rem;
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--docs-shell-hover-bg);
         color: var(--docs-shell-fg);
+        background-color: var(--docs-shell-hover-bg);
       }
     }
 
     &:focus-visible {
+      color: var(--docs-shell-fg);
       outline: none;
       background-color: var(--docs-shell-hover-bg);
-      color: var(--docs-shell-fg);
     }
 
     &.is-active,
     &[data-active] {
-      background-color: var(--docs-shell-active-bg);
       color: var(--docs-shell-active-fg);
+      background-color: var(--docs-shell-active-bg);
     }
   }
 
@@ -147,22 +148,22 @@ body {
     @apply min-h-dvh w-screen;
 
     &:not(.landing) {
-      @apply grid;
-      grid-template-columns: 1fr;
       grid-template-areas: 'main-content';
       grid-template-rows: 1fr;
+      grid-template-columns: 1fr;
+      @apply grid;
 
       @media (min-width: 640px) and (max-width: 1023.98px) {
-        grid-template-columns: 3.5rem 1fr;
         grid-template-areas: 'app-sidebar main-content';
+        grid-template-columns: 3.5rem 1fr;
       }
 
       @media (min-width: 1024px) {
-        grid-template-columns: 18rem 1fr;
-        grid-template-rows: auto 1fr;
         grid-template-areas:
           'name navigation'
           'app-sidebar main-content';
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 18rem 1fr;
         transition: grid-template-columns 220ms ease-out;
       }
     }
@@ -183,29 +184,29 @@ body {
     }
 
     &.landing {
-      @apply flex flex-col;
       overflow-x: clip;
+      @apply flex flex-col;
     }
   }
 
   #app-name {
-    grid-area: name;
-
-    @apply hidden h-14 items-center gap-2 px-4 tracking-wide;
-    background-color: var(--docs-shell-bg-translucent);
-    color: var(--docs-shell-fg);
-    border-right: 1px solid var(--docs-shell-line);
     z-index: 20;
+    grid-area: name;
+    color: var(--docs-shell-fg);
+    background-color: var(--docs-shell-bg-translucent);
+    border-right: 1px solid var(--docs-shell-line);
     backdrop-filter: blur(8px);
     transition:
       width 220ms ease-out,
       padding 150ms ease-out,
       gap 150ms ease-out;
 
+    @apply hidden h-14 items-center gap-2 px-4 tracking-wide;
+
     @media (min-width: 1024px) {
-      display: flex;
       position: sticky;
       top: 0;
+      display: flex;
     }
   }
 
@@ -215,10 +216,10 @@ body {
     }
 
     .sidebar-closed #app-name {
-      @apply justify-center px-0!;
       gap: 0;
       overflow: hidden;
       border-inline-end: 1px solid var(--docs-shell-line);
+      @apply justify-center px-0!;
     }
 
     .sidebar-closed #app-name > * {
@@ -227,8 +228,8 @@ body {
   }
 
   #app-navigation {
-    grid-area: navigation;
     z-index: 1;
+    grid-area: navigation;
 
     @apply flex items-center gap-2 bg-body;
   }
@@ -241,25 +242,25 @@ body {
       position: fixed;
       inset: 0;
       z-index: 50;
-      background: transparent;
       pointer-events: none;
+      background: transparent;
     }
 
     @media (max-width: 639.98px) {
       .sidebar-drawer-open & {
-        background: rgb(0 0 0 / 0.35);
         pointer-events: auto;
+        background: rgb(0 0 0 / 0.35);
       }
     }
 
     @media (min-width: 640px) {
-      grid-area: app-sidebar;
       position: sticky;
       top: 0;
-      height: 100dvh;
       z-index: 10;
-      background-color: var(--docs-shell-bg-translucent);
+      grid-area: app-sidebar;
+      height: 100dvh;
       color: var(--docs-shell-fg);
+      background-color: var(--docs-shell-bg-translucent);
       border-inline-end: 1px solid var(--docs-shell-line);
       backdrop-filter: blur(8px);
       transition: width 220ms ease-out;
@@ -270,11 +271,11 @@ body {
         position: fixed;
         inset: 0;
         z-index: 55;
-        background: rgb(0 0 0 / 0.35);
-        backdrop-filter: none;
-        pointer-events: auto;
         width: auto;
         max-width: none;
+        pointer-events: auto;
+        background: rgb(0 0 0 / 0.35);
+        backdrop-filter: none;
       }
     }
 
@@ -292,39 +293,39 @@ body {
     position: fixed;
     inset: 0;
     z-index: 55;
+    pointer-events: none;
     background: transparent;
     border-inline-end: 0;
     backdrop-filter: none;
-    pointer-events: none;
 
     .sidebar-drawer-open & {
-      background: rgb(0 0 0 / 0.35);
       pointer-events: auto;
+      background: rgb(0 0 0 / 0.35);
     }
 
     .sidebar-content {
       width: 18rem;
       max-width: min(18rem, 85vw);
-      transform: translateX(-100%);
       background-color: var(--docs-shell-bg);
+      transform: translateX(-100%);
 
       .sidebar-drawer-open & {
-        transform: translateX(0);
         box-shadow:
           4px 0 6px -1px rgb(0 0 0 / 0.25),
           2px 0 4px -2px rgb(0 0 0 / 0.2);
+        transform: translateX(0);
       }
     }
   }
 
   .sidebar-toggle-icon {
     right: 0;
+    color: var(--docs-shell-muted);
+    background-color: var(--docs-shell-bg);
+    border: 1px solid var(--docs-shell-line);
     transform: translateX(50%);
     transform-origin: center;
     @apply absolute top-16 z-50 hidden shrink-0 rounded-full shadow-sm transition-transform lg:block;
-    background-color: var(--docs-shell-bg);
-    color: var(--docs-shell-muted);
-    border: 1px solid var(--docs-shell-line);
   }
 
   .sidebar-closed .sidebar-toggle-icon {
@@ -333,39 +334,39 @@ body {
 
   .sidebar-content {
     z-index: 1;
+    width: 18rem;
     color: var(--docs-shell-fg);
     @apply flex h-full flex-col pt-4;
-    width: 18rem;
 
     @media (max-width: 639.98px) {
       position: relative;
+      background-color: var(--docs-shell-bg);
       transform: translateX(-100%);
       transition: transform 200ms ease;
       will-change: transform;
-      background-color: var(--docs-shell-bg);
 
       .sidebar-drawer-open & {
-        transform: translateX(0);
         box-shadow:
           4px 0 6px -1px rgb(0 0 0 / 0.25),
           2px 0 4px -2px rgb(0 0 0 / 0.2);
+        transform: translateX(0);
       }
     }
 
     @media (min-width: 640px) and (max-width: 1023.98px) {
-      width: 3.5rem;
       align-items: center;
+      width: 3.5rem;
       padding-inline: 0.5rem;
 
       .sidebar-drawer-open & {
+        align-items: stretch;
         width: 18rem;
         max-width: min(18rem, 85vw);
-        align-items: stretch;
         padding-inline: 0;
-        transform: translateX(0);
         box-shadow:
           4px 0 6px -1px rgb(0 0 0 / 0.25),
           2px 0 4px -2px rgb(0 0 0 / 0.2);
+        transform: translateX(0);
       }
     }
 
@@ -380,41 +381,41 @@ body {
 
     .rail-nav {
       display: flex;
-      width: 100%;
       flex-direction: column;
-      align-items: center;
       gap: 0.375rem;
+      align-items: center;
+      width: 100%;
     }
 
     .rail-item {
       display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 2.5rem;
       height: 2.5rem;
       padding: 0;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0.75rem;
-      border: none;
-      background: transparent;
       color: var(--docs-shell-muted);
       cursor: pointer;
+      background: transparent;
+      border: none;
+      border-radius: 0.75rem;
       transition:
         background-color 150ms ease,
         color 150ms ease;
 
       @media (hover: hover) {
         &:hover {
-          background-color: var(--docs-shell-hover-bg);
           color: var(--docs-shell-fg);
+          background-color: var(--docs-shell-hover-bg);
         }
       }
 
       &.active,
       &[data-popup-open],
       &:focus-visible {
-        background-color: var(--docs-shell-active-bg);
         color: var(--docs-shell-active-fg);
         outline: none;
+        background-color: var(--docs-shell-active-bg);
       }
 
       /* Bỏ underline ::after kế thừa từ .navigation-menu-trigger — rail-item là icon-only pill. */
@@ -427,8 +428,9 @@ body {
     .field input,
     input.field-control {
       /* background-color: var(--docs-shell-input-bg); */
-      border-color: var(--docs-shell-input-border);
       color: var(--docs-shell-fg);
+      /* background-color: var(--docs-shell-input-bg); */
+      border-color: var(--docs-shell-input-border);
     }
     .field input::placeholder,
     input.field-control::placeholder {
@@ -448,22 +450,22 @@ body {
 
         @media (hover: hover) {
           &:hover {
-            background-color: var(--docs-shell-hover-bg);
             color: var(--docs-shell-fg);
+            background-color: var(--docs-shell-hover-bg);
           }
         }
 
         &:focus-visible {
-          background-color: var(--docs-shell-hover-bg);
           color: var(--docs-shell-fg);
           outline: none;
+          background-color: var(--docs-shell-hover-bg);
         }
       }
 
       &.active,
       &:active {
-        background-color: var(--docs-shell-active-bg);
         color: var(--docs-shell-active-fg);
+        background-color: var(--docs-shell-active-bg);
       }
 
       .chevron-icon {
@@ -477,9 +479,9 @@ body {
 
     .nav-panel {
       display: flex;
-      height: var(--collapsible-panel-height);
       flex-direction: column;
       justify-content: start;
+      height: var(--collapsible-panel-height);
       overflow: hidden;
       transition: all 150ms ease-out;
 
@@ -497,20 +499,20 @@ body {
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      margin-inline-start: 1rem;
       padding-inline-start: 0.5rem;
+      margin-inline-start: 1rem;
       border-left: 1px dashed var(--docs-shell-line);
 
       .nav-item.active::before {
-        content: '';
-        display: flex;
         position: absolute;
         left: -0.75rem;
-        transform: translateX(2px);
+        display: flex;
+        width: 3px;
+        height: 80%;
+        content: '';
         background-color: var(--docs-shell-active-fg);
         border-radius: 3px;
-        height: 80%;
-        width: 3px;
+        transform: translateX(2px);
       }
     }
   }
@@ -532,8 +534,8 @@ body {
       position: absolute;
       inset-block: 0;
       inset-inline-start: 0;
-      width: 18rem;
       align-items: stretch;
+      width: 18rem;
       padding-inline: 0;
       padding-top: 1rem;
       background-color: var(--docs-shell-bg);

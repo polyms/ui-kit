@@ -92,8 +92,8 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 - **Tailwind** + `clsx()`; class có thể bị sort bởi Biome.
 - Style component: file **`core/src/styles/_tên-component.css`** và pattern import hiện có.
 - **Màu xám:** dùng **`--color-slate-*`**, không dùng `--color-neutral-*` (ví dụ `var(--color-slate-400)`).
-- **Phối transparent (idle/hover/active):** mọi component có state kiểu *ghost* (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`core/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
-- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/skills/core-ui/css-utilities.md`** (section *CSS-Only Classes* và *Interactive State Utilities*) để consumer agents biết.
+- **Phối transparent (idle/hover/active):** mọi component có state kiểu _ghost_ (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`core/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
+- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/skills/core-ui/css-utilities.md`** (section _CSS-Only Classes_ và _Interactive State Utilities_) để consumer agents biết.
 - **Comment section trong file CSS:** `core/src/styles/_*.css`, `docs/src/styles/_*.css`, … thường có comment phân vùng ngắn trước block rule (ví dụ `/* Trigger button styling */`, `/* Panel styling */` trong **`docs/src/styles/_details.css`**). **Không tự ý xóa** các comment kiểu này khi refactor, scope selector, hay format — chúng giúp điều hướng file dài. Khi thêm block rule mới cùng file, tiếp tục pattern tương tự nếu block tách rõ concern; chỉ bỏ comment khi xóa hẳn block rule đi kèm.
 
 ### Component & state
@@ -169,6 +169,8 @@ describe('ComponentName', () => {
 2. **Frontmatter** có **`title`** để sidebar hiển thị.
 3. Navigation do plugin quét file — không cần đăng ký tay; type trong **`docs/src/mdx-navigation.d.ts`**.
 4. Khi đổi API component công khai: cập nhật trang MDX tương ứng và demo trong **`-views/`** nếu có.
+
+**Giọng end-user (chỉ `docs/`):** trang docs hướng người **dùng** `@polyms/core-ui` trong app — không mô tả monorepo, Base UI stack, đường dẫn `core/src/…`, hay wiring nội bộ site. Bảng so sánh dùng **JSX table** (GFM `| … |` không render trong MDX setup hiện tại). Chi tiết: **`.cursor/rules/docs-mdx-end-user-voice.mdc`** (kèm **`docs-mdx-heading-style.mdc`** cho heading).
 
 Plugin/virtual module: dùng **`gray-matter`** cho frontmatter; virtual ID trong Vite thường resolve với prefix **`\\0`** — bám theo plugin hiện có.
 

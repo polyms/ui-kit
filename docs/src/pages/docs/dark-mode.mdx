@@ -78,7 +78,7 @@ import Utilities from './-views/dark-mode/DarkModeUtilities.tsx'
 
 Class-based dark mode for **`@polyms/core-ui`**. Add **`.dark`** to `<html>` (or any wrapper) and semantic utilities switch between light and dark palettes at runtime — no CSS rebuild.
 
-Dark body background defaults to **`#2e3440`** (Nord Polar Night). Tokens live in **`core/src/styles/_root.css`**; Tailwind v4 **`@theme inline`** keeps **`var()`** resolution at runtime. Built-in components use these tokens and auto-invert when the theme toggles.
+Dark body background defaults to **`#2e3440`** (Nord Polar Night). Semantic tokens resolve at runtime when you toggle **`.dark`** — built-in components and utilities pick up the inverted palette automatically.
 
 <CodePreview code={code}>
   <Story />
@@ -89,7 +89,7 @@ Dark body background defaults to **`#2e3440`** (Nord Polar Night). Tokens live i
 Enable dark mode by adding the class to the document root (or a subtree):
 
 ```html
-<html class="dark">
+<html class="dark"></html>
 ```
 
 Optional sync with system preference:
@@ -121,32 +121,36 @@ Seven CSS variables drive the entire theme. Override them anywhere in your app t
 Short semantic classes for app shells and custom layout — prefer these over hardcoded slate/white when building theme-aware UI:
 
 ```tsx
-<div className='bg-body text-fg min-h-dvh'>
-  <header className='border-line border-b bg-surface px-4 py-3'>
-    <h1 className='font-semibold'>Dashboard</h1>
-    <p className='text-muted text-sm'>Welcome back</p>
-  </header>
-  <main className='p-4'>
-    <div className='rounded-lg border border-line bg-surface p-4'>
-      <p className='text-fg'>Card content</p>
-      <p className='text-muted text-sm'>Supporting detail</p>
-    </div>
-  </main>
-</div>
+const layout = (
+  <div className='bg-body text-fg min-h-dvh'>
+    <header className='border-line border-b bg-surface px-4 py-3'>
+      <h1 className='font-semibold'>Dashboard</h1>
+      <p className='text-muted text-sm'>Welcome back</p>
+    </header>
+    <main className='p-4'>
+      <div className='rounded-lg border border-line bg-surface p-4'>
+        <p className='text-fg'>Card content</p>
+        <p className='text-muted text-sm'>Supporting detail</p>
+      </div>
+    </main>
+  </div>
+)
 ```
 
 <Utilities />
 
-**`html`** and **`body`** already use **`bg-body text-fg`** from preflight — toggling **`.dark`** on `<html>` updates the whole page background.
+**`html`** and **`body`** use **`bg-body text-fg`** once library styles are loaded — toggling **`.dark`** on `<html>` updates the whole page background.
 
 ## Tailwind dark variant
 
-The library registers **`@custom-variant dark (&:is(.dark *))`** in **`core/src/styles/tailwind.css`**. Use **`dark:`** for one-off overrides in app-specific layout:
+After importing **`@polyms/core-ui`** styles, use Tailwind **`dark:`** for one-off overrides in app-specific layout:
 
 ```tsx
-<div className='bg-white dark:bg-surface text-slate-900 dark:text-fg border border-slate-200 dark:border-line'>
-  …
-</div>
+const layout = (
+  <div className='bg-white dark:bg-surface text-slate-900 dark:text-fg border border-slate-200 dark:border-line'>
+    …
+  </div>
+)
 ```
 
 Works with responsive and state variants: **`md:dark:bg-surface`**, **`hover:dark:bg-surface`**, etc.

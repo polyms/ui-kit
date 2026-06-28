@@ -17,11 +17,11 @@
 }
 
 .home-decor-grid {
-  @apply absolute inset-0 opacity-60;
   background-image: radial-gradient(var(--color-slate-800) 1px, transparent 1px);
   background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  @apply absolute inset-0 opacity-60;
 }
 
 .home-decor-glow {
@@ -129,14 +129,14 @@
 }
 
 .home-marquee-container {
-  @apply relative left-[-5vw] z-10 flex w-[110vw] overflow-hidden border-y border-primary-500/50 bg-primary-900/40 py-4 backdrop-blur-md;
-  transform: rotate(-3deg);
   box-shadow: 0 0 40px rgba(var(--color-primary-500), 0.3);
+  transform: rotate(-3deg);
+  @apply relative left-[-5vw] z-10 flex w-[110vw] overflow-hidden border-y border-primary-500/50 bg-primary-900/40 py-4 backdrop-blur-md;
 }
 
 .home-marquee-content {
-  @apply flex whitespace-nowrap;
   animation: scroll-marquee 20s linear infinite;
+  @apply flex whitespace-nowrap;
 }
 
 @keyframes scroll-marquee {
@@ -149,6 +149,7 @@
 }
 
 .home-cyber-btn {
+  box-shadow: 0 0 16px color-mix(in srgb, var(--color-primary-500) 15%, transparent);
   @apply relative z-30 inline-flex cursor-pointer items-center gap-2 px-8 py-4 font-bold tracking-widest text-primary-50 uppercase transition-all duration-500;
 
   /* Tinted Glass effect */
@@ -156,18 +157,14 @@
 
   /* Geometric Leaf */
   @apply rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg;
-
-  /* Subtle glow */
-  box-shadow: 0 0 16px color-mix(in srgb, var(--color-primary-500) 15%, transparent);
 }
 
 .home-cyber-btn:hover {
-  @apply scale-102 border-primary-200/50 bg-primary-500/20 text-white;
   box-shadow: 0 0 24px color-mix(in srgb, var(--color-primary-500) 25%, transparent);
+  @apply scale-102 border-primary-200/50 bg-primary-500/20 text-white;
 }
 
 .home-scanline {
-  @apply pointer-events-none fixed inset-0 z-50 opacity-15;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0),
@@ -176,13 +173,14 @@
     rgba(0, 0, 0, 0.2)
   );
   background-size: 100% 4px;
+  @apply pointer-events-none fixed inset-0 z-50 opacity-15;
 }
 
 .home-mascot-breakout {
-  @apply pointer-events-none absolute top-0 right-0 z-20 opacity-70 md:right-[-20px] lg:top-[5%] lg:right-[-5%] lg:opacity-100;
   width: clamp(150px, 50vw, 600px);
-  animation: mascot-float 6s ease-in-out infinite;
   filter: drop-shadow(0 0 60px rgba(var(--color-primary-500), 0.5));
+  animation: mascot-float 6s ease-in-out infinite;
+  @apply pointer-events-none absolute top-0 right-0 z-20 opacity-70 md:right-[-20px] lg:top-[5%] lg:right-[-5%] lg:opacity-100;
 }
 
 @keyframes mascot-float {
@@ -230,10 +228,10 @@
 }
 
 .home-feature-icon {
-  @apply inline-flex size-11 items-center justify-center rounded-xl;
-  background-color: color-mix(in oklab, var(--feature-tone) 15%, transparent);
   color: var(--feature-tone-fg);
+  background-color: color-mix(in oklab, var(--feature-tone) 15%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--feature-tone) 25%, transparent);
+  @apply inline-flex size-11 items-center justify-center rounded-xl;
 }
 
 .home-feature-icon.tone-primary {
@@ -268,13 +266,13 @@
 /* ── CTA banner ──────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-cta {
-  @apply relative overflow-hidden rounded-3xl border border-slate-800 p-10 md:p-16;
   background: linear-gradient(
     to bottom right,
     var(--color-slate-900),
     color-mix(in oklab, var(--color-primary-950) 40%, var(--color-slate-900)),
     var(--color-slate-900)
   );
+  @apply relative overflow-hidden rounded-3xl border border-slate-800 p-10 md:p-16;
 }
 
 .home-cta-pill {
@@ -336,8 +334,8 @@
 }
 
 .home-example-code {
-  @apply overflow-x-auto p-6 font-mono leading-relaxed text-slate-100;
   font-size: 13px;
+  @apply overflow-x-auto p-6 font-mono leading-relaxed text-slate-100;
 }
 
 /* ── Window dots (mac-style traffic lights) ──────────────────────────────────────────────────────────── */
@@ -420,13 +418,13 @@ main.landing {
 
 main.landing::before,
 main.landing::after {
-  content: '';
   position: absolute;
   inset-inline: 0;
-  height: 5rem;
-  background-color: var(--color-slate-950);
-  pointer-events: none;
   z-index: -1;
+  height: 5rem;
+  pointer-events: none;
+  content: '';
+  background-color: var(--color-slate-950);
 }
 
 main.landing::before {

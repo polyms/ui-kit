@@ -3,19 +3,21 @@
 }
 
 .tooltip-popup {
+  z-index: var(--zindex-tooltip);
   box-sizing: border-box;
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
   display: flex;
   flex-direction: column;
   padding: 0.25rem 0.625rem;
-  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.25rem;
   color: #fff;
-  background-color: var(--color-slate-900);
-  transform-origin: var(--transform-origin);
   white-space: nowrap;
-  z-index: var(--zindex-tooltip);
+
+  outline: 1px solid var(--color-slate-900);
+  background-color: var(--color-slate-900);
+  border-radius: 0.25rem;
+  transform-origin: var(--transform-origin);
   transition:
     transform 150ms,
     opacity 150ms;
@@ -30,19 +32,17 @@
     transition: none;
   }
 
-  outline: 1px solid var(--color-slate-900);
-
   .dark & {
     color: #eceff4;
-    background-color: #4c566a;
     outline: 1px solid #3b4252;
     outline-offset: -1px;
+    background-color: #4c566a;
   }
 }
 
 .tooltip-arrow {
-  display: flex;
   z-index: var(--zindex-tooltip);
+  display: flex;
 
   &[data-side='top'] {
     bottom: -8px;

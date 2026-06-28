@@ -41,7 +41,7 @@ apis:
 import Story from './-views/item/ItemDefault.tsx'
 import code from './-views/item/ItemDefault.tsx?raw'
 
-Ghost-style interactive utilities for **nav items, list rows, and menu entries**. Each variant is transparent at idle and applies a tinted background + accent text on **`:hover`**, **`:active`**, and the persisted **`.active`** class. They are the single source of truth for the design-system's transparent hover/active pattern (`core/src/styles/_utilities.css`).
+Ghost-style interactive utilities for **nav items, list rows, and menu entries**. Each variant is transparent at idle and applies a tinted background + accent text on **`:hover`**, **`:active`**, and the persisted **`.active`** class — the same transparent hover/active pattern used across library components.
 
 <CodePreview code={code}>
   <Story />
@@ -52,26 +52,34 @@ Ghost-style interactive utilities for **nav items, list rows, and menu entries**
 Apply the variant alongside your own layout classes (padding, radius, flex):
 
 ```tsx
-<button className='flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm item-primary'>
-  <Icon /> Dashboard
-</button>
+const button = (
+  <button className='flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm item-primary'>
+    <Icon /> Dashboard
+  </button>
+)
 ```
 
 Mark the current row with **`.active`** to persist the selected state:
 
 ```tsx
-<a className='... item-primary active' aria-current='page'>Dashboard</a>
+const link = (
+  <a className='... item-primary active' aria-current='page'>
+    Dashboard
+  </a>
+)
 ```
 
 Neutral chrome (sidebars, settings lists) typically uses **`item-light`**, with **`item-danger`** for destructive rows:
 
 ```tsx
-<nav className='rounded-xl border border-line bg-body p-2'>
-  <a className='... item-primary active'>Dashboard</a>
-  <a className='... item-light'>Profile</a>
-  <a className='... item-light'>Settings</a>
-  <button className='... item-danger'>Delete account</button>
-</nav>
+const nav = (
+  <nav className='rounded-xl border border-line bg-body p-2'>
+    <a className='... item-primary active'>Dashboard</a>
+    <a className='... item-light'>Profile</a>
+    <a className='... item-light'>Settings</a>
+    <button className='... item-danger'>Delete account</button>
+  </nav>
+)
 ```
 
 ## Notes
