@@ -1,21 +1,39 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/.nx/cache
-/.nx/workspace-data
+# Prettier: markdown, MDX, YAML. JS/TS/CSS/HTML/JSON → Biome.
 
+# Build / deps
+node_modules/
+.pnpm-store/
+dist/
+coverage/
+.nx/
+tmp/
+out-tsc/
+doc_build/
+.tanstack/
+.agents/skills/
+
+# Lock / generated
 pnpm-lock.yaml
-.npmrc
-**/build/
+skills-lock.json
+next-env.d.ts
+**/routeTree.gen.ts
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
+
+# No Prettier parser
+*.mdc
+
+# Biome handles these — Prettier skip
 *.js
 *.mjs
-*.tsx
+*.cjs
 *.jsx
 *.ts
 *.mts
+*.tsx
 *.json
-*.html
+*.jsonc
 *.css
+*.html
 *.svg
 *.webmanifest
-.agents/skills/

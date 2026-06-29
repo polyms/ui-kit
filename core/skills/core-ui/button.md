@@ -62,20 +62,20 @@ Do not shrink library buttons with `className='size-6 p-0'` to fit tight layouts
 
 Primitives that accept Base UI `render` should receive **`render={<Button … />}`** — not `btn-*` classes on the primitive alone:
 
-| Primitive                        | Pattern                                                                                                                                                   |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Modal.Trigger`                  | `<Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>`                                                                               |
-| `Modal.Close` (footer)           | `<Modal.Close render={<Button rounded size='xl' />}>Cancel</Modal.Close>`                                                                                 |
-| `Offcanvas.Trigger`              | `<Offcanvas.Trigger render={<Button variant='primary' outlined />}>Open</Offcanvas.Trigger>`                                                              |
-| `Offcanvas.Close` (body dismiss) | `<Offcanvas.Close render={<Button rounded />}>Done</Offcanvas.Close>` — not the built-in icon close in `Offcanvas.Content` chrome                         |
-| `Menu.Trigger`                   | `<Menu.Trigger render={<Button variant='primary' outlined />}>Actions</Menu.Trigger>`                                                                     |
-| `Popover.Trigger`                | `<Popover.Trigger render={<Button variant='primary' />}>Details</Popover.Trigger>`                                                                        |
-| `Popover.Close`                  | `<Popover.Close render={<Button size='sm' variant='light' className='w-full' />}>Close</Popover.Close>`                                                   |
-| `Collapsible.Trigger`            | `<Collapsible.Trigger render={<Button />}>Toggle</Collapsible.Trigger>` — omit `variant` for ghost                                                        |
-| `Toolbar.Button` + overflow menu | `<Toolbar.Button render={<Menu.Trigger />}>More</Toolbar.Button>` inside `Toolbar` — [navigation.md#responsive-toolbar](navigation.md#responsive-toolbar) |
-| `Toolbar.Button`                 | `<Toolbar.Button render={<Toggle />}>…</Toolbar.Button>`                                                                                                  |
+| Primitive                        | Pattern                                                                                                                                                                                         |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Modal.Trigger`                  | `<Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>`                                                                                                                     |
+| `Modal.Close` (footer)           | `<Modal.Close render={<Button rounded size='xl' />}>Cancel</Modal.Close>` — **omit `variant`** (ghost); `autoFocus` on footer CTA only when body has no form input ([modal.md](modal.md#modal)) |
+| `Offcanvas.Trigger`              | `<Offcanvas.Trigger render={<Button variant='primary' outlined />}>Open</Offcanvas.Trigger>`                                                                                                    |
+| `Offcanvas.Close` (body dismiss) | `<Offcanvas.Close render={<Button rounded />}>Done</Offcanvas.Close>` — not the built-in icon close in `Offcanvas.Content` chrome                                                               |
+| `Menu.Trigger`                   | `<Menu.Trigger render={<Button variant='primary' outlined />}>Actions</Menu.Trigger>`                                                                                                           |
+| `Popover.Trigger`                | `<Popover.Trigger render={<Button variant='primary' />}>Details</Popover.Trigger>`                                                                                                              |
+| `Popover.Close`                  | `<Popover.Close render={<Button size='sm' variant='light' className='w-full' />}>Close</Popover.Close>`                                                                                         |
+| `Collapsible.Trigger`            | `<Collapsible.Trigger render={<Button />}>Toggle</Collapsible.Trigger>` — omit `variant` for ghost                                                                                              |
+| `Toolbar.Button` + overflow menu | `<Toolbar.Button render={<Menu.Trigger />}>More</Toolbar.Button>` inside `Toolbar` — [navigation.md#responsive-toolbar](navigation.md#responsive-toolbar)                                       |
+| `Toolbar.Button`                 | `<Toolbar.Button render={<Toggle />}>…</Toolbar.Button>`                                                                                                                                        |
 
-Footer **`Modal.Close`** wires Dialog dismiss — pass **`children`** for a labeled button (with `render={<Button … />}`). Do not use a plain **`Button`** with a manual `onClick` just to close.
+Footer **`Modal.Close`** wires Dialog dismiss — pass **`children`** for a labeled button (with `render={<Button … />}`). Omit **`variant`** on that `Button` (ghost Cancel/Close). **`autoFocus`**: one target per modal — form in body → first **`Field.Control`** / input; confirm-only → main footer CTA (`Delete`, `Confirm`, …), not dismiss. Do not use a plain **`Button`** with a manual `onClick` just to close.
 
 When `render` is provided on **`Button`**, the default `type='button'` is dropped so the target element keeps its own semantics.
 

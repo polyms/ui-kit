@@ -76,7 +76,9 @@ const modal = (
       <Modal.Body>Are you sure you want to proceed with this action?</Modal.Body>
       <Modal.Footer>
         <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-        <Button variant='primary'>Confirm</Button>
+        <Button autoFocus variant='primary'>
+          Confirm
+        </Button>
       </Modal.Footer>
     </Modal.Content>
   </Modal>
@@ -85,11 +87,17 @@ const modal = (
 
 Put the title in **`Modal.Header`** — `Modal.Content` has no `title` prop. Style **`Modal.Trigger`** and footer **`Modal.Close`** with **`render={<Button … />}`**. Use **`scrollable`** when the body holds a long form.
 
+**Footer actions:** Cancel and Close use a ghost **`Button`** (omit **`variant`** on **`Modal.Close render={<Button … />}`**). **`autoFocus`** — one target per modal: confirm-only (no form inputs) → primary footer CTA (`Confirm`, `Delete`, …) with the appropriate **`variant`**; form in **`Modal.Body`** → first **`Field.Control`** or input — do not also put **`autoFocus`** on footer Save.
+
 ## Common mistakes
 
 - Hand-built `fixed inset-0` overlays instead of `Modal.Content`
 - `btn-*` classes on `Modal.Trigger` or `Modal.Close` without `render={<Button />}`
 - Footer dismiss as plain `Button` instead of `Modal.Close`
+- `variant` on footer `Modal.Close` (Cancel/Close should be ghost — omit `variant`)
+- `autoFocus` on footer Save when the body has form inputs (focus the first input instead)
+- Missing `autoFocus` on confirm-only modals (no inputs in body)
+- Two `autoFocus` targets in one modal (input + footer CTA)
 - `title` on `Modal.Content`
 - Long forms without `scrollable`
 - `showModal` without `Modal.Container` mounted
@@ -98,6 +106,33 @@ Put the title in **`Modal.Header`** — `Modal.Content` has no `title` prop. Sty
 ## Composition
 
 Modals support flexible composition with Header, Body, and Footer sections for organized content layout.
+
+### Form modal
+
+When the body contains inputs, put **`autoFocus`** on the first **`Field.Control`** — not on footer Save.
+
+```tsx
+import { Button, Field, Modal } from '@polyms/core-ui'
+
+const editModal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Edit profile</Modal.Trigger>
+    <Modal.Content size='lg' scrollable>
+      <Modal.Header>Edit profile</Modal.Header>
+      <Modal.Body>
+        <Field>
+          <Field.Label>Display name</Field.Label>
+          <Field.Control autoFocus name='name' placeholder='Your name' type='text' />
+        </Field>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+        <Button variant='primary'>Save</Button>
+      </Modal.Footer>
+    </Modal.Content>
+  </Modal>
+)
+```
 
 ### With Controlled State
 
@@ -234,7 +269,11 @@ function DeleteButton() {
         <Modal.Body>This cannot be undone.</Modal.Body>
         <Modal.Footer>
           <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-          <Button onClick={() => useModalStore.getState().closeModal('delete-item')} variant='danger'>
+          <Button
+            autoFocus
+            onClick={() => useModalStore.getState().closeModal('delete-item')}
+            variant='danger'
+          >
             Delete
           </Button>
         </Modal.Footer>

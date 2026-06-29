@@ -646,10 +646,14 @@ All complex components follow compound component pattern:
     <Modal.Body>Content</Modal.Body>
     <Modal.Footer>
       <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-      <Button variant='primary'>Confirm</Button>
+      <Button autoFocus variant='primary'>
+        Confirm
+      </Button>
     </Modal.Footer>
   </Modal.Content>
 </Modal>
+
+// Modal focus: one autoFocus per modal — confirm-only → footer CTA; form in body → first Field.Control (not footer Save)
 
 // Offcanvas Example
 <Offcanvas swipeDirection='right'>

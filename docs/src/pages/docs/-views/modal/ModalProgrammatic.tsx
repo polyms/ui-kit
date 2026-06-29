@@ -13,7 +13,12 @@ export default function ModalProgrammatic() {
         <Modal.Body>This action cannot be undone. All data will be permanently removed.</Modal.Body>
         <Modal.Footer>
           <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
-          <Button onClick={() => useModalStore.getState().closeModal(MODAL_ID)} rounded variant='danger'>
+          <Button
+            autoFocus
+            onClick={() => useModalStore.getState().closeModal(MODAL_ID)}
+            rounded
+            variant='danger'
+          >
             Delete
           </Button>
         </Modal.Footer>

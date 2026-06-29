@@ -97,6 +97,7 @@ export default function ModalDefault() {
                             <Field>
                               <Field.Label>API Key</Field.Label>
                               <Field.Control
+                                autoFocus
                                 className='font-mono text-sm'
                                 defaultValue='sk_live_51H...'
                                 readOnly
