@@ -2,9 +2,20 @@ import { Select } from '@base-ui/react/select'
 import clsx from 'clsx'
 import { forwardRef } from 'react'
 
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+export type SelectSize = 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
+
+type SelectTriggerProps = Omit<Select.Trigger.Props, 'children'> &
+  Pick<Select.Value.Props, 'children' | 'placeholder'> & {
+    size?: SelectSize
+  }
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
 export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, children, placeholder, ...props }, ref) => (
-    <Select.Trigger {...props} className={clsx('select', className)} ref={ref}>
+  ({ className, children, placeholder, size, ...props }, ref) => (
+    <Select.Trigger {...props} className={clsx('select', className, { [`select-${size}`]: size })} ref={ref}>
       <Select.Value className='select-value' placeholder={placeholder} />
       <Select.Icon className='select-icon'>
         <ChevronUpDownIcon />
@@ -41,8 +52,3 @@ function ChevronUpDownIcon(props: React.ComponentProps<'svg'>) {
     </svg>
   )
 }
-
-// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
-
-type SelectTriggerProps = Omit<Select.Trigger.Props, 'children'> &
-  Pick<Select.Value.Props, 'children' | 'placeholder'>

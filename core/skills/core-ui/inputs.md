@@ -125,9 +125,10 @@ const exportFormats = [
 </Select>
 ```
 
-| Rule                | Detail                                                                                            |
-| ------------------- | ------------------------------------------------------------------------------------------------- |
-| **Items**           | Optional `items` on `Select` root for simple data; still render `Select.Item` children for groups |
-| **No fake listbox** | No hand-built `<div role='listbox'>` when `Select` fits                                           |
-| **Shell**           | `Select.Content` is already styled — do not wrap in large Tailwind bundles                        |
-| **vs Menu**         | `Select` for choosing a value; `Menu` for actions — [navigation.md](navigation.md#menu)           |
+| Rule                | Detail                                                                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Items**           | Optional `items` on `Select` root for simple data; still render `Select.Item` children for groups                            |
+| **Size**            | `size` on `Select.Trigger` (`sm`, `lg`, `xl`, `2xl`, `3xl`) — same tokens as `Field`; inside `Field`, set `size` on the root |
+| **No fake listbox** | No hand-built `<div role='listbox'>` when `Select` fits                                                                      |
+| **Shell**           | `Select.Content` is already styled — do not wrap in large Tailwind bundles                                                   |
+| **vs Menu**         | `Select` for choosing a value; `Menu` for actions — [navigation.md](navigation.md#menu)                                      |

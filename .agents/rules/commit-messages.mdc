@@ -1,0 +1,60 @@
+---
+description: Conventional commit message format for git commits and MRs
+alwaysApply: true
+---
+
+# Commit messages
+
+Dùng [Conventional Commits](https://www.conventionalcommits.org/) cho mọi commit và MR title.
+
+## Format
+
+```
+<type>[optional scope]: <short description>
+
+[optional body]
+
+[optional footer]
+```
+
+- **Subject** (dòng đầu): imperative, lowercase sau dấu `:`, không chấm cuối, ≤ 72 ký tự.
+- **Body** (nếu cần): giải thích *why*, không lặp lại diff.
+- **Footer**: issue tracker — `Refs #123` hoặc `Closes #123` (GitLab).
+
+## Types
+
+| Type | Khi nào dùng |
+|------|----------------|
+| `feat` | Tính năng mới cho user |
+| `fix` | Sửa bug |
+| `refactor` | Đổi cấu trúc, không đổi hành vi |
+| `chore` | Tooling, deps, release, housekeeping |
+| `docs` | Chỉ tài liệu |
+| `test` | Thêm/sửa test |
+| `ci` | Pipeline, workflow |
+| `style` | Format, whitespace — không đổi logic |
+| `perf` | Cải thiện hiệu năng |
+
+Scope tùy chọn, lowercase trong ngoặc: `feat(astra): add screen filters`, `chore(release): v0.1.39`.
+
+## Ví dụ
+
+```
+feat: add MCP API for CodeVoice admin tools
+
+fix(sidebar): restore collapsed state on reload
+
+refactor: standardize type section HR comments
+
+chore(release): v0.1.38
+
+test(cuit): lock in home sidebar toggle flow
+
+Refs #42
+```
+
+## Tránh
+
+- Subject mơ hồ: `update`, `fix stuff`, `WIP`
+- Past tense: `added`, `fixed` → dùng `add`, `fix`
+- Commit khi user chưa yêu cầu (xem user rule `committing-changes-with-git`)

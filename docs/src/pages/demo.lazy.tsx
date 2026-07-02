@@ -92,7 +92,7 @@ function Page() {
               <span className='font-semibold text-slate-800 dark:text-fg'>mega menu</span>, global search and
               an auth flow — composed entirely from{' '}
               <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-sm dark:bg-surface dark:text-fg'>
-                @polyms/core
+                @polyms/core-ui
               </code>{' '}
               primitives.
             </p>

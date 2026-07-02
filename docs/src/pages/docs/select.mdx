@@ -24,6 +24,10 @@ apis:
     values: boolean
     description: When true, prevents interaction with the select component.
   - separator: Select.Trigger
+  - name: size
+    default: '-'
+    values: sm | lg | xl | 2xl | 3xl
+    description: Controls the padding and font size of the trigger. Matches Field size tokens.
   - name: placeholder
     default: '-'
     values: string
@@ -45,6 +49,7 @@ apis:
 
 import Story from './-views/select/SelectDefault.tsx'
 import code from './-views/select/SelectDefault.tsx?raw'
+import Sizes from './-views/select/SelectSizes.tsx'
 
 Allow users to choose one or multiple options from a dropdown list. Select components provide a space-efficient way to present many choices while maintaining a clean interface.
 
@@ -93,6 +98,12 @@ const stacks = [
   </Select.Content>
 </Select>
 ```
+
+## Sizes
+
+Select triggers use the same size scale as Field — pass **`size`** on **`Select.Trigger`**, or wrap the select in **`Field`** with **`size`** on the root so the trigger inherits matching dimensions.
+
+<Sizes />
 
 ## Grouping
 

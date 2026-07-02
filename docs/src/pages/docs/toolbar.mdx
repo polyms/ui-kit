@@ -15,6 +15,14 @@ apis:
     default: '-'
     values: boolean
     description: When true, all controls inside the toolbar are disabled.
+  - name: variant
+    default: '-'
+    values: inline
+    description: Use inline when the toolbar sits on the same row as Field or Button controls (for example a filter bar). Removes the outer border and padding so heights align.
+  - name: rounded
+    default: 'false'
+    values: boolean
+    description: Pill shell and controls via ring outline. Use with variant inline to match rounded-full Field and Button in filter bars.
   - separator: Toolbar.Button
   - name: disabled
     default: 'false'
@@ -89,6 +97,34 @@ const toolbar = (
     <Toolbar.Separator orientation='vertical' />
     <Toolbar.Link href='#'>Docs</Toolbar.Link>
   </Toolbar>
+)
+```
+
+## Inline layout
+
+Use `variant='inline'` when the toolbar shares a row with `Field` or `Button` controls — for example a filter or action bar. The default bordered shell adds extra padding and height; inline removes that chrome so control heights line up while roving focus, groups, and separators keep working the same way. Add `rounded` for a pill outline that matches `rounded-full` inputs and buttons without adding layout height (ring instead of border).
+
+```tsx
+import { Button, Field, Toggle, ToggleGroup, Toolbar } from '@polyms/core-ui'
+
+const filterBar = (
+  <div className='flex flex-col gap-3 lg:flex-row lg:items-end'>
+    <Field className='min-w-0 flex-1'>
+      <Field.Label>Search</Field.Label>
+      <Field.Control placeholder='Name or email…' rounded />
+    </Field>
+    <Toolbar aria-label='View options' rounded variant='inline'>
+      <ToggleGroup aria-label='Layout' className='toolbar-group'>
+        <Toolbar.Button render={<Toggle />} value='grid'>
+          Grid
+        </Toolbar.Button>
+        <Toolbar.Button render={<Toggle />} value='list'>
+          List
+        </Toolbar.Button>
+      </ToggleGroup>
+    </Toolbar>
+    <Button variant='primary'>Apply</Button>
+  </div>
 )
 ```
 

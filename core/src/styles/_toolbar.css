@@ -31,6 +31,25 @@
   }
 }
 
+.toolbar-inline {
+  padding: 0;
+  overflow: hidden;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  background-color: transparent;
+  border: 0;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.toolbar-inline.rounded-full {
+  border-radius: 9999px;
+
+  .toolbar-button,
+  .toolbar-group > .toolbar-button {
+    border-radius: 9999px;
+  }
+}
+
 .toolbar-group {
   display: inline-flex;
   gap: 0.125rem;

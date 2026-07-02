@@ -102,6 +102,12 @@
     padding: calc(var(--input-padding-y) - 1px) calc(var(--input-padding-x) - 1px);
     font-size: var(--input-fs);
     line-height: var(--input-lh);
+    border-radius: var(--control-radius);
+
+    .select-icon svg {
+      width: var(--input-icon-size);
+      height: var(--input-icon-size);
+    }
   }
 }
 

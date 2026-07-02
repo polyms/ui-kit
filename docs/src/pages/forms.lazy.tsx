@@ -6,7 +6,18 @@ import {
   UserIcon,
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Checkbox, Field, NumberField, Radio, RadioGroup, Select } from '@polyms/core-ui'
+import {
+  Button,
+  Checkbox,
+  Field,
+  NumberField,
+  Radio,
+  RadioGroup,
+  Select,
+  Toggle,
+  ToggleGroup,
+  Toolbar,
+} from '@polyms/core-ui'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
@@ -26,16 +37,16 @@ const planItems = [
 ]
 
 const roleItems = [
-  { label: 'Tất cả', value: 'all' },
+  { label: 'All', value: 'all' },
   { label: 'Admin', value: 'admin' },
   { label: 'Editor', value: 'editor' },
   { label: 'Viewer', value: 'viewer' },
 ]
 
 const statusItems = [
-  { label: 'Mọi trạng thái', value: 'any' },
-  { label: 'Đang hoạt động', value: 'active' },
-  { label: 'Đã lưu trữ', value: 'archived' },
+  { label: 'Any status', value: 'any' },
+  { label: 'Active', value: 'active' },
+  { label: 'Archived', value: 'archived' },
 ]
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -91,7 +102,7 @@ function LoginFormCase() {
         />
       </Field>
       <Field required>
-        <Field.Label>Mật khẩu</Field.Label>
+        <Field.Label>Password</Field.Label>
         <Field.Control
           autoComplete='current-password'
           onChange={e => setPassword(e.target.value)}
@@ -100,18 +111,18 @@ function LoginFormCase() {
           type='password'
           value={password}
         />
-        <Field.Description>Tối thiểu 8 ký tự, có chữ hoa và số.</Field.Description>
+        <Field.Description>At least 8 characters, with uppercase and a number.</Field.Description>
       </Field>
       <div className='flex items-center justify-between gap-3'>
         <Checkbox checked={remember} onCheckedChange={setRemember}>
-          Ghi nhớ đăng nhập
+          Remember me
         </Checkbox>
         <a className='link link-primary text-xs' href='#forgot'>
-          Quên mật khẩu?
+          Forgot password?
         </a>
       </div>
       <Button className='w-full' disabled={!email || !password} rounded type='submit' variant='primary'>
-        Đăng nhập
+        Sign in
       </Button>
     </form>
   )
@@ -125,7 +136,7 @@ function FilterBarCase() {
   return (
     <div className='flex flex-col gap-3 lg:flex-row lg:items-end'>
       <Field className='min-w-0 flex-1'>
-        <Field.Label>Tìm kiếm</Field.Label>
+        <Field.Label>Search</Field.Label>
         <HugeiconsIcon className='icon-start' icon={SearchList02Icon} strokeWidth={2} />
         {query ? (
           <HugeiconsIcon
@@ -137,16 +148,16 @@ function FilterBarCase() {
         ) : null}
         <Field.Control
           onChange={e => setQuery(e.target.value)}
-          placeholder='Tên, email hoặc ID…'
+          placeholder='Name, email, or ID…'
           rounded
           value={query}
         />
       </Field>
       <Field className='w-full lg:w-44'>
-        <Field.Label>Vai trò</Field.Label>
+        <Field.Label>Role</Field.Label>
         <Select items={roleItems} onValueChange={setRole} value={role}>
-          <Select.Trigger className='w-full rounded-full' placeholder='Vai trò'>
-            {item => item?.label ?? 'Vai trò'}
+          <Select.Trigger className='w-full rounded-full' placeholder='Role'>
+            {item => item?.label ?? 'Role'}
           </Select.Trigger>
           <Select.Content>
             {roleItems.map(item => (
@@ -158,10 +169,10 @@ function FilterBarCase() {
         </Select>
       </Field>
       <Field className='w-full lg:w-48'>
-        <Field.Label>Trạng thái</Field.Label>
+        <Field.Label>Status</Field.Label>
         <Select items={statusItems} onValueChange={setStatus} value={status}>
-          <Select.Trigger className='w-full rounded-full' placeholder='Trạng thái'>
-            {item => item?.label ?? 'Trạng thái'}
+          <Select.Trigger className='w-full rounded-full' placeholder='Status'>
+            {item => item?.label ?? 'Status'}
           </Select.Trigger>
           <Select.Content>
             {statusItems.map(item => (
@@ -172,7 +183,17 @@ function FilterBarCase() {
           </Select.Content>
         </Select>
       </Field>
-      <div className='flex shrink-0 gap-2 lg:pb-0.5'>
+      <Toolbar aria-label='View mode' className='shrink-0' rounded variant='inline'>
+        <ToggleGroup aria-label='Layout' className='toolbar-group' defaultValue={['list']}>
+          <Toolbar.Button aria-label='Grid view' render={<Toggle />} value='grid'>
+            Grid
+          </Toolbar.Button>
+          <Toolbar.Button aria-label='List view' render={<Toggle />} value='list'>
+            List
+          </Toolbar.Button>
+        </ToggleGroup>
+      </Toolbar>
+      <div className='flex shrink-0 gap-2'>
         <Button
           onClick={() => {
             setQuery('')
@@ -184,10 +205,10 @@ function FilterBarCase() {
           type='button'
           variant='light'
         >
-          Xóa lọc
+          Clear filters
         </Button>
         <Button rounded type='button' variant='primary'>
-          Áp dụng
+          Apply
         </Button>
       </div>
     </div>
@@ -209,7 +230,7 @@ function CreateWorkspaceCase() {
     >
       <div className='grid gap-4 sm:grid-cols-2'>
         <Field required>
-          <Field.Label>Tên workspace</Field.Label>
+          <Field.Label>Workspace name</Field.Label>
           <Field.Control
             onChange={e => setName(e.target.value)}
             placeholder='Acme Corp'
@@ -225,13 +246,13 @@ function CreateWorkspaceCase() {
             rounded
             value={slug}
           />
-          <Field.Description>Dùng trong link mời thành viên.</Field.Description>
+          <Field.Description>Used in member invite links.</Field.Description>
         </Field>
         <Field>
-          <Field.Label>Gói</Field.Label>
+          <Field.Label>Plan</Field.Label>
           <Select items={planItems} onValueChange={setPlan} value={plan}>
-            <Select.Trigger className='w-full rounded-full' placeholder='Chọn gói'>
-              {item => item?.label ?? 'Chọn gói'}
+            <Select.Trigger className='w-full rounded-full' placeholder='Select plan'>
+              {item => item?.label ?? 'Select plan'}
             </Select.Trigger>
             <Select.Content>
               {planItems.map(item => (
@@ -243,7 +264,7 @@ function CreateWorkspaceCase() {
           </Select>
         </Field>
         <NumberField
-          label='Số ghế'
+          label='Seats'
           max={99}
           min={1}
           onValueChange={v => setSeats(v ?? 1)}
@@ -253,10 +274,10 @@ function CreateWorkspaceCase() {
       </div>
       <div className='flex flex-wrap items-center justify-end gap-2 border-slate-200/80 border-t pt-4 dark:border-line'>
         <Button rounded type='button'>
-          Hủy
+          Cancel
         </Button>
         <Button rounded type='submit' variant='primary'>
-          Tạo workspace
+          Create workspace
         </Button>
       </div>
     </form>
@@ -269,17 +290,17 @@ function ProfileSettingsCase() {
   return (
     <div className='flex flex-col gap-4 sm:flex-row sm:items-end'>
       <Field className='min-w-0 flex-1' size='lg'>
-        <Field.Label>Tên hiển thị</Field.Label>
+        <Field.Label>Display name</Field.Label>
         <HugeiconsIcon className='icon-start' icon={UserIcon} strokeWidth={2} />
         <Field.Control
           onChange={e => setDisplayName(e.target.value)}
-          placeholder='Tên của bạn'
+          placeholder='Your name'
           rounded
           value={displayName}
         />
       </Field>
       <Button rounded size='lg' type='button' variant='primary'>
-        Lưu thay đổi
+        Save changes
       </Button>
     </div>
   )
@@ -291,7 +312,7 @@ function InlineFieldButtonCase() {
   return (
     <div className='flex flex-col gap-2 sm:flex-row sm:items-stretch'>
       <Field className='min-w-0 flex-1'>
-        <Field.Label>Mời qua email</Field.Label>
+        <Field.Label>Invite by email</Field.Label>
         <HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
         <Field.Control
           onChange={e => setInvite(e.target.value)}
@@ -302,7 +323,7 @@ function InlineFieldButtonCase() {
         />
       </Field>
       <Button className='sm:self-end' disabled={!invite} rounded type='button' variant='primary'>
-        Gửi lời mời
+        Send invite
       </Button>
     </div>
   )
@@ -325,7 +346,7 @@ function SizeAlignmentCase() {
           <tr className='text-muted'>
             <th className='w-24 pb-3 font-medium'>Size</th>
             <th className='pb-3 font-medium'>Field + Button (pill)</th>
-            <th className='pb-3 font-medium'>Field + Button (góc chuẩn)</th>
+            <th className='pb-3 font-medium'>Field + Button (default corners)</th>
           </tr>
         </thead>
         <tbody className='divide-y divide-slate-100 dark:divide-line'>
@@ -361,9 +382,9 @@ function SizeAlignmentCase() {
 }
 
 const notificationItems = [
-  { id: 'product', label: 'Cập nhật sản phẩm', desc: 'Tính năng mới, ra mắt và bản vá.' },
-  { id: 'security', label: 'Cảnh báo bảo mật', desc: 'Đăng nhập lạ, đổi mật khẩu.' },
-  { id: 'billing', label: 'Hoá đơn & thanh toán', desc: 'Sao kê hàng tháng, thẻ hết hạn.' },
+  { id: 'product', label: 'Product updates', desc: 'New features, launches, and patches.' },
+  { id: 'security', label: 'Security alerts', desc: 'Unusual sign-ins, password changes.' },
+  { id: 'billing', label: 'Billing & payments', desc: 'Monthly statements, expiring cards.' },
 ] as const
 
 function NotificationPreferencesCase() {
@@ -384,7 +405,7 @@ function NotificationPreferencesCase() {
         onCheckedChange={next => setChecked(Object.fromEntries(notificationItems.map(i => [i.id, next])))}
         size='lg'
       >
-        <span className='font-semibold'>Tất cả thông báo</span>
+        <span className='font-semibold'>All notifications</span>
       </Checkbox>
       <div className='flex flex-col gap-2 ps-7'>
         {notificationItems.map(i => (
@@ -405,8 +426,8 @@ function NotificationPreferencesCase() {
 }
 
 const planCardOptions = [
-  { id: 'free', name: 'Free', price: '$0', desc: '1 dự án · cá nhân.' },
-  { id: 'pro', name: 'Pro', price: '$19', desc: 'Team nhỏ · không giới hạn dự án.' },
+  { id: 'free', name: 'Free', price: '$0', desc: '1 project · personal.' },
+  { id: 'pro', name: 'Pro', price: '$19', desc: 'Small team · unlimited projects.' },
   { id: 'enterprise', name: 'Enterprise', price: 'Custom', desc: 'SSO · audit log · SLA.' },
 ]
 
@@ -415,7 +436,7 @@ function PlanRadioCardsCase() {
 
   return (
     <Field>
-      <Field.Label>Chọn gói thanh toán</Field.Label>
+      <Field.Label>Choose billing plan</Field.Label>
       <RadioGroup className='mt-1 grid gap-3 sm:grid-cols-3' onValueChange={setSelected} value={selected}>
         {planCardOptions.map(plan => (
           <Radio
@@ -439,7 +460,7 @@ function PlanRadioCardsCase() {
           </Radio>
         ))}
       </RadioGroup>
-      <Field.Description>Có thể nâng cấp hoặc đổi gói bất kỳ lúc nào.</Field.Description>
+      <Field.Description>You can upgrade or change plans at any time.</Field.Description>
     </Field>
   )
 }
@@ -510,8 +531,8 @@ function CheckRadioGalleryCase() {
       <div className='flex flex-col gap-2'>
         <span className='font-medium text-muted text-xs uppercase tracking-wider'>States</span>
         <div className='flex flex-wrap items-center gap-x-6 gap-y-3'>
-          <Checkbox>Bỏ chọn</Checkbox>
-          <Checkbox defaultChecked>Đã chọn</Checkbox>
+          <Checkbox>Unchecked</Checkbox>
+          <Checkbox defaultChecked>Checked</Checkbox>
           <Checkbox disabled>Disabled</Checkbox>
           <Checkbox defaultChecked disabled>
             Disabled · checked
@@ -530,14 +551,14 @@ function ModalFooterCase() {
 
   return (
     <div className='mx-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-lg ring-1 ring-slate-100 dark:border-line dark:bg-surface dark:ring-line/40'>
-      <h3 className='font-semibold text-base text-fg'>Lên lịch xuất bản</h3>
-      <p className='mt-1 text-muted text-sm'>Footer modal: field và nút cùng hàng, căn đáy.</p>
+      <h3 className='font-semibold text-base text-fg'>Schedule publish</h3>
+      <p className='mt-1 text-muted text-sm'>Modal footer: field and buttons on one row, bottom-aligned.</p>
       <Field className='mt-5'>
-        <Field.Label>Ngày giờ</Field.Label>
+        <Field.Label>Date & time</Field.Label>
         <HugeiconsIcon className='icon-start' icon={Calendar03Icon} strokeWidth={2} />
         <Field.Control
           onChange={e => setDate(e.target.value)}
-          placeholder='Chọn ngày…'
+          placeholder='Pick a date…'
           rounded
           type='datetime-local'
           value={date}
@@ -545,10 +566,10 @@ function ModalFooterCase() {
       </Field>
       <div className='mt-6 flex flex-wrap justify-end gap-2'>
         <Button rounded type='button'>
-          Hủy
+          Cancel
         </Button>
         <Button disabled={!date} rounded type='button' variant='primary'>
-          Xác nhận
+          Confirm
         </Button>
       </div>
     </div>
@@ -581,76 +602,76 @@ function FormsPage() {
               Forms playground
             </div>
             <h1 className='mt-6 max-w-3xl font-semibold text-3xl text-fg tracking-tight md:text-4xl lg:text-5xl'>
-              Field × Button trên cùng một trang
+              Field × Button on one page
             </h1>
             <p className='mt-4 max-w-3xl text-pretty text-base text-muted leading-relaxed md:text-lg'>
-              Preview các layout form thường gặp trong app thật — đăng nhập, lọc danh sách, tạo bản ghi, cài
-              đặt và bảng so size — để so chiều cao, bo góc (<code className='text-xs'>--control-radius</code>
-              ) và căn hàng giữa input và nút.
+              Preview common form layouts in real apps — sign-in, list filters, record creation, settings, and
+              a size matrix — to compare height, corner radius (
+              <code className='text-xs'>--control-radius</code>) and row alignment between inputs and buttons.
             </p>
           </section>
 
           <section className='mx-auto flex w-full max-w-5xl flex-col gap-6 px-5 pb-16 md:px-8 md:pb-20'>
             <PreviewSection
-              description='Input có icon, nút primary + ghost cùng chiều cao khi dùng rounded-full.'
-              title='1. Đăng nhập'
+              description='Icon input, primary + ghost buttons at the same height with rounded-full.'
+              title='1. Sign in'
             >
               <LoginFormCase />
             </PreviewSection>
 
             <PreviewSection
-              description='Search + 2 select + nhóm nút trên một hàng (responsive stack trên mobile).'
-              title='2. Thanh lọc danh sách'
+              description='Search + 2 selects + inline Toolbar (view toggle) + action buttons on one row — aligned with default Field/Button height.'
+              title='2. List filter bar'
             >
               <FilterBarCase />
             </PreviewSection>
 
             <PreviewSection
-              description='Grid 2 cột: text, select, NumberField cùng size default — footer Cancel / Submit.'
-              title='3. Tạo workspace'
+              description='Two-column grid: text, select, NumberField at default size — Cancel / Submit footer.'
+              title='3. Create workspace'
             >
               <CreateWorkspaceCase />
             </PreviewSection>
 
             <PreviewSection
-              description='Field size lg và Button size lg trên một hàng — pattern trang Settings.'
-              title='4. Cài đặt hồ sơ (size lg)'
+              description='Field size lg and Button size lg on one row — Settings page pattern.'
+              title='4. Profile settings (size lg)'
             >
               <ProfileSettingsCase />
             </PreviewSection>
 
             <PreviewSection
-              description='Email + nút gửi: kiểm tra căn đáy khi label chỉ có ở field bên trái.'
-              title='5. Mời thành viên (inline)'
+              description='Email + send button: check bottom alignment when only the field has a label.'
+              title='5. Invite member (inline)'
             >
               <InlineFieldButtonCase />
             </PreviewSection>
 
             <PreviewSection
-              description='So sánh pill vs góc mặc định theo từng size — dùng khi review radius sau refactor CSS.'
-              title='6. Ma trận size (alignment)'
+              description='Compare pill vs default corners per size — useful when reviewing radius after CSS refactors.'
+              title='6. Size matrix (alignment)'
             >
               <SizeAlignmentCase />
             </PreviewSection>
 
             <PreviewSection
               className='bg-slate-100/50 dark:bg-surface/50'
-              description='Khối giả lập modal: field full width, action bar bên phải.'
-              title='7. Footer dialog'
+              description='Modal mock: full-width field, action bar on the right.'
+              title='7. Dialog footer'
             >
               <ModalFooterCase />
             </PreviewSection>
 
             <PreviewSection
-              description='Checkbox group có parent indeterminate: hữu ích cho cấu hình quyền & notification preferences.'
-              title='8. Tuỳ chọn thông báo (checkbox + indeterminate)'
+              description='Checkbox group with indeterminate parent — useful for permissions and notification preferences.'
+              title='8. Notification preferences (checkbox + indeterminate)'
             >
               <NotificationPreferencesCase />
             </PreviewSection>
 
             <PreviewSection
-              description='Radio cards giữ class .radio cho input, layout custom — selected có viền primary + ring nhẹ.'
-              title='9. Chọn gói (radio cards)'
+              description='Radio cards keep the .radio class for the input with custom layout — selected state uses primary border + light ring.'
+              title='9. Choose plan (radio cards)'
             >
               <PlanRadioCardsCase />
             </PreviewSection>
