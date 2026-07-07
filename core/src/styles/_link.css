@@ -10,54 +10,72 @@
     outline: none;
   }
 
-  &:active,
-  &:visited {
+  &:active {
     color: var(--color-primary);
+  }
+
+  &:visited {
+    text-decoration: underline dotted;
   }
 
   &.link-primary {
     font-weight: 500;
     color: var(--color-primary-700);
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-primary-900);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 
   &.link-success {
     color: var(--color-success-600);
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-success-700);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 
   &.link-info {
     color: var(--color-info-600);
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-info-700);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 
   &.link-warning {
     color: var(--color-warning-600);
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-warning-700);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 
   &.link-danger {
     color: var(--color-danger);
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-danger-700);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 
@@ -70,9 +88,12 @@
       color: var(--color-primary-600);
     }
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--fg);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 
@@ -86,9 +107,12 @@
       color: var(--color-primary-600);
     }
 
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-slate-900);
+    }
+
+    &:visited {
+      text-decoration: underline dotted;
     }
   }
 }
@@ -100,19 +124,17 @@
   }
 }
 
-/* Dark-mode overrides: shade sáng (-300 default, -100/-200 visited) cho contrast với body Nord. */
+/* Dark-mode overrides: shade sáng (-300 default) cho contrast với body Nord. */
 .dark {
   .link {
-    &:active,
-    &:visited {
+    &:active {
       color: var(--color-primary-200);
     }
 
     &.link-primary {
       color: var(--color-primary-300);
 
-      &:active,
-      &:visited {
+      &:active {
         color: var(--color-primary-100);
       }
     }
@@ -120,8 +142,7 @@
     &.link-success {
       color: var(--color-success-300);
 
-      &:active,
-      &:visited {
+      &:active {
         color: var(--color-success-200);
       }
     }
@@ -129,8 +150,7 @@
     &.link-info {
       color: var(--color-info-300);
 
-      &:active,
-      &:visited {
+      &:active {
         color: var(--color-info-200);
       }
     }
@@ -138,8 +158,7 @@
     &.link-warning {
       color: var(--color-warning-300);
 
-      &:active,
-      &:visited {
+      &:active {
         color: var(--color-warning-200);
       }
     }
@@ -147,8 +166,7 @@
     &.link-danger {
       color: var(--color-danger-300);
 
-      &:active,
-      &:visited {
+      &:active {
         color: var(--color-danger-200);
       }
     }
@@ -170,8 +188,7 @@
         color: var(--color-primary-400);
       }
 
-      &:active,
-      &:visited {
+      &:active {
         color: var(--color-slate-100);
       }
     }
