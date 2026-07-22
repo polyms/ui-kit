@@ -26,10 +26,9 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "@polyms/core-ui": ["core/src/index.ts"],
-      "~plugins/*": ["plugins/*"]
+      "@polyms/core-ui": ["./core/src/index.ts"],
+      "~plugins/*": ["./plugins/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
