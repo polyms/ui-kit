@@ -145,10 +145,7 @@ export default defineConfig(async () => {
 
           const newPath = path.relative(path.dirname(filePath), `${outDir}/base`)
           const baseImport = newPath === 'base' || newPath === '' ? './base' : newPath
-          const modifiedContent = content.replaceAll(
-            /(?:node_modules\/)?@base-ui\/react/g,
-            baseImport
-          )
+          const modifiedContent = content.replaceAll(/(?:node_modules\/)?@base-ui\/react/g, baseImport)
 
           return { content: modifiedContent, filePath }
         },

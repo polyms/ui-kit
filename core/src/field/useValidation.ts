@@ -1,19 +1,5 @@
-import {
-  autoUpdate,
-  flip,
-  offset,
-  type UseFloatingReturn,
-  useFloating,
-} from '@floating-ui/react-dom'
-import {
-  type CSSProperties,
-  type HTMLProps,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from 'react'
+import { autoUpdate, flip, offset, type UseFloatingReturn, useFloating } from '@floating-ui/react-dom'
+import { type CSSProperties, type HTMLProps, useCallback, useEffect, useId, useRef, useState } from 'react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
