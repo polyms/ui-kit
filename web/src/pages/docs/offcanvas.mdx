@@ -1,0 +1,273 @@
+---
+type: Feedback
+title: Offcanvas
+apis:
+  - separator: Offcanvas (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Called when offcanvas open state changes.
+  - name: swipeDirection
+    default: left
+    values: left | right | up | down
+    description: The edge where the panel appears and the direction it swipes to dismiss.
+  - separator: Offcanvas.Content
+  - name: closeButton
+    default: 'true'
+    values: boolean
+    description: When true, displays a close button in the top-right corner.
+  - name: backdrop
+    default: 'true'
+    values: boolean
+    description: When true, displays a backdrop overlay behind the offcanvas.
+  - name: size
+    default: '-'
+    values: sm | md | lg | xl | 2xl | 3xl | full
+    description: Controls panel width (left/right) or height (up/down). On mobile, the panel remains full-width bottom drawer.
+  - separator: useOffcanvasStore.showOffcanvas(id, element, options?)
+  - name: id
+    default: '-'
+    values: string
+    description: Unique key for the offcanvas instance. Reusing an id replaces the previous entry.
+  - name: element
+    default: '-'
+    values: ReactNode
+    description: Offcanvas content, typically an Offcanvas.Content tree with Header, Body, and Close.
+  - name: options.onClose
+    default: '-'
+    values: '(reason?) => void'
+    description: Called when the offcanvas finishes closing (after the exit animation).
+  - separator: useOffcanvasStore.closeOffcanvas(id, reason?)
+  - name: id
+    default: '-'
+    values: string
+    description: The id passed to showOffcanvas. Starts close animation then removes the panel after 300ms.
+  - name: reason
+    default: '-'
+    values: Drawer close reason
+    description: Optional close reason forwarded to onClose (e.g. escape press, outside click, swipe).
+---
+
+import Story from './-views/offcanvas/OffcanvasDefault.tsx'
+import code from './-views/offcanvas/OffcanvasDefault.tsx?raw'
+import Programmatic from './-views/offcanvas/OffcanvasProgrammatic.tsx'
+import programmaticCode from './-views/offcanvas/OffcanvasProgrammatic.tsx?raw'
+
+Offcanvas panels slide in from the edge of the viewport to display supplementary content, navigation menus, or settings. They provide a focused workspace without leaving the current page context.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Button, Offcanvas } from '@polyms/ui-kit'
+
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' />}>Open Menu</Offcanvas.Trigger>
+    <Offcanvas.Content>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Navigation</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Description>Browse through the menu options below</Offcanvas.Description>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
+```
+
+## Composition
+
+Offcanvas supports flexible composition with Header, Title, Description, Body, and Close components.
+
+### Complete Example
+
+```tsx
+import { Button, Offcanvas } from '@polyms/ui-kit'
+
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Settings</Offcanvas.Trigger>
+    <Offcanvas.Content>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Settings</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Description>Manage your preferences</Offcanvas.Description>
+      <Offcanvas.Body>
+        <div>Settings content goes here</div>
+      </Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
+```
+
+### Direction
+
+Use `swipeDirection` on `Offcanvas` to choose which viewport edge the panel uses. The value also controls the dismissal gesture and exit animation.
+
+```tsx
+import { Button, Offcanvas } from '@polyms/ui-kit'
+
+export default function DirectionOffcanvas() {
+  return (
+    <div className='m-auto grid grid-cols-2 gap-4'>
+      {(['left', 'right', 'up', 'down'] as const).map((direction) => (
+        <Offcanvas key={direction} swipeDirection={direction}>
+          <Offcanvas.Trigger render={<Button variant='primary' />}>Open {direction}</Offcanvas.Trigger>
+          <Offcanvas.Content>
+            <Offcanvas.Header>
+              <Offcanvas.Title>{direction} offcanvas</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Description>This panel is placed on the {direction} edge.</Offcanvas.Description>
+          </Offcanvas.Content>
+        </Offcanvas>
+      ))}
+    </div>
+  )
+}
+```
+
+### Without Close Button
+
+Hide the close button when you need explicit user action to close.
+
+```tsx
+import { Button, Offcanvas } from '@polyms/ui-kit'
+
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' />}>Confirm</Offcanvas.Trigger>
+    <Offcanvas.Content closeButton={false}>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Confirmation Required</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>
+        <Button variant='primary'>Confirm</Button>
+        <Offcanvas.Close render={<Button rounded />}>Cancel</Offcanvas.Close>
+      </Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
+```
+
+### Without Backdrop
+
+Remove the backdrop overlay for a less intrusive experience.
+
+```tsx
+import { Button, Offcanvas } from '@polyms/ui-kit'
+
+const offcanvas = (
+  <Offcanvas>
+    <Offcanvas.Trigger render={<Button variant='primary' outlined />}>Quick Menu</Offcanvas.Trigger>
+    <Offcanvas.Content backdrop={false}>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Quick Actions</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>Menu content</Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
+```
+
+### Size
+
+Use `size` on `Offcanvas.Content` to control panel width for left/right drawers or height for up/down drawers. Values: `sm` (300px), `md` (360px), `lg` (480px), `xl` (640px), `2xl` (768px), `3xl` (896px), `full` (100%). When omitted, defaults to 360px width / 90% height.
+
+```tsx
+import { Button, Offcanvas } from '@polyms/ui-kit'
+
+const offcanvas = (
+  <Offcanvas swipeDirection='right'>
+    <Offcanvas.Trigger render={<Button variant='primary' />}>Wide panel</Offcanvas.Trigger>
+    <Offcanvas.Content size='lg'>
+      <Offcanvas.Header>
+        <Offcanvas.Title>Settings</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body>Wide settings panel</Offcanvas.Body>
+    </Offcanvas.Content>
+  </Offcanvas>
+)
+```
+
+## Behavior
+
+### Slide Animation
+
+The offcanvas smoothly slides in from the selected edge of the viewport with a backdrop overlay, creating a focused interaction space.
+
+### Swipe Direction
+
+`swipeDirection` accepts `left`, `right`, `up`, or `down`. A left drawer appears on the left edge and dismisses to the left; a down drawer appears on the bottom edge and dismisses downward.
+
+### Responsive behavior (mobile)
+
+On viewports **below 768px** wide, **`Offcanvas`** always uses a **bottom drawer** (`swipeDirection: 'down'`), regardless of the `swipeDirection` you pass. This matches common mobile patterns (sheet from the bottom). On **md+** breakpoints, your `swipeDirection` prop is respected for side panels.
+
+### Click Outside to Close
+
+Users can click on the backdrop to dismiss the offcanvas, providing an intuitive way to close it.
+
+## Keyboard Navigation
+
+- **Escape**: Close the offcanvas
+- **Tab**: Cycle through focusable elements within the offcanvas
+- **Shift + Tab**: Cycle backwards through focusable elements
+
+Focus is automatically trapped within the offcanvas when open and restored to the trigger element when closed.
+
+## Programmatic offcanvas
+
+Open panels from event handlers, data loaders, or global state without a declarative **`Offcanvas.Trigger`**. The store API uses **Zustand** (peer dependency — install **`zustand`** in your app).
+
+1. Mount **`Offcanvas.Container`** once near the root of your app (same level as your router outlet).
+2. Call **`useOffcanvasStore.getState().showOffcanvas(id, element, options?)`** with a stable **`id`** and an **`Offcanvas.Content`** tree.
+3. Close with **`Offcanvas.Close`**, **`closeOffcanvas(id)`**, or Escape / backdrop / swipe (handled by **`Offcanvas.Container`**).
+
+```tsx
+import { Button, Offcanvas, useOffcanvasStore } from '@polyms/ui-kit'
+
+function App() {
+  return (
+    <>
+      <Offcanvas.Container />
+      <YourRoutes />
+    </>
+  )
+}
+
+function NotificationsButton() {
+  const open = () =>
+    useOffcanvasStore.getState().showOffcanvas(
+      'notifications',
+      <Offcanvas.Content>
+        <Offcanvas.Header>
+          <Offcanvas.Title>Notifications</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>You're all caught up.</Offcanvas.Body>
+      </Offcanvas.Content>,
+      { onClose: (reason) => console.log('closed:', reason) }
+    )
+
+  return <Button onClick={open}>Notifications</Button>
+}
+```
+
+**Animation:** **`closeOffcanvas`** sets **`open: false`** first, then removes the entry after **300ms** so exit transitions can finish.
+
+<CodePreview code={programmaticCode}>
+  <Programmatic />
+</CodePreview>
+
+## API Reference
+
+<APIReference />

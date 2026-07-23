@@ -10,13 +10,13 @@
 
 ## 1. Executive Summary
 
-Polyms xây package icon riêng `@polyms/icons` (Nx project `icons/`), ship style **BoldDuotone** qua entry `@polyms/icons/bold-duotone` (export tên ngắn, ví dụ `Home` — style đã nằm trong path). v1 **clone nguyên bộ BoldDuotone Solar** vào provenance `solar/` (CC BY 4.0) và giữ `polyms/` cho glyph custom; publish **cùng pipeline / cùng version number với `@polyms/core-ui`**. Initiative thay thế cả `@hugeicons/*` và `@solar-icons/*` trong monorepo — demos, skill, Figma notes, builtin core — một họ icon, một import path.
+Polyms xây package icon riêng `@polyms/icons` (Nx project `icons/`), ship style **BoldDuotone** qua entry `@polyms/icons/bold-duotone` (export tên ngắn, ví dụ `Home` — style đã nằm trong path). v1 **clone nguyên bộ BoldDuotone Solar** vào provenance `solar/` (CC BY 4.0) và giữ `polyms/` cho glyph custom; publish **cùng pipeline / cùng version number với `@polyms/ui-kit`**. Initiative thay thế cả `@hugeicons/*` và `@solar-icons/*` trong monorepo — demos, skill, Figma notes, builtin core — một họ icon, một import path.
 
 ## 2. Problem Statement
 
 ### Background
 
-Kit UI hiện tại (`@polyms/core-ui`) không sở hữu bộ icon. Docs demos và skill bắt buộc `@hugeicons/react` + `@hugeicons/core-free-icons`; trong khi docs board headers trên Figma và một số surface marketing dùng `@solar-icons/react-perf` BoldDuotone. Builtin core (Select tick, Offcanvas close) hardcode path SVG từ Hugeicons CDN. Kết quả: hai họ icon song song, skill lệch Figma, và dependency vendor bên ngoài cho glyph “chuẩn kit”.
+Kit UI hiện tại (`@polyms/ui-kit`) không sở hữu bộ icon. Docs demos và skill bắt buộc `@hugeicons/react` + `@hugeicons/core-free-icons`; trong khi docs board headers trên Figma và một số surface marketing dùng `@solar-icons/react-perf` BoldDuotone. Builtin core (Select tick, Offcanvas close) hardcode path SVG từ Hugeicons CDN. Kết quả: hai họ icon song song, skill lệch Figma, và dependency vendor bên ngoài cho glyph “chuẩn kit”.
 
 ### Problem
 
@@ -28,7 +28,7 @@ Chi phí không giải quyết: drift visual tăng theo mỗi demo mới; skill 
 
 ### Opportunity
 
-Một package `@polyms/icons` chứa **toàn bộ** glyph BoldDuotone Solar (vendor SVG + codegen React tree-shakeable) cộng glyph `polyms/` khi thiếu; entry BoldDuotone duy nhất ở v1; monorepo migrate hết về một path; attribution CC BY trong LICENSE; skill và Figma cùng một họ; version lockstep với core.
+Một package `@polyms/icons` chứa **toàn bộ** glyph BoldDuotone Solar (vendor SVG + codegen React tree-shakeable) cộng glyph `polyms/` khi thiếu; entry BoldDuotone duy nhất ở v1; monorepo migrate hết về một path; attribution CC BY trong LICENSE; skill và Figma cùng một họ; version lockstep với ui-kit.
 
 ## 3. Goals & Success Metrics
 
@@ -37,18 +37,18 @@ Một package `@polyms/icons` chứa **toàn bộ** glyph BoldDuotone Solar (ven
 | Một import path chính thức cho icon v1    | Số entry path được document & dùng trong monorepo | = 1: `@polyms/icons/bold-duotone` | Rà soát import trong monorepo + README package / skill |
 | Loại bỏ vendor icon cũ trong monorepo     | Dependency `@hugeicons/*` và `@solar-icons/*` | = 0 sau migrate | `package.json` workspace + lockfile; grep import        |
 | Sở hữu glyph + provenance rõ              | Thư mục nguồn SVG theo provenance           | Có `solar/` (full BoldDuotone) và `polyms/` | Cấu trúc package icons + đếm file SVG Solar ≈ catalog upstream BoldDuotone |
-| Version lockstep với core                 | Version `@polyms/icons` vs `@polyms/core-ui` | Cùng số version mỗi release | `nx release` / package metadata                         |
+| Version lockstep với ui-kit                 | Version `@polyms/icons` vs `@polyms/ui-kit` | Cùng số version mỗi release | `nx release` / package metadata                         |
 | Tuân thủ CC BY 4.0 cho glyph Solar        | Attribution trong artifact phân phối        | Có trong LICENSE (và NOTICE nếu cần) | Review file LICENSE của package trước publish           |
-| Builtin core không phụ thuộc CDN vendor   | Select tick / Offcanvas close               | 0 URL `cdn.hugeicons.com` | Grep source core                                        |
+| Builtin core không phụ thuộc CDN vendor   | Select tick / Offcanvas close               | 0 URL `cdn.hugeicons.com` | Grep source ui-kit                                        |
 | Skill và design guidance đồng bộ họ icon  | Hard rule skill + design notes              | Cùng trỏ `@polyms/icons/bold-duotone` | Diff skill + design agent docs sau migrate              |
 
 ### Non-goals
 
-- Đổi tên marketing `core-ui` → `ui-kit` hoặc sync branding với ai-kit.
+- Rename marketing đã tách sang PRD rename ui-kit (làm trước icons).
 - Ship nhiều style (Linear, Outline, Broken, Bold, …) trong v1 — **chỉ** BoldDuotone; không clone 5 style còn lại của Solar.
 - Suffix tên component theo style (`HomeBoldDuotone`) — style đã encode trong subpath.
-- Version / publish `@polyms/icons` lệch lịch hoặc lệch số version so với `@polyms/core-ui`.
-- Re-export icon qua barrel `@polyms/core-ui`.
+- Version / publish `@polyms/icons` lệch lịch hoặc lệch số version so với `@polyms/ui-kit`.
+- Re-export icon qua barrel `@polyms/ui-kit`.
 - Plugin Figma sync tự động glyph (có thể Future / P2 — không chặn MVP).
 
 ## 4. Users & Personas
@@ -73,7 +73,7 @@ Một package `@polyms/icons` chứa **toàn bộ** glyph BoldDuotone Solar (ven
 *Why P0:* Không có entry path thì initiative không có surface dùng được.
 
 ```
-Given package `@polyms/icons` đã publish/link trong workspace (cùng version với core khi release)
+Given package `@polyms/icons` đã publish/link trong workspace (cùng version với ui-kit khi release)
 When tôi import `{ Home }` từ `@polyms/icons/bold-duotone` và render trong React
 Then component render SVG BoldDuotone; tên export **không** mang suffix style; không yêu cầu `@hugeicons/*` hay `@solar-icons/*`
 ```
@@ -133,7 +133,7 @@ Then không còn URL `cdn.hugeicons.com`; glyph lấy từ bộ Polyms icons (in
 ```
 
 ```
-Given skill `core-ui` hard rules và quality guidance về icons
+Given skill `ui-kit` hard rules và quality guidance về icons
 When agent đọc skill sau migrate
 Then hard rule trỏ `@polyms/icons/bold-duotone` (không còn bắt buộc `@hugeicons/react`)
 ```
@@ -176,12 +176,12 @@ Out of MVP — xem Future; story giữ chỗ ưu tiên thấp nếu stakeholder 
 
 ### Overview
 
-Tạo **Nx project riêng** `icons/` cạnh `core/` và `docs/`. Nguồn sự thật là SVG trong repo, phân thư mục provenance:
+Tạo **Nx project riêng** `icons/` cạnh `ui-kit/ và `docs/`. Nguồn sự thật là SVG trong repo, phân thư mục provenance:
 
 - **Clone nguyên bộ BoldDuotone** từ Solar Icons (480 Design, CC BY 4.0) → `icons/svg/solar/`
 - Glyph custom Polyms → `icons/svg/polyms/`
 
-Pipeline **codegen** biến SVG → React components. Package publish **`@polyms/icons`**, consumer v1 chỉ dùng subpath **`@polyms/icons/bold-duotone`** với export tên ngắn (`Home`, không `HomeBoldDuotone`). Package npm **tách** khỏi barrel `@polyms/core-ui` nhưng **release cùng pipeline và cùng số version** với `@polyms/core-ui`. Sau đó migrate demos, skill, Figma notes, builtin core; gỡ `@hugeicons/*` và `@solar-icons/*`.
+Pipeline **codegen** biến SVG → React components. Package publish **`@polyms/icons`**, consumer v1 chỉ dùng subpath **`@polyms/icons/bold-duotone`** với export tên ngắn (`Home`, không `HomeBoldDuotone`). Package npm **tách** khỏi barrel `@polyms/ui-kit` nhưng **release cùng pipeline và cùng số version** với `@polyms/ui-kit`. Sau đó migrate demos, skill, Figma notes, builtin core; gỡ `@hugeicons/*` và `@solar-icons/*`.
 
 ### User flows
 
@@ -191,7 +191,7 @@ Pipeline **codegen** biến SVG → React components. Package publish **`@polyms
 3. Chạy codegen → React components trên entry bold-duotone; export tên ngắn khớp tên glyph.
 4. Engineer / agent: `import { Home } from '@polyms/icons/bold-duotone'`.
 5. Migrate demos + skill + builtins; map Hugeicons → tên Solar BoldDuotone tương đương (hoặc glyph polyms/).
-6. `nx release` (hoặc pipeline hiện có) bump **cùng version** cho `core` và `icons`.
+6. `nx release` (hoặc pipeline hiện có) bump **cùng version** cho `ui-kit` và `icons`.
 ```
 
 ### Key screens / touchpoints
@@ -213,9 +213,9 @@ Pipeline **codegen** biến SVG → React components. Package publish **`@polyms
 | FR-08 | Cập nhật skill: hard rule import `@polyms/icons/bold-duotone`; bỏ Hugeicons; **standalone a11y** = tên trên control cha (pre-flight/quality enforce) — D6 | P0 | SKILL + quality/brandkit/button |
 | FR-09 | Builtin Select tick và Offcanvas close không còn CDN Hugeicons; dùng glyph Polyms | P0 | |
 | FR-10 | Gỡ dependency `@hugeicons/*` và `@solar-icons/*` khỏi workspace sau migrate | P0 | Binary metric |
-| FR-11 | Không re-export icons qua barrel `@polyms/core-ui`                          | P0 | Package tách; version lockstep |
+| FR-11 | Không re-export icons qua barrel `@polyms/ui-kit`                          | P0 | Package tách; version lockstep |
 | FR-12 | v1 chứa **toàn bộ** glyph BoldDuotone Solar trong `svg/solar/` (không thu hẹp curated) | P0 | Không clone style khác |
-| FR-12b | Publish `@polyms/icons` cùng pipeline release và **cùng số version** với `@polyms/core-ui` | P0 | Decisions §16 |
+| FR-12b | Publish `@polyms/icons` cùng pipeline release và **cùng số version** với `@polyms/ui-kit` | P0 | Decisions §16 |
 | FR-13 | Cập nhật design agent notes / Figma header helpers sang bộ Polyms           | P1 | Sau hoặc song song migrate code |
 | FR-14 | Docs liệt kê catalog glyph v1 (tên + provenance)                            | P1 | |
 | FR-15 | Maintainer checklist thêm icon                                              | P1 | |
@@ -226,8 +226,8 @@ Pipeline **codegen** biến SVG → React components. Package publish **`@polyms
 | Category      | Requirement |
 | ------------- | ----------- |
 | Performance   | Import một named icon không kéo toàn bộ set vào bundle consumer (tree-shake / per-icon module). |
-| Accessibility | **Hướng A + skill xử lý standalone:** mọi icon mặc định decorative — `aria-hidden={true}` và `focusable="false"`. Không API `alt`/`title` trên icon component. Trường hợp **standalone** (icon-only, không có text cạnh): skill `core-ui` bắt buộc gắn accessible name trên **control cha** (`Button`/`aria-label`/`title`, …) — đây là cơ chế a11y cho standalone, không phải prop trên SVG. Escape hatch: spread SVG props (không document như API chính). |
-| Compatibility | React cùng peer major với `@polyms/core-ui` (React 19 trong monorepo hiện tại); ESM entry ổn định cho Vite. |
+| Accessibility | **Hướng A + skill xử lý standalone:** mọi icon mặc định decorative — `aria-hidden={true}` và `focusable="false"`. Không API `alt`/`title` trên icon component. Trường hợp **standalone** (icon-only, không có text cạnh): skill `ui-kit` bắt buộc gắn accessible name trên **control cha** (`Button`/`aria-label`/`title`, …) — đây là cơ chế a11y cho standalone, không phải prop trên SVG. Escape hatch: spread SVG props (không document như API chính). |
+| Compatibility | React cùng peer major với `@polyms/ui-kit` (React 19 trong monorepo hiện tại); ESM entry ổn định cho Vite. |
 | License       | Glyph `solar/`: CC BY 4.0 — attribution bắt buộc khi phân phối. Glyph `polyms/`: license Polyms (ghi rõ trong package). Không ship path/runtime phụ thuộc Hugeicons CDN. |
 | Maintainability | Codegen tái lập được từ SVG trong repo; không edit tay file generated như nguồn sự thật. |
 
@@ -251,7 +251,7 @@ Pipeline **codegen** biến SVG → React components. Package publish **`@polyms
 | Subset SVG Solar (CC BY 4.0) cần curate | Maintainer icons | Ready to source từ upstream Solar | Chặn codegen + migrate demos |
 | Pipeline codegen SVG → React | Maintainer icons | Chưa có trong repo | Chặn FR-01–FR-03 |
 | Quyết định naming / release / catalog | Stakeholders | **Đã chốt** (xem §16 Decisions) | — |
-| Peer React / bundler monorepo | core-ui workspace | Ready | Thấp |
+| Peer React / bundler monorepo | ui-kit workspace | Ready | Thấp |
 | Figma docs headers scripts | Design/maintainer | P1 | Không chặn npm package MVP |
 
 ## 11. Scope
@@ -263,17 +263,17 @@ Pipeline **codegen** biến SVG → React components. Package publish **`@polyms
 - Codegen React; tree-shake per icon; size/color API; export tên ngắn (`Home`).
 - LICENSE attribution CC BY cho Solar.
 - Migrate demos, skill, builtin core glyphs; gỡ `@hugeicons/*` và `@solar-icons/*`.
-- Package npm tách barrel core — **cùng version + cùng release** với `@polyms/core-ui`.
+- Package npm tách barrel ui-kit — **cùng version + cùng release** với `@polyms/ui-kit`.
 
 ### Out of scope
 
-- Rename marketing `core-ui` → `ui-kit` / sync ai-kit branding.
+- Rename ui-kit — xem PRD rename (làm trước initiative này).
 - Style khác BoldDuotone (Linear, Outline, Broken, Bold, …) trong v1 — không clone 5 style còn lại.
 - Suffix style trên tên export (`HomeBoldDuotone`).
-- Version/publish `@polyms/icons` lệch `core`.
-- Re-export icons từ `@polyms/core-ui`.
+- Version/publish `@polyms/icons` lệch `ui-kit`.
+- Re-export icons từ `@polyms/ui-kit`.
 - Plugin Figma đầy đủ / sync tự động mọi glyph (P2 / Future).
-- Thay thế icon ngoài monorepo này (consumer app riêng) trong cùng release — họ tự migrate khi sẵn sàng; PRD chỉ bắt buộc monorepo `core-ui`.
+- Thay thế icon ngoài monorepo này (consumer app riêng) trong cùng release — họ tự migrate khi sẵn sàng; PRD chỉ bắt buộc monorepo `ui-kit`.
 
 ### Future considerations
 
@@ -347,7 +347,7 @@ Select tick (`tick-01` CDN), Offcanvas close (`cancel-circle-half-dot` CDN) → 
 - Full BoldDuotone clone vẫn tree-shake được nhờ per-icon modules.
 - Không vendor SVG từ Hugeicons vào `svg/` — map Solar hoặc vẽ `polyms/`.
 - Monorepo là consumer bắt buộc đầu tiên; app ngoài tự migrate sau.
-- `@polyms/icons` và `@polyms/core-ui` luôn cùng version number khi publish (peer/docs có thể ghi “install cùng version”).
+- `@polyms/icons` và `@polyms/ui-kit` luôn cùng version number khi publish (peer/docs có thể ghi “install cùng version”).
 
 ### E. Ghi chú kỹ thuật bổ sung (cho implement)
 
@@ -357,7 +357,7 @@ Select tick (`tick-01` CDN), Offcanvas close (`cancel-circle-half-dot` CDN) → 
 | Quy mô | ~1 200+ glyph × 1 style; expect repo `icons/svg/solar/` + generated `src/bold-duotone/` lớn — CI/artifact cần theo dõi; runtime consumer chỉ trả phí icon đã import. |
 | Duotone + theme | Hai tầng path: tầng chính follow `currentColor` / prop `color`; tầng phụ opacity hoặc `color-mix` theo contract API (document trong README icons). |
 | Trùng tên | `polyms/` **thắng** `solar/` khi cùng export name — cho phép brand override không sửa file Solar. |
-| Release | Thêm project `icons` vào cùng `nx release` group với `core`; tag/version đồng số (ví dụ cả hai `0.x.y`). |
+| Release | Thêm project `icons` vào cùng `nx release` group với `ui-kit`; tag/version đồng số (ví dụ cả hai `0.x.y`). |
 | Skill | Hard rule import: `@polyms/icons/bold-duotone`. **Standalone a11y:** skill gắn tên trên control (D6) — không prop a11y trên icon. Cấm Hugeicons/Solar package. |
 | Attribution | LICENSE package + README: credit 480 Design (CC BY 4.0) + link Figma community Solar. |
 
@@ -376,11 +376,11 @@ _Không còn — a11y đã chốt D6._
 | # | Quyết định | Chi tiết |
 | - | ---------- | -------- |
 | D1 | Tên export ngắn | `Home`, không `HomeBoldDuotone` — style đã nằm trong path `/bold-duotone`. |
-| D2 | Release lockstep | `@polyms/icons` publish cùng pipeline với `@polyms/core-ui`, **cùng số version**. |
+| D2 | Release lockstep | `@polyms/icons` publish cùng pipeline với `@polyms/ui-kit`, **cùng số version**. |
 | D3 | Catalog v1 | Clone **nguyên bộ BoldDuotone** Solar vào `svg/solar/`; không curated thu hẹp; không clone style khác. |
 | D4 | Provenance | `svg/solar/` vs `svg/polyms/`; trùng tên → **polyms thắng**. |
 | D5 | Scope rename ui-kit | Ngoài PRD này. |
-| D6 | A11y = A + skill xử lý standalone | Icon luôn decorative (`aria-hidden` + `focusable="false"`). Không `alt`/`title` API trên icon. **Standalone** (icon-only): skill `core-ui` phối hợp — bắt buộc accessible name trên control cha; thiếu = fail pre-flight. |
+| D6 | A11y = A + skill xử lý standalone | Icon luôn decorative (`aria-hidden` + `focusable="false"`). Không `alt`/`title` API trên icon. **Standalone** (icon-only): skill `ui-kit` phối hợp — bắt buộc accessible name trên control cha; thiếu = fail pre-flight. |
 
 ## Next Step
 

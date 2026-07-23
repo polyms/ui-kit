@@ -12,7 +12,8 @@
     },
     "enabled": true,
     "includes": [
-      "core/**/*",
+      "ui-kit/**/*",
+      "web/**/*",
       "docs/**/*",
       ".vscode/settings.json",
       "biome.json",

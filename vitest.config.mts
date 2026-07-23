@@ -5,21 +5,21 @@ import path from 'node:path'
 export default defineConfig({
   plugins: [react()],
   test: {
-    projects: ['core'],
+    projects: ['ui-kit'],
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
-    include: ['core/src/**/*.test.{ts,tsx}'],
+    include: ['ui-kit/src/**/*.test.{ts,tsx}'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      include: ['core/src/**/*.{ts,tsx}'],
-      exclude: ['core/src/**/*.d.ts', 'core/src/**/index.ts', 'node_modules/', 'dist/'],
+      include: ['ui-kit/src/**/*.{ts,tsx}'],
+      exclude: ['ui-kit/src/**/*.d.ts', 'ui-kit/src/**/index.ts', 'node_modules/', 'dist/'],
     },
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './core/src'),
+      '~': path.resolve(__dirname, './ui-kit/src'),
     },
   },
 })

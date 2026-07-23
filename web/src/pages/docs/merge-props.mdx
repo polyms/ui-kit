@@ -1,0 +1,67 @@
+---
+type: Guide
+title: mergeProps
+apis:
+  - separator: mergeProps
+  - name: a…e
+    default: '-'
+    values: props object | (mergedSoFar) => props
+    description: Up to five prop sets to merge. Rightmost values win except for className, style, and event handlers.
+  - separator: mergePropsN
+  - name: props
+    default: '-'
+    values: Array of props objects or functions
+    description: Same merge rules as mergeProps when you need more than five sets.
+---
+
+**`mergeProps`** combines multiple React prop objects when you wrap or compose elements. Import it from **`@polyms/ui-kit`** with **`useRender`**.
+
+## Usage
+
+```tsx
+import { mergeProps, useRender } from '@polyms/ui-kit'
+import clsx from 'clsx'
+
+type CardProps = useRender.ComponentProps<'div'>
+
+export function Card({ className, render, ref, ...props }: CardProps) {
+  return useRender({
+    defaultTagName: 'div',
+    ref,
+    render,
+    props: mergeProps<'div'>({ className: clsx('card', className) }, props),
+  })
+}
+```
+
+## How merging works
+
+- Most keys — rightmost object wins
+- **`className`** — concatenated (rightmost first)
+- **`style`** — shallow-merged (rightmost keys overwrite)
+- **Event handlers** — all run (rightmost first)
+- **`ref`** — **not** merged; only the rightmost `ref` is kept. Pass multiple refs through **`useRender({ ref: [internalRef, ref] })`** instead
+
+## With the render callback
+
+When **`render`** is a function, props are not auto-merged onto your element. Merge the callback props with your own:
+
+```tsx
+import { mergeProps } from '@polyms/ui-kit'
+
+const trigger = (
+  <SomeTrigger
+    render={(props, state) => (
+      <button type='button' {...mergeProps<'button'>(props, { className: 'my-trigger' })}>
+        {state.open ? 'Open' : 'Closed'}
+      </button>
+    )}
+  />
+)
+```
+
+See also [useRender](/docs/use-render) for polymorphic composition.
+
+## API Reference
+
+<APIReference />

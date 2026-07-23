@@ -2,7 +2,7 @@
 
 File **nguồn chính** cho Cursor, Claude, các IDE tích hợp AI, và bất kỳ agent nào làm việc trên repo này. (Không chỉ GitHub Copilot — tránh phụ thuộc vào `.github/copilot-instructions.md` làm bản duy nhất.)
 
-**Core-UI** là thư viện UI React modular; monorepo **Nx** + **pnpm**; format/lint **Biome**.
+**UI Kit** là thư viện UI React modular; monorepo **Nx** + **pnpm**; format/lint **Biome**.
 
 ## Agent skills
 
@@ -14,7 +14,7 @@ See `docs/agents/language.md`.
 
 ### Issue tracker
 
-GitHub issues on **polyms/core-ui** via `gh` CLI. See `docs/agents/issue-tracker.md`.
+GitHub issues on **polyms/ui-kit** via `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Domain docs
 
@@ -26,7 +26,7 @@ Canonical roles mapped to tracker labels. See `docs/agents/triage-labels.md`.
 
 ### Design
 
-UI specs and `@polyms/core-ui` pointers; **Figma token board** link and page structure for new sessions. See `docs/agents/design.md`.
+UI specs and `@polyms/ui-kit` pointers; **Figma token board** link and page structure for new sessions. See `docs/agents/design.md`.
 
 ### Pipeline
 
@@ -38,8 +38,9 @@ Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/de
 
 | Khu vực | Vai trò                                                                                                    |
 | ------- | ---------------------------------------------------------------------------------------------------------- |
-| `core/` | Component tái sử dụng + style; build Vite → `dist/core`, package **`@polyms/core-ui`** (theo metadata Nx). |
-| `docs/` | Site tài liệu: **TanStack Router**, **MDX**, demo live.                                                    |
+| `ui-kit/` | Component tái sử dụng + style; build Vite → `dist/ui-kit`, package **`@polyms/ui-kit`** (theo metadata Nx). |
+| `web/`  | Site công khai: **TanStack Router**, **MDX**, demo live (URL `/docs/...`).                                 |
+| `docs/` | Domain/ai-kit: `agents/`, `adr/`, `prd/` — không phải Nx app.                                              |
 
 **Stack chính:** React 19, TypeScript (strict), Vite 8, Tailwind CSS 4, `@base-ui/react`, Floating UI, Vitest + Testing Library, Zustand (ví dụ modal), shiki (highlight trong docs).
 
@@ -47,23 +48,29 @@ Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/de
 
 ## Cấu trúc & đường dẫn quan trọng
 
-**Core**
+**UI Kit**
 
-- `core/src/<feature>/` — mỗi feature một thư mục (`button/`, `modal/`, …): `Component.tsx`, `index.ts`, test `*.test.tsx`.
-- `core/src/styles/` — CSS theo component dạng **`_component-name.css`** (import/layer tập trung, không nhất thiết `styles/` con trong từng component).
-- `core/plugins/module-federation.plugin.ts` — Module Federation / dynamic imports.
-- `core/vite.config.mts` — cấu hình Vite cho library.
+- `ui-kit/src/<feature>/` — mỗi feature một thư mục (`button/`, `modal/`, …): `Component.tsx`, `index.ts`, test `*.test.tsx`.
+- `ui-kit/src/styles/` — CSS theo component dạng **`_component-name.css`** (import/layer tập trung, không nhất thiết `styles/` con trong từng component).
+- `ui-kit/plugins/module-federation.plugin.ts` — Module Federation / dynamic imports.
+- `ui-kit/vite.config.mts` — cấu hình Vite cho library.
 
-**Docs**
+**Web**
 
-- `docs/src/pages/` — route file-based + **`.mdx`** (nhóm theo thư mục, ví dụ `pages/docs/button.mdx`).
-- `docs/src/pages/docs/-views/` — demo/preview cho tài liệu.
-- `docs/src/layouts/` — `AppSidebar.tsx`, `DocsToc.tsx`, `CodePreview.tsx`, …
-- `docs/src/styles/` — CSS riêng site docs (ví dụ **`_details.css`** — API Reference accordion scoped `.api-reference`; giữ comment section trong file).
-- `docs/plugins/mdxNavigation.plugin.ts` — sinh module ảo **`virtual:mdx-navigation`** (scan MDX, frontmatter `title`, nhóm theo cây thư mục).
-- `docs/src/mdx-navigation.d.ts` — khai báo TypeScript cho module ảo.
-- `docs/vite.config.mts` — Vite cho site docs.
+- `web/src/pages/` — route file-based + **`.mdx`** (nhóm theo thư mục, ví dụ `pages/docs/button.mdx` → URL `/docs/button`).
+- `web/src/pages/docs/-views/` — demo/preview cho tài liệu.
+- `web/src/layouts/` — `AppSidebar.tsx`, `DocsToc.tsx`, `CodePreview.tsx`, …
+- `web/src/styles/` — CSS riêng site (ví dụ **`_details.css`** — API Reference accordion scoped `.api-reference`; giữ comment section trong file).
+- `web/plugins/mdxNavigation.plugin.ts` — sinh module ảo **`virtual:mdx-navigation`** (scan MDX, frontmatter `title`, nhóm theo cây thư mục).
+- `web/src/mdx-navigation.d.ts` — khai báo TypeScript cho module ảo.
+- `web/vite.config.mts` — Vite cho site.
 - **`routeTree.gen.ts`** — generate (TanStack Router); **không sửa tay**.
+
+**Docs (ai-kit)**
+
+- `docs/agents/` — language, issue-tracker, domain, design, triage-labels.
+- `docs/adr/` — ADRs.
+- `docs/prd/` — PRD mirrors.
 
 **Gốc repo**
 
@@ -76,17 +83,17 @@ Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/de
 Ưu tiên **pnpm** (đồng bộ với `package.json`):
 
 ```bash
-pnpm dev                    # nx serve docs — site tài liệu
-pnpm exec nx serve core     # dev server trực tiếp cho core (nếu cần)
+pnpm dev                    # nx serve web — site tài liệu
+pnpm exec nx serve ui-kit     # dev server trực tiếp cho ui-kit (nếu cần)
 pnpm build                  # nx build
-pnpm test                   # nx test core — Vitest
+pnpm test                   # nx test ui-kit — Vitest
 pnpm check                  # biome check --write . && prettier -l --write .
-pnpm release                # nx release … — project core (xem nx.json)
+pnpm release                # nx release … — project ui-kit (xem nx.json)
 ```
 
-Tương đương: `pnpm exec nx build core`, `pnpm exec nx build docs`, `pnpm exec nx test core --watch`, `pnpm exec nx test core -- --coverage`.
+Tương đương: `pnpm exec nx build ui-kit`, `pnpm exec nx build web`, `pnpm exec nx test ui-kit --watch`, `pnpm exec nx test ui-kit -- --coverage`.
 
-Tra cứu target: `pnpm exec nx show project core`, `pnpm exec nx show project docs`, `pnpm exec nx graph`.
+Tra cứu target: `pnpm exec nx show project ui-kit`, `pnpm exec nx show project web`, `pnpm exec nx graph`.
 
 ---
 
@@ -116,11 +123,11 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 ### Styling
 
 - **Tailwind** + `clsx()`; class có thể bị sort bởi Biome.
-- Style component: file **`core/src/styles/_tên-component.css`** và pattern import hiện có.
+- Style component: file **`ui-kit/src/styles/_tên-component.css`** và pattern import hiện có.
 - **Màu xám:** dùng **`--color-slate-*`**, không dùng `--color-neutral-*` (ví dụ `var(--color-slate-400)`).
-- **Phối transparent (idle/hover/active):** mọi component có state kiểu _ghost_ (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`core/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
-- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`core/skills/core-ui/css-utilities.md`** (section _CSS-Only Classes_ và _Interactive State Utilities_) để consumer agents biết.
-- **Comment section trong file CSS:** `core/src/styles/_*.css`, `docs/src/styles/_*.css`, … thường có comment phân vùng ngắn trước block rule (ví dụ `/* Trigger button styling */`, `/* Panel styling */` trong **`docs/src/styles/_details.css`**). **Không tự ý xóa** các comment kiểu này khi refactor, scope selector, hay format — chúng giúp điều hướng file dài. Khi thêm block rule mới cùng file, tiếp tục pattern tương tự nếu block tách rõ concern; chỉ bỏ comment khi xóa hẳn block rule đi kèm.
+- **Phối transparent (idle/hover/active):** mọi component có state kiểu _ghost_ (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`ui-kit/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
+- **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`ui-kit/skills/ui-kit/css-utilities.md`** (section _CSS-Only Classes_ và _Interactive State Utilities_) để consumer agents biết.
+- **Comment section trong file CSS:** `ui-kit/src/styles/_*.css`, `web/src/styles/_*.css`, … thường có comment phân vùng ngắn trước block rule (ví dụ `/* Trigger button styling */`, `/* Panel styling */` trong **`web/src/styles/_details.css`**). **Không tự ý xóa** các comment kiểu này khi refactor, scope selector, hay format — chúng giúp điều hướng file dài. Khi thêm block rule mới cùng file, tiếp tục pattern tương tự nếu block tách rõ concern; chỉ bỏ comment khi xóa hẳn block rule đi kèm.
 
 ### Component & state
 
@@ -154,7 +161,7 @@ export function Component({ className, render, ref, ...props }: ComponentProps) 
 
 - Typing: `useRender.ComponentProps<'tagname'>` (có sẵn prop `render`).
 - React 19: `ref` truyền vào `useRender({ ref })`; **không cần** `forwardRef` cho pattern này.
-- Trong `core/`: import trực tiếp `@base-ui/react/…` như trên. Consumer app: import `mergeProps` / `useRender` từ barrel `@polyms/core-ui`.
+- Trong `ui-kit/: import trực tiếp `@base-ui/react/…` như trên. Consumer app: import `mergeProps` / `useRender` từ barrel `@polyms/ui-kit`.
 
 ---
 
@@ -188,41 +195,41 @@ describe('ComponentName', () => {
 
 ## Tài liệu (MDX)
 
-1. Thêm **`*.mdx`** dưới `docs/src/pages/` (ví dụ `docs/src/pages/docs/foo.mdx`).
+1. Thêm **`*.mdx`** dưới `web/src/pages/` (ví dụ `web/src/pages/docs/foo.mdx` → URL `/docs/foo`).
 2. **Frontmatter** có **`title`** để sidebar hiển thị.
-3. Navigation do plugin quét file — không cần đăng ký tay; type trong **`docs/src/mdx-navigation.d.ts`**.
+3. Navigation do plugin quét file — không cần đăng ký tay; type trong **`web/src/mdx-navigation.d.ts`**.
 4. Khi đổi API component công khai: cập nhật trang MDX tương ứng và demo trong **`-views/`** nếu có.
 
-**Giọng end-user (chỉ `docs/`):** trang docs hướng người **dùng** `@polyms/core-ui` trong app — không mô tả monorepo, Base UI stack, đường dẫn `core/src/…`, hay wiring nội bộ site. Bảng so sánh dùng **JSX table** (GFM `| … |` không render trong MDX setup hiện tại). Chi tiết: **`.cursor/rules/docs-mdx-end-user-voice.mdc`** (kèm **`docs-mdx-heading-style.mdc`** cho heading).
+**Giọng end-user (chỉ site `web/`):** trang hướng người **dùng** `@polyms/ui-kit` trong app — không mô tả monorepo, Base UI stack, đường dẫn `ui-kit/src/…`, hay wiring nội bộ site. Bảng so sánh dùng **JSX table** (GFM `| … |` không render trong MDX setup hiện tại). Chi tiết: **`.cursor/rules/docs-mdx-end-user-voice.mdc`** (kèm **`docs-mdx-heading-style.mdc`** cho heading).
 
 Plugin/virtual module: dùng **`gray-matter`** cho frontmatter; virtual ID trong Vite thường resolve với prefix **`\\0`** — bám theo plugin hiện có.
 
 ---
 
-## Tài liệu cho consumer agent (`core-ui` skill)
+## Tài liệu cho consumer agent (`ui-kit` skill)
 
-Thư mục **`core/skills/core-ui/`** là nguồn chính cho agent guidance consumer và được copy vào **`dist/core/skills/core-ui`** khi build. Khi đổi cách tiêu thụ công khai (import style, peer deps, quy ước compose UI), cập nhật skill tương ứng trong **`core/skills/core-ui/`** và **`core/README.md`** cho đồng bộ.
+Thư mục **`ui-kit/skills/ui-kit/`** là nguồn chính cho agent guidance consumer và được copy vào **`dist/ui-kit/skills/ui-kit`** khi build. Khi đổi cách tiêu thụ công khai (import style, peer deps, quy ước compose UI), cập nhật skill tương ứng trong **`ui-kit/skills/ui-kit/`** và **`ui-kit/README.md`** cho đồng bộ.
 
-Repo này tự dùng cùng skill qua symlink **`.agents/skills/core-ui`** trỏ về **`core/skills/core-ui`**; không tạo bản copy thứ hai để tránh drift.
+Repo này tự dùng cùng skill qua symlink **`.agents/skills/ui-kit`** trỏ về **`ui-kit/skills/ui-kit`**; không tạo bản copy thứ hai để tránh drift.
 
 ---
 
-## Liên kết local `core`
+## Liên kết local `ui-kit`
 
 Trong app consumer thử nghiệm:
 
 ```json
-"@polyms/core-ui": "file:./dist/core"
+"@polyms/ui-kit": "file:./dist/ui-kit"
 ```
 
-(Sau `nx build core`.)
+(Sau `nx build ui-kit`.)
 
 ---
 
 ## Ghi chú cho agent
 
 - **TypeScript strict** — khai báo type đầy đủ; tránh `any` không cần thiết.
-- Thêm virtual module mới trong docs → bổ sung **`.d.ts`** tương ứng trong `docs/src/`.
+- Thêm virtual module mới trong `web/` → bổ sung **`.d.ts`** tương ứng trong `web/src/`.
 - Không chỉnh tay **`routeTree.gen.ts`**; để generator/router tool cập nhật.
 
 **Editor (VS Code / Cursor):** format on save với Biome; organize imports / fixAll theo setting workspace nếu có.
@@ -231,7 +238,7 @@ Trong app consumer thử nghiệm:
 
 ## Release
 
-`nx.json`: release độc lập cho `core` và `docs`; tag `{projectName}@{version}`; `preVersionCommand` chạy build — đảm bảo **build pass** trước khi release.
+`nx.json`: release độc lập cho `ui-kit` và `web`; tag `{projectName}@{version}`; `preVersionCommand` chạy build — đảm bảo **build pass** trước khi release.
 
 ---
 

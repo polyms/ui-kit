@@ -27,7 +27,7 @@
     "importHelpers": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@polyms/core-ui": ["./core/src/index.ts"],
+      "@polyms/ui-kit": ["./ui-kit/src/index.ts"],
       "~plugins/*": ["./plugins/*"]
     }
   },

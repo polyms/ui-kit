@@ -1,0 +1,235 @@
+---
+type: Data input
+title: Field
+apis:
+  - separator: Field.Root
+  - name: size
+    default: '-'
+    values: sm | lg | xl | 2xl | 3xl
+    description: Controls the padding and font size of the input field.
+  - name: name
+    default: '-'
+    values: string
+    description: Form control name wired to Field.Control (defaults from the field id when omitted).
+  - name: required
+    default: '-'
+    values: boolean
+    description: Marks the field as required and displays a visual indicator.
+  - name: invalid
+    default: '-'
+    values: boolean
+    description: Applies error styling to the field and enables Field.Feedback when present.
+  - separator: Field.Label
+  - name: render
+    default: <label/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default label element. Pass a React element or render function for advanced customization.
+  - separator: Field.Control
+  - name: disabled
+    default: '-'
+    values: boolean
+    description: Prevents interaction; applies muted background, border, and reduced opacity.
+  - name: readOnly
+    default: '-'
+    values: boolean
+    description: Shows the value without editing; muted background and no hover or focus ring.
+  - name: rounded
+    default: '-'
+    values: boolean
+    description: Makes the input field fully rounded (pill shape) when set to true.
+  - name: debounce
+    default: '-'
+    values: number
+    description: Milliseconds to wait before calling onChange after the last change event. Omit or use 0 for immediate updates (same pattern as Field.Floating).
+  - name: render
+    default: <input/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default input element. Pass a React element or render function for advanced customization.
+  - separator: Field.Description
+  - name: render
+    default: <div/>
+    values: ReactElement | (props, state) => ReactNode
+    description: Overrides the default description element. Pass a React element or render function for advanced customization.
+  - separator: Field.Feedback
+  - name: children
+    default: '-'
+    values: ReactNode
+    description: Validation message content. Renders only when the field is invalid and feedback is open (or defaultShowOnError is set).
+  - name: defaultShowOnError
+    default: '-'
+    values: boolean
+    description: Keeps the feedback message visible while the field is invalid, without requiring focus, hover, or click.
+  - name: floatingRoot
+    default: document.body
+    values: string
+    description: DOM id of the portal container for the feedback tooltip. Falls back to document.body when omitted or not found.
+  - separator: Field.Floating
+  - name: label
+    default: '-'
+    values: ReactNode
+    description: Label text for the floating label pattern.
+  - name: placeholder
+    default: '-'
+    values: ReactNode
+    description: Helper text rendered via Field.Description below the input.
+  - name: debounce
+    default: '-'
+    values: number
+    description: Milliseconds to debounce onChange. Omit for immediate updates on each change.
+  - name: onChange
+    default: '-'
+    values: '(event: ChangeEvent<HTMLInputElement>) => void'
+    description: Fires when the value changes; delayed by debounce when debounce is set.
+---
+
+import Story from './-views/field/FieldDefault.tsx'
+import code from './-views/field/FieldDefault.tsx?raw'
+import Sizes from './-views/field/FieldSizes.tsx'
+import States from './-views/field/FieldStates.tsx'
+import statesCode from './-views/field/FieldStates.tsx?raw'
+import Floating from './-views/field/FieldFloatingDemo.tsx'
+import floatingCode from './-views/field/FieldFloatingDemo.tsx?raw'
+import Invalid from './-views/field/FieldInvalidDemo.tsx'
+import invalidCode from './-views/field/FieldInvalidDemo.tsx?raw'
+
+A flexible form field wrapper that combines labels, inputs, descriptions, and validation feedback into a cohesive component. Use it to collect user input such as text, email, passwords, or search queries with proper accessibility and visual hierarchy.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Field } from '@polyms/ui-kit'
+
+const field = (
+  <Field required>
+    <Field.Label>Let me know your email?</Field.Label>
+    <Field.Control placeholder='tifa.lockhart@polyms.dev' />
+    <Field.Description>We'll never share your email with anyone else.</Field.Description>
+  </Field>
+)
+```
+
+## Field vs Field.Floating
+
+export const fieldPatterns = [
+  {
+    pattern: 'Field (standard tree)',
+    useWhen: 'Settings, signup, modals, validation',
+    details: 'Field.Label + Field.Feedback + icons',
+  },
+  {
+    pattern: 'Field.Floating (standalone)',
+    useWhen: 'Search bars, filters, debounced query',
+    details: 'Floating label; placeholder prop = helper text below',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th>Pattern</th>
+        <th>Use when</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {fieldPatterns.map((row, index) => (
+        <tr key={index}>
+          <td className='align-top text-nowrap font-medium text-fg'>{row.pattern}</td>
+          <td className='text-muted text-sm'>{row.useWhen}</td>
+          <td className='text-muted text-sm'>{row.details}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+**`Field.Floating` is not a child of `Field`.** Do not nest them.
+
+## Icons
+
+Place `HugeiconsIcon` with `className='icon-start'` or `'icon-end'` as **siblings** of `Field.Control` inside the `Field` root (after `Field.Label` when the label is visible). See the default demo.
+
+## Common mistakes
+
+- Raw `<label>` + `<input>` instead of the compound tree
+- `invalid` on `Field.Control` — put it on **`Field`** root
+- Using `Field.Floating`'s `placeholder` prop as the HTML input placeholder
+- Inventing `Field.Input` or importing `FieldFloating` separately
+- Expecting `Field.Feedback` to take a `render` prop — pass the message as **`children`**
+
+## Sizes
+
+Fields come in 6 different sizes to match various UI contexts. The default size provides balanced proportions for standard forms.
+
+<Sizes/ >
+
+## Disabled and read-only
+
+Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs block interaction and use reduced opacity; read-only inputs keep the value readable with a muted background and suppress hover border and focus ring styling.
+
+<CodePreview code={statesCode}>
+  <States />
+</CodePreview>
+
+## Invalid state
+
+Pass **`invalid`** on **`Field`** to apply error styling (danger border, text, and focus ring). Add **`Field.Feedback`** for the validation message — it portals as a tooltip near the control and opens on focus-visible, hover, or click. Use **`defaultShowOnError`** to keep it visible while invalid. Pass **`floatingRoot`** with a DOM id when the feedback must portal into a specific container (for example a modal body) instead of `document.body`.
+
+```tsx
+import { Field } from '@polyms/ui-kit'
+
+const emailField = (
+  <Field invalid={hasError} required>
+    <Field.Label>Email</Field.Label>
+    <Field.Control value={email} onChange={onEmailChange} />
+    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+  </Field>
+)
+```
+
+<CodePreview code={invalidCode}>
+  <Invalid />
+</CodePreview>
+
+## Debounced onChange
+
+Pass **`debounce`** (milliseconds) on **`Field.Control`** to delay **`onChange`** until typing pauses—useful for filtering or validation without work on every keystroke. Omit **`debounce`** or use **`0`** for synchronous **`onChange`** (native behavior).
+
+```tsx
+const field = (
+  <Field>
+    <Field.Label>Search</Field.Label>
+    <Field.Control debounce={300} onChange={(e) => console.log(e.target.value)} />
+  </Field>
+)
+```
+
+## Floating label
+
+**`Field.Floating`** bundles a floating-label input with optional helper text. Pass **`debounce`** when you want **`onChange`** to fire after a quiet period; omit it for updates on every change. Use **`placeholder`** for the description below the field, not the HTML placeholder (the input uses a blank placeholder so the label can animate).
+
+```tsx
+import { Field } from '@polyms/ui-kit'
+
+const fieldFloating = (
+  <Field.Floating
+    label='Search'
+    placeholder='Results update as you type'
+    debounce={400}
+    onChange={(e) => console.log(e.target.value)}
+  />
+)
+```
+
+<CodePreview code={floatingCode}>
+  <Floating />
+</CodePreview>
+
+## API Reference
+
+<APIReference />

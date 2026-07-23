@@ -5,13 +5,13 @@
   "packageManager": "pnpm@11.10.0",
   "license": "MIT",
   "type": "module",
-  "repository": "https://github.com/polyms/core-ui.git",
+  "repository": "https://github.com/polyms/ui-kit.git",
   "scripts": {
-    "start": "nx preview docs",
-    "build": "nx build core",
-    "test": "nx test core",
-    "dev": "nx serve docs",
-    "release": "nx release version patch --projects=core",
+    "start": "nx preview web",
+    "build": "nx build ui-kit",
+    "test": "nx test ui-kit",
+    "dev": "nx serve web",
+    "release": "nx release version patch --projects=ui-kit",
     "check": "biome check --write . && prettier -l --write ."
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 ---
 description: MDX documentation heading style
-globs: docs/src/pages/**/*.mdx
+globs: web/src/pages/**/*.mdx
 alwaysApply: false
 ---
 

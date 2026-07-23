@@ -1,0 +1,142 @@
+---
+type: Data input
+title: Select
+apis:
+  - separator: Select (Root)
+  - name: defaultValue
+    default: '-'
+    values: string | string[]
+    description: The default selected value when the component mounts. Use string array for multiple selection.
+  - name: value
+    default: '-'
+    values: string | string[]
+    description: The controlled selected value. Use with onValueChange for controlled behavior.
+  - name: onValueChange
+    default: '-'
+    values: '(value: string | string[]) => void'
+    description: Callback fired when the selected value changes.
+  - name: multiple
+    default: false
+    values: boolean
+    description: When true, allows selecting multiple items. Values become an array.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents interaction with the select component.
+  - separator: Select.Trigger
+  - name: size
+    default: '-'
+    values: sm | lg | xl | 2xl | 3xl
+    description: Controls the padding and font size of the trigger. Matches Field size tokens.
+  - name: placeholder
+    default: '-'
+    values: string
+    description: Text displayed when no value is selected.
+  - name: children
+    default: '-'
+    values: 'ReactNode | ((value: string | string[] | null) => ReactNode)'
+    description: Forwarded to Select.Value — formatter for the selected value(s). Omit when using items on Select for automatic labels.
+  - separator: Select.Item
+  - name: value
+    default: '-'
+    values: string
+    description: The unique value of this item. Required.
+  - name: disabled
+    default: false
+    values: boolean
+    description: When true, prevents this item from being selected.
+---
+
+import Story from './-views/select/SelectDefault.tsx'
+import code from './-views/select/SelectDefault.tsx?raw'
+import Sizes from './-views/select/SelectSizes.tsx'
+
+Allow users to choose one or multiple options from a dropdown list. Select components provide a space-efficient way to present many choices while maintaining a clean interface.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+Set **`items`** on **`Select`** so the trigger shows each option’s **`label`**. Optional **`Select.Trigger`** children format the displayed value: **`(value) => ReactNode`**, where **`value`** is the selected **`string`**, or **`string[]`** when **`multiple`** — not an item object.
+
+```tsx
+import { Select } from '@polyms/ui-kit'
+
+const items = [
+  { label: 'Option 1', value: 'option1' },
+  { label: 'Option 2', value: 'option2' },
+  { label: 'Option 3', value: 'option3' },
+]
+
+<Select defaultValue="option1" items={items}>
+  <Select.Trigger placeholder="Choose an option" />
+  <Select.Content>
+    <Select.Item value="option1">Option 1</Select.Item>
+    <Select.Item value="option2">Option 2</Select.Item>
+    <Select.Item value="option3">Option 3</Select.Item>
+  </Select.Content>
+</Select>
+```
+
+## Multiple selection
+
+Set **`multiple`** on **`Select`** so **`defaultValue`** / **`value`** and **`onValueChange`** use **`string[]`**. The live demo below uses **`multiple`** with grouped items.
+
+```tsx
+const stacks = [
+  { label: 'React', value: 'react' },
+  { label: 'Node.js', value: 'node' },
+]
+
+<Select multiple defaultValue={['react', 'node']} items={stacks}>
+  <Select.Trigger placeholder="Pick stacks" />
+  <Select.Content>
+    <Select.Item value="react">React</Select.Item>
+    <Select.Item value="node">Node.js</Select.Item>
+  </Select.Content>
+</Select>
+```
+
+## Sizes
+
+Select triggers use the same size scale as Field — pass **`size`** on **`Select.Trigger`**, or wrap the select in **`Field`** with **`size`** on the root so the trigger inherits matching dimensions.
+
+<Sizes />
+
+## Grouping
+
+Organize related options into groups with labels and separators for better scanability.
+
+```tsx
+const frameworks = [
+  { label: 'React', value: 'react' },
+  { label: 'Vue', value: 'vue' },
+  { label: 'Node.js', value: 'node' },
+  { label: 'Django', value: 'django' },
+]
+
+<Select items={frameworks}>
+  <Select.Trigger placeholder="Select framework" />
+  <Select.Content>
+    <Select.Group>
+      <Select.GroupLabel>Frontend</Select.GroupLabel>
+      <Select.Item value="react">React</Select.Item>
+      <Select.Item value="vue">Vue</Select.Item>
+    </Select.Group>
+
+    <Select.Separator />
+
+    <Select.Group>
+      <Select.GroupLabel>Backend</Select.GroupLabel>
+      <Select.Item value="node">Node.js</Select.Item>
+      <Select.Item value="django">Django</Select.Item>
+    </Select.Group>
+  </Select.Content>
+</Select>
+```
+
+## API Reference
+
+<APIReference />

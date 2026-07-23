@@ -1,0 +1,144 @@
+---
+type: Feedback
+title: Popover
+apis:
+  - separator: Popover (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Called when popover open state changes.
+  - separator: Popover.Content
+  - name: title
+    default: '-'
+    values: string
+    description: The title displayed at the top of the popover.
+  - name: description
+    default: '-'
+    values: string
+    description: The description text displayed below the title.
+  - name: side
+    default: bottom
+    values: top | bottom | left | right
+    description: The preferred side of the trigger to position the popover.
+  - name: align
+    default: center
+    values: start | center | end
+    description: The alignment of the popover relative to the trigger element.
+  - name: anchor
+    default: '-'
+    values: Element | null | VirtualElement
+    description: Custom anchor element for positioning the popover.
+---
+
+import Story from './-views/popover/PopoverDefault.tsx'
+import code from './-views/popover/PopoverDefault.tsx?raw'
+
+Popovers display rich content in a floating panel when triggered by user interaction. Unlike tooltips, they can contain interactive elements and stay open until explicitly closed. This component is based on the [WAI-ARIA Dialog (non-modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Button, Popover } from '@polyms/ui-kit'
+
+const popover = (
+  <Popover>
+    <Popover.Trigger render={<Button variant='primary' />}>Click me</Popover.Trigger>
+    <Popover.Content
+      title='Popover Title'
+      description='This is a popover with some helpful information.'
+      side='top'
+    />
+  </Popover>
+)
+```
+
+## Composition
+
+Popovers support flexible content composition beyond just title and description.
+
+### With Custom Content
+
+```tsx
+import { Button, Popover } from '@polyms/ui-kit'
+
+export default function CustomPopover() {
+  return (
+    <Popover>
+      <Popover.Trigger render={<Button variant='primary' />}>Settings</Popover.Trigger>
+      <Popover.Content title='Quick Settings' side='bottom'>
+        <div className='flex flex-col gap-2 p-2'>
+          <Button size='sm'>Dark Mode</Button>
+          <Button size='sm'>Notifications</Button>
+          <Button size='sm'>Privacy</Button>
+        </div>
+      </Popover.Content>
+    </Popover>
+  )
+}
+```
+
+### With Controlled State
+
+Control the popover's open state externally for programmatic control.
+
+```tsx
+import { Button, Popover } from '@polyms/ui-kit'
+import { useState } from 'react'
+
+export default function ControlledPopover() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className='flex gap-4'>
+      <Popover open={open} onOpenChange={setOpen}>
+        <Popover.Trigger render={<Button variant='primary' />}>Controlled Popover</Popover.Trigger>
+        <Popover.Content
+          title='Controlled'
+          description="This popover's state is controlled externally."
+          side='top'
+        />
+      </Popover>
+
+      <Button outlined onClick={() => setOpen(!open)} variant='light'>
+        Toggle from Outside
+      </Button>
+    </div>
+  )
+}
+```
+
+### With Close Button
+
+Add a close button inside the popover for explicit dismissal.
+
+```tsx
+import { Button, Popover } from '@polyms/ui-kit'
+
+export default function PopoverWithClose() {
+  return (
+    <Popover>
+      <Popover.Trigger render={<Button variant='primary' />}>Open Popover</Popover.Trigger>
+      <Popover.Content title='Dismissible Popover' side='right'>
+        <p className='text-sm mb-2'>Click the close button to dismiss this popover.</p>
+        <Popover.Close render={<Button className='w-full' size='sm' variant='light' />}>Close</Popover.Close>
+      </Popover.Content>
+    </Popover>
+  )
+}
+```
+
+## API Reference
+
+<APIReference />

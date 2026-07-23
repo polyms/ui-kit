@@ -1,0 +1,821 @@
+---
+type: Guide
+title: Design System
+---
+
+**Polyms UI Kit** (`@polyms/ui-kit`) is a React component library for product UI: semantic colors, compound components, CSS utilities, and dark mode. This page summarizes the visual and interaction rules to follow when building screens with the package. For install steps see [Installation](/installation); for AI assistants see [AI Agent Skill](/agent-skill). When anything disagrees with your installed version, trust **`index.d.ts`**.
+
+## Philosophy
+
+The system is built on three principles:
+
+**Consistency** — One semantic palette (primary, success, warning, danger, informational accents, light/dark surfaces) plus a **slate** gray ramp for chrome, so composed UI stays visually aligned with bundled components.
+
+**Accessibility** — Semantic HTML, keyboard support, and ARIA patterns built into components; target **WCAG 2.1 AA** for text contrast and focus behavior in your product screens.
+
+**Flexibility** — Themeable **CSS custom properties** (colors, z-index scale) and Tailwind utilities; prefer **component props** and **documented composition trees** over restyling component shells with ad-hoc Tailwind.
+
+## Foundation
+
+### Color System
+
+Semantic ramps use **11 steps (50–950)** where the theme defines them. Prefer **`var(--color-{name}-{step})`** in CSS and **`bg-*` / `text-*` / `border-*`** in Tailwind for **primary**, **success**, **info**, **warning**, and **danger**. For **neutral chrome** (borders, muted text, surfaces next to library components), use **slate only**—not the Tailwind **`neutral`** scale (see below).
+
+```css
+/* CSS Custom Properties */
+var(--color-primary-500)
+var(--color-success-600)
+var(--color-danger-50)
+
+/* Tailwind Utilities */
+bg-primary-500
+text-success-600
+border-danger-50
+```
+
+export const colorVariants = [
+  {
+    name: 'primary',
+    color: 'bg-primary-500',
+    description: 'Brand / default emphasis (buttons, links, key actions)',
+  },
+  { name: 'success', color: 'bg-success-500', description: 'Positive completion and confirmations' },
+  { name: 'info', color: 'bg-info-500', description: 'Soft informational accents (badges, hints)' },
+  { name: 'warning', color: 'bg-warning-500', description: 'Caution and at-risk states' },
+  { name: 'danger', color: 'bg-danger-500', description: 'Errors, validation, destructive actions' },
+  {
+    name: 'light',
+    color: 'bg-slate-100',
+    description: 'Surface / contrast helpers (`badge-light`, subtle panels)',
+  },
+  {
+    name: 'dark',
+    color: 'bg-slate-900',
+    description: 'High-contrast surfaces and inverse chrome (`badge-dark`, …)',
+  },
+  {
+    name: 'slate',
+    color: 'bg-slate-500',
+    description:
+      'Default **gray ramp** for UI chrome — use `slate-*` / `var(--color-slate-*)`, not `neutral-*`',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Preview</th>
+        <th className='w-px'>Variant</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {colorVariants.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <div
+              className={`${row.color} mx-auto size-10 rounded-lg outline -outline-offset-1 outline-black/10`}
+            />
+          </td>
+          <td>
+            <code className='text-nowrap'>{row.name}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+**All color variants include 11 shades (50-950) for flexible styling:**
+
+<table className='mt-4 table align-middle'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th className='w-px text-center'>50</th>
+      <th className='w-px text-center'>100</th>
+      <th className='w-px text-center'>200</th>
+      <th className='w-px text-center'>300</th>
+      <th className='w-px text-center'>400</th>
+      <th className='w-px text-center'>500</th>
+      <th className='w-px text-center'>600</th>
+      <th className='w-px text-center'>700</th>
+      <th className='w-px text-center'>800</th>
+      <th className='w-px text-center'>900</th>
+      <th className='w-px text-center'>950</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>primary</td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-primary-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>info</td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-info-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-success-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>danger</td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-danger-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-warning-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        slate <span className='text-muted text-xs'>(gray ramp)</span>
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-50 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-100 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-200 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-300 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-400 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-500 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-600 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-700 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-800 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-900 outline -outline-offset-1 outline-black/10' />
+      </td>
+      <td>
+        <div className='size-10 rounded-lg bg-slate-950 outline -outline-offset-1 outline-black/10' />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+**Tailwind color utilities**
+
+- `bg-{semantic}-{50…950}` — background
+- `text-{semantic}-{50…950}` — foreground
+- `border-{semantic}-{50…950}` — borders
+
+**Do not** substitute unrelated Tailwind families (`emerald-*`, `rose-*`, `amber-*`, …) when you mean **success**, **danger**, or **warning**—that drifts away from the contract used by **`btn-*`**, **`badge-*`**, and **`alert-*`**.
+
+#### Slate vs neutral
+
+In your app, use **`text-slate-*`**, **`bg-slate-*`**, **`border-slate-*`**, and **`var(--color-slate-50)` … `var(--color-slate-950)`** for generic gray UI. Avoid **`neutral-*`** utilities and **`var(--color-neutral-*)`** next to library components so borders, text, and surfaces stay on the same hue and contrast curve.
+
+### Brand theming
+
+Ship your product accent through the **`primary`** ramp. The library defaults to cyan; remap **`--color-primary-50` … `--color-primary-950`** in your app CSS **after** importing package styles — do not edit files inside `node_modules`.
+
+**You own (brand)**
+
+export const brandTokens = [
+  { token: '--color-primary-*', role: 'Buttons, links, link-primary, item-primary, focus emphasis' },
+  {
+    token: '--body, --fg, --surface, --surface-2, --muted, --line, --input',
+    role: 'Optional page chrome tuning (test light and .dark)',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Token</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {brandTokens.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap text-xs'>{row.token}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.role}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+**Keep semantic (intent)**
+
+export const semanticFamilies = [
+  {
+    family: 'success, warning, danger, info',
+    role: 'Status and validation — do not recolor for brand flair',
+  },
+  { family: 'slate-*', role: 'Gray chrome next to library components' },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Family</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {semanticFamilies.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap'>{row.family}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.role}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+```css
+/* src/styles/theme.css */
+@import '@polyms/ui-kit/styles/tailwind.css';
+
+@theme {
+  /* Example: indigo brand — define a full 50–950 ramp for hover/active states */
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  /* …remaining steps… */
+}
+
+:root {
+  --body: #ffffff;
+  --fg: var(--color-slate-900);
+}
+
+.dark {
+  --body: #2e3440;
+  --fg: #eceff4;
+}
+```
+
+Import `theme.css` once at the app entry (before or as your main global stylesheet). Components such as **`Button variant='primary'`**, **`link link-primary`**, and **`item-primary`** pick up the new ramp automatically.
+
+**Component touchpoints**
+
+export const brandTouchpoints = [
+  { ui: 'Primary action', pattern: "Button variant='primary'" },
+  { ui: 'Secondary / nav', pattern: 'item-primary + .active for current page' },
+  { ui: 'Inline links', pattern: 'link link-primary' },
+  { ui: 'Status', pattern: 'badge-success / badge-danger — not badge-primary for errors' },
+  { ui: 'Forms', pattern: "Field with conversational labels; destructive actions use variant='danger'" },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>UI</th>
+        <th>Pattern</th>
+      </tr>
+    </thead>
+    <tbody>
+      {brandTouchpoints.map((row, index) => (
+        <tr key={index}>
+          <td className='text-nowrap font-medium text-fg'>{row.ui}</td>
+          <td className='text-muted text-sm'>
+            <code>{row.pattern}</code>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+**BRAND.md (recommended)**
+
+Commit a short **`BRAND.md`** beside your theme file so humans and agents share the same contract:
+
+```markdown
+# Brand — YourProduct
+
+## Tokens
+
+- Primary: `--color-primary-700` = `#4338ca`
+- Light surfaces: `--body`, `--fg` as in theme.css
+- Dark: `.dark` overrides documented in theme.css
+
+## Component mapping
+
+- CTA: `Button variant='primary'`
+- Nav active: `item-primary active`
+- Links: `link link-primary`
+- Destructive: `Button variant='danger'` — never brand primary
+
+## Do not
+
+- Remap `danger` / `success` for branding
+- Use `neutral-*` for chrome
+- Restyle `Modal.Content` / `Menu.Content` shells with ad-hoc Tailwind
+```
+
+After `pnpm exec ui-kit-skill`, your AI assistant can follow the same brand rules — see [AI Agent Skill](/agent-skill). Re-run the installer when you upgrade `@polyms/ui-kit`.
+
+**Brand checklist**
+
+- [ ] Full enough `primary-*` ramp for hover and active states
+- [ ] Light and dark modes both readable (WCAG AA on primary CTAs)
+- [ ] One accent across the app shell — no per-screen hex drift
+- [ ] Semantic tones still mean success / warning / danger
+
+### Spacing System
+
+Spacing follows **Tailwind CSS 4**’s default scale (typically **0.25rem** steps via `1` = `0.25rem`, etc.).
+
+```tsx
+const layout = <div className='p-4 gap-2 mb-6'>{/* padding: 1rem, gap: 0.5rem, margin-bottom: 1.5rem */}</div>
+```
+
+For **RTL-friendly** layouts, prefer **logical** utilities — `ms-*` / `me-*`, `ps-*` / `pe-*`, `border-s-*` / `border-e-*` — over physical `ml` / `mr` / `pl` / `pr` in new code. The [AI Agent Skill](/agent-skill) repeats this guidance for assistants.
+
+### Border Radius
+
+Rounded corners follow a consistent scale:
+
+export const borderRadiusScale = [
+  {
+    class: 'rounded-sm',
+    value: '0.125rem (2px)',
+    preview: 'rounded-sm',
+    usage: 'Subtle rounding for inputs, badges',
+  },
+  {
+    class: 'rounded',
+    value: '0.25rem (4px)',
+    preview: 'rounded',
+    usage: 'Default rounding for most components',
+  },
+  { class: 'rounded-md', value: '0.375rem (6px)', preview: 'rounded-md', usage: 'Cards, modals, popovers' },
+  {
+    class: 'rounded-lg',
+    value: '0.5rem (8px)',
+    preview: 'rounded-lg',
+    usage: 'Large cards, containers, images',
+  },
+  {
+    class: 'rounded-xl',
+    value: '0.75rem (12px)',
+    preview: 'rounded-xl',
+    usage: 'Hero sections, featured content',
+  },
+  {
+    class: 'rounded-full',
+    value: '9999px',
+    preview: 'rounded-full',
+    usage: 'Avatars, pills, circular buttons',
+  },
+]
+
+<div className='card mt-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Preview</th>
+        <th className='w-px'>Class</th>
+        <th className='w-px'>Value</th>
+        <th>Usage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {borderRadiusScale.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <div className={`mx-auto size-12 bg-primary-500 ${row.preview}`} />
+          </td>
+          <td>
+            <code className='text-nowrap'>{row.class}</code>
+          </td>
+          <td className='text-sm text-nowrap'>{row.value}</td>
+          <td className='text-muted text-sm'>{row.usage}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+### Breakpoints
+
+Responsive design breakpoints follow mobile-first approach:
+
+export const breakpoints = [
+  { name: 'sm', value: '640px', description: 'Small tablets and large phones' },
+  { name: 'md', value: '768px', description: 'Tablets' },
+  { name: 'lg', value: '1024px', description: 'Laptops and desktops' },
+  { name: 'xl', value: '1280px', description: 'Large desktops' },
+  { name: '2xl', value: '1536px', description: 'Extra large screens' },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Breakpoint</th>
+        <th className='w-px text-nowrap'>Min-width</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {breakpoints.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap'>{row.name}</code>
+          </td>
+          <td className='text-nowrap'>{row.value}</td>
+          <td className='text-muted text-sm'>{row.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+Example:
+
+```tsx
+const layout = (
+  <div className='p-4 md:p-6 lg:p-8'>
+    {/* Responsive padding: 1rem on mobile, 1.5rem on tablet, 2rem on desktop */}
+  </div>
+)
+```
+
+### Z-Index and Layering
+
+Stacking uses **`--zindex-*`** CSS variables exposed as utility classes so overlays stay ordered across Modal, Offcanvas, Popover, Tooltip, and Toast.
+
+export const zIndexLayers = [
+  {
+    util: 'z-dropdown',
+    token: '--zindex-dropdown',
+    value: '1000',
+    description: 'Dropdowns and anchored panels',
+  },
+  { util: 'z-sticky', token: '--zindex-sticky', value: '1020', description: 'Sticky regions' },
+  { util: 'z-fixed', token: '--zindex-fixed', value: '1030', description: 'Fixed UI chrome' },
+  { util: 'z-toolbar', token: '--zindex-toolbar', value: '1050', description: 'Toolbars' },
+  {
+    util: 'z-offcanvas-backdrop',
+    token: '--zindex-offcanvas-backdrop',
+    value: '2000',
+    description: 'Offcanvas backdrop',
+  },
+  { util: 'z-offcanvas', token: '--zindex-offcanvas', value: '2005', description: 'Offcanvas surface' },
+  { util: 'z-sidebar', token: '--zindex-sidebar', value: '2010', description: 'App sidebar / shell' },
+  {
+    util: 'z-modal-backdrop',
+    token: '--zindex-modal-backdrop',
+    value: '3000',
+    description: 'Modal backdrop',
+  },
+  { util: 'z-modal', token: '--zindex-modal', value: '3005', description: 'Modal content' },
+  { util: 'z-popover', token: '--zindex-popover', value: '4010', description: 'Popovers' },
+  { util: 'z-tooltip', token: '--zindex-tooltip', value: '4020', description: 'Tooltips' },
+  { util: 'z-toast', token: '--zindex-toast', value: '5000', description: 'Toasts (top layer)' },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Utility</th>
+        <th className='w-px text-nowrap'>Token</th>
+        <th className='w-px'>Default</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {zIndexLayers.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap'>{row.util}</code>
+          </td>
+          <td>
+            <code className='text-nowrap text-xs'>{row.token}</code>
+          </td>
+          <td className='text-nowrap'>{row.value}</td>
+          <td className='text-muted text-sm'>{row.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+**Ad-hoc stacking:** Tailwind’s numeric utilities (`z-0`, `z-10`, …) remain available for local layout, but **prefer the utilities above** for anything that competes with overlays so you don’t fight the global scale.
+
+```tsx
+const header = <header className='sticky top-0 z-sticky'>…</header>
+```
+
+## CSS-only patterns and item-\*
+
+Several patterns are **CSS classes only** (no dedicated React export). They are part of the public surface once **`@polyms/ui-kit`** styles are loaded:
+
+- **Tables:** `.table`, `.table-sm`, `.table-lg`, `.table-striped`, `.table-hover`, `.table-bordered`, `.table-borderless`, `.table-active`, `.table-group-divider`, `.caption-top`, **`thead.thead-light`**
+- **Badge / card / link:** `.badge` (+ size and tone variants), `.card`, `.card-body`, `.link` + `.link-primary` / `.link-danger` / `.link-light`, `.stretched-link`
+- **Chrome helpers:** `.border-light`, `.border-{t|r|b|l|s|e|x|y}-light`, `.bg-light`
+- **Skeleton / type scale:** `.skeleton`, `.h1` … `.h6`
+- **Layout:** `.@page`, `.container-page` (container-query page layout)
+
+**`item-*`** classes implement the shared **ghost** interaction recipe (transparent idle → tinted hover/active) for nav rows, chips, list rows, and ad-hoc controls. Variants: **`item-primary`**, **`item-success`**, **`item-info`**, **`item-warning`**, **`item-danger`**, **`item-light`**, **`item-dark`**. Combine with **`.active`** for a persistent selected state (same look as `:active`). Prefer these over one-off `hover:bg-*` chains so tones stay aligned with buttons and menus.
+
+See component pages for full examples. For AI-assisted UI, install the [AI Agent Skill](/agent-skill).
+
+## Using components
+
+### Imports and styles
+
+- **Single barrel import:** `import { Button, Modal, Field, … } from '@polyms/ui-kit'` — avoid deep paths unless your toolchain explicitly supports them.
+- **Peers:** `react` and `react-dom` **>= 19**.
+- **Styles:** Import the built **`styles-*.css`** from the package, or **`styles/tailwind.css`** when compiling Tailwind 4 in your app (see [Installation](/installation)).
+
+### Composition pattern
+
+Components use **compound (dot) notation** — keep **Trigger → Content → semantic slots** (`Header`, `Body`, `Footer`, `Item`, …) in the documented order so accessibility and default styling stay correct.
+
+```tsx
+import { Alert, Button, Field, Modal } from '@polyms/ui-kit'
+
+const alert = (
+  <>
+    <Alert variant='success' onDismiss={handleDismiss}>
+      <Alert.Heading>Success!</Alert.Heading>
+      Payment processed successfully.
+    </Alert>
+
+    <Modal>
+      <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
+      <Modal.Content size='lg' scrollable>
+        <Modal.Header>Account settings</Modal.Header>
+        <Modal.Body>{/* primary content */}</Modal.Body>
+        <Modal.Footer>
+          <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+          <Button variant='primary'>Save</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
+
+    <Field name='email'>
+      <Field.Label>Email</Field.Label>
+      <Field.Control />
+      <Field.Description>We never share your email.</Field.Description>
+    </Field>
+  </>
+)
+```
+
+### Built-in surfaces
+
+Roots like **`Modal.Content`**, **`Offcanvas.Content`**, **`Menu.Content`**, and drawer internals already encode **padding, layout, motion, and z-index**. Prefer **props** (`size`, `centered`, `scrollable`, `variant`, …) and **slot components** over pasting large Tailwind bundles onto those nodes.
+
+### CSS variables pattern
+
+Components use CSS custom properties for themeable styling:
+
+```css
+.alert {
+  background-color: var(--alert-bg);
+  border-color: var(--alert-border);
+  color: var(--alert-color);
+}
+
+.alert-success {
+  --alert-bg: var(--color-success-50);
+  --alert-border: var(--color-success-600);
+  --alert-color: var(--color-success-700);
+}
+```
+
+### Data attributes (advanced)
+
+When writing custom CSS alongside library components, state and placement are exposed via **`data-*`** attributes:
+
+```css
+[data-part='trigger'][data-state='open'] {
+  /* open trigger */
+}
+
+[data-part='item'][data-highlighted] {
+  /* highlighted collection item */
+}
+
+[data-part='content'][data-placement='top'] {
+  /* placement-specific content */
+}
+```
+
+### Toasts and imperative modals
+
+- **Toast:** wrap the app with **`Toast`** and render **`Toast.Container`** where toasts should portal.
+- **Programmatic modals:** **`useModalStore`** (**`showModal`** / **`closeModal`**) requires **`zustand`** in your app and a mounted **`Modal.Container`** when using the store API.
+- **Programmatic offcanvas:** **`useOffcanvasStore`** (**`showOffcanvas`** / **`closeOffcanvas`**) follows the same pattern — requires **`zustand`** and a mounted **`Offcanvas.Container`** when using the store API.
+
+## Usage Guidelines
+
+### Color usage
+
+**Do:**
+
+- Use **semantic** ramps for intent (success / warning / danger / primary / info).
+- Use **slate** for neutral chrome; keep **4.5:1** contrast for body text where feasible.
+- Use lighter steps (50–200) for backgrounds and darker steps (600–900) for text and borders on light surfaces.
+
+**Don’t:**
+
+- Mix meanings (e.g. success styling on destructive actions).
+- Pair **slate-based** library UI with the **`neutral`** Tailwind scale in the same chrome without a deliberate exception.
+- Override semantic tokens with arbitrary unrelated palettes for the same role.
+
+### Component selection
+
+Choose by **interaction and attention**:
+
+- **Modal** — Blocking, focused work; centered dialog pattern with **`Modal.Content`** sizing and header/body/footer slots.
+- **Offcanvas** — Navigation and supplementary panels that slide from an edge.
+- **Popover** — Contextual, non-blocking content.
+- **Tooltip** — Short hints on hover/focus.
+
+### Accessibility
+
+- Prefer **library slots** for titles and descriptions so **`aria-*`** relationships stay wired.
+- Preserve **keyboard** roving focus for menus, toolbars, and composite widgets.
+- Manage **focus** when opening/closing dialogs and drawers per component docs.

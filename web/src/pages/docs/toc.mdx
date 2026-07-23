@@ -1,0 +1,152 @@
+---
+type: Navigation
+title: Toc
+apis:
+  - separator: Toc (Root)
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default nav element.
+  - name: aria-label
+    default: Table of contents
+    values: string
+    description: Accessible name for the navigation landmark.
+  - name: scrollRef
+    default: '-'
+    values: RefObject<Element | null>
+    description: Ref to the overflow element that scrolls. Defaults to the window when omitted.
+  - separator: Toc.List
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default unordered list element.
+  - separator: Toc.Item
+  - name: href
+    default: '-'
+    values: string
+    description: Fragment or URL for the heading. Hash links register for scroll spy and smooth-scroll on click. When omitted, the item renders as a button.
+  - name: depth
+    default: '-'
+    values: number
+    description: Heading depth. Depth 3 and 4 add extra left padding.
+  - name: visible
+    default: '-'
+    values: boolean
+    description: Optional override for the in-viewport state. Defaults to scroll spy from Toc.
+  - name: primary
+    default: '-'
+    values: boolean
+    description: Optional override for the topmost visible heading. Defaults to scroll spy from Toc.
+  - name: render
+    default: '-'
+    values: React element | (props) => React element
+    description: Custom render function or element to override the default link or button.
+  - separator: Toc.Indicator
+  - name: className
+    default: '-'
+    values: string
+    description: Optional class for the range indicator that spans currently visible items.
+  - separator: useToc
+  - name: returns
+    default: '-'
+    values: '{ visibleIds, primaryActiveId, items }'
+    description: Read scroll-spy state from the nearest Toc root (for custom chrome beside Toc.Item).
+  - separator: useVisibleHeadings
+  - name: itemIds
+    default: '-'
+    values: string[]
+    description: Standalone scroll spy when you are not rendering Toc (for example a custom mobile list).
+  - name: options.root
+    default: '-'
+    values: RefObject<Element | null>
+    description: Overflow element that scrolls. Defaults to the window when omitted. Same role as Toc scrollRef.
+  - separator: scroll helpers
+  - name: scrollToHeading
+    default: '-'
+    values: '(headingId: string) => void'
+    description: Smooth-scrolls the heading with the given id into view.
+  - name: scrollToTop
+    default: '-'
+    values: '() => void'
+    description: Smooth-scrolls the window to the top of the page.
+---
+
+import Story from './-views/toc/TocDefault.tsx'
+import code from './-views/toc/TocDefault.tsx?raw'
+
+Anchor readers to the sections on the current page. **`Toc`** tracks which headings are in view and styles items for you — no manual scroll-spy wiring on each link.
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Toc } from '@polyms/ui-kit'
+
+const items = [
+  { title: 'Overview', url: '#overview', depth: 2 },
+  { title: 'Setup', url: '#setup', depth: 2 },
+  { title: 'Tips', url: '#tips', depth: 3 },
+]
+
+const pageToc = (
+  <Toc>
+    <Toc.List>
+      {items.map((item) => (
+        <Toc.Item key={item.url} depth={item.depth} href={item.url}>
+          {item.title}
+        </Toc.Item>
+      ))}
+      <Toc.Indicator />
+    </Toc.List>
+  </Toc>
+)
+```
+
+Give each heading on the page a matching **`id`**. Hash **`href`** values register with the root scroll spy; clicking an item smooth-scrolls to that heading.
+
+## Behavior
+
+### Scroll spy
+
+`Toc` watches registered item fragments and applies **`is-visible`** / **`is-primary`** on the matching items. You do not need to call **`useVisibleHeadings`** for the compound tree.
+
+When content scrolls inside an overflow container (not the window), pass that element’s ref as **`scrollRef`** on **`Toc`**:
+
+```tsx
+import { useRef } from 'react'
+import { Toc } from '@polyms/ui-kit'
+
+const Article = () => {
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  return (
+    <div className='overflow-auto' ref={scrollRef}>
+      {/* article headings… */}
+      <Toc scrollRef={scrollRef}>{/* … */}</Toc>
+    </div>
+  )
+}
+```
+
+Use **`useToc`** inside the tree if custom chrome needs the same state, or **`useVisibleHeadings(ids, { root })`** when you build a list outside **`Toc`** (pass **`root`** when the page scrolls in an overflow container).
+
+### Range indicator
+
+Render **`Toc.Indicator`** inside **`Toc.List`**. It spans from the first to the last **visible** item and hides when none are visible.
+
+### Button items
+
+Omit **`href`** to render a button — useful for a “back to top” control with **`scrollToTop`**.
+
+### Accessibility
+
+- Root defaults to **`aria-label="Table of contents"`** on a **`nav`**
+- Items with **`href`** are real links; omit **`href`** for buttons
+- Hash clicks call **`preventDefault`** and **`scrollToHeading`** unless your **`onClick`** already called **`preventDefault`**
+
+## API Reference
+
+<APIReference />

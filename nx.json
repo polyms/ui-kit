@@ -34,7 +34,7 @@
       }
     }
   ],
-  "defaultProject": "core",
+  "defaultProject": "ui-kit",
   "generators": {
     "@nx/react": {
       "application": {
@@ -62,7 +62,7 @@
     }
   },
   "release": {
-    "projects": ["core", "docs"],
+    "projects": ["ui-kit", "web"],
     "projectsRelationship": "independent",
     "changelog": {
       "projectChangelogs": false,

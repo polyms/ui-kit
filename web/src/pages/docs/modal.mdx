@@ -1,0 +1,295 @@
+---
+type: Actions
+title: Modal
+apis:
+  - separator: Modal (Root)
+  - name: defaultOpen
+    default: 'false'
+    values: boolean
+    description: Initial open state (uncontrolled).
+  - name: open
+    default: '-'
+    values: boolean
+    description: Controls the open state (controlled).
+  - name: onOpenChange
+    default: '-'
+    values: '(open: boolean) => void'
+    description: Called when modal open state changes.
+  - separator: Modal.Content
+  - name: size
+    default: '-'
+    values: sm | lg | xl | full
+    description: Controls the width of the modal dialog.
+  - name: centered
+    default: 'true'
+    values: boolean
+    description: Vertically centers the modal in the viewport.
+  - name: scrollable
+    default: 'false'
+    values: boolean
+    description: Enables scrolling inside the modal body instead of the entire modal.
+  - separator: useModalStore.showModal(id, element, options?)
+  - name: id
+    default: '-'
+    values: string
+    description: Unique key for the modal instance. Reusing an id replaces the previous entry.
+  - name: element
+    default: '-'
+    values: ReactNode
+    description: Modal content, typically a Modal.Content tree with Header, Body, and Footer.
+  - name: options.onClose
+    default: '-'
+    values: '(reason?) => void'
+    description: Called when the modal finishes closing (after the exit animation).
+  - separator: useModalStore.closeModal(id, reason?)
+  - name: id
+    default: '-'
+    values: string
+    description: The id passed to showModal. Starts close animation then removes the modal after 300ms.
+  - name: reason
+    default: '-'
+    values: Dialog close reason
+    description: Optional close reason forwarded to onClose (e.g. escape press, outside click).
+---
+
+import Story from './-views/modal/ModalDefault.tsx'
+import code from './-views/modal/ModalDefault.tsx?raw'
+import Programmatic from './-views/modal/ModalProgrammatic.tsx'
+import programmaticCode from './-views/modal/ModalProgrammatic.tsx?raw'
+
+Modals display focused content in a layer above the main interface, requiring user interaction before proceeding. They're ideal for confirmations, forms, or detailed information. This component is based on the [WAI-ARIA Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { Button, Modal } from '@polyms/ui-kit'
+
+const modal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Open Modal</Modal.Trigger>
+    <Modal.Content size='lg' scrollable>
+      <Modal.Header>Confirmation</Modal.Header>
+      <Modal.Body>Are you sure you want to proceed with this action?</Modal.Body>
+      <Modal.Footer>
+        <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+        <Button autoFocus variant='primary'>
+          Confirm
+        </Button>
+      </Modal.Footer>
+    </Modal.Content>
+  </Modal>
+)
+```
+
+Put the title in **`Modal.Header`** — `Modal.Content` has no `title` prop. Style **`Modal.Trigger`** and footer **`Modal.Close`** with **`render={<Button … />}`**. Use **`scrollable`** when the body holds a long form.
+
+**Footer actions:** Cancel and Close use a ghost **`Button`** (omit **`variant`** on **`Modal.Close render={<Button … />}`**). **`autoFocus`** — one target per modal: confirm-only (no form inputs) → primary footer CTA (`Confirm`, `Delete`, …) with the appropriate **`variant`**; form in **`Modal.Body`** → first **`Field.Control`** or input — do not also put **`autoFocus`** on footer Save.
+
+## Common mistakes
+
+- Hand-built `fixed inset-0` overlays instead of `Modal.Content`
+- `btn-*` classes on `Modal.Trigger` or `Modal.Close` without `render={<Button />}`
+- Footer dismiss as plain `Button` instead of `Modal.Close`
+- `variant` on footer `Modal.Close` (Cancel/Close should be ghost — omit `variant`)
+- `autoFocus` on footer Save when the body has form inputs (focus the first input instead)
+- Missing `autoFocus` on confirm-only modals (no inputs in body)
+- Two `autoFocus` targets in one modal (input + footer CTA)
+- `title` on `Modal.Content`
+- Long forms without `scrollable`
+- `showModal` without `Modal.Container` mounted
+- Importing `ModalHeader` / `ModalBody` as separate symbols
+
+## Composition
+
+Modals support flexible composition with Header, Body, and Footer sections for organized content layout.
+
+### Form modal
+
+When the body contains inputs, put **`autoFocus`** on the first **`Field.Control`** — not on footer Save.
+
+```tsx
+import { Button, Field, Modal } from '@polyms/ui-kit'
+
+const editModal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Edit profile</Modal.Trigger>
+    <Modal.Content size='lg' scrollable>
+      <Modal.Header>Edit profile</Modal.Header>
+      <Modal.Body>
+        <Field>
+          <Field.Label>Display name</Field.Label>
+          <Field.Control autoFocus name='name' placeholder='Your name' type='text' />
+        </Field>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+        <Button variant='primary'>Save</Button>
+      </Modal.Footer>
+    </Modal.Content>
+  </Modal>
+)
+```
+
+### With Controlled State
+
+```tsx
+import { Button, Modal } from '@polyms/ui-kit'
+import { useState } from 'react'
+
+export default function ControlledModal() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Modal open={open} onOpenChange={setOpen}>
+      <Modal.Trigger render={<Button variant='primary' />}>Open</Modal.Trigger>
+      <Modal.Content size='lg'>
+        <Modal.Header>Controlled Modal</Modal.Header>
+        <Modal.Body>This modal's state is controlled externally.</Modal.Body>
+        <Modal.Footer>
+          <Modal.Close render={<Button rounded />}>Close</Modal.Close>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
+  )
+}
+```
+
+### Nested Modals
+
+Modals can be nested to create multi-step flows or additional confirmation dialogs.
+
+```tsx
+import { Button, Modal } from '@polyms/ui-kit'
+
+const modal = (
+  <Modal>
+    <Modal.Trigger render={<Button variant='primary' />}>Open Parent</Modal.Trigger>
+    <Modal.Content>
+      <Modal.Header>Parent Modal</Modal.Header>
+      <Modal.Body>
+        <Modal>
+          <Modal.Trigger render={<Button outlined variant='primary' />}>Open Nested</Modal.Trigger>
+          <Modal.Content size='sm'>
+            <Modal.Header>Nested Modal</Modal.Header>
+            <Modal.Body>This is a nested modal dialog.</Modal.Body>
+          </Modal.Content>
+        </Modal>
+      </Modal.Body>
+    </Modal.Content>
+  </Modal>
+)
+```
+
+## Sizes
+
+Control modal width with the `size` prop on `Modal.Content`. The `full` size makes the modal occupy the entire viewport.
+
+```tsx
+const smallModal = (
+  <Modal.Content size='sm'>
+    <Modal.Header>Small modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+
+const largeModal = (
+  <Modal.Content size='lg'>
+    <Modal.Header>Large modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+
+const xlModal = (
+  <Modal.Content size='xl'>
+    <Modal.Header>Extra large modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+
+const fullModal = (
+  <Modal.Content size='full'>
+    <Modal.Header>Full screen modal</Modal.Header>
+    <Modal.Body>Content</Modal.Body>
+  </Modal.Content>
+)
+```
+
+## Scrollable Content
+
+By default, long content causes the entire modal to scroll. Enable `scrollable` to scroll only the body section while keeping header and footer fixed.
+
+```tsx
+const modalContent = (
+  <Modal.Content scrollable>
+    <Modal.Header>Fixed Header</Modal.Header>
+    <Modal.Body>{/* Long content scrolls here */}</Modal.Body>
+    <Modal.Footer>Fixed Footer</Modal.Footer>
+  </Modal.Content>
+)
+```
+
+## Keyboard Navigation
+
+- **Escape**: Close the modal
+- **Tab**: Cycle through focusable elements within the modal
+- **Shift + Tab**: Cycle backwards through focusable elements
+
+Focus is automatically trapped within the modal when open and restored to the trigger element when closed.
+
+## Programmatic modals
+
+Open modals from event handlers, data loaders, or global state without a declarative **`Modal.Trigger`**. The store API uses **Zustand** (peer dependency — install **`zustand`** in your app).
+
+1. Mount **`Modal.Container`** once near the root of your app (same level as your router outlet).
+2. Call **`useModalStore.getState().showModal(id, element, options?)`** with a stable **`id`** and a **`Modal.Content`** tree.
+3. Close with **`Modal.Close`**, **`closeModal(id)`**, or Escape / backdrop (handled by **`Modal.Container`**).
+
+```tsx
+import { Button, Modal, useModalStore } from '@polyms/ui-kit'
+
+function App() {
+  return (
+    <>
+      <Modal.Container />
+      <YourRoutes />
+    </>
+  )
+}
+
+function DeleteButton() {
+  const open = () =>
+    useModalStore.getState().showModal(
+      'delete-item',
+      <Modal.Content size='sm'>
+        <Modal.Header>Delete item?</Modal.Header>
+        <Modal.Body>This cannot be undone.</Modal.Body>
+        <Modal.Footer>
+          <Modal.Close render={<Button rounded />}>Cancel</Modal.Close>
+          <Button
+            autoFocus
+            onClick={() => useModalStore.getState().closeModal('delete-item')}
+            variant='danger'
+          >
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal.Content>
+    )
+
+  return <Button onClick={open}>Delete</Button>
+}
+```
+
+**Animation:** **`closeModal`** sets **`open: false`** first, then removes the entry after **300ms** so exit transitions can finish.
+
+<CodePreview code={programmaticCode}>
+  <Programmatic />
+</CodePreview>
+
+## API Reference
+
+<APIReference />

@@ -1,0 +1,113 @@
+# @polyms/ui-kit
+
+Modular React 19 UI component library for the **Polyms ecosystem** — compound components, semantic theming, programmatic overlays, and Tailwind CSS 4 utilities.
+
+Built with Nx + Vite. Distributed via **GitHub Packages**.
+
+## Install
+
+This package is published to GitHub Packages under the `@polyms` scope, so consumers must point the scope at the GitHub registry and authenticate (required even for public packages).
+
+Add a `.npmrc` to the consumer repo:
+
+```ini
+@polyms:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+always-auth=true
+```
+
+`GITHUB_TOKEN` is a GitHub Personal Access Token with the `read:packages` scope. Then install:
+
+```bash
+pnpm add @polyms/ui-kit
+```
+
+## Peer dependencies
+
+- `react` >= 19.0.0
+- `react-dom` >= 19.0.0
+
+Install `zustand` in the host app when using programmatic modals or offcanvas stores:
+
+```bash
+pnpm add zustand
+```
+
+## Usage
+
+Import components from the package barrel — avoid deep imports.
+
+```tsx
+import { Button, Field, Modal } from '@polyms/ui-kit'
+```
+
+When unsure a symbol exists, open `node_modules/@polyms/ui-kit/index.d.ts`.
+
+### Inputs
+
+```tsx
+import { Checkbox, Radio, RadioGroup } from '@polyms/ui-kit'
+
+<Checkbox checked={accepted} onCheckedChange={setAccepted}>
+  Accept terms
+</Checkbox>
+
+<RadioGroup name='plan' onValueChange={setPlan} value={plan}>
+  <Radio value='free'>Free</Radio>
+  <Radio value='pro'>Pro</Radio>
+</RadioGroup>
+```
+
+## Styles
+
+Components rely on the CSS shipped with the package. Load the Tailwind 4 source entry so tokens and layers align with your own setup:
+
+```ts
+import '@polyms/ui-kit/styles/tailwind.css'
+```
+
+## Agent skill
+
+Install the `@polyms/ui-kit` agent skill into a consumer repository so Cursor, Claude Code, and other agents load usage rules automatically:
+
+```bash
+pnpm exec ui-kit-skill
+```
+
+The installer copies the skill to `.cursor/skills/ui-kit`, `.claude/skills/ui-kit`, and `.agents/skills/ui-kit`. Use `--target cursor`, `--target claude`, or `--target agents` to install only one target.
+
+Add a script so the team can re-sync after upgrading the package:
+
+```json
+{
+  "scripts": {
+    "polyms:skill": "ui-kit-skill --force"
+  }
+}
+```
+
+## Link locally (dev / dogfooding)
+
+After building the library to `dist/ui-kit`, point the consumer `package.json` at the folder:
+
+```json
+"@polyms/ui-kit": "file:./dist/ui-kit"
+```
+
+Build with:
+
+```bash
+pnpm exec nx build ui-kit
+```
+
+## Release
+
+Releases are independent per project (see `nx.json`). Versioning runs a build first, then tags `ui-kit@{version}`; pushing that tag triggers the GitHub Packages publish workflow.
+
+```bash
+pnpm exec nx release version patch --projects=ui-kit
+```
+
+## License
+
+MIT

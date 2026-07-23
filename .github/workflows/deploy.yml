@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     tags:
-      - 'core@*'
+      - 'ui-kit@*'
   pull_request:
 
 env:
@@ -50,7 +50,7 @@ jobs:
 
   build-and-deploy:
     name: 'Build and test'
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/core@')
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/ui-kit@')
     runs-on: ubuntu-latest
     # environment: production
 
@@ -81,18 +81,18 @@ jobs:
         run: |
           pnpm check
           pnpm nx affected -t build --base=HEAD~1
-          echo "pkg_index=$(node -p "require('./dist/core/.vite/manifest.json')['src/index.ts'].file")" >> $GITHUB_OUTPUT
-          echo "pkg_style=$(node -p "require('./dist/core/.vite/manifest.json')['src/styles/tailwind.css'].file")" >> $GITHUB_OUTPUT
+          echo "pkg_index=$(node -p "require('./dist/ui-kit/.vite/manifest.json')['src/index.ts'].file")" >> $GITHUB_OUTPUT
+          echo "pkg_style=$(node -p "require('./dist/ui-kit/.vite/manifest.json')['src/styles/tailwind.css'].file")" >> $GITHUB_OUTPUT
 
       - name: Package and prepare artifacts
         run: |
           mkdir -p dist/mfe
-          mv dist/core/*.css dist/mfe/
-          mv dist/core/.vite/ dist/mfe/
+          mv dist/ui-kit/*.css dist/mfe/
+          mv dist/ui-kit/.vite/ dist/mfe/
 
       - name: Publish to GitHub Packages
         run: |
           echo "@polyms:registry=https://npm.pkg.github.com" >> .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
           echo "always-auth=true" >> .npmrc
-          pnpm publish dist/core --no-git-checks
+          pnpm publish dist/ui-kit --no-git-checks

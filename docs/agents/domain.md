@@ -16,9 +16,12 @@ If files don't exist, proceed silently. `domain-modeling` creates them lazily wh
 ```
 /
 ├── CONTEXT.md
-├── docs/adr/
-├── core/          ← @polyms/core-ui library
-└── docs/          ← documentation site
+├── docs/          ← ai-kit: agents/, adr/, prd/
+│   ├── agents/
+│   ├── adr/
+│   └── prd/
+├── ui-kit/        ← @polyms/ui-kit library
+└── web/           ← public website (MDX + demos)
 ```
 
 ## Rules

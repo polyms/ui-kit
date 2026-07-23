@@ -2,7 +2,7 @@
 
 ## Quick Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/polyms/core-ui)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/polyms/ui-kit)
 
 ## Manual Setup
 
@@ -41,16 +41,16 @@ The project uses `vercel.json` with:
 
 ```json
 {
-  "buildCommand": "pnpm nx build docs",
-  "outputDirectory": "dist/docs",
-  "devCommand": "pnpm nx serve docs",
+  "buildCommand": "pnpm nx build web",
+  "outputDirectory": "dist/web",
+  "devCommand": "pnpm nx serve web",
   "installCommand": "pnpm install"
 }
 ```
 
 ### 4. Environment Variables (if needed)
 
-No environment variables required for static docs deployment.
+No environment variables required for static web deployment.
 
 ### 5. Custom Domain (Optional)
 
@@ -63,11 +63,11 @@ No environment variables required for static docs deployment.
 Test production build before deploying:
 
 ```bash
-# Build docs
-pnpm nx build docs
+# Build web
+pnpm nx build web
 
 # Preview build (optional)
-cd dist/docs
+cd dist/web
 npx serve
 ```
 
@@ -94,9 +94,9 @@ npx serve
 Since this is an Nx monorepo:
 
 - Vercel detects the root `package.json`
-- Build command uses `nx` to build only `docs` project
-- Output directory points to `dist/docs` (not root)
+- Build command uses `nx` to build only `web` project
+- Output directory points to `dist/web` (not root)
 
 ---
 
-**Deployed URL:** Your docs will be live at `https://your-project.vercel.app`
+**Deployed URL:** Your site will be live at `https://your-project.vercel.app`

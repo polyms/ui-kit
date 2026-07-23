@@ -1,4 +1,4 @@
-# Core-UI Agent Guidance
+# UI Kit Agent Guidance
 
 Use `AGENTS.md` as the single source of truth for conventions and workflows in this repository.
 When there is ambiguity, follow `AGENTS.md` first.

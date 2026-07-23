@@ -1,0 +1,45 @@
+---
+type: Actions
+title: Dynamic import
+apis:
+  - separator: dynamic(importFunc, options?)
+  - name: importFunc
+    default: '-'
+    values: '() => Promise<{ default: Component }>'
+    description: Factory passed to React.lazy. Must resolve a module with a default export.
+  - name: options.loadingComponent
+    default: 'null'
+    values: ReactNode
+    description: Suspense fallback while the chunk loads.
+---
+
+import Story from './-views/dynamic/DynamicDefault.tsx'
+import code from './-views/dynamic/DynamicDefault.tsx?raw'
+
+Wrap **`React.lazy`** and **`Suspense`** for code-split routes, heavy widgets, or federated remotes. Import as **`dynamic`** or **`LazyComponentLoader`** (same helper).
+
+<CodePreview code={code}>
+  <Story />
+</CodePreview>
+
+## Usage
+
+```tsx
+import { dynamic, Spinner } from '@polyms/ui-kit'
+
+const SettingsPanel = dynamic(() => import('./SettingsPanel'), { loadingComponent: <Spinner size={24} /> })
+
+function Page() {
+  return <SettingsPanel />
+}
+```
+
+The returned component forwards refs and props to the lazily loaded default export.
+
+## Module Federation
+
+When loading remote modules (for example with Module Federation), use the same **`dynamic()`** helper so loading states stay consistent with the rest of your app.
+
+## API Reference
+
+<APIReference />

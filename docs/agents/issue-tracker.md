@@ -1,8 +1,8 @@
 # Issue tracker: GitHub
 
-Issues and PRDs live as GitHub issues on **polyms/core-ui**. Use `gh` CLI.
+Issues and PRDs live as GitHub issues on **polyms/ui-kit**. Use `gh` CLI.
 
-**Remote:** `git@github.polyms:polyms/core-ui.git`
+**Remote:** `git@github.polyms:polyms/ui-kit.git`
 
 ## Commands
 

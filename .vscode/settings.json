@@ -27,6 +27,6 @@
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "nxConsole.generateAiAgentRules": true,
   "tailwindCSS.classFunctions": ["clsx"],
-  "tailwindCSS.experimental.configFile": "core/src/styles/tailwind.css",
+  "tailwindCSS.experimental.configFile": "ui-kit/src/styles/tailwind.css",
   "typescript.tsdk": "node_modules/typescript/lib"
 }

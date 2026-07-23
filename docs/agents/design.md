@@ -1,6 +1,6 @@
 # Design
 
-How `/design` and `/dev` consume UI specifications and `@polyms/core-ui`.
+How `/design` and `/dev` consume UI specifications and `@polyms/ui-kit`.
 
 ## Design specs
 
@@ -10,10 +10,10 @@ How `/design` and `/dev` consume UI specifications and `@polyms/core-ui`.
 
 ## Design system
 
-- **Library:** `@polyms/core-ui` (Tailwind CSS 4, React 19)
-- **Skill:** `.agents/skills/core-ui` (symlink → `core/skills/core-ui`)
-- **CSS tokens (source of truth):** `core/src/styles/_root.css`, component styles in `core/src/styles/_*.css`
-- **Boundary:** `/design` maps _what_; `/core-ui` skill documents _how_ (primitives, tokens, motion API)
+- **Library:** `@polyms/ui-kit` (Tailwind CSS 4, React 19)
+- **Skill:** `.agents/skills/ui-kit` (symlink → `ui-kit/skills/ui-kit`)
+- **CSS tokens (source of truth):** `ui-kit/src/styles/_root.css`, component styles in `ui-kit/src/styles/_*.css`
+- **Boundary:** `/design` maps _what_; `/ui-kit` skill documents _how_ (primitives, tokens, motion API)
 
 ## Figma — Polyms design system
 
@@ -550,7 +550,7 @@ Focus ring cards: `focus-ring`, `focus-ring-error`, `focus-ring-shadow-xs/sm`, `
 | Control               | Value       | Button/input line-heights                          |
 | Z-Index               | Value       | Layer stack                                        |
 
-Repo mirror: `core/src/styles/_root.css` (+ `_typography.css`, `_button.css`, …).
+Repo mirror: `ui-kit/src/styles/_root.css` (+ `_typography.css`, `_button.css`, …).
 
 ### Gray ramp — slate only (never neutral)
 
@@ -567,7 +567,7 @@ When adding or retargeting Color-collection aliases, point gray tokens at **Pale
 
 ### MDX ↔ Figma mapping
 
-| MDX (`docs/src/pages/docs/`) | Figma page (canonical → live)             | Section / docs frame                       |
+| MDX (`web/src/pages/docs/`) | Figma page (canonical → live)             | Section / docs frame                       |
 | ---------------------------- | ----------------------------------------- | ------------------------------------------ |
 | `button.mdx`                 | Button → live `Actions` (`143:2`)         | `Button — docs` `143:3`                    |
 | `badge.mdx`                  | Badge / Items → `Badge` (`165:105`)       | `Badge — docs` `171:42`                    |
@@ -631,8 +631,8 @@ Khi `find scripts/figma` thiếu file: lấy lại từ session trước / regen
 
 - Read **`CONTEXT.md`** for screen and domain naming (when present)
 - Read **`docs/adr/`** for UI constraints
-- Invoke **`/core-ui`** before component mapping
-- For token board work: read **`core/src/styles/_root.css`** and this Figma section
+- Invoke **`/ui-kit`** before component mapping
+- For token board work: read **`ui-kit/src/styles/_root.css`** and this Figma section
 
 ## Rules
 
