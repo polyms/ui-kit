@@ -13,7 +13,7 @@ apis:
     description: Additional descriptive text shown below the title.
   - name: type
     default: '-'
-    values: success | danger | warning | primary | actions
+    values: success | danger | warning | info | actions
     description: Determines the visual style and icon displayed in the toast.
   - name: timeout
     default: 5000
@@ -77,7 +77,7 @@ function MyComponent() {
 
 ## Types
 
-Toasts support 5 different types for various feedback contexts. Each type displays a distinct icon and color scheme.
+Toasts support five types for different feedback contexts. Each type (except `actions`) displays a matching icon and color scheme.
 
 ### Success Toast
 
@@ -88,6 +88,18 @@ toastManager.add({
   title: 'File uploaded',
   description: 'Your document is now available.',
   type: 'success',
+})
+```
+
+### Info Toast
+
+Neutral updates that are useful but not urgent — product news, tips, or status that is not a success or failure.
+
+```tsx
+toastManager.add({
+  title: 'New update available',
+  description: 'Version 2.0 is ready when you are.',
+  type: 'info',
 })
 ```
 

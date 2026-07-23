@@ -7,6 +7,7 @@
 Core-UI is a modular, component-driven UI library designed for production use. It combines the flexibility of Base UI headless components with Tailwind CSS styling and TypeScript type safety.
 
 **Key Features:**
+
 - 30+ production-ready components
 - 100% TypeScript coverage
 - WCAG 2.1 AA accessibility compliant
@@ -20,7 +21,7 @@ Core-UI is a modular, component-driven UI library designed for production use. I
 - **TypeScript**: Strict mode enabled, full type safety
 - **Base UI**: Headless UI primitives with `useRender` hook pattern
 - **Tailwind CSS v4**: Utility-first styling with CSS variables
-- **Floating UI**: Positioning for popovers, tooltips, dropdowns
+- **Floating UI** (`@floating-ui/react-dom`): Positioning for field feedback, popovers, tooltips
 - **Nx**: Monorepo management and task orchestration
 - **Vite**: Fast bundling, HMR, module federation
 - **Vitest + React Testing Library**: Unit and integration testing
@@ -35,20 +36,27 @@ core-ui/
 │   ├── src/
 │   │   ├── accordion/             # Accordion expand/collapse sections
 │   │   ├── alert/                 # Alert components
+│   │   ├── avatar/                # Avatar image / fallback
 │   │   ├── breadcrumb/            # Breadcrumb navigation
 │   │   ├── button/                # Button component
+│   │   ├── checkbox/              # Checkbox control
 │   │   ├── collapsible/           # Single expand/collapse region
-│   │   ├── field/                 # Form field components with validation
+│   │   ├── field/                 # Form field compound + floating feedback
 │   │   ├── loading/               # Spinner loading indicator
+│   │   ├── menu/                  # Menu / dropdown menu
 │   │   ├── modal/                 # Modal/Dialog with Zustand store
+│   │   ├── navigation-menu/       # Site navigation menu
+│   │   ├── number-field/          # Number input with controls
 │   │   ├── offcanvas/             # Offcanvas/Drawer
 │   │   ├── popover/               # Popover component
+│   │   ├── radio/                 # Radio group
 │   │   ├── select/                # Select dropdown
 │   │   ├── switch/                # Switch/Toggle
 │   │   ├── tabs/                  # Tabs component
-│   │   ├── toast/                 # Toast notifications
+│   │   ├── toast/                 # Toast notifications (Container uses Toast.Portal)
+│   │   ├── toc/                   # Table of contents
+│   │   ├── toolbar/               # Toolbar grouping
 │   │   ├── tooltip/               # Tooltip component
-│   │   ├── number-field/          # Number input with controls
 │   │   ├── styles/                # Global styles + component CSS
 │   │   │   ├── tailwind.css      # Tailwind config & theme
 │   │   │   ├── _component.css    # Per-component styles
@@ -90,6 +98,7 @@ core-ui/
 ### Component Structure
 
 Each component folder follows this pattern:
+
 ```
 component-name/
 ├── ComponentName.tsx          # Main component
@@ -118,6 +127,7 @@ export const Component = () => {}
 ```
 
 **Separator Format Rules:**
+
 - Each separator is EXACTLY 110 characters total (including `//` and spaces)
 - Format: `// ── SectionName ────────────────────────────────────────────────────────────────────────────────────────────`
 - Always use `// ──` (2 dashes with spaces) at start
@@ -129,12 +139,14 @@ export const Component = () => {}
 **Examples:**
 
 File with both Types and Components:
+
 ```tsx
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
 File with only Components (no types):
+
 ```tsx
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 ```
@@ -142,30 +154,34 @@ File with only Components (no types):
 ### Styling System
 
 **Tailwind CSS:**
+
 - Use utility classes combined with `clsx()` for conditional styling
 - Responsive: `md:`, `lg:`, `xl:` breakpoints
 - Dark mode: `dark:` prefix
 - Hover states: `hover:` prefix with `@media (hover: hover)` for touch devices
 
 **Color Variables (CRITICAL):**
+
 - **ALWAYS use `--color-slate-*`** for grays (e.g., `var(--color-slate-400)`, `var(--color-slate-100)`)
 - **NEVER use `--color-neutral-*`** (deprecated)
 - Primary colors: `--color-primary-*` (50-950)
 - Theme colors: `--color-blue-*`, `--color-purple-*`, etc.
 
 **Component-Specific CSS:**
+
 - Each component has `_component-name.css` in `core/src/styles/`
 - Import in main `tailwind.css`: `@import './_component-name.css' layer(components);`
 - Use `@layer components` for component styles
 - Use CSS custom properties for themeable values
 
 **Example:**
+
 ```css
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center rounded-lg px-4 py-2;
     @apply font-medium transition-colors;
-    
+
     &.btn-primary {
       @apply bg-primary-600 text-white;
       @apply hover:bg-primary-700;
@@ -191,19 +207,20 @@ type ComponentProps = useRender.ComponentProps<'div'>
 export function Component({ className, render, ...props }: ComponentProps) {
   const element = useRender({
     defaultTagName: 'div',
-    ref: props.ref,  // React 19: ref is regular prop (NO forwardRef needed)
+    ref: props.ref, // React 19: ref is regular prop (NO forwardRef needed)
     render,
     props: {
       ...props,
       className: clsx('component-class', className),
     },
   })
-  
+
   return element
 }
 ```
 
 **Key Points:**
+
 - Use `useRender.ComponentProps<'tagname'>` for typing props
 - `ref` is a regular prop in React 19 (pass `props.ref` directly)
 - Merge props and className inside the `props` object
@@ -213,6 +230,7 @@ export function Component({ className, render, ...props }: ComponentProps) {
 ### React Patterns
 
 **Functional Components Only:**
+
 ```tsx
 // ✅ CORRECT
 export const Component = ({ prop }: Props) => {
@@ -226,11 +244,14 @@ export function Component({ prop }: Props) {
 
 // ❌ WRONG - NO class components
 export class Component extends React.Component {
-  render() { return <div /> }
+  render() {
+    return <div />
+  }
 }
 ```
 
 **Hooks Best Practices:**
+
 - Use `useState`, `useEffect`, `useRef`, `useMemo`, `useCallback`
 - Custom hooks: `use<FeatureName>` naming (e.g., `useValidation`, `useOffcanvas`)
 - Context: Create separate `ComponentContext.tsx` file
@@ -239,6 +260,7 @@ export class Component extends React.Component {
 ### Testing Patterns
 
 **Test File Structure:**
+
 ```typescript
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -251,11 +273,11 @@ describe('ComponentName', () => {
     render(<Component />)
     expect(screen.getByText('text')).toBeInTheDocument()
   })
-  
+
   it('should handle user interaction', async () => {
     const user = userEvent.setup()
     render(<Component />)
-    
+
     await user.click(screen.getByRole('button'))
     expect(screen.getByText('clicked')).toBeInTheDocument()
   })
@@ -263,6 +285,7 @@ describe('ComponentName', () => {
 ```
 
 **Testing Rules:**
+
 1. **Always import from vitest**: `describe`, `expect`, `it`, `vi` (for mocking)
 2. **Use screen queries**: Prefer `screen.getByRole()`, `screen.getByText()`, `screen.getByTestId()`
 3. **Portal Elements (Floating-UI)**: Components using Floating-UI render in portals
@@ -273,6 +296,7 @@ describe('ComponentName', () => {
 5. **Test File Naming**: `ComponentName.test.tsx`
 
 **Portal Testing Example:**
+
 ```typescript
 it('renders close button in portal', () => {
   render(
@@ -280,7 +304,7 @@ it('renders close button in portal', () => {
       <OffcanvasClose />
     </OffcanvasContent>
   )
-  
+
   // Use document.querySelector for portal elements
   const closeButton = document.querySelector('.offcanvas-close')
   expect(closeButton).toBeInTheDocument()
@@ -296,7 +320,7 @@ it('renders close button in portal', () => {
 export const Route = createFileRoute('/')({
   component: LandingPage,
   staticData: {
-    layout: 'landing',  // Disables sidebar layout
+    layout: 'landing', // Disables sidebar layout
   },
 })
 
@@ -308,13 +332,14 @@ export const Route = createFileRoute('/docs/button')({
 ```
 
 **Root Layout Logic:**
+
 ```tsx
 // pages/__root.tsx
 const Root = () => {
   const router = useRouterState()
   const layout = router.matches[router.matches.length - 1]?.staticData?.layout
   const isLandingLayout = layout === 'landing'
-  
+
   // Apply class to #root for CSS targeting
   if (typeof document !== 'undefined') {
     const root = document.getElementById('root')
@@ -322,11 +347,11 @@ const Root = () => {
       root.classList.toggle('homepage', isLandingLayout)
     }
   }
-  
+
   if (isLandingLayout) {
     return <Outlet /> // No sidebar
   }
-  
+
   return (
     <>
       <Name />
@@ -339,24 +364,25 @@ const Root = () => {
 ```
 
 **CSS Grid Layout:**
+
 ```css
 /* globals.css */
 #root {
   @apply min-h-dvh w-screen;
-  
+
   &:not(.homepage) {
     @apply grid;
     grid-template-areas: 'main-content' 'navigation';
-    
+
     @media (min-width: 768px) {
       grid-template-areas:
         'name navigation'
         'app-sidebar main-content';
     }
   }
-  
+
   &.homepage {
-    @apply block;  /* No grid for landing */
+    @apply block; /* No grid for landing */
   }
 }
 ```
@@ -378,6 +404,7 @@ import navigation from 'virtual:mdx-navigation'
 ```
 
 **Type Declarations:**
+
 ```typescript
 // src/mdx-navigation.d.ts
 declare module 'virtual:mdx-navigation' {
@@ -424,22 +451,24 @@ npx nx affected:test                # Test affected projects
 ### Adding New Components
 
 1. **Create component folder:**
+
    ```bash
    mkdir core/src/new-component
    ```
 
 2. **Create component files:**
+
    ```tsx
    // core/src/new-component/NewComponent.tsx
    import { useRender } from '@base-ui/react/use-render'
    import clsx from 'clsx'
-   
+
    // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
-   
+
    type NewComponentProps = useRender.ComponentProps<'div'>
-   
+
    // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
-   
+
    export function NewComponent({ className, render, ...props }: NewComponentProps) {
      const element = useRender({
        defaultTagName: 'div',
@@ -450,24 +479,27 @@ npx nx affected:test                # Test affected projects
          className: clsx('new-component', className),
        },
      })
-     
+
      return element
    }
    ```
 
 3. **Export in index.ts:**
+
    ```tsx
    // core/src/new-component/index.ts
    export * from './NewComponent'
    ```
 
 4. **Add to main exports:**
+
    ```tsx
    // core/src/index.ts
    export * from './new-component'
    ```
 
 5. **Add component styles:**
+
    ```css
    /* core/src/styles/_new-component.css */
    @layer components {
@@ -486,24 +518,26 @@ npx nx affected:test                # Test affected projects
 ### Adding Documentation Pages
 
 1. **Create MDX file:**
-   ```mdx
+   ````mdx
    ---
    title: New Component
    ---
-   
+
    # New Component
-   
+
    Description of the component...
-   
+
    ## Usage
-   
+
    ```tsx
    import { NewComponent } from '@polyms/core-ui'
-   
-   <NewComponent>Content</NewComponent>
+
+   ;<NewComponent>Content</NewComponent>
    ```
+   ````
    ```
 
+   ```
 2. **Auto-generated navigation:**
    - File: `docs/src/pages/components/new-component.mdx`
    - Auto-appears in sidebar under "Components" section
@@ -513,10 +547,8 @@ npx nx affected:test                # Test affected projects
 3. **Live Examples:**
    ```mdx
    import { NewComponent } from '@polyms/core-ui'
-   
-   <NewComponent>
-     Live example!
-   </NewComponent>
+
+   <NewComponent>Live example!</NewComponent>
    ```
 
 ## Module Federation
@@ -538,6 +570,7 @@ export default {
 ```
 
 This enables:
+
 - Dynamic component loading
 - Micro-frontend architecture
 - Version isolation
@@ -548,6 +581,7 @@ This enables:
 ### Performance
 
 1. **Memoization:**
+
    ```tsx
    const MemoizedComponent = React.memo(Component)
    const memoizedValue = useMemo(() => computeExpensive(), [deps])
@@ -555,9 +589,10 @@ This enables:
    ```
 
 2. **Lazy Loading:**
+
    ```tsx
    const LazyComponent = lazy(() => import('./Component'))
-   
+
    <Suspense fallback={<Spinner />}>
      <LazyComponent />
    </Suspense>
@@ -571,6 +606,7 @@ This enables:
 ### Accessibility
 
 1. **Semantic HTML:**
+
    ```tsx
    <button type="button">Click</button>  // Not <div onClick>
    <nav>...</nav>                        // Not <div>
@@ -578,6 +614,7 @@ This enables:
    ```
 
 2. **ARIA Attributes:**
+
    ```tsx
    <button aria-label="Close dialog" aria-expanded={isOpen}>
    <div role="dialog" aria-modal="true" aria-labelledby="title">
@@ -596,9 +633,10 @@ This enables:
    - Explicit return types for exported functions
 
 2. **Generic Components:**
+
    ```tsx
    function GenericComponent<T>({ items }: { items: T[] }) {
-     return items.map(item => <div key={String(item)} />)
+     return items.map((item) => <div key={String(item)} />)
    }
    ```
 
@@ -613,25 +651,33 @@ This enables:
 
 ### Available Components
 
-| Component | Description | Key Props | Use Case |
-|-----------|-------------|-----------|----------|
-| `Accordion` | Expand/collapse sections | `defaultValue`, `value`, `multiple`, `title` shorthand | FAQ, settings panels |
-| `Alert` | Inline status banner | `variant`, `onDismiss`, `badge`, `Alert.Heading` | Page feedback, warnings |
-| `Breadcrumb` | Navigation trail | compound `Breadcrumb.Item` | Page hierarchy |
-| `Button` | Clickable button | `variant`, `size`, `render` | Actions, forms |
-| `Collapsible` | Single show/hide region | `open`, `defaultOpen`, `Collapsible.Trigger/Panel` | Progressive disclosure |
-| `Field` | Form field compound | `Field.Label`, `Field.Control`, validation | Form inputs with validation |
-| `Modal` | Dialog overlay | compound tree, `showModal` | Confirmations, forms |
-| `NumberField` | Numeric stepper | `label`, `min`, `max`, `step`, scrub on label | Quantities, amounts |
-| `Offcanvas` | Side drawer | compound tree, `showOffcanvas`, `swipeDirection` | Navigation, filters |
-| `Popover` | Floating content | compound tree | Menus, contextual panels |
-| `Select` | Dropdown selector | compound tree | Single/multi select |
-| `Spinner` | Loading indicator | `size`, `color`, `subColor` | Async pending UI |
-| `Switch` | Toggle control | `checked`, `onCheckedChange` | Settings, features |
-| `Tabs` | Tabbed interface | `Tabs.Tab` + `Tabs.Panel` per `value` | Content sections |
-| `Toast` | Temporary notification | `Toast.useToastManager` | Success, error messages |
-| `Tooltip` | Hover hint | compound tree | Help text |
-| `dynamic` | Code-split helper | `loadingComponent` Suspense fallback | Lazy routes, federated remotes |
+| Component                | Description                          | Key Props                                                      | Use Case                       |
+| ------------------------ | ------------------------------------ | -------------------------------------------------------------- | ------------------------------ |
+| `Accordion`              | Expand/collapse sections             | `defaultValue`, `value`, `multiple`, `title` shorthand         | FAQ, settings panels           |
+| `Alert`                  | Inline status banner                 | `variant`, `onDismiss`, `badge`, `Alert.Heading`               | Page feedback, warnings        |
+| `Avatar`                 | Image / fallback initials            | `src`, `alt`, size variants                                    | User identity                  |
+| `Breadcrumb`             | Navigation trail                     | compound `Breadcrumb.Item`                                     | Page hierarchy                 |
+| `Button`                 | Clickable button                     | `variant`, `size`, `render`                                    | Actions, forms                 |
+| `Checkbox`               | Checkbox control                     | `checked`, `onCheckedChange`                                   | Multi-select options           |
+| `Collapsible`            | Single show/hide region              | `open`, `defaultOpen`, `Collapsible.Trigger/Panel`             | Progressive disclosure         |
+| `Field`                  | Form field compound                  | `invalid`, `required`, `Field.Label/Control/Feedback/Floating` | Inputs + error feedback        |
+| `Menu`                   | Dropdown menu                        | compound tree                                                  | Actions, overflow menus        |
+| `Modal`                  | Dialog overlay                       | compound tree, `showModal`                                     | Confirmations, forms           |
+| `NavigationMenu`         | Site nav menu                        | compound tree                                                  | Header / app navigation        |
+| `NumberField`            | Numeric stepper                      | `label`, `min`, `max`, `step`, scrub on label                  | Quantities, amounts            |
+| `Offcanvas`              | Side drawer                          | compound tree, `showOffcanvas`, `swipeDirection`               | Navigation, filters            |
+| `Popover`                | Floating content                     | compound tree                                                  | Menus, contextual panels       |
+| `Radio`                  | Radio group                          | compound tree                                                  | Single choice among options    |
+| `Select`                 | Dropdown selector                    | compound tree                                                  | Single/multi select            |
+| `Spinner`                | Loading indicator                    | `size`, `color`, `subColor`                                    | Async pending UI               |
+| `Switch`                 | Toggle control                       | `checked`, `onCheckedChange`                                   | Settings, features             |
+| `Tabs`                   | Tabbed interface                     | `Tabs.Tab` + `Tabs.Panel` per `value`                          | Content sections               |
+| `Toast`                  | Temporary notification               | `Toast.useToastManager`, `Toast.Container`                     | Success, error messages        |
+| `Toc`                    | Table of contents                    | compound tree                                                  | Docs / long-page nav           |
+| `Toolbar`                | Control grouping                     | compound tree                                                  | Editor / filter toolbars       |
+| `Tooltip`                | Hover hint                           | compound tree                                                  | Help text                      |
+| `Toggle` / `ToggleGroup` | Pressable toggle (Base UI re-export) | from `@polyms/core-ui`                                         | Segmented controls             |
+| `dynamic`                | Code-split helper                    | `loadingComponent` Suspense fallback                           | Lazy routes, federated remotes |
 
 ### Component Composition Pattern
 
@@ -700,6 +746,13 @@ All complex components follow compound component pattern:
   </Accordion.Item>
 </Accordion>
 
+// Field — invalid on root; Feedback portals (focus/hover/click or defaultShowOnError)
+<Field invalid={hasError} required>
+  <Field.Label>Email</Field.Label>
+  <Field.Control value={email} onChange={onEmailChange} />
+  <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+</Field>
+
 // dynamic() — React.lazy + Suspense
 import { dynamic, Spinner } from '@polyms/core-ui'
 
@@ -730,13 +783,7 @@ export type ButtonProps = useRender.ComponentProps<'button'> & {
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export function Button({
-  className,
-  variant = 'primary',
-  size = 'md',
-  render,
-  ...props
-}: ButtonProps) {
+export function Button({ className, variant = 'primary', size = 'md', render, ...props }: ButtonProps) {
   const element = useRender({
     defaultTagName: 'button',
     ref: props.ref,
@@ -744,13 +791,7 @@ export function Button({
     props: {
       type: 'button',
       ...props,
-      className: clsx(
-        'btn',
-        `btn-${variant}`,
-        `btn-${size}`,
-        props.disabled && 'btn-disabled',
-        className
-      ),
+      className: clsx('btn', `btn-${variant}`, `btn-${size}`, props.disabled && 'btn-disabled', className),
     },
   })
 
@@ -770,41 +811,41 @@ export * from './Button'
     @apply inline-flex items-center justify-center gap-2;
     @apply rounded-lg font-medium transition-all duration-200;
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500;
-    
+
     &.btn-sm {
       @apply h-8 px-3 text-sm;
     }
-    
+
     &.btn-md {
       @apply h-10 px-4 text-base;
     }
-    
+
     &.btn-lg {
       @apply h-12 px-6 text-lg;
     }
-    
+
     &.btn-primary {
       @apply bg-primary-600 text-white;
       @apply hover:bg-primary-700;
       @apply active:bg-primary-800;
     }
-    
+
     &.btn-secondary {
       @apply border border-slate-300 bg-white text-slate-900;
       @apply hover:bg-slate-50;
       @apply dark:border-slate-700 dark:bg-slate-800 dark:text-white;
     }
-    
+
     &.btn-danger {
       @apply bg-red-600 text-white;
       @apply hover:bg-red-700;
     }
-    
+
     &.btn-ghost {
       @apply text-slate-700 hover:bg-slate-100;
       @apply dark:text-slate-300 dark:hover:bg-slate-800;
     }
-    
+
     &.btn-disabled {
       @apply cursor-not-allowed opacity-50;
       @apply pointer-events-none;
@@ -825,31 +866,31 @@ import { Button } from './Button'
 describe('Button', () => {
   it('should render with default props', () => {
     render(<Button>Click me</Button>)
-    
+
     const button = screen.getByRole('button', { name: 'Click me' })
     expect(button).toBeInTheDocument()
     expect(button).toHaveClass('btn', 'btn-primary', 'btn-md')
   })
-  
+
   it('should apply variant classes', () => {
-    render(<Button variant="secondary">Secondary</Button>)
-    
+    render(<Button variant='secondary'>Secondary</Button>)
+
     expect(screen.getByRole('button')).toHaveClass('btn-secondary')
   })
-  
+
   it('should handle click events', async () => {
     const handleClick = vi.fn()
     const user = userEvent.setup()
-    
+
     render(<Button onClick={handleClick}>Click</Button>)
-    
+
     await user.click(screen.getByRole('button'))
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
-  
+
   it('should be disabled when disabled prop is true', () => {
     render(<Button disabled>Disabled</Button>)
-    
+
     const button = screen.getByRole('button')
     expect(button).toBeDisabled()
     expect(button).toHaveClass('btn-disabled')
@@ -951,7 +992,7 @@ export function ModalContent({ className, render, children, ...props }: ModalCon
 
   return (
     <Dialog.Portal>
-      <Dialog.Backdrop className="modal-backdrop" />
+      <Dialog.Backdrop className='modal-backdrop' />
       <Dialog.Popup render={() => element}>{children}</Dialog.Popup>
     </Dialog.Portal>
   )
@@ -974,79 +1015,164 @@ export const Modal = Object.assign(ModalRoot, {
 export type { ModalRootProps } from './ModalRoot'
 ```
 
-### Example 3: Form Field with Validation
+### Example 3: Form Field with Validation Feedback
+
+Consumer API — put `invalid` on the **root**, not on `Field.Control`. `Field.Feedback` portals a tooltip-style message (focus / hover / click); use `defaultShowOnError` to keep it visible while invalid.
+
+```tsx
+import { Field } from '@polyms/core-ui'
+
+const emailField = (
+  <Field invalid={hasError} required>
+    <Field.Label>Email</Field.Label>
+    <Field.Control value={email} onChange={onEmailChange} debounce={300} />
+    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+  </Field>
+)
+
+// Field.Floating is standalone — do NOT nest inside Field
+const searchField = (
+  <Field.Floating label='Search' placeholder='Filter results' debounce={300} onChange={onSearch} />
+)
+```
+
+Internals (`FieldRoot` + context — no built-in schema rules; the app owns validation state):
 
 ```tsx
 // core/src/field/FieldRoot.tsx
-import { Field as BaseField } from '@base-ui/react/Field'
-import { type ReactNode } from 'react'
+import { useRender } from '@base-ui/react/use-render'
+import clsx from 'clsx'
+import type { FC } from 'react'
 import { FieldProvider } from './FieldContext'
-import { useValidation } from './useValidation'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-type ValidationRule = {
-  required?: boolean | string
-  pattern?: { value: RegExp; message: string }
-  min?: { value: number; message: string }
-  max?: { value: number; message: string }
-  validate?: (value: unknown) => string | true
-}
-
-export type FieldRootProps = {
-  children: ReactNode
-  name: string
-  label?: string
-  rules?: ValidationRule
-  defaultValue?: string
+export interface FieldRootProps extends useRender.ComponentProps<'div'> {
+  variant?: string
+  size?: 'sm' | 'lg' | 'xl' | '2xl' | '3xl'
+  invalid?: boolean
+  name?: string
+  required?: boolean
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export function FieldRoot({ children, name, label, rules, defaultValue }: FieldRootProps) {
-  const validation = useValidation(name, rules)
+export const FieldRoot: FC<FieldRootProps> = ({
+  variant,
+  size,
+  className,
+  id,
+  invalid,
+  required,
+  name,
+  children,
+  render,
+  ...props
+}) => {
+  const element = useRender({
+    defaultTagName: 'div',
+    props: {
+      ...props,
+      'data-field': id,
+      className: clsx('field', className, {
+        invalid,
+        [`field-${size}`]: size,
+        [`field-${variant}`]: variant,
+        required,
+      }),
+      children,
+    },
+    render,
+  })
 
   return (
-    <BaseField.Root name={name} defaultValue={defaultValue}>
-      <FieldProvider value={{ name, label, validation }}>{children}</FieldProvider>
-    </BaseField.Root>
+    <FieldProvider id={id} invalid={invalid} name={name} required={required}>
+      {element}
+    </FieldProvider>
   )
 }
 ```
 
 ```tsx
-// core/src/field/FieldControl.tsx
-import { Field as BaseField } from '@base-ui/react/Field'
-import { useRender } from '@base-ui/react/use-render'
-import clsx from 'clsx'
+// core/src/field/FieldFeedback.tsx — portals via createPortal; positioning via useValidation
+import type { FC } from 'react'
+import { createPortal } from 'react-dom'
 import { useFieldContext } from './FieldContext'
+import { useValidation } from './useValidation'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-type FieldControlProps = useRender.ComponentProps<'input'>
+export interface FieldFeedbackProps {
+  children?: React.ReactNode
+  floatingRoot?: string
+  defaultShowOnError?: boolean
+}
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export function FieldControl({ className, render, ...props }: FieldControlProps) {
-  const { validation } = useFieldContext()
-
-  const element = useRender({
-    defaultTagName: 'input',
-    ref: props.ref,
-    render,
-    props: {
-      ...props,
-      className: clsx(
-        'field-control',
-        validation.error && 'field-error',
-        className
-      ),
-      'aria-invalid': !!validation.error,
-    },
+export const FieldFeedback: FC<FieldFeedbackProps> = ({
+  children,
+  floatingRoot: floatingRootId,
+  defaultShowOnError,
+}) => {
+  const { id, invalid } = useFieldContext()
+  const forceDescribed = Boolean(invalid && defaultShowOnError)
+  const { refs, floatingStyles, isOpen, getFloatingProps } = useValidation({
+    controlId: id,
+    described: forceDescribed,
   })
 
-  return <BaseField.Control render={() => element} />
+  if (!((isOpen || defaultShowOnError) && invalid && children)) return null
+
+  return createPortal(
+    <div
+      ref={refs.setFloating}
+      style={{ ...floatingStyles, zIndex: 99999 }}
+      {...getFloatingProps()}
+      className='field-feedback'
+    >
+      {children}
+    </div>,
+    floatingRootId ? (document.getElementById(floatingRootId) ?? document.body) : document.body
+  )
 }
+```
+
+```tsx
+// core/src/field/useValidation.ts — Floating UI react-dom only (no @floating-ui/react)
+import { autoUpdate, flip, offset, useFloating } from '@floating-ui/react-dom'
+
+export const useValidation = ({
+  controlId,
+  described = false,
+}: {
+  controlId?: string
+  /** Keep aria-describedby when feedback is visible without interaction (e.g. defaultShowOnError). */
+  described?: boolean
+} = {}) => {
+  // Opens on focus-visible / hover / click; dismisses on Escape + outside press
+  // Sets aria-describedby on the control while open or when `described` is true
+  const { refs, floatingStyles } = useFloating({
+    placement: 'top-end',
+    whileElementsMounted: autoUpdate,
+    middleware: [offset({ mainAxis: 5 }), flip({ fallbackAxisSideDirection: 'start' })],
+  })
+  // ...interaction effects attach to document.getElementById(controlId)
+  return { refs, floatingStyles, isOpen, floatingId, getFloatingProps }
+}
+```
+
+Compound export:
+
+```tsx
+// core/src/field/index.ts
+export const Field = Object.assign(FieldRoot, {
+  Control: FieldControl,
+  Label: FieldLabel,
+  Description: FieldDescription,
+  Feedback: FieldFeedback,
+  Floating: FieldFloating,
+})
 ```
 
 ## Naming Conventions
@@ -1054,6 +1180,7 @@ export function FieldControl({ className, render, ...props }: FieldControlProps)
 ### File Naming
 
 **Components:**
+
 - Component files: `PascalCase.tsx` (e.g., `Button.tsx`, `ModalContent.tsx`)
 - Test files: `PascalCase.test.tsx` (e.g., `Button.test.tsx`)
 - Context files: `PascalCase + Context.tsx` (e.g., `FieldContext.tsx`)
@@ -1062,49 +1189,60 @@ export function FieldControl({ className, render, ...props }: FieldControlProps)
 - Index files: `index.ts` (barrel exports)
 
 **Styles:**
+
 - Component styles: `_kebab-case.css` (e.g., `_button.css`, `_modal.css`)
 - Global styles: `kebab-case.css` (e.g., `tailwind.css`, `globals.css`)
 
 **Folders:**
+
 - Component folders: `kebab-case` (e.g., `button/`, `modal/`, `number-field/`)
 
 ### Variable Naming
 
 ```tsx
 // ✅ CORRECT
-const userName = 'John'                    // camelCase for variables
-const MAX_ITEMS = 10                       // UPPER_CASE for constants
-type ButtonProps = {}                      // PascalCase for types
-interface UserData {}                      // PascalCase for interfaces
-function handleClick() {}                  // camelCase for functions
-export function Button() {}                // PascalCase for components
-const useCustomHook = () => {}             // camelCase with 'use' prefix
+const userName = 'John' // camelCase for variables
+const MAX_ITEMS = 10 // UPPER_CASE for constants
+type ButtonProps = {} // PascalCase for types
+interface UserData {} // PascalCase for interfaces
+function handleClick() {} // camelCase for functions
+export function Button() {} // PascalCase for components
+const useCustomHook = () => {} // camelCase with 'use' prefix
 
 // ❌ WRONG
-const UserName = 'John'                    // Not PascalCase for variables
-const max_items = 10                       // Not snake_case
-type buttonProps = {}                      // Not camelCase for types
-function HandleClick() {}                  // Not PascalCase for functions
-const customHook = () => {}                // Missing 'use' prefix
+const UserName = 'John' // Not PascalCase for variables
+const max_items = 10 // Not snake_case
+type buttonProps = {} // Not camelCase for types
+function HandleClick() {} // Not PascalCase for functions
+const customHook = () => {} // Missing 'use' prefix
 ```
 
 ### CSS Class Naming
 
 ```css
 /* Component-specific classes: kebab-case */
-.btn { }
-.modal-backdrop { }
-.field-control { }
+.btn {
+}
+.modal-backdrop {
+}
+.field-control {
+}
 
 /* Modifier classes: component-modifier */
-.btn-primary { }
-.btn-disabled { }
-.modal-open { }
+.btn-primary {
+}
+.btn-disabled {
+}
+.modal-open {
+}
 
 /* State classes: is-/has- prefix */
-.is-active { }
-.is-disabled { }
-.has-error { }
+.is-active {
+}
+.is-disabled {
+}
+.has-error {
+}
 ```
 
 ## Props Typing Patterns
@@ -1163,7 +1301,7 @@ type ListProps<T> = {
 function List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {
   return (
     <ul>
-      {items.map(item => (
+      {items.map((item) => (
         <li key={keyExtractor(item)}>{renderItem(item)}</li>
       ))}
     </ul>
@@ -1171,11 +1309,7 @@ function List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {
 }
 
 // Usage
-<List
-  items={users}
-  renderItem={(user) => <div>{user.name}</div>}
-  keyExtractor={(user) => user.id}
-/>
+;<List items={users} renderItem={(user) => <div>{user.name}</div>} keyExtractor={(user) => user.id} />
 ```
 
 ### Polymorphic Components
@@ -1229,29 +1363,27 @@ Question: Does the state need to be shared?
 // 1. Local state - useState
 function Counter() {
   const [count, setCount] = useState(0)
-  return <button onClick={() => setCount(c => c + 1)}>{count}</button>
+  return <button onClick={() => setCount((c) => c + 1)}>{count}</button>
 }
 
 // 2. Tree-scoped state - Context
 function TabsRoot({ children }: { children: ReactNode }) {
   const [activeTab, setActiveTab] = useState('tab1')
-  
-  return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      {children}
-    </TabsContext.Provider>
-  )
+
+  return <TabsContext.Provider value={{ activeTab, setActiveTab }}>{children}</TabsContext.Provider>
 }
 
 // 3. Global complex state - Zustand
 const useModalStore = create<ModalStore>((set) => ({
   modals: [],
-  open: (id, props) => set((state) => ({ 
-    modals: [...state.modals, { id, props }] 
-  })),
-  close: (id) => set((state) => ({ 
-    modals: state.modals.filter(m => m.id !== id) 
-  })),
+  open: (id, props) =>
+    set((state) => ({
+      modals: [...state.modals, { id, props }],
+    })),
+  close: (id) =>
+    set((state) => ({
+      modals: state.modals.filter((m) => m.id !== id),
+    })),
 }))
 ```
 
@@ -1296,9 +1428,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       if (this.props.fallback) {
         return this.props.fallback(this.state.error!)
       }
-      
+
       return (
-        <div className="error-boundary">
+        <div className='error-boundary'>
           <h2>Something went wrong</h2>
           <details>
             <summary>Error details</summary>
@@ -1386,12 +1518,20 @@ export * from './Button'
 ```tsx
 // core/src/index.ts
 export * from './alert'
+export * from './avatar'
 export * from './button'
-export * from './modal'
+export * from './checkbox'
 export * from './field'
-// ... all components
+export * from './menu'
+export * from './modal'
+export * from './navigation-menu'
+export * from './radio'
+export * from './toast'
+export * from './toc'
+export * from './toolbar'
+// …plus accordion, breadcrumb, collapsible, dynamic, loading, number-field,
+// offcanvas, popover, select, switch, tabs, tooltip, and Base UI mergeProps / useRender / Toggle*
 
-// Export utility types
 export type { useRender } from '@base-ui/react/use-render'
 ```
 
@@ -1415,12 +1555,8 @@ export function useComponent() {
 // Step 3: Create root component
 export function ComponentRoot({ children }: { children: ReactNode }) {
   const [state, setState] = useState(initialState)
-  
-  return (
-    <ComponentContext.Provider value={{ state, setState }}>
-      {children}
-    </ComponentContext.Provider>
-  )
+
+  return <ComponentContext.Provider value={{ state, setState }}>{children}</ComponentContext.Provider>
 }
 
 // Step 4: Create sub-components
@@ -1480,21 +1616,27 @@ export const useComponentStore = create<ComponentStore>((set) => ({
 
 ### Floating UI Integration
 
-```tsx
-import { useFloating, offset, flip } from '@floating-ui/react'
+Prefer `@floating-ui/react-dom` (bundled with the library). Field feedback self-wires reference/floating interactions in `useValidation` — do not add `@floating-ui/react` interaction hooks for that path.
 
-export function Popover() {
+```tsx
+import { autoUpdate, flip, offset, useFloating } from '@floating-ui/react-dom'
+
+export function PositionedPanel({ open }: { open: boolean }) {
   const { refs, floatingStyles } = useFloating({
+    open,
     placement: 'bottom-start',
+    whileElementsMounted: autoUpdate,
     middleware: [offset(8), flip()],
   })
-  
+
   return (
     <>
       <button ref={refs.setReference}>Trigger</button>
-      <div ref={refs.setFloating} style={floatingStyles}>
-        Popover content
-      </div>
+      {open && (
+        <div ref={refs.setFloating} style={floatingStyles}>
+          Panel content
+        </div>
+      )}
     </>
   )
 }
@@ -1577,6 +1719,7 @@ Helps AI assistants compose UI with correct component trees, theming, brand toke
 ## See Also
 
 For complete project guidelines and AI coding agent instructions, see:
+
 - `AGENTS.md` — monorepo conventions, component structure, testing, MDX docs
 - `core/skills/core-ui/SKILL.md` — consumer agent skill entry (shipped in package)
 - `docs/src/pages/agent-skill.mdx` — skill install guide for package users

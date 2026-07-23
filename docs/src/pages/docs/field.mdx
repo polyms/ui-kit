@@ -7,6 +7,10 @@ apis:
     default: '-'
     values: sm | lg | xl | 2xl | 3xl
     description: Controls the padding and font size of the input field.
+  - name: name
+    default: '-'
+    values: string
+    description: Form control name wired to Field.Control (defaults from the field id when omitted).
   - name: required
     default: '-'
     values: boolean
@@ -14,7 +18,7 @@ apis:
   - name: invalid
     default: '-'
     values: boolean
-    description: Applies error styling to the field and shows validation feedback.
+    description: Applies error styling to the field and enables Field.Feedback when present.
   - separator: Field.Label
   - name: render
     default: <label/>
@@ -43,14 +47,22 @@ apis:
     description: Overrides the default input element. Pass a React element or render function for advanced customization.
   - separator: Field.Description
   - name: render
-    default: <p/>
+    default: <div/>
     values: ReactElement | (props, state) => ReactNode
-    description: Overrides the default paragraph element. Pass a React element or render function for advanced customization.
+    description: Overrides the default description element. Pass a React element or render function for advanced customization.
   - separator: Field.Feedback
-  - name: render
-    default: <p/>
-    values: ReactElement | (props, state) => ReactNode
-    description: Overrides the default paragraph element. Pass a React element or render function for advanced customization.
+  - name: children
+    default: '-'
+    values: ReactNode
+    description: Validation message content. Renders only when the field is invalid and feedback is open (or defaultShowOnError is set).
+  - name: defaultShowOnError
+    default: '-'
+    values: boolean
+    description: Keeps the feedback message visible while the field is invalid, without requiring focus, hover, or click.
+  - name: floatingRoot
+    default: document.body
+    values: string
+    description: DOM id of the portal container for the feedback tooltip. Falls back to document.body when omitted or not found.
   - separator: Field.Floating
   - name: label
     default: '-'
@@ -148,6 +160,7 @@ Place `HugeiconsIcon` with `className='icon-start'` or `'icon-end'` as **sibling
 - `invalid` on `Field.Control` — put it on **`Field`** root
 - Using `Field.Floating`'s `placeholder` prop as the HTML input placeholder
 - Inventing `Field.Input` or importing `FieldFloating` separately
+- Expecting `Field.Feedback` to take a `render` prop — pass the message as **`children`**
 
 ## Sizes
 
@@ -165,14 +178,15 @@ Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs bl
 
 ## Invalid state
 
-Pass **`invalid`** on **`Field.Root`** to apply error styling (danger border, text, and focus ring). Add **`Field.Feedback`** for validation messages; it appears on focus or hover by default, or stays visible with **`defaultShowOnError`**.
+Pass **`invalid`** on **`Field`** to apply error styling (danger border, text, and focus ring). Add **`Field.Feedback`** for the validation message — it portals as a tooltip near the control and opens on focus-visible, hover, or click. Use **`defaultShowOnError`** to keep it visible while invalid. Pass **`floatingRoot`** with a DOM id when the feedback must portal into a specific container (for example a modal body) instead of `document.body`.
 
 ```tsx
+import { Field } from '@polyms/core-ui'
 
-const field = (
+const emailField = (
   <Field invalid={hasError} required>
     <Field.Label>Email</Field.Label>
-    <Field.Control value={email} onChange={...} />
+    <Field.Control value={email} onChange={onEmailChange} />
     <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
   </Field>
 )

@@ -30,7 +30,7 @@ const toastManager = Toast.useToastManager()
 toastManager.add({
   title: 'Saved',
   description: 'Profile updated.',
-  type: 'success',
+  type: 'success', // success | danger | warning | info | actions
 })
 ```
 
@@ -41,6 +41,7 @@ Deep reference for Modal/Offcanvas overlays: **[modal.md](modal.md)** — Toast 
 | Rule               | Detail                                                                                                                                                                                        |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Non-blocking**   | Toast does not trap focus — use **`Modal`** for delete confirm and irreversible actions.                                                                                                      |
+| **Types**          | `success`, `danger`, `warning`, `info`, or `actions` (with `actionProps` for undo/retry). There is no `primary` toast type.                                                                   |
 | **Auto-dismiss**   | Default **`timeout`** is **5000** ms; set `timeout: 0` only when the user must read or act (e.g. undo).                                                                                       |
 | **Screen readers** | Keep `title` / `description` concise — Base UI announces via a live region; do not rely on toast alone for critical errors that need a persistent **`Alert`** or inline **`Field.Feedback`**. |
 | **Undo / retry**   | Prefer `type: 'actions'` with one clear action — not a second toast stacked on the first.                                                                                                     |
