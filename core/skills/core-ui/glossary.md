@@ -1,6 +1,6 @@
 ---
 description: >-
-  Core-ui jargon — compound tree, useRender, item-*, semantic tones, Container, barrel import, built-in shell.
+  Core-ui jargon — compound tree, useRender, mergeProps, item-*, semantic tones, Container, barrel import, built-in shell.
 ---
 
 # Glossary
@@ -21,6 +21,12 @@ Base UI pattern for polymorphic primitives. `render={<Button … />}` on a trigg
 
 - Extend wrappers with `useRender.ComponentProps<'tag'>` — [components.md#extending-primitives-with-userender](components.md#extending-primitives-with-userender).
 - Compose triggers: [button.md#compose-button-through-render](button.md#compose-button-through-render).
+
+## mergeProps
+
+Base UI helper re-exported from `@polyms/core-ui` to combine prop objects when wrapping primitives: event handlers chain, `className` concatenates, `style` shallow-merges. **`ref` is not merged** — use `useRender({ ref: [internalRef, ref] })` instead.
+
+- Pair with `useRender` when merging defaults + consumer props — [components.md#extending-primitives-with-userender](components.md#extending-primitives-with-userender).
 
 ## Ghost style
 

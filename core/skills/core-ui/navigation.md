@@ -1,11 +1,11 @@
 ---
 description: >-
-  Menu, NavigationMenu, Toolbar, Tabs, Breadcrumb. Responsive toolbar/tabs patterns. Triggers → button.md#compose-button-through-render.
+  Menu, NavigationMenu, Toolbar, Tabs, Breadcrumb, Toc. Responsive toolbar/tabs patterns. Triggers → button.md#compose-button-through-render.
 ---
 
 # Navigation
 
-Menu, NavigationMenu, Toolbar, Tabs, Breadcrumb. Triggers with `Button` → [button.md](button.md#compose-button-through-render).
+Menu, NavigationMenu, Toolbar, Tabs, Breadcrumb, Toc. Triggers with `Button` → [button.md](button.md#compose-button-through-render).
 
 ## Menu
 
@@ -269,3 +269,39 @@ const projectBreadcrumb = (
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | **Current page** | `active` or omit `href` on the last crumb — sets `aria-current="page"` on that item only; ancestor links with `href` do not |
 | **Router links** | `Breadcrumb.Item` `render` for client-side links — confirm props in `index.d.ts`                                            |
+
+## Toc
+
+**Tree:** `Toc` → `Toc.List` → `Toc.Item` (+ optional `Toc.Indicator`). Scroll spy runs inside `Toc` and styles items automatically.
+
+```tsx
+import { Toc } from '@polyms/core-ui'
+
+const items = [
+  { title: 'Overview', url: '#overview', depth: 2 },
+  { title: 'Setup', url: '#setup', depth: 2 },
+]
+
+const pageToc = (
+  <Toc>
+    <Toc.List>
+      {items.map((item) => (
+        <Toc.Item key={item.url} depth={item.depth} href={item.url}>
+          {item.title}
+        </Toc.Item>
+      ))}
+      <Toc.Indicator />
+    </Toc.List>
+  </Toc>
+)
+```
+
+| Rule                 | Detail                                                                                        |
+| -------------------- | --------------------------------------------------------------------------------------------- |
+| **Heading ids**      | Page headings must use the same ids as item `href` fragments (`#overview` → `id="overview"`)  |
+| **Scroll spy**       | Built into `Toc` — do not pass `visible` / `primary` unless you need an override              |
+| **Scroll container** | Pass `scrollRef` on `Toc` when the page scrolls inside an overflow element (not the window)   |
+| **Custom chrome**    | `useToc()` inside the tree, or standalone `useVisibleHeadings(ids, { root })` outside `Toc`   |
+| **Indicator**        | Spans first→last **visible** items inside `Toc.List`; omit when you do not need the range bar |
+| **Scroll helpers**   | `scrollToHeading(id)` for hash targets; `scrollToTop()` for the window top                    |
+| **Top control**      | Omit `href` on `Toc.Item` for a button (e.g. back to top) + `scrollToTop()`                   |

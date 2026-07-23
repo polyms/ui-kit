@@ -34,18 +34,22 @@ import code from './-views/use-render/UseRenderDefault.tsx?raw'
 ## Typing
 
 ```tsx
-import { useRender } from '@polyms/core-ui'
+import { mergeProps, useRender } from '@polyms/core-ui'
+import clsx from 'clsx'
 
 type CardProps = useRender.ComponentProps<'div'>
 
-export function Card({ className, render, ...props }: CardProps) {
+export function Card({ className, render, ref, ...props }: CardProps) {
   return useRender({
     defaultTagName: 'div',
+    ref,
     render,
-    props: { ...props, className: clsx('card', className) },
+    props: mergeProps<'div'>({ className: clsx('card', className) }, props),
   })
 }
 ```
+
+Prefer **`mergeProps`** over spreading when combining library defaults with consumer props so **`className`**, **`style`**, and event handlers merge safely. **`ref` is not merged by `mergeProps`** — use **`useRender`'s `ref`** option (a single ref or an array). Details: [mergeProps](/docs/merge-props).
 
 ## Button as anchor
 

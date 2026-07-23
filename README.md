@@ -27,8 +27,7 @@ pnpm install
 pnpm dev          # serve the docs site
 pnpm build        # build @polyms/core-ui → dist/core
 pnpm test         # run Vitest for core
-pnpm check        # Biome lint + format check
-pnpm check:fix    # apply Biome fixes
+pnpm check        # biome + prettier auto-fix
 ```
 
 Run a task directly through Nx when needed:

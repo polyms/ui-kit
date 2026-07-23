@@ -4,6 +4,34 @@ File **nguồn chính** cho Cursor, Claude, các IDE tích hợp AI, và bất k
 
 **Core-UI** là thư viện UI React modular; monorepo **Nx** + **pnpm**; format/lint **Biome**.
 
+## Agent skills
+
+### Documentation language
+
+Written docs (`CONTEXT.md`, ADRs, PRDs, design specs, `docs/agents/*.md`) are in **Vietnamese**. Chat tone still matches whichever language the user writes in.
+
+See `docs/agents/language.md`.
+
+### Issue tracker
+
+GitHub issues on **polyms/core-ui** via `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` + `docs/adr/` at repo root. See `docs/agents/domain.md`.
+
+### Triage labels
+
+Canonical roles mapped to tracker labels. See `docs/agents/triage-labels.md`.
+
+### Design
+
+UI specs and `@polyms/core-ui` pointers; **Figma token board** link and page structure for new sessions. See `docs/agents/design.md`.
+
+### Pipeline
+
+Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/dev`; raw issues via `/triage`. PRDs in `docs/prd/`; ADRs in `docs/adr/`; glossary in `CONTEXT.md`.
+
 ---
 
 ## Tổng quan
@@ -52,9 +80,7 @@ pnpm dev                    # nx serve docs — site tài liệu
 pnpm exec nx serve core     # dev server trực tiếp cho core (nếu cần)
 pnpm build                  # nx build
 pnpm test                   # nx test core — Vitest
-pnpm lint                   # biome lint .
-pnpm check                  # biome check .
-pnpm check:fix              # biome check --write .
+pnpm check                  # biome check --write . && prettier -l --write .
 pnpm release                # nx release … — project core (xem nx.json)
 ```
 
@@ -101,11 +127,12 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 - Chỉ **function components + hooks** (trừ khi có lý do đặc biệt).
 - State chia sẻ: **React Context** (ví dụ offcanvas); hook đặt tên **`use<Feature>`** (`useValidation.ts`, …), đặt cạnh feature.
 
-### Base UI — `useRender`
+### Base UI — `useRender` + `mergeProps`
 
-Khi dựng primitive với **`useRender`**:
+Khi dựng primitive với **`useRender`**, merge default props với consumer qua **`mergeProps`** (`className` / `style` / handlers chain đúng; **`ref` không** được `mergeProps` — truyền qua option `ref` của `useRender`, kể cả mảng):
 
 ```tsx
+import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import clsx from 'clsx'
 
@@ -115,23 +142,19 @@ type ComponentProps = useRender.ComponentProps<'div'>
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-export function Component({ className, render, ...props }: ComponentProps) {
-  const element = useRender({
+export function Component({ className, render, ref, ...props }: ComponentProps) {
+  return useRender({
     defaultTagName: 'div',
-    ref: props.ref,
+    ref,
     render,
-    props: {
-      ...props,
-      className: clsx('component-class', className),
-    },
+    props: mergeProps<'div'>({ className: clsx('component-class', className) }, props),
   })
-
-  return element
 }
 ```
 
 - Typing: `useRender.ComponentProps<'tagname'>` (có sẵn prop `render`).
-- React 19: `ref` truyền qua `props.ref` vào `useRender`; **không cần** `forwardRef` cho pattern này.
+- React 19: `ref` truyền vào `useRender({ ref })`; **không cần** `forwardRef` cho pattern này.
+- Trong `core/`: import trực tiếp `@base-ui/react/…` như trên. Consumer app: import `mergeProps` / `useRender` từ barrel `@polyms/core-ui`.
 
 ---
 

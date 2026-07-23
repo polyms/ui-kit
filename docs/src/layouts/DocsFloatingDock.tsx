@@ -1,4 +1,5 @@
 import { ListViewIcon, Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icons'
+import { scrollToHeading, scrollToTop, useVisibleHeadings } from '@polyms/core-ui'
 import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import clsx from 'clsx'
 import { type RefObject, useMemo } from 'react'
@@ -19,7 +20,9 @@ type DocsFloatingDockProps = {
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 function DocsTocPopover({ onClose }: { onClose: () => void }) {
-  const { toc, visibleIds, primaryActiveId, scrollToTop, scrollToHeading } = useDocsToc()
+  const { toc } = useDocsToc()
+  const itemIds = useMemo(() => toc.map(item => item.url.replace('#', '')), [toc])
+  const { visibleIds, primaryActiveId } = useVisibleHeadings(itemIds)
 
   return (
     <div>
@@ -72,10 +75,6 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
   const { toc } = useDocsToc()
   // The TOC aside is visible from xl up, so the dock's TOC popover is redundant there.
   const isTocAsideVisible = useMediaQuery('(min-width: 1280px)')
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
 
   const actions: DockAction[] = useMemo(() => {
     const themeAction: DockAction = {
