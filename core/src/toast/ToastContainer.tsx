@@ -1,5 +1,4 @@
 import { Toast } from '@base-ui/react/toast'
-import { FloatingPortal } from '@floating-ui/react'
 import clsx from 'clsx'
 import { type PropsWithChildren, useEffect } from 'react'
 import Icons from '../Icons'
@@ -24,7 +23,7 @@ export const ToastContainer = () => {
   }, [])
 
   return (
-    <FloatingPortal>
+    <Toast.Portal>
       <Toast.Viewport className='toast-container' id='toast-container'>
         {toastManager.toasts.map(toast => (
           <Toast.Root
@@ -58,6 +57,6 @@ export const ToastContainer = () => {
           </Toast.Root>
         ))}
       </Toast.Viewport>
-    </FloatingPortal>
+    </Toast.Portal>
   )
 }

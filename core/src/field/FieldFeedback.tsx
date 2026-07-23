@@ -1,5 +1,5 @@
-import { FloatingPortal } from '@floating-ui/react'
 import type { FC } from 'react'
+import { createPortal } from 'react-dom'
 import { useFieldContext } from './FieldContext'
 import { useValidation } from './useValidation'
 
@@ -13,26 +13,34 @@ export interface FieldFeedbackProps {
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
+function resolvePortalContainer(id?: string): HTMLElement {
+  if (!id) return document.body
+  return document.getElementById(id) ?? document.body
+}
+
 export const FieldFeedback: FC<FieldFeedbackProps> = ({
   children,
   floatingRoot: floatingRootId,
   defaultShowOnError,
 }) => {
   const { id, invalid } = useFieldContext()
-  const { refs, floatingStyles, isOpen, getFloatingProps } = useValidation({ controlId: id })
+  const forceDescribed = Boolean(invalid && defaultShowOnError)
+  const { refs, floatingStyles, isOpen, getFloatingProps } = useValidation({
+    controlId: id,
+    described: forceDescribed,
+  })
 
   if (!((isOpen || defaultShowOnError) && invalid && children)) return null
 
-  return (
-    <FloatingPortal id={floatingRootId}>
-      <div
-        ref={refs.setFloating}
-        style={{ ...floatingStyles, zIndex: 99999 }}
-        {...getFloatingProps()}
-        className='field-feedback'
-      >
-        {children}
-      </div>
-    </FloatingPortal>
+  return createPortal(
+    <div
+      ref={refs.setFloating}
+      style={{ ...floatingStyles, zIndex: 99999 }}
+      {...getFloatingProps()}
+      className='field-feedback'
+    >
+      {children}
+    </div>,
+    resolvePortalContainer(floatingRootId)
   )
 }

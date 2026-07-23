@@ -9,22 +9,36 @@ import pkg from './package.json'
 
 // import federation from './plugins/module-federation.plugin'
 
-const footer = (mode: string, version: string) => `
-const styles = [
-  'color: #1e0dff',
-  'border: 1px dashed #1e0dff',
-  'background: #fff',
-  'border-radius: .25rem',
-  'padding: .25rem .5rem',
-  'margin: .25rem','font-weight: bold',].join(';')
-console.info(\`%c${pkg.name}%c${mode.toUpperCase()}%c${version}\`, styles, styles, styles)
-`
+/** Emit path for preserveModules — own src flat under outDir; deps under base/ or vendor/. */
+function preservedModuleFileName(facadeModuleId: string | undefined | null, name: string, srcRoot: string) {
+  if (!facadeModuleId) return `${name}.mjs`
 
-export default defineConfig(async ({ mode }) => {
+  const id = facadeModuleId.split('?')[0] ?? facadeModuleId
+  if (id === srcRoot || id.startsWith(`${srcRoot}/`) || id.startsWith(`${srcRoot}${path.sep}`)) {
+    const rel = path.relative(srcRoot, id).replace(/\.[cm]?[jt]sx?$/, '')
+    return `${rel}.mjs`
+  }
+
+  const pnpm = id.match(/\/node_modules\/\.pnpm\/[^/]+\/node_modules\/(.+)$/)
+  const plain = id.match(/\/node_modules\/(.+)$/)
+  const pkgPath = (pnpm?.[1] ?? plain?.[1])?.replace(/\.[cm]?js$/, '')
+  if (!pkgPath) return `vendor/${name}.mjs`
+
+  // Runtime next to cloned @base-ui types under dist/base/
+  if (pkgPath === '@base-ui/react' || pkgPath.startsWith('@base-ui/react/')) {
+    const sub = pkgPath === '@base-ui/react' ? 'index' : pkgPath.slice('@base-ui/react/'.length)
+    return `base/${sub}.mjs`
+  }
+
+  return `vendor/${pkgPath}.mjs`
+}
+
+export default defineConfig(async () => {
   const isLocal = process.env.LOCAL === 'true'
   const version = isLocal ? 'local' : pkg.version
   const tailwindcssVite = (await import('@tailwindcss/vite')).default
   const outDir = path.join(__dirname, process.env.OUTDIR ?? '../dist/core')
+  const srcRoot = path.resolve(__dirname, 'src')
 
   return {
     build: {
@@ -53,8 +67,10 @@ export default defineConfig(async ({ mode }) => {
       reportCompressedSize: true,
       // Rolldown preserves `require()` for externals; browser bundles need `import` (see rolldown.rs bundling-cjs).
       // Keep react out of top-level `external` here — handled by esmExternalRequirePlugin's own list.
+      // @base-ui/react, clsx, @floating-ui/react-dom stay bundled so consumers do not install them.
       rolldownOptions: {
-        external: ['use-sync-external-store', 'zustand'],
+        // zustand stays external (programmatic overlay stores); @base-ui + its transitive deps are bundled.
+        external: ['zustand'],
         output: {
           assetFileNames: assetInfo => {
             if (assetInfo.names.some(name => name.endsWith('.css'))) {
@@ -62,20 +78,15 @@ export default defineConfig(async ({ mode }) => {
             }
             return '[name]-[hash][extname]'
           },
-          chunkFileNames(chunkInfo) {
-            if (chunkInfo.name === 'index' && chunkInfo.facadeModuleId) {
-              const match = chunkInfo.facadeModuleId.match(/\/([^/]*)(?=\/index.ts)/)
-              if (match) return `${match[1]}-[hash].mjs`
-            }
-            return '[name]-[hash].mjs'
-          },
-          entryFileNames: '[name].mjs',
-          footer: chunk => (chunk.isEntry ? footer(mode, version) : ''),
+          chunkFileNames: chunk => preservedModuleFileName(chunk.facadeModuleId, chunk.name, srcRoot),
+          entryFileNames: chunk => preservedModuleFileName(chunk.facadeModuleId, chunk.name, srcRoot),
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',
             'react/jsx-runtime': 'jsxRuntime',
           },
+          preserveModules: true,
+          preserveModulesRoot: srcRoot,
         },
         plugins: [
           esmExternalRequirePlugin({
@@ -103,7 +114,7 @@ export default defineConfig(async ({ mode }) => {
       tailwindcssVite(),
       dts({
         afterBuild: async () => {
-          // Copy @base-ui/react types to dist
+          // Copy @base-ui/react types to dist so consumers resolve them as core-ui types.
           const fs = await import('node:fs/promises')
           const baseUiPath = path.resolve(__dirname, '../node_modules/@base-ui/react')
           const destPath = path.join(outDir, 'base')
@@ -128,11 +139,16 @@ export default defineConfig(async ({ mode }) => {
         },
         // bundledPackages: ['@base-ui/react'],
         beforeWriteFile(filePath, content) {
-          const matchs = content.match(/(?:node_modules\/)?@base-ui\/react?/g)
-          if (!matchs) return { content, filePath }
+          if (!/(?:node_modules\/)?@base-ui\/react/.test(content)) {
+            return { content, filePath }
+          }
 
-          const newPath = path.relative(path.dirname(filePath), `${outDir}/base/`)
-          const modifiedContent = content.replaceAll(matchs[0], newPath === 'base' ? './base' : newPath)
+          const newPath = path.relative(path.dirname(filePath), `${outDir}/base`)
+          const baseImport = newPath === 'base' || newPath === '' ? './base' : newPath
+          const modifiedContent = content.replaceAll(
+            /(?:node_modules\/)?@base-ui\/react/g,
+            baseImport
+          )
 
           return { content: modifiedContent, filePath }
         },
