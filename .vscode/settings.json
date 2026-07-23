@@ -24,6 +24,7 @@
     "*.md": "markdown",
     "*.mdx": "markdown"
   },
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "nxConsole.generateAiAgentRules": true,
   "tailwindCSS.classFunctions": ["clsx"],
   "tailwindCSS.experimental.configFile": "core/src/styles/tailwind.css",

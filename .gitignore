@@ -89,21 +89,33 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Nx
 .nx/cache
 .nx/workspace-data
+.nx/polygraph
+.nx/migrate-runs
+.nx/self-healing
 
+# Vite / Vitest
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
+# Env & local config
 .env
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
 .npmrc
-doc_build/
+
+# Coverage & docs build
 **/coverage/
+doc_build/
+
+# Package manager
 .pnpm-store
 
+# Agent / AI local
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
 .claude/worktrees
 .claude/settings.local.json
-.nx/polygraph
+
+# Local tooling
 .venv-rembg
