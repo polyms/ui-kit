@@ -1,9 +1,8 @@
 import path from 'node:path'
-import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import { defineConfig, esmExternalRequirePlugin, type UserConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import pkg from './package.json'
 
@@ -104,13 +103,14 @@ export default defineConfig(async () => {
     },
     plugins: [
       react(),
-      nxViteTsPaths(),
-      nxCopyAssetsPlugin([
-        '*.md',
-        { glob: '**/*', input: 'src/styles', output: 'styles' },
-        { glob: '**/*', input: 'skills', output: 'skills' },
-        { glob: '**/*', input: 'scripts', output: 'scripts' },
-      ]),
+      viteStaticCopy({
+        targets: [
+          { dest: '.', src: 'README.md' },
+          { dest: 'styles', rename: { stripBase: 2 }, src: 'src/styles/*' },
+          { dest: '.', src: 'skills' },
+          { dest: '.', src: 'scripts' },
+        ],
+      }),
       tailwindcssVite(),
       dts({
         afterBuild: async () => {
@@ -166,10 +166,6 @@ export default defineConfig(async () => {
       host: '0.0.0.0',
       port: 6173,
     },
-    // Uncomment this if you are using workers.
-    // worker: {
-    //  plugins: [ nxViteTsPaths() ],
-    // },
     // Configuration for building your library.
     // See: https://vitejs.dev/guide/build.html#library-mode
     resolve: {

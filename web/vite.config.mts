@@ -1,7 +1,6 @@
 /// <reference types='vitest' />
+import path from 'node:path'
 import mdx from '@mdx-js/rollup'
-import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import tailwindcssVite from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
@@ -12,10 +11,6 @@ import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin'
 import { stripFrontmatter } from './plugins/stripFrontmatter.plugin'
 
 export default defineConfig({
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true,
@@ -28,7 +23,6 @@ export default defineConfig({
   cacheDir: '../node_modules/.vite/web',
   plugins: [
     react(),
-    nxViteTsPaths(),
     stripFrontmatter(),
     mdx({ providerImportSource: '@mdx-js/react' }),
     mdxNavigationPlugin({
@@ -36,7 +30,6 @@ export default defineConfig({
       routeBase: '/',
     }),
     tanstackRouter({ routesDirectory: './src/pages' }),
-    nxCopyAssetsPlugin(['*.md']),
     svgr({ include: '**/*.svg' }),
     tailwindcssVite(),
   ],
@@ -44,20 +37,16 @@ export default defineConfig({
     host: 'localhost',
     port: 4300,
   },
+  resolve: {
+    // Workspace package source — neither nxViteTsPaths nor vite-tsconfig-paths reliably
+    // apply tsconfig.base paths to MDX under Vite 8; alias keeps docs/dev imports working.
+    alias: {
+      '@polyms/ui-kit': path.resolve(__dirname, '../ui-kit/src/index.ts'),
+    },
+  },
   root: __dirname,
   server: {
     host: 'localhost',
     port: 4200,
   },
-  // test: {
-  //   watch: false,
-  //   globals: true,
-  //   environment: 'jsdom',
-  //   include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-  //   reporters: ['default'],
-  //   coverage: {
-  //     reportsDirectory: '../coverage/docs',
-  //     provider: 'v8' as const,
-  //   },
-  // },
 })
