@@ -80,7 +80,7 @@ function LandingNav() {
         <Link className='flex items-center' to='/'>
           <FaviconFit className='h-10 w-auto' hexCenterColor='#fff' />
           <span className='ms-1 mb-1.5 font-semibold text-slate-100 tracking-tight'>olyms</span>
-          <span className='home-nav-tag ms-2'>Core UI</span>
+          <span className='home-nav-tag ms-2'>UI Kit</span>
         </Link>
 
         <nav className='hidden items-center gap-1 md:flex'>
@@ -127,7 +127,7 @@ function HeroSection() {
               UNCOMPROMISING {'//'}
             </span>
             <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
-              POLYMS CORE UI {'//'}
+              POLYMS UI KIT {'//'}
             </span>
             <span className='home-text-outline-neon px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-transparent italic md:px-8'>
               CYBERPUNK {'//'}
@@ -139,7 +139,7 @@ function HeroSection() {
               UNCOMPROMISING {'//'}
             </span>
             <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
-              POLYMS CORE UI {'//'}
+              POLYMS UI KIT {'//'}
             </span>
             <span className='home-text-outline-neon px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-transparent italic md:px-8'>
               CYBERPUNK {'//'}
@@ -451,7 +451,7 @@ function FeaturesSection() {
     <section className='relative px-6 py-20 md:py-28'>
       <Container>
         <SectionHeader
-          eyebrow='Why Core UI'
+          eyebrow='Why UI Kit'
           subtitle='Every primitive is opinionated where it matters — accessibility, types, semantics — and flexible everywhere else.'
           title='Built for serious product teams'
         />
@@ -489,8 +489,8 @@ function ThemingSection() {
               Make it yours in minutes.
             </h2>
             <p className='mt-4 max-w-xl text-slate-400 md:text-lg'>
-              Polyms UI Kit is built on CSS variables. You don't need to fork the library to match your
-              brand. Just tweak a few variables and the entire design system adapts seamlessly.
+              Polyms UI Kit is built on CSS variables. You don't need to fork the library to match your brand.
+              Just tweak a few variables and the entire design system adapts seamlessly.
             </p>
             <ul className='mt-8 space-y-4 text-slate-300'>
               <li className='flex items-center gap-3'>

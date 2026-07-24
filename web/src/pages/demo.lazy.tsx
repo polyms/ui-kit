@@ -85,7 +85,7 @@ function Page() {
             </div>
 
             <h1 className='mt-6 max-w-3xl font-semibold text-3xl text-fg tracking-tight md:text-4xl lg:text-5xl'>
-              A fintech-style shell, powered by Core UI
+              A fintech-style shell, powered by UI Kit
             </h1>
             <p className='mt-4 max-w-3xl text-pretty text-base text-muted leading-relaxed md:text-lg'>
               Sticky header with a real{' '}

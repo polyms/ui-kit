@@ -23,7 +23,7 @@ Read the codebase before editing:
 
 | Check                                                                  | Why                                                                                     |
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `package.json` — is `@polyms/ui-kit` installed?                       | Run [setup.md](setup.md) first if missing                                               |
+| `package.json` — is `@polyms/ui-kit` installed?                        | Run [setup.md](setup.md) first if missing                                               |
 | Styles entry — `styles-<hash>.css` or `styles/tailwind.css` imported?  | Unstyled primitives if CSS is missing                                                   |
 | `Modal.Container` / `Offcanvas.Container` / `Toast.Container` mounted? | Programmatic overlays break without containers                                          |
 | Styling method — Tailwind v4, plain CSS, mixed inline                  | Match existing app patterns; use DS tokens on top                                       |
@@ -132,7 +132,7 @@ Apply in order. **Stop when the brief is satisfied** — do not keep restyling f
 | Step | Action                                                                                                       | Risk       |
 | ---- | ------------------------------------------------------------------------------------------------------------ | ---------- |
 | 1    | **Setup** — package, styles, overlay containers ([setup.md](setup.md))                                       | Low        |
-| 2    | **Component swap** — map ad-hoc markup to `@polyms/ui-kit` primitives; keep compound trees intact           | Low–medium |
+| 2    | **Component swap** — map ad-hoc markup to `@polyms/ui-kit` primitives; keep compound trees intact            | Low–medium |
 | 3    | **Semantic tokens** — `bg-body`, `text-fg`, `border-line`, `slate` chrome ([theming.md](theming.md))         | Low        |
 | 4    | **Interactive surfaces** — `item-*` for ghost nav/actions; `btn-*` variants for actions                      | Low        |
 | 5    | **Spacing and density** — align to Comfortable / Compact / Cockpit ([quality.md](quality.md#visual-density)) | Medium     |

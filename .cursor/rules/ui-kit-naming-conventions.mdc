@@ -1,10 +1,10 @@
 ---
-description: Naming conventions for Core-UI TypeScript and React files
+description: Naming conventions for UI Kit TypeScript and React files
 globs: **/*.{ts,tsx}
 alwaysApply: false
 ---
 
-# Core-UI Naming Conventions
+# UI Kit Naming Conventions
 
 - Use `PascalCase` for React component files and exported component names (`Button.tsx`, `ModalHeader.tsx`).
 - Use `camelCase` for hooks/util files and exported functions (`useValidation.ts`, `formatDate.ts`).

@@ -1,11 +1,11 @@
 ---
 description: >-
-  Core-ui jargon — compound tree, useRender, mergeProps, item-*, semantic tones, Container, barrel import, built-in shell.
+  UI Kit jargon — compound tree, useRender, mergeProps, item-*, semantic tones, Container, barrel import, built-in shell.
 ---
 
 # Glossary
 
-Core-ui jargon — load when a term below appears in the task or generated code.
+UI Kit jargon — load when a term below appears in the task or generated code.
 
 ## Compound tree / compound component
 

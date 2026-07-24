@@ -1,5 +1,5 @@
 ---
-description: TS/TSX section ordering and separator style for Core-UI
+description: TS/TSX section ordering and separator style for UI Kit
 globs: **/*.{ts,tsx}
 alwaysApply: false
 ---

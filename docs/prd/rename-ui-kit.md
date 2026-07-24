@@ -18,8 +18,8 @@ Kit UI Polyms đang mang tên **core-ui** trên npm, GitHub, Nx, skill agent và
 ## User Stories
 
 **US-01 — Import package tên mới** (P0)  
-*As an* engineer product, *I want* `import { … } from '@polyms/ui-kit'`, *so that* app khớp brand ui-kit / ai-kit.  
-*Why P0:* Không có package name mới thì rename thất bại.
+_As an_ engineer product, _I want_ `import { … } from '@polyms/ui-kit'`, _so that_ app khớp brand ui-kit / ai-kit.  
+_Why P0:_ Không có package name mới thì rename thất bại.
 
 ```
 Given monorepo đã cutover
@@ -28,8 +28,8 @@ Then TypeScript/runtime resolve được và không cần `@polyms/core-ui`
 ```
 
 **US-02 — Skill và CLI tên mới** (P0)  
-*As an* engineer chạy agent skill, *I want* `ui-kit-skill` cài skill `ui-kit`, *so that* Cursor/Claude load đúng bộ hướng dẫn.  
-*Why P0:* Skill cũ `core-ui` sẽ lệch package.
+_As an_ engineer chạy agent skill, _I want_ `ui-kit-skill` cài skill `ui-kit`, _so that_ Cursor/Claude load đúng bộ hướng dẫn.  
+_Why P0:_ Skill cũ `core-ui` sẽ lệch package.
 
 ```
 Given package `@polyms/ui-kit` đã build
@@ -38,8 +38,8 @@ Then target path là `.cursor|.claude|.agents/skills/ui-kit` và nguồn skill l
 ```
 
 **US-03 — Docs và agent docs đồng bộ** (P0)  
-*As a* maintainer, *I want* docs site và AGENTS nói Polyms UI Kit / `@polyms/ui-kit`, *so that* không còn hướng dẫn core-ui.  
-*Why P0:* Docs lệch = agent/human làm sai.
+_As a_ maintainer, _I want_ docs site và AGENTS nói Polyms UI Kit / `@polyms/ui-kit`, _so that_ không còn hướng dẫn core-ui.  
+_Why P0:_ Docs lệch = agent/human làm sai.
 
 ```
 Given cutover merge
@@ -48,8 +48,8 @@ Then không còn match ngoài CONTEXT glossary lịch sử
 ```
 
 **US-04 — CI publish path mới** (P0)  
-*As a* maintainer, *I want* workflow tag `ui-kit@*` publish `dist/ui-kit`, *so that* release không trỏ artifact cũ.  
-*Why P0:* Sai path CI = ship nhầm hoặc fail.
+_As a_ maintainer, _I want_ workflow tag `ui-kit@*` publish `dist/ui-kit`, _so that_ release không trỏ artifact cũ.  
+_Why P0:_ Sai path CI = ship nhầm hoặc fail.
 
 ```
 Given tag `ui-kit@1.0.0`
@@ -58,8 +58,8 @@ Then build/publish dùng `dist/ui-kit` và package name `@polyms/ui-kit`
 ```
 
 **US-05 — GitHub rename in-place** (P0)  
-*As a* maintainer, *I want* repo đổi tên `polyms/ui-kit` giữ issues, *so that* lịch sử tracker không mất.  
-*Why P0:* Tạo repo mới phá continuity.
+_As a_ maintainer, _I want_ repo đổi tên `polyms/ui-kit` giữ issues, _so that_ lịch sử tracker không mất.  
+_Why P0:_ Tạo repo mới phá continuity.
 
 ```
 Given cutover code đã merge
@@ -68,7 +68,7 @@ Then URL cũ redirect; issues/PR cũ vẫn thuộc repo mới
 ```
 
 **US-06 — Migration note cho consumer** (P1)  
-*As an* engineer app ngoài, *I want* README/changelog nói rõ đổi import và major `1.0.0`, *so that* nâng cấp có checklist.
+_As an_ engineer app ngoài, _I want_ README/changelog nói rõ đổi import và major `1.0.0`, _so that_ nâng cấp có checklist.
 
 ## Implementation Decisions
 

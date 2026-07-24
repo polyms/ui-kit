@@ -1,4 +1,4 @@
-# Core UI
+# UI Kit
 
 Modular React 19 UI component library for the **Polyms ecosystem** — compound components, semantic theming, programmatic overlays, and Tailwind CSS 4 utilities.
 
@@ -8,11 +8,11 @@ Monorepo powered by **Nx** + **pnpm**, formatted and linted with **Biome**.
 
 ## Packages
 
-| Path     | Package           | Description                                                              |
-| -------- | ----------------- | ------------------------------------------------------------------------ |
-| `ui-kit/` | `@polyms/ui-kit` | Reusable React components + styles. Built with Vite → `dist/ui-kit`.     |
-| `web/`   | —                 | Public website (TanStack Router + MDX, live demos).                      |
-| `docs/`  | —                 | Agent/domain docs (ai-kit): `agents/`, `adr/`, `prd/`.                   |
+| Path      | Package          | Description                                                          |
+| --------- | ---------------- | -------------------------------------------------------------------- |
+| `ui-kit/` | `@polyms/ui-kit` | Reusable React components + styles. Built with Vite → `dist/ui-kit`. |
+| `web/`    | —                | Public website (TanStack Router + MDX, live demos).                  |
+| `docs/`   | —                | Agent/domain docs (ai-kit): `agents/`, `adr/`, `prd/`.               |
 
 ## Tech stack
 

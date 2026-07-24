@@ -28,10 +28,7 @@
   "bin": {
     "ui-kit-skill": "./scripts/add-skill.mjs"
   },
-  "sideEffects": [
-    "**/*.css",
-    "./styles/**"
-  ],
+  "sideEffects": ["**/*.css", "./styles/**"],
   "main": "./index.mjs",
   "module": "./index.mjs",
   "types": "./index.d.ts",

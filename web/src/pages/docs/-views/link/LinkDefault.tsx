@@ -16,7 +16,7 @@ const profiles = [
     action: 'View profile',
     href: 'https://polyms.dev/',
     name: 'Aliah Lane',
-    role: 'Design lead · Core UI',
+    role: 'Design lead · UI Kit',
     src: 'https://untitledui.com/images/avatars/aliah-lane',
   },
   {

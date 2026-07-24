@@ -36,11 +36,11 @@ Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/de
 
 ## Tổng quan
 
-| Khu vực | Vai trò                                                                                                    |
-| ------- | ---------------------------------------------------------------------------------------------------------- |
+| Khu vực   | Vai trò                                                                                                     |
+| --------- | ----------------------------------------------------------------------------------------------------------- |
 | `ui-kit/` | Component tái sử dụng + style; build Vite → `dist/ui-kit`, package **`@polyms/ui-kit`** (theo metadata Nx). |
-| `web/`  | Site công khai: **TanStack Router**, **MDX**, demo live (URL `/docs/...`).                                 |
-| `docs/` | Domain/ai-kit: `agents/`, `adr/`, `prd/` — không phải Nx app.                                              |
+| `web/`    | Site công khai: **TanStack Router**, **MDX**, demo live (URL `/docs/...`).                                  |
+| `docs/`   | Domain/ai-kit: `agents/`, `adr/`, `prd/` — không phải Nx app.                                               |
 
 **Stack chính:** React 19, TypeScript (strict), Vite 8, Tailwind CSS 4, `@base-ui/react`, Floating UI, Vitest + Testing Library, Zustand (ví dụ modal), shiki (highlight trong docs).
 
@@ -161,7 +161,7 @@ export function Component({ className, render, ref, ...props }: ComponentProps) 
 
 - Typing: `useRender.ComponentProps<'tagname'>` (có sẵn prop `render`).
 - React 19: `ref` truyền vào `useRender({ ref })`; **không cần** `forwardRef` cho pattern này.
-- Trong `ui-kit/: import trực tiếp `@base-ui/react/…` như trên. Consumer app: import `mergeProps` / `useRender` từ barrel `@polyms/ui-kit`.
+- Trong `ui-kit/`: import trực tiếp `@base-ui/react/…` như trên. Consumer app: import `mergeProps` / `useRender` từ barrel `@polyms/ui-kit`.
 
 ---
 

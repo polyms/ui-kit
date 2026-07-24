@@ -1,10 +1,10 @@
 ---
-description: Vitest + Testing Library test patterns for Core-UI
+description: Vitest + Testing Library test patterns for UI Kit
 globs: **/*.test.{ts,tsx}
 alwaysApply: false
 ---
 
-# Core-UI Testing Patterns
+# UI Kit Testing Patterns
 
 - Use Vitest imports from `vitest`: `describe`, `it`, `expect`, `vi`.
 - Prefer `screen` queries (`getByRole`, `getByText`, `getByTestId`) over container-level selectors.

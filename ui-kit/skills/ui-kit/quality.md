@@ -26,7 +26,7 @@ Infer the task before writing code. State one line:
 | **Brand kit**  | Rebrand, `theme.css`, primary tokens                               | Usually comfortable — [brandkit.md](brandkit.md)                                  |
 | **Docs demo**  | `-views/`, MDX live preview in the docs site                       | Comfortable — [Sample Data and Docs Demos](#sample-data-and-docs-demos)           |
 | **Redesign**   | Migrate or refresh an existing consumer screen                     | Pick in Scan — [redesign.md](redesign.md)                                         |
-| **Maintainer** | Change package primitives, styles, or compound APIs in `ui-kit/     | N/A — [Maintainer](#maintainer)                                                   |
+| **Maintainer** | Change package primitives, styles, or compound APIs in `ui-kit/    | N/A — [Maintainer](#maintainer)                                                   |
 
 **Pairs & cross-cutting** (load both; also in [SKILL.md](SKILL.md)):
 

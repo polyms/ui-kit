@@ -1,10 +1,10 @@
-# Core-UI
+# UI Kit
 
 > Enterprise-grade React component library built with TypeScript, Base UI, and Tailwind CSS
 
 ## Overview
 
-Core-UI is a modular, component-driven UI library designed for production use. It combines the flexibility of Base UI headless components with Tailwind CSS styling and TypeScript type safety.
+UI Kit is a modular, component-driven UI library designed for production use. It combines the flexibility of Base UI headless components with Tailwind CSS styling and TypeScript type safety.
 
 **Key Features:**
 
@@ -423,10 +423,10 @@ declare module 'virtual:mdx-navigation' {
 ```bash
 # Development
 npx nx serve web                   # Start docs dev server (http://localhost:5173)
-npx nx serve ui-kit                   # Start core dev server
+npx nx serve ui-kit                   # Start ui-kit dev server
 
 # Build
-npx nx build ui-kit                   # Build core library → dist/ui-kit
+npx nx build ui-kit                   # Build ui-kit library → dist/ui-kit
 npx nx build web                   # Build docs site → dist/web
 
 # Testing
@@ -441,7 +441,7 @@ npx biome check --write .           # Auto-fix
 npx biome format .                  # Format only
 
 # Nx Tasks
-npx nx show project ui-kit            # List all tasks for core
+npx nx show project ui-kit            # List all tasks for ui-kit
 npx nx graph                        # Show dependency graph
 npx nx affected:test                # Test affected projects
 ```
@@ -553,7 +553,7 @@ npx nx affected:test                # Test affected projects
 
 ## Module Federation
 
-Core-UI uses Vite Module Federation for dynamic imports:
+UI Kit uses Vite Module Federation for dynamic imports:
 
 ```typescript
 // ui-kit/plugins/module-federation.plugin.ts

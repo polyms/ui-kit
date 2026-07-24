@@ -19,7 +19,7 @@ Write **what to do** and **why it helps the product UI** — not how the library
 | `ui-kit/src/styles/_*.css`, monorepo paths | "Import `@polyms/ui-kit` styles" |
 | Base UI / `@base-ui/react` / re-export internals | Component API and usage |
 | "bundled classes", `_accordion.css`, build pipeline | "Import package styles so motion applies" |
-| "design-system", "Core-UI shorthand", "Polyms defaults" | Plain product language |
+| "design-system", "UI Kit shorthand", "Polyms defaults" | Plain product language |
 | Skill file maps, routing tables, agent skill internals | Install steps + links to Design System |
 | "consumers should", "this repo", "we ship" | "you", "your app", "the library" |
 

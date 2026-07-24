@@ -568,26 +568,26 @@ When adding or retargeting Color-collection aliases, point gray tokens at **Pale
 ### MDX ↔ Figma mapping
 
 | MDX (`web/src/pages/docs/`) | Figma page (canonical → live)             | Section / docs frame                       |
-| ---------------------------- | ----------------------------------------- | ------------------------------------------ |
-| `button.mdx`                 | Button → live `Actions` (`143:2`)         | `Button — docs` `143:3`                    |
-| `badge.mdx`                  | Badge / Items → `Badge` (`165:105`)       | `Badge — docs` `171:42`                    |
-| `item.mdx`                   | Badge / Items → `Badge`                   | `Interactive items — docs` `171:236`       |
-| `avatar.mdx`                 | Avatar / Items → `Avatars` (`178:2`)      | `Avatar — docs` `179:237` + rows `179:160` |
-| `field.mdx`                  | Form / Items → `Data input` (`180:2`)     | `Field — docs` `180:433`                   |
-| `select.mdx`                 | Form / Items → `Data input`               | `Select — docs` `180:511`                  |
-| `switch.mdx`                 | Form / Items → `Data input`               | `Switch — docs` `180:574`                  |
-| `checkbox.mdx`               | Form / Items → `Data input`               | `Checkbox — docs` `183:555` @ (80, 1213)   |
-| `radio.mdx`                  | Form / Items → `Data input`               | `Radio — docs` `183:644` @ (520, 1213)     |
-| _(form composition)_         | Form / Items → `Data input`               | `Form — docs` `180:581` @ (1400, 80)       |
-| `alert.mdx`                  | Feedback / Items → `Feedback` (`183:102`) | `Alert — docs` `183:929`                   |
-| `offcanvas.mdx`              | Feedback                                  | `Offcanvas — docs` `183:1089`              |
-| `popover.mdx`                | Feedback                                  | `Popover — docs` `183:1030`                |
-| `spinner.mdx`                | Feedback                                  | `Spinner — docs` `199:823` @ (80, 900)     |
-| `toast.mdx`                  | Feedback                                  | `Toast — docs` `183:1317`                  |
-| `tooltip.mdx`                | Feedback                                  | `Tooltip — docs` `183:1377`                |
-| `link.mdx`                   | Actions / Items (`189:2`)                 | `Link — docs` `190:42`                     |
-| `modal.mdx`                  | Actions / Items                           | `Modal — docs` `190:268`                   |
-| `toggle.mdx`                 | Actions / Items                           | `Toggle — docs` `190:313`                  |
+| --------------------------- | ----------------------------------------- | ------------------------------------------ |
+| `button.mdx`                | Button → live `Actions` (`143:2`)         | `Button — docs` `143:3`                    |
+| `badge.mdx`                 | Badge / Items → `Badge` (`165:105`)       | `Badge — docs` `171:42`                    |
+| `item.mdx`                  | Badge / Items → `Badge`                   | `Interactive items — docs` `171:236`       |
+| `avatar.mdx`                | Avatar / Items → `Avatars` (`178:2`)      | `Avatar — docs` `179:237` + rows `179:160` |
+| `field.mdx`                 | Form / Items → `Data input` (`180:2`)     | `Field — docs` `180:433`                   |
+| `select.mdx`                | Form / Items → `Data input`               | `Select — docs` `180:511`                  |
+| `switch.mdx`                | Form / Items → `Data input`               | `Switch — docs` `180:574`                  |
+| `checkbox.mdx`              | Form / Items → `Data input`               | `Checkbox — docs` `183:555` @ (80, 1213)   |
+| `radio.mdx`                 | Form / Items → `Data input`               | `Radio — docs` `183:644` @ (520, 1213)     |
+| _(form composition)_        | Form / Items → `Data input`               | `Form — docs` `180:581` @ (1400, 80)       |
+| `alert.mdx`                 | Feedback / Items → `Feedback` (`183:102`) | `Alert — docs` `183:929`                   |
+| `offcanvas.mdx`             | Feedback                                  | `Offcanvas — docs` `183:1089`              |
+| `popover.mdx`               | Feedback                                  | `Popover — docs` `183:1030`                |
+| `spinner.mdx`               | Feedback                                  | `Spinner — docs` `199:823` @ (80, 900)     |
+| `toast.mdx`                 | Feedback                                  | `Toast — docs` `183:1317`                  |
+| `tooltip.mdx`               | Feedback                                  | `Tooltip — docs` `183:1377`                |
+| `link.mdx`                  | Actions / Items (`189:2`)                 | `Link — docs` `190:42`                     |
+| `modal.mdx`                 | Actions / Items                           | `Modal — docs` `190:268`                   |
+| `toggle.mdx`                | Actions / Items                           | `Toggle — docs` `190:313`                  |
 
 **MDX chưa có board Figma** (còn trên docs site): `accordion`, `breadcrumb`, `card`, `collapsible`, `dark-mode`, `dynamic`, `menu`, `navigation-menu`, `number-field`, `skeleton`, `table`, `tabs`, `toolbar`, `use-render`, `z-index`. Token / effect: Polyms token set + Effect styles (không map 1:1 MDX component).
 
