@@ -1,0 +1,39 @@
+{
+  "name": "@polyms/icons",
+  "version": "1.0.2",
+  "description": "Tree-shakeable Solar BoldDuotone icon components for the Polyms ecosystem — Zustand-driven size/color defaults, no Context provider.",
+  "license": "MIT",
+  "author": "Polyms",
+  "homepage": "https://github.com/polyms/ui-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polyms/ui-kit.git",
+    "directory": "icons"
+  },
+  "bugs": {
+    "url": "https://github.com/polyms/ui-kit/issues"
+  },
+  "keywords": ["react", "react-19", "icons", "solar-icons", "bold-duotone", "polyms"],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./bold-duotone/index.mjs",
+  "module": "./bold-duotone/index.mjs",
+  "types": "./bold-duotone/index.d.ts",
+  "exports": {
+    "./bold-duotone": {
+      "types": "./bold-duotone/index.d.ts",
+      "import": "./bold-duotone/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "zustand": "~5.0.14"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

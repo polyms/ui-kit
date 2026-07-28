@@ -18,7 +18,6 @@ type SelectItemProps = Select.Item.Props & { checked?: boolean }
 
 const TickIcon = () => (
   <svg
-    data-src='https://cdn.hugeicons.com/icons/tick-01-stroke-rounded.svg?v=1.0.1'
     fill='none'
     height='24'
     role='img'

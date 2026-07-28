@@ -68,6 +68,39 @@ import { Button, Modal, Field } from '@polyms/ui-kit'
 
 When unsure a symbol exists, open **`node_modules/@polyms/ui-kit/index.d.ts`** in the editor.
 
+## Icons
+
+Icons ship as a separate package, **`@polyms/icons`**, on the same GitHub Packages registry (released in lockstep with `@polyms/ui-kit`). Install it alongside React 19:
+
+```bash
+pnpm add @polyms/icons
+```
+
+```bash
+npm install @polyms/icons
+```
+
+v1 exposes one style entry: **`@polyms/icons/bold-duotone`**. Export names are short — the style already lives in the subpath (`Home`, not `HomeBoldDuotone`). Each glyph is its own module, so importing one icon does not pull in the rest of the catalog.
+
+```tsx
+import { Home, Sun, setIconDefaults } from '@polyms/icons/bold-duotone'
+
+setIconDefaults({ size: 20, secondaryOpacity: 0.4 })
+
+export function Example() {
+  return (
+    <>
+      <Home />
+      <Sun size={24} color='var(--color-primary-600)' secondaryColor='var(--color-slate-400)' />
+    </>
+  )
+}
+```
+
+Useful props: **`size`**, **`color`**, **`strokeWidth`**, **`secondaryColor`**, **`secondaryOpacity`**. Icons are decorative by default (`aria-hidden`); put the accessible name on the parent control for icon-only buttons. Global defaults live in a Zustand store via **`setIconDefaults`** / **`useIconStore`** — an explicit prop on an icon always wins.
+
+Browse and filter the full catalog on the [Icons](/docs/icons) page.
+
 ## Imperative modals and Zustand
 
 Using **`useModalStore`** with **`showModal`** / **`closeModal`** requires installing **`zustand`** in the host app (it is external to the library bundle). Mount **`Modal.Container`** once in your layout when using that flow. See the Modal docs page for the full pattern.
@@ -84,6 +117,7 @@ Adjust the relative path so it resolves from your app to the directory that cont
 
 ## Next steps
 
-- [AI Agent Skill](/agent-skill) — install the skill so AI assistants compose UI consistently.
 - [Design System](/design-system) — color tokens, **slate** vs neutral, CSS-only surface classes.
+- [Icons](/docs/icons) — search the Bold Duotone catalog and copy imports.
+- [AI Agent Skill](/agent-skill) — install the skill so AI assistants compose UI consistently.
 - Component pages under **Actions**, **Data input**, **Navigation**, etc. in the sidebar.

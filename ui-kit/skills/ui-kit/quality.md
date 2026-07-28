@@ -168,7 +168,7 @@ Avoid LLM-default patterns that fight this design system:
 - **No invented Button props** — there is no `content` prop; use `size`, `variant`, `rounded`, `outlined`.
 - **No `className='btn …'` on `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close`** — use `render={<Button … />}` (built-in offcanvas icon chrome is library-owned; see [modal.md](modal.md), [button.md](button.md#compose-button-through-render)).
 - **No large Tailwind bundles on library shells** — `Modal.Content`, `Menu.Content`, `Select.Content`, etc. are already styled.
-- **No hand-rolled SVG icons** — use `@hugeicons/react` + `@hugeicons/core-free-icons` (same as docs demos). One icon family per screen.
+- **No hand-rolled SVG icons** — use `@polyms/icons/bold-duotone` (same as docs demos). One icon family per screen.
 - **No arbitrary z-index spam** — use `.z-modal`, `.z-dropdown`, `.z-tooltip`, `.z-toast` from [css-utilities.md](css-utilities.md).
 
 ### Color and theme
@@ -213,7 +213,7 @@ Live component-library demos should:
 5. Style overlay/menu triggers with **`render={<Button … />}`** — not `className='btn …'` on primitives (see [button.md](button.md#compose-button-through-render)).
 6. **Accordion demos:** plain text in `Accordion.Panel` — no extra `<p>` for padding; do not override core `accordion-*` with unscoped docs CSS.
 7. **Collapsible demos:** custom padding on trigger/panel is OK — unlike `Accordion.Panel`, there is no built-in body wrapper.
-8. **New demos:** `@hugeicons/react` for icons — avoid new inline SVG chevrons in `-views/`.
+8. **New demos:** `@polyms/icons/bold-duotone` for icons — avoid new inline SVG chevrons in `-views/`.
 
 ## Field Label Copy
 
@@ -321,4 +321,4 @@ Run before shipping UI. If any item fails, fix before delivering.
 
 - [ ] Demo compiles and reflects public API from `index.d.ts`.
 - [ ] Sample data believable; states demonstrated match the MDX section topic.
-- [ ] Hugeicons (or existing demo icon pattern), not inline SVG paths.
+- [ ] `@polyms/icons/bold-duotone` (or existing demo icon pattern), not inline SVG paths.

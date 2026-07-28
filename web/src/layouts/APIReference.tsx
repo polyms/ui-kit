@@ -1,7 +1,6 @@
 /** biome-ignore-all lint/suspicious/noArrayIndexKey: dup prop name */
 import { metadataByRoute } from 'virtual:mdx-navigation'
-import { PlusSignIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { AddCircle } from '@polyms/icons/bold-duotone'
 import { Accordion } from '@polyms/ui-kit'
 import { useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
@@ -18,10 +17,10 @@ export default function APIReference() {
 
   return (
     <div className='api-reference card mt-4'>
-      <Accordion className='accordion' multiple>
-        <Accordion.Item className='accordion-item border-solid bg-surface' disabled value='_header'>
-          <Accordion.Header className='accordion-header font-semibold' render={<div />}>
-            <Accordion.Trigger className='accordion-trigger font-semibold' disabled>
+      <Accordion multiple>
+        <Accordion.Item className='border-solid bg-surface' disabled value='_header'>
+          <Accordion.Header className='font-semibold' render={<div />}>
+            <Accordion.Trigger className='font-semibold' disabled>
               <span></span>
               <span>Prop</span>
               <span>Default</span>
@@ -45,10 +44,10 @@ export default function APIReference() {
 
           // Render prop item
           return (
-            <Accordion.Item className='accordion-item' key={`item-${idx}`} value={prop.name}>
-              <Accordion.Header className='accordion-header' render={<div />}>
-                <Accordion.Trigger className='accordion-trigger'>
-                  <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
+            <Accordion.Item key={`item-${idx}`} value={prop.name}>
+              <Accordion.Header render={<div />}>
+                <Accordion.Trigger>
+                  <AddCircle className='accordion-icon' size={20} />
                   <span className='font-medium'>{prop.name}</span>
                   <span
                     className={clsx('font-mono text-sm', {

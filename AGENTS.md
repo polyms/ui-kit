@@ -36,11 +36,12 @@ Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/de
 
 ## Tổng quan
 
-| Khu vực   | Vai trò                                                                                                     |
-| --------- | ----------------------------------------------------------------------------------------------------------- |
-| `ui-kit/` | Component tái sử dụng + style; build Vite → `dist/ui-kit`, package **`@polyms/ui-kit`** (theo metadata Nx). |
-| `web/`    | Site công khai: **TanStack Router**, **MDX**, demo live (URL `/docs/...`).                                  |
-| `docs/`   | Domain/ai-kit: `agents/`, `adr/`, `prd/` — không phải Nx app.                                               |
+| Khu vực   | Vai trò                                                                                                         |
+| --------- | --------------------------------------------------------------------------------------------------------------- |
+| `ui-kit/` | Component tái sử dụng + style; build Vite → `dist/ui-kit`, package **`@polyms/ui-kit`** (theo metadata Nx).     |
+| `icons/`  | Glyph BoldDuotone; build Vite → `dist/icons`, package **`@polyms/icons`** (entry `@polyms/icons/bold-duotone`). |
+| `web/`    | Site công khai: **TanStack Router**, **MDX**, demo live (URL `/docs/...`).                                      |
+| `docs/`   | Domain/ai-kit: `agents/`, `adr/`, `prd/` — không phải Nx app.                                                   |
 
 **Stack chính:** React 19, TypeScript (strict), Vite 8, Tailwind CSS 4, `@base-ui/react`, Floating UI, Vitest + Testing Library, Zustand (ví dụ modal), shiki (highlight trong docs).
 
@@ -54,6 +55,14 @@ Idea → `/align` → `/pm` or `/to-prd` → `/to-issues` → `/design` → `/de
 - `ui-kit/src/styles/` — CSS theo component dạng **`_component-name.css`** (import/layer tập trung, không nhất thiết `styles/` con trong từng component).
 - `ui-kit/plugins/module-federation.plugin.ts` — Module Federation / dynamic imports.
 - `ui-kit/vite.config.mts` — cấu hình Vite cho library.
+
+**Icons**
+
+- `icons/svg/solar/` + `icons/svg/polyms/` — **source of truth duy nhất** cho glyph (`polyms/` thắng khi trùng tên).
+- `icons/plugins/icon-source.mjs` — SVG → text module thuần (unit-test); `icons/plugins/icons-virtual.plugin.ts` — Vite plugin serve `@polyms/icons/bold-duotone` dạng **module ảo** cho dev/test và emit `dist/icons/bold-duotone/*.mjs` khi build.
+- `icons/src/` chỉ chứa code viết tay: `createIcon.tsx`, `icon-store.ts` (Zustand defaults). **Không** gen component vào `src/`.
+- `icons/types/bold-duotone.d.ts` — file generated duy nhất trong repo (Nx target `types`); chạy `pnpm exec nx run icons:types` sau khi thêm SVG để TS/editor biết export mới.
+- Consumer trong monorepo (`web`, vitest) phải add `polymsIcons()` vào vite config — không alias tới file cứng.
 
 **Web**
 

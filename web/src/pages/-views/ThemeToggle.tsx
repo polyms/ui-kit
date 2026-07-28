@@ -1,5 +1,5 @@
+import { Moon, Sun } from '@polyms/icons/bold-duotone'
 import { Button } from '@polyms/ui-kit'
-import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 
 import { useAppStore } from '../../stores/app.store'
 

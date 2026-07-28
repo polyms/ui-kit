@@ -1,5 +1,4 @@
-import { ArrowRight01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { ArrowRight } from '@polyms/icons/bold-duotone'
 import { Button, Collapsible } from '@polyms/ui-kit'
 import { useState } from 'react'
 
@@ -13,7 +12,7 @@ export default function CollapsibleDefault() {
       {/* Uncontrolled */}
       <Collapsible className='overflow-clip rounded-lg border border-line' defaultOpen>
         <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium transition-colors hover:bg-surface'>
-          <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
+          <ArrowRight className='collapsible-icon' size={16} />
           Uncontrolled Collapsible (Default Open)
         </Collapsible.Trigger>
         <Collapsible.Panel>
@@ -27,7 +26,7 @@ export default function CollapsibleDefault() {
       {/* Controlled */}
       <Collapsible className='overflow-clip rounded-lg border border-line' onOpenChange={setOpen} open={open}>
         <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium transition-colors hover:bg-surface'>
-          <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
+          <ArrowRight className='collapsible-icon' size={16} />
           Controlled Collapsible ({open ? 'Open' : 'Closed'})
         </Collapsible.Trigger>
         <Collapsible.Panel>
@@ -68,7 +67,7 @@ export default function CollapsibleDefault() {
         ].map(faq => (
           <Collapsible className='overflow-clip rounded-lg border border-line' key={faq.q}>
             <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium transition-colors hover:bg-surface'>
-              <HugeiconsIcon className='collapsible-icon shrink-0' icon={ArrowRight01Icon} size={16} />
+              <ArrowRight className='collapsible-icon shrink-0' size={16} />
               {faq.q}
             </Collapsible.Trigger>
             <Collapsible.Panel>

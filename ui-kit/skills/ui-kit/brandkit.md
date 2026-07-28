@@ -127,7 +127,7 @@ Apply the brand through **real exports** — identity applications, not feature 
 | Forms             | `Field` + conversational labels ([quality.md](quality.md#field-label-copy))            |
 | App chrome        | `bg-body text-fg`, `bg-surface border-line` headers                                    |
 | Overlays          | `Modal` / `Offcanvas` / `Toast` — library shells, brand only on **your** inner content |
-| Icons             | `@hugeicons/react` — one family, consistent `strokeWidth`                              |
+| Icons             | `@polyms/icons/bold-duotone` — one family, consistent size/color                       |
 | Loading           | `.skeleton` or `Spinner` — shape matches final layout                                  |
 
 **Mockup rules** (from Taste Skill, adapted):
@@ -140,7 +140,7 @@ Apply the brand through **real exports** — identity applications, not feature 
 
 - Prefer **simple, scalable** marks — monogram, geometric construction, one metaphor.
 - Favicon and app icon are **consumer assets** (SVG/PNG), not generated inside the library.
-- Do not hand-roll SVG icons in product UI — use Hugeicons or the approved logo asset.
+- Do not hand-roll SVG icons in product UI — use `@polyms/icons/bold-duotone` or the approved logo asset.
 - Repeat the **same** mark everywhere; no drift between header, modal, and email template.
 
 Avoid unless justified: generic lightning bolts, random mascots, fake crests, sparkle clutter.
@@ -209,7 +209,7 @@ Run before shipping branded shell changes. **If any item fails, the brand pass i
 - [ ] `slate` chrome intact; semantic tones used for intent
 - [ ] Light and `.dark` tested — brand accent readable on both
 - [ ] Applications use library components, not parallel button/input styles
-- [ ] Logo/icon consistent; Hugeicons for UI glyphs
+- [ ] Logo/icon consistent; `@polyms/icons/bold-duotone` for UI glyphs
 - [ ] Copy matches voice rules; no lorem / TODO in branded shell
 - [ ] No silent logo, legal, or analytics identifier changes ([redesign.md](redesign.md#what-never-changes-silently))
 

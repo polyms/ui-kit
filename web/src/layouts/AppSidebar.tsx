@@ -1,17 +1,10 @@
-import {
-  ArrowRight01Icon,
-  CircleArrowLeftDoubleIcon,
-  GoogleDocIcon,
-  SearchList02Icon,
-  SearchRemoveIcon,
-} from '@hugeicons/core-free-icons'
+import { AltArrowRight, CloseCircle, DoubleAltArrowLeft, RoundedMagnifer } from '@polyms/icons/bold-duotone'
 import { Collapsible, Field, NavigationMenu } from '@polyms/ui-kit'
-import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
+import { useNavigate, useRouter, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useImperativeHandle, useState } from 'react'
 import { useBoolean, useEventCallback } from 'usehooks-ts'
-import { Icon } from '../components/Icons'
-import { type DocsNavSection, useDocsNav } from '../hooks/useDocsNav'
+import { type DocsNavItem, type DocsNavSection, useDocsNav } from '../hooks/useDocsNav'
 import { useDocsShellMode } from '../hooks/useMediaQuery'
 
 export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
@@ -26,7 +19,7 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
     setTrue: showToggleSidebar,
     setFalse: hideToggleSidebar,
   } = useBoolean(false)
-  const { sections, showExamplesNav, examplesIcon } = useDocsNav(search)
+  const { sections } = useDocsNav(search)
 
   const toggleSidebar = useEventCallback(() => {
     if (mode === 'drawer' || mode === 'rail') {
@@ -42,8 +35,14 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
   useImperativeHandle<AppSidebarRef, AppSidebarRef>(ref, () => ({ toggleSidebar }), [toggleSidebar])
 
   const navigate = useNavigate()
-  const onSelect = useEventCallback((path: string) => {
-    navigate({ to: '/$', params: { _splat: path.substring(1) } })
+  const router = useRouter()
+  const onSelect = useEventCallback((item: DocsNavItem) => {
+    if (item.routeKind === 'file') {
+      // File routes (`/demo`, `/forms`, `/docs/icons`) — history avoids splat typing.
+      router.history.push(item.path)
+    } else {
+      void navigate({ to: '/$', params: { _splat: item.path.substring(1) } })
+    }
     setIsDrawerOpen(false)
   })
 
@@ -80,15 +79,13 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
       tabIndex={-1}
     >
       {mode === 'full' && (isShowToggleSidebar || !isFullSidebarOpen) && (
-        <Icon
+        <DoubleAltArrowLeft
           className={clsx('sidebar-toggle-icon link link-light')}
-          icon={CircleArrowLeftDoubleIcon}
           onClick={event => {
             event.stopPropagation()
             toggleSidebar()
           }}
           size={28}
-          strokeWidth={1.5}
         />
       )}
 
@@ -100,22 +97,14 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
         onKeyDown={event => event.stopPropagation()}
       >
         {mode === 'rail' && !isDrawerOpen ? (
-          <RailNav
-            activePath={activePath}
-            examplesIcon={examplesIcon}
-            onSelect={onSelect}
-            sections={sections}
-            showExamplesNav={showExamplesNav}
-          />
+          <RailNav activePath={activePath} onSelect={onSelect} sections={sections} />
         ) : (
           <FullNav
             activePath={activePath}
-            examplesIcon={examplesIcon}
             onSelect={onSelect}
             search={search}
             sections={sections}
             setSearch={setSearch}
-            showExamplesNav={showExamplesNav}
           />
         )}
       </aside>
@@ -125,24 +114,14 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-function FullNav({
-  activePath,
-  examplesIcon,
-  onSelect,
-  search,
-  sections,
-  setSearch,
-  showExamplesNav,
-}: FullNavProps) {
+function FullNav({ activePath, onSelect, search, sections, setSearch }: FullNavProps) {
+  const SearchIcon = search ? CloseCircle : RoundedMagnifer
+
   return (
     <>
       <div className='relative mb-4 px-4'>
         <Field>
-          <Icon
-            className='icon-start'
-            icon={search ? SearchRemoveIcon : SearchList02Icon}
-            onClick={() => setSearch('')}
-          />
+          <SearchIcon className='icon-start' onClick={() => setSearch('')} />
           <Field.Control
             onChange={e => setSearch(e.target.value)}
             placeholder='Find components...'
@@ -156,9 +135,9 @@ function FullNav({
         {sections.map(section => (
           <Collapsible defaultOpen key={section.key}>
             <Collapsible.Trigger className='nav-item'>
-              <Icon className={clsx('size-4', section.colorClass)} icon={section.icon} />
+              <section.icon className={clsx('size-5 -rotate-10', section.colorClass)} />
               {section.label}
-              <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
+              <AltArrowRight className='chevron-icon ms-auto size-4' />
             </Collapsible.Trigger>
             <Collapsible.Panel className='nav-panel'>
               <div className='nav-panel-content'>
@@ -166,7 +145,7 @@ function FullNav({
                   <div key={item.path}>
                     <button
                       className={clsx('nav-item', activePath === item.path && 'active')}
-                      onClick={() => onSelect(item.path)}
+                      onClick={() => onSelect(item)}
                       type='button'
                     >
                       {item.label}
@@ -177,64 +156,18 @@ function FullNav({
             </Collapsible.Panel>
           </Collapsible>
         ))}
-
-        {showExamplesNav && (
-          <Collapsible defaultOpen>
-            <Collapsible.Trigger className='nav-item'>
-              <Icon className='size-4 text-slate-400' icon={examplesIcon} />
-              Examples
-              <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
-            </Collapsible.Trigger>
-            <Collapsible.Panel className='nav-panel'>
-              <div className='nav-panel-content'>
-                <Link className='nav-item' to='/demo'>
-                  <Icon className='size-4 text-slate-400' icon={GoogleDocIcon} />
-                  Page Demo
-                </Link>
-                <Link className='nav-item' to='/forms'>
-                  <Icon className='size-4 text-slate-400' icon={GoogleDocIcon} />
-                  Forms preview
-                </Link>
-              </div>
-            </Collapsible.Panel>
-          </Collapsible>
-        )}
       </nav>
     </>
   )
 }
 
-function RailNav({ activePath, examplesIcon, onSelect, sections, showExamplesNav }: RailNavProps) {
+function RailNav({ activePath, onSelect, sections }: RailNavProps) {
   return (
     <NavigationMenu closeDelay={200} delay={120} orientation='vertical'>
       <NavigationMenu.List aria-label='Documentation sections' className='rail-nav' variant='bare'>
         {sections.map(section => (
           <RailSection activePath={activePath} key={section.key} onSelect={onSelect} section={section} />
         ))}
-        {showExamplesNav && (
-          <NavigationMenu.Item>
-            <NavigationMenu.Trigger aria-label='Examples' className='rail-item' type='button'>
-              <Icon className='size-5 text-slate-400' icon={examplesIcon} />
-            </NavigationMenu.Trigger>
-            <NavigationMenu.Content>
-              <p className='floating-dock-popover-title'>Examples</p>
-              <ul className='floating-dock-nav-list'>
-                <li>
-                  <NavigationMenu.Link className='floating-dock-nav-item' render={<Link to='/demo' />}>
-                    <Icon className='size-4 shrink-0 text-slate-400' icon={GoogleDocIcon} />
-                    Page Demo
-                  </NavigationMenu.Link>
-                </li>
-                <li>
-                  <NavigationMenu.Link className='floating-dock-nav-item' render={<Link to='/forms' />}>
-                    <Icon className='size-4 shrink-0 text-slate-400' icon={GoogleDocIcon} />
-                    Forms preview
-                  </NavigationMenu.Link>
-                </li>
-              </ul>
-            </NavigationMenu.Content>
-          </NavigationMenu.Item>
-        )}
       </NavigationMenu.List>
 
       <NavigationMenu.Viewport
@@ -255,12 +188,8 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
 
   return (
     <NavigationMenu.Item>
-      <NavigationMenu.Trigger
-        aria-label={section.label}
-        className={clsx('rail-item', isActive && 'active')}
-        type='button'
-      >
-        <Icon className={clsx('size-5', section.colorClass)} icon={section.icon} />
+      <NavigationMenu.Trigger aria-label={section.label} className={clsx('rail-item', isActive && 'active')}>
+        <section.icon className={clsx('size-5', section.colorClass)} />
       </NavigationMenu.Trigger>
       <NavigationMenu.Content>
         <p className='floating-dock-popover-title'>{section.label}</p>
@@ -269,7 +198,7 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
             <li key={item.path}>
               <NavigationMenu.Link
                 className={clsx('floating-dock-nav-item', activePath === item.path && 'is-active')}
-                onClick={() => onSelect(item.path)}
+                onClick={() => onSelect(item)}
                 render={<button type='button' />}
               >
                 {item.label}
@@ -295,25 +224,21 @@ type AppSidebarProps = {
 
 type FullNavProps = {
   activePath: string
-  examplesIcon: DocsNavSection['icon']
-  onSelect: (path: string) => void
+  onSelect: (item: DocsNavItem) => void
   search: string
   sections: DocsNavSection[]
   setSearch: (search: string) => void
-  showExamplesNav: boolean
 }
 
 type RailNavProps = {
   activePath: string
-  examplesIcon: DocsNavSection['icon']
-  onSelect: (path: string) => void
+  onSelect: (item: DocsNavItem) => void
   sections: DocsNavSection[]
-  showExamplesNav: boolean
 }
 
 type RailSectionProps = {
   activePath: string
-  onSelect: (path: string) => void
+  onSelect: (item: DocsNavItem) => void
   section: DocsNavSection
 }
 

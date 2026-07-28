@@ -1,6 +1,4 @@
-import { ArrowDown01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
-
+import { AltArrowDown, ArrowRight } from '@polyms/icons/bold-duotone'
 import { Button, Menu } from '@polyms/ui-kit'
 
 export default function MenuDefault() {
@@ -9,7 +7,7 @@ export default function MenuDefault() {
       <Menu defaultOpen>
         <Menu.Trigger render={<Button className='mx-auto pe-2xs' outlined size='lg' variant='primary' />}>
           Song
-          <HugeiconsIcon height={18} icon={ArrowDown01Icon} strokeWidth={2} width={18} />
+          <AltArrowDown size={18} />
         </Menu.Trigger>
         <Menu.Content title='Song Options'>
           <Menu.Item>
@@ -38,7 +36,7 @@ export default function MenuDefault() {
           <Menu.SubmenuRoot>
             <Menu.SubmenuTrigger>
               Export
-              <HugeiconsIcon className='ms-auto' icon={ArrowRight01Icon} size={18} strokeWidth={2} />
+              <ArrowRight className='ms-auto' size={18} />
             </Menu.SubmenuTrigger>
             <Menu.Content sideOffset={0}>
               <Menu.Item>PDF</Menu.Item>

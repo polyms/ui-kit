@@ -1,5 +1,4 @@
-import { SearchList02Icon, Sent02Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Magnifer, SendSquare } from '@polyms/icons/bold-duotone'
 import { Button, Offcanvas } from '@polyms/ui-kit'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
@@ -22,7 +21,7 @@ export default function OffcanvasDefault() {
             <Offcanvas.Header>
               <Offcanvas.Title>
                 <span className='flex items-center gap-2'>
-                  <HugeiconsIcon icon={SearchList02Icon} size={18} strokeWidth={2} />
+                  <Magnifer size={18} />
                   Project Overview
                   <span className='badge badge-info rounded-full'>Live</span>
                 </span>
@@ -58,7 +57,7 @@ export default function OffcanvasDefault() {
 
                 <section className='rounded-lg border border-line p-4'>
                   <div className='flex items-center gap-2'>
-                    <HugeiconsIcon icon={Sent02Icon} size={16} strokeWidth={2} />
+                    <SendSquare size={16} />
                     <p className='font-semibold text-fg text-sm'>Quick Actions</p>
                   </div>
                   <div className='mt-2 flex flex-wrap gap-2'>

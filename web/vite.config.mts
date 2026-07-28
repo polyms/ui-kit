@@ -7,6 +7,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
+import { polymsIcons } from '../icons/plugins/icons-virtual.plugin'
 import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin'
 import { stripFrontmatter } from './plugins/stripFrontmatter.plugin'
 
@@ -22,6 +23,7 @@ export default defineConfig({
   // base: '/',
   cacheDir: '../node_modules/.vite/web',
   plugins: [
+    polymsIcons({ root: path.resolve(__dirname, '../icons') }),
     react(),
     stripFrontmatter(),
     mdx({ providerImportSource: '@mdx-js/react' }),

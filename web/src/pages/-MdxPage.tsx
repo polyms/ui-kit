@@ -1,12 +1,10 @@
 import { metadataByRoute, type PageMetadata } from 'virtual:mdx-navigation'
-import { LinkSquare02Icon, Unlink01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import { MDXProvider } from '@mdx-js/react'
+import { LinkCircle, LinkRoundAngle } from '@polyms/icons/bold-duotone'
 import { useMatch, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { CodeHighlight } from '../components/CodeHighlight'
-import { Icon } from '../components/Icons'
 import APIReference from '../layouts/APIReference'
 import { CodePreview } from '../layouts/CodePreview'
 import { DocsToc } from '../layouts/DocsToc'
@@ -68,9 +66,8 @@ export function MdxPage() {
         return (
           <h2 {...props} className={clsx('h2', props.className)} id={id}>
             <span className='link peer decoration-transparent'>{props.children}</span>
-            <Icon
+            <LinkRoundAngle
               className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
-              icon={Unlink01Icon}
               size={16}
             />
           </h2>
@@ -82,9 +79,8 @@ export function MdxPage() {
         return (
           <h3 {...props} className={clsx('h3', props.className)} id={id}>
             <span className='link peer decoration-transparent'>{props.children}</span>
-            <Icon
+            <LinkRoundAngle
               className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
-              icon={Unlink01Icon}
               size={16}
             />
           </h3>
@@ -99,7 +95,7 @@ export function MdxPage() {
         return (
           <a {...props} className='link link-primary inline-flex items-center gap-1'>
             {props.children}
-            {props.href?.startsWith('http') && <HugeiconsIcon icon={LinkSquare02Icon} size={16} />}
+            {props.href?.startsWith('http') && <LinkCircle size={16} />}
           </a>
         )
       },

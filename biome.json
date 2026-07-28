@@ -38,6 +38,7 @@
   "files": {
     "includes": [
       "**/*.{js,mjs,jsx,ts,mts,tsx,json,css,svg,html,webmanifest}",
+      "!icons/svg",
       "!**/_root.css",
       "!**/routeTree.gen.ts",
       "!**/.nx",
@@ -171,6 +172,10 @@
     {
       "includes": ["**/*.d.ts"],
       "linter": { "rules": { "correctness": { "noUnusedVariables": "off" } } }
+    },
+    {
+      "includes": ["icons/types/*.d.ts"],
+      "linter": { "rules": { "suspicious": { "noShadowRestrictedNames": "off" } } }
     }
   ],
   "vcs": { "clientKind": "git", "defaultBranch": "main", "enabled": true, "useIgnoreFile": true }

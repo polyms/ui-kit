@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './pages/index'
 import { Route as SplatRouteImport } from './pages/$'
 import { Route as DemoRouteImport } from './pages/demo'
 import { Route as FormsRouteImport } from './pages/forms'
+import { Route as DocsIconsRouteImport } from './pages/docs/icons'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const FormsRoute = FormsRouteImport.update({
   path: '/forms',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./pages/forms.lazy').then((d) => d.Route))
+const DocsIconsRoute = DocsIconsRouteImport.update({
+  id: '/docs/icons',
+  path: '/docs/icons',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./pages/docs/icons.lazy').then((d) => d.Route))
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/demo': typeof DemoRoute
   '/forms': typeof FormsRoute
+  '/docs/icons': typeof DocsIconsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/demo': typeof DemoRoute
   '/forms': typeof FormsRoute
+  '/docs/icons': typeof DocsIconsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/demo': typeof DemoRoute
   '/forms': typeof FormsRoute
+  '/docs/icons': typeof DocsIconsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/demo' | '/forms'
+  fullPaths: '/' | '/$' | '/demo' | '/forms' | '/docs/icons'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/demo' | '/forms'
-  id: '__root__' | '/' | '/$' | '/demo' | '/forms'
+  to: '/' | '/$' | '/demo' | '/forms' | '/docs/icons'
+  id: '__root__' | '/' | '/$' | '/demo' | '/forms' | '/docs/icons'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   DemoRoute: typeof DemoRoute
   FormsRoute: typeof FormsRoute
+  DocsIconsRoute: typeof DocsIconsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FormsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/icons': {
+      id: '/docs/icons'
+      path: '/docs/icons'
+      fullPath: '/docs/icons'
+      preLoaderRoute: typeof DocsIconsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   DemoRoute: DemoRoute,
   FormsRoute: FormsRoute,
+  DocsIconsRoute: DocsIconsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

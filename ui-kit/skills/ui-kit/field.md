@@ -44,8 +44,8 @@ const emailField = (
 All slots are **direct children** of `Field`:
 
 1. `Field.Label` (recommended for a11y)
-2. `HugeiconsIcon` with `className='icon-start'` (optional)
-3. `HugeiconsIcon` with `className='icon-end'` (optional)
+2. an icon from `@polyms/icons/bold-duotone` with `className='icon-start'` (optional)
+3. an icon from `@polyms/icons/bold-duotone` with `className='icon-end'` (optional)
 4. `Field.Control`
 5. `Field.Description` (optional)
 6. `Field.Feedback` (optional)

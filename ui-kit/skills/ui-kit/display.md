@@ -162,14 +162,13 @@ const faqAccordion = (
 Single expand/collapse region — Base UI wrapper with `.collapsible` animation and `.collapsible-icon` rotation when open.
 
 ```tsx
-import { ArrowRight01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { ArrowRight } from '@polyms/icons/bold-duotone'
 import { Collapsible } from '@polyms/ui-kit'
 
 const detailsCollapsible = (
   <Collapsible className='rounded-lg border border-line' defaultOpen>
     <Collapsible.Trigger className='flex w-full items-center gap-2 p-4 text-left font-medium hover:bg-surface'>
-      <HugeiconsIcon className='collapsible-icon' icon={ArrowRight01Icon} size={16} />
+      <ArrowRight className='collapsible-icon' size={16} />
       Show more details
     </Collapsible.Trigger>
     <Collapsible.Panel>

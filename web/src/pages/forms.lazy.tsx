@@ -1,11 +1,4 @@
-import {
-  Calendar03Icon,
-  Eraser01Icon,
-  MailAtSign02Icon,
-  SearchList02Icon,
-  UserIcon,
-} from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Calendar, Eraser, Letter, Magnifer, User } from '@polyms/icons/bold-duotone'
 import {
   Button,
   Checkbox,
@@ -91,7 +84,7 @@ function LoginFormCase() {
     >
       <Field required>
         <Field.Label>Email</Field.Label>
-        <HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
+        <Letter className='icon-start' />
         <Field.Control
           autoComplete='email'
           onChange={e => setEmail(e.target.value)}
@@ -137,15 +130,8 @@ function FilterBarCase() {
     <div className='flex flex-col gap-3 lg:flex-row lg:items-end'>
       <Field className='min-w-0 flex-1'>
         <Field.Label>Search</Field.Label>
-        <HugeiconsIcon className='icon-start' icon={SearchList02Icon} strokeWidth={2} />
-        {query ? (
-          <HugeiconsIcon
-            className='icon-end origin-top rotate-180'
-            icon={Eraser01Icon}
-            onClick={() => setQuery('')}
-            strokeWidth={2}
-          />
-        ) : null}
+        <Magnifer className='icon-start' />
+        {query ? <Eraser className='icon-end origin-top rotate-180' onClick={() => setQuery('')} /> : null}
         <Field.Control
           onChange={e => setQuery(e.target.value)}
           placeholder='Name, email, or ID…'
@@ -291,7 +277,7 @@ function ProfileSettingsCase() {
     <div className='flex flex-col gap-4 sm:flex-row sm:items-end'>
       <Field className='min-w-0 flex-1' size='lg'>
         <Field.Label>Display name</Field.Label>
-        <HugeiconsIcon className='icon-start' icon={UserIcon} strokeWidth={2} />
+        <User className='icon-start' />
         <Field.Control
           onChange={e => setDisplayName(e.target.value)}
           placeholder='Your name'
@@ -313,7 +299,7 @@ function InlineFieldButtonCase() {
     <div className='flex flex-col gap-2 sm:flex-row sm:items-stretch'>
       <Field className='min-w-0 flex-1'>
         <Field.Label>Invite by email</Field.Label>
-        <HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
+        <Letter className='icon-start' />
         <Field.Control
           onChange={e => setInvite(e.target.value)}
           placeholder='colleague@company.com'
@@ -331,7 +317,11 @@ function InlineFieldButtonCase() {
 
 type SizeRowButtonSize = 'sm' | 'lg' | 'xl'
 
-const sizeRows: { label: string; fieldSize?: Field.Props['size']; buttonSize?: SizeRowButtonSize }[] = [
+const sizeRows: {
+  label: string
+  fieldSize?: Field.Props['size']
+  buttonSize?: SizeRowButtonSize
+}[] = [
   { label: 'default' },
   { label: 'sm', fieldSize: 'sm', buttonSize: 'sm' },
   { label: 'lg', fieldSize: 'lg', buttonSize: 'lg' },
@@ -382,9 +372,21 @@ function SizeAlignmentCase() {
 }
 
 const notificationItems = [
-  { id: 'product', label: 'Product updates', desc: 'New features, launches, and patches.' },
-  { id: 'security', label: 'Security alerts', desc: 'Unusual sign-ins, password changes.' },
-  { id: 'billing', label: 'Billing & payments', desc: 'Monthly statements, expiring cards.' },
+  {
+    id: 'product',
+    label: 'Product updates',
+    desc: 'New features, launches, and patches.',
+  },
+  {
+    id: 'security',
+    label: 'Security alerts',
+    desc: 'Unusual sign-ins, password changes.',
+  },
+  {
+    id: 'billing',
+    label: 'Billing & payments',
+    desc: 'Monthly statements, expiring cards.',
+  },
 ] as const
 
 function NotificationPreferencesCase() {
@@ -427,8 +429,18 @@ function NotificationPreferencesCase() {
 
 const planCardOptions = [
   { id: 'free', name: 'Free', price: '$0', desc: '1 project · personal.' },
-  { id: 'pro', name: 'Pro', price: '$19', desc: 'Small team · unlimited projects.' },
-  { id: 'enterprise', name: 'Enterprise', price: 'Custom', desc: 'SSO · audit log · SLA.' },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '$19',
+    desc: 'Small team · unlimited projects.',
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 'Custom',
+    desc: 'SSO · audit log · SLA.',
+  },
 ]
 
 function PlanRadioCardsCase() {
@@ -465,7 +477,10 @@ function PlanRadioCardsCase() {
   )
 }
 
-const checkVariants: { variant: '' | 'success' | 'info' | 'warning' | 'danger'; label: string }[] = [
+const checkVariants: {
+  variant: '' | 'success' | 'info' | 'warning' | 'danger'
+  label: string
+}[] = [
   { variant: '', label: 'primary' },
   { variant: 'success', label: 'success' },
   { variant: 'info', label: 'info' },
@@ -555,7 +570,7 @@ function ModalFooterCase() {
       <p className='mt-1 text-muted text-sm'>Modal footer: field and buttons on one row, bottom-aligned.</p>
       <Field className='mt-5'>
         <Field.Label>Date & time</Field.Label>
-        <HugeiconsIcon className='icon-start' icon={Calendar03Icon} strokeWidth={2} />
+        <Calendar className='icon-start' />
         <Field.Control
           onChange={e => setDate(e.target.value)}
           placeholder='Pick a date…'

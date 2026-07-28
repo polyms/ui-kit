@@ -1,24 +1,25 @@
 import {
-  Add01Icon,
-  ArrowRight01Icon,
-  ArrowUp01Icon,
-  ChartIncreaseIcon,
-  CreditCardIcon,
-  Exchange02Icon,
-  HeadphonesIcon,
-  Invoice01Icon,
-  PercentSquareIcon,
-  PiggyBankIcon,
-  ReceiptTextIcon,
-  SavingsIcon,
-  SearchList02Icon,
-  SearchRemoveIcon,
-  Sent02Icon,
-  ShieldEnergyIcon,
-  Wallet01Icon,
-} from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+  AddCircle,
+  ArrowRight,
+  ArrowUp,
+  Bill2,
+  BillList,
+  Card2,
+  CloseCircle,
+  GraphNewUp,
+  HeadphonesRound,
+  type IconProps,
+  Magnifer,
+  SafeSquare,
+  SendSquare,
+  ShieldStar,
+  SquareTransferHorizontal,
+  TagPrice,
+  Wallet,
+  WalletMoney,
+} from '@polyms/icons/bold-duotone'
 import { Button, Field, NavigationMenu } from '@polyms/ui-kit'
+import type { ComponentType } from 'react'
 import React from 'react'
 import { FaviconFit } from '../../assets/FaviconFit'
 
@@ -29,7 +30,7 @@ type AccountRow = {
   type: string
   balance: string
   hint: string
-  icon: typeof Wallet01Icon
+  icon: ComponentType<IconProps>
   tone: 'primary' | 'success' | 'warning' | 'slate'
   href: string
 }
@@ -37,7 +38,7 @@ type AccountRow = {
 type ActionTile = {
   label: string
   description: string
-  icon: typeof Sent02Icon
+  icon: ComponentType<IconProps>
   href: string
 }
 
@@ -69,7 +70,7 @@ const accountRows: AccountRow[] = [
     type: 'Primary · •••• 4521',
     balance: '$12,485.62',
     hint: 'Available now',
-    icon: Wallet01Icon,
+    icon: Wallet,
     tone: 'primary',
     href: '#checking',
   },
@@ -78,7 +79,7 @@ const accountRows: AccountRow[] = [
     type: 'APY 4.5% · •••• 8814',
     balance: '$34,219.10',
     hint: 'Earning $128.32 / mo',
-    icon: PiggyBankIcon,
+    icon: WalletMoney,
     tone: 'success',
     href: '#savings',
   },
@@ -87,7 +88,7 @@ const accountRows: AccountRow[] = [
     type: 'Credit · •••• 7702',
     balance: '−$1,205.40',
     hint: 'Due in 12 days',
-    icon: CreditCardIcon,
+    icon: Card2,
     tone: 'warning',
     href: '#credit',
   },
@@ -97,19 +98,19 @@ const quickActions: ActionTile[] = [
   {
     label: 'Send',
     description: 'Pay anyone, instantly.',
-    icon: Sent02Icon,
+    icon: SendSquare,
     href: '#send',
   },
   {
     label: 'Request',
     description: 'Split a bill or get paid.',
-    icon: Exchange02Icon,
+    icon: SquareTransferHorizontal,
     href: '#request',
   },
   {
     label: 'Bill pay',
     description: 'Schedule recurring bills.',
-    icon: Invoice01Icon,
+    icon: Bill2,
     href: '#billpay',
   },
 ]
@@ -124,7 +125,12 @@ const recentRecipients: Recipient[] = [
 
 const recentTransfers: Transfer[] = [
   { who: 'Spotify · Family', detail: 'Sub · today, 09:12', amount: '−$16.99' },
-  { who: 'From Ngọc Hà', detail: 'Sent · Yesterday', amount: '+$45.00', positive: true },
+  {
+    who: 'From Ngọc Hà',
+    detail: 'Sent · Yesterday',
+    amount: '+$45.00',
+    positive: true,
+  },
   { who: 'Trader Joe’s', detail: 'Card · Thu, 4:48 PM', amount: '−$62.18' },
 ]
 
@@ -164,7 +170,7 @@ export const Header = () => {
                     <span className='font-semibold text-white text-xl'>$45,499.32</span>
                   </div>
                   <span className='inline-flex items-center gap-1 rounded-full bg-success/20 px-2 py-0.5 font-medium text-[11px] text-success-300'>
-                    <HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
+                    <ArrowUp size={10} />
                     +1.24% today
                   </span>
                 </div>
@@ -184,7 +190,7 @@ export const Header = () => {
                                   : 'bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'
                           }`}
                         >
-                          <HugeiconsIcon icon={row.icon} size={18} strokeWidth={2} />
+                          <row.icon size={18} />
                         </span>
                         <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                           <span className='flex items-center justify-between gap-2 font-medium text-sm'>
@@ -203,7 +209,7 @@ export const Header = () => {
 
                 <a className='link link-primary inline-flex items-center gap-1 text-xs' href='#all-accounts'>
                   View all accounts
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={12} strokeWidth={2.25} />
+                  <ArrowRight size={12} />
                 </a>
               </div>
             </NavigationMenu.Content>
@@ -234,7 +240,7 @@ export const Header = () => {
                   <span className='flex items-center justify-between'>
                     <span className='font-semibold text-sm tracking-wide'>polyms·bank</span>
                     <span className='inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-medium text-[10px] uppercase tracking-wider'>
-                      <HugeiconsIcon icon={ShieldEnergyIcon} size={10} strokeWidth={2.5} />
+                      <ShieldStar size={10} />
                       Signature
                     </span>
                   </span>
@@ -258,7 +264,7 @@ export const Header = () => {
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#manage'>
                       <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
-                        <HugeiconsIcon icon={CreditCardIcon} size={15} strokeWidth={2} />
+                        <Card2 size={15} />
                       </span>
                       <span className='font-medium text-sm'>Manage cards</span>
                     </NavigationMenu.Link>
@@ -266,7 +272,7 @@ export const Header = () => {
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#add'>
                       <span className='flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary'>
-                        <HugeiconsIcon icon={Add01Icon} size={15} strokeWidth={2.25} />
+                        <AddCircle size={15} />
                       </span>
                       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                         <span className='font-medium text-sm'>Add a new card</span>
@@ -277,7 +283,7 @@ export const Header = () => {
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#limits'>
                       <span className='flex size-8 items-center justify-center rounded-md bg-warning/10 text-warning'>
-                        <HugeiconsIcon icon={PercentSquareIcon} size={15} strokeWidth={2} />
+                        <TagPrice size={15} />
                       </span>
                       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                         <span className='font-medium text-sm'>Spending limits</span>
@@ -288,7 +294,7 @@ export const Header = () => {
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#freeze'>
                       <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
-                        <HugeiconsIcon icon={ReceiptTextIcon} size={15} strokeWidth={2} />
+                        <BillList size={15} />
                       </span>
                       <span className='flex min-w-0 flex-1 items-center justify-between gap-2'>
                         <span className='font-medium text-sm'>Recent statements</span>
@@ -317,7 +323,7 @@ export const Header = () => {
                       variant='soft'
                     >
                       <span className='flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary'>
-                        <HugeiconsIcon icon={action.icon} size={16} strokeWidth={2} />
+                        <action.icon size={16} />
                       </span>
                       <span className='flex flex-col gap-0.5'>
                         <span className='font-semibold text-sm'>{action.label}</span>
@@ -355,7 +361,7 @@ export const Header = () => {
                     <li key={t.who}>
                       <NavigationMenu.Link className='flex items-center gap-3' href='#tx'>
                         <span className='flex size-8 items-center justify-center rounded-full bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
-                          <HugeiconsIcon icon={Exchange02Icon} size={14} strokeWidth={2} />
+                          <SquareTransferHorizontal size={14} />
                         </span>
                         <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                           <span className='flex items-center justify-between gap-2 font-medium text-sm'>
@@ -392,7 +398,7 @@ export const Header = () => {
                       </span>
                     </div>
                     <span className='inline-flex items-center gap-1 rounded-full bg-success/15 px-2 py-0.5 font-semibold text-[11px] text-success-700 tabular-nums'>
-                      <HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
+                      <ArrowUp size={10} />
                       +2.34%
                     </span>
                   </div>
@@ -410,7 +416,7 @@ export const Header = () => {
                   <div className='flex items-center justify-between text-[11px] text-muted'>
                     <span>7 days</span>
                     <span className='inline-flex items-center gap-1'>
-                      <HugeiconsIcon icon={ChartIncreaseIcon} size={10} strokeWidth={2.5} />
+                      <GraphNewUp size={10} />
                       +$1,103.55 today
                     </span>
                   </div>
@@ -446,10 +452,10 @@ export const Header = () => {
                   variant='soft'
                 >
                   <span className='flex items-center gap-2'>
-                    <HugeiconsIcon className='text-primary' icon={SavingsIcon} size={16} strokeWidth={2} />
+                    <SafeSquare className='text-primary' size={16} />
                     <span className='font-medium text-sm'>Open a new portfolio</span>
                   </span>
-                  <HugeiconsIcon icon={ArrowRight01Icon} size={14} strokeWidth={2.25} />
+                  <ArrowRight size={14} />
                 </NavigationMenu.Link>
               </div>
             </NavigationMenu.Content>
@@ -463,7 +469,7 @@ export const Header = () => {
               href='#support'
               variant='trigger'
             >
-              <HugeiconsIcon icon={HeadphonesIcon} size={14} strokeWidth={2} />
+              <HeadphonesRound size={14} />
               Support
             </NavigationMenu.Link>
           </NavigationMenu.Item>
@@ -479,12 +485,11 @@ export const Header = () => {
       </NavigationMenu>
 
       <Field className='ml-auto min-w-0 max-w-full' size='lg'>
-        <HugeiconsIcon
-          className='icon-start'
-          icon={search ? SearchRemoveIcon : SearchList02Icon}
-          onClick={() => setSearch('')}
-          strokeWidth={2}
-        />
+        {search ? (
+          <CloseCircle className='icon-start' onClick={() => setSearch('')} />
+        ) : (
+          <Magnifer className='icon-start' onClick={() => setSearch('')} />
+        )}
         <Field.Control
           className='w-full min-w-0 max-w-full sm:max-w-xs md:max-w-sm'
           onChange={e => setSearch(e.target.value)}

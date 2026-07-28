@@ -1,5 +1,4 @@
-import { Sent02Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { SendSquare } from '@polyms/icons/bold-duotone'
 import { Button, Switch } from '@polyms/ui-kit'
 import { useState } from 'react'
 
@@ -57,7 +56,7 @@ export default function ButtonVariants() {
                   rounded={rounded}
                   variant={variant === 'ghost' ? undefined : variant}
                 >
-                  <HugeiconsIcon className='btn-icon-content' icon={Sent02Icon} strokeWidth={1.5} />
+                  <SendSquare className='btn-icon-content' />
                 </Button>
               </td>
             </tr>

@@ -7,19 +7,16 @@
   "repository": "https://github.com/polyms/ui-kit.git",
   "scripts": {
     "start": "nx preview web",
-    "build": "nx build ui-kit",
-    "test": "nx test ui-kit",
+    "build": "nx run-many -t build --projects=ui-kit,icons",
+    "test": "nx run-many -t test --projects=ui-kit,icons",
     "dev": "nx serve web",
-    "release": "nx release version patch --projects=ui-kit",
+    "release": "nx release version patch --projects=ui-kit,icons",
     "check": "biome check --write . && prettier -l --write ."
   },
   "dependencies": {
     "@base-ui/react": "1.6.0",
     "@floating-ui/react-dom": "~2.1.9",
-    "@hugeicons/core-free-icons": "~4.2.3",
-    "@hugeicons/react": "~1.1.9",
     "@mdx-js/react": "~3.1.1",
-    "@solar-icons/react-perf": "^2.1.1",
     "@tanstack/react-router": "1.170.18",
     "clsx": "~2.1.1",
     "nanoid": "~6.0.0",

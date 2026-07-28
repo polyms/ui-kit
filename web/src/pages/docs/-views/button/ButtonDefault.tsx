@@ -1,5 +1,4 @@
-import { MouseLeftClick06Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Mouse } from '@polyms/icons/bold-duotone'
 import { Button, Spinner } from '@polyms/ui-kit'
 import { useEffect, useRef } from 'react'
 
@@ -15,12 +14,12 @@ export default function ButtonDefault() {
   return (
     <div className='m-auto grid grid-cols-2 gap-4'>
       <Button outlined ref={ref} rounded size='xl'>
-        <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
+        <Mouse className='btn-icon-content' />
         Click me
       </Button>
 
       <Button rounded size='xl'>
-        <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
+        <Mouse className='btn-icon-content' />
         Click me
       </Button>
 

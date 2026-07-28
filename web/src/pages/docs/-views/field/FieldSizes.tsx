@@ -1,5 +1,4 @@
-import { Eraser01Icon, SearchList02Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Eraser, Magnifer } from '@polyms/icons/bold-duotone'
 import { Field } from '@polyms/ui-kit'
 import { nanoid } from 'nanoid'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -51,13 +50,8 @@ export default function FieldSizes() {
             <tr key={size}>
               <td className='text-center'>
                 <Field size={size === 'default' ? undefined : size}>
-                  <HugeiconsIcon className='icon-start' icon={SearchList02Icon} strokeWidth={2} />
-                  <HugeiconsIcon
-                    className='icon-end origin-top rotate-180'
-                    icon={Eraser01Icon}
-                    onClick={() => setValue('')}
-                    strokeWidth={2}
-                  />
+                  <Magnifer className='icon-start' />
+                  <Eraser className='icon-end origin-top rotate-180' onClick={() => setValue('')} />
                   <Field.Control
                     onChange={e => setValue(e.target.value)}
                     placeholder={size !== 'default' ? `.field-${size}` : 'default'}

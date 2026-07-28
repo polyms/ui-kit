@@ -1,5 +1,5 @@
+import { ChartSquare, Code2, Layers, MagicStick3 } from '@polyms/icons/bold-duotone'
 import { Button, Offcanvas, type OffcanvasSize } from '@polyms/ui-kit'
-import { ChartSquare, Code2, Layers, MagicStick3 } from '@solar-icons/react-perf/BoldDuotone'
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
 import type { ComponentType } from 'react'

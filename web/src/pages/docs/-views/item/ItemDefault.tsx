@@ -1,19 +1,20 @@
 import {
-  Album02Icon,
-  Alert02Icon,
-  CheckmarkCircle02Icon,
-  InformationCircleIcon,
-  Settings02Icon,
-  StarIcon,
-  UserIcon,
-} from '@hugeicons/core-free-icons'
-import { Icon } from '../../../../components/Icons'
+  Album,
+  CheckCircle,
+  DangerTriangle,
+  type IconProps,
+  InfoCircle,
+  Settings,
+  Star,
+  User,
+} from '@polyms/icons/bold-duotone'
+import type { ComponentType } from 'react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 type ItemVariant = {
   cls: string
-  icon: typeof StarIcon
+  icon: ComponentType<IconProps>
   label: string
   name: string
 }
@@ -21,13 +22,28 @@ type ItemVariant = {
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 const variants: ItemVariant[] = [
-  { cls: 'item-primary', icon: StarIcon, label: 'Primary', name: 'item-primary' },
-  { cls: 'item-success', icon: CheckmarkCircle02Icon, label: 'Success', name: 'item-success' },
-  { cls: 'item-info', icon: InformationCircleIcon, label: 'Info', name: 'item-info' },
-  { cls: 'item-warning', icon: Alert02Icon, label: 'Warning', name: 'item-warning' },
-  { cls: 'item-danger', icon: Alert02Icon, label: 'Danger', name: 'item-danger' },
-  { cls: 'item-light', icon: UserIcon, label: 'Light', name: 'item-light' },
-  { cls: 'item-dark', icon: Settings02Icon, label: 'Dark', name: 'item-dark' },
+  { cls: 'item-primary', icon: Star, label: 'Primary', name: 'item-primary' },
+  {
+    cls: 'item-success',
+    icon: CheckCircle,
+    label: 'Success',
+    name: 'item-success',
+  },
+  { cls: 'item-info', icon: InfoCircle, label: 'Info', name: 'item-info' },
+  {
+    cls: 'item-warning',
+    icon: DangerTriangle,
+    label: 'Warning',
+    name: 'item-warning',
+  },
+  {
+    cls: 'item-danger',
+    icon: DangerTriangle,
+    label: 'Danger',
+    name: 'item-danger',
+  },
+  { cls: 'item-light', icon: User, label: 'Light', name: 'item-light' },
+  { cls: 'item-dark', icon: Settings, label: 'Dark', name: 'item-dark' },
 ]
 
 export default function ItemDefault() {
@@ -47,23 +63,23 @@ export default function ItemDefault() {
           Active
         </div>
 
-        {variants.map(v => (
-          <div className='contents' key={v.name}>
+        {variants.map(({ cls, icon: Icon, label, name }) => (
+          <div className='contents' key={name}>
             <button
-              className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors ${v.cls}`}
+              className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors ${cls}`}
               type='button'
             >
-              <Icon className='size-4 shrink-0' icon={v.icon} />
-              <span className='flex-1'>{v.label}</span>
-              <code className='font-mono text-xs opacity-70'>.{v.name}</code>
+              <Icon className='size-4 shrink-0' />
+              <span className='flex-1'>{label}</span>
+              <code className='font-mono text-xs opacity-70'>.{name}</code>
             </button>
 
             <button
-              className={`active flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors ${v.cls}`}
+              className={`active flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors ${cls}`}
               type='button'
             >
-              <Icon className='size-4 shrink-0' icon={v.icon} />
-              <span className='flex-1'>{v.label}</span>
+              <Icon className='size-4 shrink-0' />
+              <span className='flex-1'>{label}</span>
               <code className='font-mono text-xs opacity-70'>.active</code>
             </button>
           </div>
@@ -76,28 +92,28 @@ export default function ItemDefault() {
           className='active item-primary flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors'
           type='button'
         >
-          <Icon className='size-4' icon={Album02Icon} />
+          <Album className='size-4' />
           Dashboard
         </button>
         <button
           className='item-light flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors'
           type='button'
         >
-          <Icon className='size-4' icon={UserIcon} />
+          <User className='size-4' />
           Profile
         </button>
         <button
           className='item-light flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors'
           type='button'
         >
-          <Icon className='size-4' icon={Settings02Icon} />
+          <Settings className='size-4' />
           Settings
         </button>
         <button
           className='item-danger flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left font-medium text-sm transition-colors'
           type='button'
         >
-          <Icon className='size-4' icon={Alert02Icon} />
+          <DangerTriangle className='size-4' />
           Delete account
         </button>
       </nav>

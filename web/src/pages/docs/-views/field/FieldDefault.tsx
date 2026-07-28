@@ -1,5 +1,4 @@
-import { Eraser01Icon, MailAtSign02Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Eraser, Letter } from '@polyms/icons/bold-duotone'
 import { Field } from '@polyms/ui-kit'
 import { useMemo, useRef, useState } from 'react'
 
@@ -12,15 +11,13 @@ export default function FieldDefault() {
   return (
     <Field className='m-auto w-1/2' invalid={showError} required>
       <Field.Label>Let me know your email?</Field.Label>
-      <HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
-      <HugeiconsIcon
+      <Letter className='icon-start' />
+      <Eraser
         className='icon-end origin-top rotate-180'
-        icon={Eraser01Icon}
         onClick={() => {
           setValue('')
           ref.current?.focus()
         }}
-        strokeWidth={2}
       />
       <Field.Control
         onChange={e => setValue(e.target.value)}

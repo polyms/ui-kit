@@ -1,8 +1,5 @@
 /** biome-ignore-all lint/style/useNamingConvention: Icon component prop */
 
-import { GithubIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
-import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/ui-kit'
 import {
   Accessibility,
   Code2,
@@ -11,7 +8,8 @@ import {
   Palette,
   Rocket,
   SpeedometerMax,
-} from '@solar-icons/react-perf/BoldDuotone'
+} from '@polyms/icons/bold-duotone'
+import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/ui-kit'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
@@ -100,7 +98,7 @@ function LandingNav() {
             rel='noopener noreferrer'
             target='_blank'
           >
-            <HugeiconsIcon className='size-4' icon={GithubIcon} />
+            <GitHubIcon className='size-4' />
             <span className='hidden sm:inline'>GitHub</span>
           </a>
           <Button render={<Link to='/design-system' />} rounded size='sm' variant='primary'>
@@ -115,7 +113,7 @@ function LandingNav() {
 
 function HeroSection() {
   return (
-    <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-[700px] items-center overflow-hidden'>
+    <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-175 items-center overflow-hidden'>
       {/* Background Marquee */}
       <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -translate-y-1/2'>
         <div className='home-marquee-container'>
@@ -202,7 +200,7 @@ function ComponentShowcaseSection() {
           title='See the design system in motion'
         />
 
-        <div className='mt-12 grid auto-rows-[13rem] grid-cols-1 gap-6 sm:grid-cols-6'>
+        <div className='mt-12 grid auto-rows-52 grid-cols-1 gap-6 sm:grid-cols-6'>
           <ShowcaseCard className='sm:col-span-3 sm:row-span-2 sm:h-auto' label='Button' to='/docs/button'>
             <ButtonsPreview />
           </ShowcaseCard>

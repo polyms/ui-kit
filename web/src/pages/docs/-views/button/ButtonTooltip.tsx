@@ -1,5 +1,4 @@
-import { Cancel01Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { CloseCircle } from '@polyms/icons/bold-duotone'
 import { Button } from '@polyms/ui-kit'
 
 export default function ButtonTooltip() {
@@ -9,7 +8,7 @@ export default function ButtonTooltip() {
         Save
       </Button>
       <Button icon rounded tooltip='Dismiss'>
-        <HugeiconsIcon className='btn-icon-content' icon={Cancel01Icon} strokeWidth={2} />
+        <CloseCircle className='btn-icon-content' />
       </Button>
     </div>
   )

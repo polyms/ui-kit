@@ -1,5 +1,4 @@
-import { MouseLeftClick06Icon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { Mouse } from '@polyms/icons/bold-duotone'
 import { Button } from '@polyms/ui-kit'
 import { nanoid } from 'nanoid'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -58,7 +57,7 @@ export default function ButtonSizes() {
                   rounded
                   size={size === 'default' ? undefined : size}
                 >
-                  <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
+                  <Mouse className='btn-icon-content' />
 
                   {size !== 'default' ? `btn-${size}` : 'default'}
                 </Button>
@@ -75,7 +74,7 @@ export default function ButtonSizes() {
                   rounded
                   size={size === 'default' ? undefined : size}
                 >
-                  <HugeiconsIcon className='btn-icon-content' icon={MouseLeftClick06Icon} strokeWidth={2} />
+                  <Mouse className='btn-icon-content' />
                 </Button>
               </td>
               <td className='text-center'>{styles[size]?.fontSize}</td>

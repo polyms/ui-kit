@@ -62,8 +62,16 @@
     }
   },
   "release": {
-    "projects": ["ui-kit", "web"],
-    "projectsRelationship": "independent",
+    "groups": {
+      "ui-kit": {
+        "projects": ["ui-kit", "icons"],
+        "projectsRelationship": "fixed"
+      },
+      "web": {
+        "projects": ["web"],
+        "projectsRelationship": "independent"
+      }
+    },
     "changelog": {
       "projectChangelogs": false,
       "workspaceChangelog": false

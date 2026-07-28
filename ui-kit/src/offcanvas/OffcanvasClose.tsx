@@ -17,7 +17,6 @@ export const OffcanvasClose = forwardRef<HTMLButtonElement, OffcanvasCloseProps>
 
 const CloseIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
-    data-src='https://cdn.hugeicons.com/icons/cancel-circle-half-dot-stroke-rounded.svg?v=1.0.1'
     fill='none'
     role='img'
     viewBox='0 0 24 24'

@@ -1,0 +1,58 @@
+{
+  "name": "icons",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "icons/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project icons --web",
+  "targets": {
+    "types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/generate-types.mjs",
+        "cwd": "icons"
+      },
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/svg/**/*.svg",
+        "{projectRoot}/scripts/generate-types.mjs",
+        "{projectRoot}/plugins/icon-source.mjs"
+      ],
+      "outputs": ["{projectRoot}/types"]
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "cwd": "icons",
+        "outputPath": "dist/icons"
+      },
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": [
+        "production",
+        "^production",
+        "{projectRoot}/svg/**/*.svg",
+        "{projectRoot}/plugins/**/*",
+        {
+          "externalDependencies": ["vite"]
+        }
+      ],
+      "outputs": ["{workspaceRoot}/dist/icons"],
+      "metadata": {
+        "technologies": ["vite"],
+        "description": "Run Vite build",
+        "help": {
+          "command": "pnpm exec vite build --help",
+          "example": {
+            "options": {
+              "sourcemap": true,
+              "manifest": "manifest.json"
+            }
+          }
+        }
+      },
+      "configurations": {},
+      "parallelism": true
+    }
+  }
+}

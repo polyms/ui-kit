@@ -28,6 +28,7 @@
     "skipDefaultLibCheck": true,
     "paths": {
       "@polyms/ui-kit": ["./ui-kit/src/index.ts"],
+      "@polyms/icons/bold-duotone": ["./icons/types/bold-duotone.d.ts"],
       "~plugins/*": ["./plugins/*"]
     }
   },
