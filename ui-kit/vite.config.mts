@@ -66,10 +66,10 @@ export default defineConfig(async () => {
       reportCompressedSize: true,
       // Rolldown preserves `require()` for externals; browser bundles need `import` (see rolldown.rs bundling-cjs).
       // Keep react out of top-level `external` here — handled by esmExternalRequirePlugin's own list.
-      // @base-ui/react, clsx, @floating-ui/react-dom stay bundled so consumers do not install them.
       rolldownOptions: {
-        // zustand stays external (programmatic overlay stores); @base-ui + its transitive deps are bundled.
-        external: ['zustand'],
+        // Bundled: @base-ui/react (+ its non-external transitive deps under vendor/).
+        // External: zustand (optional host install), clsx + @floating-ui (package.json dependencies).
+        external: ['zustand', 'clsx', 'use-sync-external-store', /^@floating-ui(\/.*)?$/],
         output: {
           assetFileNames: assetInfo => {
             if (assetInfo.names.some(name => name.endsWith('.css'))) {
