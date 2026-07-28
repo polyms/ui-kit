@@ -2,6 +2,11 @@
 type: Feedback
 title: Toast
 apis:
+  - separator: Toast.Container
+  - name: position
+    default: bottom-right
+    values: top-left | top-right | top-center | bottom-left | bottom-right | bottom-center
+    description: Screen-edge placement for the stacked toast viewport.
   - separator: toastManager.add(options)
   - name: title
     default: '-'
@@ -32,6 +37,8 @@ apis:
 
 import Story from './-views/toast/ToastDefault.tsx'
 import code from './-views/toast/ToastDefault.tsx?raw'
+import PositionStory from './-views/toast/ToastPosition.tsx'
+import positionCode from './-views/toast/ToastPosition.tsx?raw'
 
 Display brief, non-blocking feedback messages to users about the outcome of an action or system event. Toasts appear temporarily and auto-dismiss, ensuring they don't interrupt the user's workflow.
 
@@ -44,7 +51,6 @@ Display brief, non-blocking feedback messages to users about the outcome of an a
 ```tsx
 import { Button, Toast } from '@polyms/ui-kit'
 
-// Wrap your app with Toast provider
 function App() {
   return (
     <Toast>
@@ -54,11 +60,10 @@ function App() {
   )
 }
 
-// Show toasts from any component
 function MyComponent() {
   const toastManager = Toast.useToastManager()
 
-  return (
+  const saveButton = (
     <Button
       onClick={() =>
         toastManager.add({
@@ -72,8 +77,29 @@ function MyComponent() {
       Save Changes
     </Button>
   )
+
+  return saveButton
 }
 ```
+
+## Position
+
+Set placement once on **`Toast.Container`** — it controls where the stacked toast viewport sits on screen. Default is **`bottom-right`**.
+
+```tsx
+import { Toast } from '@polyms/ui-kit'
+
+const appShell = (
+  <Toast>
+    <main>{/* routes */}</main>
+    <Toast.Container position='top-center' />
+  </Toast>
+)
+```
+
+<CodePreview code={positionCode}>
+  <PositionStory />
+</CodePreview>
 
 ## Types
 

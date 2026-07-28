@@ -36,12 +36,15 @@ toastManager.add({
 
 Mount **`Toast.Container`** once under **`Toast`**. Full app-shell wiring (with Modal/Offcanvas containers): [setup.md](setup.md#app-shell).
 
+Screen placement is set on the container — **`position`**: `top-left` | `top-right` | `top-center` | `bottom-left` | `bottom-right` | `bottom-center` (default **`bottom-right`**). Do not pass placement via `toastManager.add()` options for stacked toasts.
+
 Deep reference for Modal/Offcanvas overlays: **[modal.md](modal.md)** — Toast is not a dialog; do not use it for confirmations that block workflow.
 
 | Rule               | Detail                                                                                                                                                                                        |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Non-blocking**   | Toast does not trap focus — use **`Modal`** for delete confirm and irreversible actions.                                                                                                      |
 | **Types**          | `success`, `danger`, `warning`, `info`, or `actions` (with `actionProps` for undo/retry). There is no `primary` toast type.                                                                   |
+| **Position**       | Set **`Toast.Container position`** once for the app shell — not per `add()` call for the stacked viewport.                                                                                    |
 | **Auto-dismiss**   | Default **`timeout`** is **5000** ms; set `timeout: 0` only when the user must read or act (e.g. undo).                                                                                       |
 | **Screen readers** | Keep `title` / `description` concise — Base UI announces via a live region; do not rely on toast alone for critical errors that need a persistent **`Alert`** or inline **`Field.Feedback`**. |
 | **Undo / retry**   | Prefer `type: 'actions'` with one clear action — not a second toast stacked on the first.                                                                                                     |

@@ -39,10 +39,9 @@
     translateY(
       calc(
         var(--toast-swipe-movement-y) -
-        (
-          (var(--toast-index) * var(--peek)) +
-          (var(--shrink) * var(--height))
-        ) * -1 * var(--toast-stack-direction)
+        ((var(--toast-index) * var(--peek)) + (var(--shrink) * var(--height))) *
+        -1 *
+        var(--toast-stack-direction)
       )
     )
     scale(var(--scale));
@@ -127,7 +126,6 @@
 .toast-container {
   top: auto;
   right: 1rem;
-
   bottom: 1rem;
   left: auto;
   z-index: var(--zindex-toast);
@@ -178,22 +176,6 @@
   bottom: 1rem;
   left: auto;
   transform: translateX(50%);
-}
-
-.toast-container-left-center {
-  top: 50%;
-  right: auto;
-  bottom: auto;
-  left: 1rem;
-  transform: translateY(-50%);
-}
-
-.toast-container-right-center {
-  top: 50%;
-  right: 1rem;
-  bottom: auto;
-  left: auto;
-  transform: translateY(-50%);
 }
 
 .toast-content {

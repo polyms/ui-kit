@@ -4,4 +4,5 @@ import { ToastContainer, ToastProvider } from './ToastContainer'
 export const Toast = Object.assign(ToastProvider, {
   Container: ToastContainer,
   useToastManager: Base.useToastManager,
+  createToastManager: Base.createToastManager,
 })
