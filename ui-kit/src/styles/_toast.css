@@ -3,13 +3,13 @@
   --toast-color: var(--fg);
   --gap: 0.75rem;
   --peek: 0.75rem;
+  --toast-stack-direction: -1;
   --scale: calc(max(0, 1 - (var(--toast-index) * 0.1)));
   --shrink: calc(1 - var(--scale));
   --height: var(--toast-frontmost-height, var(--toast-height));
   --offset-y: calc(
-    var(--toast-offset-y) *
-    -1 +
-    (var(--toast-index) * var(--gap) * -1) +
+    (var(--toast-offset-y) * var(--toast-stack-direction)) +
+    (var(--toast-index) * var(--gap) * var(--toast-stack-direction)) +
     var(--toast-swipe-movement-y)
   );
 
@@ -39,12 +39,14 @@
     translateY(
       calc(
         var(--toast-swipe-movement-y) -
-        (var(--toast-index) * var(--peek)) -
-        (var(--shrink) * var(--height))
+        (
+          (var(--toast-index) * var(--peek)) +
+          (var(--shrink) * var(--height))
+        ) * -1 * var(--toast-stack-direction)
       )
     )
     scale(var(--scale));
-  transform-origin: bottom center;
+  transform-origin: var(--toast-transform-origin, bottom center);
   transition:
     transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.5s,
@@ -63,7 +65,7 @@
 
   &[data-starting-style],
   &[data-ending-style] {
-    transform: translateY(150%);
+    transform: translateY(calc(var(--toast-stack-direction) * -150%));
   }
 
   &[data-limited] {
@@ -110,6 +112,18 @@
   }
 }
 
+.toast-top {
+  --toast-stack-direction: 1;
+  --toast-transform-origin: top center;
+  top: 0;
+  bottom: auto;
+
+  &::after {
+    top: auto;
+    bottom: 100%;
+  }
+}
+
 .toast-container {
   top: auto;
   right: 1rem;
@@ -120,6 +134,66 @@
   min-width: 20rem;
   max-width: min(100%, 25rem);
   @apply fixed flex px-4;
+}
+
+.toast-container-top-left {
+  top: 1rem;
+  right: auto;
+  bottom: auto;
+  left: 1rem;
+}
+
+.toast-container-top-right {
+  top: 1rem;
+  right: 1rem;
+  bottom: auto;
+  left: auto;
+}
+
+.toast-container-top-center {
+  top: 1rem;
+  right: 50%;
+  bottom: auto;
+  left: auto;
+  transform: translateX(50%);
+}
+
+.toast-container-bottom-left {
+  top: auto;
+  right: auto;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.toast-container-bottom-right {
+  top: auto;
+  right: 1rem;
+  bottom: 1rem;
+  left: auto;
+}
+
+.toast-container-bottom-center {
+  top: auto;
+  right: 50%;
+  bottom: 1rem;
+  left: auto;
+  transform: translateX(50%);
+}
+
+.toast-container-left-center {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+.toast-container-right-center {
+  top: 50%;
+  right: 1rem;
+  bottom: auto;
+  left: auto;
+  transform: translateY(-50%);
 }
 
 .toast-content {

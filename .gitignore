@@ -119,3 +119,5 @@ doc_build/
 
 # Local tooling
 .venv-rembg
+.vercel
+.env*

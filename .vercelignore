@@ -1,0 +1,56 @@
+# Local Python tooling (was ~15k files — blows past Vercel CLI 15k upload limit)
+.venv-rembg
+
+# Build / cache / package manager (rebuilt on Vercel)
+node_modules
+dist
+tmp
+out-tsc
+.nx
+.pnpm-store
+.tanstack
+.vercel
+coverage
+**/coverage
+doc_build
+
+# Env & secrets
+.env
+.env.*
+.npmrc
+
+# IDE / editor / OS
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+*.log
+
+# Agent / AI local tooling (not needed for web build)
+# Leading `/` = repo root only — bare `docs` also matched `web/src/pages/docs/` (MDX).
+/.agents
+/.claude
+/.codex
+/.cursor
+/.gemini
+/.github
+
+# Internal agent docs at repo root only (keep web/src/pages/docs/**)
+/docs
+/AGENTS.md
+/CLAUDE.md
+/CONTEXT.md
+/DEPLOY.md
+
+# Tests (not needed for production build)
+**/*.test.ts
+**/*.test.tsx
+**/*.test.mjs
+**/*.test.js
+**/vitest.config.*
+vitest.config.mts
+vitest.setup.ts
+
+# Vite / Vitest timestamps
+vite.config.*.timestamp*
+vitest.config.*.timestamp*
