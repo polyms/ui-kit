@@ -34,7 +34,7 @@ const emailField = (
     <Field.Label>Let me know your email?</Field.Label>
     <Field.Control type='email' placeholder='tifa.lockhart@polyms.dev' />
     <Field.Description>We'll only use this for account updates.</Field.Description>
-    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+    <Field.Feedback>Enter a valid email address</Field.Feedback>
   </Field>
 )
 ```
@@ -78,14 +78,15 @@ Omit `debounce` for controlled submit forms.
 
 ### Validation
 
-`Field.Feedback` portals a tooltip-style message when **`invalid`**. It opens on **focus-visible**, **hover**, or **click** (dismiss: Escape / outside press / click again when click-sticky). Use **`defaultShowOnError`** to keep the message visible while invalid (also keeps `aria-describedby` on the control). Pass **`floatingRoot`** (DOM id) when the portal must target a container other than `document.body` (e.g. inside a modal).
+`Field.Feedback` portals a tooltip-style message when **`invalid`**. Default: opens on **focus-visible**, **hover**, or **click** (dismiss: Escape / outside press / click again when click-sticky). Do **not** add **`defaultShowOnError`** on every field — omit it in normal forms. Pass **`floatingRoot`** (DOM id) when the portal must target a container other than `document.body` (e.g. inside a modal).
 
-| Rule                 | Detail                                                                                                                                   |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **When to validate** | On **blur** or **submit** — not on every keystroke unless the field is a live search/filter (`Field.Floating` + `debounce`).             |
-| **Error copy**       | State cause + fix in `Field.Feedback` — not only `Invalid input` ([quality.md#copy-tells-product-ui](quality.md#copy-tells-product-ui)). |
-| **Submit focus**     | After failed submit, move focus to the **first** `invalid` `Field` control so keyboard users land on the problem.                        |
-| **Portal target**    | Default portal is `document.body`. Set `floatingRoot` to a container id when stacking contexts clip the tooltip.                         |
+| Rule                      | Detail                                                                                                                                   |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **When to validate**      | On **blur** or **submit** — not on every keystroke unless the field is a live search/filter (`Field.Floating` + `debounce`).             |
+| **Error copy**            | State cause + fix in `Field.Feedback` — not only `Invalid input` ([quality.md#copy-tells-product-ui](quality.md#copy-tells-product-ui)). |
+| **Submit focus**          | After failed submit, move focus to the **first** `invalid` `Field` control so keyboard users land on the problem (feedback opens on focus). |
+| **`defaultShowOnError`**  | **Opt-in only** — keeps the message visible (and `aria-describedby`) while invalid without focus/hover/click. Use for sticky always-on errors or docs demos; never as a default on every `Field.Feedback`. |
+| **Portal target**         | Default portal is `document.body`. Set `floatingRoot` to a container id when stacking contexts clip the tooltip.                         |
 
 ### Input types (mobile)
 
@@ -171,6 +172,7 @@ For validation UI, use compound **`Field`** or show errors via `children`.
 - Icons inside `Field.Control`
 - `Field.Input`, `FieldFloating`, `NumberField` inside `<Field>` (use **`NumberField`** standalone), deep imports
 - Treating `Field.Feedback` like a `render` slot — message goes in **`children`**; portal via **`floatingRoot`** when needed
+- Sprinkling **`defaultShowOnError`** on every `Field.Feedback` — opt-in only for sticky always-on errors / demos
 
 ---
 
@@ -178,7 +180,7 @@ For validation UI, use compound **`Field`** or show errors via `children`.
 
 - [ ] **API choice** — `Field` compound vs `Field.Floating` vs `NumberField` vs raw input matches intent ([Choose the right API](#choose-the-right-api)).
 - [ ] **Props on correct node** — `invalid` / `required` / `size` / `name` on `Field` root; `disabled`, `debounce`, `type`, etc. on `Field.Control`; never `invalid` on `Field.Control`.
-- [ ] **Error visibility** — `Field.Feedback` present when showing validation; `defaultShowOnError` when message must stay visible after blur; `floatingRoot` when portal must leave `document.body`.
+- [ ] **Error visibility** — `Field.Feedback` present when showing validation; omit `defaultShowOnError` unless sticky always-on feedback is required; `floatingRoot` when portal must leave `document.body`.
 - [ ] **Validation timing** — errors on blur/submit, not per-keystroke (except debounced search fields).
 - [ ] **Submit focus** — first invalid field receives focus after a failed submit.
 - [ ] **Mobile types** — `email` / `tel` / `url` / `password` on `Field.Control` when the input type is known.

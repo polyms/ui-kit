@@ -746,11 +746,11 @@ All complex components follow compound component pattern:
   </Accordion.Item>
 </Accordion>
 
-// Field — invalid on root; Feedback portals (focus/hover/click or defaultShowOnError)
+// Field — invalid on root; Feedback portals on focus/hover/click (defaultShowOnError is opt-in only)
 <Field invalid={hasError} required>
   <Field.Label>Email</Field.Label>
   <Field.Control value={email} onChange={onEmailChange} />
-  <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+  <Field.Feedback>Enter a valid email address</Field.Feedback>
 </Field>
 
 // dynamic() — React.lazy + Suspense
@@ -1017,7 +1017,7 @@ export type { ModalRootProps } from './ModalRoot'
 
 ### Example 3: Form Field with Validation Feedback
 
-Consumer API — put `invalid` on the **root**, not on `Field.Control`. `Field.Feedback` portals a tooltip-style message (focus / hover / click); use `defaultShowOnError` to keep it visible while invalid.
+Consumer API — put `invalid` on the **root**, not on `Field.Control`. `Field.Feedback` portals a tooltip-style message (focus / hover / click). Omit `defaultShowOnError` in normal forms — opt-in only when sticky always-on feedback is required.
 
 ```tsx
 import { Field } from '@polyms/ui-kit'
@@ -1026,7 +1026,7 @@ const emailField = (
   <Field invalid={hasError} required>
     <Field.Label>Email</Field.Label>
     <Field.Control value={email} onChange={onEmailChange} debounce={300} />
-    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+    <Field.Feedback>Enter a valid email address</Field.Feedback>
   </Field>
 )
 

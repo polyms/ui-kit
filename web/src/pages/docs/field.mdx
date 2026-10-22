@@ -56,9 +56,9 @@ apis:
     values: ReactNode
     description: Validation message content. Renders only when the field is invalid and feedback is open (or defaultShowOnError is set).
   - name: defaultShowOnError
-    default: '-'
+    default: false
     values: boolean
-    description: Keeps the feedback message visible while the field is invalid, without requiring focus, hover, or click.
+    description: Opt-in. Keeps the feedback message visible while the field is invalid, without requiring focus, hover, or click. Omit in normal forms; use only when sticky always-on feedback is required.
   - name: floatingRoot
     default: document.body
     values: string
@@ -161,6 +161,7 @@ Place `HugeiconsIcon` with `className='icon-start'` or `'icon-end'` as **sibling
 - Using `Field.Floating`'s `placeholder` prop as the HTML input placeholder
 - Inventing `Field.Input` or importing `FieldFloating` separately
 - Expecting `Field.Feedback` to take a `render` prop — pass the message as **`children`**
+- Adding **`defaultShowOnError`** on every `Field.Feedback` — only when sticky always-on feedback is required
 
 ## Sizes
 
@@ -178,7 +179,7 @@ Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs bl
 
 ## Invalid state
 
-Pass **`invalid`** on **`Field`** to apply error styling (danger border, text, and focus ring). Add **`Field.Feedback`** for the validation message — it portals as a tooltip near the control and opens on focus-visible, hover, or click. Use **`defaultShowOnError`** to keep it visible while invalid. Pass **`floatingRoot`** with a DOM id when the feedback must portal into a specific container (for example a modal body) instead of `document.body`.
+Pass **`invalid`** on **`Field`** to apply error styling (danger border, text, and focus ring). Add **`Field.Feedback`** for the validation message — it portals as a tooltip near the control and opens on focus-visible, hover, or click. After a failed submit, focus the first invalid control so the message appears for keyboard users. **`defaultShowOnError`** is optional — only set it when the message must stay visible without interaction (for example a sticky always-on error). Pass **`floatingRoot`** with a DOM id when the feedback must portal into a specific container (for example a modal body) instead of `document.body`.
 
 ```tsx
 import { Field } from '@polyms/ui-kit'
@@ -187,7 +188,7 @@ const emailField = (
   <Field invalid={hasError} required>
     <Field.Label>Email</Field.Label>
     <Field.Control value={email} onChange={onEmailChange} />
-    <Field.Feedback defaultShowOnError>Enter a valid email address</Field.Feedback>
+    <Field.Feedback>Enter a valid email address</Field.Feedback>
   </Field>
 )
 ```
