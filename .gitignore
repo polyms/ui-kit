@@ -121,3 +121,6 @@ doc_build/
 .venv-rembg
 .vercel
 .env*
+migrations.json
+.vitest
+tools/ai-migrations

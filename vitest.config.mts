@@ -19,7 +19,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './ui-kit/src'),
+      '~': path.resolve(import.meta.dirname, './ui-kit/src'),
     },
   },
 })

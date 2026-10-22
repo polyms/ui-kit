@@ -36,8 +36,8 @@ export default defineConfig(async () => {
   const isLocal = process.env.LOCAL === 'true'
   const version = isLocal ? 'local' : pkg.version
   const tailwindcssVite = (await import('@tailwindcss/vite')).default
-  const outDir = path.join(__dirname, process.env.OUTDIR ?? '../dist/ui-kit')
-  const srcRoot = path.resolve(__dirname, 'src')
+  const outDir = path.join(import.meta.dirname, process.env.OUTDIR ?? '../dist/ui-kit')
+  const srcRoot = path.resolve(import.meta.dirname, 'src')
 
   return {
     build: {
@@ -116,7 +116,7 @@ export default defineConfig(async () => {
         afterBuild: async () => {
           // Copy @base-ui/react types to dist so consumers resolve them as ui-kit types.
           const fs = await import('node:fs/promises')
-          const baseUiPath = path.resolve(__dirname, '../node_modules/@base-ui/react')
+          const baseUiPath = path.resolve(import.meta.dirname, '../node_modules/@base-ui/react')
           const destPath = path.join(outDir, 'base')
 
           const copyDir = async (src: string, dest: string) => {
@@ -155,7 +155,7 @@ export default defineConfig(async () => {
         outDirs: outDir,
         staticImport: true,
         strictOutput: true,
-        tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+        tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json'),
       }),
     ].filter(Boolean),
     preview: {
@@ -171,7 +171,7 @@ export default defineConfig(async () => {
     resolve: {
       dedupe: ['react', 'react-dom'],
     },
-    root: __dirname,
+    root: import.meta.dirname,
     server: {
       host: '0.0.0.0',
       port: 5173,

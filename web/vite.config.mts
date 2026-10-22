@@ -7,8 +7,8 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
-import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin'
-import { stripFrontmatter } from './plugins/stripFrontmatter.plugin'
+import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin.ts'
+import { stripFrontmatter } from './plugins/stripFrontmatter.plugin.ts'
 
 export default defineConfig({
   build: {
@@ -41,10 +41,10 @@ export default defineConfig({
     // Workspace package source — neither nxViteTsPaths nor vite-tsconfig-paths reliably
     // apply tsconfig.base paths to MDX under Vite 8; alias keeps docs/dev imports working.
     alias: {
-      '@polyms/ui-kit': path.resolve(__dirname, '../ui-kit/src/index.ts'),
+      '@polyms/ui-kit': path.resolve(import.meta.dirname, '../ui-kit/src/index.ts'),
     },
   },
-  root: __dirname,
+  root: import.meta.dirname,
   server: {
     host: 'localhost',
     port: 4200,
