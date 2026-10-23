@@ -202,12 +202,11 @@ function FilterBarCase() {
           }}
           outlined
           rounded
-          type='button'
           variant='light'
         >
           Clear filters
         </Button>
-        <Button rounded type='button' variant='primary'>
+        <Button rounded variant='primary'>
           Apply
         </Button>
       </div>
@@ -273,7 +272,7 @@ function CreateWorkspaceCase() {
         />
       </div>
       <div className='flex flex-wrap items-center justify-end gap-2 border-slate-200/80 border-t pt-4 dark:border-line'>
-        <Button rounded type='button'>
+        <Button rounded>
           Cancel
         </Button>
         <Button rounded type='submit' variant='primary'>
@@ -299,7 +298,7 @@ function ProfileSettingsCase() {
           value={displayName}
         />
       </Field>
-      <Button rounded size='lg' type='button' variant='primary'>
+      <Button rounded size='lg' variant='primary'>
         Save changes
       </Button>
     </div>
@@ -322,7 +321,7 @@ function InlineFieldButtonCase() {
           value={invite}
         />
       </Field>
-      <Button className='sm:self-end' disabled={!invite} rounded type='button' variant='primary'>
+      <Button className='sm:self-end' disabled={!invite} rounded variant='primary'>
         Send invite
       </Button>
     </div>
@@ -565,10 +564,10 @@ function ModalFooterCase() {
         />
       </Field>
       <div className='mt-6 flex flex-wrap justify-end gap-2'>
-        <Button rounded type='button'>
+        <Button rounded>
           Cancel
         </Button>
-        <Button disabled={!date} rounded type='button' variant='primary'>
+        <Button disabled={!date} rounded variant='primary'>
           Confirm
         </Button>
       </div>

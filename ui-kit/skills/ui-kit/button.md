@@ -1,6 +1,7 @@
 ---
 description: >-
   Button primitive — variants, sizes, icon, touch targets, compose-through-render for Modal/Menu/Toolbar triggers.
+  Omit `type` on `<Button>` unless it is `submit` or `reset`. Never write `type='button'`.
 ---
 
 # Button
@@ -17,7 +18,7 @@ The most-used primitive. `Button` wraps a native `<button>` through `useRender`,
 | `active`   | `boolean`                                                                        | `false`    | Forces the active/pressed visual state.                                                                                                                    |
 | `tooltip`  | `string`                                                                         | —          | Rich tooltip; falls back to the native `title` before hydration.                                                                                           |
 | `disabled` | `boolean`                                                                        | `false`    | Native attribute; disables interaction and applies disabled styling.                                                                                       |
-| `type`     | `'button' \| 'submit' \| 'reset'`                                                | `'button'` | Injected when not using `render`. **Omit in generated code** — only set for `submit` / `reset`.                                                            |
+| `type`     | `'submit' \| 'reset'`                                                            | omit       | Do not pass `type='button'`. The component injects it. Set `type` only for `submit` or `reset`.                                                            |
 | `render`   | `useRender` render prop                                                          | —          | Render as another element (e.g. an `<a>` or router link) while keeping button styling.                                                                     |
 
 **There is no `content` prop.** Do not pass `content='center'` or similar invented props.
@@ -52,15 +53,14 @@ Use raw `className='btn …'` only on **native** `<button>` / `<a>` when `Button
 `Button` sets `type='button'` automatically (unless `render` is set). Do **not** pass `type='button'` in generated code — omit `type` entirely for the common case. Only set `type` when you need `submit` or `reset` (e.g. form submit CTA).
 
 ```tsx
-// ✅ Correct — omit redundant type
+// ✅ Omit type — component already sets button
 <Button variant='primary' onClick={save}>Save</Button>
 
-// ✅ Correct — non-default type
+// ✅ Only when the control submits or resets a form
 <Button type='submit' variant='primary'>Submit</Button>
-
-// ❌ Noisy — redundant default
-<Button type='button' variant='primary'>Save</Button>
 ```
+
+Passing `type='button'` is invalid output. Do not copy it from older demos or from native `<button type='button'>` examples.
 
 ### Touch targets
 

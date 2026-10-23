@@ -124,7 +124,7 @@ Set semantic **`type`** on `Field.Control` so mobile picks the right keyboard:
 
 ### Native forms
 
-Wrap in `<form onSubmit={…}>`. Set `name` on `Field` root (defaults from `id`). Submit with `Button type='submit' variant='primary'`.
+Wrap in `<form onSubmit={…}>`. Set `name` on `Field` root (defaults from `id`). Submit with `Button type='submit' variant='primary'`. Every other `Button` omits `type` — do not write `type='button'` ([button.md](button.md#type--omit-the-default)).
 
 Type **`onSubmit`** handlers as **`React.SubmitEvent<HTMLFormElement>`** — React 19 / `@types/react` 19; `FormEvent` on submit is deprecated. Inline handlers can infer the type.
 

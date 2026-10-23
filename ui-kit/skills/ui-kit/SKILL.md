@@ -3,6 +3,7 @@ name: ui-kit
 description: >-
   Build UI with @polyms/ui-kit — compound components, semantic theming, CSS utilities, responsive product UI.
   Entry skill: open routing table before coding. Form in overlay → field.md + modal.md.
+  On `<Button>`, omit `type` unless it is `submit` or `reset` — never write `type='button'`.
 ---
 
 # @polyms/ui-kit
@@ -52,6 +53,7 @@ Load **every** matched file before generating code.
 4. `item-*` for ghost hover surfaces ([glossary.md](glossary.md#item--utilities)); library shells are not Tailwind rewrite targets.
 5. `@hugeicons/react` for icons — no hand-rolled SVG paths.
 6. Ship complete UI — [quality.md](quality.md) (copy tells, output completeness, pre-flight).
+7. On `<Button>`, omit `type` unless it is `submit` or `reset`. Never write `type='button'` — the component already sets it ([button.md](button.md#type--omit-the-default)).
 
 **Frequent mistakes:** conversational `Field.Label` ([quality.md#field-label-copy](quality.md#field-label-copy)); `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close` via `render={<Button … />}` ([button.md](button.md#compose-button-through-render), [modal.md](modal.md)); footer `Modal.Close` without `variant` (ghost); `autoFocus` on footer CTA when modal has form inputs — use first input instead ([modal.md#modal](modal.md#modal)); no invented `content` prop on `Button`; redundant `type='button'` on `<Button>` ([button.md](button.md#type--omit-the-default)).
 

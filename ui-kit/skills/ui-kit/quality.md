@@ -166,6 +166,7 @@ Avoid LLM-default patterns that fight this design system:
 - **No div-based fake UI** — do not simulate a modal, dropdown, or data table with styled `<div>`s when the library provides the real component.
 - **No parallel button/input styles** — use **`Button`** / `Field.*` / `item-*`, not one-off `rounded-lg bg-blue-600 px-4` or hand-written `btn size-xl`.
 - **No invented Button props** — there is no `content` prop; use `size`, `variant`, `rounded`, `outlined`.
+- **No `type='button'` on `<Button>`** — omit `type`. Set it only for `submit` or `reset` ([button.md](button.md#type--omit-the-default)).
 - **No `className='btn …'` on `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close`** — use `render={<Button … />}` (built-in offcanvas icon chrome is library-owned; see [modal.md](modal.md), [button.md](button.md#compose-button-through-render)).
 - **No large Tailwind bundles on library shells** — `Modal.Content`, `Menu.Content`, `Select.Content`, etc. are already styled.
 - **No hand-rolled SVG icons** — use `@hugeicons/react` + `@hugeicons/core-free-icons` (same as docs demos). One icon family per screen.
@@ -298,6 +299,7 @@ Run before shipping UI. If any item fails, fix before delivering.
 - [ ] **Visible focus** — do not remove focus rings (`outline-none` without a replacement); library focus styles stay intact.
 - [ ] Focus order sane in modals, menus, and toolbars.
 - [ ] **One primary CTA** per screen — at most one `Button variant='primary'` (or equivalent) with the same intent; secondary actions use ghost/outlined/light.
+- [ ] **No `type='button'` on `<Button>`** — omit `type`; only `submit` or `reset` ([button.md](button.md#type--omit-the-default)).
 
 ### Theme
 
