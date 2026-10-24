@@ -8,13 +8,14 @@ import { AppSidebar } from '../layouts/AppSidebar'
 import { DocsFloatingDock } from '../layouts/DocsFloatingDock'
 
 import '../stores/app.store'
+import { FaviconFit } from '../assets/FaviconFit'
 
 const Name = () => {
   return (
     <div id='app-name'>
-      <Link aria-label='Polyms home' className='flex items-center gap-2' to='/'>
-        <img alt='logo' className='h-10 shrink-0' src='/favicon.svg' />
-        <strong className='text-xl'>Polyms</strong>
+      <Link aria-label='Polyms home' className='flex items-center gap-1' to='/'>
+        <FaviconFit className='h-10 w-auto' />
+        <strong className='text-xl'>olyms</strong>
       </Link>
       <span className='badge badge-primary whitespace-nowrap rounded-full px-4 font-bold'>Design system</span>
     </div>
