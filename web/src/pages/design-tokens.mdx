@@ -1,0 +1,34 @@
+---
+type: Guide
+title: Design Tokens
+---
+
+import DesignTokens from './-views/DesignTokens.tsx'
+
+**Polyms UI Kit** names the values it uses for color, type, elevation, motion, and stacking. Some names store a raw value. Others point at a name that already has one. You change a name, and everything that points at it follows.
+
+The three sections below follow that path, from a general scale to a single component. Primitive tokens are the scales. Semantic tokens say what a value is for, and they point at a scale. Component tokens are the properties one component reads.
+
+## 1. Primitive
+
+These are the raw scales. Primary, success, info, danger, and warning each run from step 50 to step 950. The hex under a swatch is the color that step resolves to right now. Elevation uses `--shadow-*`, motion uses `--animate-fade-zoom-*`, and the type scale runs from `h1` to `h6`. The heading scale lists the pixel size of each step on a phone, a tablet, and a desktop.
+
+Look here when you want the source of a value. Primary step 700 is the brand emphasis color. Change a step when everything that still points at that step should move with it. For a new brand color, remap the primary ramp.
+
+<DesignTokens level='primitive' />
+
+## 2. Semantic
+
+This layer names a purpose and points at a primitive. Surfaces (body, fg, surface, surface-2, muted, line, and input) each have a light value and a dark value, plus a `--color-*` alias. Z-index tokens name stacking layers, such as `--zindex-modal` and `--zindex-tooltip`.
+
+Edit a semantic token when the whole product should change together: a new page background, or a higher modal. For a new brand color, remap the primary ramp, including step 700. Color ramps stay on the primitive steps, such as success step 500.
+
+<DesignTokens level='semantic' />
+
+## 3. Component
+
+These are the custom properties one component reads, such as `--btn-*` on a button and `--alert-*` on an alert. They usually point at a semantic token or a primitive step, so the component stays with the rest of the product. A variant does not invent new token names. It assigns different values to the same properties. A primary alert and a danger alert both use `--alert-bg`, `--alert-border`, and `--alert-color`.
+
+Edit a component token only when that one component should differ. If the whole product should take a new brand color, remap the primary ramp instead. Some components below have a default table plus variant groups. Some have only one table. When a default table is shown, that is what the component uses before a variant.
+
+<DesignTokens level='component' />
