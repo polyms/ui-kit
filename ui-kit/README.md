@@ -2,21 +2,19 @@
 
 Modular React 19 UI component library for the **Polyms ecosystem** — compound components, semantic theming, programmatic overlays, and Tailwind CSS 4 utilities.
 
-Built with Nx + Vite. Distributed via **GitHub Packages**.
+Built with Nx + Vite. Distributed via **registry.polyms.dev**.
 
 ## Install
 
-This package is published to GitHub Packages under the `@polyms` scope, so consumers must point the scope at the GitHub registry and authenticate (required even for public packages).
+Point the `@polyms` scope at the Polyms registry. No token is required.
 
 Add a `.npmrc` to the consumer repo:
 
 ```ini
-@polyms:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-always-auth=true
+@polyms:registry=https://registry.polyms.dev
 ```
 
-`GITHUB_TOKEN` is a GitHub Personal Access Token with the `read:packages` scope. Then install:
+Then install:
 
 ```bash
 pnpm add @polyms/ui-kit
@@ -102,7 +100,7 @@ pnpm exec nx build ui-kit
 
 ## Release
 
-Releases are independent per project (see `nx.json`). Versioning runs a build first, then tags `ui-kit@{version}`; pushing that tag triggers the GitHub Packages publish workflow.
+Releases are independent per project (see `nx.json`). Versioning runs a build first, then tags `ui-kit@{version}`; pushing that tag triggers the publish workflow.
 
 ```bash
 pnpm exec nx release version patch --projects=ui-kit

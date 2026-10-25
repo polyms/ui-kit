@@ -11,7 +11,6 @@ env:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
   pr-affected:
@@ -90,9 +89,7 @@ jobs:
           mv dist/ui-kit/*.css dist/mfe/
           mv dist/ui-kit/.vite/ dist/mfe/
 
-      - name: Publish to GitHub Packages
+      - name: Publish package
         run: |
-          echo "@polyms:registry=https://npm.pkg.github.com" >> .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
-          echo "always-auth=true" >> .npmrc
+          echo "@polyms:registry=https://registry.polyms.dev" >> .npmrc
           pnpm publish dist/ui-kit --no-git-checks

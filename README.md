@@ -2,7 +2,7 @@
 
 Modular React 19 UI component library for the **Polyms ecosystem** — compound components, semantic theming, programmatic overlays, and Tailwind CSS 4 utilities.
 
-Open source, distributed via **GitHub Packages** as [`@polyms/ui-kit`](./ui-kit/README.md).
+Open source, distributed via **registry.polyms.dev** as [`@polyms/ui-kit`](./ui-kit/README.md).
 
 Monorepo powered by **Nx** + **pnpm**, formatted and linted with **Biome**.
 
@@ -42,24 +42,20 @@ pnpm exec nx graph
 
 ## Consuming the library
 
-See [`ui-kit/README.md`](./ui-kit/README.md) for install (GitHub Packages auth), peer dependencies, styles, and usage. Quick version:
+See [`ui-kit/README.md`](./ui-kit/README.md) for install, peer dependencies, styles, and usage. Quick version:
 
 ```ini
 # consumer .npmrc
-@polyms:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-always-auth=true
+@polyms:registry=https://registry.polyms.dev
 ```
 
 ```bash
 pnpm add @polyms/ui-kit
 ```
 
-> GitHub Packages requires authentication to install, even for public packages — by design for the Polyms ecosystem.
-
 ## Release & publish
 
-Releases are independent per project (`nx.json`). Versioning builds first, then tags `ui-kit@{version}`; pushing that tag triggers the **Build and Deploy** workflow which publishes `@polyms/ui-kit` to GitHub Packages.
+Releases are independent per project (`nx.json`). Versioning builds first, then tags `ui-kit@{version}`; pushing that tag triggers the **Build and Deploy** workflow which publishes `@polyms/ui-kit` to registry.polyms.dev.
 
 ```bash
 pnpm exec nx release version patch --projects=ui-kit
