@@ -33,12 +33,11 @@ bun add @polyms/ui-kit
 
 ## Peer dependencies
 
-Peers declared by the library:
-
 - **`react`** ≥ 19.0.0
 - **`react-dom`** ≥ 19.0.0
+- **`zustand`** — required for **`useModalStore`** and **`useOffcanvasStore`**
 
-Install them at the app level (or let your workspace manage versions). They are not bundled into `@polyms/ui-kit`.
+Install them at the app level (or let your workspace manage versions). They are not bundled into `@polyms/ui-kit`. **`zustand`** is only needed when you call those store APIs.
 
 ## Styles
 
@@ -62,7 +61,7 @@ When unsure a symbol exists, open **`node_modules/@polyms/ui-kit/index.d.ts`** i
 
 ## Imperative modals and Zustand
 
-Using **`useModalStore`** with **`showModal`** / **`closeModal`** requires installing **`zustand`** in the host app (it is external to the library bundle). Mount **`Modal.Container`** once in your layout when using that flow. See the Modal docs page for the full pattern.
+**`useModalStore`** (**`showModal`** / **`closeModal`**) and **`useOffcanvasStore`** (**`showOffcanvas`** / **`closeOffcanvas`**) need **`zustand`** in the host app. Mount **`Modal.Container`** or **`Offcanvas.Container`** once in your layout when using that flow. See [Modal](/docs/modal) and [Offcanvas](/docs/offcanvas).
 
 ## Link locally for development
 

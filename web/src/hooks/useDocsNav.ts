@@ -2,6 +2,7 @@ import { pages } from 'virtual:mdx-navigation'
 import {
   AiChemistry02Icon,
   ChatFeedback01Icon,
+  CodeIcon,
   CursorMagicSelection04Icon,
   GoogleDocIcon,
   InputCursorTextIcon,
@@ -30,6 +31,7 @@ const iconMaps = {
   Feedback: ChatFeedback01Icon,
   Navigation: Share08Icon,
   Others: ThreeDScaleIcon,
+  Utils: CodeIcon,
 } as const
 
 const colors = {
@@ -39,6 +41,7 @@ const colors = {
   Feedback: 'text-danger-400',
   Navigation: 'text-primary-400',
   Others: 'text-danger-400',
+  Utils: 'text-slate-400',
 } as const
 // biome-ignore-end lint/style/useNamingConvention: section labels from frontmatter
 
@@ -68,10 +71,14 @@ export function useDocsNav(search = '') {
     return Object.entries(nav)
       .filter(([, sectionItems]) => sectionItems.length > 0)
       .sort(([labelA], [labelB]) => {
-        if (labelA === 'Guide') return -1
-        if (labelB === 'Guide') return 1
-        if (labelA === 'Others') return 1
-        if (labelB === 'Others') return -1
+        const pin = (label: string) => {
+          if (label === 'Guide') return -1
+          if (label === 'Others') return 1
+          if (label === 'Utils') return 2
+          return 0
+        }
+        const diff = pin(labelA) - pin(labelB)
+        if (diff !== 0) return diff
         return labelA.localeCompare(labelB)
       })
       .map(([label, items]) => ({
@@ -79,7 +86,14 @@ export function useDocsNav(search = '') {
         label,
         icon: iconMaps[label as keyof typeof iconMaps] || GoogleDocIcon,
         colorClass: colors[label as keyof typeof colors] || 'text-slate-400',
-        items: items.sort((a, b) => a.label.localeCompare(b.label)),
+        items: items.sort((a, b) => {
+          if (label === 'Guide') {
+            const pinItem = (item: { path: string }) => (item.path === '/installation' ? -1 : 0)
+            const itemDiff = pinItem(a) - pinItem(b)
+            if (itemDiff !== 0) return itemDiff
+          }
+          return a.label.localeCompare(b.label)
+        }),
       }))
   }, [search])
 
