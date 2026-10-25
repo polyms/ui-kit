@@ -25,7 +25,7 @@ Peers: `react` and `react-dom` `>=19`. Install `zustand` only when calling `useM
 
 - [AI Agent Skill](https://ui.polyms.dev/agent-skill.md): After you install @polyms/ui-kit, you can add a bundled agent skill so AI coding assistants — Cursor, Claude Code, and other tools that read AGENTS.md — compose UI the same way this library expects.
 - [Design System](https://ui.polyms.dev/design-system.md): Polyms UI Kit (@polyms/ui-kit) is a React component library for product UI: semantic colors, compound components, CSS utilities, and dark mode.
-- [Design Tokens](https://ui.polyms.dev/design-tokens.md): Polyms UI Kit names the values it uses for color, type, elevation, motion, and stacking.
+- [Design Tokens](https://ui.polyms.dev/design-tokens.md): Polyms UI Kit exposes color, type, elevation, motion, and stacking as CSS custom properties.
 - [Installation](https://ui.polyms.dev/installation.md): Polyms UI Kit is published as @polyms/ui-kit.
 - [Typography](https://ui.polyms.dev/typography.md): Polyms UI Kit ships a heading scale as CSS classes (h1–h6) with Tailwind CSS 4 for size, weight, and alignment utilities.
 

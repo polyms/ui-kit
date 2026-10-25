@@ -83,7 +83,7 @@
 }
 
 .home-hero-pill:hover .arrow {
-  @apply tranneutral-x-0.5 text-primary-400;
+  @apply translate-x-0.5 text-primary-400;
 }
 
 .home-hero-pill .sep {
@@ -206,7 +206,7 @@
 }
 
 .home-showcase-card:hover {
-  @apply -tranneutral-y-2 border-primary-700/40 shadow-2xl shadow-primary-700/10;
+  @apply -translate-y-2 border-primary-700/40 shadow-2xl shadow-primary-700/10;
 }
 
 .home-showcase-card-footer {

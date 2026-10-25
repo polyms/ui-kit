@@ -38,7 +38,9 @@ type JsxElement = {
   start: number
 }
 
-type PlainRow = Record<string, string | number | boolean | null>
+type CellValue = string | number | boolean | null | CellValue[] | { [key: string]: CellValue }
+
+type PlainRow = Record<string, CellValue>
 
 type TokenModule = {
   collectDesignTokens: typeof collectDesignTokens
@@ -244,11 +246,18 @@ function evalLiteral(expr: string): unknown {
   return Function(`"use strict"; return (${expr});`)()
 }
 
+function isCell(value: unknown): value is CellValue {
+  if (value == null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    return true
+  }
+  if (Array.isArray(value)) return value.every(isCell)
+  if (typeof value === 'object') return Object.values(value).every(isCell)
+  return false
+}
+
 function isPlainRow(value: unknown): value is PlainRow {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
-  return Object.values(value).every(
-    item => item == null || ['string', 'number', 'boolean'].includes(typeof item)
-  )
+  return Object.values(value).every(isCell)
 }
 
 function markdownTable(rows: PlainRow[]) {
@@ -270,8 +279,22 @@ function labelize(key: string) {
     .replace(/^\w/, char => char.toUpperCase())
 }
 
+function flattenCell(value: CellValue): string {
+  if (value == null) return ''
+  if (typeof value !== 'object') return String(value)
+  if (Array.isArray(value)) {
+    const parts = value.map(item => flattenCell(item))
+    const glue = value.every(item => item == null || typeof item !== 'object') ? ', ' : ''
+    return parts.join(glue)
+  }
+  return Object.values(value)
+    .map(item => flattenCell(item))
+    .join('')
+}
+
 function cell(value: unknown) {
-  return String(value ?? '')
+  const text = isCell(value) ? flattenCell(value) : ''
+  return text
     .replace(/\|/g, '\\|')
     .replace(/\r?\n/g, ' ')
     .trim()

@@ -72,7 +72,7 @@ function Page() {
               )}")`,
             }}
           />
-          <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -tranneutral-x-1/2 rounded-full bg-primary-700/15 blur-3xl' />
+          <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -translate-x-1/2 rounded-full bg-primary-700/15 blur-3xl' />
           <div className='absolute top-48 -right-20 h-72 w-72 rounded-full bg-primary-700/10 blur-3xl' />
           <div className='absolute top-80 -left-16 h-64 w-64 rounded-full bg-neutral-300/40 blur-3xl dark:bg-neutral-700/30' />
         </div>

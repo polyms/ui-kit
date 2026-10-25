@@ -62,7 +62,7 @@ function BackgroundDecor() {
   return (
     <div aria-hidden='true' className='home-decor'>
       <div className='home-decor-grid' />
-      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -tranneutral-x-1/2 bg-primary-700/25' />
+      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -translate-x-1/2 bg-primary-700/25' />
       <div className='home-decor-glow top-160 -left-40 h-96 w-96 bg-primary-700/10' />
       <div className='home-decor-glow top-320 -right-40 h-112 w-md bg-primary-700/10' />
     </div>
@@ -117,7 +117,7 @@ function HeroSection() {
   return (
     <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-175 items-center overflow-hidden'>
       {/* Background Marquee */}
-      <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -tranneutral-y-1/2'>
+      <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -translate-y-1/2'>
         <div className='home-marquee-container'>
           <div className='home-marquee-content'>
             <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
@@ -254,7 +254,7 @@ function ShowcaseCard({
           to={to}
         >
           Open
-          <ArrowRightIcon className='size-3 transition-transform group-hover:tranneutral-x-0.5' />
+          <ArrowRightIcon className='size-3 transition-transform group-hover:translate-x-0.5' />
         </Link>
       </div>
     </article>
@@ -772,7 +772,7 @@ function CTASection() {
         <div className='home-cta'>
           <div
             aria-hidden='true'
-            className='home-decor-glow top-0 left-1/2 h-72 w-xl -tranneutral-x-1/2 bg-primary-700/20'
+            className='home-decor-glow top-0 left-1/2 h-72 w-xl -translate-x-1/2 bg-primary-700/20'
           />
           <div
             aria-hidden='true'
