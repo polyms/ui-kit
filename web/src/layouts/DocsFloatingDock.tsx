@@ -1,12 +1,13 @@
 import { ListViewIcon, Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icons'
 import { scrollToHeading, scrollToTop, useVisibleHeadings } from '@polyms/ui-kit'
-import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
+import { Moon, Palette, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import clsx from 'clsx'
-import { type RefObject, useMemo, useState } from 'react'
+import { type RefObject, useMemo } from 'react'
 import { Icon } from '../components/Icons'
 import { useDocsToc } from '../hooks/useDocsToc'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAppStore } from '../stores/app.store'
+import { useThemeStore } from '../stores/theme.store'
 import type { AppSidebar } from './AppSidebar'
 import { type DockAction, FloatingDock } from './FloatingDock'
 import { ThemeConfigOffcanvas } from './ThemeConfigOffcanvas'
@@ -71,8 +72,10 @@ function DocsTocPopover({ onClose }: { onClose: () => void }) {
 
 export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps) {
   const theme = useAppStore(state => state.theme)
+  const toggleTheme = useAppStore(state => state.toggleTheme)
   const isDark = theme === 'dark'
-  const [themeOpen, setThemeOpen] = useState(false)
+  const themeOpen = useThemeStore(state => state.open)
+  const setThemeOpen = useThemeStore(state => state.setOpen)
   const { toc } = useDocsToc()
   // The TOC aside is visible from xl up, so the dock's TOC popover is redundant there.
   const isTocAsideVisible = useMediaQuery('(min-width: 1280px)')
@@ -81,10 +84,18 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
     const themeAction: DockAction = {
       type: 'button',
       id: 'theme',
-      icon: isDark ? <Sun className='size-5' /> : <Moon className='size-5' />,
-      label: 'Theme settings',
+      icon: <Palette className='size-5' />,
+      label: 'Theme',
       active: themeOpen,
       onClick: () => setThemeOpen(true),
+    }
+
+    const appearanceAction: DockAction = {
+      type: 'button',
+      id: 'appearance',
+      icon: isDark ? <Sun className='size-5' /> : <Moon className='size-5' />,
+      label: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+      onClick: toggleTheme,
     }
 
     const topAction: DockAction = {
@@ -104,10 +115,18 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
     }
 
     if (variant === 'landing') {
-      return sidebarRef ? [topAction, themeAction, menuAction] : [topAction, themeAction]
+      return sidebarRef
+        ? [topAction, themeAction, appearanceAction, menuAction]
+        : [topAction, themeAction, appearanceAction]
     }
 
-    const docsActions: DockAction[] = [topAction, themeAction, { type: 'divider', id: 'divider' }, menuAction]
+    const docsActions: DockAction[] = [
+      topAction,
+      themeAction,
+      appearanceAction,
+      { type: 'divider', id: 'divider' },
+      menuAction,
+    ]
 
     if (toc.length > 0 && !isTocAsideVisible) {
       docsActions.push({
@@ -120,12 +139,12 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
     }
 
     return docsActions
-  }, [variant, isDark, themeOpen, sidebarRef, toc.length, isTocAsideVisible])
+  }, [variant, isDark, themeOpen, setThemeOpen, toggleTheme, sidebarRef, toc.length, isTocAsideVisible])
 
   return (
     <>
       <FloatingDock actions={actions} />
-      <ThemeConfigOffcanvas onOpenChange={setThemeOpen} open={themeOpen} />
+      <ThemeConfigOffcanvas />
     </>
   )
 }

@@ -1,11 +1,13 @@
+import { Button } from '@polyms/ui-kit'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { cssColorToHex } from '../../stores/brand-ramp'
+import { useThemeStore } from '../../stores/theme.store'
 import {
+  type CatalogToken,
   collectDesignTokens,
   groupComponentTokens,
   readCssModule,
   typeSizePx,
-  type CatalogToken,
   type VariantSection,
 } from './design-tokens'
 
@@ -41,7 +43,7 @@ function tokenByName(tokens: CatalogToken[], name: string) {
   return tokens.find(token => token.name === name)
 }
 
-function displayValue(value: string | undefined) {
+function displayValue(value: string | null | undefined) {
   if (!value || /theme\(\s*colors\./.test(value)) return null
   return value
 }
@@ -99,7 +101,7 @@ function Swatch({ name }: { name: string }) {
   return (
     <span
       aria-hidden
-      className='inline-block size-8 shrink-0 rounded-md outline -outline-offset-1 outline-black/10'
+      className='inline-block size-8 shrink-0 rounded-md outline outline-black/10 -outline-offset-1'
       style={{ backgroundColor: `var(${name})` }}
     />
   )
@@ -114,7 +116,7 @@ function ColorRampSwatch({ hex, name, step }: { hex: string | null; name: string
   return (
     <div className='min-w-0 text-center'>
       <div
-        className='h-10 rounded-md outline -outline-offset-1 outline-black/10'
+        className='h-10 rounded-md outline outline-black/10 -outline-offset-1'
         data-color-token={name}
         style={{ backgroundColor: `var(${name})` }}
         title={name}
@@ -248,8 +250,13 @@ function TypeScale() {
 }
 
 function PrimitiveTokens() {
+  const setThemeOpen = useThemeStore(state => state.setOpen)
+
   return (
     <div className='space-y-8'>
+      <Button onClick={() => setThemeOpen(true)} size='sm' variant='primary'>
+        Theme
+      </Button>
       <ColorRamps />
       <Elevation />
       <Motion />
@@ -411,7 +418,7 @@ function ComponentTable({ tokens }: { tokens: CatalogToken[] }) {
                   ) : null}
                 </tr>
               )
-            }),
+            })
           )}
         </tbody>
       </table>

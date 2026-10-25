@@ -5,30 +5,178 @@ title: Design Tokens
 
 import DesignTokens from './-views/DesignTokens.tsx'
 
-**Polyms UI Kit** names the values it uses for color, type, elevation, motion, and stacking. Some names store a raw value. Others point at a name that already has one. You change a name, and everything that points at it follows.
+**Polyms UI Kit** exposes color, type, elevation, motion, and stacking as CSS custom properties. After you import the package styles, those names are live in the browser. Change one in your app CSS, or try a value in DevTools, and every rule that reads it updates. You do not rebuild the library.
 
-The three sections below follow that path, from a general scale to a single component. Primitive tokens are the scales. Semantic tokens say what a value is for, and they point at a scale. Component tokens are the properties one component reads.
+The names are unprefixed: `--color-primary-500`, `--body`, `--alert-bg`. Some store a raw value. Others point at a name that already has one. Change a name, and everything that points at it follows.
 
-## 1. Primitive
+## How the layers connect
 
-These are the raw scales. Primary, success, info, danger, and warning each run from step 50 to step 950. The hex under a swatch is the color that step resolves to right now. Elevation uses `--shadow-*`, motion uses `--animate-fade-zoom-*`, and the type scale runs from `h1` to `h6`. The heading scale lists the pixel size of each step on a phone, a tablet, and a desktop.
+A screen color travels through four layers, from a general scale to a single control.
 
-Look here when you want the source of a value. Primary step 700 is the brand emphasis color. Change a step when everything that still points at that step should move with it. For a new brand color, remap the primary ramp.
+1. **Primitive** tokens are the scales. `--color-primary-50` through `--color-primary-950`, and the same steps for success, info, warning, danger, and neutral, are the source colors. A step on its own does not style a component. Elevation uses `--shadow-*`, motion uses `--animate-fade-zoom-*`, and the type scale runs from `h1` to `h6`.
+2. **Semantic** tokens name a job for the whole page. Surfaces — `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, and `--input` — each have a light value on `:root` and a dark value under `.dark`. Stacking tokens such as `--zindex-modal` and `--zindex-tooltip` name overlay order. Each surface also has a `--color-*` alias (`--color-body`, `--color-fg`, and the rest) so utilities such as `bg-body` and `text-fg` stay on the same value.
+3. **Component** tokens are the properties one component reads, such as `--btn-*` on a button and `--alert-*` on an alert. They usually point at a semantic token or a primitive step, so the component stays with the rest of the product. A variant does not invent new names. It assigns different values to the same properties. A primary alert and a danger alert both use `--alert-bg`, `--alert-border`, and `--alert-color`. On a light surface the primary alert points those three at steps 50, 600, and 700. Under `.dark` the same three names switch to a `color-mix(in oklab, …)` wash, step 500, and step 200, so the alert stays readable on a dark page.
+4. **Classes and props** read those names. `Button variant='primary'` and `bg-primary-500` both resolve through the primary ramp. Set the ramp, and both move. Pass `variant` on each component. Each one reads its own tokens.
+
+## Which layer to edit
+
+Pick the layer that matches how far the change should travel.
+
+export const layerChoices = [
+  {
+    change: 'Brand color across the product',
+    tokens: ['--color-primary-50', '--color-primary-950'],
+    separator: '…',
+    follows: 'Buttons, links, item-primary, and alerts that read the primary ramp',
+  },
+  {
+    change: 'Page background, text, and dividers',
+    tokens: ['--body', '--fg', '--surface', '--surface-2', '--muted', '--line', '--input'],
+    follows: 'Shells, cards, inputs, and muted copy in both light and .dark',
+  },
+  {
+    change: 'One component’s padding or fill',
+    tokens: ['--btn-padding-x', '--alert-bg'],
+    note: 'and the other properties on that component',
+    follows: 'Only elements that use that component class',
+  },
+  {
+    change: 'Overlay order',
+    tokens: ['--zindex-modal', '--zindex-tooltip'],
+    note: ['and the other ', { token: '--zindex-*' }, ' names'],
+    follows: 'Modal, offcanvas, popover, tooltip, and toast stacking',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Change</th>
+        <th className='w-px'>Edit</th>
+        <th>What follows</th>
+      </tr>
+    </thead>
+    <tbody>
+      {layerChoices.map((row, index) => (
+        <tr key={index}>
+          <td className='text-nowrap font-medium text-fg'>{row.change}</td>
+          <td>
+            <div className='flex flex-col gap-0.5'>
+              {row.tokens.map((token, tokenIndex) => (
+                <span key={token} className='contents'>
+                  {row.separator && tokenIndex > 0 ? <span className='text-xs'>{row.separator}</span> : null}
+                  <code className='w-fit whitespace-nowrap text-xs'>{token}</code>
+                </span>
+              ))}
+              {row.note ? (
+                <span className='min-w-0 text-xs'>
+                  {typeof row.note === 'string'
+                    ? row.note
+                    : row.note.map((part, partIndex) =>
+                        typeof part === 'string' ? (
+                          <span key={partIndex}>{part}</span>
+                        ) : (
+                          <code key={part.token} className='whitespace-nowrap text-xs'>
+                            {part.token}
+                          </code>
+                        )
+                      )}
+                </span>
+              ) : null}
+            </div>
+          </td>
+          <td className='text-muted text-sm'>{row.follows}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+Remap every primary step when the brand should change together. `--color-primary-500` alone updates rules that read step 500. Hover, pale backgrounds, and alert text still read steps 50, 600, and 700, so those parts keep the previous color. The same split applies inside a component: `--alert-bg` and `--alert-color` are separate names. Changing the background leaves the text on its old step until you set that name too.
+
+For product rules — which step to use for text, fills, and borders — see [Design System](/design-system).
+
+## Primitive scales
+
+These are the raw scales. Primary, success, info, danger, and warning each run from step 50 to step 950. The hex under a swatch is the color that step resolves to right now. Elevation, motion, and the heading scale are listed here as well. The heading scale shows the pixel size of each step on a phone, a tablet, and a desktop.
+
+Look here when you want the source of a value. Primary step 700 is the emphasis color for text on a pale wash. Change a step when everything that still points at that step should move with it. For a new brand color, remap the whole primary ramp.
 
 <DesignTokens level='primitive' />
 
-## 2. Semantic
+## Semantic roles
 
-This layer names a purpose and points at a primitive. Surfaces (body, fg, surface, surface-2, muted, line, and input) each have a light value and a dark value, plus a `--color-*` alias. Z-index tokens name stacking layers, such as `--zindex-modal` and `--zindex-tooltip`.
+This layer names a purpose. Surfaces each have a light value and a dark value, plus a `--color-*` alias. Z-index tokens name stacking layers.
 
-Edit a semantic token when the whole product should change together: a new page background, or a higher modal. For a new brand color, remap the primary ramp, including step 700. Color ramps stay on the primitive steps, such as success step 500.
+Edit a semantic token when the whole product should change together: a new page background, or a higher modal. For a new brand color, remap the primary ramp, including step 700. Status colors stay on their own primitive steps, such as success step 500.
+
+export const surfacePairings = [
+  {
+    preview: 'border border-line bg-body text-fg',
+    pair: 'text-fg on bg-body',
+    use: 'Page canvas and default copy',
+  },
+  {
+    preview: 'border border-line bg-surface text-muted',
+    pair: 'text-muted on bg-surface',
+    use: 'Captions and secondary text on cards and panels',
+  },
+  {
+    preview: 'border border-line bg-surface-2 text-fg',
+    pair: 'text-fg on bg-surface-2',
+    use: 'Menus, popovers, and other elevated layers',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Preview</th>
+        <th className='w-px'>Pair</th>
+        <th>Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      {surfacePairings.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <div className={`${row.preview} rounded-lg px-3 py-2 text-sm`}>Aa</div>
+          </td>
+          <td>
+            <code className='text-nowrap text-xs'>{row.pair}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.use}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+`border-line` is the divider for those surfaces. The same class names follow `.dark`, because the underlying tokens change with the mode. Check both modes after you override a surface. Defaults, setup, and utilities are on [Dark mode](/docs/dark-mode).
 
 <DesignTokens level='semantic' />
 
-## 3. Component
+## Component properties
 
-These are the custom properties one component reads, such as `--btn-*` on a button and `--alert-*` on an alert. They usually point at a semantic token or a primitive step, so the component stays with the rest of the product. A variant does not invent new token names. It assigns different values to the same properties. A primary alert and a danger alert both use `--alert-bg`, `--alert-border`, and `--alert-color`.
+These are the custom properties one component reads. They are set on that component’s class, so an override stays local. You can change padding or a fill here when the shared ramp should stay as it is.
 
-Edit a component token only when that one component should differ. If the whole product should take a new brand color, remap the primary ramp instead. Some components below have a default table plus variant groups. Some have only one table. When a default table is shown, that is what the component uses before a variant.
+```css
+.toolbar .btn {
+  --btn-padding-x: 0.375rem;
+  --btn-padding-y: 0.25rem;
+}
+
+.banner.alert-primary {
+  --alert-bg: var(--color-primary-100);
+  --alert-border: var(--color-primary-600);
+  --alert-color: var(--color-primary-800);
+}
+```
+
+The button snippet only affects buttons inside `.toolbar`. The alert snippet only affects a primary alert that also has `.banner`. Alert padding is not a token. Color, border, and text are.
+
+Edit a component token when that one component should differ. When the whole product should take a new brand color, remap the primary ramp instead. Some components below have a default table plus variant groups. Some have only one table. When a default table is shown, that is what the component uses before a variant.
 
 <DesignTokens level='component' />

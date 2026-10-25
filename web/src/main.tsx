@@ -9,9 +9,9 @@ const router = createRouter({
   routeTree,
   basepath: '/',
   defaultPreload: 'intent',
-  defaultErrorComponent: ({ error }: { error: Error }) => {
-    // Render an error message
-    return <div>{error.message}</div>
+  defaultErrorComponent: ({ error }) => {
+    const message = error instanceof Error ? error.message : 'Something went wrong'
+    return <div>{message}</div>
   },
 })
 root.render(

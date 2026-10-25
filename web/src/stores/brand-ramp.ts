@@ -1,4 +1,4 @@
-import type { ColorStep } from './brand.store'
+import type { ColorStep } from './theme.store'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -97,8 +97,15 @@ function computedColorToHex(computed: string) {
   const oklch = computed.match(/oklch\(\s*(-?[\d.]+%?)\s+(-?[\d.]+)\s+(-?[\d.]+)/)
   if (!oklch) return null
 
-  const lightness = oklch[1].endsWith('%') ? Number(oklch[1].slice(0, -1)) / 100 : Number(oklch[1])
-  const [red, green, blue] = oklchToSrgb(lightness, Number(oklch[2]), Number(oklch[3]))
+  const lightnessRaw = oklch[1]
+  const chromaRaw = oklch[2]
+  const hueRaw = oklch[3]
+  if (lightnessRaw == null || chromaRaw == null || hueRaw == null) return null
+
+  const lightness = lightnessRaw.endsWith('%')
+    ? Number(lightnessRaw.slice(0, -1)) / 100
+    : Number(lightnessRaw)
+  const [red, green, blue] = oklchToSrgb(lightness, Number(chromaRaw), Number(hueRaw))
   return channelsToHex(red, green, blue)
 }
 
@@ -109,7 +116,7 @@ function channelsToHex(red: number, green: number, blue: number) {
   return `#${channels.join('')}`
 }
 
-function oklchToSrgb(l: number, c: number, h: number) {
+function oklchToSrgb(l: number, c: number, h: number): [number, number, number] {
   const hue = (h * Math.PI) / 180
   const a = c * Math.cos(hue)
   const b = c * Math.sin(hue)
@@ -159,13 +166,16 @@ function srgbToLinear(channel: number) {
 }
 
 function curveT(stops: readonly number[], distance: number, count: number) {
-  if (count === stops.length) return stops[distance - 1]
-  if (count <= 1) return stops[stops.length - 1]
+  const last = stops.at(-1) ?? 0
+  if (count === stops.length) return stops[distance - 1] ?? last
+  if (count <= 1) return last
 
   const pos = ((distance - 1) / (count - 1)) * (stops.length - 1)
   const index = Math.min(Math.floor(pos), stops.length - 1)
   const next = Math.min(index + 1, stops.length - 1)
-  return stops[index] + (stops[next] - stops[index]) * (pos - index)
+  const start = stops[index] ?? last
+  const end = stops[next] ?? start
+  return start + (end - start) * (pos - index)
 }
 
 function mix(from: number, to: number, amount: number) {
