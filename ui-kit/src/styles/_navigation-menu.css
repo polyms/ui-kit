@@ -203,7 +203,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-primary-700);
     outline-offset: -1px;
   }
 
@@ -220,26 +220,26 @@
   @media (hover: hover) {
     &:hover {
       color: var(--color-danger-700);
-      background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
+      background-color: color-mix(in oklab, var(--color-danger-500) 10%, transparent);
     }
   }
 
   &:focus-visible {
     color: var(--color-danger-700);
-    outline-color: var(--color-danger);
-    background-color: color-mix(in oklab, var(--color-danger) 10%, transparent);
+    outline-color: var(--color-danger-500);
+    background-color: color-mix(in oklab, var(--color-danger-500) 10%, transparent);
   }
 
   &[data-active] {
     color: var(--color-danger-700);
-    background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
+    background-color: color-mix(in oklab, var(--color-danger-500) 15%, transparent);
   }
 }
 
 /* Variant: soft — primary-tinted card-style item with dashed→solid border on hover/focus/active. */
 .navigation-menu-link-soft {
-  background-color: color-mix(in oklab, var(--color-primary) 5%, transparent);
-  border: 1px dashed color-mix(in oklab, var(--color-primary) 30%, transparent);
+  background-color: color-mix(in oklab, var(--color-primary-700) 5%, transparent);
+  border: 1px dashed color-mix(in oklab, var(--color-primary-700) 30%, transparent);
   border-radius: 0.75rem;
   transition:
     background-color 200ms ease,
@@ -248,23 +248,23 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
-      border-color: var(--color-primary);
+      background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
+      border-color: var(--color-primary-700);
       border-style: solid;
     }
   }
 
   &:focus-visible {
     outline: none;
-    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
-    border-color: var(--color-primary);
+    background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
+    border-color: var(--color-primary-700);
     border-style: solid;
   }
 
   &[data-active] {
     color: var(--color-primary-700);
-    background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
-    border-color: var(--color-primary);
+    background-color: color-mix(in oklab, var(--color-primary-700) 15%, transparent);
+    border-color: var(--color-primary-700);
     border-style: solid;
   }
 }
@@ -417,18 +417,18 @@
     @media (hover: hover) {
       &:hover {
         color: var(--color-primary-300);
-        background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
+        background-color: color-mix(in oklab, var(--color-primary-700) 15%, transparent);
       }
     }
 
     &[data-popup-open] {
       color: var(--color-primary-300);
-      background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+      background-color: color-mix(in oklab, var(--color-primary-700) 20%, transparent);
     }
 
     &:focus-visible {
       color: var(--color-primary-300);
-      background-color: color-mix(in oklab, var(--color-primary) 15%, transparent);
+      background-color: color-mix(in oklab, var(--color-primary-700) 15%, transparent);
     }
   }
 
@@ -447,41 +447,41 @@
     @media (hover: hover) {
       &:hover {
         color: var(--color-danger-200);
-        background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
+        background-color: color-mix(in oklab, var(--color-danger-500) 15%, transparent);
       }
     }
 
     &:focus-visible {
       color: var(--color-danger-200);
       outline-color: var(--color-danger-400);
-      background-color: color-mix(in oklab, var(--color-danger) 15%, transparent);
+      background-color: color-mix(in oklab, var(--color-danger-500) 15%, transparent);
     }
 
     &[data-active] {
       color: var(--color-danger-200);
-      background-color: color-mix(in oklab, var(--color-danger) 20%, transparent);
+      background-color: color-mix(in oklab, var(--color-danger-500) 20%, transparent);
     }
   }
 
   .navigation-menu-link-soft {
-    background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
-    border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+    background-color: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
+    border-color: color-mix(in oklab, var(--color-primary-700) 40%, transparent);
 
     @media (hover: hover) {
       &:hover {
-        background-color: color-mix(in oklab, var(--color-primary) 18%, transparent);
+        background-color: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
         border-color: var(--color-primary-400);
       }
     }
 
     &:focus-visible {
-      background-color: color-mix(in oklab, var(--color-primary) 18%, transparent);
+      background-color: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
       border-color: var(--color-primary-400);
     }
 
     &[data-active] {
       color: var(--color-primary-300);
-      background-color: color-mix(in oklab, var(--color-primary) 24%, transparent);
+      background-color: color-mix(in oklab, var(--color-primary-700) 24%, transparent);
       border-color: var(--color-primary-400);
     }
   }

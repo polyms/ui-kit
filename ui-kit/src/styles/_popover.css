@@ -29,7 +29,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 2px solid var(--color-primary-700);
     outline-offset: -1px;
   }
 }

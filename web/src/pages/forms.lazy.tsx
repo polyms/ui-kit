@@ -590,7 +590,7 @@ function FormsPage() {
               )}")`,
             }}
           />
-          <div className='absolute -top-20 left-1/3 h-96 w-96 rounded-full bg-primary/10 blur-3xl' />
+          <div className='absolute -top-20 left-1/3 h-96 w-96 rounded-full bg-primary-700/10 blur-3xl' />
           <div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-slate-300/30 blur-3xl dark:bg-slate-700/30' />
         </div>
 

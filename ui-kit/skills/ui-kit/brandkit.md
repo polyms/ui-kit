@@ -54,7 +54,7 @@ Infer before touching tokens:
 | Token family                                                                           | Role                                           | Override pattern                                  |
 | -------------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------- |
 | `--color-primary-50` … `--color-primary-950`                                           | Brand accent ramp                              | Remap steps to brand hue; keep 11-step scale      |
-| `--color-primary` / `--color-primary-700`                                              | Links, buttons, `item-primary`, focus emphasis | Usually tracks `primary-700`                      |
+| `--color-primary-700`                                                                  | Links, buttons, `item-primary`, focus emphasis | Brand emphasis step on the primary ramp           |
 | Optional: `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input` | Page chrome                                    | Tune for brand warmth; test light **and** `.dark` |
 
 ### What stays semantic (do not remap per brand whims)

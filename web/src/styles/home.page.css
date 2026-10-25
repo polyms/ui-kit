@@ -35,7 +35,7 @@
 }
 
 .home-nav-tag {
-  @apply inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-medium tracking-wider text-primary-300 uppercase;
+  @apply inline-flex items-center rounded-full border border-primary-700/30 bg-primary-700/10 px-2 py-0.5 text-[10px] font-medium tracking-wider text-primary-300 uppercase;
 }
 
 .home-nav-link {
@@ -75,7 +75,7 @@
 }
 
 .home-hero-pill:hover {
-  @apply border-primary/40 text-primary-300;
+  @apply border-primary-700/40 text-primary-300;
 }
 
 .home-hero-pill .arrow {
@@ -97,7 +97,7 @@
 .home-hero-pulse::before,
 .home-hero-pulse::after {
   content: '';
-  @apply inline-flex rounded-full bg-primary;
+  @apply inline-flex rounded-full bg-primary-700;
 }
 
 .home-hero-pulse::before {
@@ -196,7 +196,7 @@
 /* ── Section header ──────────────────────────────────────────────────────────────────────────────────── */
 
 .home-section-eyebrow {
-  @apply inline-flex items-center gap-2 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-primary/20 bg-primary/10 px-5 py-1.5 text-xs font-bold tracking-widest uppercase text-primary-300;
+  @apply inline-flex items-center gap-2 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-primary-700/20 bg-primary-700/10 px-5 py-1.5 text-xs font-bold tracking-widest uppercase text-primary-300;
 }
 
 /* ── Showcase card (white card on dark bg) ───────────────────────────────────────────────────────────── */
@@ -206,7 +206,7 @@
 }
 
 .home-showcase-card:hover {
-  @apply -translate-y-2 border-primary/40 shadow-2xl shadow-primary/10;
+  @apply -translate-y-2 border-primary-700/40 shadow-2xl shadow-primary-700/10;
 }
 
 .home-showcase-card-footer {
@@ -276,7 +276,7 @@
 }
 
 .home-cta-pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-primary/30 bg-slate-950/60 px-3 py-1 text-xs font-medium text-primary-300 backdrop-blur-sm;
+  @apply inline-flex items-center gap-2 rounded-full border border-primary-700/30 bg-slate-950/60 px-3 py-1 text-xs font-medium text-primary-300 backdrop-blur-sm;
 }
 
 .home-cta-accent {

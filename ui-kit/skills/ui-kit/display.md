@@ -200,7 +200,7 @@ Loading indicator for async operations — pair with disabled buttons or skeleto
 import { Spinner } from '@polyms/ui-kit'
 
 <Spinner />
-<Spinner className='text-primary' size={24} />
+<Spinner className='text-primary-700' size={24} />
 ```
 
 | Prop                 | Notes                                                              |

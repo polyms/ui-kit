@@ -62,9 +62,9 @@ function BackgroundDecor() {
   return (
     <div aria-hidden='true' className='home-decor'>
       <div className='home-decor-grid' />
-      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -translate-x-1/2 bg-primary/25' />
-      <div className='home-decor-glow top-160 -left-40 h-96 w-96 bg-primary/10' />
-      <div className='home-decor-glow top-320 -right-40 h-112 w-md bg-primary/10' />
+      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -translate-x-1/2 bg-primary-700/25' />
+      <div className='home-decor-glow top-160 -left-40 h-96 w-96 bg-primary-700/10' />
+      <div className='home-decor-glow top-320 -right-40 h-112 w-md bg-primary-700/10' />
     </div>
   )
 }
@@ -494,24 +494,24 @@ function ThemingSection() {
             </p>
             <ul className='mt-8 space-y-4 text-slate-300'>
               <li className='flex items-center gap-3'>
-                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-400'>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-700/10 text-primary-400'>
                   <Palette className='size-4' />
                 </div>
                 <span>No complex CSS-in-JS configurations</span>
               </li>
               <li className='flex items-center gap-3'>
-                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-400'>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-700/10 text-primary-400'>
                   <MagicStick3 className='size-4' />
                 </div>
                 <span>Tailwind CSS v4 ready out of the box</span>
               </li>
               <li className='flex items-center gap-3'>
-                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary-400'>
+                <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-700/10 text-primary-400'>
                   <Layers className='size-4' />
                 </div>
                 <span>
                   Dynamic colors via{' '}
-                  <code className='rounded bg-primary/10 px-1 py-0.5 text-primary-300 text-xs'>
+                  <code className='rounded bg-primary-700/10 px-1 py-0.5 text-primary-300 text-xs'>
                     color-mix()
                   </code>
                 </span>
@@ -519,7 +519,7 @@ function ThemingSection() {
             </ul>
           </div>
           <div className='relative'>
-            <div className='home-example-card border-primary/20 shadow-2xl shadow-primary/5'>
+            <div className='home-example-card border-primary-700/20 shadow-2xl shadow-primary-700/5'>
               <div className='home-example-card-header'>
                 <span className='home-dot close' />
                 <span className='home-dot minimize' />
@@ -772,9 +772,9 @@ function CTASection() {
         <div className='home-cta'>
           <div
             aria-hidden='true'
-            className='home-decor-glow top-0 left-1/2 h-72 w-xl -translate-x-1/2 bg-primary/20'
+            className='home-decor-glow top-0 left-1/2 h-72 w-xl -translate-x-1/2 bg-primary-700/20'
           />
-          <div aria-hidden='true' className='home-decor-glow right-0 -bottom-32 h-72 w-72 bg-primary/10' />
+          <div aria-hidden='true' className='home-decor-glow right-0 -bottom-32 h-72 w-72 bg-primary-700/10' />
           <div className='relative grid items-end gap-8 md:grid-cols-[1fr_auto]'>
             <div>
               <span className='home-cta-pill'>

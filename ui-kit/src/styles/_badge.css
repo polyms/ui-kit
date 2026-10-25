@@ -25,31 +25,31 @@
 /* Badge Variants */
 .badge-primary {
   --badge-border: var(--color-primary-600);
-  --badge-bg: color-mix(in oklab, var(--color-primary) 10%, transparent);
+  --badge-bg: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
   --badge-color: var(--color-primary-600);
 }
 
 .badge-success {
   --badge-border: var(--color-success-600);
-  --badge-bg: color-mix(in oklab, var(--color-success) 10%, transparent);
+  --badge-bg: color-mix(in oklab, var(--color-success-500) 10%, transparent);
   --badge-color: var(--color-success-500);
 }
 
 .badge-info {
   --badge-border: var(--color-info-600);
-  --badge-bg: color-mix(in oklab, var(--color-info) 10%, transparent);
+  --badge-bg: color-mix(in oklab, var(--color-info-500) 10%, transparent);
   --badge-color: var(--color-info-600);
 }
 
 .badge-warning {
   --badge-border: var(--color-warning-600);
-  --badge-bg: color-mix(in oklab, var(--color-warning) 10%, transparent);
+  --badge-bg: color-mix(in oklab, var(--color-warning-500) 10%, transparent);
   --badge-color: var(--color-warning-700);
 }
 
 .badge-danger {
   --badge-border: var(--color-danger-600);
-  --badge-bg: color-mix(in oklab, var(--color-danger) 10%, transparent);
+  --badge-bg: color-mix(in oklab, var(--color-danger-500) 10%, transparent);
   --badge-color: var(--color-danger-700);
 }
 
@@ -69,31 +69,31 @@
 .dark {
   .badge-primary {
     --badge-border: var(--color-primary-500);
-    --badge-bg: color-mix(in oklab, var(--color-primary) 18%, transparent);
+    --badge-bg: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
     --badge-color: var(--color-primary-200);
   }
 
   .badge-success {
     --badge-border: var(--color-success-500);
-    --badge-bg: color-mix(in oklab, var(--color-success) 18%, transparent);
+    --badge-bg: color-mix(in oklab, var(--color-success-500) 18%, transparent);
     --badge-color: var(--color-success-200);
   }
 
   .badge-info {
     --badge-border: var(--color-info-500);
-    --badge-bg: color-mix(in oklab, var(--color-info) 18%, transparent);
+    --badge-bg: color-mix(in oklab, var(--color-info-500) 18%, transparent);
     --badge-color: var(--color-info-200);
   }
 
   .badge-warning {
     --badge-border: var(--color-warning-500);
-    --badge-bg: color-mix(in oklab, var(--color-warning) 18%, transparent);
+    --badge-bg: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
     --badge-color: var(--color-warning-200);
   }
 
   .badge-danger {
     --badge-border: var(--color-danger-500);
-    --badge-bg: color-mix(in oklab, var(--color-danger) 18%, transparent);
+    --badge-bg: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
     --badge-color: var(--color-danger-200);
   }
 }

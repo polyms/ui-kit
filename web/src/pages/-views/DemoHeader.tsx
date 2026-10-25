@@ -115,11 +115,11 @@ const quickActions: ActionTile[] = [
 ]
 
 const recentRecipients: Recipient[] = [
-  { initials: 'NH', name: 'Ngọc Hà', tone: 'bg-primary/15 text-primary' },
-  { initials: 'TM', name: 'Tuấn Minh', tone: 'bg-warning/15 text-warning' },
-  { initials: 'AT', name: 'Anh Thư', tone: 'bg-success/15 text-success' },
-  { initials: 'KD', name: 'Khánh Duy', tone: 'bg-info/15 text-info' },
-  { initials: 'LP', name: 'Linh Phương', tone: 'bg-danger/15 text-danger' },
+  { initials: 'NH', name: 'Ngọc Hà', tone: 'bg-primary-700/15 text-primary-700' },
+  { initials: 'TM', name: 'Tuấn Minh', tone: 'bg-warning-500/15 text-warning-500' },
+  { initials: 'AT', name: 'Anh Thư', tone: 'bg-success-500/15 text-success-500' },
+  { initials: 'KD', name: 'Khánh Duy', tone: 'bg-info-500/15 text-info-500' },
+  { initials: 'LP', name: 'Linh Phương', tone: 'bg-danger-500/15 text-danger-500' },
 ]
 
 const recentTransfers: Transfer[] = [
@@ -131,8 +131,8 @@ const recentTransfers: Transfer[] = [
 const portfolioBars = [42, 56, 49, 64, 58, 72, 68, 81]
 
 const allocations: Allocation[] = [
-  { label: 'Stocks', weight: 60, bar: 'bg-primary', value: '$29,035.32' },
-  { label: 'Bonds', weight: 25, bar: 'bg-success', value: '$12,098.05' },
+  { label: 'Stocks', weight: 60, bar: 'bg-primary-700', value: '$29,035.32' },
+  { label: 'Bonds', weight: 25, bar: 'bg-success-500', value: '$12,098.05' },
   { label: 'Cash', weight: 15, bar: 'bg-slate-400', value: '$7,258.83' },
 ]
 
@@ -163,7 +163,7 @@ export const Header = () => {
                     <span className='text-[11px] text-white/60 uppercase tracking-wider'>Total balance</span>
                     <span className='font-semibold text-white text-xl'>$45,499.32</span>
                   </div>
-                  <span className='inline-flex items-center gap-1 rounded-full bg-success/20 px-2 py-0.5 font-medium text-[11px] text-success-300'>
+                  <span className='inline-flex items-center gap-1 rounded-full bg-success-500/20 px-2 py-0.5 font-medium text-[11px] text-success-300'>
                     <HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
                     +1.24% today
                   </span>
@@ -176,11 +176,11 @@ export const Header = () => {
                         <span
                           className={`flex size-9 items-center justify-center rounded-lg ${
                             row.tone === 'primary'
-                              ? 'bg-primary/10 text-primary'
+                              ? 'bg-primary-700/10 text-primary-700'
                               : row.tone === 'success'
-                                ? 'bg-success/10 text-success'
+                                ? 'bg-success-500/10 text-success-500'
                                 : row.tone === 'warning'
-                                  ? 'bg-warning/10 text-warning'
+                                  ? 'bg-warning-500/10 text-warning-500'
                                   : 'bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'
                           }`}
                         >
@@ -265,7 +265,7 @@ export const Header = () => {
                   </li>
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#add'>
-                      <span className='flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary'>
+                      <span className='flex size-8 items-center justify-center rounded-md bg-primary-700/10 text-primary-700'>
                         <HugeiconsIcon icon={Add01Icon} size={15} strokeWidth={2.25} />
                       </span>
                       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
@@ -276,7 +276,7 @@ export const Header = () => {
                   </li>
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#limits'>
-                      <span className='flex size-8 items-center justify-center rounded-md bg-warning/10 text-warning'>
+                      <span className='flex size-8 items-center justify-center rounded-md bg-warning-500/10 text-warning-500'>
                         <HugeiconsIcon icon={PercentSquareIcon} size={15} strokeWidth={2} />
                       </span>
                       <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
@@ -316,7 +316,7 @@ export const Header = () => {
                       key={action.href}
                       variant='soft'
                     >
-                      <span className='flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary'>
+                      <span className='flex size-9 items-center justify-center rounded-lg bg-primary-700/10 text-primary-700'>
                         <HugeiconsIcon icon={action.icon} size={16} strokeWidth={2} />
                       </span>
                       <span className='flex flex-col gap-0.5'>
@@ -361,7 +361,7 @@ export const Header = () => {
                           <span className='flex items-center justify-between gap-2 font-medium text-sm'>
                             <span className='truncate'>{t.who}</span>
                             <span
-                              className={`shrink-0 tabular-nums ${t.positive ? 'text-success' : 'text-slate-900 dark:text-fg'}`}
+                              className={`shrink-0 tabular-nums ${t.positive ? 'text-success-500' : 'text-slate-900 dark:text-fg'}`}
                             >
                               {t.amount}
                             </span>
@@ -391,7 +391,7 @@ export const Header = () => {
                         $48,392.20
                       </span>
                     </div>
-                    <span className='inline-flex items-center gap-1 rounded-full bg-success/15 px-2 py-0.5 font-semibold text-[11px] text-success-700 tabular-nums'>
+                    <span className='inline-flex items-center gap-1 rounded-full bg-success-500/15 px-2 py-0.5 font-semibold text-[11px] text-success-700 tabular-nums'>
                       <HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
                       +2.34%
                     </span>
@@ -400,7 +400,7 @@ export const Header = () => {
                   <div className='flex h-12 items-end gap-1'>
                     {portfolioBars.map((h, i) => (
                       <span
-                        className='flex-1 rounded-sm bg-primary/30'
+                        className='flex-1 rounded-sm bg-primary-700/30'
                         // biome-ignore lint/suspicious/noArrayIndexKey: static decorative bars
                         key={i}
                         style={{ height: `${h}%` }}
@@ -446,7 +446,7 @@ export const Header = () => {
                   variant='soft'
                 >
                   <span className='flex items-center gap-2'>
-                    <HugeiconsIcon className='text-primary' icon={SavingsIcon} size={16} strokeWidth={2} />
+                    <HugeiconsIcon className='text-primary-700' icon={SavingsIcon} size={16} strokeWidth={2} />
                     <span className='font-medium text-sm'>Open a new portfolio</span>
                   </span>
                   <HugeiconsIcon icon={ArrowRight01Icon} size={14} strokeWidth={2.25} />

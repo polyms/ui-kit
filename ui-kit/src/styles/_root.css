@@ -1,6 +1,5 @@
 /** biome-ignore-all assist/source/useSortedProperties: biome sorts properties alphabetically */
 @theme {
-  --color-primary: var(--color-primary-700);
   --color-primary-50: theme(colors.cyan.50);
   --color-primary-100: theme(colors.cyan.100);
   --color-primary-200: theme(colors.cyan.200);
@@ -13,7 +12,6 @@
   --color-primary-900: theme(colors.cyan.900);
   --color-primary-950: theme(colors.cyan.950);
 
-  --color-success: var(--color-success-500);
   --color-success-50: theme(colors.emerald.50);
   --color-success-100: theme(colors.emerald.100);
   --color-success-200: theme(colors.emerald.200);
@@ -26,7 +24,6 @@
   --color-success-900: theme(colors.emerald.900);
   --color-success-950: theme(colors.emerald.950);
 
-  --color-info: var(--color-info-500);
   --color-info-50: theme(colors.orange.50);
   --color-info-100: theme(colors.orange.100);
   --color-info-200: theme(colors.orange.200);
@@ -39,7 +36,6 @@
   --color-info-900: theme(colors.orange.900);
   --color-info-950: theme(colors.orange.950);
 
-  --color-danger: var(--color-danger-500);
   --color-danger-50: theme(colors.rose.50);
   --color-danger-100: theme(colors.rose.100);
   --color-danger-200: theme(colors.rose.200);
@@ -52,7 +48,6 @@
   --color-danger-900: theme(colors.rose.900);
   --color-danger-950: theme(colors.rose.950);
 
-  --color-warning: var(--color-warning-500);
   --color-warning-50: theme(colors.amber.50);
   --color-warning-100: theme(colors.amber.100);
   --color-warning-200: theme(colors.amber.200);

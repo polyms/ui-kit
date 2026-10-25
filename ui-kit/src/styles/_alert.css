@@ -83,31 +83,31 @@
 .dark {
   .alert-primary {
     --alert-border: var(--color-primary-500);
-    --alert-bg: color-mix(in oklab, var(--color-primary) 18%, transparent);
+    --alert-bg: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
     --alert-color: var(--color-primary-200);
   }
 
   .alert-success {
     --alert-border: var(--color-success-500);
-    --alert-bg: color-mix(in oklab, var(--color-success) 18%, transparent);
+    --alert-bg: color-mix(in oklab, var(--color-success-500) 18%, transparent);
     --alert-color: var(--color-success-200);
   }
 
   .alert-info {
     --alert-border: var(--color-info-500);
-    --alert-bg: color-mix(in oklab, var(--color-info) 18%, transparent);
+    --alert-bg: color-mix(in oklab, var(--color-info-500) 18%, transparent);
     --alert-color: var(--color-info-200);
   }
 
   .alert-warning {
     --alert-border: var(--color-warning-500);
-    --alert-bg: color-mix(in oklab, var(--color-warning) 18%, transparent);
+    --alert-bg: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
     --alert-color: var(--color-warning-200);
   }
 
   .alert-danger {
     --alert-border: var(--color-danger-500);
-    --alert-bg: color-mix(in oklab, var(--color-danger) 18%, transparent);
+    --alert-bg: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
     --alert-color: var(--color-danger-200);
   }
 }

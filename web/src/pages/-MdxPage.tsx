@@ -69,7 +69,7 @@ export function MdxPage() {
           <h2 {...props} className={clsx('h2', props.className)} id={id}>
             <span className='link peer decoration-transparent'>{props.children}</span>
             <Icon
-              className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
+              className='ms-2 text-primary-700 opacity-0 transition-opacity peer-hover:opacity-100'
               icon={Unlink01Icon}
               size={16}
             />
@@ -83,7 +83,7 @@ export function MdxPage() {
           <h3 {...props} className={clsx('h3', props.className)} id={id}>
             <span className='link peer decoration-transparent'>{props.children}</span>
             <Icon
-              className='ms-2 text-primary opacity-0 transition-opacity peer-hover:opacity-100'
+              className='ms-2 text-primary-700 opacity-0 transition-opacity peer-hover:opacity-100'
               icon={Unlink01Icon}
               size={16}
             />

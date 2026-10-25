@@ -52,12 +52,12 @@ export default function APIReference() {
                   <span className='font-medium'>{prop.name}</span>
                   <span
                     className={clsx('font-mono text-sm', {
-                      'text-primary': prop.default !== '-',
+                      'text-primary-700': prop.default !== '-',
                     })}
                   >
                     {prop.default}
                   </span>
-                  <span className='font-mono text-primary text-xs'>{prop.values}</span>
+                  <span className='font-mono text-primary-700 text-xs'>{prop.values}</span>
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel className='accordion-panel'>

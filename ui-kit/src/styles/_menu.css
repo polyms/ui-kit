@@ -67,7 +67,7 @@
   }
 
   &.menu-danger {
-    color: var(--color-danger);
+    color: var(--color-danger-500);
 
     &[data-highlighted] {
       color: #fff;
@@ -78,7 +78,7 @@
     }
 
     &[data-highlighted]::before {
-      background-color: var(--color-danger);
+      background-color: var(--color-danger-500);
     }
   }
 }

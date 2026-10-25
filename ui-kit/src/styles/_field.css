@@ -51,7 +51,7 @@
   &.required {
     .field-label::after {
       margin-left: 0.25rem;
-      color: var(--color-danger);
+      color: var(--color-danger-500);
       content: '*';
     }
   }
@@ -159,7 +159,7 @@
   }
 
   .field.invalid &.field-control {
-    @apply border-danger-600/70 text-danger;
+    @apply border-danger-600/70 text-danger-500;
 
     &::placeholder {
       color: var(--color-danger-300);
@@ -231,7 +231,7 @@
   font-size: 0.75rem;
   line-height: 1.375rem;
   color: #fff;
-  background-color: var(--color-danger);
+  background-color: var(--color-danger-500);
   border-radius: 0.25rem;
 }
 

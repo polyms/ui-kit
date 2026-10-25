@@ -11,7 +11,7 @@
   }
 
   &:active {
-    color: var(--color-primary);
+    color: var(--color-primary-700);
   }
 
   &:visited {
@@ -68,7 +68,7 @@
   }
 
   &.link-danger {
-    color: var(--color-danger);
+    color: var(--color-danger-500);
 
     &:active {
       color: var(--color-danger-700);

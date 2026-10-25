@@ -72,8 +72,8 @@ function Page() {
               )}")`,
             }}
           />
-          <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl' />
-          <div className='absolute top-48 -right-20 h-72 w-72 rounded-full bg-primary/10 blur-3xl' />
+          <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -translate-x-1/2 rounded-full bg-primary-700/15 blur-3xl' />
+          <div className='absolute top-48 -right-20 h-72 w-72 rounded-full bg-primary-700/10 blur-3xl' />
           <div className='absolute top-80 -left-16 h-64 w-64 rounded-full bg-slate-300/40 blur-3xl dark:bg-slate-700/30' />
         </div>
 
@@ -99,7 +99,7 @@ function Page() {
 
             <div className='mt-8 flex flex-wrap items-center gap-3'>
               <Button
-                className='px-5 shadow-primary/20 shadow-sm'
+                className='px-5 shadow-primary-700/20 shadow-sm'
                 render={<Link to='/design-system' />}
                 rounded
                 size='lg'
@@ -132,7 +132,7 @@ function Page() {
                   )}
                   key={title}
                 >
-                  <div className='flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary-700 transition-colors group-hover:bg-primary/15 dark:bg-primary/20 dark:text-primary-300 dark:group-hover:bg-primary/25'>
+                  <div className='flex size-11 items-center justify-center rounded-xl bg-primary-700/10 text-primary-700 transition-colors group-hover:bg-primary-700/15 dark:bg-primary-700/20 dark:text-primary-300 dark:group-hover:bg-primary-700/25'>
                     <Icon className='size-6' />
                   </div>
                   <h2 className='mt-4 font-semibold text-fg text-lg tracking-tight'>{title}</h2>
@@ -142,7 +142,7 @@ function Page() {
             </div>
 
             <div className='mt-10 flex flex-col gap-6 rounded-2xl border border-slate-200/90 bg-linear-to-br from-white via-white to-slate-50/90 p-6 shadow-sm ring-1 ring-slate-100/80 md:flex-row md:items-start md:gap-8 md:p-8 dark:border-line dark:from-surface dark:via-surface dark:to-surface/80 dark:ring-line/40'>
-              <div className='flex size-12 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-primary dark:text-primary-50'>
+              <div className='flex size-12 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-primary-700 dark:text-primary-50'>
                 <Code2 className='size-7' />
               </div>
               <div className='min-w-0 flex-1'>

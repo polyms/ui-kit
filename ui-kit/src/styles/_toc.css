@@ -56,7 +56,7 @@
     &.is-primary {
       font-weight: 600;
       color: var(--color-primary-700);
-      background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+      background-color: color-mix(in oklab, var(--color-primary-700) 12%, transparent);
     }
 
     @media (hover: hover) {

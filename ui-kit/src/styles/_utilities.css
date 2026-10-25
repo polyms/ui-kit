@@ -73,14 +73,14 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-success-700);
-      background-color: color-mix(in oklab, var(--color-success) 12%, transparent);
+      background-color: color-mix(in oklab, var(--color-success-500) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-success-700);
-    background-color: color-mix(in oklab, var(--color-success) 18%, transparent);
+    background-color: color-mix(in oklab, var(--color-success-500) 18%, transparent);
   }
 }
 
@@ -91,14 +91,14 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-info-600);
-      background-color: color-mix(in oklab, var(--color-info) 12%, transparent);
+      background-color: color-mix(in oklab, var(--color-info-500) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-info-600);
-    background-color: color-mix(in oklab, var(--color-info) 18%, transparent);
+    background-color: color-mix(in oklab, var(--color-info-500) 18%, transparent);
   }
 }
 
@@ -109,14 +109,14 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-warning-600);
-      background-color: color-mix(in oklab, var(--color-warning) 12%, transparent);
+      background-color: color-mix(in oklab, var(--color-warning-500) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-warning-600);
-    background-color: color-mix(in oklab, var(--color-warning) 18%, transparent);
+    background-color: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
   }
 }
 
@@ -127,14 +127,14 @@
   &:hover {
     @media (hover: hover) {
       color: var(--color-danger-600);
-      background-color: color-mix(in oklab, var(--color-danger) 12%, transparent);
+      background-color: color-mix(in oklab, var(--color-danger-500) 12%, transparent);
     }
   }
 
   &:active,
   &.active {
     color: var(--color-danger-600);
-    background-color: color-mix(in oklab, var(--color-danger) 18%, transparent);
+    background-color: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
   }
 }
 
