@@ -7,36 +7,10 @@
   "// targets": "to see all targets run: nx show project ui-kit --web",
   "targets": {
     "build": {
-      "executor": "@nx/vite:build",
       "options": {
         "cwd": "ui-kit",
-        "outputPath": "dist/ui-kit"
-      },
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": [
-        "production",
-        "^production",
-        {
-          "externalDependencies": ["vite"]
-        }
-      ],
-      "outputs": ["{workspaceRoot}/dist/ui-kit"],
-      "metadata": {
-        "technologies": ["vite"],
-        "description": "Run Vite build",
-        "help": {
-          "command": "pnpm exec vite build --help",
-          "example": {
-            "options": {
-              "sourcemap": true,
-              "manifest": "manifest.json"
-            }
-          }
-        }
-      },
-      "configurations": {},
-      "parallelism": true
+        "outDir": "../dist/ui-kit"
+      }
     }
   }
 }

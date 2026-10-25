@@ -3,6 +3,13 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import matter from 'gray-matter'
+import type Typescript from 'typescript'
+import type {
+  CatalogToken,
+  collectDesignTokens,
+  DesignTokenCatalog,
+  groupComponentTokens,
+} from '../src/pages/-views/design-tokens.ts'
 
 // ── Paths ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -33,36 +40,9 @@ type JsxElement = {
 
 type PlainRow = Record<string, string | number | boolean | null>
 
-type CatalogToken = {
-  component: string
-  name: string
-  uses: { selector: string; value: string }[]
-}
-
-type VariantRow = { dark: string | null; light: string | null; name: string }
-
-type ComponentTokenLayout = {
-  defaults: CatalogToken[]
-  variants: { label: string; rows: VariantRow[] }[]
-}
-
-type TypeToken = {
-  className: string
-  fontSize: string
-  lineHeight: string
-  weight: string | null
-}
-
-type DesignTokenCatalog = {
-  component: CatalogToken[]
-  primitive: CatalogToken[]
-  semantic: CatalogToken[]
-  typeScale: TypeToken[]
-}
-
 type TokenModule = {
-  collectDesignTokens: (files: Record<string, string>) => DesignTokenCatalog
-  groupComponentTokens: (tokens: CatalogToken[]) => ComponentTokenLayout
+  collectDesignTokens: typeof collectDesignTokens
+  groupComponentTokens: typeof groupComponentTokens
 }
 
 type CatalogApi = {
@@ -604,7 +584,7 @@ function publicFileFor(route: string) {
 
 async function loadTokenCatalog() {
   const require = createRequire(path.join(repoRoot, 'package.json'))
-  const ts = require('typescript')
+  const ts: typeof Typescript = require('typescript')
   const source = fs.readFileSync(tokensModule, 'utf8')
   const compiled = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 },
@@ -653,7 +633,7 @@ function componentTokenMarkdown(
     list.push(token)
     groups.set(token.component, list)
   }
-  const chunks = []
+  const chunks: string[] = []
   for (const name of [...groups.keys()].sort((a, b) => a.localeCompare(b))) {
     const layout = groupComponentTokens(groups.get(name) ?? [])
     chunks.push(`### ${name || 'Component'}`)

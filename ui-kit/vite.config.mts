@@ -4,7 +4,7 @@ import { defineConfig, esmExternalRequirePlugin, type UserConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
-import pkg from './package.json'
+import pkg from './package.json' with { type: 'json' }
 
 // import federation from './plugins/module-federation.plugin'
 

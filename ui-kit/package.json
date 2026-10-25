@@ -1,7 +1,7 @@
 {
   "name": "@polyms/ui-kit",
   "version": "1.0.5",
-  "description": "Modular React 19 UI component library for the Polyms ecosystem \u2014 compound components, semantic theming, and Tailwind CSS 4 utilities.",
+  "description": "Modular React 19 UI component library for the Polyms ecosystem — compound components, semantic theming, and Tailwind CSS 4 utilities.",
   "license": "MIT",
   "author": "Polyms",
   "homepage": "https://github.com/polyms/ui-kit#readme",
@@ -28,10 +28,7 @@
   "bin": {
     "ui-kit-skill": "./scripts/add-skill.mjs"
   },
-  "sideEffects": [
-    "**/*.css",
-    "./styles/**"
-  ],
+  "sideEffects": ["**/*.css", "./styles/**"],
   "main": "./index.mjs",
   "module": "./index.mjs",
   "types": "./index.d.ts",
