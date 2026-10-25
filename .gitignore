@@ -106,7 +106,6 @@ vitest.config.*.timestamp*
 
 # Env & local config
 .env
-.npmrc
 
 # Coverage & docs build
 **/coverage/

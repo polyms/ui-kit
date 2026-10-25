@@ -17,7 +17,6 @@ doc_build
 # Env & secrets
 .env
 .env.*
-.npmrc
 
 # IDE / editor / OS
 .idea
