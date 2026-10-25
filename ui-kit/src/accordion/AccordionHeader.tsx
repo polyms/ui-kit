@@ -4,7 +4,7 @@ import clsx from 'clsx'
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const AccordionHeader = ({ className, ...props }: Base.Header.Props) => (
-  <Base.Header render={<div />} {...props} className={clsx('accordion-header', className)} />
+	<Base.Header render={<div />} {...props} className={clsx('accordion-header', className)} />
 )
 
 AccordionHeader.displayName = 'AccordionHeader'

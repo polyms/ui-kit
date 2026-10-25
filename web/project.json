@@ -1,24 +1,24 @@
 {
-  "name": "web",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "web/src",
-  "projectType": "application",
-  "tags": [],
-  "// targets": "to see all targets run: nx show project web --web",
-  "targets": {
-    "lint": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "biome lint .",
-        "cwd": "web"
-      }
-    },
-    "format": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "biome format . --write",
-        "cwd": "web"
-      }
-    }
-  }
+	"name": "web",
+	"$schema": "../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "web/src",
+	"projectType": "application",
+	"tags": [],
+	"// targets": "to see all targets run: nx show project web --web",
+	"targets": {
+		"lint": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "biome lint .",
+				"cwd": "web"
+			}
+		},
+		"format": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "biome format . --write",
+				"cwd": "web"
+			}
+		}
+	}
 }

@@ -1,8 +1,8 @@
 .spinner-loader {
-  path:nth-child(2) {
-    /* animation: spin 2s linear infinite; */
-    transform-origin: center;
+	path:nth-child(2) {
+		/* animation: spin 2s linear infinite; */
+		transform-origin: center;
 
-    @apply animate-spin;
-  }
+		@apply animate-spin;
+	}
 }

@@ -12,11 +12,11 @@ export type { ModalSize } from './ModalContent'
 export * from './modal.store'
 
 export const Modal = Object.assign(ModalRoot, {
-  Trigger: ModalTrigger,
-  Content: ModalContent,
-  Header: ModalHeader,
-  Body: ModalBody,
-  Footer: ModalFooter,
-  Close: ModalClose,
-  Container: ModalContainer,
+	Trigger: ModalTrigger,
+	Content: ModalContent,
+	Header: ModalHeader,
+	Body: ModalBody,
+	Footer: ModalFooter,
+	Close: ModalClose,
+	Container: ModalContainer,
 })

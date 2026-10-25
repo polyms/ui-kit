@@ -4,5 +4,5 @@ import clsx from 'clsx'
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ToolbarInput = ({ className, ...props }: Base.Input.Props) => {
-  return <Base.Input {...props} className={clsx('toolbar-input', className)} />
+	return <Base.Input {...props} className={clsx('toolbar-input', className)} />
 }

@@ -1,32 +1,32 @@
 {
-  "[javascriptreact][javascript][typescriptreact][typescript][tailwindcss][html][jsonc][json]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[mdx][markdown][yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "biome.suggestInstallingGlobally": false,
-  "editor.codeActionsOnSave": {
-    "source.action.useSortedAttributes.biome": "explicit",
-    "source.action.useSortedProperties.biome": "explicit",
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  },
-  "editor.defaultFormatter": "biomejs.biome",
-  "editor.formatOnSave": true,
-  "editor.quickSuggestions": {
-    "strings": "on"
-  },
-  "editor.tabSize": 2,
-  "editor.wordWrapColumn": 110,
-  "files.associations": {
-    "*.css": "tailwindcss",
-    "*.md": "markdown",
-    "*.mdx": "markdown"
-  },
-  "js/ts.tsdk.path": "node_modules/typescript/lib",
-  "nxConsole.generateAiAgentRules": true,
-  "tailwindCSS.classFunctions": ["clsx"],
-  "tailwindCSS.experimental.configFile": "ui-kit/src/styles/tailwind.css",
-  "typescript.tsdk": "node_modules/typescript/lib"
+	"[javascriptreact][javascript][typescriptreact][typescript][tailwindcss][html][jsonc][json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[mdx][markdown][yaml]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"biome.suggestInstallingGlobally": false,
+	"editor.codeActionsOnSave": {
+		"source.action.useSortedAttributes.biome": "explicit",
+		"source.action.useSortedProperties.biome": "explicit",
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true,
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
+	"editor.tabSize": 2,
+	"editor.wordWrapColumn": 110,
+	"files.associations": {
+		"*.css": "tailwindcss",
+		"*.md": "markdown",
+		"*.mdx": "markdown"
+	},
+	"js/ts.tsdk.path": "node_modules/typescript/lib",
+	"nxConsole.generateAiAgentRules": true,
+	"tailwindCSS.classFunctions": ["clsx"],
+	"tailwindCSS.experimental.configFile": "ui-kit/src/styles/tailwind.css",
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

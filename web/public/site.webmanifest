@@ -1,6 +1,6 @@
 {
-  "icons": [
-    { "sizes": "192x192", "src": "https://polyms.dev/favicon/favicon-192x192.png", "type": "image/png" },
-    { "sizes": "512x512", "src": "https://polyms.dev/favicon/favicon-512x512.png", "type": "image/png" }
-  ]
+	"icons": [
+		{ "sizes": "192x192", "src": "https://polyms.dev/favicon/favicon-192x192.png", "type": "image/png" },
+		{ "sizes": "512x512", "src": "https://polyms.dev/favicon/favicon-512x512.png", "type": "image/png" }
+	]
 }

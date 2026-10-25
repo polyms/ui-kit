@@ -13,12 +13,12 @@ export type { OffcanvasSize } from './OffcanvasContent'
 export * from './offcanvas.store'
 
 export const Offcanvas = Object.assign(Root, {
-  Trigger: OffcanvasTrigger,
-  Content: OffcanvasContent,
-  Header: OffcanvasHeader,
-  Title: OffcanvasTitle,
-  Description: OffcanvasDescription,
-  Close: OffcanvasClose,
-  Body: OffcanvasBody,
-  Container: OffcanvasContainer,
+	Trigger: OffcanvasTrigger,
+	Content: OffcanvasContent,
+	Header: OffcanvasHeader,
+	Title: OffcanvasTitle,
+	Description: OffcanvasDescription,
+	Close: OffcanvasClose,
+	Body: OffcanvasBody,
+	Container: OffcanvasContainer,
 })

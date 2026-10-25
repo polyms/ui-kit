@@ -10,63 +10,63 @@ import { useMemo } from 'react'
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export default function APIReference() {
-  const activePath = useRouterState({ select: s => s.location.pathname })
-  const meta = useMemo(
-    () => metadataByRoute[activePath] ?? metadataByRoute[activePath.replace(/\/$/, '')] ?? {},
-    [activePath]
-  )
+	const activePath = useRouterState({ select: s => s.location.pathname })
+	const meta = useMemo(
+		() => metadataByRoute[activePath] ?? metadataByRoute[activePath.replace(/\/$/, '')] ?? {},
+		[activePath]
+	)
 
-  return (
-    <div className='api-reference card mt-4'>
-      <Accordion className='accordion' multiple>
-        <Accordion.Item className='accordion-item border-solid bg-surface' disabled value='_header'>
-          <Accordion.Header className='accordion-header font-semibold' render={<div />}>
-            <Accordion.Trigger className='accordion-trigger font-semibold' disabled>
-              <span></span>
-              <span>Prop</span>
-              <span>Default</span>
-              <span>Values</span>
-            </Accordion.Trigger>
-          </Accordion.Header>
-        </Accordion.Item>
+	return (
+		<div className='api-reference card mt-4'>
+			<Accordion className='accordion' multiple>
+				<Accordion.Item className='accordion-item border-solid bg-surface' disabled value='_header'>
+					<Accordion.Header className='accordion-header font-semibold' render={<div />}>
+						<Accordion.Trigger className='accordion-trigger font-semibold' disabled>
+							<span></span>
+							<span>Prop</span>
+							<span>Default</span>
+							<span>Values</span>
+						</Accordion.Trigger>
+					</Accordion.Header>
+				</Accordion.Item>
 
-        {meta.apis?.map((prop, idx) => {
-          // Render separator
-          if (prop.separator) {
-            return (
-              <div
-                className='m-px rounded-xs bg-primary-600 px-9 py-1 font-semibold text-white'
-                key={`sep-${prop.separator}`}
-              >
-                {prop.separator}
-              </div>
-            )
-          }
+				{meta.apis?.map((prop, idx) => {
+					// Render separator
+					if (prop.separator) {
+						return (
+							<div
+								className='bg-primary-600 m-px rounded-xs px-9 py-1 font-semibold text-white'
+								key={`sep-${prop.separator}`}
+							>
+								{prop.separator}
+							</div>
+						)
+					}
 
-          // Render prop item
-          return (
-            <Accordion.Item className='accordion-item' key={`item-${idx}`} value={prop.name}>
-              <Accordion.Header className='accordion-header' render={<div />}>
-                <Accordion.Trigger className='accordion-trigger'>
-                  <HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
-                  <span className='font-medium'>{prop.name}</span>
-                  <span
-                    className={clsx('font-mono text-sm', {
-                      'text-primary-700': prop.default !== '-',
-                    })}
-                  >
-                    {prop.default}
-                  </span>
-                  <span className='font-mono text-primary-700 text-xs'>{prop.values}</span>
-                </Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Panel className='accordion-panel'>
-                <p className='text-fg text-sm'>{prop.description}</p>
-              </Accordion.Panel>
-            </Accordion.Item>
-          )
-        })}
-      </Accordion>
-    </div>
-  )
+					// Render prop item
+					return (
+						<Accordion.Item className='accordion-item' key={`item-${idx}`} value={prop.name}>
+							<Accordion.Header className='accordion-header' render={<div />}>
+								<Accordion.Trigger className='accordion-trigger'>
+									<HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />
+									<span className='font-medium'>{prop.name}</span>
+									<span
+										className={clsx('font-mono text-sm', {
+											'text-primary-700': prop.default !== '-',
+										})}
+									>
+										{prop.default}
+									</span>
+									<span className='text-primary-700 font-mono text-xs'>{prop.values}</span>
+								</Accordion.Trigger>
+							</Accordion.Header>
+							<Accordion.Panel className='accordion-panel'>
+								<p className='text-sm text-fg'>{prop.description}</p>
+							</Accordion.Panel>
+						</Accordion.Item>
+					)
+				})}
+			</Accordion>
+		</div>
+	)
 }

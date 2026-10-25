@@ -9,13 +9,13 @@ export interface ModalBodyProps extends useRender.ComponentProps<'div'> {}
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalBody: FC<ModalBodyProps> = ({ className, render, ...props }) => {
-  const defaultProps = {
-    className: clsx('modal-body', className),
-  }
+	const defaultProps = {
+		className: clsx('modal-body', className),
+	}
 
-  return useRender({
-    defaultTagName: 'div',
-    props: { ...defaultProps, ...props },
-    render,
-  })
+	return useRender({
+		defaultTagName: 'div',
+		props: { ...defaultProps, ...props },
+		render,
+	})
 }

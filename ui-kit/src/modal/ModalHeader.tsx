@@ -6,21 +6,21 @@ import { ModalClose } from './ModalClose'
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export interface ModalHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  close?: boolean
+	close?: boolean
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
-  ({ children, className, close = true, ...props }, ref) => {
-    return (
-      <Dialog.Title {...props} className={clsx('modal-header', className)} ref={ref} render={<div />}>
-        {children}
+	({ children, className, close = true, ...props }, ref) => {
+		return (
+			<Dialog.Title {...props} className={clsx('modal-header', className)} ref={ref} render={<div />}>
+				{children}
 
-        {close && <ModalClose className='modal-close' />}
-      </Dialog.Title>
-    )
-  }
+				{close && <ModalClose className='modal-close' />}
+			</Dialog.Title>
+		)
+	}
 )
 
 ModalHeader.displayName = 'ModalHeader'

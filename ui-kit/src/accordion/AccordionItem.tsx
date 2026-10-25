@@ -8,24 +8,24 @@ import { AccordionTrigger } from './AccordionTrigger'
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export type AccordionItemProps = Base.Item.Props & {
-  title?: ReactNode
+	title?: ReactNode
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const AccordionItem = ({ className, children, title, ...props }: AccordionItemProps) => (
-  <Base.Item {...props} className={clsx('accordion-item', className)}>
-    {title ? (
-      <>
-        <AccordionHeader>
-          <AccordionTrigger>{title}</AccordionTrigger>
-        </AccordionHeader>
-        <AccordionPanel>{children}</AccordionPanel>
-      </>
-    ) : (
-      children
-    )}
-  </Base.Item>
+	<Base.Item {...props} className={clsx('accordion-item', className)}>
+		{title ? (
+			<>
+				<AccordionHeader>
+					<AccordionTrigger>{title}</AccordionTrigger>
+				</AccordionHeader>
+				<AccordionPanel>{children}</AccordionPanel>
+			</>
+		) : (
+			children
+		)}
+	</Base.Item>
 )
 
 AccordionItem.displayName = 'AccordionItem'

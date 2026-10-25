@@ -11,6 +11,9 @@ out-tsc/
 doc_build/
 .tanstack/
 .agents/skills/
+.github/skills/
+.cursor/skills/
+.claude/skills/
 
 # Lock / generated
 pnpm-lock.yaml

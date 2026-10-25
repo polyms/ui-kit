@@ -1,196 +1,196 @@
 .link {
-  text-decoration: none;
-  cursor: pointer;
-  outline: none;
+	text-decoration: none;
+	cursor: pointer;
+	outline: none;
 
-  &:hover,
-  &:focus,
-  &:focus-visible {
-    text-decoration: underline;
-    outline: none;
-  }
+	&:hover,
+	&:focus,
+	&:focus-visible {
+		text-decoration: underline;
+		outline: none;
+	}
 
-  &:active {
-    color: var(--color-primary-700);
-  }
+	&:active {
+		color: var(--color-primary-700);
+	}
 
-  &:visited {
-    text-decoration: underline dotted;
-  }
+	&:visited {
+		text-decoration: underline dotted;
+	}
 
-  &.link-primary {
-    font-weight: 500;
-    color: var(--color-primary-700);
+	&.link-primary {
+		font-weight: 500;
+		color: var(--color-primary-700);
 
-    &:active {
-      color: var(--color-primary-900);
-    }
+		&:active {
+			color: var(--color-primary-900);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 
-  &.link-success {
-    color: var(--color-success-600);
+	&.link-success {
+		color: var(--color-success-600);
 
-    &:active {
-      color: var(--color-success-700);
-    }
+		&:active {
+			color: var(--color-success-700);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 
-  &.link-info {
-    color: var(--color-info-600);
+	&.link-info {
+		color: var(--color-info-600);
 
-    &:active {
-      color: var(--color-info-700);
-    }
+		&:active {
+			color: var(--color-info-700);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 
-  &.link-warning {
-    color: var(--color-warning-600);
+	&.link-warning {
+		color: var(--color-warning-600);
 
-    &:active {
-      color: var(--color-warning-700);
-    }
+		&:active {
+			color: var(--color-warning-700);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 
-  &.link-danger {
-    color: var(--color-danger-500);
+	&.link-danger {
+		color: var(--color-danger-500);
 
-    &:active {
-      color: var(--color-danger-700);
-    }
+		&:active {
+			color: var(--color-danger-700);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 
-  &.link-light {
-    color: var(--muted);
+	&.link-light {
+		color: var(--muted);
 
-    &:hover,
-    &:focus,
-    &:focus-visible {
-      color: var(--color-primary-600);
-    }
+		&:hover,
+		&:focus,
+		&:focus-visible {
+			color: var(--color-primary-600);
+		}
 
-    &:active {
-      color: var(--fg);
-    }
+		&:active {
+			color: var(--fg);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 
-  &.link-dark {
-    font-weight: 500;
-    color: var(--color-neutral-700);
+	&.link-dark {
+		font-weight: 500;
+		color: var(--color-neutral-700);
 
-    &:hover,
-    &:focus,
-    &:focus-visible {
-      color: var(--color-primary-600);
-    }
+		&:hover,
+		&:focus,
+		&:focus-visible {
+			color: var(--color-primary-600);
+		}
 
-    &:active {
-      color: var(--color-neutral-900);
-    }
+		&:active {
+			color: var(--color-neutral-900);
+		}
 
-    &:visited {
-      text-decoration: underline dotted;
-    }
-  }
+		&:visited {
+			text-decoration: underline dotted;
+		}
+	}
 }
 
 .stretched-link {
-  &::after {
-    content: '';
-    @apply absolute inset-0 z-10 cursor-pointer;
-  }
+	&::after {
+		content: '';
+		@apply absolute inset-0 z-10 cursor-pointer;
+	}
 }
 
 /* Dark-mode overrides: shade sáng (-300 default) cho contrast với body Nord. */
 .dark {
-  .link {
-    &:active {
-      color: var(--color-primary-200);
-    }
+	.link {
+		&:active {
+			color: var(--color-primary-200);
+		}
 
-    &.link-primary {
-      color: var(--color-primary-300);
+		&.link-primary {
+			color: var(--color-primary-300);
 
-      &:active {
-        color: var(--color-primary-100);
-      }
-    }
+			&:active {
+				color: var(--color-primary-100);
+			}
+		}
 
-    &.link-success {
-      color: var(--color-success-300);
+		&.link-success {
+			color: var(--color-success-300);
 
-      &:active {
-        color: var(--color-success-200);
-      }
-    }
+			&:active {
+				color: var(--color-success-200);
+			}
+		}
 
-    &.link-info {
-      color: var(--color-info-300);
+		&.link-info {
+			color: var(--color-info-300);
 
-      &:active {
-        color: var(--color-info-200);
-      }
-    }
+			&:active {
+				color: var(--color-info-200);
+			}
+		}
 
-    &.link-warning {
-      color: var(--color-warning-300);
+		&.link-warning {
+			color: var(--color-warning-300);
 
-      &:active {
-        color: var(--color-warning-200);
-      }
-    }
+			&:active {
+				color: var(--color-warning-200);
+			}
+		}
 
-    &.link-danger {
-      color: var(--color-danger-300);
+		&.link-danger {
+			color: var(--color-danger-300);
 
-      &:active {
-        color: var(--color-danger-200);
-      }
-    }
+			&:active {
+				color: var(--color-danger-200);
+			}
+		}
 
-    &.link-light {
-      &:hover,
-      &:focus,
-      &:focus-visible {
-        color: var(--color-primary-400);
-      }
-    }
+		&.link-light {
+			&:hover,
+			&:focus,
+			&:focus-visible {
+				color: var(--color-primary-400);
+			}
+		}
 
-    &.link-dark {
-      color: var(--color-neutral-300);
+		&.link-dark {
+			color: var(--color-neutral-300);
 
-      &:hover,
-      &:focus,
-      &:focus-visible {
-        color: var(--color-primary-400);
-      }
+			&:hover,
+			&:focus,
+			&:focus-visible {
+				color: var(--color-primary-400);
+			}
 
-      &:active {
-        color: var(--color-neutral-100);
-      }
-    }
-  }
+			&:active {
+				color: var(--color-neutral-100);
+			}
+		}
+	}
 }

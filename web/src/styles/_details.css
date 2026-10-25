@@ -1,81 +1,81 @@
 /* API Reference table accordion — scoped so demo accordions keep core `_accordion.css` layout */
 .api-reference {
-  .accordion {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 0.875rem;
-    font-weight: 500;
-  }
+	.accordion {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
 
-  .accordion-item {
-    border-width: 0;
-  }
+	.accordion-item {
+		border-width: 0;
+	}
 
-  .accordion-header {
-    margin: 0;
-  }
+	.accordion-header {
+		margin: 0;
+	}
 
-  .accordion-item:not(:last-child) {
-    border-bottom: 1px dashed var(--color-neutral-300);
-  }
+	.accordion-item:not(:last-child) {
+		border-bottom: 1px dashed var(--color-neutral-300);
+	}
 
-  /* Trigger button styling */
-  .accordion-trigger {
-    position: relative;
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 1rem 4fr 4fr 7fr;
-    font-family: inherit;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.5rem;
-    text-align: left;
-    outline: none;
-    background: none;
-    border: none;
-    @apply w-full cursor-default items-center gap-3 p-2;
+	/* Trigger button styling */
+	.accordion-trigger {
+		position: relative;
+		box-sizing: border-box;
+		display: grid;
+		grid-template-columns: 1rem 4fr 4fr 7fr;
+		font-family: inherit;
+		font-size: 0.875rem;
+		font-weight: 500;
+		line-height: 1.5rem;
+		text-align: left;
+		outline: none;
+		background: none;
+		border: none;
+		@apply w-full cursor-default items-center gap-3 p-2;
 
-    &:not([data-disabled]) {
-      @apply cursor-pointer;
-    }
+		&:not([data-disabled]) {
+			@apply cursor-pointer;
+		}
 
-    &:hover:not([data-disabled]) {
-      @apply bg-neutral-50;
-    }
+		&:hover:not([data-disabled]) {
+			@apply bg-neutral-50;
+		}
 
-    &:focus-visible {
-      z-index: 1;
-      outline: 2px solid var(--color-blue);
-    }
+		&:focus-visible {
+			z-index: 1;
+			outline: 2px solid var(--color-blue);
+		}
 
-    svg {
-      transition: transform 200ms ease;
-    }
-  }
+		svg {
+			transition: transform 200ms ease;
+		}
+	}
 
-  /* Icon rotation when open */
-  .accordion-item[data-open] .accordion-trigger svg {
-    transform: rotate(135deg);
-  }
+	/* Icon rotation when open */
+	.accordion-item[data-open] .accordion-trigger svg {
+		transform: rotate(135deg);
+	}
 
-  /* Panel styling */
-  .accordion-panel {
-    box-sizing: border-box;
-    height: var(--accordion-panel-height);
-    max-height: 500px;
-    overflow: hidden;
-    transition: height 150ms ease-out;
-    @apply border-neutral-200 bg-neutral-50;
+	/* Panel styling */
+	.accordion-panel {
+		box-sizing: border-box;
+		height: var(--accordion-panel-height);
+		max-height: 500px;
+		overflow: hidden;
+		transition: height 150ms ease-out;
+		@apply border-neutral-200 bg-neutral-50;
 
-    &[data-starting-style],
-    &[data-ending-style] {
-      height: 0;
-    }
-  }
+		&[data-starting-style],
+		&[data-ending-style] {
+			height: 0;
+		}
+	}
 
-  .accordion-panel-body {
-    padding-inline-start: 2.5rem;
-  }
+	.accordion-panel-body {
+		padding-inline-start: 2.5rem;
+	}
 }

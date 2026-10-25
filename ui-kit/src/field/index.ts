@@ -6,21 +6,21 @@ import { FieldLabel } from './FieldLabel'
 import { FieldRoot, type FieldRootProps } from './FieldRoot'
 
 export const Field = Object.assign(FieldRoot, {
-  Control: FieldControl,
-  Label: FieldLabel,
-  Description: FieldDescription,
-  Feedback: FieldFeedback,
-  Floating: FieldFloating,
+	Control: FieldControl,
+	Label: FieldLabel,
+	Description: FieldDescription,
+	Feedback: FieldFeedback,
+	Floating: FieldFloating,
 })
 
 export declare namespace Field {
-  type Props = FieldRootProps
+	type Props = FieldRootProps
 
-  namespace Control {
-    type Props = FieldControlProps
-  }
+	namespace Control {
+		type Props = FieldControlProps
+	}
 
-  namespace Floating {
-    type Props = FieldFloatingProps
-  }
+	namespace Floating {
+		type Props = FieldFloatingProps
+	}
 }

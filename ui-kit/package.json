@@ -1,54 +1,54 @@
 {
-  "name": "@polyms/ui-kit",
-  "version": "1.0.5",
-  "description": "Modular React 19 UI component library for the Polyms ecosystem — compound components, semantic theming, and Tailwind CSS 4 utilities.",
-  "license": "MIT",
-  "author": "Polyms",
-  "homepage": "https://github.com/polyms/ui-kit#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/polyms/ui-kit.git",
-    "directory": "ui-kit"
-  },
-  "bugs": {
-    "url": "https://github.com/polyms/ui-kit/issues"
-  },
-  "keywords": [
-    "react",
-    "react-19",
-    "ui",
-    "ui-kit",
-    "component-library",
-    "design-system",
-    "tailwindcss",
-    "base-ui",
-    "polyms"
-  ],
-  "type": "module",
-  "bin": {
-    "ui-kit-skill": "./scripts/add-skill.mjs"
-  },
-  "sideEffects": ["**/*.css", "./styles/**"],
-  "main": "./index.mjs",
-  "module": "./index.mjs",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "import": "./index.mjs"
-    },
-    "./styles/*": "./styles/*",
-    "./package.json": "./package.json"
-  },
-  "peerDependencies": {
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
-  },
-  "dependencies": {
-    "@floating-ui/react-dom": "^2.1.9",
-    "clsx": "^2.1.1"
-  },
-  "publishConfig": {
-    "registry": "https://registry.polyms.dev"
-  }
+	"name": "@polyms/ui-kit",
+	"version": "1.0.5",
+	"description": "Modular React 19 UI component library for the Polyms ecosystem — compound components, semantic theming, and Tailwind CSS 4 utilities.",
+	"license": "MIT",
+	"author": "Polyms",
+	"homepage": "https://github.com/polyms/ui-kit#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/polyms/ui-kit.git",
+		"directory": "ui-kit"
+	},
+	"bugs": {
+		"url": "https://github.com/polyms/ui-kit/issues"
+	},
+	"keywords": [
+		"react",
+		"react-19",
+		"ui",
+		"ui-kit",
+		"component-library",
+		"design-system",
+		"tailwindcss",
+		"base-ui",
+		"polyms"
+	],
+	"type": "module",
+	"bin": {
+		"ui-kit-skill": "./scripts/add-skill.mjs"
+	},
+	"sideEffects": ["**/*.css", "./styles/**"],
+	"main": "./index.mjs",
+	"module": "./index.mjs",
+	"types": "./index.d.ts",
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.mjs"
+		},
+		"./styles/*": "./styles/*",
+		"./package.json": "./package.json"
+	},
+	"peerDependencies": {
+		"react": ">=19.0.0",
+		"react-dom": ">=19.0.0"
+	},
+	"dependencies": {
+		"@floating-ui/react-dom": "^2.1.9",
+		"clsx": "^2.1.1"
+	},
+	"publishConfig": {
+		"registry": "https://registry.polyms.dev"
+	}
 }

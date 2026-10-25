@@ -13,43 +13,43 @@ import { Avatar } from '@polyms/ui-kit'
 // </svg>`)}`
 
 export default function AvatarDefault() {
-  return (
-    <div className='m-auto grid grid-cols-3 items-center justify-center gap-2'>
-      <Avatar className='size-12 bg-linear-65 from-violet-500 to-fuchsia-500 text-neutral-100'>
-        <Avatar.Fallback className='avatar-fallback' delay={0}>
-          AL
-        </Avatar.Fallback>
-      </Avatar>
-      <Avatar className='size-12'>
-        <Avatar.Image
-          alt='Aliah Lane'
-          className='avatar-image'
-          src='https://untitledui.com/images/avatars/aliah-lane'
-        />
-        <Avatar.Fallback className='avatar-fallback' delay={300}>
-          AL
-        </Avatar.Fallback>
-      </Avatar>
-      <div className='font-medium text-sm'>Aliah Lane</div>
+	return (
+		<div className='m-auto grid grid-cols-3 items-center justify-center gap-2'>
+			<Avatar className='size-12 bg-linear-65 from-violet-500 to-fuchsia-500 text-neutral-100'>
+				<Avatar.Fallback className='avatar-fallback' delay={0}>
+					AL
+				</Avatar.Fallback>
+			</Avatar>
+			<Avatar className='size-12'>
+				<Avatar.Image
+					alt='Aliah Lane'
+					className='avatar-image'
+					src='https://untitledui.com/images/avatars/aliah-lane'
+				/>
+				<Avatar.Fallback className='avatar-fallback' delay={300}>
+					AL
+				</Avatar.Fallback>
+			</Avatar>
+			<div className='text-sm font-medium'>Aliah Lane</div>
 
-      <Avatar className='size-12 bg-linear-65 from-purple-500 to-pink-500 text-neutral-100'>
-        <Avatar.Fallback className='avatar-fallback' delay={0}>
-          RL
-        </Avatar.Fallback>
-      </Avatar>
+			<Avatar className='size-12 bg-linear-65 from-purple-500 to-pink-500 text-neutral-100'>
+				<Avatar.Fallback className='avatar-fallback' delay={0}>
+					RL
+				</Avatar.Fallback>
+			</Avatar>
 
-      <Avatar className='size-12'>
-        <Avatar.Image
-          alt='Rhea Levine'
-          className='avatar-image'
-          src='https://untitledui.com/images/avatars/rhea-levine'
-        />
-        <Avatar.Fallback className='avatar-fallback' delay={300}>
-          RL
-        </Avatar.Fallback>
-      </Avatar>
+			<Avatar className='size-12'>
+				<Avatar.Image
+					alt='Rhea Levine'
+					className='avatar-image'
+					src='https://untitledui.com/images/avatars/rhea-levine'
+				/>
+				<Avatar.Fallback className='avatar-fallback' delay={300}>
+					RL
+				</Avatar.Fallback>
+			</Avatar>
 
-      <div className='font-medium text-sm'>Rhea Levine</div>
-    </div>
-  )
+			<div className='text-sm font-medium'>Rhea Levine</div>
+		</div>
+	)
 }

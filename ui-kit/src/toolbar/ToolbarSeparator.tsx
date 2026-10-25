@@ -4,5 +4,5 @@ import clsx from 'clsx'
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ToolbarSeparator = ({ className, ...props }: Base.Separator.Props) => {
-  return <Base.Separator {...props} className={clsx('toolbar-separator', className)} />
+	return <Base.Separator {...props} className={clsx('toolbar-separator', className)} />
 }

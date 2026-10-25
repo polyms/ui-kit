@@ -14,29 +14,29 @@ export type AccordionPanelProps = BaseAccordion.Panel.Props
 export type { AccordionItemProps }
 
 export const Accordion = Object.assign(AccordionRoot, {
-  Root: AccordionRoot,
-  Item: AccordionItem,
-  Header: AccordionHeader,
-  Trigger: AccordionTrigger,
-  Panel: AccordionPanel,
+	Root: AccordionRoot,
+	Item: AccordionItem,
+	Header: AccordionHeader,
+	Trigger: AccordionTrigger,
+	Panel: AccordionPanel,
 })
 
 export declare namespace Accordion {
-  type Props = AccordionRootProps
+	type Props = AccordionRootProps
 
-  namespace Item {
-    type Props = AccordionItemProps
-  }
+	namespace Item {
+		type Props = AccordionItemProps
+	}
 
-  namespace Header {
-    type Props = AccordionHeaderProps
-  }
+	namespace Header {
+		type Props = AccordionHeaderProps
+	}
 
-  namespace Trigger {
-    type Props = AccordionTriggerProps
-  }
+	namespace Trigger {
+		type Props = AccordionTriggerProps
+	}
 
-  namespace Panel {
-    type Props = AccordionPanelProps
-  }
+	namespace Panel {
+		type Props = AccordionPanelProps
+	}
 }

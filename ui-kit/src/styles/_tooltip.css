@@ -1,90 +1,90 @@
 .tooltip-positioner {
-  z-index: var(--zindex-tooltip);
+	z-index: var(--zindex-tooltip);
 }
 
 .tooltip-popup {
-  z-index: var(--zindex-tooltip);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 0.25rem 0.625rem;
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.25rem;
-  color: #fff;
-  white-space: nowrap;
+	z-index: var(--zindex-tooltip);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	padding: 0.25rem 0.625rem;
+	font-size: 0.75rem;
+	font-weight: 400;
+	line-height: 1.25rem;
+	color: #fff;
+	white-space: nowrap;
 
-  outline: 1px solid var(--color-neutral-900);
-  background-color: var(--color-neutral-900);
-  border-radius: 0.25rem;
-  transform-origin: var(--transform-origin);
-  transition:
-    transform 150ms,
-    opacity 150ms;
+	outline: 1px solid var(--color-neutral-900);
+	background-color: var(--color-neutral-900);
+	border-radius: 0.25rem;
+	transform-origin: var(--transform-origin);
+	transition:
+		transform 150ms,
+		opacity 150ms;
 
-  &[data-starting-style],
-  &[data-ending-style] {
-    opacity: 0;
-    transform: scale(0.9);
-  }
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: scale(0.9);
+	}
 
-  &[data-instant] {
-    transition: none;
-  }
+	&[data-instant] {
+		transition: none;
+	}
 
-  .dark & {
-    color: #eceff4;
-    outline: 1px solid #3b4252;
-    outline-offset: -1px;
-    background-color: #4c566a;
-  }
+	.dark & {
+		color: #eceff4;
+		outline: 1px solid #3b4252;
+		outline-offset: -1px;
+		background-color: #4c566a;
+	}
 }
 
 .tooltip-arrow {
-  z-index: var(--zindex-tooltip);
-  display: flex;
+	z-index: var(--zindex-tooltip);
+	display: flex;
 
-  &[data-side='top'] {
-    bottom: -8px;
-    rotate: 180deg;
-  }
+	&[data-side='top'] {
+		bottom: -8px;
+		rotate: 180deg;
+	}
 
-  &[data-side='bottom'] {
-    top: -8px;
-    rotate: 0deg;
-  }
+	&[data-side='bottom'] {
+		top: -8px;
+		rotate: 0deg;
+	}
 
-  &[data-side='left'] {
-    right: -13px;
-    rotate: 90deg;
-  }
+	&[data-side='left'] {
+		right: -13px;
+		rotate: 90deg;
+	}
 
-  &[data-side='right'] {
-    left: -13px;
-    rotate: -90deg;
-  }
+	&[data-side='right'] {
+		left: -13px;
+		rotate: -90deg;
+	}
 }
 
 .tooltip-arrow-fill {
-  fill: var(--color-neutral-900);
+	fill: var(--color-neutral-900);
 
-  .dark & {
-    fill: #4c566a;
-  }
+	.dark & {
+		fill: #4c566a;
+	}
 }
 
 .tooltip-arrow-outer {
-  fill: var(--color-neutral-900);
+	fill: var(--color-neutral-900);
 
-  .dark & {
-    fill: #3b4252;
-  }
+	.dark & {
+		fill: #3b4252;
+	}
 }
 
 .tooltip-arrow-inner {
-  fill: transparent;
+	fill: transparent;
 
-  .dark & {
-    fill: #3b4252;
-  }
+	.dark & {
+		fill: #3b4252;
+	}
 }

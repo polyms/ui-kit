@@ -1,25 +1,25 @@
 {
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "aliases": {
-    "components": "dist/components",
-    "hooks": "dist/hooks",
-    "lib": "dist/lib",
-    "ui": "dist/components/ui",
-    "utils": "dist/lib/utils"
-  },
-  "iconLibrary": "radix",
-  "registries": {
-    "@coss": "https://coss.com/ui/r/{name}.json",
-    "@pureui": "https://pure.kam-ui.com/r/{name}.json"
-  },
-  "rsc": false,
-  "style": "new-york",
-  "tailwind": {
-    "baseColor": "slate",
-    "config": "",
-    "css": "../dist/tailwind.css",
-    "cssVariables": true,
-    "prefix": ""
-  },
-  "tsx": true
+	"$schema": "https://ui.shadcn.com/schema.json",
+	"aliases": {
+		"components": "dist/components",
+		"hooks": "dist/hooks",
+		"lib": "dist/lib",
+		"ui": "dist/components/ui",
+		"utils": "dist/lib/utils"
+	},
+	"iconLibrary": "radix",
+	"registries": {
+		"@coss": "https://coss.com/ui/r/{name}.json",
+		"@pureui": "https://pure.kam-ui.com/r/{name}.json"
+	},
+	"rsc": false,
+	"style": "new-york",
+	"tailwind": {
+		"baseColor": "slate",
+		"config": "",
+		"css": "../dist/tailwind.css",
+		"cssVariables": true,
+		"prefix": ""
+	},
+	"tsx": true
 }

@@ -1,129 +1,129 @@
 .alert {
-  padding: 0.75rem 1rem;
-  font-size: 14px;
-  color: var(--alert-color);
-  background-color: var(--alert-bg);
-  border: 1px solid var(--alert-border);
-  @apply relative mb-4 rounded-xl font-medium;
+	padding: 0.75rem 1rem;
+	font-size: 14px;
+	color: var(--alert-color);
+	background-color: var(--alert-bg);
+	border: 1px solid var(--alert-border);
+	@apply relative mb-4 rounded-xl font-medium;
 }
 
 .alert-heading {
-  font-weight: 700;
-  color: var(--alert-color);
+	font-weight: 700;
+	color: var(--alert-color);
 }
 
 .alert-link {
-  font-weight: 700;
+	font-weight: 700;
 }
 
 .alert-dismissible {
-  .alert-close {
-    padding-block: 0.25rem;
-    color: var(--alert-color);
-    background-color: var(--body);
-    border: 1px solid var(--alert-border);
-    border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
-    @apply absolute -top-1 -right-1 z-10 flex items-center justify-center transition-all duration-200;
-    @apply opacity-0;
+	.alert-close {
+		padding-block: 0.25rem;
+		color: var(--alert-color);
+		background-color: var(--body);
+		border: 1px solid var(--alert-border);
+		border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
+		@apply absolute -top-1 -right-1 z-10 flex items-center justify-center transition-all duration-200;
+		@apply opacity-0;
 
-    &:hover {
-      background-color: var(--alert-bg);
-    }
-  }
+		&:hover {
+			background-color: var(--alert-bg);
+		}
+	}
 
-  &:hover .alert-close {
-    @apply scale-110 opacity-100 shadow-lg;
-  }
+	&:hover .alert-close {
+		@apply scale-110 opacity-100 shadow-lg;
+	}
 }
 
 /* Alert Variants */
 .alert-primary {
-  --alert-border: var(--color-primary-600);
-  --alert-bg: var(--color-primary-50);
-  --alert-color: var(--color-primary-700);
+	--alert-border: var(--color-primary-600);
+	--alert-bg: var(--color-primary-50);
+	--alert-color: var(--color-primary-700);
 }
 
 .alert-success {
-  --alert-border: var(--color-success-600);
-  --alert-bg: var(--color-success-50);
-  --alert-color: var(--color-success-700);
+	--alert-border: var(--color-success-600);
+	--alert-bg: var(--color-success-50);
+	--alert-color: var(--color-success-700);
 }
 
 .alert-info {
-  --alert-border: var(--color-info-600);
-  --alert-bg: var(--color-info-50);
-  --alert-color: var(--color-info-700);
+	--alert-border: var(--color-info-600);
+	--alert-bg: var(--color-info-50);
+	--alert-color: var(--color-info-700);
 }
 
 .alert-warning {
-  --alert-border: var(--color-warning-600);
-  --alert-bg: var(--color-warning-50);
-  --alert-color: var(--color-warning-700);
+	--alert-border: var(--color-warning-600);
+	--alert-bg: var(--color-warning-50);
+	--alert-color: var(--color-warning-700);
 }
 
 .alert-danger {
-  --alert-border: var(--color-danger-600);
-  --alert-bg: var(--color-danger-50);
-  --alert-color: var(--color-danger-700);
+	--alert-border: var(--color-danger-600);
+	--alert-bg: var(--color-danger-50);
+	--alert-color: var(--color-danger-700);
 }
 
 .alert-light {
-  --alert-border: var(--line);
-  --alert-bg: var(--surface);
-  --alert-color: var(--fg);
+	--alert-border: var(--line);
+	--alert-bg: var(--surface);
+	--alert-color: var(--fg);
 }
 
 .alert-dark {
-  --alert-border: #3b4252;
-  --alert-bg: #3b4252;
-  --alert-color: #eceff4;
+	--alert-border: #3b4252;
+	--alert-bg: #3b4252;
+	--alert-color: #eceff4;
 }
 
 /* Dark-mode overrides: text dùng shade sáng (-200), tint mạnh hơn (18%) để contrast với body Nord. */
 .dark {
-  .alert-primary {
-    --alert-border: var(--color-primary-500);
-    --alert-bg: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
-    --alert-color: var(--color-primary-200);
-  }
+	.alert-primary {
+		--alert-border: var(--color-primary-500);
+		--alert-bg: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
+		--alert-color: var(--color-primary-200);
+	}
 
-  .alert-success {
-    --alert-border: var(--color-success-500);
-    --alert-bg: color-mix(in oklab, var(--color-success-500) 18%, transparent);
-    --alert-color: var(--color-success-200);
-  }
+	.alert-success {
+		--alert-border: var(--color-success-500);
+		--alert-bg: color-mix(in oklab, var(--color-success-500) 18%, transparent);
+		--alert-color: var(--color-success-200);
+	}
 
-  .alert-info {
-    --alert-border: var(--color-info-500);
-    --alert-bg: color-mix(in oklab, var(--color-info-500) 18%, transparent);
-    --alert-color: var(--color-info-200);
-  }
+	.alert-info {
+		--alert-border: var(--color-info-500);
+		--alert-bg: color-mix(in oklab, var(--color-info-500) 18%, transparent);
+		--alert-color: var(--color-info-200);
+	}
 
-  .alert-warning {
-    --alert-border: var(--color-warning-500);
-    --alert-bg: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
-    --alert-color: var(--color-warning-200);
-  }
+	.alert-warning {
+		--alert-border: var(--color-warning-500);
+		--alert-bg: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
+		--alert-color: var(--color-warning-200);
+	}
 
-  .alert-danger {
-    --alert-border: var(--color-danger-500);
-    --alert-bg: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
-    --alert-color: var(--color-danger-200);
-  }
+	.alert-danger {
+		--alert-border: var(--color-danger-500);
+		--alert-bg: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
+		--alert-color: var(--color-danger-200);
+	}
 }
 
 .alert-badge {
-  position: absolute;
-  top: -1rem;
-  left: 0.75rem;
-  padding: 2px 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  background-color: var(--alert-border);
-  border-start-start-radius: 12px;
-  border-start-end-radius: 4px;
-  border-end-start-radius: 4px;
-  border-end-end-radius: 12px;
+	position: absolute;
+	top: -1rem;
+	left: 0.75rem;
+	padding: 2px 0.5rem;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	background-color: var(--alert-border);
+	border-start-start-radius: 12px;
+	border-start-end-radius: 4px;
+	border-end-start-radius: 4px;
+	border-end-end-radius: 12px;
 
-  @apply inline-block font-semibold text-white;
+	@apply inline-block font-semibold text-white;
 }

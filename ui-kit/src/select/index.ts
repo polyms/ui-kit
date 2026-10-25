@@ -7,10 +7,10 @@ import { SelectSeparator } from './SelectSeparator'
 import { SelectTrigger } from './SelectTrigger'
 
 export const Select = Object.assign(BaseSelect.Root, {
-  Trigger: SelectTrigger,
-  Content: SelectContent,
-  Separator: SelectSeparator,
-  Item: SelectItem,
-  Group: SelectGroup,
-  GroupLabel: SelectGroupLabel,
+	Trigger: SelectTrigger,
+	Content: SelectContent,
+	Separator: SelectSeparator,
+	Item: SelectItem,
+	Group: SelectGroup,
+	GroupLabel: SelectGroupLabel,
 })

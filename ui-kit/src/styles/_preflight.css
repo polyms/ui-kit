@@ -1,25 +1,25 @@
 html,
 body {
-  scroll-behavior: smooth;
-  @apply bg-body text-fg;
-  font-optical-sizing: auto;
-  font-weight: 400;
+	scroll-behavior: smooth;
+	@apply bg-body text-fg;
+	font-optical-sizing: auto;
+	font-weight: 400;
 }
 
 input {
-  outline: none;
+	outline: none;
 }
 
 button {
-  cursor: pointer;
-  outline: none;
+	cursor: pointer;
+	outline: none;
 }
 
 img,
 svg {
-  display: inline;
+	display: inline;
 }
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }

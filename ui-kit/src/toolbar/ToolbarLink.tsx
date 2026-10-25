@@ -4,5 +4,5 @@ import clsx from 'clsx'
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ToolbarLink = ({ className, ...props }: Base.Link.Props) => {
-  return <Base.Link {...props} className={clsx('toolbar-link', className)} />
+	return <Base.Link {...props} className={clsx('toolbar-link', className)} />
 }

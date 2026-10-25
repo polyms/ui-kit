@@ -4,9 +4,9 @@ import { TocList } from './TocList'
 import { TocRoot } from './TocRoot'
 
 export const Toc = Object.assign(TocRoot, {
-  List: TocList,
-  Item: TocItem,
-  Indicator: TocIndicator,
+	List: TocList,
+	Item: TocItem,
+	Indicator: TocIndicator,
 })
 
 export { scrollToHeading, scrollToTop } from './scroll'

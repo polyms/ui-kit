@@ -1,89 +1,89 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": [
-      "default",
-      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-      "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
-    ],
-    "sharedGlobals": ["{workspaceRoot}/bitbucket-pipelines.yml"]
-  },
-  "plugins": [
-    {
-      "plugin": "@nx/vite/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "serveTargetName": "serve",
-        "devTargetName": "dev",
-        "previewTargetName": "preview",
-        "serveStaticTargetName": "serve-static",
-        "typecheckTargetName": "typecheck",
-        "buildDepsTargetName": "build-deps",
-        "watchDepsTargetName": "watch-deps"
-      }
-    },
-    {
-      "plugin": "@nx/vitest",
-      "options": {
-        "testTargetName": "test",
-        "ciTargetName": "test-ci",
-        "testMode": "watch"
-      }
-    }
-  ],
-  "defaultProject": "ui-kit",
-  "generators": {
-    "@nx/react": {
-      "application": {
-        "babel": true,
-        "style": "css",
-        "linter": "none",
-        "bundler": "vite",
-        "compiler": "swc",
-        "projectNameAndRootFormat": "derived",
-        "publishable": true,
-        "unitTestRunner": "vitest"
-      },
-      "component": {
-        "style": "tailwind"
-      },
-      "library": {
-        "style": "css",
-        "linter": "none",
-        "bundler": "vite",
-        "compiler": "swc",
-        "projectNameAndRootFormat": "derived",
-        "publishable": true,
-        "unitTestRunner": "vitest"
-      }
-    }
-  },
-  "release": {
-    "projects": ["ui-kit", "web"],
-    "projectsRelationship": "independent",
-    "changelog": {
-      "projectChangelogs": false,
-      "workspaceChangelog": false
-    },
-    "version": {
-      "preVersionCommand": "pnpm dlx nx run-many -t build",
-      "git": {
-        "stageChanges": true,
-        "tag": true,
-        "commit": true,
-        "commitMessage": "chore(release): {projectName}@{version}"
-      }
-    },
-    "releaseTag": {
-      "pattern": "{projectName}@{version}"
-    }
-  },
-  "defaultBase": "origin/main",
-  "analytics": true,
-  "migrate": {
-    "agentic": false
-  }
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"namedInputs": {
+		"default": ["{projectRoot}/**/*", "sharedGlobals"],
+		"production": [
+			"default",
+			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+			"!{projectRoot}/tsconfig.spec.json",
+			"!{projectRoot}/src/test-setup.[jt]s",
+			"!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
+		],
+		"sharedGlobals": ["{workspaceRoot}/bitbucket-pipelines.yml"]
+	},
+	"plugins": [
+		{
+			"plugin": "@nx/vite/plugin",
+			"options": {
+				"buildTargetName": "build",
+				"serveTargetName": "serve",
+				"devTargetName": "dev",
+				"previewTargetName": "preview",
+				"serveStaticTargetName": "serve-static",
+				"typecheckTargetName": "typecheck",
+				"buildDepsTargetName": "build-deps",
+				"watchDepsTargetName": "watch-deps"
+			}
+		},
+		{
+			"plugin": "@nx/vitest",
+			"options": {
+				"testTargetName": "test",
+				"ciTargetName": "test-ci",
+				"testMode": "watch"
+			}
+		}
+	],
+	"defaultProject": "ui-kit",
+	"generators": {
+		"@nx/react": {
+			"application": {
+				"babel": true,
+				"style": "css",
+				"linter": "none",
+				"bundler": "vite",
+				"compiler": "swc",
+				"projectNameAndRootFormat": "derived",
+				"publishable": true,
+				"unitTestRunner": "vitest"
+			},
+			"component": {
+				"style": "tailwind"
+			},
+			"library": {
+				"style": "css",
+				"linter": "none",
+				"bundler": "vite",
+				"compiler": "swc",
+				"projectNameAndRootFormat": "derived",
+				"publishable": true,
+				"unitTestRunner": "vitest"
+			}
+		}
+	},
+	"release": {
+		"projects": ["ui-kit", "web"],
+		"projectsRelationship": "independent",
+		"changelog": {
+			"projectChangelogs": false,
+			"workspaceChangelog": false
+		},
+		"version": {
+			"preVersionCommand": "pnpm dlx nx run-many -t build",
+			"git": {
+				"stageChanges": true,
+				"tag": true,
+				"commit": true,
+				"commitMessage": "chore(release): {projectName}@{version}"
+			}
+		},
+		"releaseTag": {
+			"pattern": "{projectName}@{version}"
+		}
+	},
+	"defaultBase": "origin/main",
+	"analytics": true,
+	"migrate": {
+		"agentic": false
+	}
 }

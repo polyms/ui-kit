@@ -1,21 +1,21 @@
 .docs {
-  & > p,
-  & > pre {
-    @apply mb-2;
-  }
+	& > p,
+	& > pre {
+		@apply mb-2;
+	}
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply relative flex items-center;
-  }
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply relative flex items-center;
+	}
 
-  h1 {
-    @apply mb-4;
-  }
+	h1 {
+		@apply mb-4;
+	}
 
-  /* 
+	/* 
   h1 + p,
   h2 + p,
   h3 + p,
@@ -24,49 +24,49 @@
     @apply mt-2;
   } */
 
-  h2,
-  h3 {
-    @apply mb-2;
-  }
+	h2,
+	h3 {
+		@apply mb-2;
+	}
 
-  h2.h2::before,
-  h3.h3::before {
-    bottom: -3px;
-    width: 2rem;
-    height: 3px;
+	h2.h2::before,
+	h3.h3::before {
+		bottom: -3px;
+		width: 2rem;
+		height: 3px;
 
-    content: '';
-    @apply absolute rounded-full bg-primary-700/50;
-  }
+		content: '';
+		@apply absolute rounded-full bg-primary-700/50;
+	}
 
-  pre + p {
-    @apply mt-4;
-  }
+	pre + p {
+		@apply mt-4;
+	}
 
-  h2,
-  h3,
-  h4 {
-    @apply pt-6 font-semibold;
-  }
+	h2,
+	h3,
+	h4 {
+		@apply pt-6 font-semibold;
+	}
 
-  ul {
-    @apply mb-2 list-inside list-disc;
-  }
+	ul {
+		@apply mb-2 list-inside list-disc;
+	}
 
-  /* Release notes: date above the version, Latest badge on the same line. */
-  .release-date {
-    @apply mt-8 mb-0 text-muted text-sm;
-  }
+	/* Release notes: date above the version, Latest badge on the same line. */
+	.release-date {
+		@apply mt-8 mb-0 text-muted text-sm;
+	}
 
-  .release-date + h2 {
-    @apply mb-4 inline-flex w-auto pt-1;
-  }
+	.release-date + h2 {
+		@apply mb-4 inline-flex w-auto pt-1;
+	}
 
-  .release-date + h2 + .badge {
-    @apply ms-2 align-middle;
-  }
+	.release-date + h2 + .badge {
+		@apply ms-2 align-middle;
+	}
 
-  .tabs-panel > pre {
-    height: 100%;
-  }
+	.tabs-panel > pre {
+		height: 100%;
+	}
 }

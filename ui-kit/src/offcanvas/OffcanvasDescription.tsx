@@ -9,9 +9,9 @@ type OffcanvasDescriptionProps = Drawer.Description.Props
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const OffcanvasDescription = forwardRef<HTMLDivElement, OffcanvasDescriptionProps>(
-  ({ className, ...props }, ref) => (
-    <Drawer.Description className={clsx('offcanvas-description', className)} ref={ref} {...props} />
-  )
+	({ className, ...props }, ref) => (
+		<Drawer.Description className={clsx('offcanvas-description', className)} ref={ref} {...props} />
+	)
 )
 
 OffcanvasDescription.displayName = 'OffcanvasDescription'

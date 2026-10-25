@@ -2,7 +2,7 @@ import { Select } from '@base-ui/react'
 import clsx from 'clsx'
 
 export const SelectSeparator = ({ className, ...props }: SelectSeparatorProps) => (
-  <Select.Separator className={clsx(className, 'select-separator')} {...props} />
+	<Select.Separator className={clsx(className, 'select-separator')} {...props} />
 )
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────

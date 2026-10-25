@@ -1,78 +1,78 @@
 .table {
-  /* Reset needed for nesting tables */
-  --table-color-type: initial;
-  --table-bg-type: initial;
-  --table-color-state: initial;
-  --table-bg-state: initial;
-  /* End of reset */
-  --table-color: var(--fg);
-  --table-bg: var(--body);
-  --table-border-color: var(--line);
-  --table-accent-bg: transparent;
-  --table-striped-color: var(--table-color);
-  --table-striped-bg: var(--color-neutral-50);
-  --table-active-color: var(--table-color);
-  --table-active-bg: var(--color-neutral-100);
-  --table-hover-color: var(--table-color);
-  --table-hover-bg: hsla(210, 17%, 84%, 0.25);
-  --table-border-width: 1px;
+	/* Reset needed for nesting tables */
+	--table-color-type: initial;
+	--table-bg-type: initial;
+	--table-color-state: initial;
+	--table-bg-state: initial;
+	/* End of reset */
+	--table-color: var(--fg);
+	--table-bg: var(--body);
+	--table-border-color: var(--line);
+	--table-accent-bg: transparent;
+	--table-striped-color: var(--table-color);
+	--table-striped-bg: var(--color-neutral-50);
+	--table-active-color: var(--table-color);
+	--table-active-bg: var(--color-neutral-100);
+	--table-hover-color: var(--table-color);
+	--table-hover-bg: hsla(210, 17%, 84%, 0.25);
+	--table-border-width: 1px;
 
-  width: 100%;
-  font-size: 0.875rem;
-  vertical-align: top;
+	width: 100%;
+	font-size: 0.875rem;
+	vertical-align: top;
 
-  /* 
+	/* 
   // Target th & td
   // We need the child combinator to prevent styles leaking to nested tables which doesn't have a `.table` class.
   // We use the universal selectors here to simplify the selector (else we would need 6 different selectors).
   // Another advantage is that this generates less code and makes the selector less specific making it easier to override. */
-  > :not(caption) > * > * {
-    padding: 0.5rem 0.5rem;
-    /* Following the precept of cascades: https://codepen.io/miriamsuzanne/full/vYNgodb */
-    color: var(--table-color-state, var(--table-color-type, var(--table-color)));
-    background-color: var(--table-bg);
-    border-color: var(--table-border-color);
-    border-bottom-width: var(--table-border-width);
-    box-shadow: inset 0 0 0 9999px var(--table-bg-state, var(--table-bg-type, var(--table-accent-bg)));
-  }
+	> :not(caption) > * > * {
+		padding: 0.5rem 0.5rem;
+		/* Following the precept of cascades: https://codepen.io/miriamsuzanne/full/vYNgodb */
+		color: var(--table-color-state, var(--table-color-type, var(--table-color)));
+		background-color: var(--table-bg);
+		border-color: var(--table-border-color);
+		border-bottom-width: var(--table-border-width);
+		box-shadow: inset 0 0 0 9999px var(--table-bg-state, var(--table-bg-type, var(--table-accent-bg)));
+	}
 
-  &:not(.table-bordered) tbody > tr:last-child > * {
-    border-color: transparent;
-  }
+	&:not(.table-bordered) tbody > tr:last-child > * {
+		border-color: transparent;
+	}
 
-  > tbody {
-    vertical-align: inherit;
-  }
+	> tbody {
+		vertical-align: inherit;
+	}
 
-  > thead {
-    vertical-align: bottom;
+	> thead {
+		vertical-align: bottom;
 
-    &.bg-neutral {
-      tr > th {
-        background-color: var(--surface);
-      }
-    }
-  }
+		&.bg-neutral {
+			tr > th {
+				background-color: var(--surface);
+			}
+		}
+	}
 
-  th,
-  td {
-    text-align: start;
-  }
+	th,
+	td {
+		text-align: start;
+	}
 
-  th {
-    font-weight: 600;
-    line-height: 1.5rem;
-  }
+	th {
+		font-weight: 600;
+		line-height: 1.5rem;
+	}
 
-  tfoot {
-    tr > * {
-      border-top: 1px var(--line) solid;
-    }
-  }
+	tfoot {
+		tr > * {
+			border-top: 1px var(--line) solid;
+		}
+	}
 }
 
 .table-group-divider {
-  border-top: calc(var(--table-border-width) * 2) solid currentcolor;
+	border-top: calc(var(--table-border-width) * 2) solid currentcolor;
 }
 
 /* 
@@ -81,7 +81,7 @@
 // */
 
 .caption-top {
-  caption-side: top;
+	caption-side: top;
 }
 
 /* 
@@ -90,15 +90,15 @@
 // */
 
 .table-sm {
-  > :not(caption) > * > * {
-    padding: 0.25rem 0.5rem;
-  }
+	> :not(caption) > * > * {
+		padding: 0.25rem 0.5rem;
+	}
 }
 
 .table-lg {
-  > :not(caption) > * > * {
-    line-height: 1.5rem;
-  }
+	> :not(caption) > * > * {
+		line-height: 1.5rem;
+	}
 }
 
 /*
@@ -112,25 +112,25 @@
 // to the `td`s or `th`s */
 
 .table-bordered {
-  > :not(caption) > * {
-    border-color: var(--table-border-color);
-    border-width: var(--table-border-width) 0;
+	> :not(caption) > * {
+		border-color: var(--table-border-color);
+		border-width: var(--table-border-width) 0;
 
-    > * {
-      border-color: var(--table-border-color);
-      border-width: 0 var(--table-border-width);
-    }
-  }
+		> * {
+			border-color: var(--table-border-color);
+			border-width: 0 var(--table-border-width);
+		}
+	}
 }
 
 .table-borderless {
-  > :not(caption) > * > * {
-    border-bottom-width: 0;
-  }
+	> :not(caption) > * > * {
+		border-bottom-width: 0;
+	}
 
-  > :not(:first-child) {
-    border-top-width: 0;
-  }
+	> :not(:first-child) {
+		border-top-width: 0;
+	}
 }
 
 /* 
@@ -140,18 +140,18 @@
 
 /* For rows */
 .table-striped {
-  > tbody > tr:nth-of-type(even) > * {
-    --table-color-type: var(--table-striped-color);
-    --table-bg-type: var(--table-striped-bg);
-  }
+	> tbody > tr:nth-of-type(even) > * {
+		--table-color-type: var(--table-striped-color);
+		--table-bg-type: var(--table-striped-bg);
+	}
 }
 
 /* For columns */
 .table-striped-columns {
-  > :not(caption) > tr > :nth-child(even) {
-    --table-color-type: var(--table-striped-color);
-    --table-bg-type: var(--table-striped-bg);
-  }
+	> :not(caption) > tr > :nth-child(even) {
+		--table-color-type: var(--table-striped-color);
+		--table-bg-type: var(--table-striped-bg);
+	}
 }
 
 /* 
@@ -160,8 +160,8 @@
 // The `.table-active` class can be added to highlight rows or cells */
 
 .table-active {
-  --table-color-state: var(--table-active-color);
-  --table-bg-state: var(--table-active-bg);
+	--table-color-state: var(--table-active-color);
+	--table-bg-state: var(--table-active-bg);
 }
 
 /* 
@@ -170,15 +170,15 @@
 // Placed here since it has to come after the potential zebra striping */
 
 .table-hover {
-  > tbody > tr:hover > * {
-    --table-color-state: var(--table-hover-color);
-    --table-bg-state: var(--table-hover-bg);
-  }
+	> tbody > tr:hover > * {
+		--table-color-state: var(--table-hover-color);
+		--table-bg-state: var(--table-hover-bg);
+	}
 }
 
 thead.thead-light {
-  tr > th {
-    background-color: var(--surface);
-    border-bottom: 1px solid var(--line);
-  }
+	tr > th {
+		background-color: var(--surface);
+		border-bottom: 1px solid var(--line);
+	}
 }

@@ -3,14 +3,14 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import { Button } from '@polyms/ui-kit'
 
 export default function ButtonTooltip() {
-  return (
-    <div className='card card-body items-center gap-4'>
-      <Button rounded tooltip='Save changes to the server' variant='primary'>
-        Save
-      </Button>
-      <Button icon rounded tooltip='Dismiss'>
-        <HugeiconsIcon className='btn-icon-content' icon={Cancel01Icon} strokeWidth={2} />
-      </Button>
-    </div>
-  )
+	return (
+		<div className='card card-body items-center gap-4'>
+			<Button rounded tooltip='Save changes to the server' variant='primary'>
+				Save
+			</Button>
+			<Button icon rounded tooltip='Dismiss'>
+				<HugeiconsIcon className='btn-icon-content' icon={Cancel01Icon} strokeWidth={2} />
+			</Button>
+		</div>
+	)
 }

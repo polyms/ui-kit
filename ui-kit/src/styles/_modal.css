@@ -1,169 +1,169 @@
 .modal {
-  z-index: var(--zindex-modal-backdrop);
-  @apply fixed top-0 left-0 flex h-full w-full flex-col overflow-x-hidden overflow-y-auto outline-none;
+	z-index: var(--zindex-modal-backdrop);
+	@apply fixed top-0 left-0 flex h-full w-full flex-col overflow-x-hidden overflow-y-auto outline-none;
 }
 
 .modal-dialog {
-  z-index: var(--zindex-modal);
-  transition-duration: 300ms;
-  @apply pointer-events-none relative flex w-full p-1 outline-0;
-  @apply transition-all ease-out;
+	z-index: var(--zindex-modal);
+	transition-duration: 300ms;
+	@apply pointer-events-none relative flex w-full p-1 outline-0;
+	@apply transition-all ease-out;
 
-  &[data-nested-dialog-open] {
-    .modal-content::after {
-      position: absolute;
-      inset: -1px;
-      content: '';
-      background-color: rgb(0 0 0 / 0.6);
-      border-radius: inherit;
-    }
+	&[data-nested-dialog-open] {
+		.modal-content::after {
+			position: absolute;
+			inset: -1px;
+			content: '';
+			background-color: rgb(0 0 0 / 0.6);
+			border-radius: inherit;
+		}
 
-    .modal-close {
-      display: none;
-    }
-  }
+		.modal-close {
+			display: none;
+		}
+	}
 
-  &[data-starting-style],
-  &[data-ending-style] {
-    opacity: 0;
-    transform: translateY(2rem) scale(0.97);
-  }
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: translateY(2rem) scale(0.97);
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .modal .modal-dialog {
-    @apply transition-none;
-  }
+	.modal .modal-dialog {
+		@apply transition-none;
+	}
 }
 
 .modal-content {
-  background-color: var(--body);
+	background-color: var(--body);
 
-  /* overflow: hidden; */
-  border-radius: 1.5rem;
-  @apply pointer-events-auto relative flex w-full flex-auto flex-col bg-clip-padding outline-none;
-  @apply ring-4 ring-white/30;
+	/* overflow: hidden; */
+	border-radius: 1.5rem;
+	@apply pointer-events-auto relative flex w-full flex-auto flex-col bg-clip-padding outline-none;
+	@apply ring-4 ring-white/30;
 }
 
 .modal-backdrop {
-  z-index: var(--zindex-modal-backdrop);
-  opacity: 0.8;
-  transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
-  @apply fixed inset-0 h-screen w-screen bg-black;
+	z-index: var(--zindex-modal-backdrop);
+	opacity: 0.8;
+	transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
+	@apply fixed inset-0 h-screen w-screen bg-black;
 
-  &[data-starting-style] {
-    transition: opacity 150ms cubic-bezier(0.45, 1.005, 0, 1.005);
-  }
+	&[data-starting-style] {
+		transition: opacity 150ms cubic-bezier(0.45, 1.005, 0, 1.005);
+	}
 
-  &[data-starting-style],
-  &[data-ending-style] {
-    opacity: 0;
-  }
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+	}
 }
 
 .modal-header {
-  font-size: 22px;
-  @apply flex shrink-0 items-center gap-2 leading-5;
-  @apply rounded-t-3xl p-5 font-semibold;
+	font-size: 22px;
+	@apply flex shrink-0 items-center gap-2 leading-5;
+	@apply rounded-t-3xl p-5 font-semibold;
 
-  .modal-close {
-    @apply self-start;
-    /* @apply -mt-2 -mr-2 -mb-2 m-auto p-2; */
-  }
+	.modal-close {
+		@apply self-start;
+		/* @apply -mt-2 -mr-2 -mb-2 m-auto p-2; */
+	}
 }
 
 .modal-title {
-  @apply mb-0 leading-normal;
+	@apply mb-0 leading-normal;
 }
 
 .modal-body {
-  @apply relative flex-auto p-5;
+	@apply relative flex-auto p-5;
 
-  .modal-header + & {
-    @apply pt-0;
-  }
+	.modal-header + & {
+		@apply pt-0;
+	}
 }
 
 .modal-footer {
-  position: sticky;
-  bottom: 0;
-  padding: 0.5rem 1.5rem 1rem;
-  border-radius: 1.5rem;
-  @apply flex shrink-0 flex-wrap items-center justify-end gap-2 backdrop-blur-lg;
+	position: sticky;
+	bottom: 0;
+	padding: 0.5rem 1.5rem 1rem;
+	border-radius: 1.5rem;
+	@apply flex shrink-0 flex-wrap items-center justify-end gap-2 backdrop-blur-lg;
 }
 
 .modal-close {
-  position: absolute;
-  top: -1.5rem;
-  left: 100%;
-  @apply z-10 flex p-2;
-  @apply cursor-pointer rounded-full outline-0;
-  @apply text-neutral-300 hover:bg-neutral-50/10 hover:text-neutral-50;
-  @apply border border-dashed border-transparent focus:border-neutral-300;
+	position: absolute;
+	top: -1.5rem;
+	left: 100%;
+	@apply z-10 flex p-2;
+	@apply cursor-pointer rounded-full outline-0;
+	@apply text-neutral-300 hover:bg-neutral-50/10 hover:text-neutral-50;
+	@apply border border-dashed border-transparent focus:border-neutral-300;
 }
 
 @media (min-width: 40rem) {
-  .modal-dialog {
-    max-width: var(--container-lg);
+	.modal-dialog {
+		max-width: var(--container-lg);
 
-    padding-block: 2rem;
-    @apply mx-auto;
-  }
+		padding-block: 2rem;
+		@apply mx-auto;
+	}
 
-  .modal-sm .modal-dialog {
-    max-width: var(--container-sm);
-  }
+	.modal-sm .modal-dialog {
+		max-width: var(--container-sm);
+	}
 }
 
 @media (min-width: 64rem) {
-  .modal-lg .modal-dialog {
-    max-width: var(--container-3xl);
-  }
+	.modal-lg .modal-dialog {
+		max-width: var(--container-3xl);
+	}
 
-  .modal-xl .modal-dialog {
-    max-width: var(--container-4xl);
-  }
+	.modal-xl .modal-dialog {
+		max-width: var(--container-4xl);
+	}
 }
 
 @media (min-width: 80rem) {
-  .modal-xl .modal-dialog {
-    max-width: var(--container-5xl);
-  }
+	.modal-xl .modal-dialog {
+		max-width: var(--container-5xl);
+	}
 }
 
 .modal-dialog-scrollable {
-  max-height: calc(100dvh - 2rem);
+	max-height: calc(100dvh - 2rem);
 
-  .modal-content {
-    @apply max-h-full;
-  }
+	.modal-content {
+		@apply max-h-full;
+	}
 
-  .modal-body {
-    overflow: auto;
-  }
+	.modal-body {
+		overflow: auto;
+	}
 }
 
 .modal-dialog-centered {
-  @apply my-auto items-center;
+	@apply my-auto items-center;
 }
 
 .modal-full {
-  .modal-dialog {
-    display: flex;
-    flex-direction: column-reverse;
-    width: 100dvw;
-    max-width: none;
-    height: 100dvh;
-    padding: 2rem 0 0 0;
-  }
+	.modal-dialog {
+		display: flex;
+		flex-direction: column-reverse;
+		width: 100dvw;
+		max-width: none;
+		height: 100dvh;
+		padding: 2rem 0 0 0;
+	}
 
-  .modal-content {
-    height: calc(100dvh - 2rem);
-    border-end-start-radius: 0;
-    border-end-end-radius: 0;
+	.modal-content {
+		height: calc(100dvh - 2rem);
+		border-end-start-radius: 0;
+		border-end-end-radius: 0;
 
-    .modal-body {
-      overflow-y: auto;
-    }
-  }
+		.modal-body {
+			overflow-y: auto;
+		}
+	}
 }

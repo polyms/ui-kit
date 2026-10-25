@@ -8,31 +8,31 @@ import { RadioProvider } from './RadioContext'
 export type RadioGroupOrientation = 'vertical' | 'horizontal'
 
 export interface RadioGroupProps extends BaseRadioGroup.Props<string> {
-  orientation?: RadioGroupOrientation
-  size?: RadioSize
-  variant?: RadioVariant
+	orientation?: RadioGroupOrientation
+	size?: RadioSize
+	variant?: RadioVariant
 }
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export function RadioGroup({
-  children,
-  className,
-  orientation = 'vertical',
-  size,
-  variant,
-  ...props
+	children,
+	className,
+	orientation = 'vertical',
+	size,
+	variant,
+	...props
 }: RadioGroupProps) {
-  return (
-    <RadioProvider size={size} variant={variant}>
-      <BaseRadioGroup
-        {...props}
-        className={clsx('radio-group', className, {
-          'radio-group-horizontal': orientation === 'horizontal',
-        })}
-      >
-        {children}
-      </BaseRadioGroup>
-    </RadioProvider>
-  )
+	return (
+		<RadioProvider size={size} variant={variant}>
+			<BaseRadioGroup
+				{...props}
+				className={clsx('radio-group', className, {
+					'radio-group-horizontal': orientation === 'horizontal',
+				})}
+			>
+				{children}
+			</BaseRadioGroup>
+		</RadioProvider>
+	)
 }

@@ -1,436 +1,477 @@
 /* ── Landing page (route /) ─────────────────────────────────────────────────────────────────────────────
-   Component-scoped styles for the home page. Keeps JSX clean by encapsulating:
-   - long Tailwind utility chains
-   - colors outside the project main variants (primary / neutral)
-   The page itself only references primary-*, neutral-*, and these semantic classes.
+   Cream studio skin for the home page. Cute lives in the mascot, chips, and motion.
+   Component demos, type, and spacing stay product UI.
 
-   Loaded lazily via `?url` + TanStack Router `head` API (only for the landing route).
-   `@reference` brings in token context (primary-*, neutral-*, ...) so `@apply` resolves correctly.
+   Loaded via `?url` on the landing route only. `@reference` brings in token context so `@apply` resolves.
    ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
 
 @reference './tailwind.css';
 
+/* ── Canvas ──────────────────────────────────────────────────────────────────────────────────────────── */
+
+main.landing {
+	--home-canvas: #fff6ee;
+	--home-ink: var(--color-neutral-900);
+	--home-muted: var(--color-neutral-600);
+	--home-card-shadow: 0 8px 24px rgb(31 40 61 / 6%);
+
+	position: relative;
+	color: var(--home-ink);
+	background-color: var(--home-canvas);
+}
+
 /* ── Background decor ────────────────────────────────────────────────────────────────────────────────── */
 
 .home-decor {
-  @apply pointer-events-none fixed inset-0 -z-10 overflow-hidden;
+	@apply pointer-events-none fixed inset-0 -z-10 overflow-hidden;
 }
 
 .home-decor-grid {
-  background-image: radial-gradient(var(--color-neutral-800) 1px, transparent 1px);
-  background-size: 28px 28px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-  @apply absolute inset-0 opacity-60;
+	background-image: radial-gradient(
+		color-mix(in oklab, var(--color-neutral-400) 45%, transparent) 1px,
+		transparent 1px
+	);
+	background-size: 28px 28px;
+	-webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+	mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+	@apply absolute inset-0 opacity-70;
 }
 
 .home-decor-glow {
-  @apply absolute rounded-full blur-3xl;
+	@apply absolute rounded-full blur-3xl;
+}
+
+.home-decor-glow-peach {
+	background-color: color-mix(in oklab, var(--color-info-300) 55%, transparent);
+}
+
+.home-decor-glow-cyan {
+	background-color: color-mix(in oklab, var(--color-primary-300) 45%, transparent);
 }
 
 /* ── Nav bar ─────────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-nav {
-  @apply sticky top-0 z-30 border-b border-neutral-800/60 bg-neutral-950/70 backdrop-blur-md;
+	background-color: rgb(255 246 238 / 94%);
+	border-bottom: 1px solid color-mix(in oklab, var(--color-neutral-900) 8%, transparent);
+	@apply sticky top-0 z-30 backdrop-blur-md;
 }
 
 .home-nav-tag {
-  @apply inline-flex items-center rounded-full border border-primary-700/30 bg-primary-700/10 px-2 py-0.5 text-[10px] font-medium tracking-wider text-primary-300 uppercase;
+	@apply inline-flex items-center rounded-full border border-neutral-500 border-dashed bg-white px-2 py-0.5 text-[10px] font-bold text-neutral-700;
 }
 
 .home-nav-link {
-  @apply rounded-full px-4 py-1.5 text-neutral-400 transition-colors;
+	@apply rounded-full px-4 py-1.5 text-neutral-600 transition-colors;
 }
 
 .home-nav-link:hover {
-  @apply bg-neutral-800/60 text-neutral-100;
-}
-
-/* ── Glass button (dark) ─────────────────────────────────────────────────────────────────────────────── */
-
-.home-btn-glass {
-  @apply inline-flex items-center gap-2 rounded-full border border-neutral-700 bg-neutral-900/60 font-medium text-neutral-100 backdrop-blur-sm transition-all;
-}
-
-.home-btn-glass:hover {
-  @apply border-neutral-600 bg-neutral-800/80;
-}
-
-.home-btn-glass.sm {
-  @apply px-3 py-1.5 text-xs;
-}
-
-.home-btn-glass.md {
-  @apply px-5 py-2.5 text-sm;
-}
-
-.home-btn-glass.lg {
-  @apply justify-center px-6 py-3 text-sm;
+	@apply bg-white text-neutral-900;
 }
 
 /* ── Hero ────────────────────────────────────────────────────────────────────────────────────────────── */
 
-.home-hero-pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300 shadow-sm backdrop-blur-sm transition-all;
+.home-hero {
+	@apply px-6 pt-10 pb-16 md:pt-16 md:pb-24;
 }
 
-.home-hero-pill:hover {
-  @apply border-primary-700/40 text-primary-300;
+.home-hero-grid {
+	@apply grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8;
 }
 
-.home-hero-pill .arrow {
-  @apply size-3 text-neutral-500 transition-transform;
+.home-hero-title {
+	font-size: clamp(2.6rem, 5vw, 4.25rem);
+	line-height: 1.05;
+	@apply mt-4 text-balance font-semibold text-neutral-900 tracking-tight;
 }
 
-.home-hero-pill:hover .arrow {
-  @apply translate-x-0.5 text-primary-400;
+.home-hero-title-line {
+	@apply mt-1 block;
 }
 
-.home-hero-pill .sep {
-  @apply text-neutral-700;
+.home-hero-accent {
+	color: var(--color-info-600);
 }
 
-.home-hero-pulse {
-  @apply relative inline-flex size-1.5;
+.home-hero-sub {
+	@apply mt-5 max-w-xl text-pretty text-base text-neutral-600 md:text-lg;
 }
 
-.home-hero-pulse::before,
-.home-hero-pulse::after {
-  content: '';
-  @apply inline-flex rounded-full bg-primary-700;
+.home-hero-em {
+	@apply font-medium text-neutral-900;
 }
 
-.home-hero-pulse::before {
-  @apply absolute h-full w-full animate-ping opacity-75;
+.home-hero-actions {
+	@apply mt-8 flex flex-wrap items-center gap-3;
 }
 
-.home-hero-pulse::after {
-  @apply relative size-1.5;
+/* Stage */
+
+.home-hero-stage {
+	@apply relative mx-auto aspect-square w-full max-w-xl;
 }
 
-.home-hero-title-mute {
-  @apply bg-linear-to-b from-neutral-100 to-neutral-400 bg-clip-text text-transparent;
+.home-hero-mascot {
+	animation: home-bob 6s ease-in-out infinite;
+	@apply pointer-events-none relative z-10 mx-auto block w-[92%] max-w-none;
 }
 
-.home-hero-title-accent {
-  @apply bg-linear-to-r from-primary-700 via-primary-400 to-primary-300 bg-clip-text text-transparent;
+.home-speech {
+	box-shadow: var(--home-card-shadow);
+	@apply absolute top-4 left-4 z-20 max-w-44 rounded-2xl border border-white/80 bg-white px-3 py-2 font-semibold text-neutral-800 text-sm;
 }
 
-/* ── Cyber-Brutalism Extensions ──────────────────────────────────────────────────────────────────────── */
-
-.home-text-outline {
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
-}
-.home-text-outline-neon {
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1.5px var(--color-primary-400);
-  filter: drop-shadow(0 0 10px var(--color-primary-500));
+.home-speech::after {
+	content: '';
+	@apply absolute -bottom-1.5 left-4 size-3 rotate-45 border-r border-b border-white/80 bg-white;
 }
 
-.home-marquee-container {
-  box-shadow: 0 0 40px rgba(var(--color-primary-500), 0.3);
-  transform: rotate(-3deg);
-  @apply relative left-[-5vw] z-10 flex w-[110vw] overflow-hidden border-y border-primary-500/50 bg-primary-900/40 py-4 backdrop-blur-md;
+/* Inventory chips */
+
+.home-chip {
+	box-shadow: var(--home-card-shadow);
+	animation-name: home-bob;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	@apply absolute z-20 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white px-3 py-1.5 font-semibold text-neutral-800 text-xs;
 }
 
-.home-marquee-content {
-  animation: scroll-marquee 20s linear infinite;
-  @apply flex whitespace-nowrap;
+.home-chip-type {
+	top: 18%;
+	right: 6%;
+	animation-duration: 3s;
 }
 
-@keyframes scroll-marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.home-chip-color {
+	bottom: 18%;
+	left: 4%;
+	animation-duration: 4s;
+	animation-delay: -1s;
 }
 
-.home-cyber-btn {
-  box-shadow: 0 0 16px color-mix(in srgb, var(--color-primary-500) 15%, transparent);
-  @apply relative z-30 inline-flex cursor-pointer items-center gap-2 px-8 py-4 font-bold tracking-widest text-primary-50 uppercase transition-all duration-500;
-
-  /* Tinted Glass effect */
-  @apply border border-primary-300/30 bg-primary-500/15 backdrop-blur-md;
-
-  /* Geometric Leaf */
-  @apply rounded-tl-3xl rounded-tr-lg rounded-br-3xl rounded-bl-lg;
+.home-chip-pen {
+	right: 8%;
+	bottom: 12%;
+	animation-duration: 5s;
+	animation-delay: -2s;
 }
 
-.home-cyber-btn:hover {
-  box-shadow: 0 0 24px color-mix(in srgb, var(--color-primary-500) 25%, transparent);
-  @apply scale-102 border-primary-200/50 bg-primary-500/20 text-white;
+.home-chip-dot {
+	@apply size-2 rounded-full;
 }
 
-.home-scanline {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0) 50%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.2)
-  );
-  background-size: 100% 4px;
-  @apply pointer-events-none fixed inset-0 z-50 opacity-15;
+.home-chip-dot.tone-type {
+	background-color: var(--color-primary-500);
 }
 
-.home-mascot-breakout {
-  width: clamp(150px, 50vw, 600px);
-  filter: drop-shadow(0 0 60px rgba(var(--color-primary-500), 0.5));
-  animation: mascot-float 6s ease-in-out infinite;
-  @apply pointer-events-none absolute top-0 right-0 z-20 opacity-70 md:right-[-20px] lg:top-[5%] lg:right-[-5%] lg:opacity-100;
+.home-chip-dot.tone-color {
+	background-color: var(--color-info-500);
 }
 
-@keyframes mascot-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(2deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(-2deg);
-  }
+.home-chip-dot.tone-pen {
+	background-color: var(--color-warning-500);
+}
+
+@keyframes home-bob {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-8px);
+	}
 }
 
 /* ── Section header ──────────────────────────────────────────────────────────────────────────────────── */
 
 .home-section-eyebrow {
-  @apply inline-flex items-center gap-2 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-primary-700/20 bg-primary-700/10 px-5 py-1.5 text-xs font-bold tracking-widest uppercase text-primary-300;
+	@apply inline-flex items-center gap-2 rounded-full border border-info-600 bg-white px-3 py-1 font-semibold text-info-600 text-xs;
 }
 
-/* ── Showcase card (white card on dark bg) ───────────────────────────────────────────────────────────── */
+.home-section-title {
+	@apply mt-4 text-balance font-semibold text-3xl text-neutral-900 tracking-tight md:text-4xl;
+}
+
+.home-section-sub {
+	@apply mt-3 text-balance text-neutral-600 md:text-lg;
+}
+
+/* ── Showcase card ───────────────────────────────────────────────────────────────────────────────────── */
 
 .home-showcase-card {
-  @apply relative flex flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 backdrop-blur-md transition-all duration-500;
+	color-scheme: light;
+	background-color: #fff;
+	box-shadow: var(--home-card-shadow);
+	@apply relative flex flex-col overflow-hidden rounded-2xl border border-neutral-200/80 transition-transform duration-300;
 }
 
 .home-showcase-card:hover {
-  @apply -translate-y-2 border-primary-700/40 shadow-2xl shadow-primary-700/10;
+	@apply -translate-y-1 border-neutral-200;
 }
 
 .home-showcase-card-footer {
-  @apply flex items-center justify-between border-t border-neutral-800/80 bg-neutral-950/60 px-4 py-3 backdrop-blur-md;
+	@apply flex items-center justify-between border-t border-neutral-200 bg-neutral-50/80 px-4 py-3;
 }
 
 /* ── Features grid ───────────────────────────────────────────────────────────────────────────────────── */
 
 .home-feature-grid {
-  @apply grid gap-px overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-800/40 sm:grid-cols-2 lg:grid-cols-3;
+	@apply grid gap-4 sm:grid-cols-2 lg:grid-cols-3;
 }
 
 .home-feature {
-  @apply relative bg-neutral-950/70 p-7 transition-colors;
+	box-shadow: var(--home-card-shadow);
+	@apply rounded-2xl border border-neutral-200/80 bg-white p-7 transition-transform duration-300;
 }
 
 .home-feature:hover {
-  @apply bg-neutral-900/60;
+	@apply -translate-y-1;
+}
+
+.home-feature-title {
+	@apply mt-5 font-semibold text-base text-neutral-900;
+}
+
+.home-feature-copy {
+	@apply mt-2 text-neutral-600 text-sm leading-relaxed;
 }
 
 .home-feature-icon {
-  color: var(--feature-tone-fg);
-  background-color: color-mix(in oklab, var(--feature-tone) 15%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--feature-tone) 25%, transparent);
-  @apply inline-flex size-11 items-center justify-center rounded-xl;
+	color: var(--feature-tone-fg);
+	background-color: color-mix(in oklab, var(--feature-tone) 14%, white);
+	box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--feature-tone) 22%, transparent);
+	@apply inline-flex size-11 items-center justify-center rounded-full;
 }
 
 .home-feature-icon.tone-primary {
-  --feature-tone: var(--color-primary-500);
-  --feature-tone-fg: var(--color-primary-300);
+	--feature-tone: var(--color-primary-500);
+	--feature-tone-fg: var(--color-primary-700);
 }
 
 .home-feature-icon.tone-success {
-  --feature-tone: var(--color-success-500);
-  --feature-tone-fg: var(--color-success-400);
+	--feature-tone: var(--color-success-500);
+	--feature-tone-fg: var(--color-success-700);
 }
 
 .home-feature-icon.tone-warning {
-  --feature-tone: var(--color-warning-500);
-  --feature-tone-fg: var(--color-warning-300);
+	--feature-tone: var(--color-warning-500);
+	--feature-tone-fg: var(--color-warning-700);
+}
+
+/* ── Band (theming) ──────────────────────────────────────────────────────────────────────────────────── */
+
+.home-band {
+	background-color: color-mix(in srgb, white 55%, var(--home-canvas));
+	border-block: 1px solid color-mix(in oklab, var(--color-neutral-900) 6%, transparent);
+}
+
+.home-band-title {
+	@apply mt-4 text-balance font-semibold text-3xl text-neutral-900 tracking-tight md:text-4xl;
+}
+
+.home-band-copy {
+	@apply mt-4 max-w-xl text-neutral-600 md:text-lg;
+}
+
+.home-band-list {
+	@apply mt-8 space-y-4 text-neutral-700;
+}
+
+.home-band-icon {
+	@apply flex size-8 shrink-0 items-center justify-center rounded-full text-white bg-neutral-700;
 }
 
 /* ── Metrics ─────────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-metric-grid {
-  @apply grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-800/40 lg:grid-cols-4;
+	@apply grid grid-cols-2 gap-4 lg:grid-cols-4;
 }
 
 .home-metric-cell {
-  @apply bg-neutral-950/70 p-6 md:p-8;
+	@apply rounded-2xl border border-neutral-200/80 bg-white p-6 md:p-8;
 }
 
 .home-metric-value {
-  @apply bg-linear-to-b from-neutral-100 to-primary-400 bg-clip-text text-4xl font-semibold tracking-tight text-transparent md:text-5xl;
+	@apply font-semibold text-4xl text-neutral-900 tracking-tight md:text-5xl;
+}
+
+/* ── FAQ ─────────────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-faq {
+	box-shadow: 0 8px 24px rgb(31 40 61 / 4%);
+	@apply rounded-2xl border border-neutral-200 bg-white p-6;
+}
+
+.home-faq-q {
+	@apply font-medium text-lg text-neutral-900;
+}
+
+.home-faq-a {
+	@apply mt-2 text-neutral-600 leading-relaxed;
 }
 
 /* ── CTA banner ──────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-cta {
-  background: linear-gradient(
-    to bottom right,
-    var(--color-neutral-900),
-    color-mix(in oklab, var(--color-primary-950) 40%, var(--color-neutral-900)),
-    var(--color-neutral-900)
-  );
-  @apply relative overflow-hidden rounded-3xl border border-neutral-800 p-10 md:p-16;
+	background: linear-gradient(180deg, #fff 0%, #fff4ea 100%);
+	@apply relative overflow-hidden rounded-3xl border border-neutral-200 p-8 md:p-14;
 }
 
-.home-cta-pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-primary-700/30 bg-neutral-950/60 px-3 py-1 text-xs font-medium text-primary-300 backdrop-blur-sm;
+.home-cta-body {
+	@apply relative z-10 max-w-2xl md:pe-48;
+}
+
+.home-cta-title {
+	@apply mt-4 max-w-2xl text-balance font-semibold text-3xl text-neutral-900 tracking-tight md:text-5xl;
 }
 
 .home-cta-accent {
-  @apply bg-linear-to-r from-primary-300 to-primary-500 bg-clip-text text-transparent;
+	color: var(--color-info-600);
 }
 
 .home-cta-link {
-  @apply font-medium text-primary-300 underline-offset-4;
+	@apply font-medium text-primary-700 underline-offset-4;
 }
 
 .home-cta-link:hover {
-  @apply text-primary-200 underline;
+	@apply text-primary-800 underline;
+}
+
+.home-cta-mascot {
+	-webkit-mask-image: linear-gradient(to top, transparent 0%, #000 32%);
+	mask-image: linear-gradient(to top, transparent 0%, #000 32%);
+	@apply pointer-events-none absolute -right-2 -bottom-8 hidden h-56 w-60 object-cover object-top md:block;
 }
 
 /* ── Footer ──────────────────────────────────────────────────────────────────────────────────────────── */
 
-.home-footer-link {
-  @apply text-neutral-400 transition-colors;
+.home-footer {
+	background-color: color-mix(in srgb, white 70%, var(--home-canvas));
+	border-top: 1px solid color-mix(in oklab, var(--color-neutral-900) 8%, transparent);
 }
 
-.home-footer-link:hover {
-  @apply text-neutral-100;
-}
-
-/* ── Install card (light card on dark bg) ────────────────────────────────────────────────────────────── */
+/* ── Install card ────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-install-card {
-  @apply flex flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-white;
+	box-shadow: var(--home-card-shadow);
+	@apply flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white;
 }
 
 .home-install-card-header {
-  @apply flex items-center gap-2 border-b border-neutral-200 px-5 py-3 text-neutral-700;
+	@apply flex items-center gap-2 border-b border-neutral-200 px-5 py-3 text-neutral-700;
 }
 
 .home-install-card-footer {
-  @apply border-t border-neutral-200 bg-neutral-50/60 p-5 text-xs leading-relaxed text-neutral-600;
+	@apply border-t border-neutral-200 bg-neutral-50/80 p-5 text-neutral-600 text-xs leading-relaxed;
 }
 
 .home-install-card-footer code {
-  @apply rounded bg-neutral-200/60 px-1 font-mono;
+	@apply rounded bg-neutral-200/70 px-1 font-mono;
 }
 
-/* ── Example code card (terminal mock) ───────────────────────────────────────────────────────────────── */
+/* ── Example code card ───────────────────────────────────────────────────────────────────────────────── */
 
 .home-example-card {
-  @apply overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 shadow-xl shadow-neutral-900/5;
+	box-shadow: var(--home-card-shadow);
+	@apply overflow-hidden rounded-2xl border border-neutral-200 bg-white;
 }
 
 .home-example-card-header {
-  @apply flex items-center gap-2 border-b border-neutral-800 bg-neutral-900 px-5 py-3;
+	@apply flex items-center gap-2 border-b border-neutral-200 bg-neutral-50 px-5 py-3;
 }
 
 .home-example-card-header .label {
-  @apply ms-2 font-mono text-xs text-neutral-400;
+	@apply ms-2 font-mono text-neutral-500 text-xs;
 }
 
 .home-example-code {
-  font-size: 13px;
-  @apply overflow-x-auto p-6 font-mono leading-relaxed text-neutral-100;
+	font-size: 13px;
+	@apply overflow-x-auto p-6 font-mono text-neutral-800 leading-relaxed;
 }
 
 /* ── Window dots (mac-style traffic lights) ──────────────────────────────────────────────────────────── */
 
 .home-dot {
-  @apply size-2.5 rounded-full;
+	@apply size-2.5 rounded-full;
 }
 
 .home-dot.close {
-  background-color: color-mix(in oklab, var(--color-rose-400) 80%, transparent);
+	background-color: color-mix(in oklab, var(--color-rose-400) 80%, white);
 }
 
 .home-dot.minimize {
-  background-color: color-mix(in oklab, var(--color-amber-400) 80%, transparent);
+	background-color: color-mix(in oklab, var(--color-amber-400) 80%, white);
 }
 
 .home-dot.maximize {
-  background-color: color-mix(in oklab, var(--color-emerald-400) 80%, transparent);
+	background-color: color-mix(in oklab, var(--color-emerald-400) 80%, white);
 }
 
 /* ── Inline command (CodeBlock) ──────────────────────────────────────────────────────────────────────── */
 
 .home-cmd {
-  @apply flex items-center justify-between gap-3 rounded-lg bg-neutral-950 px-4 py-3 font-mono text-sm text-neutral-100;
+	@apply flex items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 font-mono text-neutral-900 text-sm;
 }
 
 .home-cmd-prompt {
-  @apply text-primary-300;
+	@apply text-primary-600;
 }
 
 .home-cmd-copy {
-  @apply shrink-0 rounded-md p-1.5 text-neutral-400 transition-colors;
+	@apply shrink-0 rounded-md p-1.5 text-neutral-500 transition-colors;
 }
 
 .home-cmd-copy:hover {
-  @apply bg-neutral-800 text-neutral-100;
+	@apply bg-white text-neutral-900;
 }
 
 .home-cmd-copy.copied {
-  color: var(--color-success-400);
+	color: var(--color-success-600);
 }
 
 /* ── Syntax highlight tokens ─────────────────────────────────────────────────────────────────────────── */
 
 .tk-keyword {
-  color: var(--color-violet-300);
+	color: var(--color-violet-700);
 }
 
 .tk-component {
-  color: var(--color-sky-300);
+	color: var(--color-sky-700);
 }
 
 .tk-string {
-  color: var(--color-emerald-300);
+	color: var(--color-emerald-700);
 }
 
 .tk-attr {
-  color: var(--color-amber-200);
+	color: var(--color-amber-700);
 }
 
 .tk-punct {
-  color: var(--color-neutral-300);
+	color: var(--color-neutral-700);
 }
 
 .tk-bracket {
-  color: var(--color-neutral-400);
+	color: var(--color-neutral-500);
+}
+
+/* ── Motion ──────────────────────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+	.home-hero-mascot,
+	.home-chip,
+	.home-cta-mascot,
+	.home-showcase-card,
+	.home-feature {
+		transition: none;
+		animation: none;
+	}
 }
 
 /* ── Overscroll bounce fix ───────────────────────────────────────────────────────────────────────────────
-   Chrome / Safari rubber-band scroll exposes the <html> background. Force it dark while the landing
-   layout is mounted; pseudo-elements on main.landing act as an extra safety net at the very top/bottom. */
+   Chrome / Safari rubber-band scroll exposes the <html> background. Match the cream canvas while the
+   landing layout is mounted. */
 
 html:has(#root.landing) {
-  background-color: var(--color-neutral-950);
-}
-
-main.landing {
-  position: relative;
-}
-
-main.landing::before,
-main.landing::after {
-  position: absolute;
-  inset-inline: 0;
-  z-index: -1;
-  height: 5rem;
-  pointer-events: none;
-  content: '';
-  background-color: var(--color-neutral-950);
-}
-
-main.landing::before {
-  bottom: 100%;
-}
-
-main.landing::after {
-  top: 100%;
+	background-color: #fff6ee;
 }

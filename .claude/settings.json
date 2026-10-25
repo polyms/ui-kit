@@ -1,23 +1,23 @@
 {
-  "extraKnownMarketplaces": {
-    "nx-claude-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "nrwl/nx-ai-agents-config"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "nx@nx-claude-plugins": true
-  },
-  "sandbox": {
-    "network": {
-      "allowedDomains": ["www.google-analytics.com"],
-      "allowUnixSockets": ["/tmp/.nx", "~/.nx"]
-    },
-    "filesystem": {
-      "allowRead": ["/tmp/.nx", "~/.nx"],
-      "allowWrite": ["/tmp/.nx", "~/.nx"]
-    }
-  }
+	"enabledPlugins": {
+		"nx@nx-claude-plugins": true
+	},
+	"extraKnownMarketplaces": {
+		"nx-claude-plugins": {
+			"source": {
+				"repo": "nrwl/nx-ai-agents-config",
+				"source": "github"
+			}
+		}
+	},
+	"sandbox": {
+		"filesystem": {
+			"allowRead": ["/tmp/.nx", "~/.nx"],
+			"allowWrite": ["/tmp/.nx", "~/.nx"]
+		},
+		"network": {
+			"allowedDomains": ["www.google-analytics.com"],
+			"allowUnixSockets": ["/tmp/.nx", "~/.nx"]
+		}
+	}
 }

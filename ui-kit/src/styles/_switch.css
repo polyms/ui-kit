@@ -1,86 +1,86 @@
 .switch {
-  @apply inline-flex cursor-pointer items-center;
+	@apply inline-flex cursor-pointer items-center;
 }
 
 .switch input {
-  --switch-knob-x: 0;
-  position: relative;
-  flex-shrink: 0;
-  width: 2.5rem;
-  height: 1.25rem;
-  margin: 0;
-  appearance: none;
-  cursor: pointer;
-  background-color: var(--line);
-  border-radius: 1.5em;
-  transition:
-    background-color 200ms ease-in-out,
-    box-shadow 200ms ease-in-out,
-    opacity 200ms ease-in-out;
+	--switch-knob-x: 0;
+	position: relative;
+	flex-shrink: 0;
+	width: 2.5rem;
+	height: 1.25rem;
+	margin: 0;
+	appearance: none;
+	cursor: pointer;
+	background-color: var(--line);
+	border-radius: 1.5em;
+	transition:
+		background-color 200ms ease-in-out,
+		box-shadow 200ms ease-in-out,
+		opacity 200ms ease-in-out;
 
-  &:checked {
-    --switch-knob-x: 1.25rem;
-    background-color: var(--color-info-500);
-  }
+	&:checked {
+		--switch-knob-x: 1.25rem;
+		background-color: var(--color-info-500);
+	}
 
-  &.disabled,
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
-  }
+	&.disabled,
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.7;
+	}
 
-  /* Knob using pseudo-element (replaces background SVG) */
-  &::before {
-    position: absolute;
-    top: 50%;
-    left: 0.125rem; /* knob padding from left */
-    width: 1rem;
-    height: 1rem;
-    content: '';
-    background-color: var(--body); /* default knob color */
-    border: 1px solid transparent;
-    border-radius: 99px;
-    transform: translate(var(--switch-knob-x), -50%);
-    transition:
-      width 200ms ease-in-out,
-      transform 200ms ease-in-out,
-      background-color 200ms ease-in-out,
-      box-shadow 200ms ease-in-out;
-  }
+	/* Knob using pseudo-element (replaces background SVG) */
+	&::before {
+		position: absolute;
+		top: 50%;
+		left: 0.125rem; /* knob padding from left */
+		width: 1rem;
+		height: 1rem;
+		content: '';
+		background-color: var(--body); /* default knob color */
+		border: 1px solid transparent;
+		border-radius: 99px;
+		transform: translate(var(--switch-knob-x), -50%);
+		transition:
+			width 200ms ease-in-out,
+			transform 200ms ease-in-out,
+			background-color 200ms ease-in-out,
+			box-shadow 200ms ease-in-out;
+	}
 
-  /* Knob widens on hover in both off/on; when on, nudge travel left so wider knob stays inside track */
-  &:hover:not(:disabled):not(.disabled)::before {
-    width: 1.25rem;
-  }
+	/* Knob widens on hover in both off/on; when on, nudge travel left so wider knob stays inside track */
+	&:hover:not(:disabled):not(.disabled)::before {
+		width: 1.25rem;
+	}
 
-  &:hover:not(:disabled):not(.disabled):checked {
-    --switch-knob-x: 1rem; /* 1.25rem − 0.25rem (extra knob width) */
-  }
-  &:checked::before {
-    background-color: var(--color-info-50); /* checked knob color */
-  }
+	&:hover:not(:disabled):not(.disabled):checked {
+		--switch-knob-x: 1rem; /* 1.25rem − 0.25rem (extra knob width) */
+	}
+	&:checked::before {
+		background-color: var(--color-info-50); /* checked knob color */
+	}
 
-  /* Primary variant knob colors */
-  &.primary {
-    &:hover:not(:disabled):not(.disabled):not(:checked)::before {
-      background-color: var(--color-primary-600);
-    }
+	/* Primary variant knob colors */
+	&.primary {
+		&:hover:not(:disabled):not(.disabled):not(:checked)::before {
+			background-color: var(--color-primary-600);
+		}
 
-    &:focus:not(:hover):not(:checked)::before,
-    &:focus-visible:not(:hover):not(:checked)::before {
-      background-color: var(--color-primary-300);
-    }
+		&:focus:not(:hover):not(:checked)::before,
+		&:focus-visible:not(:hover):not(:checked)::before {
+			background-color: var(--color-primary-300);
+		}
 
-    &:checked::before {
-      background-color: var(--color-primary-600);
-    }
-  }
+		&:checked::before {
+			background-color: var(--color-primary-600);
+		}
+	}
 }
 
 .switch-label {
-  @apply ms-3 text-sm font-medium text-fg;
+	@apply ms-3 text-sm font-medium text-fg;
 }
 
 .switch-label-start .switch-label {
-  @apply ms-0 me-auto pe-3;
+	@apply ms-0 me-auto pe-3;
 }

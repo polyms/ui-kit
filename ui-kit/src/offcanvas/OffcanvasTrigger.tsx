@@ -9,9 +9,9 @@ type OffcanvasTriggerProps = Drawer.Trigger.Props
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const OffcanvasTrigger = forwardRef<HTMLButtonElement, OffcanvasTriggerProps>(
-  ({ className, ...props }, ref) => (
-    <Drawer.Trigger className={clsx('offcanvas-trigger', className)} ref={ref} {...props} />
-  )
+	({ className, ...props }, ref) => (
+		<Drawer.Trigger className={clsx('offcanvas-trigger', className)} ref={ref} {...props} />
+	)
 )
 
 OffcanvasTrigger.displayName = 'OffcanvasTrigger'

@@ -1,19 +1,19 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm nx build web",
-  "outputDirectory": "dist/web",
-  "devCommand": "pnpm nx serve web",
-  "installCommand": "pnpm install",
-  "framework": null,
-  "git": {
-    "deploymentEnabled": {
-      "main": true
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"buildCommand": "pnpm nx build web",
+	"devCommand": "pnpm nx serve web",
+	"framework": null,
+	"git": {
+		"deploymentEnabled": {
+			"main": true
+		}
+	},
+	"installCommand": "pnpm install",
+	"outputDirectory": "dist/web",
+	"rewrites": [
+		{
+			"destination": "/index.html",
+			"source": "/(.*)"
+		}
+	]
 }

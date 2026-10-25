@@ -1,12 +1,9 @@
 allowBuilds:
   '@swc/core': true
   esbuild: true
+  lefthook: true
   msw: false
   nx: true
 minimumReleaseAgeExclude:
   - prettier@3.9.1
-onlyBuiltDependencies:
-  - '@swc/core'
-  - '@tailwindcss/oxide'
-  - esbuild
-  - nx
+  - '@polyms/lint-kit@0.1.2'

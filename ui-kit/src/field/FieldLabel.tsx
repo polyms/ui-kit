@@ -10,19 +10,19 @@ export interface FieldLabelProps extends useRender.ComponentProps<'label'> {}
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>(
-  ({ className, render, ...props }, ref) => {
-    const { id } = useFieldContext()
+	({ className, render, ...props }, ref) => {
+		const { id } = useFieldContext()
 
-    const defaultProps = {
-      htmlFor: id,
-      className: clsx('field-label', className),
-    }
+		const defaultProps = {
+			htmlFor: id,
+			className: clsx('field-label', className),
+		}
 
-    return useRender({
-      defaultTagName: 'label',
-      ref,
-      props: { ...defaultProps, ...props },
-      render,
-    })
-  }
+		return useRender({
+			defaultTagName: 'label',
+			ref,
+			props: { ...defaultProps, ...props },
+			render,
+		})
+	}
 )

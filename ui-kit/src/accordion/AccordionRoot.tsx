@@ -4,5 +4,5 @@ import clsx from 'clsx'
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const AccordionRoot = ({ className, ...props }: BaseAccordion.Root.Props) => {
-  return <BaseAccordion.Root {...props} className={clsx('accordion', className)} />
+	return <BaseAccordion.Root {...props} className={clsx('accordion', className)} />
 }

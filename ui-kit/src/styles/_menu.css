@@ -1,130 +1,130 @@
 .menu-popup {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 150px;
-  padding-block: 0.25rem;
-  outline: none;
-  background-color: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: 0.5rem;
-  box-shadow:
-    0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
-    0 4px 6px -4px color-mix(in oklab, #000 10%, transparent);
-  transform-origin: var(--transform-origin);
-  transition:
-    transform 150ms,
-    opacity 150ms;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	min-width: 150px;
+	padding-block: 0.25rem;
+	outline: none;
+	background-color: var(--surface-2);
+	border: 1px solid var(--line);
+	border-radius: 0.5rem;
+	box-shadow:
+		0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
+		0 4px 6px -4px color-mix(in oklab, #000 10%, transparent);
+	transform-origin: var(--transform-origin);
+	transition:
+		transform 150ms,
+		opacity 150ms;
 
-  &[data-starting-style],
-  &[data-ending-style] {
-    opacity: 0;
-    transform: scale(0.95);
-  }
+	&[data-starting-style],
+	&[data-ending-style] {
+		opacity: 0;
+		transform: scale(0.95);
+	}
 }
 
 .menu-item {
-  display: flex;
-  row-gap: 2px;
-  column-gap: 0.5rem;
-  align-items: center;
-  width: 100%;
-  min-width: 12rem;
-  padding-block: 0.375rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  cursor: pointer;
-  user-select: none;
-  outline: 0;
-  border-radius: 0.375rem;
+	display: flex;
+	row-gap: 2px;
+	column-gap: 0.5rem;
+	align-items: center;
+	width: 100%;
+	min-width: 12rem;
+	padding-block: 0.375rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.5;
+	cursor: pointer;
+	user-select: none;
+	outline: 0;
+	border-radius: 0.375rem;
 
-  &[data-highlighted] {
-    position: relative;
-    z-index: 0;
-  }
+	&[data-highlighted] {
+		position: relative;
+		z-index: 0;
+	}
 
-  &[data-highlighted]:not([data-disabled])::before {
-    position: absolute;
-    inset-block: 0;
-    inset-inline: 0.25rem;
-    z-index: -1;
-    content: '';
-    background-color: var(--surface);
-    border-radius: 0.25rem;
-  }
+	&[data-highlighted]:not([data-disabled])::before {
+		position: absolute;
+		inset-block: 0;
+		inset-inline: 0.25rem;
+		z-index: -1;
+		content: '';
+		background-color: var(--surface);
+		border-radius: 0.25rem;
+	}
 
-  .dark &[data-highlighted]:not([data-disabled])::before {
-    background-color: color-mix(in oklab, var(--fg) 10%, transparent);
-  }
+	.dark &[data-highlighted]:not([data-disabled])::before {
+		background-color: color-mix(in oklab, var(--fg) 10%, transparent);
+	}
 
-  &[data-disabled] {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
+	&[data-disabled] {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
 
-  &.menu-danger {
-    color: var(--color-danger-500);
+	&.menu-danger {
+		color: var(--color-danger-500);
 
-    &[data-highlighted] {
-      color: #fff;
-    }
+		&[data-highlighted] {
+			color: #fff;
+		}
 
-    &[data-highlighted] .menu-command {
-      color: rgb(255 255 255 / 0.85);
-    }
+		&[data-highlighted] .menu-command {
+			color: rgb(255 255 255 / 0.85);
+		}
 
-    &[data-highlighted]::before {
-      background-color: var(--color-danger-500);
-    }
-  }
+		&[data-highlighted]::before {
+			background-color: var(--color-danger-500);
+		}
+	}
 }
 
 .menu-separator {
-  height: 1px;
-  margin: 2px 0.25rem;
-  background-color: var(--line);
+	height: 1px;
+	margin: 2px 0.25rem;
+	background-color: var(--line);
 }
 
 .menu-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
 }
 
 .menu-group-label {
-  padding-top: 0.25rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0px;
+	padding-top: 0.25rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0px;
 }
 
 .menu-command {
-  display: flex;
-  column-gap: 0.125rem;
-  align-items: center;
-  padding-inline-start: 0.5rem;
-  margin-inline-start: auto;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--muted);
+	display: flex;
+	column-gap: 0.125rem;
+	align-items: center;
+	padding-inline-start: 0.5rem;
+	margin-inline-start: auto;
+	font-size: 14px;
+	line-height: 1.5;
+	color: var(--muted);
 }
 
 .menu-command abbr {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .menu-command-key {
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	font-family:
+		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
 .menu-command-sep {
-  user-select: none;
+	user-select: none;
 }

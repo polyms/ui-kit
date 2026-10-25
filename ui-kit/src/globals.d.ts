@@ -4,7 +4,7 @@ type SVGComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { ti
 /// <reference types="react-dom" />
 
 declare module '*.svg' {
-  const ReactComponent: SVGComponent
+	const ReactComponent: SVGComponent
 
-  export default ReactComponent
+	export default ReactComponent
 }

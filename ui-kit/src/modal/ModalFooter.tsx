@@ -9,13 +9,13 @@ export interface ModalFooterProps extends useRender.ComponentProps<'div'> {}
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const ModalFooter: FC<ModalFooterProps> = ({ className, render, ...props }) => {
-  const defaultProps = {
-    className: clsx('modal-footer', className),
-  }
+	const defaultProps = {
+		className: clsx('modal-footer', className),
+	}
 
-  return useRender({
-    defaultTagName: 'div',
-    props: { ...defaultProps, ...props },
-    render,
-  })
+	return useRender({
+		defaultTagName: 'div',
+		props: { ...defaultProps, ...props },
+		render,
+	})
 }
