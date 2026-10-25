@@ -1,0 +1,84 @@
+/* Shared demo chrome that has no Tailwind theme utility.
+   Loaded from globals.css in layer(components) so /demo, /forms, theme config, and docs previews share it.
+   ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
+
+/* ── Type below the scale ────────────────────────────────────────────────────────────────────────────── */
+
+.text-2xs {
+	font-size: 10px;
+}
+
+.text-caption {
+	font-size: 11px;
+}
+
+/* ── Theme config ────────────────────────────────────────────────────────────────────────────────────── */
+
+.theme-surface-grid {
+	grid-template-columns: 5.5rem 1fr 1fr;
+}
+
+.theme-ramp-grid {
+	grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* ── Playground decor ────────────────────────────────────────────────────────────────────────────────── */
+
+.playground-page .playground-grid {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='44' viewBox='0 0 42 44'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2394a3b8' fill-opacity='0.06'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	-webkit-mask-image: linear-gradient(to bottom, black 55%, transparent);
+	mask-image: linear-gradient(to bottom, black 55%, transparent);
+}
+
+.playground-page .playground-glow-wide {
+	width: min(100%, 56rem);
+}
+
+/* ── Status chip ─────────────────────────────────────────────────────────────────────────────────────── */
+
+.playground-page .playground-status-dot {
+	box-shadow: 0 0 0 3px var(--color-success-100);
+}
+
+/* ── Demo header ─────────────────────────────────────────────────────────────────────────────────────── */
+
+.demo-cards-grid {
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+
+.demo-card-face {
+	aspect-ratio: 1.586 / 1;
+}
+
+.demo-card-pan {
+	letter-spacing: 0.2em;
+}
+
+/* ── Navigation menu demo ────────────────────────────────────────────────────────────────────────────── */
+
+.nav-customers-grid {
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+}
+
+.nav-blog-card {
+	grid-template-rows: auto 1fr;
+	grid-template-columns: auto 1fr;
+}
+
+/* ── Docs previews ───────────────────────────────────────────────────────────────────────────────────── */
+
+.item-demo-cols {
+	@media (min-width: 640px) {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.toc-demo-cols {
+	@media (min-width: 768px) {
+		grid-template-columns: 1fr 11rem;
+	}
+}
+
+.docs-link-card {
+	transition-property: box-shadow, border-color;
+}

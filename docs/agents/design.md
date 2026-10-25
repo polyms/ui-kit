@@ -425,9 +425,9 @@ Popup: `color/surface-2` fill, `neutral/200` border, drop shadow. Trigger = surf
 
 **Spinner component set** — properties khớp `spinner.mdx` + **`Spinner.tsx`** (library `199:689` → set `199:720`, 25 variants):
 
-| Property | Values                                  | Ghi chú                                                           |
-| -------- | --------------------------------------- | ----------------------------------------------------------------- |
-| `Size`   | 12, 16, 24, 32, 48                      | diameter px — maps `size` prop                                    |
+| Property | Values                                  | Ghi chú                                                             |
+| -------- | --------------------------------------- | ------------------------------------------------------------------- |
+| `Size`   | 12, 16, 24, 32, 48                      | diameter px — maps `size` prop                                      |
 | `Color`  | dark, primary, success, danger, warning | maps `color` / `subColor`; dark arc `#181b1f`, track ~`neutral/300` |
 
 Geometry: frame `spinner` chứa **2 VECTOR** filled paths từ `Spinner.tsx` viewBox `0 0 20 20` — track (donut / `subColor`) + arc (wedge / `color`). **Không** dùng ELLIPSE stroke. Solar `RefreshCircle` chỉ cho docs header (`201:378` @ header `199:824`). Script: `feedback-items/04-spinner-components.js`; re-patch header: `lib/patch-page-183-102-compact.js`.
@@ -556,12 +556,12 @@ Repo mirror: `ui-kit/src/styles/_root.css` (+ `_typography.css`, `_button.css`, 
 
 Polyms gray chrome uses **`neutral/*`** in Figma and **`--color-neutral-*`** in CSS. The ramp keeps the slate hue. Do **not** use `zinc/*`, `gray/*`, or `stone/*` for chrome next to library components.
 
-| Layer            | Figma token                                          | CSS (repo)                                 |
-| ---------------- | ---------------------------------------------------- | ------------------------------------------ |
-| Palette          | `neutral/50` … `neutral/950`                         | `--color-neutral-50` … `--color-neutral-950` |
-| Color (semantic) | `color/fg` → `neutral/900` (light), `neutral/100` (dark) | `--fg: var(--color-neutral-900)`        |
-| Color (semantic) | `color/muted`, `color/line`, `color/surface`         | alias `neutral/*` steps — see `_root.css`  |
-| Token board      | `Seed/Neutral` swatches bind `neutral/*`             | label **Neutral**                          |
+| Layer            | Figma token                                              | CSS (repo)                                   |
+| ---------------- | -------------------------------------------------------- | -------------------------------------------- |
+| Palette          | `neutral/50` … `neutral/950`                             | `--color-neutral-50` … `--color-neutral-950` |
+| Color (semantic) | `color/fg` → `neutral/900` (light), `neutral/100` (dark) | `--fg: var(--color-neutral-900)`             |
+| Color (semantic) | `color/muted`, `color/line`, `color/surface`             | alias `neutral/*` steps — see `_root.css`    |
+| Token board      | `Seed/Neutral` swatches bind `neutral/*`                 | label **Neutral**                            |
 
 When adding or retargeting Color-collection aliases, point gray tokens at **Palette `neutral/*`**.
 

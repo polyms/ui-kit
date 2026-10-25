@@ -578,14 +578,7 @@ function FormsPage() {
 
 			<div className='docs-demo-shell relative isolate flex-1 overflow-x-clip bg-body text-fg'>
 				<div aria-hidden className='pointer-events-none absolute inset-0 overflow-hidden'>
-					<div
-						className='absolute inset-x-0 top-0 h-144 mask-[linear-gradient(to_bottom,black_55%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)]'
-						style={{
-							backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
-								'<svg width="42" height="44" viewBox="0 0 42 44" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="#94a3b8" fill-opacity="0.06"><path d="M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z"/></g></g></svg>'
-							)}")`,
-						}}
-					/>
+					<div className='playground-grid absolute inset-x-0 top-0 h-144' />
 					<div className='bg-primary-700/10 absolute -top-20 left-1/3 h-96 w-96 rounded-full blur-3xl' />
 					<div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-neutral-300/30 blur-3xl dark:bg-neutral-700/30' />
 				</div>

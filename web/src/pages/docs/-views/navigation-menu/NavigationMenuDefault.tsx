@@ -161,7 +161,7 @@ export default function NavigationMenuDefault() {
 						</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
 							<div className='flex w-2xl flex-col gap-3'>
-								<div className='grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] gap-3'>
+								<div className='grid grid-cols-3 gap-3'>
 									<NavigationMenu.Link
 										className='group relative flex h-full flex-col justify-between gap-3 overflow-hidden rounded-xl p-4 text-white'
 										href='#cloud'
@@ -179,7 +179,7 @@ export default function NavigationMenuDefault() {
 											}}
 										/>
 										<span className='flex items-center gap-2'>
-											<span className='badge badge-light inline-flex items-center gap-1 rounded-full text-[10px] tracking-wider uppercase'>
+											<span className='badge badge-light text-2xs inline-flex items-center gap-1 rounded-full tracking-wider uppercase'>
 												<HugeiconsIcon icon={SparklesIcon} size={11} strokeWidth={2} />
 												New
 											</span>
@@ -215,7 +215,7 @@ export default function NavigationMenuDefault() {
 																<span className='flex items-center gap-1.5 text-sm font-medium'>
 																	{item.title}
 																	{item.badge && (
-																		<span className='badge badge-primary rounded-full text-[10px]'>
+																		<span className='badge badge-primary text-2xs rounded-full'>
 																			{item.badge}
 																		</span>
 																	)}
@@ -251,7 +251,7 @@ export default function NavigationMenuDefault() {
 							<NavigationMenu.Icon />
 						</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<div className='grid w-136 grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-3'>
+							<div className='nav-customers-grid grid w-136 gap-3'>
 								<div className='flex flex-col gap-3 rounded-xl border border-line bg-surface p-4'>
 									<div className='flex items-center gap-2'>
 										<HugeiconsIcon className='text-warning-500' icon={StarIcon} size={14} strokeWidth={2.5} />
@@ -269,13 +269,13 @@ export default function NavigationMenuDefault() {
 										</span>
 										<span className='flex flex-col gap-0.5'>
 											<span className='text-xs font-medium text-fg'>Linh Đoàn</span>
-											<span className='text-[11px] text-muted'>Head of Eng · Sophie Farm</span>
+											<span className='text-caption text-muted'>Head of Eng · Sophie Farm</span>
 										</span>
 									</div>
 									<dl className='m-0 grid grid-cols-3 gap-2 border-t border-line pt-3'>
 										{customerStats.map(stat => (
 											<div className='flex flex-col gap-0.5' key={stat.label}>
-												<dt className='text-[10px] tracking-wider text-muted uppercase'>{stat.label}</dt>
+												<dt className='text-2xs tracking-wider text-muted uppercase'>{stat.label}</dt>
 												<dd className='text-primary-700 m-0 text-sm font-semibold'>{stat.value}</dd>
 											</div>
 										))}
@@ -357,7 +357,7 @@ export default function NavigationMenuDefault() {
 								{blogEntries.map(item => (
 									<li key={item.href}>
 										<NavigationMenu.Link
-											className='group grid h-full grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-2'
+											className='nav-blog-card group grid h-full gap-2'
 											href={item.href}
 											variant='soft'
 										>

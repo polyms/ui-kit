@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/correctness/noInvalidPositionAtImportRule: page css */
 @reference './tailwind.css';
 @import './_docs.css' layer(components);
+@import './demo.page.css' layer(components);
 @import './_floating-dock.css' layer(components);
 
 /* Unlayered — mini-sidebar flyout: width cố định, padding đồng nhất, thắng Base UI inline vars. */

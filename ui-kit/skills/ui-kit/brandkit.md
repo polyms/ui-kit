@@ -62,7 +62,7 @@ Infer before touching tokens:
 | Family                                 | Role                                                                                                 |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `success`, `warning`, `danger`, `info` | Intent — errors stay readable, success stays green-family unless accessibility review says otherwise |
-| `neutral-*`                              | Gray chrome — **never** swap to `zinc-*`, `gray-*`, or `stone-*` for library-adjacent UI             |
+| `neutral-*`                            | Gray chrome — **never** swap to `zinc-*`, `gray-*`, or `stone-*` for library-adjacent UI             |
 | Z-index utilities                      | `.z-modal`, `.z-dropdown`, etc. — use library scale                                                  |
 
 ### Minimal brand theme example

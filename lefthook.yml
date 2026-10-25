@@ -1,8 +1,14 @@
 pre-commit:
   commands:
     format:
-      glob: '*.{js,jsx,ts,tsx,json,jsonc,css}'
+      glob: '*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,json,css,svg,html,webmanifest}'
       run: pnpm exec biome format --write {staged_files}
+      stage_fixed: true
+    prettier:
+      glob: '*.{md,mdx,yml,yaml}'
+      exclude:
+        - pnpm-lock.yaml
+      run: pnpm exec prettier --write {staged_files}
       stage_fixed: true
 # EXAMPLE USAGE:
 #

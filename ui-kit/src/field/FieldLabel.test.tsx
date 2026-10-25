@@ -5,6 +5,10 @@ import { FieldRoot } from './FieldRoot'
 
 // ── Components ──────────────────────────────────────────────────────────────────────────────────────────────────
 
+function BoldLabel() {
+	return <strong>Bold Label</strong>
+}
+
 describe('FieldLabel', () => {
 	it('renders as label element', () => {
 		const { container } = render(
@@ -71,11 +75,10 @@ describe('FieldLabel', () => {
 	})
 
 	it('supports React nodes as children', () => {
-		const TestComponent = () => <strong>Bold Label</strong>
 		render(
 			<FieldRoot id='test-label'>
 				<FieldLabel>
-					<TestComponent />
+					<BoldLabel />
 				</FieldLabel>
 			</FieldRoot>
 		)

@@ -58,7 +58,7 @@ export default function LinkDefault() {
 
 				{profiles.map(person => (
 					<div
-						className='relative overflow-hidden rounded-2xl border border-line bg-body p-4 shadow-sm transition-[box-shadow,border-color] hover:shadow-md'
+						className='docs-link-card relative overflow-hidden rounded-2xl border border-line bg-body p-4 shadow-sm hover:shadow-md'
 						key={person.name}
 					>
 						<div className='flex gap-4'>

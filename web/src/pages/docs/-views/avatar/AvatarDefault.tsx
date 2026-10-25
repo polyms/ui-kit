@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/nursery/noTailwindRawColors: demo */
 import { Avatar } from '@polyms/ui-kit'
 
 // const avatarSrc = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">

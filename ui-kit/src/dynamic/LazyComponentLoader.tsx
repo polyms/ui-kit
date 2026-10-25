@@ -11,6 +11,7 @@ export function LazyComponentLoader<T extends ComponentType<any>>(
 	const LazyComponent = lazy(importFunc)
 
 	// Return a component wrapped in Suspense with a custom loader
+	// biome-ignore lint/correctness/noComponentHookFactories: dynamic import
 	const WrapperComponent = forwardRef((props: any, ref) => (
 		<Suspense fallback={options.loadingComponent}>
 			<LazyComponent {...props} ref={ref} />

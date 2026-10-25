@@ -14,7 +14,7 @@ const Default = () => {
 
 	return (
 		<div className='min-h-0 flex-1 overflow-auto p-4' ref={scrollRef}>
-			<div className='mx-auto grid max-w-3xl gap-8 md:grid-cols-[1fr_11rem]'>
+			<div className='toc-demo-cols mx-auto grid max-w-3xl gap-8'>
 				<div className='space-y-16 text-sm leading-relaxed'>
 					<section className='min-h-40' id='toc-demo-overview'>
 						<h3 className='h3 mb-2'>Overview</h3>

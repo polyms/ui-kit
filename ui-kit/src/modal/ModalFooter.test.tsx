@@ -4,6 +4,15 @@ import { ModalFooter } from './ModalFooter'
 
 // ── Components ──────────────────────────────────────────────────────────────────────────────────────────────────
 
+function FooterActions() {
+	return (
+		<>
+			<span>Action 1</span>
+			<span>Action 2</span>
+		</>
+	)
+}
+
 describe('ModalFooter', () => {
 	it('renders as div element', () => {
 		const { container } = render(<ModalFooter>Footer</ModalFooter>)
@@ -41,15 +50,9 @@ describe('ModalFooter', () => {
 	})
 
 	it('supports React nodes as children', () => {
-		const Actions = () => (
-			<>
-				<span>Action 1</span>
-				<span>Action 2</span>
-			</>
-		)
 		render(
 			<ModalFooter>
-				<Actions />
+				<FooterActions />
 			</ModalFooter>
 		)
 		expect(screen.getByText('Action 1')).toBeInTheDocument()

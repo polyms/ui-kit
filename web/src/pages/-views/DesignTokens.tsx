@@ -121,8 +121,8 @@ function ColorRampSwatch({ hex, name, step }: { hex: string | null; name: string
 				style={{ backgroundColor: `var(${name})` }}
 				title={name}
 			/>
-			<span className='mt-1 block text-[10px] text-muted'>{step}</span>
-			<span className='block text-[10px] whitespace-nowrap text-muted'>{hex}</span>
+			<span className='text-2xs mt-1 block text-muted'>{step}</span>
+			<span className='text-2xs block whitespace-nowrap text-muted'>{hex}</span>
 		</div>
 	)
 }

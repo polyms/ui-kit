@@ -32,7 +32,7 @@ export default function DarkModeDefault() {
 					<p className='mt-1 text-sm text-muted'>Balance and recent activity on your primary account.</p>
 
 					<div className='mt-4 rounded-lg border border-line bg-surface p-4'>
-						<span className='text-[11px] tracking-wider text-muted uppercase'>Available balance</span>
+						<span className='text-caption tracking-wider text-muted uppercase'>Available balance</span>
 						<p className='mt-1 text-xl font-semibold text-fg tabular-nums'>$12,485.62</p>
 						<p className='mt-2 text-xs text-muted'>Updated just now · Everyday checking •••• 4521</p>
 					</div>

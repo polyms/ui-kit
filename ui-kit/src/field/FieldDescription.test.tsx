@@ -4,6 +4,10 @@ import { FieldDescription } from './FieldDescription'
 
 // ── Components ──────────────────────────────────────────────────────────────────────────────────────────────────
 
+function EmphasizedDescription() {
+	return <em>Emphasized Description</em>
+}
+
 describe('FieldDescription', () => {
 	it('renders as div element', () => {
 		const { container } = render(<FieldDescription>Test Description</FieldDescription>)
@@ -41,10 +45,9 @@ describe('FieldDescription', () => {
 	})
 
 	it('supports React nodes as children', () => {
-		const TestComponent = () => <em>Emphasized Description</em>
 		render(
 			<FieldDescription>
-				<TestComponent />
+				<EmphasizedDescription />
 			</FieldDescription>
 		)
 		expect(screen.getByText('Emphasized Description')).toBeInTheDocument()

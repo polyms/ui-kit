@@ -4,6 +4,10 @@ import { ModalBody } from './ModalBody'
 
 // ── Components ──────────────────────────────────────────────────────────────────────────────────────────────────
 
+function BoldText() {
+	return <strong>Bold Text</strong>
+}
+
 describe('ModalBody', () => {
 	it('renders as div element', () => {
 		const { container } = render(<ModalBody>Body Text</ModalBody>)
@@ -41,10 +45,9 @@ describe('ModalBody', () => {
 	})
 
 	it('supports React nodes as children', () => {
-		const TestComponent = () => <strong>Bold Text</strong>
 		render(
 			<ModalBody>
-				<TestComponent />
+				<BoldText />
 			</ModalBody>
 		)
 		expect(screen.getByText('Bold Text')).toBeInTheDocument()

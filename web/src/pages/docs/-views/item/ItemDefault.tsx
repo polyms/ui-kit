@@ -39,7 +39,7 @@ export default function ItemDefault() {
 				below; the last column shows the persisted <code className='text-fg'>.active</code> state.
 			</p>
 
-			<div className='grid gap-x-8 gap-y-1 rounded-xl border border-line bg-body p-3 sm:grid-cols-[1fr_1fr]'>
+			<div className='item-demo-cols grid gap-x-8 gap-y-1 rounded-xl border border-line bg-body p-3'>
 				<div className='hidden px-3 pb-1 text-xs font-semibold tracking-wide text-muted uppercase sm:block'>
 					Idle / hover
 				</div>

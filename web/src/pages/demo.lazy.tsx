@@ -64,15 +64,8 @@ function Page() {
 
 			<div className='docs-demo-shell relative isolate flex-1 overflow-x-clip bg-body text-fg'>
 				<div aria-hidden className='pointer-events-none absolute inset-0 overflow-hidden'>
-					<div
-						className='absolute inset-x-0 top-0 h-144 mask-[linear-gradient(to_bottom,black_55%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent)]'
-						style={{
-							backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(
-								'<svg width="42" height="44" viewBox="0 0 42 44" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="#94a3b8" fill-opacity="0.06"><path d="M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z"/></g></g></svg>'
-							)}")`,
-						}}
-					/>
-					<div className='bg-primary-700/15 absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -translate-x-1/2 rounded-full blur-3xl' />
+					<div className='playground-grid absolute inset-x-0 top-0 h-144' />
+					<div className='playground-glow-wide bg-primary-700/15 absolute -top-24 left-1/2 h-112 -translate-x-1/2 rounded-full blur-3xl' />
 					<div className='bg-primary-700/10 absolute top-48 -right-20 h-72 w-72 rounded-full blur-3xl' />
 					<div className='absolute top-80 -left-16 h-64 w-64 rounded-full bg-neutral-300/40 blur-3xl dark:bg-neutral-700/30' />
 				</div>
@@ -80,7 +73,7 @@ function Page() {
 				<main className='relative flex min-h-0 min-w-0 flex-1 flex-col'>
 					<section className='mx-auto w-full max-w-5xl px-5 pt-12 pb-14 md:px-8 md:pt-20 md:pb-20'>
 						<div className='inline-flex items-center gap-2 rounded-full border border-neutral-200/90 bg-white/90 px-3 py-1 text-xs font-medium text-neutral-600 shadow-sm ring-1 ring-neutral-100/80 backdrop-blur-sm dark:border-line dark:bg-surface/80 dark:text-muted dark:ring-line/40'>
-							<span className='bg-success-500 flex size-1.5 rounded-full shadow-[0_0_0_3px_var(--color-success-100)]' />
+							<span className='playground-status-dot bg-success-500 flex size-1.5 rounded-full' />
 							Playground
 						</div>
 

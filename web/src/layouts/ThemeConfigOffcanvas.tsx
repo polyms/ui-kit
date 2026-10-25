@@ -177,7 +177,7 @@ function SemanticFields() {
 	return (
 		<section className='space-y-3'>
 			<p className='text-sm font-medium text-fg'>Surfaces</p>
-			<div className='grid grid-cols-[5.5rem_1fr_1fr] items-center gap-x-2 gap-y-2'>
+			<div className='theme-surface-grid grid items-center gap-x-2 gap-y-2'>
 				<span />
 				<span className='text-xs text-muted'>Light</span>
 				<span className='text-xs text-muted'>Dark</span>
@@ -316,10 +316,9 @@ function PrimaryPreview({
 	return (
 		<div className='min-w-0 space-y-1'>
 			<span className='text-xs text-muted'>{isDark ? 'Dark' : 'Light'}</span>
-			<div
+			<fieldset
 				aria-label={isDark ? 'Primary on a dark surface' : 'Primary on a light surface'}
-				className={clsx('space-y-2 rounded-lg border border-line bg-body p-2', isDark && 'dark')}
-				role='group'
+				className={clsx('min-w-0 space-y-2 rounded-lg border border-line bg-body p-2', isDark && 'dark')}
 				style={{ ...previewSurface(mode, semantics), ...primaryVars(ramp) }}
 			>
 				<div className='flex flex-wrap items-center gap-2'>
@@ -349,7 +348,7 @@ function PrimaryPreview({
 						/>
 					))}
 				</div>
-			</div>
+			</fieldset>
 		</div>
 	)
 }
@@ -450,7 +449,7 @@ function PrimaryField({ palettes }: { palettes: BrandPalettes }) {
 					))}
 				</Select.Content>
 			</Select>
-			<div className='grid grid-cols-[2rem_minmax(0,1fr)_minmax(0,1fr)] items-center gap-x-2 gap-y-2'>
+			<div className='theme-ramp-grid grid items-center gap-x-2 gap-y-2'>
 				<span />
 				<span className='text-xs text-muted'>Light</span>
 				<span className='text-xs text-muted'>Dark</span>

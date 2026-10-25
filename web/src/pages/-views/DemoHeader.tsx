@@ -160,10 +160,10 @@ export const Header = () => {
 							<div className='flex w-md flex-col gap-3'>
 								<div className='flex items-end justify-between rounded-xl bg-neutral-900 px-4 py-3 text-white'>
 									<div className='flex flex-col gap-0.5'>
-										<span className='text-[11px] tracking-wider text-white/60 uppercase'>Total balance</span>
+										<span className='text-caption tracking-wider text-white/60 uppercase'>Total balance</span>
 										<span className='text-xl font-semibold text-white'>$45,499.32</span>
 									</div>
-									<span className='bg-success-500/20 text-success-300 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium'>
+									<span className='bg-success-500/20 text-success-300 text-caption inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-medium'>
 										<HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
 										+1.24% today
 									</span>
@@ -215,9 +215,9 @@ export const Header = () => {
 							<NavigationMenu.Icon />
 						</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<div className='grid w-lg grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-3'>
+							<div className='demo-cards-grid grid w-lg gap-3'>
 								<div
-									className='relative flex aspect-[1.586/1] flex-col justify-between overflow-hidden rounded-2xl p-4 text-white'
+									className='demo-card-face relative flex flex-col justify-between overflow-hidden rounded-2xl p-4 text-white'
 									style={{
 										backgroundImage:
 											'linear-gradient(135deg, oklch(28% 0.05 260), oklch(40% 0.08 280) 55%, oklch(22% 0.04 250))',
@@ -233,7 +233,7 @@ export const Header = () => {
 									/>
 									<span className='flex items-center justify-between'>
 										<span className='text-sm font-semibold tracking-wide'>polyms·bank</span>
-										<span className='inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium tracking-wider uppercase'>
+										<span className='text-2xs inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 font-medium tracking-wider uppercase'>
 											<HugeiconsIcon icon={ShieldEnergyIcon} size={10} strokeWidth={2.5} />
 											Signature
 										</span>
@@ -246,10 +246,10 @@ export const Header = () => {
 										}}
 									/>
 									<span className='flex flex-col gap-1.5'>
-										<span className='font-mono tracking-[0.2em] text-white/90'>•••• 7702</span>
+										<span className='demo-card-pan font-mono text-white/90'>•••• 7702</span>
 										<span className='flex items-baseline justify-between gap-2'>
 											<span className='text-sm font-medium tracking-wider uppercase'>Linh Đoàn</span>
-											<span className='text-[11px] text-white/70 tabular-nums'>12/29</span>
+											<span className='text-caption text-white/70 tabular-nums'>12/29</span>
 										</span>
 									</span>
 								</div>
@@ -292,7 +292,7 @@ export const Header = () => {
 											</span>
 											<span className='flex min-w-0 flex-1 items-center justify-between gap-2'>
 												<span className='text-sm font-medium'>Recent statements</span>
-												<span className='badge badge-light rounded-full text-[10px]'>3 new</span>
+												<span className='badge badge-light text-2xs rounded-full'>3 new</span>
 											</span>
 										</NavigationMenu.Link>
 									</li>
@@ -328,9 +328,12 @@ export const Header = () => {
 								</div>
 
 								<div className='flex flex-col gap-2 rounded-xl border border-neutral-200 px-3 py-2.5 dark:border-line'>
-									<span className='flex items-center justify-between text-[11px] tracking-wider text-muted uppercase'>
+									<span className='text-caption flex items-center justify-between tracking-wider text-muted uppercase'>
 										Recent recipients
-										<a className='link link-primary text-[11px] tracking-normal normal-case' href='#contacts'>
+										<a
+											className='link link-primary text-caption tracking-normal normal-case'
+											href='#contacts'
+										>
 											Manage
 										</a>
 									</span>
@@ -386,12 +389,14 @@ export const Header = () => {
 								<div className='flex flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 dark:border-line dark:bg-surface'>
 									<div className='flex items-end justify-between gap-2'>
 										<div className='flex flex-col gap-0.5'>
-											<span className='text-[11px] tracking-wider text-muted uppercase'>Portfolio value</span>
+											<span className='text-caption tracking-wider text-muted uppercase'>
+												Portfolio value
+											</span>
 											<span className='text-xl font-semibold text-neutral-900 tabular-nums dark:text-fg'>
 												$48,392.20
 											</span>
 										</div>
-										<span className='bg-success-500/15 text-success-700 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums'>
+										<span className='bg-success-500/15 text-success-700 text-caption inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold tabular-nums'>
 											<HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
 											+2.34%
 										</span>
@@ -407,7 +412,7 @@ export const Header = () => {
 											/>
 										))}
 									</div>
-									<div className='flex items-center justify-between text-[11px] text-muted'>
+									<div className='text-caption flex items-center justify-between text-muted'>
 										<span>7 days</span>
 										<span className='inline-flex items-center gap-1'>
 											<HugeiconsIcon icon={ChartIncreaseIcon} size={10} strokeWidth={2.5} />
@@ -417,7 +422,7 @@ export const Header = () => {
 								</div>
 
 								<div className='flex flex-col gap-2'>
-									<span className='px-1 text-[11px] tracking-wider text-muted uppercase'>
+									<span className='text-caption px-1 tracking-wider text-muted uppercase'>
 										Asset allocation
 									</span>
 									<ul className='m-0 flex list-none flex-col gap-2 p-0'>
