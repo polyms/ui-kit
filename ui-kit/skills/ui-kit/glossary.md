@@ -53,7 +53,7 @@ Intent colors mapped to design-system roles — not raw Tailwind palettes.
 | `light`   | Light surface contrast       |
 | `dark`    | Dark surface contrast        |
 
-Gray chrome uses **`slate`**, not `neutral` / `zinc`. Full rules: [theming.md](theming.md).
+Gray chrome uses **`neutral`**, not `zinc` / `gray` / `stone`. Full rules: [theming.md](theming.md).
 
 ## Container (overlay)
 

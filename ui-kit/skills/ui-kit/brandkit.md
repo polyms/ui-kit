@@ -19,7 +19,7 @@ Every brand pass must answer:
 2. What is the **one** brand accent (mapped to `primary`)?
 3. How do surfaces read in light and dark (`bg-body`, `text-fg`, `bg-surface`)?
 4. How do core components express the brand (`Button`, `Field`, `Badge`, `link-primary`, `item-primary`)?
-5. What must **not** change (semantic `danger` / `warning`, slate chrome, compound APIs)?
+5. What must **not** change (semantic `danger` / `warning`, neutral chrome, compound APIs)?
 
 ## Workflow
 
@@ -29,7 +29,7 @@ Strategy → Token map → Light/dark parity → Component applications → BRAN
 
 Declare one line before editing CSS:
 
-**"Brand kit for \<product> — \<personality> — primary \<hue family> on slate chrome, \<comfortable \| compact> density."**
+**"Brand kit for \<product> — \<personality> — primary \<hue family> on neutral chrome, \<comfortable \| compact> density."**
 
 ## Brand strategy first
 
@@ -62,7 +62,7 @@ Infer before touching tokens:
 | Family                                 | Role                                                                                                 |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `success`, `warning`, `danger`, `info` | Intent — errors stay readable, success stays green-family unless accessibility review says otherwise |
-| `slate-*`                              | Gray chrome — **never** swap to `neutral-*` or `zinc-*` for library-adjacent UI                      |
+| `neutral-*`                              | Gray chrome — **never** swap to `zinc-*`, `gray-*`, or `stone-*` for library-adjacent UI             |
 | Z-index utilities                      | `.z-modal`, `.z-dropdown`, etc. — use library scale                                                  |
 
 ### Minimal brand theme example
@@ -81,7 +81,7 @@ Infer before touching tokens:
 /* Optional: warmer light surfaces */
 :root {
   --body: #fafaf9;
-  --surface: var(--color-slate-100);
+  --surface: var(--color-neutral-100);
 }
 
 .dark {
@@ -188,7 +188,7 @@ When the user wants a portable brand doc in the consumer repo, create `BRAND.md`
 ## Do not
 
 - Remap `danger` / `success` for brand flair
-- Use `neutral-*` for chrome
+- Use `zinc-*`, `gray-*`, or `stone-*` for chrome
 - Restyle `Modal.Content` / `Menu.Content` shells with ad-hoc Tailwind
 
 ## Brand checklist
@@ -206,7 +206,7 @@ Run before shipping branded shell changes. **If any item fails, the brand pass i
 
 - [ ] `@polyms/ui-kit` styles imported; overrides live in **consumer** CSS only
 - [ ] `primary-*` ramp complete enough for hover/active (`btn-*`, `item-primary` use `primary-700` / mixes)
-- [ ] `slate` chrome intact; semantic tones used for intent
+- [ ] `neutral` chrome intact; semantic tones used for intent
 - [ ] Light and `.dark` tested — brand accent readable on both
 - [ ] Applications use library components, not parallel button/input styles
 - [ ] Logo/icon consistent; Hugeicons for UI glyphs

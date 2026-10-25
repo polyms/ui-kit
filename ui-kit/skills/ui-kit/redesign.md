@@ -58,7 +58,7 @@ List concrete problems before fixing. Group findings under the headings below.
 - Hand-built modal markup instead of `Modal` compound tree
 - Custom dropdown/listbox instead of `Menu` / `Select`
 - FAQ / settings sections as stacked `divide-y` divs instead of `Accordion` when sections collapse
-- `neutral-*`, `zinc-*`, or raw `blue-*` / `rose-*` for chrome instead of `slate` + semantic tones ([theming.md](theming.md))
+- `zinc-*`, `gray-*`, `stone-*`, or raw `blue-*` / `rose-*` for chrome instead of `neutral` + semantic tones ([theming.md](theming.md))
 - Hand-written `hover:bg-*` on nav rows instead of `item-*` ([css-utilities.md](css-utilities.md))
 - Deep imports (`@polyms/ui-kit/button`) or invented subcomponents (`ModalHeader`)
 - Large Tailwind bundles on `Modal.Content`, `Menu.Content`, `Select.Content` shells
@@ -133,7 +133,7 @@ Apply in order. **Stop when the brief is satisfied** — do not keep restyling f
 | ---- | ------------------------------------------------------------------------------------------------------------ | ---------- |
 | 1    | **Setup** — package, styles, overlay containers ([setup.md](setup.md))                                       | Low        |
 | 2    | **Component swap** — map ad-hoc markup to `@polyms/ui-kit` primitives; keep compound trees intact            | Low–medium |
-| 3    | **Semantic tokens** — `bg-body`, `text-fg`, `border-line`, `slate` chrome ([theming.md](theming.md))         | Low        |
+| 3    | **Semantic tokens** — `bg-body`, `text-fg`, `border-line`, `neutral` chrome ([theming.md](theming.md))       | Low        |
 | 4    | **Interactive surfaces** — `item-*` for ghost nav/actions; `btn-*` variants for actions                      | Low        |
 | 5    | **Spacing and density** — align to Comfortable / Compact / Cockpit ([quality.md](quality.md#visual-density)) | Medium     |
 | 6    | **Missing states** — loading, empty, error, disabled paths                                                   | Medium     |
@@ -184,7 +184,7 @@ Run after Fix. If any item fails, the redesign is not done.
 
 ### Product quality
 
-- [ ] `slate` + semantic tones; no raw palette drift for roles
+- [ ] `neutral` + semantic tones; no raw palette drift for roles
 - [ ] `item-*` on ghost surfaces; library shells not re-wrapped in large Tailwind bundles
 - [ ] Loading, empty, and error states present where the screen needs them
 - [ ] Natural field labels on user-facing forms ([quality.md](quality.md#field-label-copy))

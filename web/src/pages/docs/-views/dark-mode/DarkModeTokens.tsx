@@ -11,21 +11,21 @@ type Token = {
 
 const tokens: Token[] = [
   { name: '--body', light: '#ffffff', dark: '#2e3440', description: 'Page canvas background.' },
-  { name: '--fg', light: 'slate-900', dark: '#eceff4', description: 'Primary foreground text.' },
-  { name: '--surface', light: 'slate-100', dark: '#434c5e', description: 'Raised surface (card, panel).' },
+  { name: '--fg', light: 'neutral-900', dark: '#eceff4', description: 'Primary foreground text.' },
+  { name: '--surface', light: 'neutral-100', dark: '#434c5e', description: 'Raised surface (card, panel).' },
   { name: '--surface-2', light: '#ffffff', dark: '#3b4252', description: 'Elevated popup layer.' },
-  { name: '--muted', light: 'slate-500', dark: '#c0c8d4', description: 'Secondary / caption text.' },
-  { name: '--line', light: 'slate-300', dark: '#4c566a', description: 'Default divider color.' },
+  { name: '--muted', light: 'neutral-500', dark: '#c0c8d4', description: 'Secondary / caption text.' },
+  { name: '--line', light: 'neutral-300', dark: '#4c566a', description: 'Default divider color.' },
   { name: '--input', light: '#ffffff', dark: '#3b4252', description: 'Form control background.' },
 ]
 
 const lightSwatches: Record<string, string> = {
   '--body': '#ffffff',
-  '--fg': 'var(--color-slate-900)',
-  '--surface': 'var(--color-slate-100)',
+  '--fg': 'var(--color-neutral-900)',
+  '--surface': 'var(--color-neutral-100)',
   '--surface-2': '#ffffff',
-  '--muted': 'var(--color-slate-500)',
-  '--line': 'var(--color-slate-300)',
+  '--muted': 'var(--color-neutral-500)',
+  '--line': 'var(--color-neutral-300)',
   '--input': '#ffffff',
 }
 

@@ -288,7 +288,7 @@ Run before shipping UI. If any item fails, fix before delivering.
 - [ ] Components imported from `@polyms/ui-kit` barrel only.
 - [ ] Closest library primitive used before custom markup.
 - [ ] Compound tree intact (no invented `ModalHeader`-style imports).
-- [ ] Gray chrome uses `slate`; intent uses semantic tones (`primary`, `danger`, …).
+- [ ] Gray chrome uses `neutral`; intent uses semantic tones (`primary`, `danger`, …).
 - [ ] Ghost/hover surfaces use `item-*`, not hand-written `hover:bg-*`.
 
 ### Accessibility and contrast

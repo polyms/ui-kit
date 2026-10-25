@@ -18,7 +18,7 @@
   }
 
   .accordion-item:not(:last-child) {
-    border-bottom: 1px dashed var(--color-slate-300);
+    border-bottom: 1px dashed var(--color-neutral-300);
   }
 
   /* Trigger button styling */
@@ -42,7 +42,7 @@
     }
 
     &:hover:not([data-disabled]) {
-      @apply bg-slate-50;
+      @apply bg-neutral-50;
     }
 
     &:focus-visible {
@@ -67,7 +67,7 @@
     max-height: 500px;
     overflow: hidden;
     transition: height 150ms ease-out;
-    @apply border-slate-200 bg-slate-50;
+    @apply border-neutral-200 bg-neutral-50;
 
     &[data-starting-style],
     &[data-ending-style] {

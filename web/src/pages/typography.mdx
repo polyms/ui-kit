@@ -7,7 +7,7 @@ import Headings from './-views/typography/Headings'
 import { CodePreview } from '../layouts/CodePreview'
 import { Alert } from '@polyms/ui-kit'
 
-**Polyms UI Kit** ships a heading scale as **CSS classes** (`h1`–`h6`) with **Tailwind CSS 4** for size, weight, and alignment utilities. Prefer **semantic** `<h1>`–`<h6>` in markup and attach the matching class when you want this scale—for example `<h2 className='h2'>Section</h2>`. Muted chrome text should use the **slate** ramp (`text-slate-600`, …), not `neutral-*`, so it stays aligned with the rest of the system ([Design System](/design-system)).
+**Polyms UI Kit** ships a heading scale as **CSS classes** (`h1`–`h6`) with **Tailwind CSS 4** for size, weight, and alignment utilities. Prefer **semantic** `<h1>`–`<h6>` in markup and attach the matching class when you want this scale—for example `<h2 className='h2'>Section</h2>`. Muted chrome text should use the **neutral** ramp (`text-neutral-600`, …), so it stays aligned with the rest of the system ([Design System](/design-system)).
 
 ## Headings
 
@@ -150,7 +150,7 @@ export const coloredLinks = [
     class: '.link-light',
     variant: 'link link-light',
     description:
-      'Muted `--color-slate-500`; hover `--color-primary-600`; visited/active `--color-slate-900`.',
+      'Muted `--color-neutral-500`; hover `--color-primary-600`; visited/active `--color-neutral-900`.',
   },
 ]
 

@@ -61,7 +61,7 @@ apis:
   - name: children
     default: '-'
     values: ReactNode
-    description: Footer strip with a dashed slate border, designed for changelog teasers or CTAs at the bottom of a popup. Lays out children with `flex` + `justify-between` by default.
+    description: Footer strip with a dashed neutral border, designed for changelog teasers or CTAs at the bottom of a popup. Lays out children with `flex` + `justify-between` by default.
   - separator: NavigationMenu.Link
   - name: href
     default: '-'
@@ -217,7 +217,7 @@ const navigationMenuList = (
 
 ### Link variants
 
-By default, `NavigationMenu.Link` renders a plain row with a slate hover background. Use variants when a link needs stronger semantics: **`soft`** for discoverable card rows, **`danger`** for destructive actions, and **`trigger`** for static top-level entries.
+By default, `NavigationMenu.Link` renders a plain row with a neutral hover background. Use variants when a link needs stronger semantics: **`soft`** for discoverable card rows, **`danger`** for destructive actions, and **`trigger`** for static top-level entries.
 
 ```tsx
 const navigationMenuContent = (

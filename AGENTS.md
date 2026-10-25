@@ -124,7 +124,7 @@ Ví dụ rút gọn (độ dài dòng separator trong repo phải khớp 110):
 
 - **Tailwind** + `clsx()`; class có thể bị sort bởi Biome.
 - Style component: file **`ui-kit/src/styles/_tên-component.css`** và pattern import hiện có.
-- **Màu xám:** dùng **`--color-slate-*`**, không dùng `--color-neutral-*` (ví dụ `var(--color-slate-400)`).
+- **Màu xám:** dùng **`--color-neutral-*`** (ví dụ `var(--color-neutral-400)`). Không dùng `zinc-*`, `gray-*`, hay `stone-*` cho chrome.
 - **Phối transparent (idle/hover/active):** mọi component có state kiểu _ghost_ (transparent idle + tinted hover) phải nhất quán với pattern **`.item-*`** trong **`ui-kit/src/styles/_utilities.css`** — đây là single source of truth cho phối transparent của design system. Trong CSS riêng của component, tokenize bằng CSS variables + **`color-mix(in oklab, var(--variant) 10%, transparent)`** (như `_button.css` và `_toolbar.css` đang làm). Không hardcode hex hay tự ý dùng các thang màu khác (`zinc-*`, `blue-*`, `rose-*`, …).
 - **CSS-only classes mà consumer dùng được:** khi expose một utility CSS (badge/chip/link/item/...), nhớ cập nhật **`ui-kit/skills/ui-kit/css-utilities.md`** (section _CSS-Only Classes_ và _Interactive State Utilities_) để consumer agents biết.
 - **Comment section trong file CSS:** `ui-kit/src/styles/_*.css`, `web/src/styles/_*.css`, … thường có comment phân vùng ngắn trước block rule (ví dụ `/* Trigger button styling */`, `/* Panel styling */` trong **`web/src/styles/_details.css`**). **Không tự ý xóa** các comment kiểu này khi refactor, scope selector, hay format — chúng giúp điều hướng file dài. Khi thêm block rule mới cùng file, tiếp tục pattern tương tự nếu block tách rõ concern; chỉ bỏ comment khi xóa hẳn block rule đi kèm.

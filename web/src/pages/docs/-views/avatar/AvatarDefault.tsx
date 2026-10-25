@@ -15,7 +15,7 @@ import { Avatar } from '@polyms/ui-kit'
 export default function AvatarDefault() {
   return (
     <div className='m-auto grid grid-cols-3 items-center justify-center gap-2'>
-      <Avatar className='size-12 bg-linear-65 from-violet-500 to-fuchsia-500 text-slate-100'>
+      <Avatar className='size-12 bg-linear-65 from-violet-500 to-fuchsia-500 text-neutral-100'>
         <Avatar.Fallback className='avatar-fallback' delay={0}>
           AL
         </Avatar.Fallback>
@@ -32,7 +32,7 @@ export default function AvatarDefault() {
       </Avatar>
       <div className='font-medium text-sm'>Aliah Lane</div>
 
-      <Avatar className='size-12 bg-linear-65 from-purple-500 to-pink-500 text-slate-100'>
+      <Avatar className='size-12 bg-linear-65 from-purple-500 to-pink-500 text-neutral-100'>
         <Avatar.Fallback className='avatar-fallback' delay={0}>
           RL
         </Avatar.Fallback>

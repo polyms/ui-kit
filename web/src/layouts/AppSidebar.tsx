@@ -181,18 +181,18 @@ function FullNav({
         {showExamplesNav && (
           <Collapsible defaultOpen>
             <Collapsible.Trigger className='nav-item'>
-              <Icon className='size-4 text-slate-400' icon={examplesIcon} />
+              <Icon className='size-4 text-neutral-400' icon={examplesIcon} />
               Examples
               <Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
             </Collapsible.Trigger>
             <Collapsible.Panel className='nav-panel'>
               <div className='nav-panel-content'>
                 <Link className='nav-item' to='/demo'>
-                  <Icon className='size-4 text-slate-400' icon={GoogleDocIcon} />
+                  <Icon className='size-4 text-neutral-400' icon={GoogleDocIcon} />
                   Page Demo
                 </Link>
                 <Link className='nav-item' to='/forms'>
-                  <Icon className='size-4 text-slate-400' icon={GoogleDocIcon} />
+                  <Icon className='size-4 text-neutral-400' icon={GoogleDocIcon} />
                   Forms preview
                 </Link>
               </div>
@@ -214,20 +214,20 @@ function RailNav({ activePath, examplesIcon, onSelect, sections, showExamplesNav
         {showExamplesNav && (
           <NavigationMenu.Item>
             <NavigationMenu.Trigger aria-label='Examples' className='rail-item' type='button'>
-              <Icon className='size-5 text-slate-400' icon={examplesIcon} />
+              <Icon className='size-5 text-neutral-400' icon={examplesIcon} />
             </NavigationMenu.Trigger>
             <NavigationMenu.Content>
               <p className='floating-dock-popover-title'>Examples</p>
               <ul className='floating-dock-nav-list'>
                 <li>
                   <NavigationMenu.Link className='floating-dock-nav-item' render={<Link to='/demo' />}>
-                    <Icon className='size-4 shrink-0 text-slate-400' icon={GoogleDocIcon} />
+                    <Icon className='size-4 shrink-0 text-neutral-400' icon={GoogleDocIcon} />
                     Page Demo
                   </NavigationMenu.Link>
                 </li>
                 <li>
                   <NavigationMenu.Link className='floating-dock-nav-item' render={<Link to='/forms' />}>
-                    <Icon className='size-4 shrink-0 text-slate-400' icon={GoogleDocIcon} />
+                    <Icon className='size-4 shrink-0 text-neutral-400' icon={GoogleDocIcon} />
                     Forms preview
                   </NavigationMenu.Link>
                 </li>

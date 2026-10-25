@@ -98,8 +98,8 @@
   left: 100%;
   @apply z-10 flex p-2;
   @apply cursor-pointer rounded-full outline-0;
-  @apply text-slate-300 hover:bg-slate-50/10 hover:text-slate-50;
-  @apply border border-dashed border-transparent focus:border-slate-300;
+  @apply text-neutral-300 hover:bg-neutral-50/10 hover:text-neutral-50;
+  @apply border border-dashed border-transparent focus:border-neutral-300;
 }
 
 @media (min-width: 40rem) {

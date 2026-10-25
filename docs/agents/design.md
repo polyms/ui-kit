@@ -421,14 +421,14 @@ Mini preview frame 200×140; panel uses `color/body` fill. Docs `size-table` sho
 | `Side`   | top, bottom, left, right | popup placement relative to trigger         |
 | `Align`  | start, center, end       | cross-axis alignment; default bottom/center |
 
-Popup: `color/surface-2` fill, `slate/200` border, drop shadow. Trigger = surface chip “Click me”.
+Popup: `color/surface-2` fill, `neutral/200` border, drop shadow. Trigger = surface chip “Click me”.
 
 **Spinner component set** — properties khớp `spinner.mdx` + **`Spinner.tsx`** (library `199:689` → set `199:720`, 25 variants):
 
 | Property | Values                                  | Ghi chú                                                           |
 | -------- | --------------------------------------- | ----------------------------------------------------------------- |
 | `Size`   | 12, 16, 24, 32, 48                      | diameter px — maps `size` prop                                    |
-| `Color`  | dark, primary, success, danger, warning | maps `color` / `subColor`; dark arc `#181b1f`, track ~`slate/300` |
+| `Color`  | dark, primary, success, danger, warning | maps `color` / `subColor`; dark arc `#181b1f`, track ~`neutral/300` |
 
 Geometry: frame `spinner` chứa **2 VECTOR** filled paths từ `Spinner.tsx` viewBox `0 0 20 20` — track (donut / `subColor`) + arc (wedge / `color`). **Không** dùng ELLIPSE stroke. Solar `RefreshCircle` chỉ cho docs header (`201:378` @ header `199:824`). Script: `feedback-items/04-spinner-components.js`; re-patch header: `lib/patch-page-183-102-compact.js`.
 
@@ -449,7 +449,7 @@ Toast chrome: 300px wide, shadow, semantic tint or neutral body for `actions`. D
 | `Side`   | top, bottom, left, right | default side = top                           |
 | `State`  | open, disabled           | `disabled` hides popup, reduces opacity 0.45 |
 
-Popup: `slate/900` fill, white 12px / 20px lh. Provider delay 600ms documented in `Card/provider`.
+Popup: `neutral/900` fill, white 12px / 20px lh. Provider delay 600ms documented in `Card/provider`.
 
 Script order: `00-create-page` → `01-alert-components` → `02-offcanvas-components` → `03-popover-components` → `04-spinner-components` → `05-toast-components` → `06-tooltip-components` → `07-alert-docs` → `08-offcanvas-docs` → `09-popover-docs` → `10-spinner-docs` → `11-toast-docs` → `12-tooltip-docs` → `13-fix-layout`.
 
@@ -540,8 +540,8 @@ Focus ring cards: `focus-ring`, `focus-ring-error`, `focus-ring-shadow-xs/sm`, `
 
 | Collection            | Modes       | Maps to                                            |
 | --------------------- | ----------- | -------------------------------------------------- |
-| Primitives            | Value       | Base scales (`slate/*`, Tailwind hue ramps)        |
-| Palette               | Value       | `slate/*`, `primary/*`, semantic hue ramps         |
+| Primitives            | Value       | Base scales (`neutral/*`, Tailwind hue ramps)      |
+| Palette               | Value       | `neutral/*`, `primary/*`, semantic hue ramps       |
 | Color                 | Light, Dark | `--body`, `--fg`, `--surface`, …                   |
 | Spacing               | Value       | `spacing/*`                                        |
 | Radius                | Value       | `radius/*`                                         |
@@ -552,18 +552,18 @@ Focus ring cards: `focus-ring`, `focus-ring-error`, `focus-ring-shadow-xs/sm`, `
 
 Repo mirror: `ui-kit/src/styles/_root.css` (+ `_typography.css`, `_button.css`, …).
 
-### Gray ramp — slate only (never neutral)
+### Gray ramp — neutral
 
-Polyms gray chrome uses **`slate/*`** in Figma and **`--color-slate-*`** in CSS. Do **not** create or alias `neutral/*`, `color-neutral-*`, or Tailwind `neutral-*` — that naming came from a Carbon-style refactor and drifted from repo conventions.
+Polyms gray chrome uses **`neutral/*`** in Figma and **`--color-neutral-*`** in CSS. The ramp keeps the slate hue. Do **not** use `zinc/*`, `gray/*`, or `stone/*` for chrome next to library components.
 
-| Layer            | Figma token                                          | CSS (repo)                               |
-| ---------------- | ---------------------------------------------------- | ---------------------------------------- |
-| Palette          | `slate/50` … `slate/950`                             | `--color-slate-50` … `--color-slate-950` |
-| Color (semantic) | `color/fg` → `slate/900` (light), `slate/100` (dark) | `--fg: var(--color-slate-900)`           |
-| Color (semantic) | `color/muted`, `color/line`, `color/surface`         | alias `slate/*` steps — see `_root.css`  |
-| Token board      | `Seed/Slate` swatches bind `slate/*`                 | label **Slate**, not neutral             |
+| Layer            | Figma token                                          | CSS (repo)                                 |
+| ---------------- | ---------------------------------------------------- | ------------------------------------------ |
+| Palette          | `neutral/50` … `neutral/950`                         | `--color-neutral-50` … `--color-neutral-950` |
+| Color (semantic) | `color/fg` → `neutral/900` (light), `neutral/100` (dark) | `--fg: var(--color-neutral-900)`        |
+| Color (semantic) | `color/muted`, `color/line`, `color/surface`         | alias `neutral/*` steps — see `_root.css`  |
+| Token board      | `Seed/Neutral` swatches bind `neutral/*`             | label **Neutral**                          |
 
-When adding or retargeting Color-collection aliases, point gray tokens at **Palette `slate/*`**, not `neutral/*`.
+When adding or retargeting Color-collection aliases, point gray tokens at **Palette `neutral/*`**.
 
 ### MDX ↔ Figma mapping
 
@@ -624,7 +624,7 @@ Khi `find scripts/figma` thiếu file: lấy lại từ session trước / regen
 ### Typography board details
 
 - **Fonts:** Quicksand (sans/display), JetBrains Mono (mono) — bind `family/sans`, `family/display`, `family/mono`
-- **Dimensions `eg`:** spacing bars + radius previews use **`slate/900`** fill (not primary orange; never `neutral/*`)
+- **Dimensions `eg`:** spacing bars + radius previews use **`neutral/900`** fill (not primary orange; never `zinc/*`)
 - **Type Styles column:** body specimens use bilingual playful copy; code style uses JetBrains Mono
 
 ## Before designing

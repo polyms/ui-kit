@@ -5,10 +5,9 @@
 @source '../';
 
 /* Keep every Tailwind ramp so the theme dock can reassign semantic tokens at runtime. */
-@source inline('bg-slate-{50,100,200,300,400,500,600,700,800,900,950}');
+@source inline('bg-neutral-{50,100,200,300,400,500,600,700,800,900,950}');
 @source inline('bg-gray-{50,100,200,300,400,500,600,700,800,900,950}');
 @source inline('bg-zinc-{50,100,200,300,400,500,600,700,800,900,950}');
-@source inline('bg-neutral-{50,100,200,300,400,500,600,700,800,900,950}');
 @source inline('bg-stone-{50,100,200,300,400,500,600,700,800,900,950}');
 @source inline('bg-red-{50,100,200,300,400,500,600,700,800,900,950}');
 @source inline('bg-orange-{50,100,200,300,400,500,600,700,800,900,950}');

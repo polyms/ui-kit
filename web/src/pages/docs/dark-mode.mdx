@@ -46,11 +46,11 @@ apis:
     values: '#2e3440'
     description: Page canvas background. Light defaults to white; dark uses Nord nord0 (Polar Night).
   - name: --fg
-    default: slate-900
+    default: neutral-900
     values: '#eceff4'
     description: Primary foreground text — Nord nord6 (Snow Storm).
   - name: --surface
-    default: slate-100
+    default: neutral-100
     values: '#434c5e'
     description: Raised surface above the body — Nord nord2.
   - name: --surface-2
@@ -58,11 +58,11 @@ apis:
     values: '#3b4252'
     description: Elevated popup layer — Nord nord1.
   - name: --muted
-    default: slate-500
+    default: neutral-500
     values: '#c0c8d4'
-    description: Secondary / caption text — slate-derived midtone tuned for AA contrast on body.
+    description: Secondary / caption text — neutral-derived midtone tuned for AA contrast on body.
   - name: --line
-    default: slate-300
+    default: neutral-300
     values: '#4c566a'
     description: Default divider and border color — Nord nord3.
   - name: --input
@@ -118,7 +118,7 @@ Seven CSS variables drive the entire theme. Override them anywhere in your app t
 
 ## Utilities
 
-Short semantic classes for app shells and custom layout — prefer these over hardcoded slate/white when building theme-aware UI:
+Short semantic classes for app shells and custom layout — prefer these over hardcoded gray/white when building theme-aware UI:
 
 ```tsx
 const layout = (

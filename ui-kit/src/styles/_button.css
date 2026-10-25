@@ -99,21 +99,21 @@
 
     &.btn-dark {
       --btn-color: #fff;
-      --btn-variant-color: var(--color-slate-700);
+      --btn-variant-color: var(--color-neutral-700);
 
-      --btn-bg-color: var(--color-slate-800);
-      --btn-bg-hover-color: var(--color-slate-700);
-      --btn-bg-active-color: var(--color-slate-900);
+      --btn-bg-color: var(--color-neutral-800);
+      --btn-bg-hover-color: var(--color-neutral-700);
+      --btn-bg-active-color: var(--color-neutral-900);
 
       &.outlined {
-        --btn-color: var(--color-slate-900);
+        --btn-color: var(--color-neutral-900);
         --btn-bg-color: #fff;
-        --btn-border-color: var(--color-slate-900);
+        --btn-border-color: var(--color-neutral-900);
 
-        --btn-bg-hover-color: var(--color-slate-100);
+        --btn-bg-hover-color: var(--color-neutral-100);
 
         --btn-active-color: #fff;
-        --btn-border-active-color: var(--color-slate-900);
+        --btn-border-active-color: var(--color-neutral-900);
       }
     }
 

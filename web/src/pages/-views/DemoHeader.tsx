@@ -30,7 +30,7 @@ type AccountRow = {
   balance: string
   hint: string
   icon: typeof Wallet01Icon
-  tone: 'primary' | 'success' | 'warning' | 'slate'
+  tone: 'primary' | 'success' | 'warning' | 'neutral'
   href: string
 }
 
@@ -133,7 +133,7 @@ const portfolioBars = [42, 56, 49, 64, 58, 72, 68, 81]
 const allocations: Allocation[] = [
   { label: 'Stocks', weight: 60, bar: 'bg-primary-700', value: '$29,035.32' },
   { label: 'Bonds', weight: 25, bar: 'bg-success-500', value: '$12,098.05' },
-  { label: 'Cash', weight: 15, bar: 'bg-slate-400', value: '$7,258.83' },
+  { label: 'Cash', weight: 15, bar: 'bg-neutral-400', value: '$7,258.83' },
 ]
 
 export const Header = () => {
@@ -144,10 +144,10 @@ export const Header = () => {
 
   return (
     <header
-      className='sticky top-0 z-30 flex w-full min-w-0 max-w-full flex-nowrap items-center gap-3 border-slate-200/80 border-b bg-white/80 px-5 py-2.5 backdrop-blur-md backdrop-saturate-150 md:gap-4 md:px-8 dark:border-line/60 dark:bg-surface/70'
+      className='sticky top-0 z-30 flex w-full min-w-0 max-w-full flex-nowrap items-center gap-3 border-neutral-200/80 border-b bg-white/80 px-5 py-2.5 backdrop-blur-md backdrop-saturate-150 md:gap-4 md:px-8 dark:border-line/60 dark:bg-surface/70'
       id='demo-app-header'
     >
-      <FaviconFit className='size-8 shrink-0 rounded-lg shadow-sm ring-1 ring-slate-200/80 dark:ring-line/60' />
+      <FaviconFit className='size-8 shrink-0 rounded-lg shadow-sm ring-1 ring-neutral-200/80 dark:ring-line/60' />
 
       <NavigationMenu className='min-w-0 shrink-0' closeDelay={120} delay={100}>
         <NavigationMenu.List className='mb-0 list-none' variant='bare'>
@@ -158,7 +158,7 @@ export const Header = () => {
             </NavigationMenu.Trigger>
             <NavigationMenu.Content>
               <div className='flex w-md flex-col gap-3'>
-                <div className='flex items-end justify-between rounded-xl bg-slate-900 px-4 py-3 text-white'>
+                <div className='flex items-end justify-between rounded-xl bg-neutral-900 px-4 py-3 text-white'>
                   <div className='flex flex-col gap-0.5'>
                     <span className='text-[11px] text-white/60 uppercase tracking-wider'>Total balance</span>
                     <span className='font-semibold text-white text-xl'>$45,499.32</span>
@@ -181,7 +181,7 @@ export const Header = () => {
                                 ? 'bg-success-500/10 text-success-500'
                                 : row.tone === 'warning'
                                   ? 'bg-warning-500/10 text-warning-500'
-                                  : 'bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'
+                                  : 'bg-neutral-100 text-neutral-700 dark:bg-surface dark:text-fg'
                           }`}
                         >
                           <HugeiconsIcon icon={row.icon} size={18} strokeWidth={2} />
@@ -257,7 +257,7 @@ export const Header = () => {
                 <ul className='m-0 flex list-none flex-col gap-0.5 p-0'>
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#manage'>
-                      <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
+                      <span className='flex size-8 items-center justify-center rounded-md bg-neutral-100 text-neutral-700 dark:bg-surface dark:text-fg'>
                         <HugeiconsIcon icon={CreditCardIcon} size={15} strokeWidth={2} />
                       </span>
                       <span className='font-medium text-sm'>Manage cards</span>
@@ -287,7 +287,7 @@ export const Header = () => {
                   </li>
                   <li>
                     <NavigationMenu.Link className='flex items-center gap-2.5' href='#freeze'>
-                      <span className='flex size-8 items-center justify-center rounded-md bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
+                      <span className='flex size-8 items-center justify-center rounded-md bg-neutral-100 text-neutral-700 dark:bg-surface dark:text-fg'>
                         <HugeiconsIcon icon={ReceiptTextIcon} size={15} strokeWidth={2} />
                       </span>
                       <span className='flex min-w-0 flex-1 items-center justify-between gap-2'>
@@ -327,7 +327,7 @@ export const Header = () => {
                   ))}
                 </div>
 
-                <div className='flex flex-col gap-2 rounded-xl border border-slate-200 px-3 py-2.5 dark:border-line'>
+                <div className='flex flex-col gap-2 rounded-xl border border-neutral-200 px-3 py-2.5 dark:border-line'>
                   <span className='flex items-center justify-between text-[11px] text-muted uppercase tracking-wider'>
                     Recent recipients
                     <a className='link link-primary text-[11px] normal-case tracking-normal' href='#contacts'>
@@ -344,7 +344,7 @@ export const Header = () => {
                         {person.initials}
                       </span>
                     ))}
-                    <span className='inline-flex size-9 items-center justify-center rounded-full bg-slate-100 font-medium text-slate-600 text-xs dark:bg-surface dark:text-fg'>
+                    <span className='inline-flex size-9 items-center justify-center rounded-full bg-neutral-100 font-medium text-neutral-600 text-xs dark:bg-surface dark:text-fg'>
                       +12
                     </span>
                   </div>
@@ -354,14 +354,14 @@ export const Header = () => {
                   {recentTransfers.map(t => (
                     <li key={t.who}>
                       <NavigationMenu.Link className='flex items-center gap-3' href='#tx'>
-                        <span className='flex size-8 items-center justify-center rounded-full bg-slate-100 text-slate-700 dark:bg-surface dark:text-fg'>
+                        <span className='flex size-8 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 dark:bg-surface dark:text-fg'>
                           <HugeiconsIcon icon={Exchange02Icon} size={14} strokeWidth={2} />
                         </span>
                         <span className='flex min-w-0 flex-1 flex-col gap-0.5'>
                           <span className='flex items-center justify-between gap-2 font-medium text-sm'>
                             <span className='truncate'>{t.who}</span>
                             <span
-                              className={`shrink-0 tabular-nums ${t.positive ? 'text-success-500' : 'text-slate-900 dark:text-fg'}`}
+                              className={`shrink-0 tabular-nums ${t.positive ? 'text-success-500' : 'text-neutral-900 dark:text-fg'}`}
                             >
                               {t.amount}
                             </span>
@@ -383,11 +383,11 @@ export const Header = () => {
             </NavigationMenu.Trigger>
             <NavigationMenu.Content>
               <div className='flex w-md flex-col gap-3'>
-                <div className='flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-4 dark:border-line dark:bg-surface'>
+                <div className='flex flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 dark:border-line dark:bg-surface'>
                   <div className='flex items-end justify-between gap-2'>
                     <div className='flex flex-col gap-0.5'>
                       <span className='text-[11px] text-muted uppercase tracking-wider'>Portfolio value</span>
-                      <span className='font-semibold text-slate-900 text-xl tabular-nums dark:text-fg'>
+                      <span className='font-semibold text-neutral-900 text-xl tabular-nums dark:text-fg'>
                         $48,392.20
                       </span>
                     </div>
@@ -424,12 +424,12 @@ export const Header = () => {
                     {allocations.map(a => (
                       <li className='flex flex-col gap-1' key={a.label}>
                         <span className='flex items-center justify-between gap-2 text-xs'>
-                          <span className='font-medium text-slate-700 dark:text-fg'>{a.label}</span>
+                          <span className='font-medium text-neutral-700 dark:text-fg'>{a.label}</span>
                           <span className='text-muted tabular-nums'>
                             {a.weight}% · {a.value}
                           </span>
                         </span>
-                        <span className='h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-line'>
+                        <span className='h-1.5 overflow-hidden rounded-full bg-neutral-100 dark:bg-line'>
                           <span
                             className={`block h-full rounded-full ${a.bar}`}
                             style={{ width: `${a.weight}%` }}
@@ -455,7 +455,7 @@ export const Header = () => {
             </NavigationMenu.Content>
           </NavigationMenu.Item>
 
-          <span aria-hidden='true' className='mx-1 h-5 w-px bg-slate-200 dark:bg-line' />
+          <span aria-hidden='true' className='mx-1 h-5 w-px bg-neutral-200 dark:bg-line' />
 
           <NavigationMenu.Item>
             <NavigationMenu.Link

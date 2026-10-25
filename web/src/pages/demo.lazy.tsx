@@ -41,7 +41,7 @@ const features: DemoFeature[] = [
   },
   {
     description:
-      'Balance cards, virtual card visuals, recipient avatars and CSS bar charts — all rendered with @polyms/ui-kit tokens and the slate scale.',
+      'Balance cards, virtual card visuals, recipient avatars and CSS bar charts — all rendered with @polyms/ui-kit tokens and the neutral scale.',
     icon: ChartSquare,
     title: 'Data-driven content',
   },
@@ -72,14 +72,14 @@ function Page() {
               )}")`,
             }}
           />
-          <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -translate-x-1/2 rounded-full bg-primary-700/15 blur-3xl' />
+          <div className='absolute -top-24 left-1/2 h-112 w-[min(100%,56rem)] -tranneutral-x-1/2 rounded-full bg-primary-700/15 blur-3xl' />
           <div className='absolute top-48 -right-20 h-72 w-72 rounded-full bg-primary-700/10 blur-3xl' />
-          <div className='absolute top-80 -left-16 h-64 w-64 rounded-full bg-slate-300/40 blur-3xl dark:bg-slate-700/30' />
+          <div className='absolute top-80 -left-16 h-64 w-64 rounded-full bg-neutral-300/40 blur-3xl dark:bg-neutral-700/30' />
         </div>
 
         <main className='relative flex min-h-0 min-w-0 flex-1 flex-col'>
           <section className='mx-auto w-full max-w-5xl px-5 pt-12 pb-14 md:px-8 md:pt-20 md:pb-20'>
-            <div className='inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-3 py-1 font-medium text-slate-600 text-xs shadow-sm ring-1 ring-slate-100/80 backdrop-blur-sm dark:border-line dark:bg-surface/80 dark:text-muted dark:ring-line/40'>
+            <div className='inline-flex items-center gap-2 rounded-full border border-neutral-200/90 bg-white/90 px-3 py-1 font-medium text-neutral-600 text-xs shadow-sm ring-1 ring-neutral-100/80 backdrop-blur-sm dark:border-line dark:bg-surface/80 dark:text-muted dark:ring-line/40'>
               <span className='flex size-1.5 rounded-full bg-success-500 shadow-[0_0_0_3px_var(--color-success-100)]' />
               Playground
             </div>
@@ -89,9 +89,9 @@ function Page() {
             </h1>
             <p className='mt-4 max-w-3xl text-pretty text-base text-muted leading-relaxed md:text-lg'>
               Sticky header with a real{' '}
-              <span className='font-semibold text-slate-800 dark:text-fg'>mega menu</span>, global search and
+              <span className='font-semibold text-neutral-800 dark:text-fg'>mega menu</span>, global search and
               an auth flow — composed entirely from{' '}
-              <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-sm dark:bg-surface dark:text-fg'>
+              <code className='rounded-md bg-neutral-100 px-1.5 py-0.5 font-mono text-neutral-800 text-sm dark:bg-surface dark:text-fg'>
                 @polyms/ui-kit
               </code>{' '}
               primitives.
@@ -125,9 +125,9 @@ function Page() {
               {features.map(({ description, icon: Icon, title }) => (
                 <article
                   className={clsx(
-                    'group flex flex-col rounded-2xl border border-slate-200/90 bg-white/90 p-6 shadow-sm',
-                    'ring-1 ring-slate-100/80 transition-shadow duration-200',
-                    'hover:shadow-md hover:shadow-slate-200/60 dark:border-line dark:bg-surface/80 dark:ring-line/40',
+                    'group flex flex-col rounded-2xl border border-neutral-200/90 bg-white/90 p-6 shadow-sm',
+                    'ring-1 ring-neutral-100/80 transition-shadow duration-200',
+                    'hover:shadow-md hover:shadow-neutral-200/60 dark:border-line dark:bg-surface/80 dark:ring-line/40',
                     'dark:hover:shadow-black/20'
                   )}
                   key={title}
@@ -141,8 +141,8 @@ function Page() {
               ))}
             </div>
 
-            <div className='mt-10 flex flex-col gap-6 rounded-2xl border border-slate-200/90 bg-linear-to-br from-white via-white to-slate-50/90 p-6 shadow-sm ring-1 ring-slate-100/80 md:flex-row md:items-start md:gap-8 md:p-8 dark:border-line dark:from-surface dark:via-surface dark:to-surface/80 dark:ring-line/40'>
-              <div className='flex size-12 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-primary-700 dark:text-primary-50'>
+            <div className='mt-10 flex flex-col gap-6 rounded-2xl border border-neutral-200/90 bg-linear-to-br from-white via-white to-neutral-50/90 p-6 shadow-sm ring-1 ring-neutral-100/80 md:flex-row md:items-start md:gap-8 md:p-8 dark:border-line dark:from-surface dark:via-surface dark:to-surface/80 dark:ring-line/40'>
+              <div className='flex size-12 shrink-0 items-center justify-center rounded-xl bg-neutral-900 text-white dark:bg-primary-700 dark:text-primary-50'>
                 <Code2 className='size-7' />
               </div>
               <div className='min-w-0 flex-1'>
@@ -150,13 +150,13 @@ function Page() {
                   <span className='badge badge-success badge-lg rounded-full font-semibold'>Tip</span>
                   <span className='font-medium text-muted text-sm'>Content layout</span>
                 </div>
-                <p className='mt-3 text-pretty text-slate-600 leading-relaxed dark:text-muted'>
+                <p className='mt-3 text-pretty text-neutral-600 leading-relaxed dark:text-muted'>
                   The main content should be in a region with a{' '}
-                  <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-xs dark:bg-surface dark:text-fg'>
+                  <code className='rounded-md bg-neutral-100 px-1.5 py-0.5 font-mono text-neutral-800 text-xs dark:bg-surface dark:text-fg'>
                     max-width
                   </code>{' '}
                   reasonable width (here using{' '}
-                  <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-xs dark:bg-surface dark:text-fg'>
+                  <code className='rounded-md bg-neutral-100 px-1.5 py-0.5 font-mono text-neutral-800 text-xs dark:bg-surface dark:text-fg'>
                     max-w-5xl
                   </code>
                   ) to keep lines from getting too long on wide screens, while keeping the hero and card grid
@@ -174,11 +174,11 @@ function Page() {
               </div>
               <p className='max-w-2xl text-pretty text-muted text-sm leading-relaxed'>
                 Trigger each panel to test the real{' '}
-                <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-xs dark:bg-surface dark:text-fg'>
+                <code className='rounded-md bg-neutral-100 px-1.5 py-0.5 font-mono text-neutral-800 text-xs dark:bg-surface dark:text-fg'>
                   size
                 </code>{' '}
                 token on{' '}
-                <code className='rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-slate-800 text-xs dark:bg-surface dark:text-fg'>
+                <code className='rounded-md bg-neutral-100 px-1.5 py-0.5 font-mono text-neutral-800 text-xs dark:bg-surface dark:text-fg'>
                   Offcanvas.Content
                 </code>
                 . These are right-edge drawers, so the value maps to width; on viewports below 768px every

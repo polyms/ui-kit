@@ -41,7 +41,7 @@ const colors = {
   Feedback: 'text-danger-400',
   Navigation: 'text-primary-400',
   Others: 'text-danger-400',
-  Utils: 'text-slate-400',
+  Utils: 'text-neutral-400',
 } as const
 // biome-ignore-end lint/style/useNamingConvention: section labels from frontmatter
 
@@ -85,7 +85,7 @@ export function useDocsNav(search = '') {
         key: label,
         label,
         icon: iconMaps[label as keyof typeof iconMaps] || GoogleDocIcon,
-        colorClass: colors[label as keyof typeof colors] || 'text-slate-400',
+        colorClass: colors[label as keyof typeof colors] || 'text-neutral-400',
         items: items.sort((a, b) => {
           if (label === 'Guide') {
             const pinItem = (item: { path: string }) => (item.path === '/installation' ? -1 : 0)

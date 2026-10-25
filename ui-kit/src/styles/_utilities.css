@@ -152,7 +152,7 @@
   &:active,
   &.active {
     color: var(--fg);
-    background-color: var(--color-slate-200);
+    background-color: var(--color-neutral-200);
   }
 }
 

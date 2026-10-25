@@ -9,7 +9,7 @@ title: Design System
 
 The system is built on three principles:
 
-**Consistency** — One semantic palette (primary, success, warning, danger, informational accents, light/dark surfaces) plus a **slate** gray ramp for chrome, so composed UI stays visually aligned with bundled components.
+**Consistency** — One semantic palette (primary, success, warning, danger, informational accents, light/dark surfaces) plus a **neutral** gray ramp for chrome, so composed UI stays visually aligned with bundled components.
 
 **Accessibility** — Semantic HTML, keyboard support, and ARIA patterns built into components; target **WCAG 2.1 AA** for text contrast and focus behavior in your product screens.
 
@@ -19,7 +19,15 @@ The system is built on three principles:
 
 ### Color System
 
-Semantic ramps use **11 steps (50–950)** where the theme defines them. Prefer **`var(--color-{name}-{step})`** in CSS and **`bg-*` / `text-*` / `border-*`** in Tailwind for **primary**, **success**, **info**, **warning**, and **danger**. For **neutral chrome** (borders, muted text, surfaces next to library components), use **slate only**—not the Tailwind **`neutral`** scale (see below). The full catalog, split into primitive, semantic, and component layers, is on [Design Tokens](/design-tokens).
+Semantic ramps use **11 steps (50–950)**. Prefer **`var(--color-{name}-{step})`** in CSS and **`bg-*` / `text-*` / `border-*`** in Tailwind for **primary**, **success**, **info**, **warning**, and **danger**. For gray chrome (borders, muted text, surfaces next to library components), use **`neutral-*`**. Do not use **`zinc-*`**, **`gray-*`**, or **`stone-*`** for that job.
+
+#### How color reaches the UI
+
+A ramp step is a source value. It does not style a component until a token or a utility points at it.
+
+`Button variant='primary'` sets button tokens such as `--btn-variant-color` to `--color-primary-600`. The utility `bg-primary-500` reads `--color-primary-500` from the same ramp. Set the ramp, and both follow. Set `variant` on each component, because each component reads its own tokens. A class on a parent does not restyle the buttons, alerts, and badges inside it.
+
+Primitive scales, semantic surfaces, and component properties are catalogued on [Design Tokens](/design-tokens).
 
 ```css
 /* CSS Custom Properties */
@@ -45,19 +53,18 @@ export const colorVariants = [
   { name: 'danger', color: 'bg-danger-500', description: 'Errors, validation, destructive actions' },
   {
     name: 'light',
-    color: 'bg-slate-100',
+    color: 'bg-neutral-100',
     description: 'Surface / contrast helpers (`badge-light`, subtle panels)',
   },
   {
     name: 'dark',
-    color: 'bg-slate-900',
+    color: 'bg-neutral-900',
     description: 'High-contrast surfaces and inverse chrome (`badge-dark`, …)',
   },
   {
-    name: 'slate',
-    color: 'bg-slate-500',
-    description:
-      'Default **gray ramp** for UI chrome — use `slate-*` / `var(--color-slate-*)`, not `neutral-*`',
+    name: 'neutral',
+    color: 'bg-neutral-500',
+    description: 'Default **gray ramp** for UI chrome — use `neutral-*` / `var(--color-neutral-*)`',
   },
 ]
 
@@ -290,44 +297,110 @@ export const colorVariants = [
     </tr>
     <tr>
       <td>
-        slate <span className='text-muted text-xs'>(gray ramp)</span>
+        neutral <span className='text-muted text-xs'>(gray ramp)</span>
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-50 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-50 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-100 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-100 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-200 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-200 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-300 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-300 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-400 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-400 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-500 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-500 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-600 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-600 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-700 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-700 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-800 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-800 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-900 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-900 outline -outline-offset-1 outline-black/10' />
       </td>
       <td>
-        <div className='size-10 rounded-lg bg-slate-950 outline -outline-offset-1 outline-black/10' />
+        <div className='size-10 rounded-lg bg-neutral-950 outline -outline-offset-1 outline-black/10' />
       </td>
     </tr>
   </tbody>
 </table>
+
+#### What each step is for
+
+Steps are a shared scale. Components already agree on which part of the scale means a pale wash, a solid fill, or text on that wash. Your own CSS should use the same ranges so a custom panel matches an alert or a button.
+
+export const stepRoles = [
+  {
+    steps: '50–200',
+    use: 'Pale backgrounds. A light alert sets --alert-bg to step 50.',
+  },
+  {
+    steps: '300–400',
+    use: 'Soft borders and light tints when step 50 is too faint for the surface.',
+  },
+  {
+    steps: '500',
+    use: 'Mid ramp and some solid fills. Danger buttons use step 500. Dark-mode alert borders often use step 500.',
+  },
+  {
+    steps: '600–700',
+    use: 'Solid fills, strong borders, and text on pale backgrounds. Primary buttons use 600 for the fill and 700 for the pressed fill. Light alerts use 600 for the border and 700 for the text.',
+  },
+  {
+    steps: '800–950',
+    use: 'Deep emphasis on light surfaces, and the darkest end of a ramp when you need inverse chrome.',
+  },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th className='w-px'>Steps</th>
+        <th>Typical use</th>
+      </tr>
+    </thead>
+    <tbody>
+      {stepRoles.map((row, index) => (
+        <tr key={index}>
+          <td>
+            <code className='text-nowrap'>{row.steps}</code>
+          </td>
+          <td className='text-muted text-sm'>{row.use}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+#### Color pairings
+
+Keep text, fill, and border on roles that were chosen together. These three pairings are the ones built-in components already use.
+
+<div className='my-4 grid gap-3 md:grid-cols-3'>
+  <div className='rounded-lg border border-primary-600 bg-primary-50 p-4 text-primary-700 text-sm'>
+    Step 700 text on a step 50 background, with a step 600 border. Light alerts use this pairing.
+  </div>
+  <div className='rounded-lg bg-primary-600 p-4 text-sm text-white'>
+    White text on a step 600 fill. Solid primary buttons use this pairing.
+  </div>
+  <div className='rounded-lg border border-line bg-body p-4 text-fg text-sm'>
+    Foreground text on the page background, with the line token as the border.
+  </div>
+</div>
+
+When you remap a ramp, check contrast for the solid CTA (white on step 600) and for text on a step 50 background (step 700). Target **WCAG 2.1 AA** on both, in light and in `.dark`.
 
 **Tailwind color utilities**
 
@@ -337,13 +410,11 @@ export const colorVariants = [
 
 **Do not** substitute unrelated Tailwind families (`emerald-*`, `rose-*`, `amber-*`, …) when you mean **success**, **danger**, or **warning**—that drifts away from the contract used by **`btn-*`**, **`badge-*`**, and **`alert-*`**.
 
-#### Slate vs neutral
-
-In your app, use **`text-slate-*`**, **`bg-slate-*`**, **`border-slate-*`**, and **`var(--color-slate-50)` … `var(--color-slate-950)`** for generic gray UI. Avoid **`neutral-*`** utilities and **`var(--color-neutral-*)`** next to library components so borders, text, and surfaces stay on the same hue and contrast curve.
-
 ### Brand theming
 
-Ship your product accent through the **`primary`** ramp. The library defaults to cyan; remap **`--color-primary-50` … `--color-primary-950`** in your app CSS **after** importing package styles — do not edit files inside `node_modules`.
+Ship your product accent through the **`primary`** ramp. The library defaults to cyan. Remap **`--color-primary-50` … `--color-primary-950`** in your app CSS after importing package styles. Leave the files inside `node_modules` untouched.
+
+Hover, pressed, and focus states read more than one step. Dark mode keeps the same ramp and restyles components with a lighter step or `color-mix(in oklab, …)` against that ramp. Declare every step from 50 through 950. `--color-primary-500` alone updates rules that read step 500. Pale backgrounds, borders, and text still read steps 50, 600, and 700.
 
 **You own (brand)**
 
@@ -383,7 +454,7 @@ export const semanticFamilies = [
     family: 'success, warning, danger, info',
     role: 'Status and validation — do not recolor for brand flair',
   },
-  { family: 'slate-*', role: 'Gray chrome next to library components' },
+  { family: 'neutral-*', role: 'Gray chrome next to library components' },
 ]
 
 <div className='card my-4'>
@@ -421,7 +492,7 @@ export const semanticFamilies = [
 
 :root {
   --body: #ffffff;
-  --fg: var(--color-slate-900);
+  --fg: var(--color-neutral-900);
 }
 
 .dark {
@@ -431,6 +502,8 @@ export const semanticFamilies = [
 ```
 
 Import `theme.css` once at the app entry (before or as your main global stylesheet). Components such as **`Button variant='primary'`**, **`link link-primary`**, and **`item-primary`** pick up the new ramp automatically.
+
+Surfaces in that file (`--body`, `--fg`, and the rest) need a value in both `:root` and `.dark`. [Dark mode](/docs/dark-mode) lists the defaults and the utilities (`bg-body`, `text-fg`, `border-line`) that follow them.
 
 **Component touchpoints**
 
@@ -486,7 +559,7 @@ Commit a short **`BRAND.md`** beside your theme file so humans and agents share 
 ## Do not
 
 - Remap `danger` / `success` for branding
-- Use `neutral-*` for chrome
+- Use `zinc-*`, `gray-*`, or `stone-*` for chrome
 - Restyle `Modal.Content` / `Menu.Content` shells with ad-hoc Tailwind
 ```
 
@@ -498,6 +571,12 @@ After `pnpm exec ui-kit-skill`, your AI assistant can follow the same brand rule
 - [ ] Light and dark modes both readable (WCAG AA on primary CTAs)
 - [ ] One accent across the app shell — no per-screen hex drift
 - [ ] Semantic tones still mean success / warning / danger
+
+### Color modes
+
+Add `.dark` to `<html>`, or to any ancestor that should switch. Semantic surfaces (`--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input`) take their dark values. Alerts, badges, toasts, and links reassign their own component tokens for that mode. Primitive ramps keep the same steps in both modes. A dark alert picks a lighter step, or a `color-mix` wash, from the ramp you already defined.
+
+Setup, the surface utilities, and the light-to-dark token list are on [Dark mode](/docs/dark-mode).
 
 ### Spacing System
 
@@ -796,14 +875,15 @@ When writing custom CSS alongside library components, state and placement are ex
 **Do:**
 
 - Use **semantic** ramps for intent (success / warning / danger / primary / info).
-- Use **slate** for neutral chrome; keep **4.5:1** contrast for body text where feasible.
-- Use lighter steps (50–200) for backgrounds and darker steps (600–900) for text and borders on light surfaces.
+- Use **neutral** for gray chrome; keep **4.5:1** contrast for body text where feasible.
+- Pair step 50–200 backgrounds with step 600–700 text and borders on light surfaces. Use white text on a step 600 solid fill.
+- Remap a full 50–950 ramp, and set surface tokens in both `:root` and `.dark`.
 
 **Don’t:**
 
 - Mix meanings (e.g. success styling on destructive actions).
-- Pair **slate-based** library UI with the **`neutral`** Tailwind scale in the same chrome without a deliberate exception.
 - Override semantic tokens with arbitrary unrelated palettes for the same role.
+- Set a single step, such as `--color-primary-500`, and expect hover, pale backgrounds, and alert text to follow. Those still read the other steps.
 
 ### Component selection
 

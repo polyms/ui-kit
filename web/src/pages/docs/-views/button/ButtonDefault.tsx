@@ -33,7 +33,7 @@ export default function ButtonDefault() {
         />
       </Button>
       <Button rounded size='xl' variant='dark'>
-        <Spinner className='btn-icon-content' color='#fff' size={22} subColor='var(--color-slate-500)' />
+        <Spinner className='btn-icon-content' color='#fff' size={22} subColor='var(--color-neutral-500)' />
       </Button>
     </div>
   )

@@ -29,7 +29,7 @@ const TickIcon = () => (
   >
     <path
       d='M5 14.5C5 14.5 6.5 14.5 8.5 18C8.5 18 14.0588 8.83333 19 7'
-      stroke='var(--color-slate-900)'
+      stroke='var(--color-neutral-900)'
       strokeLinecap='round'
       strokeLinejoin='round'
       strokeWidth='2'

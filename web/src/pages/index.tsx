@@ -41,7 +41,7 @@ function RouteComponent() {
     <>
       <link href={homePageStylesUrl} precedence='high' rel='stylesheet' />
       <div className='home-scanline' />
-      <main className='landing relative isolate overflow-x-clip bg-slate-950 text-slate-100'>
+      <main className='landing relative isolate overflow-x-clip bg-neutral-950 text-neutral-100'>
         <BackgroundDecor />
         <LandingNav />
         <HeroSection />
@@ -62,7 +62,7 @@ function BackgroundDecor() {
   return (
     <div aria-hidden='true' className='home-decor'>
       <div className='home-decor-grid' />
-      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -translate-x-1/2 bg-primary-700/25' />
+      <div className='home-decor-glow -top-60 left-1/2 h-112 w-240 -tranneutral-x-1/2 bg-primary-700/25' />
       <div className='home-decor-glow top-160 -left-40 h-96 w-96 bg-primary-700/10' />
       <div className='home-decor-glow top-320 -right-40 h-112 w-md bg-primary-700/10' />
     </div>
@@ -79,7 +79,7 @@ function LandingNav() {
       <Container className='flex h-14 items-center gap-6'>
         <Link className='flex items-center' to='/'>
           <FaviconFit className='h-10 w-auto' hexCenterColor='#fff' />
-          <span className='ms-1 mb-1.5 font-semibold text-slate-100 tracking-tight'>olyms</span>
+          <span className='ms-1 mb-1.5 font-semibold text-neutral-100 tracking-tight'>olyms</span>
           <span className='home-nav-tag ms-2'>UI Kit</span>
         </Link>
 
@@ -117,7 +117,7 @@ function HeroSection() {
   return (
     <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-175 items-center overflow-hidden'>
       {/* Background Marquee */}
-      <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -translate-y-1/2'>
+      <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -tranneutral-y-1/2'>
         <div className='home-marquee-container'>
           <div className='home-marquee-content'>
             <span className='px-4 font-black text-[clamp(2.5rem,6vw,3.75rem)] text-primary-500/80 italic md:px-8'>
@@ -151,7 +151,7 @@ function HeroSection() {
       <Container className='relative z-10 w-full'>
         <div className='relative z-30 max-w-4xl'>
           <h1 className='text-balance font-black uppercase leading-[0.85] tracking-tighter'>
-            <span className='block text-[clamp(4rem,15vw,8rem)] text-slate-100 mix-blend-difference drop-shadow-2xl'>
+            <span className='block text-[clamp(4rem,15vw,8rem)] text-neutral-100 mix-blend-difference drop-shadow-2xl'>
               STRICT.
             </span>
             <span className='home-text-outline-neon relative z-20 -mt-1 block text-[clamp(5rem,18vw,10rem)] md:-mt-3 lg:-mt-6'>
@@ -162,7 +162,7 @@ function HeroSection() {
             </span>
           </h1>
 
-          <p className='mt-6 max-w-xl text-balance border-primary-500 border-l-4 bg-black/40 p-3 font-medium text-base text-slate-300 drop-shadow-md backdrop-blur-sm md:mt-8 md:p-4 md:text-lg lg:text-xl'>
+          <p className='mt-6 max-w-xl text-balance border-primary-500 border-l-4 bg-black/40 p-3 font-medium text-base text-neutral-300 drop-shadow-md backdrop-blur-sm md:mt-8 md:p-4 md:text-lg lg:text-xl'>
             Type-safe, accessible, and composable primitives built on{' '}
             <span className='text-white'>Base UI</span> and{' '}
             <span className='text-white'>Tailwind CSS v4</span>. No rounded corners, no safe bets.
@@ -173,7 +173,7 @@ function HeroSection() {
               Browse components
             </Link>
             <a
-              className='font-bold text-slate-300 text-sm uppercase tracking-widest transition-all hover:text-white hover:drop-shadow-[0_0_10px_#fff]'
+              className='font-bold text-neutral-300 text-sm uppercase tracking-widest transition-all hover:text-white hover:drop-shadow-[0_0_10px_#fff]'
               href='https://github.com/polyms/ui-kit'
               rel='noopener noreferrer'
               target='_blank'
@@ -247,14 +247,14 @@ function ShowcaseCard({
     <article className={clsx('home-showcase-card group', className)}>
       <div className='flex flex-1 items-center justify-center p-6'>{children}</div>
       <div className='home-showcase-card-footer'>
-        <span className='font-medium text-slate-700 text-xs uppercase tracking-wider'>{label}</span>
+        <span className='font-medium text-neutral-700 text-xs uppercase tracking-wider'>{label}</span>
         <Link
           aria-label={`Open ${label} docs`}
           className='link link-light inline-flex items-center gap-1 text-xs'
           to={to}
         >
           Open
-          <ArrowRightIcon className='size-3 transition-transform group-hover:translate-x-0.5' />
+          <ArrowRightIcon className='size-3 transition-transform group-hover:tranneutral-x-0.5' />
         </Link>
       </div>
     </article>
@@ -308,13 +308,13 @@ function TabsPreview() {
         <Tabs.Tab value='settings'>Settings</Tabs.Tab>
         <Tabs.Tab value='billing'>Billing</Tabs.Tab>
       </Tabs.List>
-      <Tabs.Panel className='pt-3 text-slate-600 text-sm' value='overview'>
+      <Tabs.Panel className='pt-3 text-neutral-600 text-sm' value='overview'>
         Build accessible tabs with animated indicator out of the box.
       </Tabs.Panel>
-      <Tabs.Panel className='pt-3 text-slate-600 text-sm' value='settings'>
+      <Tabs.Panel className='pt-3 text-neutral-600 text-sm' value='settings'>
         Compose with forms, popovers, and menus.
       </Tabs.Panel>
-      <Tabs.Panel className='pt-3 text-slate-600 text-sm' value='billing'>
+      <Tabs.Panel className='pt-3 text-neutral-600 text-sm' value='billing'>
         Keyboard navigation and ARIA roles included.
       </Tabs.Panel>
     </Tabs>
@@ -346,7 +346,7 @@ function PopoverPreview() {
 
 function SwitchPreview() {
   return (
-    <div className='flex w-full flex-col gap-3 text-slate-700 text-sm'>
+    <div className='flex w-full flex-col gap-3 text-neutral-700 text-sm'>
       <div className='flex items-center justify-between gap-3'>
         <span>Notifications</span>
         <Switch defaultChecked />
@@ -355,7 +355,7 @@ function SwitchPreview() {
         <span>Dark mode</span>
         <Switch />
       </div>
-      <div className='flex items-center justify-between gap-3 text-slate-400'>
+      <div className='flex items-center justify-between gap-3 text-neutral-400'>
         <span>Beta features</span>
         <Switch defaultChecked disabled />
       </div>
@@ -472,27 +472,27 @@ function FeatureCard({ Icon, title, description, tone }: FeatureItem) {
       <div className={clsx('home-feature-icon', `tone-${tone}`)}>
         <Icon className='size-6' />
       </div>
-      <h3 className='mt-5 font-semibold text-base text-slate-100'>{title}</h3>
-      <p className='mt-2 text-slate-400 text-sm leading-relaxed'>{description}</p>
+      <h3 className='mt-5 font-semibold text-base text-neutral-100'>{title}</h3>
+      <p className='mt-2 text-neutral-400 text-sm leading-relaxed'>{description}</p>
     </div>
   )
 }
 
 function ThemingSection() {
   return (
-    <section className='border-slate-800/60 border-y bg-slate-900/30 px-6 py-20 md:py-28'>
+    <section className='border-neutral-800/60 border-y bg-neutral-900/30 px-6 py-20 md:py-28'>
       <Container>
         <div className='grid items-center gap-12 lg:grid-cols-2'>
           <div>
             <div className='home-section-eyebrow'>Theming API</div>
-            <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-4xl'>
+            <h2 className='mt-4 text-balance font-semibold text-3xl text-neutral-100 tracking-tight md:text-4xl'>
               Make it yours in minutes.
             </h2>
-            <p className='mt-4 max-w-xl text-slate-400 md:text-lg'>
+            <p className='mt-4 max-w-xl text-neutral-400 md:text-lg'>
               Polyms UI Kit is built on CSS variables. You don't need to fork the library to match your brand.
               Just tweak a few variables and the entire design system adapts seamlessly.
             </p>
-            <ul className='mt-8 space-y-4 text-slate-300'>
+            <ul className='mt-8 space-y-4 text-neutral-300'>
               <li className='flex items-center gap-3'>
                 <div className='flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-700/10 text-primary-400'>
                   <Palette className='size-4' />
@@ -541,7 +541,7 @@ const THEME_CODE_HTML = [
   '<span class="tk-keyword">:root</span> <span class="tk-punct">{</span>',
   '  <span class="tk-bracket">/* Brand colors */</span>',
   '  <span class="tk-attr">--color-primary-500</span><span class="tk-punct">:</span> <span class="tk-string">#8b5cf6</span><span class="tk-punct">;</span>',
-  '  <span class="tk-attr">--color-slate-900</span><span class="tk-punct">:</span> <span class="tk-string">#0f172a</span><span class="tk-punct">;</span>',
+  '  <span class="tk-attr">--color-neutral-900</span><span class="tk-punct">:</span> <span class="tk-string">#0f172a</span><span class="tk-punct">;</span>',
   '',
   '  <span class="tk-bracket">/* Geometry */</span>',
   '  <span class="tk-attr">--radius-base</span><span class="tk-punct">:</span> <span class="tk-string">0.75rem</span><span class="tk-punct">;</span>',
@@ -575,7 +575,7 @@ function InstallCard({ className }: { className?: string }) {
   return (
     <div className={clsx('home-install-card', className)}>
       <div className='home-install-card-header'>
-        <TerminalIcon className='size-4 text-slate-500' />
+        <TerminalIcon className='size-4 text-neutral-500' />
         <span className='font-medium text-sm'>Install</span>
       </div>
       <Tabs className='flex-1' defaultValue='pnpm'>
@@ -602,7 +602,7 @@ function InstallCard({ className }: { className?: string }) {
       <div className='home-install-card-footer'>
         <p>
           Peers: <code>react</code> <code>react-dom</code>{' '}
-          <span className='text-slate-500'>&gt;= 19.0.0</span>
+          <span className='text-neutral-500'>&gt;= 19.0.0</span>
         </p>
       </div>
     </div>
@@ -715,8 +715,8 @@ function MetricCell({ value, label, sub }: MetricItem) {
   return (
     <div className='home-metric-cell'>
       <div className='home-metric-value'>{value}</div>
-      <div className='mt-2 font-medium text-slate-100 text-sm'>{label}</div>
-      <div className='text-slate-500 text-xs'>{sub}</div>
+      <div className='mt-2 font-medium text-neutral-100 text-sm'>{label}</div>
+      <div className='text-neutral-500 text-xs'>{sub}</div>
     </div>
   )
 }
@@ -755,12 +755,12 @@ function FaqSection() {
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   return (
-    <div className='rounded-2xl border border-slate-800 bg-slate-900/40 p-6 backdrop-blur-sm transition-colors hover:border-slate-700 hover:bg-slate-800/40'>
-      <h3 className='flex items-center gap-3 font-medium text-lg text-slate-100'>
+    <div className='rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 backdrop-blur-sm transition-colors hover:border-neutral-700 hover:bg-neutral-800/40'>
+      <h3 className='flex items-center gap-3 font-medium text-lg text-neutral-100'>
         <span className='text-primary-400'>Q.</span>
         {question}
       </h3>
-      <p className='ms-7 mt-2 text-slate-400 leading-relaxed'>{answer}</p>
+      <p className='ms-7 mt-2 text-neutral-400 leading-relaxed'>{answer}</p>
     </div>
   )
 }
@@ -772,7 +772,7 @@ function CTASection() {
         <div className='home-cta'>
           <div
             aria-hidden='true'
-            className='home-decor-glow top-0 left-1/2 h-72 w-xl -translate-x-1/2 bg-primary-700/20'
+            className='home-decor-glow top-0 left-1/2 h-72 w-xl -tranneutral-x-1/2 bg-primary-700/20'
           />
           <div
             aria-hidden='true'
@@ -784,12 +784,12 @@ function CTASection() {
                 <MagicStick3 className='size-3.5' />
                 Ready when you are
               </span>
-              <h2 className='mt-4 max-w-2xl text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-5xl'>
+              <h2 className='mt-4 max-w-2xl text-balance font-semibold text-3xl text-neutral-100 tracking-tight md:text-5xl'>
                 Stop reinventing the same primitives.
                 <br />
                 <span className='home-cta-accent'>Start shipping product.</span>
               </h2>
-              <p className='mt-4 max-w-xl text-slate-400 md:text-lg'>
+              <p className='mt-4 max-w-xl text-neutral-400 md:text-lg'>
                 Open source. MIT licensed. Built in the open by{' '}
                 <a
                   className='home-cta-link'
@@ -834,13 +834,13 @@ function FooterSection() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className='border-slate-800 border-t bg-slate-950'>
+    <footer className='border-neutral-800 border-t bg-neutral-950'>
       <Container className='flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center'>
         <div className='flex items-center'>
           <FaviconFit className='h-20 w-auto' hexCenterColor='#fff' />
           <div className='ms-1'>
-            <div className='font-semibold text-2xl text-slate-100'>olyms</div>
-            <div className='text-slate-500 text-xs'>© 2024-{currentYear} Polyms. MIT Licensed.</div>
+            <div className='font-semibold text-2xl text-neutral-100'>olyms</div>
+            <div className='text-neutral-500 text-xs'>© 2024-{currentYear} Polyms. MIT Licensed.</div>
           </div>
         </div>
 
@@ -882,10 +882,10 @@ function SectionHeader({
   return (
     <div className={clsx('max-w-2xl', align === 'center' ? 'mx-auto text-center' : 'text-left')}>
       <div className='home-section-eyebrow'>{eyebrow}</div>
-      <h2 className='mt-4 text-balance font-semibold text-3xl text-slate-100 tracking-tight md:text-4xl'>
+      <h2 className='mt-4 text-balance font-semibold text-3xl text-neutral-100 tracking-tight md:text-4xl'>
         {title}
       </h2>
-      <p className='mt-3 text-balance text-slate-400 md:text-lg'>{subtitle}</p>
+      <p className='mt-3 text-balance text-neutral-400 md:text-lg'>{subtitle}</p>
     </div>
   )
 }

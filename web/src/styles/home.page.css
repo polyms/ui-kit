@@ -1,11 +1,11 @@
 /* ── Landing page (route /) ─────────────────────────────────────────────────────────────────────────────
    Component-scoped styles for the home page. Keeps JSX clean by encapsulating:
    - long Tailwind utility chains
-   - colors outside the project main variants (primary / slate)
-   The page itself only references primary-*, slate-*, and these semantic classes.
+   - colors outside the project main variants (primary / neutral)
+   The page itself only references primary-*, neutral-*, and these semantic classes.
 
    Loaded lazily via `?url` + TanStack Router `head` API (only for the landing route).
-   `@reference` brings in token context (primary-*, slate-*, ...) so `@apply` resolves correctly.
+   `@reference` brings in token context (primary-*, neutral-*, ...) so `@apply` resolves correctly.
    ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
 
 @reference './tailwind.css';
@@ -17,7 +17,7 @@
 }
 
 .home-decor-grid {
-  background-image: radial-gradient(var(--color-slate-800) 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-neutral-800) 1px, transparent 1px);
   background-size: 28px 28px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
@@ -31,7 +31,7 @@
 /* ── Nav bar ─────────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-nav {
-  @apply sticky top-0 z-30 border-b border-slate-800/60 bg-slate-950/70 backdrop-blur-md;
+  @apply sticky top-0 z-30 border-b border-neutral-800/60 bg-neutral-950/70 backdrop-blur-md;
 }
 
 .home-nav-tag {
@@ -39,21 +39,21 @@
 }
 
 .home-nav-link {
-  @apply rounded-full px-4 py-1.5 text-slate-400 transition-colors;
+  @apply rounded-full px-4 py-1.5 text-neutral-400 transition-colors;
 }
 
 .home-nav-link:hover {
-  @apply bg-slate-800/60 text-slate-100;
+  @apply bg-neutral-800/60 text-neutral-100;
 }
 
 /* ── Glass button (dark) ─────────────────────────────────────────────────────────────────────────────── */
 
 .home-btn-glass {
-  @apply inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 font-medium text-slate-100 backdrop-blur-sm transition-all;
+  @apply inline-flex items-center gap-2 rounded-full border border-neutral-700 bg-neutral-900/60 font-medium text-neutral-100 backdrop-blur-sm transition-all;
 }
 
 .home-btn-glass:hover {
-  @apply border-slate-600 bg-slate-800/80;
+  @apply border-neutral-600 bg-neutral-800/80;
 }
 
 .home-btn-glass.sm {
@@ -71,7 +71,7 @@
 /* ── Hero ────────────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-hero-pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-300 shadow-sm backdrop-blur-sm transition-all;
+  @apply inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-300 shadow-sm backdrop-blur-sm transition-all;
 }
 
 .home-hero-pill:hover {
@@ -79,15 +79,15 @@
 }
 
 .home-hero-pill .arrow {
-  @apply size-3 text-slate-500 transition-transform;
+  @apply size-3 text-neutral-500 transition-transform;
 }
 
 .home-hero-pill:hover .arrow {
-  @apply translate-x-0.5 text-primary-400;
+  @apply tranneutral-x-0.5 text-primary-400;
 }
 
 .home-hero-pill .sep {
-  @apply text-slate-700;
+  @apply text-neutral-700;
 }
 
 .home-hero-pulse {
@@ -109,7 +109,7 @@
 }
 
 .home-hero-title-mute {
-  @apply bg-linear-to-b from-slate-100 to-slate-400 bg-clip-text text-transparent;
+  @apply bg-linear-to-b from-neutral-100 to-neutral-400 bg-clip-text text-transparent;
 }
 
 .home-hero-title-accent {
@@ -202,29 +202,29 @@
 /* ── Showcase card (white card on dark bg) ───────────────────────────────────────────────────────────── */
 
 .home-showcase-card {
-  @apply relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/40 backdrop-blur-md transition-all duration-500;
+  @apply relative flex flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 backdrop-blur-md transition-all duration-500;
 }
 
 .home-showcase-card:hover {
-  @apply -translate-y-2 border-primary-700/40 shadow-2xl shadow-primary-700/10;
+  @apply -tranneutral-y-2 border-primary-700/40 shadow-2xl shadow-primary-700/10;
 }
 
 .home-showcase-card-footer {
-  @apply flex items-center justify-between border-t border-slate-800/80 bg-slate-950/60 px-4 py-3 backdrop-blur-md;
+  @apply flex items-center justify-between border-t border-neutral-800/80 bg-neutral-950/60 px-4 py-3 backdrop-blur-md;
 }
 
 /* ── Features grid ───────────────────────────────────────────────────────────────────────────────────── */
 
 .home-feature-grid {
-  @apply grid gap-px overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-800/40 sm:grid-cols-2 lg:grid-cols-3;
+  @apply grid gap-px overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-800/40 sm:grid-cols-2 lg:grid-cols-3;
 }
 
 .home-feature {
-  @apply relative bg-slate-950/70 p-7 transition-colors;
+  @apply relative bg-neutral-950/70 p-7 transition-colors;
 }
 
 .home-feature:hover {
-  @apply bg-slate-900/60;
+  @apply bg-neutral-900/60;
 }
 
 .home-feature-icon {
@@ -252,15 +252,15 @@
 /* ── Metrics ─────────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-metric-grid {
-  @apply grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-800/40 lg:grid-cols-4;
+  @apply grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-800/40 lg:grid-cols-4;
 }
 
 .home-metric-cell {
-  @apply bg-slate-950/70 p-6 md:p-8;
+  @apply bg-neutral-950/70 p-6 md:p-8;
 }
 
 .home-metric-value {
-  @apply bg-linear-to-b from-slate-100 to-primary-400 bg-clip-text text-4xl font-semibold tracking-tight text-transparent md:text-5xl;
+  @apply bg-linear-to-b from-neutral-100 to-primary-400 bg-clip-text text-4xl font-semibold tracking-tight text-transparent md:text-5xl;
 }
 
 /* ── CTA banner ──────────────────────────────────────────────────────────────────────────────────────── */
@@ -268,15 +268,15 @@
 .home-cta {
   background: linear-gradient(
     to bottom right,
-    var(--color-slate-900),
-    color-mix(in oklab, var(--color-primary-950) 40%, var(--color-slate-900)),
-    var(--color-slate-900)
+    var(--color-neutral-900),
+    color-mix(in oklab, var(--color-primary-950) 40%, var(--color-neutral-900)),
+    var(--color-neutral-900)
   );
-  @apply relative overflow-hidden rounded-3xl border border-slate-800 p-10 md:p-16;
+  @apply relative overflow-hidden rounded-3xl border border-neutral-800 p-10 md:p-16;
 }
 
 .home-cta-pill {
-  @apply inline-flex items-center gap-2 rounded-full border border-primary-700/30 bg-slate-950/60 px-3 py-1 text-xs font-medium text-primary-300 backdrop-blur-sm;
+  @apply inline-flex items-center gap-2 rounded-full border border-primary-700/30 bg-neutral-950/60 px-3 py-1 text-xs font-medium text-primary-300 backdrop-blur-sm;
 }
 
 .home-cta-accent {
@@ -294,48 +294,48 @@
 /* ── Footer ──────────────────────────────────────────────────────────────────────────────────────────── */
 
 .home-footer-link {
-  @apply text-slate-400 transition-colors;
+  @apply text-neutral-400 transition-colors;
 }
 
 .home-footer-link:hover {
-  @apply text-slate-100;
+  @apply text-neutral-100;
 }
 
 /* ── Install card (light card on dark bg) ────────────────────────────────────────────────────────────── */
 
 .home-install-card {
-  @apply flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-white;
+  @apply flex flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-white;
 }
 
 .home-install-card-header {
-  @apply flex items-center gap-2 border-b border-slate-200 px-5 py-3 text-slate-700;
+  @apply flex items-center gap-2 border-b border-neutral-200 px-5 py-3 text-neutral-700;
 }
 
 .home-install-card-footer {
-  @apply border-t border-slate-200 bg-slate-50/60 p-5 text-xs leading-relaxed text-slate-600;
+  @apply border-t border-neutral-200 bg-neutral-50/60 p-5 text-xs leading-relaxed text-neutral-600;
 }
 
 .home-install-card-footer code {
-  @apply rounded bg-slate-200/60 px-1 font-mono;
+  @apply rounded bg-neutral-200/60 px-1 font-mono;
 }
 
 /* ── Example code card (terminal mock) ───────────────────────────────────────────────────────────────── */
 
 .home-example-card {
-  @apply overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-xl shadow-slate-900/5;
+  @apply overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 shadow-xl shadow-neutral-900/5;
 }
 
 .home-example-card-header {
-  @apply flex items-center gap-2 border-b border-slate-800 bg-slate-900 px-5 py-3;
+  @apply flex items-center gap-2 border-b border-neutral-800 bg-neutral-900 px-5 py-3;
 }
 
 .home-example-card-header .label {
-  @apply ms-2 font-mono text-xs text-slate-400;
+  @apply ms-2 font-mono text-xs text-neutral-400;
 }
 
 .home-example-code {
   font-size: 13px;
-  @apply overflow-x-auto p-6 font-mono leading-relaxed text-slate-100;
+  @apply overflow-x-auto p-6 font-mono leading-relaxed text-neutral-100;
 }
 
 /* ── Window dots (mac-style traffic lights) ──────────────────────────────────────────────────────────── */
@@ -359,7 +359,7 @@
 /* ── Inline command (CodeBlock) ──────────────────────────────────────────────────────────────────────── */
 
 .home-cmd {
-  @apply flex items-center justify-between gap-3 rounded-lg bg-slate-950 px-4 py-3 font-mono text-sm text-slate-100;
+  @apply flex items-center justify-between gap-3 rounded-lg bg-neutral-950 px-4 py-3 font-mono text-sm text-neutral-100;
 }
 
 .home-cmd-prompt {
@@ -367,11 +367,11 @@
 }
 
 .home-cmd-copy {
-  @apply shrink-0 rounded-md p-1.5 text-slate-400 transition-colors;
+  @apply shrink-0 rounded-md p-1.5 text-neutral-400 transition-colors;
 }
 
 .home-cmd-copy:hover {
-  @apply bg-slate-800 text-slate-100;
+  @apply bg-neutral-800 text-neutral-100;
 }
 
 .home-cmd-copy.copied {
@@ -397,11 +397,11 @@
 }
 
 .tk-punct {
-  color: var(--color-slate-300);
+  color: var(--color-neutral-300);
 }
 
 .tk-bracket {
-  color: var(--color-slate-400);
+  color: var(--color-neutral-400);
 }
 
 /* ── Overscroll bounce fix ───────────────────────────────────────────────────────────────────────────────
@@ -409,7 +409,7 @@
    layout is mounted; pseudo-elements on main.landing act as an extra safety net at the very top/bottom. */
 
 html:has(#root.landing) {
-  background-color: var(--color-slate-950);
+  background-color: var(--color-neutral-950);
 }
 
 main.landing {
@@ -424,7 +424,7 @@ main.landing::after {
   height: 5rem;
   pointer-events: none;
   content: '';
-  background-color: var(--color-slate-950);
+  background-color: var(--color-neutral-950);
 }
 
 main.landing::before {

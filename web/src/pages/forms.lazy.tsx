@@ -65,7 +65,7 @@ function PreviewSection({
   return (
     <section
       className={clsx(
-        'rounded-2xl border border-slate-200/90 bg-white/90 p-6 shadow-sm ring-1 ring-slate-100/80',
+        'rounded-2xl border border-neutral-200/90 bg-white/90 p-6 shadow-sm ring-1 ring-neutral-100/80',
         'md:p-8 dark:border-line dark:bg-surface/80 dark:ring-line/40',
         className
       )}
@@ -271,7 +271,7 @@ function CreateWorkspaceCase() {
           value={seats}
         />
       </div>
-      <div className='flex flex-wrap items-center justify-end gap-2 border-slate-200/80 border-t pt-4 dark:border-line'>
+      <div className='flex flex-wrap items-center justify-end gap-2 border-neutral-200/80 border-t pt-4 dark:border-line'>
         <Button rounded>
           Cancel
         </Button>
@@ -348,7 +348,7 @@ function SizeAlignmentCase() {
             <th className='pb-3 font-medium'>Field + Button (default corners)</th>
           </tr>
         </thead>
-        <tbody className='divide-y divide-slate-100 dark:divide-line'>
+        <tbody className='divide-y divide-neutral-100 dark:divide-line'>
           {sizeRows.map(({ label, fieldSize, buttonSize }) => (
             <tr key={label}>
               <td className='py-4 font-mono text-muted text-xs'>{label}</td>
@@ -396,10 +396,10 @@ function NotificationPreferencesCase() {
   const allChecked = useMemo(() => notificationItems.every(i => checked[i.id]), [checked])
   const noneChecked = useMemo(() => notificationItems.every(i => !checked[i.id]), [checked])
   return (
-    <div className='mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-slate-200/70 bg-white p-5'>
+    <div className='mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-neutral-200/70 bg-white p-5'>
       <Checkbox
         checked={allChecked}
-        className='border-slate-100 border-b pb-3'
+        className='border-neutral-100 border-b pb-3'
         indeterminate={!allChecked && !noneChecked}
         onCheckedChange={next => setChecked(Object.fromEntries(notificationItems.map(i => [i.id, next])))}
         size='lg'
@@ -444,7 +444,7 @@ function PlanRadioCardsCase() {
               'hover:border-primary-600/60',
               'data-checked:border-primary-600 data-checked:bg-primary-50/40',
               'data-checked:ring-3 data-checked:ring-primary-600/15',
-              selected === plan.id ? 'border-primary-600' : 'border-slate-200'
+              selected === plan.id ? 'border-primary-600' : 'border-neutral-200'
             )}
             key={plan.id}
             value={plan.id}
@@ -492,7 +492,7 @@ function CheckRadioGalleryCase() {
               {label}
             </Checkbox>
           ))}
-          <span aria-hidden className='h-6 w-px self-center bg-slate-200' />
+          <span aria-hidden className='h-6 w-px self-center bg-neutral-200' />
           {checkSizes.map(({ size, label }) => (
             <RadioGroup defaultValue='default' key={`rd-group-${label}`} name={`gallery-size-${label}`}>
               <Radio size={size || undefined} value={label}>
@@ -549,7 +549,7 @@ function ModalFooterCase() {
   const [date, setDate] = useState('')
 
   return (
-    <div className='mx-auto w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-lg ring-1 ring-slate-100 dark:border-line dark:bg-surface dark:ring-line/40'>
+    <div className='mx-auto w-full max-w-lg rounded-2xl border border-neutral-200 bg-white p-6 shadow-lg ring-1 ring-neutral-100 dark:border-line dark:bg-surface dark:ring-line/40'>
       <h3 className='font-semibold text-base text-fg'>Schedule publish</h3>
       <p className='mt-1 text-muted text-sm'>Modal footer: field and buttons on one row, bottom-aligned.</p>
       <Field className='mt-5'>
@@ -591,12 +591,12 @@ function FormsPage() {
             }}
           />
           <div className='absolute -top-20 left-1/3 h-96 w-96 rounded-full bg-primary-700/10 blur-3xl' />
-          <div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-slate-300/30 blur-3xl dark:bg-slate-700/30' />
+          <div className='absolute top-64 right-0 h-72 w-72 rounded-full bg-neutral-300/30 blur-3xl dark:bg-neutral-700/30' />
         </div>
 
         <main className='relative flex min-h-0 min-w-0 flex-1 flex-col'>
           <section className='mx-auto w-full max-w-5xl px-5 pt-12 pb-14 md:px-8 md:pt-20 md:pb-20'>
-            <div className='inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-3 py-1 font-medium text-slate-600 text-xs shadow-sm ring-1 ring-slate-100/80 backdrop-blur-sm dark:border-line dark:bg-surface/80 dark:text-muted dark:ring-line/40'>
+            <div className='inline-flex items-center gap-2 rounded-full border border-neutral-200/90 bg-white/90 px-3 py-1 font-medium text-neutral-600 text-xs shadow-sm ring-1 ring-neutral-100/80 backdrop-blur-sm dark:border-line dark:bg-surface/80 dark:text-muted dark:ring-line/40'>
               <span className='flex size-1.5 rounded-full bg-primary-500' />
               Forms playground
             </div>
@@ -654,7 +654,7 @@ function FormsPage() {
             </PreviewSection>
 
             <PreviewSection
-              className='bg-slate-100/50 dark:bg-surface/50'
+              className='bg-neutral-100/50 dark:bg-surface/50'
               description='Modal mock: full-width field, action bar on the right.'
               title='7. Dialog footer'
             >
