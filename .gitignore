@@ -55,6 +55,10 @@ dist
 tmp
 out-tsc
 
+# Generated LLM markdown (web/scripts/mdx-to-llm.ts)
+web/public/**/*.md
+web/scripts/.design-tokens.bundle.mjs
+
 # dependencies
 node_modules
 

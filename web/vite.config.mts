@@ -4,11 +4,21 @@ import mdx from '@mdx-js/rollup'
 import tailwindcssVite from '@tailwindcss/vite'
 import { tanstackRouter } from '@tanstack/router-vite-plugin'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
 import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin.ts'
 import { stripFrontmatter } from './plugins/stripFrontmatter.plugin.ts'
+import { generateLlmDocs } from './scripts/mdx-to-llm.ts'
+
+function llmDocsPlugin(): Plugin {
+  return {
+    async buildStart() {
+      await generateLlmDocs()
+    },
+    name: 'llm-docs',
+  }
+}
 
 export default defineConfig({
   build: {
@@ -22,6 +32,7 @@ export default defineConfig({
   // base: '/',
   cacheDir: '../node_modules/.vite/web',
   plugins: [
+    llmDocsPlugin(),
     react(),
     stripFrontmatter(),
     mdx({ providerImportSource: '@mdx-js/react' }),
