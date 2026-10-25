@@ -8,6 +8,7 @@ import { AppSidebar } from '../layouts/AppSidebar'
 import { DocsFloatingDock } from '../layouts/DocsFloatingDock'
 
 import '../stores/app.store'
+import '../stores/brand.store'
 import { FaviconFit } from '../assets/FaviconFit'
 
 const Name = () => {

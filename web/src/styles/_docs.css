@@ -36,7 +36,7 @@
     height: 3px;
 
     content: '';
-    @apply absolute rounded-full bg-primary/50;
+    @apply absolute rounded-full bg-primary-700/50;
   }
 
   pre + p {
@@ -51,6 +51,19 @@
 
   ul {
     @apply mb-2 list-inside list-disc;
+  }
+
+  /* Release notes: date above the version, Latest badge on the same line. */
+  .release-date {
+    @apply mt-8 mb-0 text-muted text-sm;
+  }
+
+  .release-date + h2 {
+    @apply mb-4 inline-flex w-auto pt-1;
+  }
+
+  .release-date + h2 + .badge {
+    @apply ms-2 align-middle;
   }
 
   .tabs-panel > pre {

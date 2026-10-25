@@ -115,7 +115,7 @@ function LandingNav() {
 
 function HeroSection() {
   return (
-    <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-[700px] items-center overflow-hidden'>
+    <section className='relative flex h-[calc(100dvh-3.5rem)] min-h-175 items-center overflow-hidden'>
       {/* Background Marquee */}
       <div className='pointer-events-none absolute top-[45%] left-0 z-0 w-full -translate-y-1/2'>
         <div className='home-marquee-container'>
@@ -202,7 +202,7 @@ function ComponentShowcaseSection() {
           title='See the design system in motion'
         />
 
-        <div className='mt-12 grid auto-rows-[13rem] grid-cols-1 gap-6 sm:grid-cols-6'>
+        <div className='mt-12 grid auto-rows-52 grid-cols-1 gap-6 sm:grid-cols-6'>
           <ShowcaseCard className='sm:col-span-3 sm:row-span-2 sm:h-auto' label='Button' to='/docs/button'>
             <ButtonsPreview />
           </ShowcaseCard>
@@ -774,7 +774,10 @@ function CTASection() {
             aria-hidden='true'
             className='home-decor-glow top-0 left-1/2 h-72 w-xl -translate-x-1/2 bg-primary-700/20'
           />
-          <div aria-hidden='true' className='home-decor-glow right-0 -bottom-32 h-72 w-72 bg-primary-700/10' />
+          <div
+            aria-hidden='true'
+            className='home-decor-glow right-0 -bottom-32 h-72 w-72 bg-primary-700/10'
+          />
           <div className='relative grid items-end gap-8 md:grid-cols-[1fr_auto]'>
             <div>
               <span className='home-cta-pill'>

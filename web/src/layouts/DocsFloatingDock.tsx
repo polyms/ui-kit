@@ -2,13 +2,14 @@ import { ListViewIcon, Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icon
 import { scrollToHeading, scrollToTop, useVisibleHeadings } from '@polyms/ui-kit'
 import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import clsx from 'clsx'
-import { type RefObject, useMemo } from 'react'
+import { type RefObject, useMemo, useState } from 'react'
 import { Icon } from '../components/Icons'
 import { useDocsToc } from '../hooks/useDocsToc'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAppStore } from '../stores/app.store'
 import type { AppSidebar } from './AppSidebar'
 import { type DockAction, FloatingDock } from './FloatingDock'
+import { ThemeConfigOffcanvas } from './ThemeConfigOffcanvas'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -70,8 +71,8 @@ function DocsTocPopover({ onClose }: { onClose: () => void }) {
 
 export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps) {
   const theme = useAppStore(state => state.theme)
-  const toggleTheme = useAppStore(state => state.toggleTheme)
   const isDark = theme === 'dark'
+  const [themeOpen, setThemeOpen] = useState(false)
   const { toc } = useDocsToc()
   // The TOC aside is visible from xl up, so the dock's TOC popover is redundant there.
   const isTocAsideVisible = useMediaQuery('(min-width: 1280px)')
@@ -81,8 +82,9 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
       type: 'button',
       id: 'theme',
       icon: isDark ? <Sun className='size-5' /> : <Moon className='size-5' />,
-      label: isDark ? 'Switch to light mode' : 'Switch to dark mode',
-      onClick: toggleTheme,
+      label: 'Theme settings',
+      active: themeOpen,
+      onClick: () => setThemeOpen(true),
     }
 
     const topAction: DockAction = {
@@ -118,7 +120,12 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
     }
 
     return docsActions
-  }, [variant, isDark, toggleTheme, sidebarRef, toc.length, isTocAsideVisible])
+  }, [variant, isDark, themeOpen, sidebarRef, toc.length, isTocAsideVisible])
 
-  return <FloatingDock actions={actions} />
+  return (
+    <>
+      <FloatingDock actions={actions} />
+      <ThemeConfigOffcanvas onOpenChange={setThemeOpen} open={themeOpen} />
+    </>
+  )
 }
