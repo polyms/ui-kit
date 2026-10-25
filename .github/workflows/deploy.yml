@@ -91,5 +91,5 @@ jobs:
 
       - name: Publish package
         run: |
-          echo "@polyms:registry=https://registry.polyms.dev" >> .npmrc
+          echo "@polyms:registry=https://registry.polyms.dev/npm" >> .npmrc
           pnpm publish dist/ui-kit --no-git-checks

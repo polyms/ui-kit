@@ -11,7 +11,7 @@ Point the `@polyms` scope at the Polyms registry. No token is required.
 Add a `.npmrc` to the consumer repo:
 
 ```ini
-@polyms:registry=https://registry.polyms.dev
+@polyms:registry=https://registry.polyms.dev/npm
 ```
 
 Then install:

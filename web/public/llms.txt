@@ -7,7 +7,7 @@ Fetch a linked `.md` file for the component or guide you are changing. Do not op
 Point the `@polyms` scope at the Polyms registry. No token is required.
 
 ```ini
-@polyms:registry=https://registry.polyms.dev
+@polyms:registry=https://registry.polyms.dev/npm
 ```
 
 ```bash

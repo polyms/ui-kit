@@ -46,7 +46,7 @@ See [`ui-kit/README.md`](./ui-kit/README.md) for install, peer dependencies, sty
 
 ```ini
 # consumer .npmrc
-@polyms:registry=https://registry.polyms.dev
+@polyms:registry=https://registry.polyms.dev/npm
 ```
 
 ```bash

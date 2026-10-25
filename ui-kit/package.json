@@ -49,6 +49,6 @@
 		"clsx": "^2.1.1"
 	},
 	"publishConfig": {
-		"registry": "https://registry.polyms.dev"
+		"registry": "https://registry.polyms.dev/npm"
 	}
 }
