@@ -6,4 +6,4 @@ allowBuilds:
   nx: true
 minimumReleaseAgeExclude:
   - prettier@3.9.1
-  - '@polyms/lint-kit@0.1.2'
+  - '@polyms/lint-kit'
