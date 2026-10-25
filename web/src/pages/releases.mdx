@@ -7,15 +7,17 @@ Changelogs for each release of **`@polyms/ui-kit`**. Read the breaking changes b
 
 <p className='release-date'>Oct 25, 2026</p>
 
-## v1.1.0
+## v2.0.0
 
 <span className='badge badge-primary'>Latest</span>
 
-Release after **1.0.5**. The numbered color steps (`50` through `950`) stay as they are. Buttons, links, badges, alerts, and the other components already read those steps.
+Release after **1.0.5**. Steps `50` through `950` on primary, success, info, warning, and danger keep the same hues. Buttons, links, badges, and alerts already read those steps. This release removes the bare color names and moves gray chrome onto the neutral ramp.
+
+### Removed color aliases
 
 - **Breaking change:** The bare color tokens are removed. `--color-primary` used to point at step 700. `--color-success`, `--color-info`, `--color-danger`, and `--color-warning` used to point at step 500. Use that step directly in CSS.
 - **Breaking change:** Tailwind color utilities with no step are removed. `bg-primary`, `text-primary`, `border-primary`, and `shadow-primary` become the `primary-700` utilities. The same names for success, info, danger, and warning become step 500, so `bg-success` becomes `bg-success-500`. An opacity suffix moves with the step: `bg-primary/10` becomes `bg-primary-700/10`, and `text-danger/70` becomes `text-danger-500/70`.
-- A theme block copied from these docs no longer includes a bare alias such as `--color-primary: var(--color-primary-700)`. Set the step tokens instead. See [Design Tokens](/design-tokens).
+- A theme block copied from these docs sets the step tokens. See [Design Tokens](/design-tokens).
 
 export const tokenReplacements = [
   {
@@ -64,6 +66,49 @@ export const tokenReplacements = [
             <code>{row.next}</code>
           </td>
           <td className='text-muted text-sm'>{row.utilities}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+### Neutral gray ramp
+
+Gray chrome uses **neutral**. `--color-neutral-50` through `--color-neutral-950` are the slate hue, and the `bg-neutral-*`, `text-neutral-*`, and `border-neutral-*` utilities follow that hue once the package styles are loaded.
+
+- **Breaking change:** `--fg`, `--surface`, `--muted`, and `--line` read neutral steps. A custom value on `--color-slate-*` leaves body text, surfaces, and dividers unchanged. Set the matching neutral step.
+- In your own chrome, use the same step on `neutral`. `bg-slate-100` becomes `bg-neutral-100`, `text-slate-500` becomes `text-neutral-500`, and `border-slate-300` becomes `border-neutral-300`.
+
+See [Design System](/design-system) for the full ramp and [Dark mode](/docs/dark-mode) for these roles in both modes.
+
+export const surfaceMoves = [
+  { role: '--fg', before: '--color-slate-900', after: '--color-neutral-900' },
+  { role: '--surface', before: '--color-slate-100', after: '--color-neutral-100' },
+  { role: '--muted', before: '--color-slate-500', after: '--color-neutral-500' },
+  { role: '--line', before: '--color-slate-300', after: '--color-neutral-300' },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th>Role</th>
+        <th>1.0.5</th>
+        <th>2.0.0</th>
+      </tr>
+    </thead>
+    <tbody>
+      {surfaceMoves.map(row => (
+        <tr key={row.role}>
+          <td className='text-nowrap'>
+            <code>{row.role}</code>
+          </td>
+          <td className='text-nowrap'>
+            <code>{row.before}</code>
+          </td>
+          <td className='text-nowrap'>
+            <code>{row.after}</code>
+          </td>
         </tr>
       ))}
     </tbody>
