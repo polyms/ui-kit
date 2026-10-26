@@ -105,71 +105,23 @@ main.landing {
 	@apply mt-8 flex flex-wrap items-center gap-3;
 }
 
+.home-hero-chips {
+	@apply mt-5 flex list-none flex-wrap gap-2 p-0;
+}
+
+.home-hero-chip {
+	@apply inline-flex items-center rounded-full border border-neutral-200 bg-white px-3 py-1 font-medium text-neutral-700 text-xs;
+}
+
 /* Stage */
 
 .home-hero-stage {
-	@apply relative mx-auto aspect-square w-full max-w-xl;
+	@apply relative mx-auto flex w-full max-w-xl items-center justify-center;
 }
 
 .home-hero-mascot {
 	animation: home-bob 6s ease-in-out infinite;
-	@apply pointer-events-none relative z-10 mx-auto block w-[92%] max-w-none;
-}
-
-.home-speech {
-	box-shadow: var(--home-card-shadow);
-	@apply absolute top-4 left-4 z-20 max-w-44 rounded-2xl border border-white/80 bg-white px-3 py-2 font-semibold text-neutral-800 text-sm;
-}
-
-.home-speech::after {
-	content: '';
-	@apply absolute -bottom-1.5 left-4 size-3 rotate-45 border-r border-b border-white/80 bg-white;
-}
-
-/* Inventory chips */
-
-.home-chip {
-	box-shadow: var(--home-card-shadow);
-	animation-name: home-bob;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: infinite;
-	@apply absolute z-20 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white px-3 py-1.5 font-semibold text-neutral-800 text-xs;
-}
-
-.home-chip-type {
-	top: 18%;
-	right: 6%;
-	animation-duration: 3s;
-}
-
-.home-chip-color {
-	bottom: 18%;
-	left: 4%;
-	animation-duration: 4s;
-	animation-delay: -1s;
-}
-
-.home-chip-pen {
-	right: 8%;
-	bottom: 12%;
-	animation-duration: 5s;
-	animation-delay: -2s;
-}
-
-.home-chip-dot {
-	@apply size-2 rounded-full;
-}
-
-.home-chip-dot.tone-type {
-	background-color: var(--color-primary-500);
-}
-
-.home-chip-dot.tone-color {
-	background-color: var(--color-info-500);
-}
-
-.home-chip-dot.tone-pen {
-	background-color: var(--color-warning-500);
+	@apply pointer-events-none relative z-10 block h-auto w-[92%] max-w-none;
 }
 
 @keyframes home-bob {
@@ -211,6 +163,68 @@ main.landing {
 
 .home-showcase-card-footer {
 	@apply flex items-center justify-between border-t border-neutral-200 bg-neutral-50/80 px-4 py-3;
+}
+
+/* ── Pillars ─────────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-pillar-grid {
+	@apply grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.home-pillar {
+	box-shadow: var(--home-card-shadow);
+	@apply rounded-2xl border border-neutral-200/80 bg-white p-6;
+}
+
+.home-pillar-title {
+	@apply font-semibold text-neutral-900;
+}
+
+.home-pillar-copy {
+	@apply mt-2 text-neutral-600 text-sm leading-relaxed;
+}
+
+/* ── Theme live stage ────────────────────────────────────────────────────────────────────────────────── */
+
+.home-theme-stage {
+	box-shadow: var(--home-card-shadow);
+	@apply rounded-3xl border border-neutral-200 bg-white p-6 md:p-8;
+}
+
+.home-theme-live {
+	@apply mt-6 flex flex-wrap items-center gap-3;
+}
+
+/* ── Story bands ─────────────────────────────────────────────────────────────────────────────────────── */
+
+.home-story {
+	@apply grid items-center gap-10 lg:grid-cols-2 lg:gap-16;
+}
+
+.home-story.is-flipped .home-story-image {
+	@apply lg:order-first;
+}
+
+.home-story-image {
+	@apply h-auto w-full rounded-3xl bg-[#fff6ee] object-contain;
+}
+
+/* ── Kit checklist ───────────────────────────────────────────────────────────────────────────────────── */
+
+.home-kit {
+	@apply flex flex-col gap-4 rounded-3xl border border-neutral-200 bg-white px-6 py-6 md:flex-row md:items-center md:justify-between md:px-8;
+}
+
+.home-kit-title {
+	@apply font-semibold text-lg text-neutral-900;
+}
+
+.home-kit-list {
+	@apply flex list-none flex-wrap gap-x-6 gap-y-3 p-0 text-sm text-neutral-700;
+}
+
+.home-kit-list li {
+	@apply inline-flex items-center gap-2;
 }
 
 /* ── Features grid ───────────────────────────────────────────────────────────────────────────────────── */
@@ -389,6 +403,29 @@ main.landing {
 	@apply overflow-x-auto p-6 font-mono text-neutral-800 leading-relaxed;
 }
 
+/* Primary swatches — live brand store on the landing page */
+
+.home-theme-swatches {
+	@apply flex flex-wrap gap-3 border-0 p-0;
+}
+
+.home-theme-legend {
+	@apply mb-1 w-full font-medium text-neutral-600 text-xs;
+}
+
+.home-theme-swatch {
+	@apply size-9 cursor-pointer rounded-full border-2 border-white shadow-sm outline outline-neutral-300;
+}
+
+.home-theme-swatch:hover {
+	transform: translateY(-1px);
+}
+
+.home-theme-swatch.is-active {
+	outline: 2px solid var(--color-neutral-900);
+	outline-offset: 2px;
+}
+
 /* ── Window dots (mac-style traffic lights) ──────────────────────────────────────────────────────────── */
 
 .home-dot {
@@ -459,12 +496,16 @@ main.landing {
 
 @media (prefers-reduced-motion: reduce) {
 	.home-hero-mascot,
-	.home-chip,
 	.home-cta-mascot,
 	.home-showcase-card,
-	.home-feature {
+	.home-feature,
+	.home-theme-swatch {
 		transition: none;
 		animation: none;
+	}
+
+	.home-theme-swatch:hover {
+		transform: none;
 	}
 }
 

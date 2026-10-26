@@ -3,19 +3,12 @@
 import { GithubIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Menu, Popover, Select, Switch, Tabs, Tooltip } from '@polyms/ui-kit'
-import {
-	Accessibility,
-	Code2,
-	Layers,
-	MagicStick3,
-	Palette,
-	Rocket,
-	SpeedometerMax,
-} from '@solar-icons/react-perf/BoldDuotone'
+import { Layers, MagicStick3, Palette, SpeedometerMax } from '@solar-icons/react-perf/BoldDuotone'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import { FaviconFit } from '../assets/FaviconFit'
+import { useThemeStore } from '../stores/theme.store'
 import homePageStylesUrl from '../styles/home.page.css?url'
 
 export const Route = createFileRoute('/')({
@@ -48,8 +41,11 @@ function RouteComponent() {
 			<LandingNav />
 			<HeroSection />
 			<ComponentShowcaseSection />
-			<FeaturesSection />
+			<PillarsSection />
 			<ThemingSection />
+			<PiecesSection />
+			<KeyboardSection />
+			<KitSection />
 			<InstallSection />
 			<MetricsSection />
 			<FaqSection />
@@ -116,7 +112,7 @@ function HeroSection() {
 							<span className='home-hero-title-line'>Strict underneath.</span>
 						</h1>
 						<p className='home-hero-sub'>
-							Type-safe, accessible, and composable primitives for React, built on{' '}
+							React components that feel easy to use, and stay strict where it counts. Built with{' '}
 							<span className='home-hero-em'>Base UI</span> and{' '}
 							<span className='home-hero-em'>Tailwind CSS</span>.
 						</p>
@@ -135,30 +131,23 @@ function HeroSection() {
 								Star on GitHub
 							</a>
 						</div>
+						<ul aria-label='Highlights' className='home-hero-chips'>
+							<li className='home-hero-chip'>Open source</li>
+							<li className='home-hero-chip'>React 19</li>
+							<li className='home-hero-chip'>Tailwind CSS 4</li>
+							<li className='home-hero-chip'>Your colors</li>
+						</ul>
 					</div>
 
 					<div className='home-hero-stage'>
-						<p className='home-speech'>Pick a component.</p>
 						<img
 							alt={
 								'Polyms mascot, a clay character with glasses holding a tablet and pen, ' +
 								'surrounded by design tools'
 							}
 							className='home-hero-mascot'
-							src='/mascot-clay.png'
+							src='/mascot.png'
 						/>
-						<span aria-hidden='true' className='home-chip home-chip-type'>
-							<span className='home-chip-dot tone-type' />
-							Type
-						</span>
-						<span aria-hidden='true' className='home-chip home-chip-color'>
-							<span className='home-chip-dot tone-color' />
-							Color
-						</span>
-						<span aria-hidden='true' className='home-chip home-chip-pen'>
-							<span className='home-chip-dot tone-pen' />
-							Pen
-						</span>
 					</div>
 				</div>
 			</Container>
@@ -172,8 +161,8 @@ function ComponentShowcaseSection() {
 			<Container>
 				<SectionHeader
 					eyebrow='Live preview'
-					subtitle='Real components, not screenshots. Hover, click, focus — everything works.'
-					title='See the design system in motion'
+					subtitle="Hover, click, and tab through. These aren't pictures."
+					title="Try them. They're real."
 				/>
 
 				<div className='mt-12 grid auto-rows-52 grid-cols-1 gap-6 sm:grid-cols-6'>
@@ -381,123 +370,115 @@ function MenuPreview() {
 	)
 }
 
-function FeaturesSection() {
-	const features: FeatureItem[] = [
-		{
-			Icon: Code2,
-			title: 'Type-safe by default',
-			description: 'Strict TypeScript with full IntelliSense on every prop and compound subcomponent.',
-			tone: 'primary',
-		},
-		{
-			Icon: Accessibility,
-			title: 'Accessible out of the box',
-			description: 'Built on Base UI primitives — keyboard nav, ARIA, focus management included.',
-			tone: 'success',
-		},
-		{
-			Icon: Layers,
-			title: 'Composable architecture',
-			description: 'Dot-notation compound components (`Modal.Header`, `Field.Control`) for clear intent.',
-			tone: 'primary',
-		},
-		{
-			Icon: Palette,
-			title: 'Themeable tokens',
-			description: 'CSS variables and Tailwind v4 — swap palettes per brand without forking components.',
-			tone: 'primary',
-		},
-		{
-			Icon: SpeedometerMax,
-			title: 'Performance-first',
-			description: 'Tree-shakeable bundle, lazy primitives, and zero runtime CSS-in-JS overhead.',
-			tone: 'warning',
-		},
-		{
-			Icon: Rocket,
-			title: 'Ready for AI workflows',
-			description: 'Ships with a `ui-kit` agent skill so assistants compose UI the right way.',
-			tone: 'primary',
-		},
-	]
+const PILLARS = [
+	{
+		title: 'Components',
+		copy: 'Button, Modal, Field, Menu. Real pieces, not pictures.',
+	},
+	{
+		title: 'Variables',
+		copy: 'One primary color runs through buttons, badges, and links.',
+	},
+	{
+		title: 'Keyboard',
+		copy: 'Focus and keys come with the component.',
+	},
+	{
+		title: 'Light',
+		copy: 'No runtime CSS-in-JS. Just Tailwind and CSS.',
+	},
+] as const
 
+function PillarsSection() {
 	return (
-		<section className='relative px-6 py-20 md:py-28'>
+		<section className='px-6 pb-8 md:pb-12'>
 			<Container>
-				<SectionHeader
-					eyebrow='Why UI Kit'
-					subtitle='Every primitive is opinionated where it matters — accessibility, types, semantics — and flexible everywhere else.'
-					title='Built for serious product teams'
-				/>
-
-				<div className='home-feature-grid mt-12'>
-					{features.map(feature => (
-						<FeatureCard key={feature.title} {...feature} />
+				<ul className='home-pillar-grid'>
+					{PILLARS.map(pillar => (
+						<li className='home-pillar' key={pillar.title}>
+							<h2 className='home-pillar-title'>{pillar.title}</h2>
+							<p className='home-pillar-copy'>{pillar.copy}</p>
+						</li>
 					))}
-				</div>
+				</ul>
 			</Container>
 		</section>
 	)
 }
 
-function FeatureCard({ Icon, title, description, tone }: FeatureItem) {
-	return (
-		<div className='home-feature'>
-			<div className={clsx('home-feature-icon', `tone-${tone}`)}>
-				<Icon className='size-6' />
-			</div>
-			<h3 className='home-feature-title'>{title}</h3>
-			<p className='home-feature-copy'>{description}</p>
-		</div>
-	)
-}
+const LANDING_PRIMARY_SWATCHES = ['cyan', 'violet', 'orange', 'rose'] as const
 
 function ThemingSection() {
+	const palettes = useThemeStore(state => state.palettes)
+	const primaryRamp = useThemeStore(state => state.primaryRamp)
+	const setPalette = useThemeStore(state => state.setPalette)
+
 	return (
 		<section className='home-band px-6 py-20 md:py-28'>
 			<Container>
 				<div className='grid items-center gap-12 lg:grid-cols-2'>
 					<div>
-						<div className='home-section-eyebrow'>Theming API</div>
-						<h2 className='home-band-title'>Make it yours in minutes.</h2>
-						<p className='home-band-copy'>
-							Polyms UI Kit is built on CSS variables. You don't need to fork the library to match your brand.
-							Just tweak a few variables and the entire design system adapts seamlessly.
-						</p>
+						<div className='home-section-eyebrow'>Variables</div>
+						<h2 className='home-band-title'>Customize easily with variables.</h2>
+						<p className='home-band-copy'>Pick a color. Buttons, badges, and links follow. No fork.</p>
 						<ul className='home-band-list'>
 							<li className='flex items-center gap-3'>
 								<div className='home-band-icon'>
 									<Palette className='size-4' />
 								</div>
-								<span>No complex CSS-in-JS configurations</span>
-							</li>
-							<li className='flex items-center gap-3'>
-								<div className='home-band-icon'>
-									<MagicStick3 className='size-4' />
-								</div>
-								<span>Tailwind CSS v4 ready out of the box</span>
+								<span>One primary color runs through the kit</span>
 							</li>
 							<li className='flex items-center gap-3'>
 								<div className='home-band-icon'>
 									<Layers className='size-4' />
 								</div>
 								<span>
-									Dynamic colors via <code className='badge badge-dark'>color-mix()</code>
+									Hover and tint use <code className='badge badge-dark'>color-mix()</code>
 								</span>
+							</li>
+							<li className='flex items-center gap-3'>
+								<div className='home-band-icon'>
+									<MagicStick3 className='size-4' />
+								</div>
+								<span>Works with Tailwind CSS 4</span>
+							</li>
+							<li className='flex items-center gap-3'>
+								<div className='home-band-icon'>
+									<SpeedometerMax className='size-4' />
+								</div>
+								<span>No CSS-in-JS setup</span>
 							</li>
 						</ul>
 					</div>
-					<div className='relative'>
-						<div className='home-example-card'>
-							<div className='home-example-card-header'>
-								<span className='home-dot close' />
-								<span className='home-dot minimize' />
-								<span className='home-dot maximize' />
-								<span className='label'>theme.css</span>
-							</div>
-							<pre className='home-example-code'>
-								<code dangerouslySetInnerHTML={{ __html: THEME_CODE_HTML }} />
-							</pre>
+					<div className='home-theme-stage'>
+						<fieldset className='home-theme-swatches'>
+							<legend className='home-theme-legend'>Primary</legend>
+							{LANDING_PRIMARY_SWATCHES.map(palette => {
+								const selected = palettes.primary === palette && primaryRamp === null
+								return (
+									<button
+										aria-label={`Primary ${palette}`}
+										aria-pressed={selected}
+										className={clsx('home-theme-swatch', selected && 'is-active')}
+										key={palette}
+										onClick={() => setPalette('primary', palette)}
+										style={{ backgroundColor: `var(--color-${palette}-600)` }}
+										type='button'
+									/>
+								)
+							})}
+						</fieldset>
+						<div className='home-theme-live'>
+							<Button rounded variant='primary'>
+								Primary
+							</Button>
+							<Button outlined rounded variant='primary'>
+								Outlined
+							</Button>
+							<span className='badge badge-primary rounded-full'>Primary</span>
+							<Link className='link link-primary font-medium' to='/design-system'>
+								A primary link
+							</Link>
 						</div>
 					</div>
 				</div>
@@ -506,20 +487,100 @@ function ThemingSection() {
 	)
 }
 
-const THEME_CODE_HTML = [
-	'<span class="tk-keyword">:root</span> <span class="tk-punct">{</span>',
-	'  <span class="tk-bracket">/* Brand colors */</span>',
-	'  <span class="tk-attr">--color-primary-500</span><span class="tk-punct">:</span> <span class="tk-string">#8b5cf6</span><span class="tk-punct">;</span>',
-	'  <span class="tk-attr">--color-neutral-900</span><span class="tk-punct">:</span> <span class="tk-string">#0f172a</span><span class="tk-punct">;</span>',
-	'',
-	'  <span class="tk-bracket">/* Geometry */</span>',
-	'  <span class="tk-attr">--radius-base</span><span class="tk-punct">:</span> <span class="tk-string">0.75rem</span><span class="tk-punct">;</span>',
-	'<span class="tk-punct">}</span>',
-	'',
-	'<span class="tk-keyword">.dark</span> <span class="tk-punct">{</span>',
-	'  <span class="tk-attr">--color-primary-500</span><span class="tk-punct">:</span> <span class="tk-string">#a78bfa</span><span class="tk-punct">;</span>',
-	'<span class="tk-punct">}</span>',
-].join('\n')
+function PiecesSection() {
+	return (
+		<StorySection
+			alt='Clay mascot stacking puzzle tiles labeled Header, Field, and Button'
+			copy='Name the part you mean. Modal.Header, Field.Control, Button. The props show up in your editor.'
+			image='/landing-pieces.png'
+			points={[
+				'Compound pieces, not one giant component',
+				'Every prop shows up in your editor',
+				'Import them from one barrel, @polyms/ui-kit',
+			]}
+			title='Pieces that fit together.'
+		/>
+	)
+}
+
+function KeyboardSection() {
+	return (
+		<StorySection
+			alt='Clay mascot pressing one key on a cream keyboard, with lots of open space'
+			copy='Focus, ARIA, and keys come from Base UI. The page stays light: CSS and Tailwind, no runtime CSS-in-JS.'
+			flip
+			image='/landing-keyboard.png'
+			points={[
+				'Keyboard and screen readers are already handled',
+				'No runtime CSS-in-JS',
+				'MIT. Use it on as many apps as you want',
+			]}
+			title='Keyboard included. Still light.'
+		/>
+	)
+}
+
+function StorySection({
+	title,
+	copy,
+	points,
+	image,
+	alt,
+	flip = false,
+}: {
+	title: string
+	copy: string
+	points: string[]
+	image: string
+	alt: string
+	flip?: boolean
+}) {
+	return (
+		<section className='px-6 py-16 md:py-24'>
+			<Container>
+				<div className={clsx('home-story', flip && 'is-flipped')}>
+					<div>
+						<h2 className='home-band-title'>{title}</h2>
+						<p className='home-band-copy'>{copy}</p>
+						<ul className='home-band-list'>
+							{points.map(point => (
+								<li className='flex items-center gap-3' key={point}>
+									<div className='home-band-icon'>
+										<CheckIcon className='size-4' />
+									</div>
+									<span>{point}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+					<img alt={alt} className='home-story-image' src={image} />
+				</div>
+			</Container>
+		</section>
+	)
+}
+
+const KIT_ITEMS = ['Components', 'CSS variables', 'TypeScript strict', 'MIT license'] as const
+
+function KitSection() {
+	return (
+		<section className='px-6 pb-4'>
+			<Container>
+				<div className='home-kit'>
+					<h2 className='home-kit-title'>In the kit</h2>
+					<ul className='home-kit-list'>
+						{KIT_ITEMS.map(item => (
+							<li key={item}>
+								<CheckIcon className='text-primary-700 size-4' />
+								{item}
+							</li>
+						))}
+					</ul>
+				</div>
+			</Container>
+		</section>
+	)
+}
 
 function InstallSection() {
 	return (
@@ -527,8 +588,8 @@ function InstallSection() {
 			<Container>
 				<SectionHeader
 					eyebrow='Get started'
-					subtitle='Install once, import the components you need from a single barrel. No deep imports required.'
-					title='Up and running in 30 seconds'
+					subtitle={'Point @polyms at registry.polyms.dev in .npmrc, then import from ' + "'@polyms/ui-kit'."}
+					title='One install. Then just import.'
 				/>
 
 				<div className='mt-12 grid gap-6 lg:grid-cols-5'>
@@ -661,10 +722,10 @@ function CopyHintButton({ text }: { text: string }) {
 
 function MetricsSection() {
 	const metrics: MetricItem[] = [
-		{ value: '30+', label: 'Components', sub: 'production-ready' },
-		{ value: '100%', label: 'TypeScript', sub: 'strict mode' },
-		{ value: 'WCAG', label: 'AA compliant', sub: 'on every primitive' },
-		{ value: '0', label: 'Runtime CSS-in-JS', sub: 'just Tailwind + CSS' },
+		{ value: '20+', label: 'Components', sub: 'ready to use' },
+		{ value: '100%', label: 'TypeScript', sub: 'strict' },
+		{ value: 'CSS', label: 'variables', sub: 'for color' },
+		{ value: '0', label: 'Runtime CSS-in-JS', sub: 'just Tailwind and CSS' },
 	]
 
 	return (
@@ -696,28 +757,33 @@ function FaqSection() {
 			<Container>
 				<SectionHeader
 					eyebrow='FAQ'
-					subtitle='Everything you need to know about Polyms UI Kit.'
-					title='Frequently asked questions'
+					subtitle='Short answers. The docs go deeper.'
+					title='Questions, answered.'
 				/>
 				<div className='mx-auto mt-12 max-w-3xl space-y-4'>
 					<FaqItem
-						answer='Yes, Polyms is framework-agnostic when it comes to bundlers. It works perfectly with Vite, Next.js (App Router), Remix, and any modern React framework.'
-						question='Is it compatible with Next.js or Vite?'
+						answer='You get typed components, keyboard support, and colors you can change without forking. The friendly part is the API. The strict part is what ships.'
+						question='Why this kit?'
 					/>
 					<FaqItem
-						answer='Yes, Polyms is built on top of Tailwind CSS v4. You will need it to properly compile the utility classes used by the components.'
-						question='Do I need to install Tailwind CSS?'
+						answer='Yes. It works with Vite, Next.js, Remix, and other React setups.'
+						question='Does it work with Next.js and Vite?'
 					/>
 					<FaqItem
-						answer='Absolutely. We build our primitives on top of Base UI, which handles complex ARIA states, focus management, and keyboard navigation according to WAI-ARIA guidelines.'
-						question='Is it fully accessible?'
+						answer='Yes. Components use Tailwind CSS 4 utility classes, so Tailwind needs to be in the app.'
+						question='Do I need Tailwind?'
 					/>
 					<FaqItem
-						answer={
-							'Polyms is a strict component set with a friendly surface. You get accessible primitives, ' +
-							'typed APIs, and theming that stays out of the way while the product stays yours.'
-						}
-						question='Why another component library?'
+						answer='Yes. Override a few CSS variables, or pick a primary color on this page. You do not fork the components.'
+						question='Can I change the colors without forking?'
+					/>
+					<FaqItem
+						answer='Yes. Focus, ARIA, and keyboard behavior come from Base UI.'
+						question='Is it accessible?'
+					/>
+					<FaqItem
+						answer='Yes. The license is MIT, so you can use it on as many apps as you want.'
+						question='Can I use it on more than one app?'
 					/>
 				</div>
 			</Container>
@@ -739,7 +805,7 @@ function CTASection() {
 		<section className='px-6 pt-8 pb-20 md:pt-12 md:pb-28'>
 			<Container>
 				<div className='home-cta'>
-					<img alt='' aria-hidden='true' className='home-cta-mascot' src='/mascot-clay.png' />
+					<img alt='' aria-hidden='true' className='home-cta-mascot' src='/mascot.png' />
 					<div className='home-cta-body'>
 						<span className='home-section-eyebrow'>
 							<MagicStick3 className='size-3.5' />
@@ -928,15 +994,6 @@ function TerminalIcon({ className }: IconProps) {
 }
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
-
-type FeatureTone = 'primary' | 'success' | 'warning'
-
-type FeatureItem = {
-	Icon: React.ComponentType<IconProps>
-	title: string
-	description: string
-	tone: FeatureTone
-}
 
 type MetricItem = {
 	value: string
