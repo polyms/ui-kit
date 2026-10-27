@@ -63,22 +63,23 @@
 	},
 	"release": {
 		"projects": ["ui-kit", "web"],
-		"projectsRelationship": "independent",
+		"projectsRelationship": "fixed",
 		"changelog": {
 			"projectChangelogs": false,
 			"workspaceChangelog": false
 		},
 		"version": {
-			"preVersionCommand": "pnpm dlx nx run-many -t build",
+			"preVersionCommand": "pnpm exec nx run-many -t build",
 			"git": {
 				"stageChanges": true,
 				"tag": true,
 				"commit": true,
-				"commitMessage": "chore(release): {projectName}@{version}"
+				"commitMessage": "chore(release): v{version}"
 			}
 		},
 		"releaseTag": {
-			"pattern": "{projectName}@{version}"
+			"pattern": "v{version}",
+			"strictPreid": true
 		}
 	},
 	"defaultBase": "origin/main",

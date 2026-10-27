@@ -238,7 +238,7 @@ Trong app consumer thử nghiệm:
 
 ## Release
 
-`nx.json`: release độc lập cho `ui-kit` và `web`; tag `{projectName}@{version}`; `preVersionCommand` chạy build — đảm bảo **build pass** trước khi release.
+`nx.json`: release cố định cho `ui-kit` và `web` (cùng version); tag `v{version}` (ví dụ `v1.0.6-alpha.0`); `preVersionCommand` chạy build — đảm bảo **build pass** trước khi release.
 
 ---
 
