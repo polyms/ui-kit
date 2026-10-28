@@ -105,6 +105,7 @@ export default defineConfig(async () => {
 			react(),
 			viteStaticCopy({
 				targets: [
+					{ dest: '.', src: 'package.json' },
 					{ dest: '.', src: 'README.md' },
 					{ dest: 'styles', rename: { stripBase: 2 }, src: 'src/styles/*' },
 					{ dest: '.', src: 'skills' },
