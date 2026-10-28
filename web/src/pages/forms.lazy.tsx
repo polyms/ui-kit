@@ -69,6 +69,10 @@ function PreviewSection({
 				'md:p-8 dark:border-line dark:bg-surface/80 dark:ring-line/40',
 				className
 			)}
+			data-testid={`forms-example-${title
+				.toLowerCase()
+				.replace(/^\d+\.\s*/, '')
+				.replace(/[^a-z0-9]+/g, '-')}`}
 		>
 			<h2 className='text-lg font-semibold tracking-tight text-fg'>{title}</h2>
 			<p className='mt-1 max-w-2xl text-sm leading-relaxed text-pretty text-muted'>{description}</p>

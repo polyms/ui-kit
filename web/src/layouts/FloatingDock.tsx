@@ -30,11 +30,13 @@ type FloatingDockProps = {
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 function DockPopoverAction({
+	id,
 	icon,
 	label,
 	render,
 }: {
 	icon: ReactNode
+	id: string
 	label: string
 	render: (close: () => void) => ReactNode
 }) {
@@ -69,6 +71,7 @@ export function FloatingDock({ actions, 'aria-label': ariaLabel = 'Quick navigat
 					return (
 						<DockPopoverAction
 							icon={action.icon}
+							id={action.id}
 							key={action.id}
 							label={action.label}
 							render={action.render}

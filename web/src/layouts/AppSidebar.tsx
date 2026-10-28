@@ -14,6 +14,13 @@ import { Icon } from '../components/Icons'
 import { type DocsNavSection, useDocsNav } from '../hooks/useDocsNav'
 import { useDocsShellMode } from '../hooks/useMediaQuery'
 
+function slug(value: string) {
+	return value
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-|-$/g, '')
+}
+
 export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
 	const [search, setSearch] = useState('')
 	const activePath = useRouterState({ select: s => s.location.pathname })
