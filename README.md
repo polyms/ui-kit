@@ -55,7 +55,7 @@ pnpm add @polyms/ui-kit
 
 ## Release & publish
 
-Releases version `ui-kit` and `web` together (`nx.json`). Versioning builds first, then tags `v{version}` (for example `v1.0.6-alpha.0`); pushing that tag triggers the **Build and Deploy** workflow which publishes `@polyms/ui-kit` to registry.polyms.dev.
+Releases version `ui-kit` and `web` together (`nx.json`). Versioning builds first, then tags `v{version}` (for example `v2.0.0-alpha.2`); pushing that tag triggers the **Build and Deploy** workflow, which publishes `@polyms/ui-kit` to GitHub Packages. Installs still go through registry.polyms.dev, which proxies that packument.
 
 ```bash
 pnpm exec nx release version patch --projects=ui-kit
