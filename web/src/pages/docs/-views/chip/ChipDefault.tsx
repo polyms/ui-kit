@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Chip, ChipInput } from '@polyms/ui-kit'
+import { useState } from 'react'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -25,7 +25,7 @@ export default function ChipDefault() {
 							onClick={() => toggleSelected(variant)}
 							variant={variant}
 						>
-							{variant[0].toUpperCase() + variant.slice(1)}
+							{variant.charAt(0).toUpperCase() + variant.slice(1)}
 						</Chip>
 					))}
 					<Chip disabled>Disabled</Chip>
@@ -63,10 +63,10 @@ export default function ChipDefault() {
 						Read only
 					</label>
 					<ChipInput
-						id='chip-readonly'
-						label='Read only values'
 						defaultValue={['Approved', 'Verified']}
 						disabled
+						id='chip-readonly'
+						label='Read only values'
 						placeholder='Disabled'
 					/>
 				</div>

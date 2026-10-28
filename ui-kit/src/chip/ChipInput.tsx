@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { useEffect, useRef, useState } from 'react'
 import type { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent } from 'react'
-import { Chip } from './Chip'
+import { useEffect, useRef, useState } from 'react'
 import type { ChipVariant } from './Chip'
+import { Chip } from './Chip'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -135,7 +135,9 @@ export function ChipInput({
 		if (addedValues.length > 0) {
 			updateValues(nextValues)
 			updateSelection([], nextValues)
-			addedValues.forEach(item => onAdd?.(item))
+			addedValues.forEach(item => {
+				onAdd?.(item)
+			})
 			setAnnouncement(`${addedValues.join(', ')} added`)
 		}
 		setInputValue(parts[parts.length - 1] ?? '')
@@ -154,7 +156,9 @@ export function ChipInput({
 		updateValues(nextValues)
 		updateSelection(nextFocusIndex === null ? [] : [nextFocusIndex], nextValues)
 		selectionAnchorRef.current = nextFocusIndex
-		removedValues.forEach(item => onRemove?.(item))
+		removedValues.forEach(item => {
+			onRemove?.(item)
+		})
 		setAnnouncement(`${removedValues.join(', ')} removed`)
 		pendingFocusRef.current = nextFocusIndex
 	}
@@ -288,33 +292,39 @@ export function ChipInput({
 		if (nextTarget instanceof Node && containerRef.current?.contains(nextTarget)) return
 		if (createOnBlur && addValue(inputValue)) setInputValue('')
 	}
+	const valueOccurrences = new Map<string, number>()
 
 	return (
 		<div
 			className={clsx('chip-input', `chip-input-${variant}`, { 'chip-input-disabled': disabled }, className)}
 			ref={containerRef}
 		>
-			{values.map((item, index) => (
-				<Chip
-					active={selectedIndices.includes(index)}
-					ref={node => {
-						chipRefs.current[index] = node
-					}}
-					className='chip-input-item'
-					disabled={disabled}
-					key={`${item}-${index}`}
-					onClick={event => handleChipClick(index, event)}
-					onDismiss={dismissible ? () => removeIndices([index]) : undefined}
-					onFocus={() => {
-						focusedIndexRef.current = index
-					}}
-					onKeyDown={event => handleChipKeyDown(index, event)}
-					dismissLabel={`Remove ${item}`}
-					variant={variant}
-				>
-					{item}
-				</Chip>
-			))}
+			{values.map((item, index) => {
+				const occurrence = valueOccurrences.get(item) ?? 0
+				valueOccurrences.set(item, occurrence + 1)
+
+				return (
+					<Chip
+						active={selectedIndices.includes(index)}
+						className='chip-input-item'
+						disabled={disabled}
+						dismissLabel={`Remove ${item}`}
+						key={JSON.stringify([item, occurrence])}
+						onClick={event => handleChipClick(index, event)}
+						onDismiss={dismissible ? () => removeIndices([index]) : undefined}
+						onFocus={() => {
+							focusedIndexRef.current = index
+						}}
+						onKeyDown={event => handleChipKeyDown(index, event)}
+						ref={node => {
+							chipRefs.current[index] = node
+						}}
+						variant={variant}
+					>
+						{item}
+					</Chip>
+				)
+			})}
 			<input
 				aria-label={id ? undefined : label}
 				className='chip-input-control'
