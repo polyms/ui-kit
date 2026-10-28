@@ -10,8 +10,8 @@
 	--chip-size: 1.25rem;
 
 	display: inline-flex;
-	align-items: center;
 	gap: var(--chip-gap);
+	align-items: center;
 	min-height: 1.75rem;
 	padding: 0.25rem 0.5rem;
 	font-size: 0.75rem;
@@ -99,14 +99,14 @@
 
 .chip-content {
 	display: inline-flex;
-	align-items: center;
 	gap: var(--chip-gap);
+	align-items: center;
 	padding: 0;
 	font: inherit;
 	line-height: inherit;
 	color: inherit;
-	white-space: inherit;
 	text-align: left;
+	white-space: inherit;
 	background: transparent;
 	border: 0;
 	border-radius: inherit;
@@ -135,8 +135,8 @@
 	justify-content: center;
 	width: 1rem;
 	height: 1rem;
-	margin-right: -0.25rem;
 	padding: 0;
+	margin-right: -0.25rem;
 	font: inherit;
 	font-size: 1rem;
 	line-height: 1;
@@ -169,8 +169,8 @@
 
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
 	gap: var(--chip-input-gap);
+	align-items: center;
 	min-height: 2.75rem;
 	padding: 0.5rem 0.625rem;
 	background-color: var(--chip-input-bg);
@@ -236,9 +236,9 @@
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 	color: var(--fg);
+	outline: 0;
 	background: transparent;
 	border: 0;
-	outline: 0;
 
 	&::placeholder {
 		color: var(--muted);

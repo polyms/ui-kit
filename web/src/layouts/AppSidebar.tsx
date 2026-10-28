@@ -176,7 +176,7 @@ function FullNav({
 										>
 											<span>{item.label}</span>
 											{item.isNew && (
-												<span className='badge badge-primary text-2xs ms-auto rounded-full px-1.5 py-0.5 font-bold tracking-wide'>
+												<span className='badge badge-primary ms-auto rounded-full px-1.5 py-0.5 text-2xs font-bold tracking-wide'>
 													NEW
 												</span>
 											)}
@@ -299,7 +299,7 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
 							>
 								<span>{item.label}</span>
 								{item.isNew && (
-									<span className='badge badge-primary text-2xs ms-auto rounded-full px-1.5 py-0.5 font-bold tracking-wide'>
+									<span className='badge badge-primary ms-auto rounded-full px-1.5 py-0.5 text-2xs font-bold tracking-wide'>
 										NEW
 									</span>
 								)}

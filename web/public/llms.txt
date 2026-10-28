@@ -39,6 +39,7 @@ Peers: `react` and `react-dom` `>=19`. Install `zustand` only when calling `useM
 - [Button](https://ui.polyms.dev/docs/button.md): Trigger an action or event, such as submitting a Form, opening a Dialog, canceling an action, or performing a delete operation in React.
 - [Card](https://ui.polyms.dev/docs/card.md): Simple content container.
 - [Checkbox](https://ui.polyms.dev/docs/checkbox.md): Use Checkbox for binary choices, agreements, and parent rows with mixed state.
+- [Chip](https://ui.polyms.dev/docs/chip.md): Chips represent compact values such as skills, categories, or recipients.
 - [Collapsible](https://ui.polyms.dev/docs/collapsible.md): Expandable container that shows and hides content.
 - [Dark mode](https://ui.polyms.dev/docs/dark-mode.md): Class-based dark mode for @polyms/ui-kit.
 - [Dynamic import](https://ui.polyms.dev/docs/dynamic.md): Wrap React.lazy and Suspense for code-split routes, heavy widgets, or federated remotes.
