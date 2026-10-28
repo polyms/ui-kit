@@ -1,0 +1,234 @@
+---
+type: Data input
+title: Chip
+apis:
+  - separator: Chip
+  - name: children
+    default: required
+    values: ReactNode
+    description: Text or content shown inside the chip.
+  - name: variant
+    default: neutral
+    values: neutral | primary | success | info | warning | danger
+    description: Sets the chip tone. Neutral chips use the primary tone when active.
+  - name: active
+    default: false
+    values: boolean
+    description: Shows the solid selected appearance. Pair with onClick to make a standalone chip interactive.
+  - name: disabled
+    default: false
+    values: boolean
+    description: Disables chip interaction and its dismiss button.
+  - name: leading
+    default: '-'
+    values: ReactNode
+    description: Optional icon or other content displayed before the label.
+  - name: avatar
+    default: '-'
+    values: ReactNode
+    description: Optional avatar content displayed before the label.
+  - name: onClick
+    default: '-'
+    values: MouseEventHandler<HTMLButtonElement>
+    description: Makes chip content a button and handles interaction.
+  - name: onKeyDown
+    default: '-'
+    values: KeyboardEventHandler<HTMLButtonElement>
+    description: Handles key events when interactive chip content is focused.
+  - name: onFocus
+    default: '-'
+    values: FocusEventHandler<HTMLButtonElement>
+    description: Handles focus on interactive chip content.
+  - name: tabIndex
+    default: '-'
+    values: number
+    description: Sets the tab order for interactive chip content.
+  - name: onDismiss
+    default: '-'
+    values: '() => void'
+    description: Adds a separate dismiss button.
+  - name: dismissLabel
+    default: Remove
+    values: string
+    description: Accessible name for the dismiss button.
+  - name: className
+    default: '-'
+    values: string
+    description: Additional classes applied to the chip.
+  - separator: ChipInput
+  - name: value
+    default: '-'
+    values: string[]
+    description: Controlled chip values. Use with onValueChange.
+  - name: defaultValue
+    default: '[]'
+    values: string[]
+    description: Initial values for an uncontrolled chip input.
+  - name: onValueChange
+    default: '-'
+    values: '(value: string[]) => void'
+    description: Callback fired when chip values change.
+  - name: onSelectionChange
+    default: '-'
+    values: '(selectedValues: string[]) => void'
+    description: Callback fired when the selected chips change.
+  - name: onAdd
+    default: '-'
+    values: '(value: string) => void'
+    description: Callback fired for each value added.
+  - name: onRemove
+    default: '-'
+    values: '(value: string) => void'
+    description: Callback fired for each value removed.
+  - name: variant
+    default: neutral
+    values: neutral | primary | success | info | warning | danger
+    description: Sets the tone for chips created by the input.
+  - name: separator
+    default: ','
+    values: string | null
+    description: Character that creates a chip as it is typed. Set to null to disable separator-based creation.
+  - name: allowDuplicates
+    default: false
+    values: boolean
+    description: Allows values that already exist in the input.
+  - name: maxChips
+    default: '-'
+    values: number
+    description: Maximum number of values allowed.
+  - name: placeholder
+    default: ''
+    values: string
+    description: Placeholder shown in the input.
+  - name: dismissible
+    default: true
+    values: boolean
+    description: Shows a dismiss button on each chip.
+  - name: createOnBlur
+    default: true
+    values: boolean
+    description: Creates a chip from the remaining input when focus leaves the field.
+  - name: label
+    default: required
+    values: string
+    description: Accessible name for the input when it has no associated visible label.
+  - name: disabled
+    default: false
+    values: boolean
+    description: Disables adding and removing values.
+  - name: name
+    default: '-'
+    values: string
+    description: Adds a hidden form input containing the values joined by commas.
+  - name: id
+    default: '-'
+    values: string
+    description: ID applied to the input. Use it to associate a visible label.
+  - name: className
+    default: '-'
+    values: string
+    description: Additional classes applied to the chip input container.
+---
+
+import Story from './-views/chip/ChipDefault.tsx'
+import code from './-views/chip/ChipDefault.tsx?raw'
+
+Chips represent compact values such as skills, categories, or recipients. Use **`Chip`** for a standalone value and **`ChipInput`** when people need to add, select, or remove multiple values.
+
+<CodePreview code={code} testId='docs-preview-chip-default'>
+  <Story />
+</CodePreview>
+
+## Chips
+
+Chips have one compact size. They can show a leading icon or avatar, use a theme, display a selected state, and include a dismiss button.
+
+```tsx
+import { Chip } from '@polyms/ui-kit'
+
+const chips = (
+  <>
+    <Chip>Default</Chip>
+    <Chip variant='primary'>Primary</Chip>
+    <Chip avatar={<img alt='' src='/avatar.png' />}>With avatar</Chip>
+    <Chip onDismiss={() => {}}>Dismissible</Chip>
+  </>
+)
+```
+
+### Theme variants
+
+Pass **`variant`** to set a chip's tone. Chips use a subtle background by default so a selected chip can use the solid tone.
+
+```tsx
+const themedChips = (
+  <>
+    <Chip variant='primary'>Primary</Chip>
+    <Chip variant='success'>Success</Chip>
+    <Chip variant='danger'>Danger</Chip>
+    <Chip variant='warning'>Warning</Chip>
+    <Chip variant='info'>Info</Chip>
+  </>
+)
+```
+
+### Active state
+
+Set **`active`** to show the solid selected appearance. For a selectable standalone chip, provide **`onClick`** and control its active state from your app.
+
+```tsx
+const selectedChip = (
+  <Chip active variant='primary'>
+    Selected
+  </Chip>
+)
+```
+
+## Chip input
+
+Use **`ChipInput`** for a field that manages multiple values. Press **Enter** or type a comma to add a value. Values are trimmed and duplicates are rejected by default.
+
+```tsx
+import { ChipInput } from '@polyms/ui-kit'
+
+const skillsInput = (
+  <>
+    <label htmlFor='skills'>Skills</label>
+    <ChipInput
+      id='skills'
+      label='Add a skill'
+      defaultValue={['React', 'TypeScript']}
+      variant='primary'
+      placeholder='Add a skill…'
+    />
+  </>
+)
+```
+
+Use **`value`** with **`onValueChange`** for controlled state, or **`defaultValue`** for an uncontrolled field. **`createOnBlur`** adds the remaining text when focus leaves the field; it defaults to `true`.
+
+### Empty state
+
+An empty input is ready for the first value. Set **`defaultValue`** to `[]` or omit it.
+
+### Disabled
+
+Set **`disabled`** to prevent adding and removing values. Existing chips and dismiss buttons become unavailable.
+
+## Keyboard behavior
+
+`ChipInput` supports keyboard navigation and selection:
+
+- In the empty input, **Backspace** or **Delete** selects and focuses the last chip. Press either key again to remove the selection.
+- **←** at the start of the input focuses the last chip. **Shift+←** selects it.
+- On a focused chip, **←** and **→** move between chips; **Shift+←/→** extends the selection. **Home** focuses the first chip and **End** returns to the input.
+- **Backspace** or **Delete** removes selected chips. **Cmd/Ctrl+A** selects all chips, and **Escape** clears selection and returns focus to the input.
+- Click selects one chip. **Cmd/Ctrl+click** toggles a chip, and **Shift+click** selects a range.
+
+## Accessibility
+
+Associate a visible **`<label>`** with the input by passing an **`id`** and matching it with **`htmlFor`**. Chips in `ChipInput` are keyboard-focusable, dismiss buttons have accessible names, and additions/removals are announced to assistive technology.
+
+## API Reference
+
+<APIReference />
