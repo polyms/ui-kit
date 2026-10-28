@@ -140,3 +140,15 @@
 		}
 	}
 }
+
+/* Dark selected and hover labels stay readable on every Nord surface. */
+.dark .tabs {
+	.tabs-tab[data-selected],
+	.tabs-tab:hover {
+		color: var(--color-primary-200);
+	}
+
+	.tabs-indicator {
+		background-color: var(--color-primary-300);
+	}
+}

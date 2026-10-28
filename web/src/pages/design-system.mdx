@@ -386,21 +386,21 @@ export const stepRoles = [
 
 #### Color pairings
 
-Keep text, fill, and border on roles that were chosen together. These three pairings are the ones built-in components already use.
+Keep text, fill, and border on roles that were chosen together. Choose a readable foreground for each fill in both themes.
 
 <div className='my-4 grid gap-3 md:grid-cols-3'>
   <div className='rounded-lg border border-primary-600 bg-primary-50 p-4 text-primary-700 text-sm'>
     Step 700 text on a step 50 background, with a step 600 border. Light alerts use this pairing.
   </div>
-  <div className='rounded-lg bg-primary-600 p-4 text-sm text-white'>
-    White text on a step 600 fill. Solid primary buttons use this pairing.
+  <div className='rounded-lg bg-primary-700 p-4 text-sm text-white dark:bg-primary-600'>
+    White text on a step 700 fill in light mode; dark mode keeps the saturated intent fill and white text.
   </div>
   <div className='rounded-lg border border-line bg-body p-4 text-fg text-sm'>
     Foreground text on the page background, with the line token as the border.
   </div>
 </div>
 
-When you remap a ramp, check contrast for the solid CTA (white on step 600) and for text on a step 50 background (step 700). Target **WCAG 2.1 AA** on both, in light and in `.dark`.
+When you remap a ramp, check contrast for solid CTAs, outlined labels, and tinted surfaces in both light and `.dark`. Solid intent buttons keep their brand fill with white text in both themes. Adjust the ramp if either pairing misses **WCAG 2.1 AA**.
 
 **Tailwind color utilities**
 

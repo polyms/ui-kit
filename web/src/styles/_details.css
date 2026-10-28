@@ -18,7 +18,7 @@
 	}
 
 	.accordion-item:not(:last-child) {
-		border-bottom: 1px dashed var(--color-neutral-300);
+		border-bottom: 1px dashed var(--line);
 	}
 
 	/* Trigger button styling */
@@ -42,12 +42,12 @@
 		}
 
 		&:hover:not([data-disabled]) {
-			@apply bg-neutral-50;
+			@apply bg-surface;
 		}
 
 		&:focus-visible {
 			z-index: 1;
-			outline: 2px solid var(--color-blue);
+			outline: 2px solid var(--color-primary-400);
 		}
 
 		svg {
@@ -67,7 +67,7 @@
 		max-height: 500px;
 		overflow: hidden;
 		transition: height 150ms ease-out;
-		@apply border-neutral-200 bg-neutral-50;
+		@apply border-line bg-surface;
 
 		&[data-starting-style],
 		&[data-ending-style] {

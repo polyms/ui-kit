@@ -51,91 +51,57 @@
  * ────────────────────────────────────────────────────────────────────────────────────────────────────────── */
 
 /* Interactive Items (for nav-item, list-item, menu-item, etc.) */
-.item-primary {
+/* Variant-local tokens keep transparent states consistent in both themes. */
+.item-primary,
+.item-success,
+.item-info,
+.item-warning,
+.item-danger {
+	color: var(--item-color);
 	background-color: transparent;
 
 	@media (hover: hover) {
 		&:hover {
-			@apply bg-primary-700/10 text-primary-700;
+			color: var(--item-interaction-color);
+			background-color: color-mix(in oklab, var(--item-tint-color) 10%, transparent);
 		}
 	}
 
 	&:active,
 	&.active {
-		@apply bg-primary-700/10 text-primary-700;
+		color: var(--item-interaction-color);
+		background-color: color-mix(in oklab, var(--item-tint-color) 15%, transparent);
 	}
+}
+
+.item-primary {
+	--item-color: inherit;
+	--item-interaction-color: var(--color-primary-700);
+	--item-tint-color: var(--color-primary-700);
 }
 
 .item-success {
-	color: var(--color-success-600);
-	background-color: transparent;
-
-	&:hover {
-		@media (hover: hover) {
-			color: var(--color-success-700);
-			background-color: color-mix(in oklab, var(--color-success-500) 12%, transparent);
-		}
-	}
-
-	&:active,
-	&.active {
-		color: var(--color-success-700);
-		background-color: color-mix(in oklab, var(--color-success-500) 18%, transparent);
-	}
+	--item-color: var(--color-success-600);
+	--item-interaction-color: var(--color-success-700);
+	--item-tint-color: var(--color-success-500);
 }
 
 .item-info {
-	color: var(--color-info-600);
-	background-color: transparent;
-
-	&:hover {
-		@media (hover: hover) {
-			color: var(--color-info-600);
-			background-color: color-mix(in oklab, var(--color-info-500) 12%, transparent);
-		}
-	}
-
-	&:active,
-	&.active {
-		color: var(--color-info-600);
-		background-color: color-mix(in oklab, var(--color-info-500) 18%, transparent);
-	}
+	--item-color: var(--color-info-600);
+	--item-interaction-color: var(--color-info-600);
+	--item-tint-color: var(--color-info-500);
 }
 
 .item-warning {
-	color: var(--color-warning-500);
-	background-color: transparent;
-
-	&:hover {
-		@media (hover: hover) {
-			color: var(--color-warning-600);
-			background-color: color-mix(in oklab, var(--color-warning-500) 12%, transparent);
-		}
-	}
-
-	&:active,
-	&.active {
-		color: var(--color-warning-600);
-		background-color: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
-	}
+	--item-color: var(--color-warning-500);
+	--item-interaction-color: var(--color-warning-600);
+	--item-tint-color: var(--color-warning-500);
 }
 
 .item-danger {
-	color: var(--color-danger-500);
-	background-color: transparent;
-
-	&:hover {
-		@media (hover: hover) {
-			color: var(--color-danger-600);
-			background-color: color-mix(in oklab, var(--color-danger-500) 12%, transparent);
-		}
-	}
-
-	&:active,
-	&.active {
-		color: var(--color-danger-600);
-		background-color: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
-	}
+	--item-color: var(--color-danger-500);
+	--item-interaction-color: var(--color-danger-600);
+	--item-tint-color: var(--color-danger-500);
 }
 
 .item-light {
@@ -162,14 +128,52 @@
 
 	&:hover {
 		@media (hover: hover) {
-			color: #fff;
+			color: var(--body);
 			background-color: color-mix(in oklab, var(--fg) 90%, transparent);
 		}
 	}
 
 	&:active,
 	&.active {
-		color: #fff;
+		color: var(--body);
 		background-color: color-mix(in oklab, var(--fg) 90%, transparent);
+	}
+}
+
+/* Dark transparent states use light intent colors without changing the brand ramp. */
+.dark {
+	.item-primary {
+		--item-color: inherit;
+		--item-interaction-color: var(--color-primary-200);
+		--item-tint-color: var(--color-primary-300);
+	}
+
+	.item-success {
+		--item-color: var(--color-success-300);
+		--item-interaction-color: var(--color-success-200);
+		--item-tint-color: var(--color-success-300);
+	}
+
+	.item-info {
+		--item-color: var(--color-info-300);
+		--item-interaction-color: var(--color-info-200);
+		--item-tint-color: var(--color-info-300);
+	}
+
+	.item-warning {
+		--item-color: var(--color-warning-300);
+		--item-interaction-color: var(--color-warning-200);
+		--item-tint-color: var(--color-warning-300);
+	}
+
+	.item-danger {
+		--item-color: var(--color-danger-300);
+		--item-interaction-color: var(--color-danger-200);
+		--item-tint-color: var(--color-danger-300);
+	}
+
+	.item-light:active,
+	.item-light.active {
+		background-color: var(--surface);
 	}
 }

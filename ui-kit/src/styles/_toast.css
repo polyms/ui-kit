@@ -265,25 +265,25 @@
 .dark {
 	.toast-info {
 		--toast-border: var(--color-primary-500);
-		--toast-bg: color-mix(in oklab, var(--color-primary-700) 18%, transparent);
+		--toast-bg: color-mix(in oklab, var(--color-primary-700) 18%, var(--surface-2));
 		--toast-color: var(--color-primary-200);
 	}
 
 	.toast-success {
 		--toast-border: var(--color-success-500);
-		--toast-bg: color-mix(in oklab, var(--color-success-500) 18%, transparent);
+		--toast-bg: color-mix(in oklab, var(--color-success-500) 18%, var(--surface-2));
 		--toast-color: var(--color-success-200);
 	}
 
 	.toast-warning {
 		--toast-border: var(--color-warning-500);
-		--toast-bg: color-mix(in oklab, var(--color-warning-500) 18%, transparent);
+		--toast-bg: color-mix(in oklab, var(--color-warning-500) 18%, var(--surface-2));
 		--toast-color: var(--color-warning-200);
 	}
 
 	.toast-danger {
 		--toast-border: var(--color-danger-500);
-		--toast-bg: color-mix(in oklab, var(--color-danger-500) 18%, transparent);
+		--toast-bg: color-mix(in oklab, var(--color-danger-500) 18%, var(--surface-2));
 		--toast-color: var(--color-danger-200);
 	}
 }

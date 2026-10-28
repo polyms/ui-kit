@@ -57,7 +57,7 @@
 		border-radius: 0.25rem;
 	}
 
-	.dark &[data-highlighted]:not([data-disabled])::before {
+	.dark &:not(.menu-danger)[data-highlighted]:not([data-disabled])::before {
 		background-color: color-mix(in oklab, var(--fg) 10%, transparent);
 	}
 

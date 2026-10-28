@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { Spinner } from './Spinner'
 
-// ── Components ──────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 describe('Spinner', () => {
 	it('renders with default size', () => {
@@ -21,10 +21,10 @@ describe('Spinner', () => {
 		expect(spinner).toHaveAttribute('height', '24')
 	})
 
-	it('renders with default color', () => {
+	it('inherits the surrounding foreground by default', () => {
 		render(<Spinner />)
 		const paths = document.querySelectorAll('svg path')
-		const colorPath = Array.from(paths).find(path => path.getAttribute('fill') === '#181b1f')
+		const colorPath = Array.from(paths).find(path => path.getAttribute('fill') === 'currentColor')
 		expect(colorPath).toBeInTheDocument()
 	})
 
@@ -35,10 +35,12 @@ describe('Spinner', () => {
 		expect(colorPath).toBeInTheDocument()
 	})
 
-	it('renders with default subColor', () => {
+	it('derives the default track from the surrounding foreground', () => {
 		render(<Spinner />)
 		const paths = document.querySelectorAll('svg path')
-		const subColorPath = Array.from(paths).find(path => path.getAttribute('fill') === '#AEB4BD')
+		const subColorPath = Array.from(paths).find(
+			path => path.getAttribute('fill') === 'color-mix(in oklab, currentColor 25%, transparent)'
+		)
 		expect(subColorPath).toBeInTheDocument()
 	})
 

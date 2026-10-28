@@ -76,7 +76,9 @@ function LandingNav() {
 			<Container className='flex h-14 items-center gap-6'>
 				<Link className='flex items-center' to='/'>
 					<FaviconFit className='h-10 w-auto' hexCenterColor='#334155' />
-					<span className='ms-1 mb-1.5 font-semibold tracking-tight text-neutral-900'>olyms</span>
+					<span className='ms-1 mb-1.5 font-semibold tracking-tight text-neutral-900 dark:text-fg'>
+						olyms
+					</span>
 					<span className='home-nav-tag ms-2'>UI Kit</span>
 				</Link>
 
@@ -222,7 +224,7 @@ function ShowcaseCard({
 		<article className={clsx('home-showcase-card group', className)}>
 			<div className='flex flex-1 items-center justify-center p-6'>{children}</div>
 			<div className='home-showcase-card-footer'>
-				<span className='text-xs font-medium text-neutral-500'>{label}</span>
+				<span className='text-xs font-medium text-neutral-500 dark:text-muted'>{label}</span>
 				<Link
 					aria-label={`Open ${label} docs`}
 					className='link link-dark inline-flex items-center gap-1 text-xs'
@@ -284,13 +286,13 @@ function TabsPreview() {
 				<Tabs.Tab value='settings'>Settings</Tabs.Tab>
 				<Tabs.Tab value='billing'>Billing</Tabs.Tab>
 			</Tabs.List>
-			<Tabs.Panel className='pt-3 text-sm text-neutral-600' value='overview'>
+			<Tabs.Panel className='pt-3 text-sm text-neutral-600 dark:text-muted' value='overview'>
 				Build accessible tabs with animated indicator out of the box.
 			</Tabs.Panel>
-			<Tabs.Panel className='pt-3 text-sm text-neutral-600' value='settings'>
+			<Tabs.Panel className='pt-3 text-sm text-neutral-600 dark:text-muted' value='settings'>
 				Compose with forms, popovers, and menus.
 			</Tabs.Panel>
-			<Tabs.Panel className='pt-3 text-sm text-neutral-600' value='billing'>
+			<Tabs.Panel className='pt-3 text-sm text-neutral-600 dark:text-muted' value='billing'>
 				Keyboard navigation and ARIA roles included.
 			</Tabs.Panel>
 		</Tabs>
@@ -322,7 +324,7 @@ function PopoverPreview() {
 
 function SwitchPreview() {
 	return (
-		<div className='flex w-full flex-col gap-3 text-sm text-neutral-700'>
+		<div className='flex w-full flex-col gap-3 text-sm text-neutral-700 dark:text-fg'>
 			<div className='flex items-center justify-between gap-3'>
 				<span>Notifications</span>
 				<Switch defaultChecked />
@@ -584,7 +586,7 @@ function KitSection() {
 					<ul className='home-kit-list'>
 						{KIT_ITEMS.map(item => (
 							<li key={item}>
-								<CheckIcon className='text-primary-700 size-4' />
+								<CheckIcon className='text-primary-700 dark:text-primary-200 size-4' />
 								{item}
 							</li>
 						))}
@@ -618,7 +620,7 @@ function InstallCard({ className }: { className?: string }) {
 	return (
 		<div className={clsx('home-install-card', className)}>
 			<div className='home-install-card-header'>
-				<TerminalIcon className='size-4 text-neutral-500' />
+				<TerminalIcon className='size-4 text-neutral-500 dark:text-muted' />
 				<span className='text-sm font-medium'>Install</span>
 			</div>
 			<Tabs className='flex-1' defaultValue='pnpm'>
@@ -645,7 +647,7 @@ function InstallCard({ className }: { className?: string }) {
 			<div className='home-install-card-footer'>
 				<p>
 					Peers: <code>react</code> <code>react-dom</code>{' '}
-					<span className='text-neutral-500'>&gt;= 19.0.0</span>
+					<span className='text-neutral-500 dark:text-muted'>&gt;= 19.0.0</span>
 				</p>
 			</div>
 		</div>
@@ -758,8 +760,8 @@ function MetricCell({ value, label, sub }: MetricItem) {
 	return (
 		<div className='home-metric-cell'>
 			<div className='home-metric-value'>{value}</div>
-			<div className='mt-2 text-sm font-medium text-neutral-800'>{label}</div>
-			<div className='text-xs text-neutral-500'>{sub}</div>
+			<div className='mt-2 text-sm font-medium text-neutral-800 dark:text-fg'>{label}</div>
+			<div className='text-xs text-neutral-500 dark:text-muted'>{sub}</div>
 		</div>
 	)
 }
@@ -828,7 +830,7 @@ function CTASection() {
 							Ship the interface.
 							<span className='home-cta-accent'> Keep the charm.</span>
 						</h2>
-						<p className='mt-4 max-w-xl text-neutral-600 md:text-lg'>
+						<p className='mt-4 max-w-xl text-neutral-600 md:text-lg dark:text-muted'>
 							Open source. MIT licensed. Built in the open by{' '}
 							<a
 								className='home-cta-link'
@@ -871,8 +873,10 @@ function FooterSection() {
 				<div className='flex items-center'>
 					<FaviconFit className='h-20 w-auto' hexCenterColor='#334155' />
 					<div className='ms-1'>
-						<div className='text-2xl font-semibold text-neutral-900'>olyms</div>
-						<div className='text-xs text-neutral-500'>© 2024-{currentYear} Polyms. MIT Licensed.</div>
+						<div className='text-2xl font-semibold text-neutral-900 dark:text-fg'>olyms</div>
+						<div className='text-xs text-neutral-500 dark:text-muted'>
+							© 2024-{currentYear} Polyms. MIT Licensed.
+						</div>
 					</div>
 				</div>
 

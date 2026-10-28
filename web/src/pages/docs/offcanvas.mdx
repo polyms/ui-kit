@@ -58,6 +58,8 @@ apis:
 
 import Story from './-views/offcanvas/OffcanvasDefault.tsx'
 import code from './-views/offcanvas/OffcanvasDefault.tsx?raw'
+import Form from './-views/offcanvas/OffcanvasForm.tsx'
+import formCode from './-views/offcanvas/OffcanvasForm.tsx?raw'
 import Programmatic from './-views/offcanvas/OffcanvasProgrammatic.tsx'
 import programmaticCode from './-views/offcanvas/OffcanvasProgrammatic.tsx?raw'
 
@@ -198,6 +200,18 @@ const offcanvas = (
   </Offcanvas>
 )
 ```
+
+## Form in an offcanvas
+
+Edit a profile without leaving the page. Save updates the preview card; Cancel, Escape, the close button,
+and backdrop dismissal ask before discarding unsaved edits. Nothing is sent to a server.
+
+Put the form and its actions inside `Offcanvas.Body`. Focus the first input, validate required fields on blur
+or submit, and move focus to the first invalid control. A nested `Modal` protects unsaved changes.
+
+<CodePreview code={formCode} testId='docs-preview-offcanvas-form'>
+  <Form />
+</CodePreview>
 
 ## Behavior
 

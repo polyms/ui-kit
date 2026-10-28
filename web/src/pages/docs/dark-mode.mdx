@@ -141,6 +141,14 @@ const layout = (
 
 **`html`** and **`body`** use **`bg-body text-fg`** once library styles are loaded — toggling **`.dark`** on `<html>` updates the whole page background.
 
+## Component colors
+
+Dark mode preserves your brand ramps. Solid intent buttons keep their saturated brand fills with white text;
+outlined buttons, selected tabs, and interactive rows use accent text with transparent tints.
+
+Table stripes, active rows, and hover states resolve through semantic surfaces, so light text stays readable.
+Popovers use the muted text token for descriptions. Spinners inherit the surrounding text color by default.
+
 ## Tailwind dark variant
 
 After importing **`@polyms/ui-kit`** styles, use Tailwind **`dark:`** for one-off overrides in app-specific layout:

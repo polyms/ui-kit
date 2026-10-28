@@ -577,3 +577,24 @@
 		}
 	}
 }
+
+/* Invalid text and floating labels remain readable against dark inputs. */
+.dark {
+	.field.invalid .field-control {
+		color: var(--color-danger-200);
+		@apply border-danger-500;
+
+		&:hover:not(:disabled):not([disabled]):not([readonly]),
+		&:focus-visible:not(:disabled):not([disabled]):not([readonly]) {
+			@apply border-danger-500;
+		}
+
+		&:focus-visible:not([readonly]):not(:disabled):not([disabled]) {
+			@apply ring-danger-500/20;
+		}
+	}
+
+	.field-floating input:focus ~ label {
+		color: var(--color-primary-200);
+	}
+}

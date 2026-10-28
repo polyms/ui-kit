@@ -1,6 +1,22 @@
 import clsx from 'clsx'
 
-export const Spinner = ({ size = 12, color = '#181b1f', subColor = '#AEB4BD', className }: SpinnerProps) => {
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type SpinnerProps = {
+	size?: number
+	color?: string
+	subColor?: string
+	className?: string
+}
+
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export const Spinner = ({
+	size = 12,
+	color = 'currentColor',
+	subColor = 'color-mix(in oklab, currentColor 25%, transparent)',
+	className,
+}: SpinnerProps) => {
 	return (
 		<svg
 			className={clsx(className, 'spinner-loader')}
@@ -24,13 +40,4 @@ export const Spinner = ({ size = 12, color = '#181b1f', subColor = '#AEB4BD', cl
 			/>
 		</svg>
 	)
-}
-
-// ======================================================================================
-
-type SpinnerProps = {
-	size?: number
-	color?: string
-	subColor?: string
-	className?: string
 }

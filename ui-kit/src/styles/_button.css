@@ -285,3 +285,29 @@
 	width: var(--btn-lh);
 	height: var(--btn-lh);
 }
+
+/* Keep ghost/light button interactions visible on dark surfaces. */
+@layer components {
+	.dark .btn {
+		&.btn-ghost,
+		&.btn-light {
+			--btn-variant-color: var(--color-primary-200);
+			--btn-hover-color: var(--color-primary-200);
+			--btn-active-color: var(--color-primary-200);
+
+			&.outlined {
+				--btn-border-hover-color: var(--color-primary-300);
+				--btn-border-active-color: var(--color-primary-300);
+			}
+		}
+
+		&.btn-dark.outlined {
+			--btn-color: var(--fg);
+			--btn-bg-color: var(--body);
+			--btn-border-color: var(--muted);
+			--btn-bg-hover-color: var(--surface);
+			--btn-active-color: var(--fg);
+			--btn-border-active-color: var(--muted);
+		}
+	}
+}

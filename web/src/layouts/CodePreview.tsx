@@ -33,7 +33,7 @@ export function CodePreview({
 			<Tabs.List className='bg-surface px-8'>
 				<Tabs.Tab data-testid={`${testId}-preview-tab`} value='preview'>
 					<svg
-						className='text-primary-700/70 me-1'
+						className='text-primary-700 dark:text-primary-200 me-1'
 						fill='none'
 						height='20'
 						viewBox='0 0 24 24'
@@ -74,7 +74,7 @@ export function CodePreview({
 				</Tabs.Tab>
 				<Tabs.Tab data-testid={`${testId}-code-tab`} value='code'>
 					<svg
-						className='text-primary-700/70 me-1'
+						className='text-primary-700 dark:text-primary-200 me-1'
 						fill='none'
 						height='20'
 						viewBox='0 0 24 24'

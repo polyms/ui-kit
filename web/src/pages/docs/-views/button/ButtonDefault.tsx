@@ -27,9 +27,9 @@ export default function ButtonDefault() {
 			<Button rounded size='xl' variant='primary'>
 				<Spinner
 					className='btn-icon-content'
-					color='var(--color-primary-700)'
+					color='currentColor'
 					size={22}
-					subColor='var(--color-primary-100)'
+					subColor='color-mix(in oklab, currentColor 25%, transparent)'
 				/>
 			</Button>
 			<Button rounded size='xl' variant='dark'>

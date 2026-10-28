@@ -7,11 +7,11 @@ apis:
     values: number
     description: Controls the width and height of the spinner in pixels.
   - name: color
-    default: '#181b1f'
+    default: currentColor
     values: string
     description: Sets the color of the animated spinner arc. Accepts any valid CSS color value.
   - name: subColor
-    default: '#AEB4BD'
+    default: 'color-mix(in oklab, currentColor 25%, transparent)'
     values: string
     description: Sets the color of the background circle track. Accepts any valid CSS color value.
   - name: className
@@ -32,6 +32,8 @@ A loading indicator that provides visual feedback to users during asynchronous o
 <CodePreview code={code} testId='docs-preview-spinner-default'>
   <Story />
 </CodePreview>
+
+The default spinner inherits the surrounding text color, including inside buttons and dark surfaces. Its track uses the same color at 25% opacity. Explicit `color` and `subColor` props still take precedence.
 
 ## Usage
 
@@ -76,7 +78,7 @@ Customize spinner colors to match your brand or indicate different states using 
 ```tsx
 const button = (
   <Button disabled>
-    <Spinner size={16} color='white' subColor='rgba(255,255,255,0.3)' />
+    <Spinner size={16} color='currentColor' />
     <span className='ms-2'>Loading...</span>
   </Button>
 )

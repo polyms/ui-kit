@@ -115,11 +115,11 @@ const quickActions: ActionTile[] = [
 ]
 
 const recentRecipients: Recipient[] = [
-	{ initials: 'NH', name: 'Ngọc Hà', tone: 'bg-primary-700/15 text-primary-700' },
-	{ initials: 'TM', name: 'Tuấn Minh', tone: 'bg-warning-500/15 text-warning-500' },
-	{ initials: 'AT', name: 'Anh Thư', tone: 'bg-success-500/15 text-success-500' },
-	{ initials: 'KD', name: 'Khánh Duy', tone: 'bg-info-500/15 text-info-500' },
-	{ initials: 'LP', name: 'Linh Phương', tone: 'bg-danger-500/15 text-danger-500' },
+	{ initials: 'NH', name: 'Ngọc Hà', tone: 'bg-primary-700/15 text-primary-700 dark:text-primary-200' },
+	{ initials: 'TM', name: 'Tuấn Minh', tone: 'bg-warning-500/15 text-warning-500 dark:text-warning-200' },
+	{ initials: 'AT', name: 'Anh Thư', tone: 'bg-success-500/15 text-success-500 dark:text-success-200' },
+	{ initials: 'KD', name: 'Khánh Duy', tone: 'bg-info-500/15 text-info-500 dark:text-info-200' },
+	{ initials: 'LP', name: 'Linh Phương', tone: 'bg-danger-500/15 text-danger-500 dark:text-danger-200' },
 ]
 
 const recentTransfers: Transfer[] = [
@@ -176,11 +176,11 @@ export const Header = () => {
 												<span
 													className={`flex size-9 items-center justify-center rounded-lg ${
 														row.tone === 'primary'
-															? 'bg-primary-700/10 text-primary-700'
+															? 'bg-primary-700/10 text-primary-700 dark:text-primary-200'
 															: row.tone === 'success'
-																? 'bg-success-500/10 text-success-500'
+																? 'bg-success-500/10 text-success-500 dark:text-success-200'
 																: row.tone === 'warning'
-																	? 'bg-warning-500/10 text-warning-500'
+																	? 'bg-warning-500/10 text-warning-500 dark:text-warning-200'
 																	: 'bg-neutral-100 text-neutral-700 dark:bg-surface dark:text-fg'
 													}`}
 												>
@@ -265,7 +265,7 @@ export const Header = () => {
 									</li>
 									<li>
 										<NavigationMenu.Link className='flex items-center gap-2.5' href='#add'>
-											<span className='bg-primary-700/10 text-primary-700 flex size-8 items-center justify-center rounded-md'>
+											<span className='bg-primary-700/10 text-primary-700 dark:text-primary-200 flex size-8 items-center justify-center rounded-md'>
 												<HugeiconsIcon icon={Add01Icon} size={15} strokeWidth={2.25} />
 											</span>
 											<span className='flex min-w-0 flex-1 flex-col gap-0.5'>
@@ -276,7 +276,7 @@ export const Header = () => {
 									</li>
 									<li>
 										<NavigationMenu.Link className='flex items-center gap-2.5' href='#limits'>
-											<span className='bg-warning-500/10 text-warning-500 flex size-8 items-center justify-center rounded-md'>
+											<span className='bg-warning-500/10 text-warning-500 dark:text-warning-200 flex size-8 items-center justify-center rounded-md'>
 												<HugeiconsIcon icon={PercentSquareIcon} size={15} strokeWidth={2} />
 											</span>
 											<span className='flex min-w-0 flex-1 flex-col gap-0.5'>
@@ -316,7 +316,7 @@ export const Header = () => {
 											key={action.href}
 											variant='soft'
 										>
-											<span className='bg-primary-700/10 text-primary-700 flex size-9 items-center justify-center rounded-lg'>
+											<span className='bg-primary-700/10 text-primary-700 dark:text-primary-200 flex size-9 items-center justify-center rounded-lg'>
 												<HugeiconsIcon icon={action.icon} size={16} strokeWidth={2} />
 											</span>
 											<span className='flex flex-col gap-0.5'>
@@ -364,7 +364,7 @@ export const Header = () => {
 													<span className='flex items-center justify-between gap-2 text-sm font-medium'>
 														<span className='truncate'>{t.who}</span>
 														<span
-															className={`shrink-0 tabular-nums ${t.positive ? 'text-success-500' : 'text-neutral-900 dark:text-fg'}`}
+															className={`shrink-0 tabular-nums ${t.positive ? 'text-success-500 dark:text-success-200' : 'text-neutral-900 dark:text-fg'}`}
 														>
 															{t.amount}
 														</span>
@@ -396,7 +396,7 @@ export const Header = () => {
 												$48,392.20
 											</span>
 										</div>
-										<span className='bg-success-500/15 text-success-700 text-caption inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold tabular-nums'>
+										<span className='bg-success-500/15 text-success-700 dark:text-success-200 text-caption inline-flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold tabular-nums'>
 											<HugeiconsIcon icon={ArrowUp01Icon} size={10} strokeWidth={2.5} />
 											+2.34%
 										</span>
@@ -452,7 +452,7 @@ export const Header = () => {
 								>
 									<span className='flex items-center gap-2'>
 										<HugeiconsIcon
-											className='text-primary-700'
+											className='text-primary-700 dark:text-primary-200'
 											icon={SavingsIcon}
 											size={16}
 											strokeWidth={2}

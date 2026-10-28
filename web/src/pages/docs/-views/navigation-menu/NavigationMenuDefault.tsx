@@ -206,7 +206,7 @@ export default function NavigationMenuDefault() {
 													<li key={item.href}>
 														<NavigationMenu.Link className='flex items-start gap-2.5' href={item.href}>
 															<HugeiconsIcon
-																className='text-primary-700 mt-0.5 shrink-0'
+																className='text-primary-700 dark:text-primary-200 mt-0.5 shrink-0'
 																icon={item.icon}
 																size={16}
 																strokeWidth={2}
@@ -232,7 +232,12 @@ export default function NavigationMenuDefault() {
 
 								<NavigationMenu.Footer>
 									<span className='flex items-center gap-2 text-xs text-muted'>
-										<HugeiconsIcon className='text-primary-700' icon={StarIcon} size={14} strokeWidth={2} />
+										<HugeiconsIcon
+											className='text-primary-700 dark:text-primary-200'
+											icon={StarIcon}
+											size={14}
+											strokeWidth={2}
+										/>
 										<strong className='font-semibold text-fg'>Postgres branching</strong>
 										is now in general availability.
 									</span>
@@ -264,7 +269,7 @@ export default function NavigationMenuDefault() {
 										"We replaced four internal tools with Polyms in a single sprint."
 									</blockquote>
 									<div className='flex items-center gap-2'>
-										<span className='bg-primary-700/15 text-primary-700 flex size-8 items-center justify-center rounded-full text-xs font-semibold'>
+										<span className='bg-primary-700/15 text-primary-700 dark:text-primary-200 flex size-8 items-center justify-center rounded-full text-xs font-semibold'>
 											LD
 										</span>
 										<span className='flex flex-col gap-0.5'>
@@ -276,7 +281,9 @@ export default function NavigationMenuDefault() {
 										{customerStats.map(stat => (
 											<div className='flex flex-col gap-0.5' key={stat.label}>
 												<dt className='text-2xs tracking-wider text-muted uppercase'>{stat.label}</dt>
-												<dd className='text-primary-700 m-0 text-sm font-semibold'>{stat.value}</dd>
+												<dd className='text-primary-700 dark:text-primary-200 m-0 text-sm font-semibold'>
+													{stat.value}
+												</dd>
 											</div>
 										))}
 									</dl>
@@ -287,7 +294,7 @@ export default function NavigationMenuDefault() {
 										<li key={item.href}>
 											<NavigationMenu.Link className='flex items-start gap-3' href={item.href} variant='soft'>
 												<HugeiconsIcon
-													className='text-primary-700 mt-0.5 shrink-0'
+													className='text-primary-700 dark:text-primary-200 mt-0.5 shrink-0'
 													icon={item.icon}
 													size={18}
 													strokeWidth={2}
@@ -316,7 +323,7 @@ export default function NavigationMenuDefault() {
 										<li key={item.href}>
 											<NavigationMenu.Link className='flex items-start gap-3' href={item.href}>
 												<HugeiconsIcon
-													className='text-primary-700 mt-0.5 shrink-0'
+													className='text-primary-700 dark:text-primary-200 mt-0.5 shrink-0'
 													icon={item.icon}
 													size={16}
 													strokeWidth={2}
@@ -350,7 +357,7 @@ export default function NavigationMenuDefault() {
 						<NavigationMenu.Content className='w-2xl'>
 							<span className='relative flex items-center gap-3 py-2 ps-4'>
 								<SectionIcon icon={NewsIcon} />
-								<span className='text-primary-700 text-base font-semibold'>Blogs</span>
+								<span className='text-primary-700 dark:text-primary-200 text-base font-semibold'>Blogs</span>
 							</span>
 
 							<ul className='m-0 grid list-none grid-cols-2 items-stretch gap-3 p-2'>
@@ -362,7 +369,7 @@ export default function NavigationMenuDefault() {
 											variant='soft'
 										>
 											<HugeiconsIcon
-												className='text-primary-700'
+												className='text-primary-700 dark:text-primary-200'
 												icon={item.icon}
 												size={18}
 												strokeWidth={2}
@@ -389,7 +396,7 @@ export default function NavigationMenuDefault() {
 								{/* Icon column */}
 								<div className='bg-primary-700/8 ring-primary-700/15 relative shrink-0 overflow-hidden rounded-xl p-3 ring-1'>
 									<HugeiconsIcon
-										className='text-primary-700 relative z-10'
+										className='text-primary-700 dark:text-primary-200 relative z-10'
 										icon={Leaf01Icon}
 										size={28}
 										strokeWidth={1.6}
@@ -404,12 +411,14 @@ export default function NavigationMenuDefault() {
 
 								{/* Text column */}
 								<div className='flex min-w-0 flex-col gap-2'>
-									<p className='text-primary-700 text-base leading-tight font-extrabold'>Pricing</p>
+									<p className='text-primary-700 dark:text-primary-200 text-base leading-tight font-extrabold'>
+										Pricing
+									</p>
 									<p className='line-clamp-3 text-xs leading-relaxed text-muted'>
 										Choose the plan that fits your team — start free, scale with usage-based add-ons, and
 										unlock SSO, audit logs, and priority support as you grow.
 									</p>
-									<span className='text-primary-700 mt-auto inline-flex items-center gap-1 text-xs font-semibold'>
+									<span className='text-primary-700 dark:text-primary-200 mt-auto inline-flex items-center gap-1 text-xs font-semibold'>
 										Explore more
 										<HugeiconsIcon
 											className='transition-transform duration-200 group-hover/panel:translate-x-0.5'
@@ -444,7 +453,12 @@ function SectionIcon({ icon }: { icon: IconSvgElement }) {
 				aria-hidden
 				className='bg-primary-700/10 ring-primary-700/15 pointer-events-none absolute -right-1 h-full w-44 rounded-e-full ring-1'
 			/>
-			<HugeiconsIcon className='text-primary-700 relative z-10' icon={icon} size={25} strokeWidth={1.6} />
+			<HugeiconsIcon
+				className='text-primary-700 dark:text-primary-200 relative z-10'
+				icon={icon}
+				size={25}
+				strokeWidth={1.6}
+			/>
 		</span>
 	)
 }

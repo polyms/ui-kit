@@ -87,3 +87,22 @@
 			opacity 200ms ease-in-out;
 	}
 }
+
+/* Active navigation uses the brand ramp's light steps on dark surfaces. */
+.dark .toc .toc-item {
+	&.is-visible,
+	&.is-primary {
+		color: var(--color-primary-200);
+	}
+
+	&.is-primary {
+		background-color: color-mix(in oklab, var(--color-primary-300) 12%, transparent);
+	}
+
+	@media (hover: hover) {
+		&:hover {
+			color: var(--fg);
+			background-color: var(--surface);
+		}
+	}
+}

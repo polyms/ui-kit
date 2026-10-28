@@ -56,7 +56,7 @@
 	color: var(--fg);
 	outline: none;
 	background-color: var(--surface-2);
-	border: 1px solid var(--color-neutral-200);
+	border: 1px solid var(--line);
 	border-radius: 0.5rem;
 	box-shadow:
 		0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
@@ -102,15 +102,11 @@
 }
 
 .popover-arrow-outer {
-	@media (prefers-color-scheme: light) {
-		fill: var(--color-neutral-200);
-	}
+	fill: var(--line);
 }
 
 .popover-arrow-inner {
-	@media (prefers-color-scheme: dark) {
-		fill: var(--color-neutral-300);
-	}
+	fill: var(--surface-2);
 }
 
 .popover-title {
@@ -124,7 +120,7 @@
 	margin: 0;
 	font-size: 1rem;
 	line-height: 1.5rem;
-	color: var(--color-neutral-600);
+	color: var(--muted);
 }
 
 .popover-container {

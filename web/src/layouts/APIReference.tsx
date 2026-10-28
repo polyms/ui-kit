@@ -38,7 +38,7 @@ export default function APIReference() {
 					if (prop.separator) {
 						return (
 							<div
-								className='bg-primary-600 m-px rounded-xs px-9 py-1 font-semibold text-white'
+								className='bg-primary-700 dark:bg-primary-300 m-px rounded-xs px-9 py-1 font-semibold text-white dark:text-neutral-950'
 								key={`sep-${prop.separator}`}
 							>
 								{prop.separator}
@@ -60,12 +60,14 @@ export default function APIReference() {
 									<span className='font-medium'>{prop.name}</span>
 									<span
 										className={clsx('font-mono text-sm', {
-											'text-primary-700': prop.default !== '-',
+											'text-primary-700 dark:text-primary-200': prop.default !== '-',
 										})}
 									>
 										{prop.default}
 									</span>
-									<span className='text-primary-700 font-mono text-xs'>{prop.values}</span>
+									<span className='text-primary-700 dark:text-primary-200 font-mono text-xs'>
+										{prop.values}
+									</span>
 								</Accordion.Trigger>
 							</Accordion.Header>
 							<Accordion.Panel className='accordion-panel'>

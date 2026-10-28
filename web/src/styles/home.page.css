@@ -516,3 +516,175 @@ main.landing {
 html:has(#root.landing) {
 	background-color: #fff6ee;
 }
+
+/* ── Dark canvas and surfaces ─────────────────────────────────────────────────────────────────────────── */
+
+html.dark:has(#root.landing) {
+	background-color: var(--body);
+}
+
+.dark main.landing {
+	--home-canvas: var(--body);
+	--home-ink: var(--fg);
+	--home-muted: var(--muted);
+	--home-card-shadow: 0 8px 24px rgb(0 0 0 / 16%);
+}
+
+.dark .home-nav {
+	background-color: color-mix(in oklab, var(--body) 94%, transparent);
+	border-color: var(--line);
+}
+
+.dark {
+	.home-hero-title,
+	.home-hero-em,
+	.home-section-title,
+	.home-pillar-title,
+	.home-kit-title,
+	.home-feature-title,
+	.home-band-title,
+	.home-metric-value,
+	.home-faq-q,
+	.home-cta-title,
+	.home-example-code,
+	.home-cmd {
+		color: var(--fg);
+	}
+
+	.home-nav-link,
+	.home-hero-sub,
+	.home-section-sub,
+	.home-pillar-copy,
+	.home-kit-list,
+	.home-feature-copy,
+	.home-band-copy,
+	.home-band-list,
+	.home-faq-a,
+	.home-theme-legend,
+	.home-install-card-header,
+	.home-install-card-footer,
+	.home-example-card-header .label,
+	.home-cmd-copy {
+		color: var(--muted);
+	}
+
+	.home-nav-tag,
+	.home-hero-chip,
+	.home-section-eyebrow,
+	.home-showcase-card,
+	.home-pillar,
+	.home-theme-stage,
+	.home-kit,
+	.home-feature,
+	.home-metric-cell,
+	.home-faq,
+	.home-install-card,
+	.home-example-card {
+		color: var(--fg);
+		background-color: var(--surface-2);
+		border-color: var(--line);
+	}
+
+	.home-showcase-card {
+		color-scheme: dark;
+	}
+
+	.home-showcase-card:hover {
+		border-color: var(--line);
+	}
+
+	.home-showcase-card-footer,
+	.home-install-card-footer,
+	.home-example-card-header,
+	.home-cmd {
+		background-color: var(--surface);
+		border-color: var(--line);
+	}
+
+	.home-install-card-footer code {
+		color: var(--fg);
+		background-color: color-mix(in oklab, var(--fg) 10%, transparent);
+	}
+
+	.home-install-card-header {
+		border-color: var(--line);
+	}
+
+	.home-nav-link:hover,
+	.home-cmd-copy:hover {
+		color: var(--fg);
+		background-color: var(--surface);
+	}
+
+	.home-band,
+	.home-footer {
+		background-color: var(--surface-2);
+		border-color: var(--line);
+	}
+
+	.home-cta {
+		background: linear-gradient(180deg, var(--surface-2), var(--body));
+		border-color: var(--line);
+	}
+
+	.home-hero-accent,
+	.home-cta-accent,
+	.home-section-eyebrow {
+		color: var(--color-info-200);
+	}
+
+	.home-section-eyebrow {
+		border-color: var(--color-info-400);
+	}
+
+	.home-cta-link,
+	.home-cta-link:hover,
+	.home-cmd-prompt {
+		color: var(--color-primary-200);
+	}
+
+	.home-theme-swatch {
+		border-color: var(--surface);
+	}
+
+	.home-theme-swatch.is-active {
+		outline-color: var(--fg);
+	}
+
+	.home-decor-glow {
+		opacity: 0.15;
+	}
+
+	.home-feature-icon {
+		background-color: color-mix(in oklab, var(--feature-tone) 14%, transparent);
+	}
+
+	.home-feature-icon.tone-primary {
+		--feature-tone-fg: var(--color-primary-200);
+	}
+
+	.home-feature-icon.tone-success {
+		--feature-tone-fg: var(--color-success-200);
+	}
+
+	.home-feature-icon.tone-warning {
+		--feature-tone-fg: var(--color-warning-200);
+	}
+
+	.tk-keyword {
+		color: #b48ead;
+	}
+	.tk-component {
+		color: #88c0d0;
+	}
+	.tk-string {
+		color: #a3be8c;
+	}
+	.tk-attr {
+		color: #ebcb8b;
+	}
+	.tk-punct,
+	.tk-bracket {
+		color: var(--muted);
+	}
+}

@@ -429,7 +429,7 @@ function NotificationPreferencesCase() {
 	const allChecked = useMemo(() => notificationItems.every(i => checked[i.id]), [checked])
 	const noneChecked = useMemo(() => notificationItems.every(i => !checked[i.id]), [checked])
 	return (
-		<div className='mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-neutral-200/70 bg-white p-5'>
+		<div className='mx-auto flex w-full max-w-lg flex-col gap-3 rounded-2xl border border-line bg-body p-5'>
 			<Checkbox
 				checked={allChecked}
 				className='border-b border-neutral-100 pb-3'
@@ -473,11 +473,11 @@ function PlanRadioCardsCase() {
 				{planCardOptions.map(plan => (
 					<Radio
 						className={clsx(
-							'radio cursor-pointer rounded-xl border bg-white p-4 transition',
+							'radio cursor-pointer rounded-xl border bg-body p-4 transition',
 							'hover:border-primary-600/60',
-							'data-checked:border-primary-600 data-checked:bg-primary-50/40',
+							'data-checked:border-primary-600 data-checked:bg-primary-50/40 dark:data-checked:bg-primary-300/10 dark:data-checked:border-primary-300',
 							'data-checked:ring-primary-600/15 data-checked:ring-3',
-							selected === plan.id ? 'border-primary-600' : 'border-neutral-200'
+							selected === plan.id ? 'border-primary-600 dark:border-primary-300' : 'border-line'
 						)}
 						key={plan.id}
 						value={plan.id}
@@ -487,7 +487,14 @@ function PlanRadioCardsCase() {
 								<span className='font-semibold'>{plan.name}</span>
 								<span className='font-semibold tabular-nums'>{plan.price}</span>
 							</span>
-							<span className='text-xs leading-snug font-normal text-muted'>{plan.desc}</span>
+							<span
+								className={clsx(
+									'text-xs leading-snug font-normal text-muted',
+									selected === plan.id && 'dark:text-fg'
+								)}
+							>
+								{plan.desc}
+							</span>
 						</span>
 					</Radio>
 				))}
