@@ -51,11 +51,12 @@ export const skillBenefits = [
   </table>
 </div>
 
-The installer copies the skill into the folders your tools discover automatically:
+The installer writes the skill once, in `.agents/skills/ui-kit`. Codex reads that folder. Cursor, Claude Code, and Copilot follow symlinks to it:
 
-- `.cursor/skills/ui-kit` — Cursor
-- `.claude/skills/ui-kit` — Claude Code
-- `.agents/skills/ui-kit` — generic `AGENTS.md` tools
+- `.agents/skills/ui-kit` — the skill files (Codex)
+- `.cursor/skills/ui-kit` — symlink for Cursor
+- `.claude/skills/ui-kit` — symlink for Claude Code
+- `.github/skills/ui-kit` — symlink for Copilot
 
 ## Install the skill
 
@@ -75,7 +76,7 @@ npx ui-kit-skill
 ui-kit-skill [options]
 ```
 
-- **`--target <all|cursor|claude|agents>`** — install for one tool only (default: all).
+- **`--target <all|cursor|claude|codex|copilot|agents>`** — `all` writes `.agents/skills/ui-kit` and links Cursor, Claude Code, and Copilot. `cursor`, `claude`, or `copilot` writes `.agents` when that folder is missing, then links only that tool. `codex` and `agents` write the folder and skip the symlinks. Codex loads `.agents/skills/ui-kit` directly.
 - **`--cwd <path>`** — repository root to install into (default: current directory).
 - **`--force`** — overwrite an existing skill (useful after upgrading the package or re-syncing the team).
 - **`--dry-run`** — show what would be written without changing files.
@@ -111,10 +112,11 @@ pnpm ui-kit:skill
 
 ## Verify
 
-Confirm the skill is on disk:
+Confirm the skill files and the tool links:
 
 ```bash
-ls .cursor/skills/ui-kit
+ls .agents/skills/ui-kit
+ls -l .cursor/skills/ui-kit .claude/skills/ui-kit .github/skills/ui-kit
 ```
 
 Then try a real prompt in your assistant — for example:

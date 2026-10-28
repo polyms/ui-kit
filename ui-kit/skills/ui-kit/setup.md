@@ -37,4 +37,4 @@ export function App() {
 pnpm exec ui-kit-skill
 ```
 
-Copies the skill into `.cursor/skills/ui-kit`, `.claude/skills/ui-kit`, and `.agents/skills/ui-kit`. Re-run after upgrading `@polyms/ui-kit`. Installer options: https://ui.polyms.dev/agent-skill.md.
+Writes the skill to `.agents/skills/ui-kit` (Codex reads this folder). `.cursor/skills/ui-kit`, `.claude/skills/ui-kit`, and `.github/skills/ui-kit` are symlinks for Cursor, Claude Code, and Copilot. Re-run after upgrading `@polyms/ui-kit`. Installer options: https://ui.polyms.dev/agent-skill.md.

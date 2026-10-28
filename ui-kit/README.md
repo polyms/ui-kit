@@ -72,7 +72,7 @@ Install the `@polyms/ui-kit` agent skill into a consumer repository so Cursor, C
 pnpm exec ui-kit-skill
 ```
 
-The installer copies the skill to `.cursor/skills/ui-kit`, `.claude/skills/ui-kit`, and `.agents/skills/ui-kit`. Use `--target cursor`, `--target claude`, or `--target agents` to install only one target.
+The installer writes the skill to `.agents/skills/ui-kit`. Codex reads that folder. `.cursor/skills/ui-kit`, `.claude/skills/ui-kit`, and `.github/skills/ui-kit` are symlinks for Cursor, Claude Code, and Copilot. `--target cursor`, `--target claude`, or `--target copilot` still writes `.agents` when it is missing, then links only that tool. `--target codex` and `--target agents` write the folder and skip the symlinks.
 
 Add a script so the team can re-sync after upgrading the package:
 
