@@ -27,12 +27,13 @@ function DocsTocPopover({ onClose }: { onClose: () => void }) {
 	const { visibleIds, primaryActiveId } = useVisibleHeadings(itemIds)
 
 	return (
-		<div>
+		<div data-testid='docs-toc-popover'>
 			<p className='floating-dock-popover-title'>On this page</p>
 			<ul className='floating-dock-nav-list'>
 				<li>
 					<button
 						className='floating-dock-toc-item'
+						data-testid='docs-toc-popover-top'
 						onClick={() => {
 							scrollToTop()
 							onClose()
@@ -54,6 +55,7 @@ function DocsTocPopover({ onClose }: { onClose: () => void }) {
 									visibleIds.has(headingId) && 'is-visible',
 									headingId === primaryActiveId && 'is-primary'
 								)}
+								data-testid={`docs-toc-popover-${headingId}`}
 								onClick={() => {
 									scrollToHeading(headingId)
 									onClose()

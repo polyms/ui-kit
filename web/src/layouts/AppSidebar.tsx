@@ -62,6 +62,7 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
 		<div
 			data-drawer-only={drawerOnly ? '' : undefined}
 			data-mode={mode}
+			data-testid='app-sidebar'
 			id='app-sidebar'
 			onClick={() => {
 				if ((mode === 'drawer' || mode === 'rail') && isDrawerOpen) {
@@ -82,6 +83,7 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
 			{mode === 'full' && (isShowToggleSidebar || !isFullSidebarOpen) && (
 				<Icon
 					className={clsx('sidebar-toggle-icon link link-light')}
+					data-testid='sidebar-collapse-toggle'
 					icon={CircleArrowLeftDoubleIcon}
 					onClick={event => {
 						event.stopPropagation()
@@ -140,10 +142,12 @@ function FullNav({
 				<Field>
 					<Icon
 						className='icon-start'
+						data-testid='docs-search-clear'
 						icon={search ? SearchRemoveIcon : SearchList02Icon}
 						onClick={() => setSearch('')}
 					/>
 					<Field.Control
+						data-testid='docs-search'
 						onChange={e => setSearch(e.target.value)}
 						placeholder='Find components...'
 						rounded
@@ -152,10 +156,10 @@ function FullNav({
 				</Field>
 			</div>
 
-			<nav className='space-y-2 overflow-y-auto px-4 pb-4'>
+			<nav className='space-y-2 overflow-y-auto px-4 pb-4' data-testid='docs-navigation'>
 				{sections.map(section => (
 					<Collapsible defaultOpen key={section.key}>
-						<Collapsible.Trigger className='nav-item'>
+						<Collapsible.Trigger className='nav-item' data-testid={`docs-section-${slug(section.key)}`}>
 							<Icon className={clsx('size-4', section.colorClass)} icon={section.icon} />
 							{section.label}
 							<Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
@@ -166,6 +170,7 @@ function FullNav({
 									<div key={item.path}>
 										<button
 											className={clsx('nav-item', activePath === item.path && 'active')}
+											data-testid={`docs-nav-${slug(item.path)}`}
 											onClick={() => onSelect(item.path)}
 											type='button'
 										>
@@ -185,18 +190,18 @@ function FullNav({
 
 				{showExamplesNav && (
 					<Collapsible defaultOpen>
-						<Collapsible.Trigger className='nav-item'>
+						<Collapsible.Trigger className='nav-item' data-testid='docs-section-examples'>
 							<Icon className='size-4 text-neutral-400' icon={examplesIcon} />
 							Examples
 							<Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
 						</Collapsible.Trigger>
 						<Collapsible.Panel className='nav-panel'>
 							<div className='nav-panel-content'>
-								<Link className='nav-item' to='/demo'>
+								<Link className='nav-item' data-testid='docs-nav-demo' to='/demo'>
 									<Icon className='size-4 text-neutral-400' icon={GoogleDocIcon} />
 									Page Demo
 								</Link>
-								<Link className='nav-item' to='/forms'>
+								<Link className='nav-item' data-testid='docs-nav-forms' to='/forms'>
 									<Icon className='size-4 text-neutral-400' icon={GoogleDocIcon} />
 									Forms preview
 								</Link>
@@ -218,20 +223,33 @@ function RailNav({ activePath, examplesIcon, onSelect, sections, showExamplesNav
 				))}
 				{showExamplesNav && (
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger aria-label='Examples' className='rail-item' type='button'>
+						<NavigationMenu.Trigger
+							aria-label='Examples'
+							className='rail-item'
+							data-testid='docs-section-examples'
+							type='button'
+						>
 							<Icon className='size-5 text-neutral-400' icon={examplesIcon} />
 						</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
 							<p className='floating-dock-popover-title'>Examples</p>
 							<ul className='floating-dock-nav-list'>
 								<li>
-									<NavigationMenu.Link className='floating-dock-nav-item' render={<Link to='/demo' />}>
+									<NavigationMenu.Link
+										className='floating-dock-nav-item'
+										data-testid='docs-nav-demo'
+										render={<Link to='/demo' />}
+									>
 										<Icon className='size-4 shrink-0 text-neutral-400' icon={GoogleDocIcon} />
 										Page Demo
 									</NavigationMenu.Link>
 								</li>
 								<li>
-									<NavigationMenu.Link className='floating-dock-nav-item' render={<Link to='/forms' />}>
+									<NavigationMenu.Link
+										className='floating-dock-nav-item'
+										data-testid='docs-nav-forms'
+										render={<Link to='/forms' />}
+									>
 										<Icon className='size-4 shrink-0 text-neutral-400' icon={GoogleDocIcon} />
 										Forms preview
 									</NavigationMenu.Link>
@@ -263,6 +281,7 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
 			<NavigationMenu.Trigger
 				aria-label={section.label}
 				className={clsx('rail-item', isActive && 'active')}
+				data-testid={`docs-section-${slug(section.key)}`}
 				type='button'
 			>
 				<Icon className={clsx('size-5', section.colorClass)} icon={section.icon} />
@@ -274,6 +293,7 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
 						<li key={item.path}>
 							<NavigationMenu.Link
 								className={clsx('floating-dock-nav-item', activePath === item.path && 'is-active')}
+								data-testid={`docs-nav-${slug(item.path)}`}
 								onClick={() => onSelect(item.path)}
 								render={<button type='button' />}
 							>

@@ -17,7 +17,10 @@ export default function APIReference() {
 	)
 
 	return (
-		<div className='api-reference card mt-4'>
+		<div
+			className='api-reference card mt-4'
+			data-testid={`api-reference-${activePath.replace(/[^a-z0-9]+/gi, '-')}`}
+		>
 			<Accordion className='accordion' multiple>
 				<Accordion.Item className='accordion-item border-solid bg-surface' disabled value='_header'>
 					<Accordion.Header className='accordion-header font-semibold' render={<div />}>
@@ -45,7 +48,12 @@ export default function APIReference() {
 
 					// Render prop item
 					return (
-						<Accordion.Item className='accordion-item' key={`item-${idx}`} value={prop.name}>
+						<Accordion.Item
+							className='accordion-item'
+							data-testid={`api-reference-prop-${prop.name.replace(/[^a-z0-9]+/gi, '-')}`}
+							key={`item-${idx}`}
+							value={prop.name}
+						>
 							<Accordion.Header className='accordion-header' render={<div />}>
 								<Accordion.Trigger className='accordion-trigger'>
 									<HugeiconsIcon className='accordion-icon' icon={PlusSignIcon} size={16} strokeWidth={2} />

@@ -13,6 +13,7 @@ export function ThemeToggle() {
 	return (
 		<Button
 			aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+			data-testid='theme-toggle'
 			icon
 			onClick={toggleTheme}
 			outlined

@@ -86,7 +86,7 @@ import multipleCode from './-views/accordion/AccordionMultiple.tsx?raw'
 
 Expand and collapse sections with **`Accordion`**, **`Accordion.Item`**, **`Header`**, **`Trigger`**, and **`Panel`**. Import **`@polyms/ui-kit`** styles so motion and layout apply automatically. Override or extend any part with **`className`** as usual.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-accordion-default'>
   <Story />
 </CodePreview>
 
@@ -115,7 +115,7 @@ const accordion = (
 
 Compose **`Header`**, **`Trigger`**, and **`Panel`** yourself when you need custom trigger content, icons, or non-heading headers.
 
-<CodePreview code={composedCode}>
+<CodePreview code={composedCode} testId='docs-preview-accordion-composed'>
   <ComposedStory />
 </CodePreview>
 
@@ -140,7 +140,7 @@ Default **`className`** shells are already merged on each part; add utilities on
 
 Pass **`multiple`** on the root so more than one panel can stay open. **`defaultValue`** and controlled **`value`** are arrays of item **`value`** strings.
 
-<CodePreview code={multipleCode}>
+<CodePreview code={multipleCode} testId='docs-preview-accordion-multiple'>
   <MultipleStory />
 </CodePreview>
 

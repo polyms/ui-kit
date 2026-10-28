@@ -497,6 +497,7 @@ export const Header = () => {
 				/>
 				<Field.Control
 					className='w-full max-w-full min-w-0 sm:max-w-xs md:max-w-sm'
+					data-testid='demo-header-search'
 					onChange={e => setSearch(e.target.value)}
 					placeholder='Search...'
 					rounded
@@ -510,12 +511,19 @@ export const Header = () => {
 						<span className='welcome min-w-0 truncate text-sm'>
 							Welcome, <b>{user.name}</b>!
 						</span>
-						<Button onClick={onLogout} outlined rounded size='lg' variant='light'>
+						<Button
+							data-testid='demo-header-logout'
+							onClick={onLogout}
+							outlined
+							rounded
+							size='lg'
+							variant='light'
+						>
 							Log out
 						</Button>
 					</>
 				) : (
-					<Button onClick={onLogin} rounded size='lg' variant='primary'>
+					<Button data-testid='demo-header-login' onClick={onLogin} rounded size='lg' variant='primary'>
 						Log in
 					</Button>
 				)}

@@ -94,7 +94,7 @@ import invalidCode from './-views/field/FieldInvalidDemo.tsx?raw'
 
 A flexible form field wrapper that combines labels, inputs, descriptions, and validation feedback into a cohesive component. Use it to collect user input such as text, email, passwords, or search queries with proper accessibility and visual hierarchy.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-field-default'>
   <Story />
 </CodePreview>
 
@@ -173,7 +173,7 @@ Fields come in 6 different sizes to match various UI contexts. The default size 
 
 Pass **`disabled`** or **`readOnly`** on **`Field.Control`**. Disabled inputs block interaction and use reduced opacity; read-only inputs keep the value readable with a muted background and suppress hover border and focus ring styling.
 
-<CodePreview code={statesCode}>
+<CodePreview code={statesCode} testId='docs-preview-field-states'>
   <States />
 </CodePreview>
 
@@ -193,7 +193,7 @@ const emailField = (
 )
 ```
 
-<CodePreview code={invalidCode}>
+<CodePreview code={invalidCode} testId='docs-preview-field-invalid'>
   <Invalid />
 </CodePreview>
 
@@ -227,7 +227,7 @@ const fieldFloating = (
 )
 ```
 
-<CodePreview code={floatingCode}>
+<CodePreview code={floatingCode} testId='docs-preview-field-floating'>
   <Floating />
 </CodePreview>
 

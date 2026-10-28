@@ -45,6 +45,7 @@ function DockPopoverAction({
 			<Popover.Trigger
 				aria-label={label}
 				className={clsx('floating-dock-item', open && 'is-active')}
+				data-testid={`docs-action-${id}`}
 				type='button'
 			>
 				{icon}
@@ -58,7 +59,7 @@ function DockPopoverAction({
 
 export function FloatingDock({ actions, 'aria-label': ariaLabel = 'Quick navigation' }: FloatingDockProps) {
 	return (
-		<div aria-label={ariaLabel} className='floating-dock' role='toolbar'>
+		<div aria-label={ariaLabel} className='floating-dock' data-testid='docs-quick-actions' role='toolbar'>
 			{actions.map(action => {
 				if (action.type === 'divider') {
 					return <span aria-hidden className='floating-dock-divider' key={action.id} />
@@ -79,6 +80,7 @@ export function FloatingDock({ actions, 'aria-label': ariaLabel = 'Quick navigat
 					<button
 						aria-label={action.label}
 						className={clsx('floating-dock-item', action.active && 'is-active')}
+						data-testid={`docs-action-${action.id}`}
 						key={action.id}
 						onClick={action.onClick}
 						type='button'

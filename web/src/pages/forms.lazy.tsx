@@ -85,6 +85,7 @@ function LoginFormCase() {
 	return (
 		<form
 			className='mx-auto flex w-full max-w-sm flex-col gap-4'
+			data-testid='forms-sign-in-form'
 			onSubmit={e => {
 				e.preventDefault()
 			}}
@@ -94,6 +95,7 @@ function LoginFormCase() {
 				<HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
 				<Field.Control
 					autoComplete='email'
+					data-testid='forms-sign-in-email'
 					onChange={e => setEmail(e.target.value)}
 					placeholder='you@company.com'
 					rounded
@@ -105,6 +107,7 @@ function LoginFormCase() {
 				<Field.Label>Password</Field.Label>
 				<Field.Control
 					autoComplete='current-password'
+					data-testid='forms-sign-in-password'
 					onChange={e => setPassword(e.target.value)}
 					placeholder='••••••••'
 					rounded
@@ -114,14 +117,21 @@ function LoginFormCase() {
 				<Field.Description>At least 8 characters, with uppercase and a number.</Field.Description>
 			</Field>
 			<div className='flex items-center justify-between gap-3'>
-				<Checkbox checked={remember} onCheckedChange={setRemember}>
+				<Checkbox checked={remember} data-testid='forms-sign-in-remember' onCheckedChange={setRemember}>
 					Remember me
 				</Checkbox>
 				<a className='link link-primary text-xs' href='#forgot'>
 					Forgot password?
 				</a>
 			</div>
-			<Button className='w-full' disabled={!email || !password} rounded type='submit' variant='primary'>
+			<Button
+				className='w-full'
+				data-testid='forms-sign-in-submit'
+				disabled={!email || !password}
+				rounded
+				type='submit'
+				variant='primary'
+			>
 				Sign in
 			</Button>
 		</form>
@@ -147,6 +157,7 @@ function FilterBarCase() {
 					/>
 				) : null}
 				<Field.Control
+					data-testid='forms-filter-query'
 					onChange={e => setQuery(e.target.value)}
 					placeholder='Name, email, or ID…'
 					rounded
@@ -156,7 +167,7 @@ function FilterBarCase() {
 			<Field className='w-full lg:w-44'>
 				<Field.Label>Role</Field.Label>
 				<Select items={roleItems} onValueChange={setRole} value={role}>
-					<Select.Trigger className='w-full rounded-full' placeholder='Role'>
+					<Select.Trigger className='w-full rounded-full' data-testid='forms-filter-role' placeholder='Role'>
 						{item => item?.label ?? 'Role'}
 					</Select.Trigger>
 					<Select.Content>
@@ -171,7 +182,11 @@ function FilterBarCase() {
 			<Field className='w-full lg:w-48'>
 				<Field.Label>Status</Field.Label>
 				<Select items={statusItems} onValueChange={setStatus} value={status}>
-					<Select.Trigger className='w-full rounded-full' placeholder='Status'>
+					<Select.Trigger
+						className='w-full rounded-full'
+						data-testid='forms-filter-status'
+						placeholder='Status'
+					>
 						{item => item?.label ?? 'Status'}
 					</Select.Trigger>
 					<Select.Content>
@@ -195,6 +210,7 @@ function FilterBarCase() {
 			</Toolbar>
 			<div className='flex shrink-0 gap-2'>
 				<Button
+					data-testid='forms-filter-clear'
 					onClick={() => {
 						setQuery('')
 						setRole('all')
@@ -206,7 +222,7 @@ function FilterBarCase() {
 				>
 					Clear filters
 				</Button>
-				<Button rounded variant='primary'>
+				<Button data-testid='forms-filter-apply' rounded variant='primary'>
 					Apply
 				</Button>
 			</div>
@@ -223,6 +239,7 @@ function CreateWorkspaceCase() {
 	return (
 		<form
 			className='flex flex-col gap-6'
+			data-testid='forms-create-workspace-form'
 			onSubmit={e => {
 				e.preventDefault()
 			}}
@@ -231,6 +248,7 @@ function CreateWorkspaceCase() {
 				<Field required>
 					<Field.Label>Workspace name</Field.Label>
 					<Field.Control
+						data-testid='forms-workspace-name'
 						onChange={e => setName(e.target.value)}
 						placeholder='Acme Corp'
 						rounded
@@ -240,6 +258,7 @@ function CreateWorkspaceCase() {
 				<Field>
 					<Field.Label>Slug URL</Field.Label>
 					<Field.Control
+						data-testid='forms-workspace-slug'
 						onChange={e => setSlug(e.target.value)}
 						placeholder='acme-corp'
 						rounded
@@ -250,7 +269,11 @@ function CreateWorkspaceCase() {
 				<Field>
 					<Field.Label>Plan</Field.Label>
 					<Select items={planItems} onValueChange={setPlan} value={plan}>
-						<Select.Trigger className='w-full rounded-full' placeholder='Select plan'>
+						<Select.Trigger
+							className='w-full rounded-full'
+							data-testid='forms-workspace-plan'
+							placeholder='Select plan'
+						>
 							{item => item?.label ?? 'Select plan'}
 						</Select.Trigger>
 						<Select.Content>
@@ -273,7 +296,7 @@ function CreateWorkspaceCase() {
 			</div>
 			<div className='flex flex-wrap items-center justify-end gap-2 border-t border-neutral-200/80 pt-4 dark:border-line'>
 				<Button rounded>Cancel</Button>
-				<Button rounded type='submit' variant='primary'>
+				<Button data-testid='forms-workspace-submit' rounded type='submit' variant='primary'>
 					Create workspace
 				</Button>
 			</div>
@@ -290,13 +313,14 @@ function ProfileSettingsCase() {
 				<Field.Label>Display name</Field.Label>
 				<HugeiconsIcon className='icon-start' icon={UserIcon} strokeWidth={2} />
 				<Field.Control
+					data-testid='forms-profile-display-name'
 					onChange={e => setDisplayName(e.target.value)}
 					placeholder='Your name'
 					rounded
 					value={displayName}
 				/>
 			</Field>
-			<Button rounded size='lg' variant='primary'>
+			<Button data-testid='forms-profile-save' rounded size='lg' variant='primary'>
 				Save changes
 			</Button>
 		</div>
@@ -312,6 +336,7 @@ function InlineFieldButtonCase() {
 				<Field.Label>Invite by email</Field.Label>
 				<HugeiconsIcon className='icon-start' icon={MailAtSign02Icon} strokeWidth={2} />
 				<Field.Control
+					data-testid='forms-invite-email'
 					onChange={e => setInvite(e.target.value)}
 					placeholder='colleague@company.com'
 					rounded
@@ -319,7 +344,13 @@ function InlineFieldButtonCase() {
 					value={invite}
 				/>
 			</Field>
-			<Button className='sm:self-end' disabled={!invite} rounded variant='primary'>
+			<Button
+				className='sm:self-end'
+				data-testid='forms-invite-submit'
+				disabled={!invite}
+				rounded
+				variant='primary'
+			>
 				Send invite
 			</Button>
 		</div>
@@ -554,6 +585,7 @@ function ModalFooterCase() {
 				<Field.Label>Date & time</Field.Label>
 				<HugeiconsIcon className='icon-start' icon={Calendar03Icon} strokeWidth={2} />
 				<Field.Control
+					data-testid='forms-schedule-datetime'
 					onChange={e => setDate(e.target.value)}
 					placeholder='Pick a date…'
 					rounded
@@ -563,7 +595,7 @@ function ModalFooterCase() {
 			</Field>
 			<div className='mt-6 flex flex-wrap justify-end gap-2'>
 				<Button rounded>Cancel</Button>
-				<Button disabled={!date} rounded variant='primary'>
+				<Button data-testid='forms-schedule-confirm' disabled={!date} rounded variant='primary'>
 					Confirm
 				</Button>
 			</div>
@@ -573,7 +605,7 @@ function ModalFooterCase() {
 
 function FormsPage() {
 	return (
-		<div className='playground-page flex min-h-0 min-w-0 flex-1 flex-col'>
+		<div className='playground-page flex min-h-0 min-w-0 flex-1 flex-col' data-testid='forms-playground'>
 			<Header />
 
 			<div className='docs-demo-shell relative isolate flex-1 overflow-x-clip bg-body text-fg'>

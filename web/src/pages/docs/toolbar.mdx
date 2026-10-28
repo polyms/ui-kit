@@ -79,7 +79,7 @@ import responsiveCode from './-views/toolbar/ToolbarResponsive.tsx?raw'
 
 A container for grouping a related set of buttons, toggles, links, and inputs. Toolbar provides roving keyboard focus and accessible labelling for dense control clusters.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-toolbar-default'>
   <Story />
 </CodePreview>
 
@@ -184,7 +184,7 @@ const toolbar = (
 
 Pass `orientation='vertical'` to switch keyboard navigation to the up/down keys and stack items vertically. Use a horizontal `Toolbar.Separator` inside a vertical toolbar.
 
-<CodePreview code={verticalCode}>
+<CodePreview code={verticalCode} testId='docs-preview-toolbar-vertical'>
   <VerticalStory />
 </CodePreview>
 
@@ -192,7 +192,7 @@ Pass `orientation='vertical'` to switch keyboard navigation to the up/down keys 
 
 On narrow viewports, wrap a dense toolbar in **`overflow-x-auto`** so groups scroll inside your layout instead of forcing horizontal page scroll. Hide secondary **`Toolbar.Group`** blocks at small breakpoints and expose the same actions through a **`Menu`** trigger composed as **`Toolbar.Button render={<Menu.Trigger />}`** inside the same toolbar — not a separate button outside the chrome.
 
-<CodePreview code={responsiveCode}>
+<CodePreview code={responsiveCode} testId='docs-preview-toolbar-responsive'>
   <ResponsiveStory />
 </CodePreview>
 

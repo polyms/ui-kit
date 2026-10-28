@@ -24,7 +24,10 @@ function MdxLayout({ children }: { children: React.ReactNode }) {
 	const metadata: PageMetadata | undefined = metadataByRoute[activePath]
 
 	return (
-		<div className='docs-page flex min-w-0 flex-row px-4 pt-6 pb-8 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0'>
+		<div
+			className='docs-page flex min-w-0 flex-row px-4 pt-6 pb-8 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0'
+			data-testid={`docs-page-${activePath.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'home'}`}
+		>
 			<div className='docs min-w-0 flex-1 xl:pe-6'>
 				{/* {metadata?.type && (
             <span className='mb-4 inline-block font-semibold text-neutral-500 text-xs uppercase tracking-wide'>

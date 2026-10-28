@@ -63,7 +63,7 @@ import programmaticCode from './-views/offcanvas/OffcanvasProgrammatic.tsx?raw'
 
 Offcanvas panels slide in from the edge of the viewport to display supplementary content, navigation menus, or settings. They provide a focused workspace without leaving the current page context.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-offcanvas-default'>
   <Story />
 </CodePreview>
 
@@ -264,7 +264,7 @@ function NotificationsButton() {
 
 **Animation:** **`closeOffcanvas`** sets **`open: false`** first, then removes the entry after **300ms** so exit transitions can finish.
 
-<CodePreview code={programmaticCode}>
+<CodePreview code={programmaticCode} testId='docs-preview-offcanvas-programmatic'>
   <Programmatic />
 </CodePreview>
 

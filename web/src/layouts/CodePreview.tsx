@@ -2,7 +2,17 @@ import { Tabs } from '@polyms/ui-kit'
 import { useEffect, useState } from 'react'
 import { codeToHtml } from 'shiki'
 
-export function CodePreview({ code, children }: { code: string; children: React.ReactNode }) {
+// ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
+
+export function CodePreview({
+	code,
+	children,
+	testId,
+}: {
+	code: string
+	children: React.ReactNode
+	testId: string
+}) {
 	const [html, setHtml] = useState('')
 
 	useEffect(() => {
@@ -15,9 +25,13 @@ export function CodePreview({ code, children }: { code: string; children: React.
 	}, [code])
 
 	return (
-		<Tabs className='mt-4 w-full overflow-clip rounded-xl border border-line' defaultValue='preview'>
+		<Tabs
+			className='mt-4 w-full overflow-clip rounded-xl border border-line'
+			data-testid={testId}
+			defaultValue='preview'
+		>
 			<Tabs.List className='bg-surface px-8'>
-				<Tabs.Tab value='preview'>
+				<Tabs.Tab data-testid={`${testId}-preview-tab`} value='preview'>
 					<svg
 						className='text-primary-700/70 me-1'
 						fill='none'
@@ -58,7 +72,7 @@ export function CodePreview({ code, children }: { code: string; children: React.
 					</svg>
 					Preview
 				</Tabs.Tab>
-				<Tabs.Tab value='code'>
+				<Tabs.Tab data-testid={`${testId}-code-tab`} value='code'>
 					<svg
 						className='text-primary-700/70 me-1'
 						fill='none'
@@ -84,12 +98,13 @@ export function CodePreview({ code, children }: { code: string; children: React.
 					Code
 				</Tabs.Tab>
 			</Tabs.List>
-			<Tabs.Panel className='flex h-96 flex-col' value='preview'>
+			<Tabs.Panel className='flex h-96 flex-col' data-testid={`${testId}-preview`} value='preview'>
 				{children}
 			</Tabs.Panel>
 			<Tabs.Panel
 				className='h-96 overflow-auto p-0'
 				dangerouslySetInnerHTML={{ __html: html }}
+				data-testid={`${testId}-code`}
 				value='code'
 			/>
 		</Tabs>

@@ -36,7 +36,7 @@ type SectionProps = {
 
 function RouteComponent() {
 	return (
-		<main className='landing relative isolate overflow-x-clip'>
+		<main className='landing relative isolate overflow-x-clip' data-testid='home-page'>
 			<BackgroundDecor />
 			<LandingNav />
 			<HeroSection />
@@ -81,16 +81,22 @@ function LandingNav() {
 				</Link>
 
 				<nav className='hidden items-center gap-1 md:flex'>
-					<Link className='home-nav-link' to='/design-system'>
+					<Link className='home-nav-link' data-testid='home-nav-docs' to='/design-system'>
 						Docs
 					</Link>
-					<Link className='home-nav-link' to='/typography'>
+					<Link className='home-nav-link' data-testid='home-nav-typography' to='/typography'>
 						Typography
 					</Link>
 				</nav>
 
 				<div className='ms-auto flex items-center gap-2'>
-					<Button render={<Link to='/design-system' />} rounded size='sm' variant='dark'>
+					<Button
+						data-testid='home-get-started'
+						render={<Link to='/design-system' />}
+						rounded
+						size='sm'
+						variant='dark'
+					>
 						Get started
 						<ArrowRightIcon className='size-3.5' />
 					</Button>
@@ -117,7 +123,13 @@ function HeroSection() {
 							<span className='home-hero-em'>Tailwind CSS</span>.
 						</p>
 						<div className='home-hero-actions'>
-							<Button render={<Link to='/design-system' />} rounded size='lg' variant='dark'>
+							<Button
+								data-testid='home-browse-components'
+								render={<Link to='/design-system' />}
+								rounded
+								size='lg'
+								variant='dark'
+							>
 								Browse components
 								<ArrowRightIcon className='size-4' />
 							</Button>
@@ -214,6 +226,7 @@ function ShowcaseCard({
 				<Link
 					aria-label={`Open ${label} docs`}
 					className='link link-dark inline-flex items-center gap-1 text-xs'
+					data-testid={`home-showcase-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
 					to={to}
 				>
 					Open

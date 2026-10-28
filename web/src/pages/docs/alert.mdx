@@ -34,7 +34,7 @@ import Variants from './-views/alert/AlertVariants.tsx'
 
 Provide contextual feedback messages for typical user actions with a handful of available and flexible alert messages. Use alerts to communicate important information, warnings, errors, or success states to users.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-alert-default'>
   <Story />
 </CodePreview>
 
@@ -67,7 +67,7 @@ const alerts = (
 
 Pass **`badge`** with a string, number, or any **`ReactNode`** to show extra context in the alert’s badge slot (after the body, before an optional dismiss control). It works together with **`onDismiss`** when you need both.
 
-<CodePreview code={badgeCode}>
+<CodePreview code={badgeCode} testId='docs-preview-alert-badge'>
   <BadgeStory />
 </CodePreview>
 

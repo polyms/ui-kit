@@ -154,6 +154,7 @@ function SemanticColor({
 			<input
 				aria-label={label}
 				className='size-8 shrink-0 cursor-pointer rounded-md border border-line bg-input p-0.5'
+				data-testid={`theme-color-${mode}-${token}`}
 				onChange={event => apply(event.target.value)}
 				type='color'
 				value={normalizeHex(draft) ?? applied}
@@ -161,6 +162,7 @@ function SemanticColor({
 			<input
 				aria-label={`${label} hex`}
 				className='h-8 w-full min-w-0 rounded-md border border-line bg-input px-2 font-mono text-xs text-fg'
+				data-testid={`theme-color-hex-${mode}-${token}`}
 				onBlur={() => setDraft(applied)}
 				onChange={event => apply(event.target.value)}
 				spellCheck={false}
@@ -264,7 +266,7 @@ function PaletteField({ palettes, role }: { palettes: BrandPalettes; role: Brand
 				}}
 				value={palettes[role]}
 			>
-				<Select.Trigger className='w-full' placeholder={label}>
+				<Select.Trigger className='w-full' data-testid={`theme-palette-${role}`} placeholder={label}>
 					{item => item?.label ?? label}
 				</Select.Trigger>
 				<Select.Content>
@@ -385,6 +387,7 @@ function PrimaryStepControl({
 			<input
 				aria-label={label}
 				className='size-8 shrink-0 cursor-pointer rounded-md border border-line bg-input p-0.5'
+				data-testid={`theme-ramp-color-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
 				onChange={event => apply(event.target.value)}
 				type='color'
 				value={color}
@@ -392,6 +395,7 @@ function PrimaryStepControl({
 			<input
 				aria-label={`${label} hex`}
 				className='h-8 min-w-0 flex-1 rounded-md border border-line bg-input px-2 font-mono text-xs text-fg'
+				data-testid={`theme-ramp-hex-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
 				onBlur={() => setDraft(hex)}
 				onChange={event => apply(event.target.value)}
 				spellCheck={false}
@@ -438,7 +442,11 @@ function PrimaryField({ palettes }: { palettes: BrandPalettes }) {
 				}}
 				value={custom ? null : palettes.primary}
 			>
-				<Select.Trigger className='w-full' placeholder={custom ? 'Custom' : 'Primary'}>
+				<Select.Trigger
+					className='w-full'
+					data-testid='theme-palette-primary'
+					placeholder={custom ? 'Custom' : 'Primary'}
+				>
 					{item => item?.label ?? 'Custom'}
 				</Select.Trigger>
 				<Select.Content>
@@ -508,7 +516,7 @@ export function ThemeConfigOffcanvas() {
 
 	return (
 		<Offcanvas onOpenChange={setOpen} open={open} swipeDirection='right'>
-			<Offcanvas.Content closeButton size='xl'>
+			<Offcanvas.Content closeButton data-testid='theme-config-panel' size='xl'>
 				<Offcanvas.Header>
 					<Offcanvas.Title>Theme</Offcanvas.Title>
 				</Offcanvas.Header>
@@ -522,6 +530,7 @@ export function ThemeConfigOffcanvas() {
 							<Button
 								active={!isDark}
 								aria-pressed={!isDark}
+								data-testid='theme-mode-light'
 								onClick={() => setTheme('light')}
 								size='sm'
 								variant='light'
@@ -532,6 +541,7 @@ export function ThemeConfigOffcanvas() {
 							<Button
 								active={isDark}
 								aria-pressed={isDark}
+								data-testid='theme-mode-dark'
 								onClick={() => setTheme('dark')}
 								size='sm'
 								variant='light'
@@ -554,6 +564,7 @@ export function ThemeConfigOffcanvas() {
 
 					<div className='flex items-center gap-2'>
 						<Button
+							data-testid='theme-reset'
 							disabled={isDefaultBrand(palettes, primaryRamp, semantics, primaryDarkRamp)}
 							onClick={reset}
 							outlined
@@ -562,7 +573,7 @@ export function ThemeConfigOffcanvas() {
 						>
 							Reset
 						</Button>
-						<Button onClick={copyTheme} size='sm' variant='primary'>
+						<Button data-testid='theme-copy' onClick={copyTheme} size='sm' variant='primary'>
 							{copied ? 'Copied' : 'Copy theme'}
 						</Button>
 					</div>

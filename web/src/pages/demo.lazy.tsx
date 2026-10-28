@@ -59,7 +59,7 @@ const offcanvasSizes: OffcanvasSizeSpec[] = [
 
 function Page() {
 	return (
-		<div className='playground-page flex min-h-0 min-w-0 flex-1 flex-col'>
+		<div className='playground-page flex min-h-0 min-w-0 flex-1 flex-col' data-testid='demo-playground'>
 			<Header />
 
 			<div className='docs-demo-shell relative isolate flex-1 overflow-x-clip bg-body text-fg'>
@@ -183,6 +183,7 @@ function Page() {
 							{offcanvasSizes.map(({ size, width, height }) => (
 								<Offcanvas key={size} swipeDirection='right'>
 									<Offcanvas.Trigger
+										data-testid={`demo-offcanvas-trigger-${size}`}
 										render={<Button className='uppercase' outlined rounded variant='light' />}
 									>
 										{size}

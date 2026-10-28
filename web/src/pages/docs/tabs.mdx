@@ -44,7 +44,7 @@ import settingsCode from './-views/tabs/TabsSettingsVertical.tsx?raw'
 
 Organize and navigate between related content groups without leaving the page. Tabs provide a clean interface for switching between different views while maintaining context and reducing cognitive load.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-tabs-default'>
   <Story />
 </CodePreview>
 
@@ -90,7 +90,7 @@ Tab labels do not wrap by default. When you have several peer tabs on a phone-wi
 
 ### Scrollable tab list
 
-<CodePreview code={scrollCode}>
+<CodePreview code={scrollCode} testId='docs-preview-tabs-scroll'>
   <ScrollStory />
 </CodePreview>
 
@@ -115,7 +115,7 @@ const filterTabs = (
 
 ### Vertical settings rail
 
-<CodePreview code={settingsCode}>
+<CodePreview code={settingsCode} testId='docs-preview-tabs-settings'>
   <SettingsStory />
 </CodePreview>
 

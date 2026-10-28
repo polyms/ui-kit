@@ -65,7 +65,7 @@ import groupCode from './-views/toggle/ToggleGroupStory.tsx?raw'
 
 A two-state button that can be on or off. Use it for binary settings where the control itself reflects the state — like bold, mute, or favorite — and pair it with an icon for a compact, immediate-feedback action.
 
-<CodePreview code={code}>
+<CodePreview code={code} testId='docs-preview-toggle-default'>
   <Story />
 </CodePreview>
 
@@ -112,7 +112,7 @@ export default function ControlledToggle() {
 
 Wrap related toggles in a `ToggleGroup` to share state. By default the group is exclusive (single selection, like a segmented control); pass `multiple` to allow several toggles to be pressed at once.
 
-<CodePreview code={groupCode}>
+<CodePreview code={groupCode} testId='docs-preview-toggle-group'>
   <GroupStory />
 </CodePreview>
 

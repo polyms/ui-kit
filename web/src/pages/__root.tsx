@@ -14,7 +14,7 @@ import { FaviconFit } from '../assets/FaviconFit'
 const Name = () => {
 	return (
 		<div id='app-name'>
-			<Link aria-label='Polyms home' className='flex items-center gap-1' to='/'>
+			<Link aria-label='Polyms home' className='flex items-center gap-1' data-testid='brand-home-link' to='/'>
 				<FaviconFit className='h-10 w-auto' />
 				<strong className='text-xl'>olyms</strong>
 			</Link>
@@ -55,9 +55,9 @@ const Root = () => {
 	return (
 		<Toast>
 			<Name />
-			<div id='app-navigation' />
+			<div data-testid='app-navigation' id='app-navigation' />
 			<AppSidebar ref={appSidebarRef} />
-			<main className='docs-outlet'>
+			<main className='docs-outlet' data-testid='docs-route-content'>
 				<Outlet />
 			</main>
 			<DocsFloatingDock sidebarRef={appSidebarRef} variant='docs' />
