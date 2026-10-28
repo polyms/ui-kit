@@ -169,7 +169,12 @@ function FullNav({
 											onClick={() => onSelect(item.path)}
 											type='button'
 										>
-											{item.label}
+											<span>{item.label}</span>
+											{item.isNew && (
+												<span className='badge badge-primary ms-auto rounded-full px-1.5 py-0.5 text-2xs font-bold tracking-wide'>
+													NEW
+												</span>
+											)}
 										</button>
 									</div>
 								))}
@@ -272,7 +277,12 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
 								onClick={() => onSelect(item.path)}
 								render={<button type='button' />}
 							>
-								{item.label}
+								<span>{item.label}</span>
+								{item.isNew && (
+									<span className='badge badge-primary ms-auto rounded-full px-1.5 py-0.5 text-2xs font-bold tracking-wide'>
+										NEW
+									</span>
+								)}
 							</NavigationMenu.Link>
 						</li>
 					))}

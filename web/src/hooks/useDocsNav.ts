@@ -18,7 +18,7 @@ export type DocsNavSection = {
 	label: string
 	icon: typeof GoogleDocIcon
 	colorClass: string
-	items: { label: string; path: string }[]
+	items: { label: string; path: string; isNew?: boolean }[]
 }
 
 // ── Constants ────────────────────────────────────────────────────────────────────────────────────────────
@@ -65,7 +65,7 @@ export function useDocsNav(search = '') {
 				nav[section] = []
 			}
 
-			nav[section].push({ label, path })
+			nav[section].push({ label, path, isNew: page.metadata.new === true })
 		}
 
 		return Object.entries(nav)
