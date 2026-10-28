@@ -10,6 +10,10 @@ Audience: developers **using** `@polyms/ui-kit` in their app. Not maintainers, n
 
 Also follow [docs-mdx-heading-style.mdc](docs-mdx-heading-style.mdc) (no inline code in headings).
 
+## Language
+
+The public docs site and its live demos use **English**, matching existing pages. Keep each page and demo in one language; do not insert Vietnamese copy into an English page. Vietnamese applies to repository planning docs listed in `docs/agents/language.md`.
+
 ## Voice
 
 Write **what to do** and **why it helps the product UI** — not how the library is built.
@@ -70,4 +74,4 @@ Single-line: `const saveButton = <Button variant='primary'>Save</Button>`. Multi
 
 ## `-views/`
 
-Demo components under `web/src/pages/docs/-views/` are site internals. Do not document `-views/` paths or plugin wiring in prose meant for package users.
+Before creating a demo, inspect the nearest existing `-views/` example and follow its composition, layout, imports, and copy language. Demo components under `web/src/pages/docs/-views/` are site internals. Do not document `-views/` paths or plugin wiring in prose meant for package users.

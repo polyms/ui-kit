@@ -8,7 +8,7 @@ File **nguồn chính** cho Cursor, Claude, các IDE tích hợp AI, và bất k
 
 ### Documentation language
 
-Written docs (`CONTEXT.md`, ADRs, PRDs, design specs, `docs/agents/*.md`) are in **Vietnamese**. Chat tone still matches whichever language the user writes in.
+Written docs (`CONTEXT.md`, ADRs, PRDs, design specs, `docs/agents/*.md`) are in **Vietnamese**. Public end-user docs under `web/src/pages/` and their live demos stay in **English**, matching the site. Chat tone still matches whichever language the user writes in.
 
 See `docs/agents/language.md`.
 

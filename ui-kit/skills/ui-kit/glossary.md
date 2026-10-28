@@ -13,20 +13,20 @@ A **root** export with **dot-slot children** that must stay wired together — e
 
 - Import only from the barrel; never invent flat names (`ModalHeader`, `FieldInput`).
 - Slots carry a11y, focus, and animation — do not replace with styled `<div>`s.
-- Full slot lists: [components.md#public-surface](components.md#public-surface).
+- Full slot lists: [design system reference](https://ui.polyms.dev/design-system.md).
 
 ## useRender / render prop
 
 Base UI pattern for polymorphic primitives. `render={<Button … />}` on a trigger/close slot renders that element as the interactive node while keeping library wiring.
 
-- Extend wrappers with `useRender.ComponentProps<'tag'>` — [components.md#extending-primitives-with-userender](components.md#extending-primitives-with-userender).
-- Compose triggers: [button.md#compose-button-through-render](button.md#compose-button-through-render).
+- Extend wrappers with `useRender.ComponentProps<'tag'>` — [components.md](components.md).
+- Compose triggers: [button.md](button.md).
 
 ## mergeProps
 
 Base UI helper re-exported from `@polyms/ui-kit` to combine prop objects when wrapping primitives: event handlers chain, `className` concatenates, `style` shallow-merges. **`ref` is not merged** — use `useRender({ ref: [internalRef, ref] })` instead.
 
-- Pair with `useRender` when merging defaults + consumer props — [components.md#extending-primitives-with-userender](components.md#extending-primitives-with-userender).
+- Pair with `useRender` when merging defaults + consumer props — [components.md](components.md).
 
 ## Ghost style
 

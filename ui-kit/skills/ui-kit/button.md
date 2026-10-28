@@ -6,6 +6,8 @@ description: >-
 
 # Button
 
+## Type
+
 Read https://ui.polyms.dev/docs/button.md for props, sizes, and examples. Apply these rules on top of that page.
 
 - Omit `type` unless it is `submit` or `reset`. Never write `type='button'`. The component already sets it. When `render` is set, that default is not injected.
@@ -20,3 +22,7 @@ Read https://ui.polyms.dev/docs/button.md for props, sizes, and examples. Apply 
 | Footer `Modal.Close`                                                    | `render={<Button … />}`, omit `variant` (ghost)                                   |
 | Body `Offcanvas.Close`                                                  | `render={<Button … />}` for a labeled dismiss                                     |
 | `Collapsible.Trigger`                                                   | `render={<Button />}` when it should look like a button; omit `variant` for ghost |
+
+## Touch targets
+
+Use at least a 44×44px target for interactive controls. For icon-only buttons, prefer `size='lg'` or `size='xl'` and add `min-h-11 min-w-11` when the rendered control is smaller. Do not shrink library buttons with layout classes.

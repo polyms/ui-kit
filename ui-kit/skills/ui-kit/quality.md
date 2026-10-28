@@ -94,24 +94,24 @@ Use the project’s Tailwind scale consistently — avoid one-off `@media (max-w
 | `lg:`          | 1024px          | Wide tables without horizontal scroll, mega menus    |
 | `xl:` / `2xl:` | 1280px / 1536px | Dashboard max-width, marketing-in-app hero bands     |
 
-**Library note:** `Offcanvas` becomes a **bottom sheet** below **768px** (`max-width: 767px` in package CSS) — do not fight with custom width on small screens; see [modal.md](modal.md#offcanvas).
+**Library note:** `Offcanvas` becomes a **bottom sheet** below **768px** (`max-width: 767px` in package CSS) — do not fight with custom width on small screens; see [Offcanvas API](https://ui.polyms.dev/docs/offcanvas.md).
 
 ### Layout by surface
 
-| Surface         | Mobile-first pattern                                                                                                                                                                             |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Forms**       | One column; `md:grid md:grid-cols-2 md:gap-4` only for independent pairs (city/state). Long flows → `Accordion` sections ([display.md](display.md#accordion)).                                   |
-| **Tables**      | Wrap in `overflow-x-auto`; keep `.table` — intentional horizontal scroll inside the wrapper, not on `<body>`.                                                                                    |
-| **Toolbars**    | `flex flex-wrap gap-2` or scrollable row; icon `Button` → `size='lg'` ([button.md](button.md#touch-targets)). Dense rows → [navigation.md#responsive-toolbar](navigation.md#responsive-toolbar). |
-| **Tabs**        | `overflow-x-auto` + optional `scrollbar-none` on list wrapper; `orientation='vertical'` settings rail at `md:` — [navigation.md#responsive-tabs](navigation.md#responsive-tabs).                 |
-| **Primary nav** | Collapse to `Menu` / `Offcanvas` / drawer; do not cram 8+ top-level items on a 375px row.                                                                                                        |
-| **Filters**     | `Offcanvas` or `Modal` on narrow; inline `Field.Floating` + chips at `md:` when space allows.                                                                                                    |
-| **Modals**      | `scrollable` on `Modal.Content` for long forms; footer actions stack with `flex flex-col-reverse gap-2 sm:flex-row sm:justify-end` when labels are long.                                         |
+| Surface         | Mobile-first pattern                                                                                                                                           |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Forms**       | One column; `md:grid md:grid-cols-2 md:gap-4` only for independent pairs (city/state). Long flows → `Accordion` sections ([display.md](display.md)).           |
+| **Tables**      | Wrap in `overflow-x-auto`; keep `.table` — intentional horizontal scroll inside the wrapper, not on `<body>`.                                                  |
+| **Toolbars**    | `flex flex-wrap gap-2` or scrollable row; icon `Button` → `size='lg' min-h-11 min-w-11` ([button.md](button.md)). Dense rows → [navigation.md](navigation.md). |
+| **Tabs**        | `overflow-x-auto` + optional `scrollbar-none` on list wrapper; `orientation='vertical'` settings rail at `md:` — [navigation.md](navigation.md).               |
+| **Primary nav** | Collapse to `Menu` / `Offcanvas` / drawer; do not cram 8+ top-level items on a 375px row.                                                                      |
+| **Filters**     | `Offcanvas` or `Modal` on narrow; inline `Field.Floating` + chips at `md:` when space allows.                                                                  |
+| **Modals**      | `scrollable` on `Modal.Content` for long forms; footer actions stack with `flex flex-col-reverse gap-2 sm:flex-row sm:justify-end` when labels are long.       |
 
 ### Inputs and touch
 
-- Semantic `type` + `autoComplete` on `Field.Control` — [field.md](field.md#input-types-mobile), [field.md](field.md#autofill-autocomplete).
-- Touch targets ~44×44px — [button.md](button.md#touch-targets).
+- Semantic `type` + `autoComplete` on `Field.Control` — [field.md](field.md).
+- Touch targets ~44×44px — [button.md](button.md).
 - Do not rely on **hover-only** affordances; tap/click must work ([overlays.md](overlays.md) — `Tooltip` supplements, does not replace labels).
 
 ### Anti-patterns
@@ -129,12 +129,12 @@ One screen = one visual system. Do not mix ad-hoc Tailwind with library defaults
 ### Shape (corners)
 
 - Pick **one** radius family per screen: library defaults (`Button`, `Field.Control`, shells) **or** your app wrapper — not both randomly.
-- Prefer **`Button rounded`**, **`Field.Control rounded`**, and component props over one-off `rounded-lg` / `rounded-2xl` / `rounded-xl` on the same flow.
+- Prefer **`Button rounded`**, **`Field.Control rounded`**, and component props over one-off radii. Single-line fields can use pill shape; textareas use `rounded-lg` / `rounded-xl` as described in [field.md](field.md).
 - Do not restyle `Modal.Content`, `Menu.Content`, or `Offcanvas.Content` corner geometry unless documented.
 
 ### Typography (headings)
 
-- Same heading **level** → same utility across the screen (`.h1`–`.h6` from [css-utilities.md](css-utilities.md#typography)).
+- Same heading **level** → same utility across the screen (`.h1`–`.h6` from [css-utilities.md](css-utilities.md)).
 - Do not mix `.h2` on one card and `text-2xl` on another for the same hierarchy.
 - Body copy: readable line length (~65ch) on prose blocks; tables and forms can be full width.
 
@@ -144,7 +144,7 @@ One screen = one visual system. Do not mix ad-hoc Tailwind with library defaults
 
 ## Lists and collections
 
-Do not default to a tall `divide-y` stack of `<div>`s when a library primitive fits. See [css-utilities.md — Lists and collections](css-utilities.md#lists-and-collections).
+Do not default to a tall `divide-y` stack of `<div>`s when a library primitive fits. See the table above and [CSS utilities](css-utilities.md).
 
 | Situation                        | Use                                                            |
 | -------------------------------- | -------------------------------------------------------------- |
@@ -166,8 +166,8 @@ Avoid LLM-default patterns that fight this design system:
 - **No div-based fake UI** — do not simulate a modal, dropdown, or data table with styled `<div>`s when the library provides the real component.
 - **No parallel button/input styles** — use **`Button`** / `Field.*` / `item-*`, not one-off `rounded-lg bg-blue-600 px-4` or hand-written `btn size-xl`.
 - **No invented Button props** — there is no `content` prop; use `size`, `variant`, `rounded`, `outlined`.
-- **No `type='button'` on `<Button>`** — omit `type`. Set it only for `submit` or `reset` ([button.md](button.md#type--omit-the-default)).
-- **No `className='btn …'` on `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close`** — use `render={<Button … />}` (built-in offcanvas icon chrome is library-owned; see [modal.md](modal.md), [button.md](button.md#compose-button-through-render)).
+- **No `type='button'` on `<Button>`** — omit `type`. Set it only for `submit` or `reset` ([button.md](button.md#type)).
+- **No `className='btn …'` on `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close`** — use `render={<Button … />}` (built-in offcanvas icon chrome is library-owned; see [modal.md](modal.md), [button.md](button.md)).
 - **No large Tailwind bundles on library shells** — `Modal.Content`, `Menu.Content`, `Select.Content`, etc. are already styled.
 - **No hand-rolled SVG icons** — use `@hugeicons/react` + `@hugeicons/core-free-icons` (same as docs demos). One icon family per screen.
 - **No arbitrary z-index spam** — use `.z-modal`, `.z-dropdown`, `.z-tooltip`, `.z-toast` from [css-utilities.md](css-utilities.md).
@@ -210,11 +210,12 @@ Live component-library demos should:
 1. Show **complete compound trees** (e.g. `Modal.Header` + `Modal.Body` + `Modal.Footer`, not a bare `Modal.Content`).
 2. Use **interactive state** where the component expects it (`open`, `invalid`, `disabled`, `checked`).
 3. Use **natural field labels** on user-facing forms (see [Field label copy](#field-label-copy)); keep descriptions and feedback concrete, not marketing prose.
-4. Match **import style** of sibling demos (`@polyms/ui-kit` barrel).
-5. Style overlay/menu triggers with **`render={<Button … />}`** — not `className='btn …'` on primitives (see [button.md](button.md#compose-button-through-render)).
-6. **Accordion demos:** plain text in `Accordion.Panel` — no extra `<p>` for padding; do not override core `accordion-*` with unscoped docs CSS.
-7. **Collapsible demos:** custom padding on trigger/panel is OK — unlike `Accordion.Panel`, there is no built-in body wrapper.
-8. **New demos:** `@hugeicons/react` for icons — avoid new inline SVG chevrons in `-views/`.
+4. Inspect a **sibling demo for the same or nearest component pattern** before creating one; match its layout, state, labels, and language. Do not introduce a one-off demo pattern.
+5. Match **import style** of sibling demos (`@polyms/ui-kit` barrel).
+6. Style overlay/menu triggers with **`render={<Button … />}`** — not `className='btn …'` on primitives (see [button.md](button.md)).
+7. **Accordion demos:** plain text in `Accordion.Panel` — no extra `<p>` for padding; do not override core `accordion-*` with unscoped docs CSS.
+8. **Collapsible demos:** custom padding on trigger/panel is OK — unlike `Accordion.Panel`, there is no built-in body wrapper.
+9. **New demos:** `@hugeicons/react` for icons — avoid new inline SVG chevrons in `-views/`.
 
 ## Field Label Copy
 
@@ -299,7 +300,7 @@ Run before shipping UI. If any item fails, fix before delivering.
 - [ ] **Visible focus** — do not remove focus rings (`outline-none` without a replacement); library focus styles stay intact.
 - [ ] Focus order sane in modals, menus, and toolbars.
 - [ ] **One primary CTA** per screen — at most one `Button variant='primary'` (or equivalent) with the same intent; secondary actions use ghost/outlined/light.
-- [ ] **No `type='button'` on `<Button>`** — omit `type`; only `submit` or `reset` ([button.md](button.md#type--omit-the-default)).
+- [ ] **No `type='button'` on `<Button>`** — omit `type`; only `submit` or `reset` ([button.md](button.md#type)).
 
 ### Theme
 
@@ -313,11 +314,10 @@ Run before shipping UI. If any item fails, fix before delivering.
 - [ ] **Mobile-first** — default layout works at ~375px; wider breakpoints add columns, not `max-md:` patches ([Responsive and mobile-first](#responsive-and-mobile-first)).
 - [ ] Page shell uses `min-h-dvh`; content has sensible `max-w-*` and horizontal padding.
 - [ ] **One shape system** — library `rounded` props / defaults; no random `rounded-*` mix on the same screen ([Visual consistency](#visual-consistency)).
-- [ ] **Heading levels** use `.h1`–`.h6` consistently ([css-utilities.md#typography](css-utilities.md#typography)).
+- [ ] **Heading levels** use `.h1`–`.h6` consistently ([css-utilities.md](css-utilities.md)).
 - [ ] Long lists use `.table`, `Tabs`, or `Menu` — not a lazy `divide-y` div stack ([Lists and collections](#lists-and-collections)).
 - [ ] Tables wrapped in `overflow-x-auto` when needed; no unintentional horizontal scroll on `<body>`.
 - [ ] Tables use `.table` utilities when showing tabular data.
-- [ ] **One primary CTA** — no duplicate `variant='primary'` buttons with the same intent ([Accessibility and contrast](#accessibility-and-contrast)).
 
 ### Docs demos (when applicable)
 

@@ -1,9 +1,8 @@
 ---
 name: ui-kit
 description: >-
-  Build UI with @polyms/ui-kit — compound components, semantic theming, CSS utilities, responsive product UI.
-  Entry skill: fetch https://ui.polyms.dev/llms.txt, then the linked markdown for the task.
-  On `<Button>`, omit `type` unless it is `submit` or `reset` — never write `type='button'`.
+  Build and update product UI with @polyms/ui-kit. Use for forms, overlays, docs demos, themes, and responsive screens;
+  dùng khi xây hoặc chỉnh giao diện, form, overlay, docs demo, theme, và bố cục responsive bằng @polyms/ui-kit.
 ---
 
 # @polyms/ui-kit
@@ -52,19 +51,19 @@ Fetch **every** matched document before generating code. Local files below are r
 
 1. Barrel import only — `import { … } from '@polyms/ui-kit'`; trust `index.d.ts` over memory.
 2. `neutral` chrome + semantic tones (`primary`, `danger`, …) — [theming.md](theming.md).
-3. Compound trees intact — no `ModalHeader`-style invented imports ([glossary.md](glossary.md#compound-tree--compound-component)).
+3. Compound trees intact — no `ModalHeader`-style invented imports ([glossary.md](glossary.md)).
 4. `item-*` for ghost hover surfaces ([glossary.md](glossary.md#item--utilities)); library shells are not Tailwind rewrite targets.
 5. `@hugeicons/react` for icons — no hand-rolled SVG paths.
 6. Ship complete UI — [quality.md](quality.md) (copy tells, output completeness, pre-flight).
-7. On `<Button>`, omit `type` unless it is `submit` or `reset`. Never write `type='button'` — the component already sets it ([button.md](button.md)).
+7. Button type follows [button.md](button.md#type) — omit it unless it is `submit` or `reset`.
 
-**Frequent mistakes:** conversational `Field.Label` ([quality.md#field-label-copy](quality.md#field-label-copy)); `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close` via `render={<Button … />}` ([button.md](button.md), [modal.md](modal.md)); footer `Modal.Close` without `variant` (ghost); `autoFocus` on footer CTA when modal has form inputs — use first input instead ([modal.md](modal.md)); no invented `content` prop on `Button`; redundant `type='button'` on `<Button>`.
+**Frequent mistakes:** conversational `Field.Label` ([quality.md#field-label-copy](quality.md#field-label-copy)); `Modal.Trigger` / footer `Modal.Close` / `Offcanvas.Trigger` / body `Offcanvas.Close` via `render={<Button … />}` ([button.md](button.md), [modal.md](modal.md)); footer `Modal.Close` without `variant` (ghost); `autoFocus` on footer CTA when modal has form inputs — use first input instead ([modal.md](modal.md)); no invented `content` prop on `Button`.
 
 ## Workflow
 
-1. Fetch `https://ui.polyms.dev/llms.txt`. Do not guess another host.
-2. Match [routing](#skill-routing) → fetch **every** linked `.md` (form in overlay → `https://ui.polyms.dev/docs/field.md` and `https://ui.polyms.dev/docs/modal.md`). Read the markdown, not the HTML page. Upgrade, breaking change, or a renamed token/utility → fetch `https://ui.polyms.dev/releases.md` before editing theme or class names.
-3. Apply the local rule file for that row, then [pre-flight](quality.md#pre-flight-check) and the topical pre-flight when the local file has one: [field](field.md#pre-flight) · [modal](modal.md#pre-flight) · [redesign](redesign.md#redesign-pre-flight) · [brandkit](brandkit.md#brand-pre-flight).
-4. **Confirm symbols** — open `index.d.ts` and verify every named import exists. Done when you can paste the exact export line for each symbol used.
+1. Fetch `https://ui.polyms.dev/llms.txt`. Do not guess another host. **Done when:** its markdown reading list is loaded.
+2. Match [routing](#skill-routing) → fetch **every** linked `.md` (form in overlay → `https://ui.polyms.dev/docs/field.md` and `https://ui.polyms.dev/docs/modal.md`). If a task also creates or edits `web/src/pages/docs/*.mdx` or `-views/`, always load the **Docs demo** route and its quality reference, even when the main change is a library component. Read the markdown, not the HTML page. Upgrade, breaking change, or a renamed token/utility → fetch `https://ui.polyms.dev/releases.md` before editing theme or class names. **Done when:** every matched document is read, including release notes for upgrade or rename work.
+3. Apply the local rule file for that row, then [pre-flight](quality.md#pre-flight-check) and the topical pre-flight when the local file has one: [field](field.md#pre-flight) · [modal](modal.md#pre-flight) · [redesign](redesign.md#redesign-pre-flight) · [brandkit](brandkit.md#brand-pre-flight). **Done when:** all applicable checks pass or a specific blocker is recorded.
+4. **Confirm symbols** — open `index.d.ts` and verify every named import exists. **Done when:** the exact export line is confirmed for every symbol used.
 
 App shell (styles, Toast, overlay containers, `zustand`): [setup.md](setup.md) after https://ui.polyms.dev/installation.md.

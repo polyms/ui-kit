@@ -4,7 +4,9 @@ The language skills write into persistent repo docs.
 
 ## Scope
 
-**Applies to:** `CONTEXT.md`, `docs/adr/`, PRDs, `docs/design/*.md`, `docs/agents/*.md`, and other files that outlive the conversation.
+**Applies to:** `CONTEXT.md`, `docs/adr/`, PRDs, `docs/design/*.md`, `docs/agents/*.md`, and other repository planning docs that outlive the conversation.
+
+**Public docs site exception:** `web/src/pages/**/*.mdx` and their `web/src/pages/**/-views/` demos use English, matching the end-user site. Follow `.cursor/rules/docs-mdx-end-user-voice.mdc` for those files.
 
 **Does not apply to:** chat replies — those match whichever language the user is typing in for that session. Code, identifiers, file paths, commit messages, and technical vocabulary (seam, ADR, PRD, sortOrder, …) stay in English regardless of this setting.
 
@@ -24,6 +26,6 @@ Skills that write persistent docs read this file and write in the confirmed lang
 
 ## Rules
 
-- One language per repo — do not mix within a single artifact
-- Headings, prose, and comments in Vietnamese; code and identifiers in English
-- If a user writes in a different language than this file specifies, still write the artifact in Vietnamese — flag the mismatch rather than silently switching
+- One language per artifact — do not mix languages within a single document or demo
+- For documents within this file's scope, write headings, prose, and comments in Vietnamese; keep code and identifiers in English
+- The user's chat language does not change the artifact language: use Vietnamese for repository planning docs and English for the public docs site exception above

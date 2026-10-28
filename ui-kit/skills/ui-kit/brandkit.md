@@ -7,11 +7,7 @@ disable-model-invocation: true
 
 # Brand Kit → @polyms/ui-kit
 
-A **token map + application rules** so every screen reads as one product. For day-to-day color rules: [theming.md](theming.md). For migrating existing screens: [redesign.md](redesign.md).
-
-## Core principle
-
-A brand kit here is not decoration. It is a **token map + application rules** so every screen reads as one product.
+Use this token map and its application rules so every screen reads as one product. For day-to-day color rules: [theming.md](theming.md). For migrating existing screens: [redesign.md](redesign.md).
 
 Every brand pass must answer:
 

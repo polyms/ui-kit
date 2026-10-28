@@ -20,3 +20,14 @@ When no React component exists, use the class page linked from https://ui.polyms
 | Stacking          | https://ui.polyms.dev/docs/z-index.md  | `.z-modal`, `.z-toast`, and the other named layers.                                      |
 
 If `Button`, `Menu`, `Toolbar`, or another component fits, use the component instead of the class.
+
+## CSS-Only Classes
+
+The `table-striped`, `table-striped-columns`, `table-active`, and `table-hover` modifiers use surface tokens.
+Do not add white backgrounds or separate dark-mode overrides for them.
+
+## Interactive State Utilities
+
+The `item-*` classes stay transparent at rest and use a 10% tint on hover and 15% when active.
+In `.dark`, intent variants use lighter steps from the same brand ramp; `item-light` uses `--surface`,
+and `item-dark` pairs a `--fg` background with `--body` text. Do not force white text on every variant.
