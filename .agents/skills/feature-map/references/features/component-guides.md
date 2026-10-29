@@ -11,7 +11,7 @@ Người đọc mở một trang component để xem cách dùng, thử demo tr�
 
 ## How to get to it (user POV)
 
-Mở một trang component, ví dụ `/docs/button`. Tương tác với preview, chuyển sang tab Code, rồi dùng TOC để đến phần Usage hoặc API Reference. Trên màn hình rộng TOC nằm cạnh nội dung; trên màn hình hẹp TOC mở từ floating dock.
+Mở một trang component, ví dụ `/docs/button`. Chip và ChipInput đi cùng lối tại `/docs/chip`. Tương tác với preview, chuyển sang tab Code, rồi dùng TOC để đến phần Usage hoặc API Reference. Trên màn hình rộng TOC nằm cạnh nội dung; trên màn hình hẹp TOC mở từ floating dock.
 
 ## Driving it
 

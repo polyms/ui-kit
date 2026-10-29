@@ -125,6 +125,10 @@ apis:
     default: '-'
     values: string
     description: ID applied to the input. Use it to associate a visible label.
+  - name: rounded
+    default: false
+    values: boolean
+    description: Rounds the wrapping shell to rounded-xl (12px), like a textarea, not a pill. Inner chips stay pills.
   - name: className
     default: '-'
     values: string
@@ -207,6 +211,8 @@ const skillsInput = (
 ```
 
 Use **`value`** with **`onValueChange`** for controlled state, or **`defaultValue`** for an uncontrolled field. **`createOnBlur`** adds the remaining text when focus leaves the field; it defaults to `true`.
+
+Pass **`rounded`** to give the shell the same corner radius as a textarea (`rounded-xl`, 12px). Chips inside the field stay pills.
 
 ### Empty state
 

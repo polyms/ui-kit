@@ -22,6 +22,8 @@ export interface ChipInputProps {
 	placeholder?: string
 	label: string
 	id?: string
+	/** Wrapping shell. Same radius as a textarea (`rounded-xl`), not a single-line pill. */
+	rounded?: boolean
 	className?: string
 	disabled?: boolean
 	name?: string
@@ -45,6 +47,7 @@ export function ChipInput({
 	placeholder = '',
 	label,
 	id,
+	rounded = false,
 	className,
 	disabled = false,
 	name,
@@ -296,7 +299,12 @@ export function ChipInput({
 
 	return (
 		<div
-			className={clsx('chip-input', `chip-input-${variant}`, { 'chip-input-disabled': disabled }, className)}
+			className={clsx(
+				'chip-input',
+				`chip-input-${variant}`,
+				{ 'chip-input-disabled': disabled, 'rounded-xl': rounded },
+				className
+			)}
 			ref={containerRef}
 		>
 			{values.map((item, index) => {

@@ -14,8 +14,8 @@ export default function ChipDefault() {
 	}
 
 	return (
-		<div className='m-auto flex flex-col gap-6'>
-			<section className='flex flex-col gap-3'>
+		<div className='m-auto flex flex-col'>
+			<section className='mb-4 flex flex-col gap-2'>
 				<h3 className='text-sm font-semibold'>Standalone chips</h3>
 				<div className='flex flex-wrap items-center gap-2'>
 					{(['primary', 'success', 'info', 'warning', 'danger'] as const).map(variant => (
