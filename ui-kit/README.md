@@ -103,7 +103,7 @@ pnpm exec nx build ui-kit
 Releases version this package together with the docs site (see `nx.json`). Versioning runs a build first, then tags `v{version}` (for example `v1.0.6-alpha.0`); pushing that tag triggers the publish workflow.
 
 ```bash
-pnpm exec nx release version patch --projects=ui-kit
+pnpm release
 ```
 
 ## License

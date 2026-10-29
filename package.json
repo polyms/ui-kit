@@ -10,7 +10,7 @@
 		"build": "nx build ui-kit",
 		"test": "nx test ui-kit",
 		"dev": "nx serve web",
-		"release": "nx release version patch --projects=ui-kit",
+		"release": "nx release version patch",
 		"check": "biome check --write . && prettier -l --write .",
 		"prepare": "lefthook install"
 	},

@@ -88,7 +88,7 @@ pnpm exec nx serve ui-kit     # dev server trực tiếp cho ui-kit (nếu cần
 pnpm build                  # nx build
 pnpm test                   # nx test ui-kit — Vitest
 pnpm check                  # biome check --write . && prettier -l --write .
-pnpm release                # nx release … — project ui-kit (xem nx.json)
+pnpm release                # nx release version patch — ui-kit + web, tag v{version}
 ```
 
 Tương đương: `pnpm exec nx build ui-kit`, `pnpm exec nx build web`, `pnpm exec nx test ui-kit --watch`, `pnpm exec nx test ui-kit -- --coverage`.
