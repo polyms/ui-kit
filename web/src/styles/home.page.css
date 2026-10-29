@@ -1,12 +1,27 @@
 @reference './tailwind.css';
 
+/* Polyms brand orange. Landing only — docs keep the cyan ramp from the kit. */
+html:has(#root.landing) {
+	--color-primary-50: oklch(97% 0.015 60);
+	--color-primary-100: oklch(94% 0.05 58);
+	--color-primary-200: oklch(89% 0.08 55);
+	--color-primary-300: oklch(86% 0.1 55);
+	--color-primary-400: oklch(78% 0.15 50);
+	--color-primary-500: oklch(75% 0.19 48);
+	--color-primary-600: oklch(68% 0.18 45);
+	--color-primary-700: oklch(58% 0.17 40);
+	--color-primary-800: oklch(48% 0.15 35);
+	--color-primary-900: oklch(40% 0.13 32);
+	--color-primary-950: oklch(26% 0.09 30);
+}
+
 /* Canvas and shared typography */
 main.landing {
-	--home-canvas: #fff9f2;
+	--home-canvas: #ffffff;
 	--home-ink: var(--color-neutral-900);
 	--home-muted: var(--color-neutral-600);
 	--home-border: color-mix(in oklab, var(--color-neutral-900) 14%, transparent);
-	--home-accent: var(--color-info-600);
+	--home-accent: var(--color-primary-700);
 	--body: var(--home-canvas);
 	--fg: var(--home-ink);
 	--muted: var(--home-muted);
@@ -365,7 +380,7 @@ main.landing {
 	gap: 4px;
 }
 .home-swatch {
-	border-radius: 8px;
+	border-radius: 999px;
 }
 .home-swatch > span {
 	width: 14px;
@@ -913,11 +928,11 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	}
 }
 .home-assembly {
-	--assembly-accent: var(--color-primary-700);
+	--assembly-accent: var(--color-cyan-700);
 	position: relative;
 	min-height: 390px;
 	overflow: clip;
-	background: color-mix(in oklab, var(--color-primary-200) 26%, var(--home-canvas));
+	background: color-mix(in oklab, var(--color-cyan-200) 26%, var(--home-canvas));
 	border: 1px solid var(--home-border);
 	border-radius: 24px;
 }
@@ -1047,9 +1062,10 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 .home-assembly[data-step='2'] .piece-badge {
 	transform: translate(-10px, 0);
 }
+/* Customize is the brand beat: the scene switches from the kit cyan to Polyms orange. */
 .home-assembly[data-step='2'] {
-	--assembly-accent: var(--color-info-700);
-	background: color-mix(in oklab, var(--color-info-200) 24%, var(--home-canvas));
+	--assembly-accent: var(--color-primary-700);
+	background: color-mix(in oklab, var(--color-primary-200) 24%, var(--home-canvas));
 }
 .home-story-progress {
 	height: 2px;
@@ -1235,7 +1251,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 
 /* Closing invitation and footer */
 .home-footer {
-	background: color-mix(in oklab, var(--color-info-200) 20%, var(--home-canvas));
+	background: color-mix(in oklab, var(--color-primary-200) 20%, var(--home-canvas));
 	border-top: 1px solid var(--home-border);
 }
 .home-final-cta {
@@ -1549,7 +1565,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	--home-ink: var(--color-neutral-50);
 	--home-muted: var(--color-neutral-400);
 	--home-border: var(--color-neutral-700);
-	--home-accent: var(--color-info-300);
+	--home-accent: var(--color-primary-300);
 }
 /* Motion and accessible fallback */
 .home-hero-stage:has(.home-shelf[data-complete='true']) .home-hero-mascot {

@@ -5,7 +5,7 @@ Người đọc mở `/` để thử component thật trên hero và playground,
 ## Sub-features
 
 - hero-shelf: Bấm nút mẫu và bật `Round the corners`; chữ trạng thái và snippet `<Button>` đổi theo.
-- playground-theme: Đổi Cyan, Violet hoặc Orange, bật `Dark preview`, rồi `Reset demo` về cyan và light.
+- playground-theme: Mặc định Orange (brand). Đổi Cyan hoặc Violet, bật `Dark preview`, rồi `Reset demo` về orange và light.
 - playground-workspace: Chuyển tab Project / Preferences, hoàn thành bước, bật tắt `Daily digest`.
 - playground-overlays: Mở dialog hoặc offcanvas; panel mang palette và light/dark đang chọn, rồi đóng lại.
 - install-copy: Copy `pnpm add @polyms/ui-kit` và đọc trạng thái clipboard.
@@ -22,7 +22,7 @@ Mở `/`. Trang này không có sidebar docs. Skip link `Skip to the playground`
 - Hero: bấm `Give it a click`; trạng thái cuối là nút `One more time?` và chữ `That’s the feeling.`. Tắt `Round the corners`; snippet thành `<Button />`. Nút `View Button documentation` mở `/docs/button`.
 - Palette: trong `Preview color`, bấm `Violet`; `[data-testid="landing-preview"]` có `data-palette="violet"` và swatch Violet ở trạng thái pressed.
 - Mode: bật `Dark preview`; preview có `data-mode="dark"`.
-- Reset: bấm `Reset demo`; preview về `data-palette="cyan"` và `data-mode="light"`, tab Project hiện lại badge `In progress`.
+- Reset: bấm `Reset demo`; preview về `data-palette="orange"` và `data-mode="light"`, tab Project hiện lại badge `In progress`.
 - Workspace: trong tablist `Workspace preview`, chọn `Preferences` và tắt `Daily digest`; chữ thành `Daily summary paused.`. Về `Project`, bấm `Finish this step`; nút thành `Step completed` và status `Step complete. Looking good!`.
 - Dialog: bấm `Try a dialog`; `[data-testid="playground-dialog"]` hiện heading `A little focus goes a long way.` và palette đang chọn. `Back to playing` hoặc Escape đóng dialog, focus về nút mở.
 - Offcanvas: bấm `Try an offcanvas`; `[data-testid="playground-offcanvas"]` hiện `A little space for the details.` và dòng Appearance `Light` hoặc `Dark`. `Back to the workspace` đóng panel.

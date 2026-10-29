@@ -8,24 +8,43 @@ import { useState } from 'react'
 
 type Palette = 'cyan' | 'violet' | 'orange'
 
+type ColorStep = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950
+
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
+const COLOR_STEPS: ColorStep[] = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+
+/** Landing brand ramp. Keep in sync with `html:has(#root.landing)` in home.page.css. */
+const BRAND_ORANGE: Record<ColorStep, string> = {
+	50: 'oklch(97% 0.015 60)',
+	100: 'oklch(94% 0.05 58)',
+	200: 'oklch(89% 0.08 55)',
+	300: 'oklch(86% 0.1 55)',
+	400: 'oklch(78% 0.15 50)',
+	500: 'oklch(75% 0.19 48)',
+	600: 'oklch(68% 0.18 45)',
+	700: 'oklch(58% 0.17 40)',
+	800: 'oklch(48% 0.15 35)',
+	900: 'oklch(40% 0.13 32)',
+	950: 'oklch(26% 0.09 30)',
+}
+
 const PALETTES: { value: Palette; label: string }[] = [
+	{ value: 'orange', label: 'Orange' },
 	{ value: 'cyan', label: 'Cyan' },
 	{ value: 'violet', label: 'Violet' },
-	{ value: 'orange', label: 'Orange' },
 ]
 
 export function LandingPlayground() {
-	const [palette, setPalette] = useState<Palette>('cyan')
+	const [palette, setPalette] = useState<Palette>('orange')
 	const [dark, setDark] = useState(false)
 	const [resetCount, setResetCount] = useState(0)
 	const paletteLabel = PALETTES.find(item => item.value === palette)?.label
 	const appearance = dark ? 'Dark' : 'Light'
 	const theme: CSSProperties = Object.fromEntries(
-		[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(step => [
+		COLOR_STEPS.map(step => [
 			`--color-primary-${step}`,
-			`var(--color-${palette}-${step})`,
+			palette === 'orange' ? BRAND_ORANGE[step] : `var(--color-${palette}-${step})`,
 		])
 	)
 	const previewProps = {
@@ -47,9 +66,16 @@ export function LandingPlayground() {
 								className='home-swatch'
 								key={item.value}
 								onClick={() => setPalette(item.value)}
+								rounded
 								size='lg'
 							>
-								<span aria-hidden='true' style={{ background: `var(--color-${item.value}-600)` }} />
+								<span
+									aria-hidden='true'
+									style={{
+										background:
+											item.value === 'orange' ? BRAND_ORANGE[600] : `var(--color-${item.value}-600)`,
+									}}
+								/>
 								{item.label}
 							</Button>
 						))}
@@ -61,10 +87,11 @@ export function LandingPlayground() {
 				</div>
 				<Button
 					onClick={() => {
-						setPalette('cyan')
+						setPalette('orange')
 						setDark(false)
 						setResetCount(value => value + 1)
 					}}
+					rounded
 					size='lg'
 				>
 					Reset demo
@@ -118,7 +145,7 @@ export function LandingPlayground() {
 									<p className='mt-3 text-muted'>Press Escape whenever you’re ready.</p>
 								</Modal.Body>
 								<Modal.Footer>
-									<Modal.Close render={<Button size='lg' />}>Back to playing</Modal.Close>
+									<Modal.Close render={<Button rounded size='lg' />}>Back to playing</Modal.Close>
 									<Modal.Close render={<Button rounded size='lg' variant='primary' />}>
 										Looks good
 									</Modal.Close>

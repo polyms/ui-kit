@@ -24,6 +24,7 @@ export function CopyCommand() {
 							setFeedback('Select the command and copy it manually.')
 						}
 					}}
+					rounded
 					size='lg'
 				>
 					<HugeiconsIcon icon={Copy01Icon} size={19} />

@@ -36,7 +36,13 @@ export function HeroShelf() {
 			</div>
 			<div className='home-shelf-footer'>
 				<code>{rounded ? '<Button rounded />' : '<Button />'}</code>
-				<Button aria-label='View Button documentation' icon render={<Link to='/docs/button' />} size='lg'>
+				<Button
+					aria-label='View Button documentation'
+					icon
+					render={<Link to='/docs/button' />}
+					rounded
+					size='lg'
+				>
 					<HugeiconsIcon icon={ArrowRight01Icon} size={18} />
 				</Button>
 			</div>
