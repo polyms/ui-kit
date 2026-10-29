@@ -2,7 +2,7 @@ import { metadataByRoute, type PageMetadata } from 'virtual:mdx-navigation'
 import { LinkSquare02Icon, Unlink01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { MDXProvider } from '@mdx-js/react'
-import { useMatch, useRouterState } from '@tanstack/react-router'
+import { Link, useMatch, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { CodeHighlight } from '../components/CodeHighlight'
@@ -15,6 +15,58 @@ const mdxFiles = import.meta.glob('./**/*.mdx', { eager: true }) as Record<
 	string,
 	{ default: React.ComponentType }
 >
+
+function MdxAnchor({ href, className, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+	const classes = clsx(className ?? 'link link-primary inline-flex items-center gap-1')
+	const target = typeof href === 'string' ? resolveAppHref(href) : null
+	const externalIcon = typeof href === 'string' && href.startsWith('http')
+
+	if (!target) {
+		return (
+			<a {...props} className={classes} href={href}>
+				{children}
+				{externalIcon ? <HugeiconsIcon icon={LinkSquare02Icon} size={16} /> : null}
+			</a>
+		)
+	}
+
+	if (target.pathname === '/') {
+		return (
+			<Link {...props} activeProps={{}} className={classes} hash={target.hash} to='/'>
+				{children}
+			</Link>
+		)
+	}
+
+	if (target.pathname === '/demo') {
+		return (
+			<Link {...props} activeProps={{}} className={classes} hash={target.hash} to='/demo'>
+				{children}
+			</Link>
+		)
+	}
+
+	if (target.pathname === '/forms') {
+		return (
+			<Link {...props} activeProps={{}} className={classes} hash={target.hash} to='/forms'>
+				{children}
+			</Link>
+		)
+	}
+
+	return (
+		<Link
+			{...props}
+			activeProps={{}}
+			className={classes}
+			hash={target.hash}
+			params={{ _splat: target.pathname.slice(1) }}
+			to='/$'
+		>
+			{children}
+		</Link>
+	)
+}
 
 function MdxLayout({ children }: { children: React.ReactNode }) {
 	// routeBase is '/' and contentDir is 'src/pages'
@@ -98,14 +150,7 @@ export function MdxPage() {
 				const id = props.id ?? slugWithCounts(text, slugCountsRef.current)
 				return <h4 {...props} className={clsx('h4', props.className)} id={id} />
 			},
-			a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
-				return (
-					<a {...props} className='link link-primary inline-flex items-center gap-1'>
-						{props.children}
-						{props.href?.startsWith('http') && <HugeiconsIcon icon={LinkSquare02Icon} size={16} />}
-					</a>
-				)
-			},
+			a: MdxAnchor,
 			code: (props: React.HTMLAttributes<HTMLElement>) => {
 				const className = props.className || ''
 				const language = className.replace('language-', '')
@@ -154,6 +199,17 @@ function MdxFallback() {
 			<div className='skeleton h-4 w-1/2 rounded' />
 		</div>
 	)
+}
+
+function resolveAppHref(href: string) {
+	const trimmed = href.trim()
+	if (!trimmed.startsWith('/') || trimmed.startsWith('//')) return null
+
+	const url = new URL(trimmed, 'http://ui-kit.local')
+	const pathname = url.pathname.replace(/\/$/, '') || '/'
+	const hash = url.hash ? url.hash.slice(1) : undefined
+
+	return { hash, pathname }
 }
 
 function slugify(value: string) {
