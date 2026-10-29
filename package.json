@@ -23,6 +23,7 @@
 		"@solar-icons/react-perf": "^2.1.1",
 		"@tanstack/react-router": "1.170.45",
 		"clsx": "~2.1.1",
+		"motion": "^14.7.1",
 		"nanoid": "~6.0.2",
 		"react": "~19.3.1",
 		"react-dom": "~19.3.1",

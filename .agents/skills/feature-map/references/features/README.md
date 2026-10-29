@@ -18,6 +18,7 @@ File khu vực là tập hành vi cần rà cho thay đổi thuộc khu vực đ
 
 ## Areas
 
+- [landing](landing.md) — thử hero, playground, copy lệnh cài, FAQ và các lối ra khỏi trang chủ.
 - [docs-navigation](docs-navigation.md) — tìm trang, lọc kết quả và điều hướng trong sidebar responsive.
 - [component-guides](component-guides.md) — dùng TOC, demo Preview/Code và API Reference của trang component.
 - [journeys](journeys.md) — từ tìm trang component đến xác nhận demo và mã nguồn.
