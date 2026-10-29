@@ -42,7 +42,13 @@
 	},
 	"peerDependencies": {
 		"react": ">=19.0.0",
-		"react-dom": ">=19.0.0"
+		"react-dom": ">=19.0.0",
+		"zustand": "^5.0.0"
+	},
+	"peerDependenciesMeta": {
+		"zustand": {
+			"optional": true
+		}
 	},
 	"dependencies": {
 		"@floating-ui/react-dom": "^2.1.9",

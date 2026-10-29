@@ -143,16 +143,17 @@ function isPaintedColor(value: string) {
 	const trimmed = value.trim()
 	if (/^(#|rgba?\(|hsla?\(|oklch\(|oklab\(|color-mix\()/.test(trimmed)) return true
 	const variable = trimmed.match(/^var\((--[\w-]+)\)$/)
-	if (!variable) return false
-	const name = variable[1]
+	const name = variable?.[1]
+	if (!name) return false
 	return name.startsWith('--color-') || SEMANTIC_COLORS.has(name)
 }
 
 function swatchColor(value: string | null, mode: 'dark' | 'light'): string | null {
 	if (!value || !isPaintedColor(value)) return null
 	const variable = value.trim().match(/^var\((--[\w-]+)\)$/)
-	if (!variable) return value
-	const token = tokenByName(catalog.semantic, variable[1])
+	const name = variable?.[1]
+	if (!name) return value
+	const token = tokenByName(catalog.semantic, name)
 	const resolved = token ? (roleValue(token, mode) ?? roleValue(token, 'light')) : null
 	if (!resolved || resolved === value) return value
 	return swatchColor(resolved, mode) ?? resolved
