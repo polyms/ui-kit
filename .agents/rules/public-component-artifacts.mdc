@@ -1,0 +1,20 @@
+---
+description: Component công khai phải có feature map, docs MDX, và consumer skill trong cùng một thay đổi
+globs: ui-kit/src/**,ui-kit/skills/ui-kit/**,web/src/pages/docs/**
+alwaysApply: false
+---
+
+# Component công khai — đủ ba artifact
+
+Nguồn: `AGENTS.md`, mục **Component công khai — đủ ba artifact**. Không lặp quy tắc dài ở đây.
+
+Khi thêm component công khai trong `ui-kit/src/<feature>/`, cùng một thay đổi phải có đủ:
+
+1. **Feature map** — route `/docs/<slug>` trong mục *How to get to it (user POV)* của file khu vực khớp. Guide chuẩn sửa `.agents/skills/feature-map/references/features/component-guides.md`. Không sửa symlink, không tạo area mới cho từng component, không sửa `routeTree.gen.ts`.
+2. **Docs tiếng Anh** — `web/src/pages/docs/<slug>.mdx` (frontmatter `title`) và demo `web/src/pages/docs/-views/<slug>/` nếu component tương tác.
+3. **Consumer skill** — một dòng *Skill routing* trong `ui-kit/skills/ui-kit/SKILL.md` và mục trong file topic khớp (`inputs.md` hoặc topic tương ứng). Chỉ sửa `ui-kit/skills/ui-kit/`.
+
+```md
+# thiếu — chỉ có ui-kit/src/chip/Chip.tsx
+# đủ — route /docs/chip trong component-guides.md, web/src/pages/docs/chip.mdx, dòng SKILL.md + inputs.md
+```

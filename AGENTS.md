@@ -216,6 +216,16 @@ Mọi skill của repo nằm ở **`.agents/skills`**. **`.cursor/skills`**, **`
 
 ---
 
+## Component công khai — đủ ba artifact
+
+Khi thêm component công khai (thư mục `ui-kit/src/<feature>/`, export trên barrel), **cùng một thay đổi** phải có đủ cả ba. Mục này là nguồn; bản canonical `.agents/rules/public-component-artifacts.mdc` chỉ trỏ về đây. `.cursor/rules/public-component-artifacts.mdc` là symlink tới bản đó.
+
+1. **Feature map** — ghi route `/docs/<slug>` vào mục _How to get to it (user POV)_ của file khu vực khớp trong `.agents/skills/feature-map/references/features/` (index `README.md`; pointer `docs/agents/feature-map.md`). Trang guide chuẩn (TOC, Preview/Code, API Reference) thuộc `component-guides.md`. Không tạo area mới cho từng component, không sửa bản symlink, không sửa `routeTree.gen.ts`.
+2. **Docs tiếng Anh** — `web/src/pages/docs/<slug>.mdx` với frontmatter `title`, cộng demo trong `web/src/pages/docs/-views/<slug>/` nếu component tương tác.
+3. **Consumer skill** — một dòng trong bảng _Skill routing_ của `ui-kit/skills/ui-kit/SKILL.md`, cộng mục trong file topic khớp (`inputs.md` hoặc topic tương ứng). Chỉ sửa `ui-kit/skills/ui-kit/`; `.agents/skills/ui-kit` là symlink.
+
+---
+
 ## Liên kết local `ui-kit`
 
 Trong app consumer thử nghiệm:

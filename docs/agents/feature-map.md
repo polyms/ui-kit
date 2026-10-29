@@ -1,6 +1,6 @@
 # Bản đồ khu vực tính năng
 
-Bản đồ này định tuyến câu hỏi về hành vi của docs site đến đúng file khu vực. Hãy dùng `/build-feature-map` để tạo hoặc sửa bản đồ; các skill khác chỉ đọc đường dẫn bên dưới.
+Bản đồ này định tuyến câu hỏi về hành vi của docs site đến đúng file khu vực. Hãy dùng `/build-feature-map` để tạo khu vực hoặc sửa hợp đồng H2. Khi thêm component công khai, ghi route trang vào file khu vực khớp trong cùng thay đổi — xem `AGENTS.md`, mục _Component công khai — đủ ba artifact_. Không sửa bản symlink.
 
 Skill: .agents/skills/feature-map/SKILL.md
 Index: .agents/skills/feature-map/references/features/README.md
