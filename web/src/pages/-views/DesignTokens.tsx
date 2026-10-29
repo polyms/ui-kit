@@ -125,18 +125,66 @@ function createHeadingSlugger() {
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
-function Swatch({ name }: { name: string }) {
+const SEMANTIC_COLORS = new Set([
+	'--body',
+	'--control-ring',
+	'--control-ring-danger',
+	'--fg',
+	'--input',
+	'--line',
+	'--muted',
+	'--overlay-backdrop',
+	'--overlay-bg',
+	'--surface',
+	'--surface-2',
+])
+
+function isPaintedColor(value: string) {
+	const trimmed = value.trim()
+	if (/^(#|rgba?\(|hsla?\(|oklch\(|oklab\(|color-mix\()/.test(trimmed)) return true
+	const variable = trimmed.match(/^var\((--[\w-]+)\)$/)
+	if (!variable) return false
+	const name = variable[1]
+	return name.startsWith('--color-') || SEMANTIC_COLORS.has(name)
+}
+
+function swatchColor(value: string | null, mode: 'dark' | 'light'): string | null {
+	if (!value || !isPaintedColor(value)) return null
+	const variable = value.trim().match(/^var\((--[\w-]+)\)$/)
+	if (!variable) return value
+	const token = tokenByName(catalog.semantic, variable[1])
+	const resolved = token ? (roleValue(token, mode) ?? roleValue(token, 'light')) : null
+	if (!resolved || resolved === value) return value
+	return swatchColor(resolved, mode) ?? resolved
+}
+
+function Swatch({ color }: { color: string }) {
 	return (
 		<span
 			aria-hidden
 			className='inline-block size-8 shrink-0 rounded-md outline -outline-offset-1 outline-black/10'
-			style={{ backgroundColor: `var(${name})` }}
+			style={{ backgroundColor: color }}
 		/>
 	)
 }
 
+function ColorValue({ mode, value }: { mode: 'dark' | 'light'; value: string | null }) {
+	const color = swatchColor(value, mode)
+	if (!color) return <ValueCode value={value} />
+	return (
+		<span className='inline-flex items-center gap-2'>
+			<Swatch color={color} />
+			<ValueCode value={value} />
+		</span>
+	)
+}
+
+function EmptyCell() {
+	return <span className='text-muted'>-</span>
+}
+
 function ValueCode({ value }: { value: string | null }) {
-	if (!value) return null
+	if (!value) return <EmptyCell />
 	return <code className='font-mono text-xs break-all text-muted'>{value}</code>
 }
 
@@ -311,16 +359,13 @@ function Surfaces() {
 						return (
 							<tr key={name}>
 								<td>
-									<span className='inline-flex items-center gap-2'>
-										<Swatch name={name} />
-										<code className='font-mono text-xs'>{name}</code>
-									</span>
+									<code className='font-mono text-xs'>{name}</code>
 								</td>
 								<td>
-									<ValueCode value={themedValue(token, 'light')} />
+									<ColorValue mode='light' value={themedValue(token, 'light')} />
 								</td>
 								<td>
-									<ValueCode value={themedValue(token, 'dark')} />
+									<ColorValue mode='dark' value={themedValue(token, 'dark')} />
 								</td>
 							</tr>
 						)
@@ -351,13 +396,13 @@ function SurfaceAliases() {
 					{aliases.map(token => (
 						<tr key={token.name}>
 							<td>
-								<span className='inline-flex items-center gap-2'>
-									<Swatch name={token.name} />
-									<code className='font-mono text-xs'>{token.name}</code>
-								</span>
+								<code className='font-mono text-xs'>{token.name}</code>
 							</td>
 							<td>
-								<ValueCode value={displayValue(token.uses[0]?.value)} />
+								<span className='inline-flex items-center gap-2'>
+									<Swatch color={`var(${token.name})`} />
+									<ValueCode value={displayValue(token.uses[0]?.value)} />
+								</span>
 							</td>
 						</tr>
 					))}
@@ -421,10 +466,10 @@ function RoleTokens() {
 										<code className='font-mono text-xs text-nowrap'>{name}</code>
 									</td>
 									<td>
-										<ValueCode value={roleValue(token, 'light')} />
+										<ColorValue mode='light' value={roleValue(token, 'light')} />
 									</td>
 									<td>
-										<ValueCode value={roleValue(token, 'dark')} />
+										<ColorValue mode='dark' value={roleValue(token, 'dark')} />
 									</td>
 								</tr>
 							)
@@ -448,7 +493,7 @@ function SemanticTokens() {
 }
 
 function ClassCode({ selector }: { selector: string }) {
-	if (!selector) return null
+	if (!selector) return <EmptyCell />
 	return <code className='font-mono text-xs break-all text-muted'>{selector}</code>
 }
 
@@ -531,10 +576,10 @@ function VariantTokens({ variants }: { variants: VariantSection[] }) {
 									{hasDark ? (
 										<>
 											<td>
-												<ValueCode value={displayValue(row.light)} />
+												<ColorValue mode='light' value={displayValue(row.light)} />
 											</td>
 											<td>
-												<ValueCode value={displayValue(row.dark)} />
+												<ColorValue mode='dark' value={displayValue(row.dark)} />
 											</td>
 										</>
 									) : (
