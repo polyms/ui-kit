@@ -9,6 +9,8 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import {
 	Button,
 	Checkbox,
+	Chip,
+	ChipInput,
 	Field,
 	NumberField,
 	Radio,
@@ -16,7 +18,6 @@ import {
 	Select,
 	Toggle,
 	ToggleGroup,
-	Toolbar,
 } from '@polyms/ui-kit'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import clsx from 'clsx'
@@ -48,6 +49,8 @@ const statusItems = [
 	{ label: 'Active', value: 'active' },
 	{ label: 'Archived', value: 'archived' },
 ]
+
+const skillSuggestions = ['Design', 'Accessibility', 'Testing']
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -146,10 +149,12 @@ function FilterBarCase() {
 	const [query, setQuery] = useState('')
 	const [role, setRole] = useState<string | null>('all')
 	const [status, setStatus] = useState<string | null>('any')
+	const [layout, setLayout] = useState<string[]>(['list'])
+	const [mine, setMine] = useState(false)
 
 	return (
-		<div className='flex flex-col gap-3 lg:flex-row lg:items-end'>
-			<Field className='min-w-0 flex-1'>
+		<div className='flex flex-wrap items-end gap-3'>
+			<Field className='min-w-56 flex-1'>
 				<Field.Label>Search</Field.Label>
 				<HugeiconsIcon className='icon-start' icon={SearchList02Icon} strokeWidth={2} />
 				{query ? (
@@ -202,16 +207,25 @@ function FilterBarCase() {
 					</Select.Content>
 				</Select>
 			</Field>
-			<Toolbar aria-label='View mode' className='shrink-0' rounded variant='inline'>
-				<ToggleGroup aria-label='Layout' className='toolbar-group' defaultValue={['list']}>
-					<Toolbar.Button aria-label='Grid view' render={<Toggle />} value='grid'>
-						Grid
-					</Toolbar.Button>
-					<Toolbar.Button aria-label='List view' render={<Toggle />} value='list'>
-						List
-					</Toolbar.Button>
+			<Field className='w-full shrink-0 lg:w-auto'>
+				<Field.Label>View</Field.Label>
+				<ToggleGroup
+					aria-label='Layout'
+					data-testid='forms-filter-layout'
+					onValueChange={setLayout}
+					rounded
+					value={layout}
+				>
+					<Toggle value='grid'>Grid</Toggle>
+					<Toggle value='list'>List</Toggle>
 				</ToggleGroup>
-			</Toolbar>
+			</Field>
+			<Field className='w-full shrink-0 lg:w-auto'>
+				<Field.Label>Scope</Field.Label>
+				<Toggle data-testid='forms-filter-mine' onPressedChange={setMine} pressed={mine} rounded>
+					Mine
+				</Toggle>
+			</Field>
 			<div className='flex shrink-0 gap-2'>
 				<Button
 					data-testid='forms-filter-clear'
@@ -219,6 +233,8 @@ function FilterBarCase() {
 						setQuery('')
 						setRole('all')
 						setStatus('any')
+						setLayout(['list'])
+						setMine(false)
 					}}
 					outlined
 					rounded
@@ -239,6 +255,7 @@ function CreateWorkspaceCase() {
 	const [slug, setSlug] = useState('polyms-studio')
 	const [plan, setPlan] = useState<string | null>('pro')
 	const [seats, setSeats] = useState(5)
+	const [visibility, setVisibility] = useState('team')
 
 	return (
 		<form
@@ -297,6 +314,25 @@ function CreateWorkspaceCase() {
 					rounded
 					value={seats}
 				/>
+				<Field className='sm:col-span-2'>
+					<Field.Label>Visibility</Field.Label>
+					<ToggleGroup
+						aria-label='Visibility'
+						className='w-full'
+						data-testid='forms-workspace-visibility'
+						onValueChange={next => {
+							const value = next[0]
+							if (value) setVisibility(value)
+						}}
+						rounded
+						value={[visibility]}
+					>
+						<Toggle value='private'>Private</Toggle>
+						<Toggle value='team'>Team</Toggle>
+						<Toggle value='public'>Public</Toggle>
+					</ToggleGroup>
+					<Field.Description>Who can open this workspace.</Field.Description>
+				</Field>
 			</div>
 			<div className='flex flex-wrap items-center justify-end gap-2 border-t border-neutral-200/80 pt-4 dark:border-line'>
 				<Button rounded>Cancel</Button>
@@ -370,6 +406,55 @@ const sizeRows: { label: string; fieldSize?: Field.Props['size']; buttonSize?: S
 	{ label: 'xl', fieldSize: 'xl', buttonSize: 'xl' },
 ]
 
+function AlignedControlRow({
+	buttonSize,
+	fieldSize,
+	rounded,
+}: {
+	buttonSize?: SizeRowButtonSize
+	fieldSize?: Field.Props['size']
+	rounded?: boolean
+}) {
+	return (
+		<div className='flex w-max items-center gap-2'>
+			<Field className='w-40' size={fieldSize}>
+				<Field.Control placeholder='Search' rounded={rounded} />
+			</Field>
+			<Select defaultValue='all' items={roleItems}>
+				<Select.Trigger
+					className={clsx('w-36', rounded && 'rounded-full')}
+					placeholder='Role'
+					size={fieldSize}
+				>
+					{item => item?.label ?? 'Role'}
+				</Select.Trigger>
+				<Select.Content>
+					{roleItems.map(item => (
+						<Select.Item key={item.value} value={item.value}>
+							{item.label}
+						</Select.Item>
+					))}
+				</Select.Content>
+			</Select>
+			<ToggleGroup
+				aria-label={`Layout ${fieldSize ?? 'default'} ${rounded ? 'pill' : 'square'}`}
+				defaultValue={['list']}
+				rounded={rounded}
+				size={fieldSize}
+			>
+				<Toggle value='grid'>Grid</Toggle>
+				<Toggle value='list'>List</Toggle>
+			</ToggleGroup>
+			<Toggle defaultPressed rounded={rounded} size={fieldSize}>
+				Mine
+			</Toggle>
+			<Button rounded={rounded} size={buttonSize} variant='primary'>
+				Apply
+			</Button>
+		</div>
+	)
+}
+
 function SizeAlignmentCase() {
 	return (
 		<div className='overflow-x-auto'>
@@ -377,8 +462,8 @@ function SizeAlignmentCase() {
 				<thead>
 					<tr className='text-muted'>
 						<th className='w-24 pb-3 font-medium'>Size</th>
-						<th className='pb-3 font-medium'>Field + Button (pill)</th>
-						<th className='pb-3 font-medium'>Field + Button (default corners)</th>
+						<th className='pb-3 font-medium'>Pill</th>
+						<th className='pb-3 font-medium'>Default corners</th>
 					</tr>
 				</thead>
 				<tbody className='divide-y divide-neutral-100 dark:divide-line'>
@@ -386,24 +471,10 @@ function SizeAlignmentCase() {
 						<tr key={label}>
 							<td className='py-4 font-mono text-xs text-muted'>{label}</td>
 							<td className='py-4 pe-4'>
-								<div className='flex max-w-md flex-wrap items-center gap-2'>
-									<Field className='min-w-0 flex-1' size={fieldSize}>
-										<Field.Control placeholder={`field-${label}`} rounded />
-									</Field>
-									<Button rounded size={buttonSize} variant='primary'>
-										Action
-									</Button>
-								</div>
+								<AlignedControlRow buttonSize={buttonSize} fieldSize={fieldSize} rounded />
 							</td>
 							<td className='py-4'>
-								<div className='flex max-w-md flex-wrap items-center gap-2'>
-									<Field className='min-w-0 flex-1' size={fieldSize}>
-										<Field.Control placeholder={`field-${label}`} />
-									</Field>
-									<Button size={buttonSize} variant='primary'>
-										Action
-									</Button>
-								</div>
+								<AlignedControlRow buttonSize={buttonSize} fieldSize={fieldSize} />
 							</td>
 						</tr>
 					))}
@@ -614,6 +685,142 @@ function ModalFooterCase() {
 	)
 }
 
+function FloatingLabelCase() {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+
+	return (
+		<form
+			className='mx-auto flex w-full max-w-sm flex-col gap-4'
+			data-testid='forms-floating-label-form'
+			onSubmit={e => {
+				e.preventDefault()
+			}}
+		>
+			<Field.Floating
+				autoComplete='email'
+				data-testid='forms-floating-email'
+				label='Email'
+				onChange={e => setEmail(e.target.value)}
+				placeholder='Used to sign you in.'
+				required
+				type='email'
+				value={email}
+			/>
+			<Field.Floating
+				autoComplete='current-password'
+				data-testid='forms-floating-password'
+				label='Password'
+				onChange={e => setPassword(e.target.value)}
+				placeholder='At least 8 characters, with a number.'
+				required
+				type='password'
+				value={password}
+			/>
+			<Button
+				className='w-full'
+				data-testid='forms-floating-submit'
+				disabled={!email || !password}
+				rounded
+				type='submit'
+				variant='primary'
+			>
+				Continue
+			</Button>
+		</form>
+	)
+}
+
+function ProfileSkillsCase() {
+	const [name, setName] = useState('Tifa Lockhart')
+	const [role, setRole] = useState<string | null>('editor')
+	const [notify, setNotify] = useState(true)
+	const [skills, setSkills] = useState(['React', 'TypeScript'])
+	const profileRoles = roleItems.filter(item => item.value !== 'all')
+
+	return (
+		<form
+			className='flex flex-col gap-6'
+			data-testid='forms-skills-form'
+			onSubmit={e => {
+				e.preventDefault()
+			}}
+		>
+			<div className='grid gap-4 sm:grid-cols-2'>
+				<Field required>
+					<Field.Label>Display name</Field.Label>
+					<HugeiconsIcon className='icon-start' icon={UserIcon} strokeWidth={2} />
+					<Field.Control
+						data-testid='forms-skills-name'
+						onChange={e => setName(e.target.value)}
+						placeholder='Your name'
+						rounded
+						value={name}
+					/>
+				</Field>
+				<Field>
+					<Field.Label>Role</Field.Label>
+					<Select items={profileRoles} onValueChange={setRole} value={role}>
+						<Select.Trigger
+							className='w-full rounded-full'
+							data-testid='forms-skills-role'
+							placeholder='Role'
+						>
+							{item => item?.label ?? 'Role'}
+						</Select.Trigger>
+						<Select.Content>
+							{profileRoles.map(item => (
+								<Select.Item key={item.value} value={item.value}>
+									{item.label}
+								</Select.Item>
+							))}
+						</Select.Content>
+					</Select>
+				</Field>
+			</div>
+			<div className='flex flex-col gap-1' data-testid='forms-skills-field'>
+				<label className='field-label' htmlFor='forms-skills-input'>
+					Skills
+				</label>
+				<ChipInput
+					id='forms-skills-input'
+					label='Skills'
+					onValueChange={setSkills}
+					placeholder='Add a skill'
+					rounded
+					value={skills}
+					variant='primary'
+				/>
+			</div>
+			<div className='flex flex-wrap items-center gap-2'>
+				<span className='text-xs font-medium text-muted'>Suggestions</span>
+				{skillSuggestions.map(skill => (
+					<Chip
+						active={skills.includes(skill)}
+						key={skill}
+						onClick={() => {
+							setSkills(current =>
+								current.includes(skill) ? current.filter(item => item !== skill) : [...current, skill]
+							)
+						}}
+						variant='neutral'
+					>
+						{skill}
+					</Chip>
+				))}
+			</div>
+			<div className='flex flex-wrap items-center justify-between gap-3 border-t border-neutral-200/80 pt-4 dark:border-line'>
+				<Toggle data-testid='forms-skills-notify' onPressedChange={setNotify} pressed={notify} rounded>
+					Email me when someone joins
+				</Toggle>
+				<Button data-testid='forms-skills-submit' rounded type='submit' variant='primary'>
+					Save profile
+				</Button>
+			</div>
+		</form>
+	)
+}
+
 function FormsPage() {
 	return (
 		<div className='playground-page flex min-h-0 min-w-0 flex-1 flex-col' data-testid='forms-playground'>
@@ -633,12 +840,12 @@ function FormsPage() {
 							Forms playground
 						</div>
 						<h1 className='mt-6 max-w-3xl text-3xl font-semibold tracking-tight text-fg md:text-4xl lg:text-5xl'>
-							Field × Button on one page
+							Controls on one row
 						</h1>
 						<p className='mt-4 max-w-3xl text-base leading-relaxed text-pretty text-muted md:text-lg'>
-							Preview common form layouts in real apps — sign-in, list filters, record creation, settings, and
-							a size matrix — to compare height, corner radius (
-							<code className='text-xs'>--control-radius</code>) and row alignment between inputs and buttons.
+							Preview common form layouts — sign-in, filters, record creation, settings, floating labels,
+							skill chips, and a size matrix — to compare height, corner radius, and color across Field,
+							Select, Toggle, Chip, and Button.
 						</p>
 					</section>
 
@@ -651,14 +858,14 @@ function FormsPage() {
 						</PreviewSection>
 
 						<PreviewSection
-							description='Search + 2 selects + inline Toolbar (view toggle) + action buttons on one row — aligned with default Field/Button height.'
+							description='Search, selects, ToggleGroup, Toggle, and actions on one row — same height and control color. Fields, the toggle group, the single toggle, and actions use a pill radius.'
 							title='2. List filter bar'
 						>
 							<FilterBarCase />
 						</PreviewSection>
 
 						<PreviewSection
-							description='Two-column grid: text, select, NumberField at default size — Cancel / Submit footer.'
+							description='Two-column grid: text, select, NumberField, and a visibility ToggleGroup — Cancel / Submit footer.'
 							title='3. Create workspace'
 						>
 							<CreateWorkspaceCase />
@@ -679,7 +886,7 @@ function FormsPage() {
 						</PreviewSection>
 
 						<PreviewSection
-							description='Compare pill vs default corners per size — useful when reviewing radius after CSS refactors.'
+							description='Field, Select, ToggleGroup, Toggle, and Button at each size — pill and default corners.'
 							title='6. Size matrix (alignment)'
 						>
 							<SizeAlignmentCase />
@@ -712,6 +919,20 @@ function FormsPage() {
 							title='10. Gallery checkbox & radio'
 						>
 							<CheckRadioGalleryCase />
+						</PreviewSection>
+
+						<PreviewSection
+							description='Email and password — the label sits inside the control and floats on focus or when the field has a value.'
+							title='11. Floating labels'
+						>
+							<FloatingLabelCase />
+						</PreviewSection>
+
+						<PreviewSection
+							description='Display name and role stay pill-shaped with the save button. Skills use the textarea corner radius. Add a skill with Enter or a suggestion chip, then remove it from the field.'
+							title='12. Profile skills'
+						>
+							<ProfileSkillsCase />
 						</PreviewSection>
 					</section>
 				</main>

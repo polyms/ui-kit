@@ -1,48 +1,88 @@
-.toggle {
+.toggle,
+.toggle-group {
+	/* Same control box as Field and Button: padding + line + 2px border. */
+	--control-radius: var(--radius-sm);
+	--toggle-pad-x: 0.5rem;
+	--toggle-pad-y: 0.375rem;
+	--toggle-lh: 1.125rem;
+	--toggle-fs: 0.75rem;
 	/* Transparent palette tokens (mirrors `.item-primary` & `.toolbar-button`) */
 	--toggle-variant-color: var(--color-primary-700);
-	--toggle-bg-hover: color-mix(in oklab, var(--toggle-variant-color) var(--control-tint-hover), transparent);
-	--toggle-bg-active: color-mix(
-		in oklab,
-		var(--toggle-variant-color) var(--control-tint-active),
-		transparent
-	);
-	--toggle-bg-pressed: color-mix(
-		in oklab,
-		var(--toggle-variant-color) var(--control-tint-pressed),
-		transparent
-	);
+	--toggle-tint-color: var(--color-primary-700);
+	--toggle-bg-hover: color-mix(in oklab, var(--toggle-tint-color) var(--control-tint-hover), transparent);
+	--toggle-bg-active: color-mix(in oklab, var(--toggle-tint-color) var(--control-tint-active), transparent);
+	--toggle-bg-pressed: color-mix(in oklab, var(--toggle-tint-color) var(--control-tint-pressed), transparent);
 	--toggle-bg-pressed-hover: color-mix(
 		in oklab,
-		var(--toggle-variant-color) var(--control-tint-pressed-hover),
+		var(--toggle-tint-color) var(--control-tint-pressed-hover),
 		transparent
 	);
 	--toggle-bg-pressed-active: color-mix(
 		in oklab,
-		var(--toggle-variant-color) var(--control-tint-pressed-active),
+		var(--toggle-tint-color) var(--control-tint-pressed-active),
 		transparent
 	);
+}
 
+/* Size scale — height, radius, and type match Field / Button at the same step. */
+.toggle-sm,
+.toggle-group-sm,
+.toggle-group-sm > .toggle {
+	--toggle-pad-y: 0.25rem;
+}
+
+.toggle-lg,
+.toggle-group-lg,
+.toggle-group-lg > .toggle {
+	--control-radius: var(--radius-lg);
+	--toggle-pad-x: 0.75rem;
+	--toggle-pad-y: 0.5rem;
+	--toggle-fs: 0.875rem;
+}
+
+.toggle-xl,
+.toggle-group-xl,
+.toggle-group-xl > .toggle {
+	--control-radius: var(--radius-xl);
+	--toggle-pad-x: 0.75rem;
+	--toggle-pad-y: 0.5rem;
+	--toggle-lh: 1.375rem;
+	--toggle-fs: 0.875rem;
+}
+
+.toggle-2xl,
+.toggle-group-2xl,
+.toggle-group-2xl > .toggle {
+	--control-radius: var(--radius-xl);
+	--toggle-pad-x: 1rem;
+	--toggle-pad-y: 0.625rem;
+	--toggle-lh: 1.625rem;
+	--toggle-fs: 1rem;
+}
+
+.toggle-3xl,
+.toggle-group-3xl,
+.toggle-group-3xl > .toggle {
+	--control-radius: var(--radius-xl);
+	--toggle-pad-x: 1.25rem;
+	--toggle-pad-y: 0.875rem;
+	--toggle-lh: 1.625rem;
+	--toggle-fs: 1rem;
+}
+
+.toggle {
 	display: inline-flex;
 	gap: 0.375rem;
 	align-items: center;
 	justify-content: center;
-	min-width: 2rem;
-	height: 2rem;
-	padding-inline: 0.5rem;
 	font-family: inherit;
-	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1;
-	color: var(--muted);
 	white-space: nowrap;
 	appearance: none;
 	cursor: pointer;
 	user-select: none;
 	outline: none;
-	background-color: transparent;
-	border: 1px solid transparent;
-	border-radius: var(--control-radius);
 	transition:
 		background-color 150ms ease,
 		color 150ms ease,
@@ -61,11 +101,6 @@
 		color: var(--toggle-variant-color);
 		background-color: var(--toggle-bg-active);
 		transform: scale(0.96);
-	}
-
-	&:focus-visible {
-		outline: var(--control-ring-width) solid var(--control-ring);
-		outline-offset: -1px;
 	}
 
 	&[data-pressed] {
@@ -96,19 +131,74 @@
 	}
 }
 
-/* Toggle group: collapse items into a unified segmented pill */
-.toggle-group {
-	display: inline-flex;
-	gap: 0.125rem;
-	align-items: center;
-	padding: 0.25rem;
-	background-color: transparent;
+/* Form shell — input background, line border, control height. Not used for variant toolbar. */
+.toggle-shell {
+	min-width: calc(var(--toggle-pad-y) * 2 + var(--toggle-lh) + 2px);
+	height: calc(var(--toggle-pad-y) * 2 + var(--toggle-lh) + 2px);
+	padding-inline: var(--toggle-pad-x);
+	font-size: var(--toggle-fs);
+	color: var(--fg);
+	background-color: var(--input);
 	border: 1px solid var(--line);
-	border-radius: var(--group-radius);
+	border-radius: var(--control-radius);
+
+	&.rounded-full {
+		padding-inline: calc(var(--toggle-pad-x) + 0.25rem);
+	}
+
+	@media (hover: hover) {
+		&:hover:not([data-disabled]):not([data-pressed]) {
+			border-color: color-mix(in oklab, var(--toggle-tint-color) 35%, var(--line));
+		}
+	}
+
+	&:focus-visible {
+		outline: none;
+		border-color: color-mix(in oklab, var(--color-primary-600) 70%, transparent);
+		box-shadow: 0 0 0 var(--control-ring-width) var(--control-ring);
+	}
+
+	&[data-pressed] {
+		border-color: color-mix(in oklab, var(--toggle-tint-color) 35%, var(--line));
+	}
+}
+
+/* Toolbar variant — ghost control, same box as .toolbar-button. No form shell. */
+.toggle-toolbar {
+	min-width: 2rem;
+	height: 2rem;
+	padding-inline: 0.5rem;
+	font-size: inherit;
+	color: var(--muted);
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: var(--control-radius);
+
+	&:hover:not([data-disabled]):not([data-pressed]),
+	&[data-pressed] {
+		border-color: transparent;
+	}
+
+	&:focus-visible {
+		outline: var(--control-ring-width) solid var(--control-ring);
+		outline-offset: -1px;
+		border-color: transparent;
+		box-shadow: none;
+	}
+}
+
+/* Shared group layout. The form shell and the toolbar variant each add their own box. */
+.toggle-group {
+	--toggle-group-inset: 0.125rem;
+
+	box-sizing: border-box;
+	display: inline-flex;
 
 	&[data-orientation='vertical'] {
 		flex-direction: column;
 		align-items: stretch;
+		width: max-content;
+		height: auto;
 	}
 
 	&[data-disabled] {
@@ -116,12 +206,187 @@
 		opacity: 0.6;
 	}
 
-	> .toggle {
-		border-radius: var(--control-radius);
+	&.w-full > .toggle {
+		flex: 1 1 0;
 	}
 }
 
-/* Dark-mode override: accent dùng shade sáng (-300) cho contrast với body Nord. */
-.dark .toggle {
-	--toggle-variant-color: var(--color-primary-300);
+.toggle-group-shell {
+	gap: 1px;
+	align-items: stretch;
+	height: calc(var(--toggle-pad-y) * 2 + var(--toggle-lh) + 2px);
+	padding: var(--toggle-group-inset);
+	overflow: hidden;
+	background-color: var(--input);
+	border: 1px solid var(--line);
+	border-radius: var(--control-radius);
+
+	&[data-orientation='vertical'] {
+		width: max-content;
+		height: auto;
+	}
+
+	> .toggle {
+		min-width: 0;
+		height: auto;
+		min-height: 0;
+		/* The shell draws the edge. A 1px border here insets the fill and squares the ends. */
+		border-width: 0;
+		border-radius: max(0px, calc(var(--control-radius) - var(--toggle-group-inset)));
+		transform: none;
+
+		&:hover:not([data-disabled]),
+		&[data-pressed] {
+			border-color: transparent;
+		}
+
+		&:active:not([data-disabled]) {
+			transform: none;
+		}
+
+		&:focus-visible {
+			position: relative;
+			z-index: 1;
+			border-color: transparent;
+			box-shadow: inset 0 0 0 var(--control-ring-width) var(--control-ring);
+		}
+	}
+
+	&[data-orientation='vertical'] > .toggle {
+		/* Match the horizontal segment: shell border and inset stay outside the button. */
+		height: calc(var(--toggle-pad-y) * 2 + var(--toggle-lh) - (var(--toggle-group-inset) * 2));
+	}
+}
+
+/* Toolbar variant group — toolbar gap, no input shell, no clipped segments, no divider. */
+.toggle-group-toolbar {
+	gap: 0.125rem;
+	align-items: center;
+	height: auto;
+	padding: 0;
+	overflow: visible;
+	background-color: transparent;
+	border-color: transparent;
+	box-shadow: none;
+
+	> .toggle {
+		min-width: 2rem;
+		height: 2rem;
+		background-color: transparent;
+		border-color: transparent;
+		border-radius: var(--control-radius);
+
+		&:focus-visible {
+			outline: var(--control-ring-width) solid var(--control-ring);
+			outline-offset: -1px;
+			border-color: transparent;
+			box-shadow: none;
+		}
+	}
+}
+
+/* Standalone .toolbar-button.toggle without variant=toolbar still stays ghost.
+   The form shell must not win just because the button is composed into a toolbar. */
+.toolbar-button.toggle {
+	height: 2rem;
+	font-size: inherit;
+	line-height: 1;
+	color: var(--muted);
+	background-color: transparent;
+	border-color: transparent;
+
+	&:hover:not([data-disabled]):not([data-pressed]),
+	&[data-pressed] {
+		border-color: transparent;
+	}
+
+	&:focus-visible {
+		border-color: transparent;
+		box-shadow: none;
+	}
+}
+
+/* A form-shell group that also carries toolbar-group keeps its inset.
+   variant=toolbar does not have .toggle-group-shell, so it stays toolbar geometry. */
+.toggle-group-shell.toolbar-group {
+	gap: 1px;
+	align-items: stretch;
+	padding: var(--toggle-group-inset);
+}
+
+/* lg and larger form shells separate segments by 2px. Later than the toolbar-group
+   shell so that 1px reset cannot win on a sized form shell. */
+.toggle-group-lg.toggle-group-shell,
+.toggle-group-xl.toggle-group-shell,
+.toggle-group-2xl.toggle-group-shell,
+.toggle-group-3xl.toggle-group-shell {
+	gap: 2px;
+}
+
+.toolbar[data-orientation='vertical'] .toggle-group-shell.toolbar-group {
+	height: auto;
+}
+
+.toggle-group-shell > .toolbar-button.toggle {
+	align-self: stretch;
+	min-width: 2rem;
+	height: auto;
+	min-height: 0;
+	border-radius: max(0px, calc(var(--control-radius) - var(--toggle-group-inset)));
+
+	&:focus-visible {
+		outline: none;
+		border-color: transparent;
+		box-shadow: inset 0 0 0 var(--control-ring-width) var(--control-ring);
+	}
+}
+
+.toggle-group-shell[data-orientation='vertical'] > .toolbar-button.toggle,
+.toolbar[data-orientation='vertical'] .toggle-group-shell.toolbar-group > .toolbar-button.toggle {
+	height: calc(var(--toggle-pad-y) * 2 + var(--toggle-lh) - (var(--toggle-group-inset) * 2));
+}
+
+/* .toolbar-inline.rounded-full paints a pill on .toolbar-group > .toolbar-button.
+   Segments inside a form-shell ToggleGroup keep the inset radius. */
+.toolbar-inline.rounded-full .toggle-group-shell > .toolbar-button.toggle {
+	border-radius: max(0px, calc(var(--control-radius) - var(--toggle-group-inset)));
+}
+
+/* Pill shell. Outer ends follow the pill; corners that face the gap stay on the control radius.
+   Half the segment box matches the shell curve inside the inset. A 50rem corner beside the
+   gap radius is scaled as one factor and squares the side that faces the gap. */
+.toggle-group-shell.rounded-full {
+	--toggle-group-pill-radius: calc(
+		(var(--toggle-pad-y) * 2 + var(--toggle-lh) - (var(--toggle-group-inset) * 2)) /
+		2
+	);
+
+	border-radius: 50rem;
+
+	&:not([data-orientation='vertical']) > .toggle:first-child {
+		border-start-start-radius: var(--toggle-group-pill-radius);
+		border-end-start-radius: var(--toggle-group-pill-radius);
+	}
+
+	&:not([data-orientation='vertical']) > .toggle:last-child {
+		border-start-end-radius: var(--toggle-group-pill-radius);
+		border-end-end-radius: var(--toggle-group-pill-radius);
+	}
+
+	&[data-orientation='vertical'] > .toggle:first-child {
+		border-start-start-radius: var(--toggle-group-pill-radius);
+		border-start-end-radius: var(--toggle-group-pill-radius);
+	}
+
+	&[data-orientation='vertical'] > .toggle:last-child {
+		border-end-start-radius: var(--toggle-group-pill-radius);
+		border-end-end-radius: var(--toggle-group-pill-radius);
+	}
+}
+
+/* Dark-mode override: accent matches `.item-primary` (text -200, tint -300). */
+.dark .toggle,
+.dark .toggle-group {
+	--toggle-variant-color: var(--color-primary-200);
+	--toggle-tint-color: var(--color-primary-300);
 }

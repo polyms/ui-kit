@@ -15,14 +15,18 @@ export default function ToolbarVertical() {
 	return (
 		<div className='m-auto flex justify-center p-6'>
 			<Toolbar aria-label='Vertical toolbar' orientation='vertical'>
-				<ToggleGroup aria-label='Alignment' className='toolbar-group'>
-					<Toolbar.Button aria-label='Align left' render={<Toggle />} value='align-left'>
+				<ToggleGroup aria-label='Alignment' className='toolbar-group' variant='toolbar'>
+					<Toolbar.Button aria-label='Align left' render={<Toggle variant='toolbar' />} value='align-left'>
 						<HugeiconsIcon icon={TextAlignLeftIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Align center' render={<Toggle />} value='align-center'>
+					<Toolbar.Button
+						aria-label='Align center'
+						render={<Toggle variant='toolbar' />}
+						value='align-center'
+					>
 						<HugeiconsIcon icon={TextAlignCenterIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Align right' render={<Toggle />} value='align-right'>
+					<Toolbar.Button aria-label='Align right' render={<Toggle variant='toolbar' />} value='align-right'>
 						<HugeiconsIcon icon={TextAlignRightIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
 				</ToggleGroup>
@@ -30,13 +34,13 @@ export default function ToolbarVertical() {
 				<Toolbar.Separator orientation='horizontal' />
 
 				<Toolbar.Group aria-label='Text formatting'>
-					<Toolbar.Button aria-label='Bold' render={<Toggle />} value='bold'>
+					<Toolbar.Button aria-label='Bold' render={<Toggle variant='toolbar' />} value='bold'>
 						<HugeiconsIcon icon={TextBoldIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Italic' render={<Toggle />} value='italic'>
+					<Toolbar.Button aria-label='Italic' render={<Toggle variant='toolbar' />} value='italic'>
 						<HugeiconsIcon icon={TextItalicIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Underline' render={<Toggle />} value='underline'>
+					<Toolbar.Button aria-label='Underline' render={<Toggle variant='toolbar' />} value='underline'>
 						<HugeiconsIcon icon={TextUnderlineIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
 				</Toolbar.Group>

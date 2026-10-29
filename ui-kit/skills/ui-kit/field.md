@@ -17,7 +17,7 @@ Read https://ui.polyms.dev/docs/field.md before writing a form. Quantities and s
 - Validate on blur or submit, not on every keystroke. Debounced search uses `Field.Floating` or `debounce` on the control.
 - After a failed submit, focus the first invalid control.
 - Set `type` (`email`, `tel`, `url`, `password`) and `autoComplete` on `Field.Control` for real forms. Use `autoComplete='off'` only when suggestions would fight a live filter.
-- The boolean `rounded` prop always makes `Field.Control` pill-shaped. Use it on single-line fields, not textareas; use `className='rounded-lg'` or `className='rounded-xl'` on a textarea to match the form's radius.
+- The boolean `rounded` prop is the pill (`rounded-full`) on single-line controls: `Field.Control`, `Button`, `Toggle`, and `ToggleGroup`. `ToggleGroup` defaults to the small control radius; `rounded` makes that shell a pill. `Select` matches that pill with `className='rounded-full'` on the trigger. Do not put `rounded` on a textarea; use `className='rounded-lg'` or `className='rounded-xl'` to match the form's radius. `ChipInput`'s `rounded` is the exception: the shell is `rounded-xl` (12px), like a textarea, and inner chips stay pills ([inputs.md](inputs.md)).
 - Submit handlers are `React.SubmitEvent<HTMLFormElement>`. The submit button is `<Button type='submit' variant='primary'>`. Every other `Button` omits `type`.
 
 ## Pre-flight

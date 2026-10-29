@@ -7,14 +7,14 @@ import { Toggle } from '@polyms/ui-kit'
 export default function ToggleDefault() {
 	return (
 		<div className='m-auto flex items-center gap-4 p-6'>
-			<Toggle aria-label='Toggle favorite' className='toggle' defaultPressed>
+			<Toggle aria-label='Toggle favorite' defaultPressed>
 				<HugeiconsIcon icon={StarIcon} size={16} strokeWidth={2} />
 			</Toggle>
-			<Toggle aria-label='Toggle dark mode' className='toggle'>
+			<Toggle aria-label='Toggle dark mode'>
 				<HugeiconsIcon icon={MoonIcon} size={16} strokeWidth={2} />
 				Dark mode
 			</Toggle>
-			<Toggle aria-label='Toggle notifications' className='toggle' disabled>
+			<Toggle aria-label='Toggle notifications' disabled>
 				<HugeiconsIcon icon={Notification03Icon} size={16} strokeWidth={2} />
 			</Toggle>
 		</div>

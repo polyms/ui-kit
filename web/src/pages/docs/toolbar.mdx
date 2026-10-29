@@ -114,11 +114,11 @@ const filterBar = (
       <Field.Control placeholder='Name or email…' rounded />
     </Field>
     <Toolbar aria-label='View options' rounded variant='inline'>
-      <ToggleGroup aria-label='Layout' className='toolbar-group'>
-        <Toolbar.Button render={<Toggle />} value='grid'>
+      <ToggleGroup aria-label='Layout' className='toolbar-group' variant='toolbar'>
+        <Toolbar.Button render={<Toggle variant='toolbar' />} value='grid'>
           Grid
         </Toolbar.Button>
-        <Toolbar.Button render={<Toggle />} value='list'>
+        <Toolbar.Button render={<Toggle variant='toolbar' />} value='list'>
           List
         </Toolbar.Button>
       </ToggleGroup>
@@ -130,18 +130,18 @@ const filterBar = (
 
 ## Composition
 
-`Toolbar.Button` is the primary slot for any clickable control. Use the `render` prop to compose it with other primitives so they inherit toolbar keyboard navigation:
+`Toolbar.Button` is the primary slot for any clickable control. Use the `render` prop to compose it with other primitives so they inherit toolbar keyboard navigation. When the control is a `Toggle` or `ToggleGroup`, pass `variant='toolbar'` so it keeps the ghost toolbar look instead of the form shell.
 
 ```tsx
 import { Toggle, ToggleGroup, Toolbar } from '@polyms/ui-kit'
 
 const toolbar = (
   <Toolbar>
-    <ToggleGroup className='toolbar-group' aria-label='Alignment'>
-      <Toolbar.Button render={<Toggle />} value='left'>
+    <ToggleGroup className='toolbar-group' aria-label='Alignment' variant='toolbar'>
+      <Toolbar.Button render={<Toggle variant='toolbar' />} value='left'>
         Left
       </Toolbar.Button>
-      <Toolbar.Button render={<Toggle />} value='right'>
+      <Toolbar.Button render={<Toggle variant='toolbar' />} value='right'>
         Right
       </Toolbar.Button>
     </ToggleGroup>

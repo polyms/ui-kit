@@ -1,6 +1,7 @@
 ---
 type: Actions
 title: Toggle
+new: true
 apis:
   - separator: Toggle
   - name: defaultPressed
@@ -27,6 +28,18 @@ apis:
     default: '-'
     values: 'ReactElement | (props, state) => ReactElement'
     description: Replace the rendered element or compose with another component (e.g. Toolbar.Button, Tooltip.Trigger).
+  - name: size
+    default: '-'
+    values: sm | lg | xl | 2xl | 3xl
+    description: Matches Field and Button height, type size, and corner radius at the same step.
+  - name: rounded
+    default: 'false'
+    values: boolean
+    description: Pill shape. Use with rounded Field and Button controls on the same row.
+  - name: variant
+    default: '-'
+    values: toolbar
+    description: Ghost toolbar look. Pass toolbar when this toggle sits inside a Toolbar. Omit it for the form control shell.
   - separator: ToggleGroup
   - name: defaultValue
     default: '-'
@@ -56,12 +69,25 @@ apis:
     default: 'false'
     values: boolean
     description: When true, disables every toggle inside the group.
+  - name: size
+    default: '-'
+    values: sm | lg | xl | 2xl | 3xl
+    description: Sizes the shell and every toggle inside it to the same Field and Button step.
+  - name: rounded
+    default: 'false'
+    values: boolean
+    description: Pill shape, same as a single Toggle. Omit it to keep the small corner radius.
+  - name: variant
+    default: '-'
+    values: toolbar
+    description: Ghost toolbar group. Pass toolbar inside a Toolbar so the group uses toolbar geometry instead of the form shell.
 ---
 
 import Story from './-views/toggle/ToggleDefault.tsx'
 import code from './-views/toggle/ToggleDefault.tsx?raw'
 import GroupStory from './-views/toggle/ToggleGroupStory.tsx'
 import groupCode from './-views/toggle/ToggleGroupStory.tsx?raw'
+import Sizes from './-views/toggle/ToggleSizes.tsx'
 
 A two-state button that can be on or off. Use it for binary settings where the control itself reflects the state — like bold, mute, or favorite — and pair it with an icon for a compact, immediate-feedback action.
 
@@ -74,14 +100,16 @@ A two-state button that can be on or off. Use it for binary settings where the c
 ```tsx
 import { Toggle } from '@polyms/ui-kit'
 
-const toggle = (
-  <Toggle className='toggle' aria-label='Bold'>
-    B
-  </Toggle>
-)
+const toggle = <Toggle aria-label='Bold'>B</Toggle>
 ```
 
-Add the **`toggle`** and **`toggle-group`** classes to match the styling in the examples below.
+`Toggle` and `ToggleGroup` bring their own classes. Pass the same `size` you use on `Field`, `Select`, and `Button` when they share a row so the heights stay aligned. `rounded` pills a single `Toggle` and a `ToggleGroup`. Omit `rounded` and the group shell keeps a small corner radius with a little padding inside the border.
+
+## Sizes
+
+Toggles and toggle groups come in 6 sizes, matching Field and Button. Leave `size` unset for the default step. Set `size` on `ToggleGroup` to size the shell and every toggle inside it.
+
+<Sizes />
 
 ## Controlled vs Uncontrolled
 
@@ -90,7 +118,7 @@ Add the **`toggle`** and **`toggle-group`** classes to match the styling in the 
 Use `defaultPressed` to set the initial state and let the component manage itself:
 
 ```tsx
-const toggle = <Toggle className='toggle' defaultPressed aria-label='Favorite' />
+const toggle = <Toggle defaultPressed aria-label='Favorite' />
 ```
 
 ### Controlled
@@ -104,7 +132,7 @@ import { useState } from 'react'
 export default function ControlledToggle() {
   const [pressed, setPressed] = useState(false)
 
-  return <Toggle className='toggle' pressed={pressed} onPressedChange={setPressed} aria-label='Mute' />
+  return <Toggle pressed={pressed} onPressedChange={setPressed} aria-label='Mute' />
 }
 ```
 
@@ -116,42 +144,76 @@ Wrap related toggles in a `ToggleGroup` to share state. By default the group is 
   <GroupStory />
 </CodePreview>
 
+Omit `rounded` to keep the small corner radius.
+
 ```tsx
 import { Toggle, ToggleGroup } from '@polyms/ui-kit'
 
 const toggleGroup = (
-  <ToggleGroup className='toggle-group' aria-label='Alignment' defaultValue={['left']}>
-    <Toggle className='toggle' value='left'>
-      Left
-    </Toggle>
-    <Toggle className='toggle' value='center'>
-      Center
-    </Toggle>
-    <Toggle className='toggle' value='right'>
-      Right
-    </Toggle>
+  <ToggleGroup aria-label='Alignment' defaultValue={['left']}>
+    <Toggle value='left'>Left</Toggle>
+    <Toggle value='center'>Center</Toggle>
+    <Toggle value='right'>Right</Toggle>
+  </ToggleGroup>
+)
+```
+
+Pass `rounded` when the group should match pill fields and buttons on the same row.
+
+```tsx
+import { Toggle, ToggleGroup } from '@polyms/ui-kit'
+
+const pillToggleGroup = (
+  <ToggleGroup aria-label='Layout' defaultValue={['list']} rounded>
+    <Toggle value='grid'>Grid</Toggle>
+    <Toggle value='list'>List</Toggle>
   </ToggleGroup>
 )
 ```
 
 ## Composition
 
-`Toggle` composes with other primitives through the `render` prop. Inside a `Toolbar`, pass it to `Toolbar.Button` so it inherits roving keyboard focus:
+`Toggle` composes with other primitives through the `render` prop. Inside a `Toolbar`, pass it to `Toolbar.Button` so it inherits roving keyboard focus. Pass `variant='toolbar'` on `Toggle` and `ToggleGroup` so they stay ghost toolbar controls. Without it, they use the form shell.
 
 ```tsx
 import { Toggle, ToggleGroup, Toolbar } from '@polyms/ui-kit'
 
 const toolbar = (
   <Toolbar>
-    <ToggleGroup className='toolbar-group' aria-label='Alignment'>
-      <Toolbar.Button render={<Toggle />} value='left'>
+    <ToggleGroup className='toolbar-group' aria-label='Alignment' variant='toolbar'>
+      <Toolbar.Button render={<Toggle variant='toolbar' />} value='left'>
         Left
       </Toolbar.Button>
-      <Toolbar.Button render={<Toggle />} value='right'>
+      <Toolbar.Button render={<Toggle variant='toolbar' />} value='right'>
         Right
       </Toolbar.Button>
     </ToggleGroup>
   </Toolbar>
+)
+```
+
+## On a form row
+
+Put `Toggle` and `ToggleGroup` beside fields and buttons. `items-end` lines the controls up when only the field has a label. Match `size` with the other controls. Pass `rounded` on `Toggle`, `ToggleGroup`, `Field`, and `Button` when that row is a pill. Leave `rounded` off the group to keep the small corner radius.
+
+```tsx
+import { Button, Field, Toggle, ToggleGroup } from '@polyms/ui-kit'
+
+const filterRow = (
+  <div className='flex flex-col gap-3 sm:flex-row sm:items-end'>
+    <Field className='min-w-0 flex-1'>
+      <Field.Label>Search</Field.Label>
+      <Field.Control placeholder='Name or email…' rounded />
+    </Field>
+    <ToggleGroup aria-label='Layout' defaultValue={['list']} rounded>
+      <Toggle value='grid'>Grid</Toggle>
+      <Toggle value='list'>List</Toggle>
+    </ToggleGroup>
+    <Toggle rounded>Mine</Toggle>
+    <Button rounded variant='primary'>
+      Apply
+    </Button>
+  </div>
 )
 ```
 

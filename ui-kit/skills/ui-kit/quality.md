@@ -129,7 +129,7 @@ One screen = one visual system. Do not mix ad-hoc Tailwind with library defaults
 ### Shape (corners)
 
 - Pick **one** radius family per screen: library defaults (`Button`, `Field.Control`, shells) **or** your app wrapper — not both randomly.
-- Prefer **`Button rounded`**, **`Field.Control rounded`**, and component props over one-off radii. Single-line fields can use pill shape; textareas use `rounded-lg` / `rounded-xl` as described in [field.md](field.md).
+- Prefer **`Button rounded`**, **`Field.Control rounded`**, and component props over one-off radii. On single-line controls, `rounded` is the pill (`rounded-full`) for `Field`, `Button`, and `Toggle`; `Select` uses `className='rounded-full'` on the trigger. `ToggleGroup` defaults to the small control radius with a small inset; `rounded` makes the shell a pill. Textareas use `rounded-lg` / `rounded-xl` as described in [field.md](field.md). `ChipInput`'s `rounded` is the textarea shell (`rounded-xl`, 12px); inner chips stay pills ([inputs.md](inputs.md)).
 - Do not restyle `Modal.Content`, `Menu.Content`, or `Offcanvas.Content` corner geometry unless documented.
 
 ### Typography (headings)

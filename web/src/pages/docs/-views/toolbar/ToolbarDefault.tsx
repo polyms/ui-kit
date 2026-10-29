@@ -17,17 +17,21 @@ export default function ToolbarDefault() {
 	return (
 		<div className='m-auto flex max-w-3xl flex-col items-center gap-6 p-6'>
 			<Toolbar aria-label='Text formatting toolbar'>
-				<ToggleGroup aria-label='Alignment' className='toolbar-group'>
-					<Toolbar.Button aria-label='Align left' render={<Toggle />} value='align-left'>
+				<ToggleGroup aria-label='Alignment' className='toolbar-group' variant='toolbar'>
+					<Toolbar.Button aria-label='Align left' render={<Toggle variant='toolbar' />} value='align-left'>
 						<HugeiconsIcon icon={TextAlignLeftIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Align center' render={<Toggle />} value='align-center'>
+					<Toolbar.Button
+						aria-label='Align center'
+						render={<Toggle variant='toolbar' />}
+						value='align-center'
+					>
 						<HugeiconsIcon icon={TextAlignCenterIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Align right' render={<Toggle />} value='align-right'>
+					<Toolbar.Button aria-label='Align right' render={<Toggle variant='toolbar' />} value='align-right'>
 						<HugeiconsIcon icon={TextAlignRightIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Justify' render={<Toggle />} value='align-justify'>
+					<Toolbar.Button aria-label='Justify' render={<Toggle variant='toolbar' />} value='align-justify'>
 						<HugeiconsIcon icon={TextAlignJustifyCenterIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
 				</ToggleGroup>
@@ -35,16 +39,21 @@ export default function ToolbarDefault() {
 				<Toolbar.Separator orientation='vertical' />
 
 				<Toolbar.Group aria-label='Text formatting'>
-					<Toolbar.Button aria-label='Bold' render={<Toggle />} value='bold'>
+					<Toolbar.Button aria-label='Bold' render={<Toggle variant='toolbar' />} value='bold'>
 						<HugeiconsIcon icon={TextBoldIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Italic' render={<Toggle />} value='italic'>
+					<Toolbar.Button aria-label='Italic' render={<Toggle variant='toolbar' />} value='italic'>
 						<HugeiconsIcon icon={TextItalicIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Underline' render={<Toggle />} value='underline'>
+					<Toolbar.Button aria-label='Underline' render={<Toggle variant='toolbar' />} value='underline'>
 						<HugeiconsIcon icon={TextUnderlineIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
-					<Toolbar.Button aria-label='Strikethrough' disabled render={<Toggle />} value='strikethrough'>
+					<Toolbar.Button
+						aria-label='Strikethrough'
+						disabled
+						render={<Toggle variant='toolbar' />}
+						value='strikethrough'
+					>
 						<HugeiconsIcon icon={TextStrikethroughIcon} size={16} strokeWidth={2} />
 					</Toolbar.Button>
 				</Toolbar.Group>
