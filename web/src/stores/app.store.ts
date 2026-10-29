@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { track } from '../core/tracking'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -15,11 +16,19 @@ type AppState = {
 
 export const useAppStore = create<AppState>()(
 	persist(
-		set => ({
-			theme: 'light',
-			setTheme: theme => set({ theme }),
-			toggleTheme: () => set(state => ({ theme: state.theme === 'dark' ? 'light' : 'dark' })),
-		}),
+		(set, get) => {
+			const commitTheme = (theme: Theme) => {
+				const changed = get().theme !== theme
+				set({ theme })
+				if (changed) track('Toggled Theme', { theme })
+			}
+
+			return {
+				theme: 'light' as const,
+				setTheme: commitTheme,
+				toggleTheme: () => commitTheme(get().theme === 'dark' ? 'light' : 'dark'),
+			}
+		},
 		{
 			name: 'polyms-docs:app',
 			partialize: state => ({ theme: state.theme }),

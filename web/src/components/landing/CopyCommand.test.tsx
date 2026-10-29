@@ -3,12 +3,18 @@ import '@testing-library/jest-dom/vitest'
 import { cleanup, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { track } from '../../core/tracking'
 import { CopyCommand } from './CopyCommand'
+
+vi.mock('../../core/tracking', () => ({
+	track: vi.fn(),
+}))
 
 // ── Tests ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 afterEach(() => {
 	cleanup()
+	vi.clearAllMocks()
 	vi.restoreAllMocks()
 })
 
@@ -20,6 +26,7 @@ describe('Copy command', () => {
 		await user.click(screen.getByRole('button', { name: 'Copy install command' }))
 		expect(write).toHaveBeenCalledWith('pnpm add @polyms/ui-kit')
 		expect(screen.getByRole('status')).toHaveTextContent('Copied to clipboard.')
+		expect(track).toHaveBeenCalledWith('Copied Install Command', { command: 'pnpm add @polyms/ui-kit' })
 	})
 
 	it('shows a useful fallback when clipboard permission is denied', async () => {
@@ -29,5 +36,6 @@ describe('Copy command', () => {
 		await user.click(screen.getByRole('button', { name: 'Copy install command' }))
 		expect(screen.getByRole('status')).toHaveTextContent('Select the command and copy it manually.')
 		expect(screen.getByText('pnpm add @polyms/ui-kit')).toBeVisible()
+		expect(track).not.toHaveBeenCalled()
 	})
 })

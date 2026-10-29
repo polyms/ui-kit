@@ -4,6 +4,9 @@
 	"files": {
 		"includes": ["!**/_root.css", "!**/.venv-rembg"]
 	},
+	"javascript": {
+		"globals": ["__VERSION__"]
+	},
 	"tailwind": {
 		"stylesheet": "./web/src/styles/tailwind.css"
 	}

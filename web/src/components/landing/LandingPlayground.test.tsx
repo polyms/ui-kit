@@ -9,6 +9,7 @@ import { LandingPlayground } from './LandingPlayground'
 
 afterEach(() => {
 	cleanup()
+	vi.clearAllMocks()
 	vi.restoreAllMocks()
 	vi.unstubAllGlobals()
 })

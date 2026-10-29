@@ -106,6 +106,8 @@ vitest.config.*.timestamp*
 
 # Env & local config
 .env
+.env*
+!.env.example
 
 # Coverage & docs build
 **/coverage/
@@ -123,7 +125,6 @@ doc_build/
 # Local tooling
 .venv-rembg
 .vercel
-.env*
 migrations.json
 .vitest
 tools/ai-migrations

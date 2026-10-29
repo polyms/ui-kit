@@ -2,6 +2,7 @@ import { Button, Offcanvas, Select } from '@polyms/ui-kit'
 import { Moon, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import clsx from 'clsx'
 import { type CSSProperties, Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { track } from '../core/tracking'
 import { useAppStore } from '../stores/app.store'
 import { hexToOklchCss, normalizeHex, readCssColorAsHex } from '../stores/brand-ramp'
 import {
@@ -507,6 +508,7 @@ export function ThemeConfigOffcanvas() {
 				buildThemeSnippet(palettes, primaryRamp, semantics, primaryDarkRamp)
 			)
 			setCopied(true)
+			track('Copied Theme Snippet', { primary: palettes.primary })
 			if (copiedTimer.current !== null) window.clearTimeout(copiedTimer.current)
 			copiedTimer.current = window.setTimeout(() => setCopied(false), 2000)
 		} catch {

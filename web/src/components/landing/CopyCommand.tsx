@@ -2,6 +2,7 @@ import { Copy01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button } from '@polyms/ui-kit'
 import { useState } from 'react'
+import { track } from '../../core/tracking'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -20,6 +21,7 @@ export function CopyCommand() {
 						try {
 							await navigator.clipboard.writeText(command)
 							setFeedback('Copied to clipboard.')
+							track('Copied Install Command', { command })
 						} catch {
 							setFeedback('Select the command and copy it manually.')
 						}

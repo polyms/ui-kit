@@ -65,7 +65,10 @@ export function LandingPlayground() {
 								aria-pressed={palette === item.value}
 								className='home-swatch'
 								key={item.value}
-								onClick={() => setPalette(item.value)}
+								onClick={() => {
+									if (palette === item.value) return
+									setPalette(item.value)
+								}}
 								rounded
 								size='lg'
 							>
