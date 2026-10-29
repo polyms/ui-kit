@@ -1,4 +1,8 @@
 @layer components {
+	#root {
+		--floating-dock-clearance: calc(5.5rem + env(safe-area-inset-bottom));
+	}
+
 	.floating-dock {
 		position: fixed;
 		inset-block-end: max(1rem, env(safe-area-inset-bottom));
@@ -159,7 +163,7 @@
 	@media (max-width: 1023.98px) {
 		#root:not(.landing) > main,
 		#root.landing {
-			padding-bottom: 5.5rem;
+			padding-bottom: var(--floating-dock-clearance);
 		}
 	}
 }

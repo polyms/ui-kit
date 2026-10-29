@@ -8,6 +8,7 @@ import {
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Accordion, Button } from '@polyms/ui-kit'
+import { ArrowRightUp } from '@solar-icons/react-perf/LineDuotone'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import {
 	domAnimation,
@@ -591,15 +592,12 @@ function FooterSection() {
 					<img alt='' aria-hidden='true' height='2400' loading='lazy' src='/mascot.png' width='2600' />
 				</div>
 			</div>
-			<div className='home-footer-panel'>
+			<div className='home-footer-panel dark'>
 				<div className='home-wrap'>
 					<div className='home-footer-links'>
-						<div className='home-footer-support'>
-							<span className='home-label'>Support</span>
-							<a className='home-footer-mail' href='mailto:hello@polyms.dev'>
-								hello@polyms.dev
-							</a>
-						</div>
+						<a className='link link-light home-footer-mail' href='mailto:hello@polyms.dev'>
+							hello@polyms.dev
+						</a>
 						<nav aria-label='Footer navigation' className='home-footer-columns'>
 							<div className='home-footer-col'>
 								<span className='home-label'>Explore</span>
@@ -612,24 +610,24 @@ function FooterSection() {
 							<div className='home-footer-col'>
 								<span className='home-label'>Elsewhere</span>
 								<a href='https://github.com/polyms/ui-kit' rel='noopener noreferrer' target='_blank'>
-									GitHub ↗
+									GitHub <ArrowRightUp aria-hidden='true' />
 								</a>
 								<a href='https://polyms.dev' rel='noopener noreferrer' target='_blank'>
-									Polyms ↗
+									Polyms <ArrowRightUp aria-hidden='true' />
 								</a>
 							</div>
 						</nav>
 					</div>
-					<Link className='home-footer-mark' to='/'>
-						<span className='home-footer-mark-name'>polyms</span>
-						<span className='home-footer-mark-suffix'>/ ui</span>
-					</Link>
-				</div>
-			</div>
-			<div className='home-footer-legal'>
-				<div className='home-wrap'>
-					<span>© {new Date().getFullYear()} Polyms · MIT licensed</span>
-					<span>Built with a little care.</span>
+					<div className='home-footer-brand-row'>
+						<Link aria-label='Polyms home' className='home-footer-mark' to='/'>
+							<FaviconFit className='home-footer-mark-icon' hexCenterColor='var(--fg)' />
+							<span>olyms</span>
+						</Link>
+						<div className='home-footer-meta'>
+							<span>Built with a little care.</span>
+							<span>© {new Date().getFullYear()} Polyms · MIT licensed</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</footer>
