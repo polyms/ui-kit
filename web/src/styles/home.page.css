@@ -17,7 +17,7 @@ html:has(#root.landing) {
 
 /* Canvas and shared typography */
 main.landing {
-	--home-canvas: #ffffff;
+	--home-canvas: #fff9f2;
 	--home-ink: var(--color-neutral-900);
 	--home-muted: var(--color-neutral-600);
 	--home-border: color-mix(in oklab, var(--color-neutral-900) 14%, transparent);
