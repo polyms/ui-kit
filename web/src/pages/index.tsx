@@ -10,7 +10,6 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import { Accordion, Button } from '@polyms/ui-kit'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import {
-	AnimatePresence,
 	domAnimation,
 	LazyMotion,
 	MotionConfig,
@@ -22,8 +21,9 @@ import {
 } from 'motion/react'
 import { type ReactNode, useRef, useState } from 'react'
 import { FaviconFit } from '../assets/FaviconFit'
+import { CopyCommand } from '../components/landing/CopyCommand'
 import { HeroShelf } from '../components/landing/HeroShelf'
-import { CopyCommand, LandingPlayground } from '../components/landing/LandingPlayground'
+import { LandingPlayground } from '../components/landing/LandingPlayground'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import homePageStylesUrl from '../styles/home.page.css?url'
 
@@ -225,8 +225,8 @@ function LandingNav() {
 					<a className='item-dark' href='#playground'>
 						Playground
 					</a>
-					<Link className='item-dark' data-testid='home-nav-docs' to='/design-system'>
-						Components
+					<Link className='item-dark' data-testid='home-nav-design-system' to='/design-system'>
+						Design system
 					</Link>
 					<a
 						aria-label='GitHub repository'
@@ -347,18 +347,27 @@ function HeroSection() {
 
 const STORY_STEPS = [
 	{
+		label: 'Pick',
+		caption: 'A few good pieces.',
+		badge: 'Your components',
 		title: 'Find your starting point.',
 		copy: 'Buttons, tabs, fields, dialogs. Start with a small piece that already feels right.',
 		link: '/design-system',
 		action: 'Explore the components',
 	},
 	{
+		label: 'Compose',
+		caption: 'Better, together.',
+		badge: 'Your components',
 		title: 'Put the pieces together.',
 		copy: 'Compose the parts you need. Keep control of your layout, content, and interactions.',
 		link: '/docs/modal',
 		action: 'See composition in action',
 	},
 	{
+		label: 'Customize',
+		caption: 'Feels like you.',
+		badge: 'Your brand',
 		title: 'Make it unmistakably yours.',
 		copy: 'Bring your colors. Switch the theme. Give every component the same point of view.',
 		link: '/design-tokens',
@@ -370,7 +379,6 @@ function StorySection() {
 	const target = useRef<HTMLDivElement>(null)
 	const [step, setStep] = useState(0)
 	const desktop = useMediaQuery('(min-width: 1024px)')
-	const reduced = useReducedMotion()
 	const { scrollYProgress } = useScroll({ target, offset: ['start center', 'end center'] })
 	useMotionValueEvent(scrollYProgress, 'change', value => {
 		if (desktop) setStep(Math.min(2, Math.floor(value * 3)))
@@ -388,31 +396,19 @@ function StorySection() {
 			</Reveal>
 			<div className='home-story-layout'>
 				<div className='home-story-sticky'>
-					<div className='home-story-scene'>
-						<AnimatePresence initial={false}>
-							<m.div
-								animate={{ opacity: 1, x: 0 }}
-								aria-hidden='true'
-								className='home-story-frame'
-								exit={{ opacity: 0, x: reduced ? 0 : -14 }}
-								initial={{ opacity: 0, x: reduced ? 0 : 14 }}
-								key={desktop ? 'desktop' : step}
-								transition={{ duration: reduced ? 0 : 0.2 }}
-							>
-								<StoryVisual step={step} />
-							</m.div>
-						</AnimatePresence>
+					<div aria-hidden='true' className='home-story-scene'>
+						<StoryVisual step={step} />
 					</div>
 					<nav aria-label='Building steps' className='home-story-timeline'>
 						<ol>
-							{['Pick', 'Compose', 'Customize'].map((label, index) => (
+							{STORY_STEPS.map((item, index) => (
 								<li
 									data-state={index === step ? 'active' : index < step ? 'complete' : 'upcoming'}
-									key={label}
+									key={item.label}
 								>
 									<a aria-current={index === step ? 'step' : undefined} href={`#building-step-${index + 1}`}>
 										<span className='home-timeline-marker'>0{index + 1}</span>
-										<span>{label}</span>
+										<span>{item.label}</span>
 									</a>
 								</li>
 							))}
@@ -421,9 +417,6 @@ function StorySection() {
 					<div className='home-story-progress'>
 						<m.div style={{ scaleX: scrollYProgress }} />
 					</div>
-					<span aria-hidden='true' className='home-label home-story-position'>
-						0{step + 1} / 03 — {['PICK', 'COMPOSE', 'CUSTOMIZE'][step]}
-					</span>
 				</div>
 				<div className='home-story-steps' ref={target}>
 					{STORY_STEPS.map((item, index) => (
@@ -472,12 +465,9 @@ function StoryVisual({ step }: { step: number }) {
 				<span className='home-drawn-switch' />
 			</div>
 			<div className='home-assembly-piece piece-badge'>
-				<HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} />{' '}
-				{step === 2 ? 'Your brand' : 'Your components'}
+				<HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} /> {STORY_STEPS[step].badge}
 			</div>
-			<span className='home-assembly-caption'>
-				{['A few good pieces.', 'Better, together.', 'Feels like you.'][step]}
-			</span>
+			<span className='home-assembly-caption'>{STORY_STEPS[step].caption}</span>
 		</div>
 	)
 }
@@ -603,7 +593,7 @@ function FooterSection() {
 				<div className='home-footer-bottom'>
 					<span>© {new Date().getFullYear()} Polyms · MIT licensed</span>
 					<nav aria-label='Footer navigation'>
-						<Link to='/design-system'>Components</Link>
+						<Link to='/design-system'>Design system</Link>
 						<Link data-testid='home-nav-typography' to='/typography'>
 							Typography
 						</Link>

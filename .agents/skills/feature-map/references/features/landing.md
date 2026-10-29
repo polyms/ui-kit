@@ -27,7 +27,7 @@ Mở `/`. Trang này không có sidebar docs. Skip link `Skip to the playground`
 - Dialog: bấm `Try a dialog`; `[data-testid="playground-dialog"]` hiện heading `A little focus goes a long way.` và palette đang chọn. `Back to playing` hoặc Escape đóng dialog, focus về nút mở.
 - Offcanvas: bấm `Try an offcanvas`; `[data-testid="playground-offcanvas"]` hiện `A little space for the details.` và dòng Appearance `Light` hoặc `Dark`. `Back to the workspace` đóng panel.
 - Copy: bấm `Copy install command`; status là `Copied to clipboard.` hoặc `Select the command and copy it manually.`
-- Paths: `Get started` và `Let’s get building` mở `/installation`. `Components` và `Explore components` mở `/design-system`. Story lần lượt mở `/design-system`, `/docs/modal`, `/design-tokens`. `Explore the Button API` mở `/docs/button`. Footer `Typography` mở `/typography`.
+- Paths: `Get started` và `Let’s get building` mở `/installation`. Nav `Design system` và `Explore components` mở `/design-system`. Story: `Explore the components` mở `/design-system`, `See composition in action` mở `/docs/modal`, `Meet your design tokens` mở `/design-tokens`. `Explore the Button API` mở `/docs/button`. Footer `Design system` mở `/design-system`, `Typography` mở `/typography`.
 - FAQ: bấm `What do I need to get started?`; panel hiện và nhắc installation guide. Bấm lại thì panel đóng.
 
 ## Gotchas
@@ -38,5 +38,5 @@ Mở `/`. Trang này không có sidebar docs. Skip link `Skip to the playground`
 - Dialog và offcanvas đọc palette và dark mode tại lúc mở. Đổi swatch khi panel đang mở thì nội dung panel đổi theo.
 - Clipboard bị chặn thì status yêu cầu copy tay; lệnh trong `<code>` vẫn là `pnpm add @polyms/ui-kit`.
 - GitHub (`https://github.com/polyms/ui-kit`) và Polyms (`https://polyms.dev`) mở tab mới. Đừng chờ route trong app.
-- Khối story đổi hình theo scroll (`01 / 03 — PICK` rồi `COMPOSE`, `CUSTOMIZE`). Viewport hẹp vẽ hình trong từng bước. Hồi quy đường đi bằng ba link chữ, không bằng vị trí scroll.
+- Khối story đổi hình theo scroll. Timeline `Building steps` hiện `Pick`, rồi `Compose`, `Customize`; bước đang active có `aria-current="step"`. Cảnh minh họa là `aria-hidden`, không còn dòng `01 / 03`. Viewport hẹp vẽ hình trong từng bước. Hồi quy đường đi bằng ba link chữ, không bằng vị trí scroll.
 - `prefers-reduced-motion` tắt animation vào viewport. Thao tác nút, switch, tab và overlay vẫn chạy.

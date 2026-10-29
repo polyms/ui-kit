@@ -151,9 +151,6 @@ main.landing {
 	font-weight: 650;
 	letter-spacing: -0.06em;
 }
-.home-brand > span {
-	margin-left: 0;
-}
 .home-brand-suffix {
 	font-size: 17px;
 	font-weight: 400;
@@ -756,10 +753,6 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 .home-story-section {
 	padding-block: 32px 80px;
 }
-.home-story-layout {
-	display: block;
-	gap: 40px;
-}
 .home-story-sticky {
 	position: sticky;
 	top: 76px;
@@ -868,10 +861,6 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 		position: relative;
 		height: clamp(190px, 28svh, 240px);
 	}
-	.home-story-frame {
-		position: absolute;
-		inset: 0;
-	}
 	.home-story-sticky .home-assembly {
 		height: clamp(190px, 28svh, 240px);
 		min-height: 0;
@@ -919,8 +908,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 		left: 12px;
 		font-size: 9px;
 	}
-	.home-story-progress,
-	.home-story-position {
+	.home-story-progress {
 		display: none;
 	}
 }
@@ -1477,12 +1465,6 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	--home-muted: var(--color-neutral-400);
 	--home-border: var(--color-neutral-700);
 	--home-accent: var(--color-info-300);
-}
-.dark .home-assembly {
-	--assembly-accent: var(--color-primary-700);
-}
-.dark .home-assembly[data-step='2'] {
-	--assembly-accent: var(--color-info-700);
 }
 
 /* Motion and accessible fallback */

@@ -1,4 +1,4 @@
-import { ArrowRight01Icon, CheckmarkCircle02Icon, Copy01Icon, Layers01Icon } from '@hugeicons/core-free-icons'
+import { ArrowRight01Icon, CheckmarkCircle02Icon, Layers01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Modal, Offcanvas, Switch, Tabs } from '@polyms/ui-kit'
 import type { CSSProperties } from 'react'
@@ -19,7 +19,9 @@ const PALETTES: { value: Palette; label: string }[] = [
 export function LandingPlayground() {
 	const [palette, setPalette] = useState<Palette>('cyan')
 	const [dark, setDark] = useState(false)
-	const [revision, setRevision] = useState(0)
+	const [resetCount, setResetCount] = useState(0)
+	const paletteLabel = PALETTES.find(item => item.value === palette)?.label
+	const appearance = dark ? 'Dark' : 'Light'
 	const theme: CSSProperties = Object.fromEntries(
 		[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950].map(step => [
 			`--color-primary-${step}`,
@@ -61,7 +63,7 @@ export function LandingPlayground() {
 					onClick={() => {
 						setPalette('cyan')
 						setDark(false)
-						setRevision(value => value + 1)
+						setResetCount(value => value + 1)
 					}}
 					size='lg'
 				>
@@ -87,7 +89,7 @@ export function LandingPlayground() {
 							))}
 						</div>
 					</div>
-					<ProjectPreview key={revision} />
+					<ProjectPreview key={resetCount} />
 				</div>
 				<div className='home-preview-bottom'>
 					<span>
@@ -106,8 +108,8 @@ export function LandingPlayground() {
 											<HugeiconsIcon icon={Layers01Icon} size={24} />
 										</span>
 										<span>
-											{PALETTES.find(item => item.value === palette)?.label} palette
-											<span className='home-overlay-muted'>{dark ? 'Dark' : 'Light'} workspace</span>
+											{paletteLabel} palette
+											<span className='home-overlay-muted'>{appearance} workspace</span>
 										</span>
 									</div>
 									<p>
@@ -147,11 +149,11 @@ export function LandingPlayground() {
 									<dl className='home-overlay-details'>
 										<div>
 											<dt>Palette</dt>
-											<dd>{PALETTES.find(item => item.value === palette)?.label}</dd>
+											<dd>{paletteLabel}</dd>
 										</div>
 										<div>
 											<dt>Appearance</dt>
-											<dd>{dark ? 'Dark' : 'Light'}</dd>
+											<dd>{appearance}</dd>
 										</div>
 										<div>
 											<dt>Built with</dt>
@@ -173,7 +175,7 @@ export function LandingPlayground() {
 	)
 }
 
-export function ProjectPreview({ compact = false }: { compact?: boolean }) {
+function ProjectPreview() {
 	const [complete, setComplete] = useState(false)
 	const [digest, setDigest] = useState(true)
 	return (
@@ -191,7 +193,7 @@ export function ProjectPreview({ compact = false }: { compact?: boolean }) {
 				</span>
 			</div>
 			<Tabs defaultValue='project'>
-				<Tabs.List aria-label={compact ? 'Hero preview' : 'Workspace preview'}>
+				<Tabs.List aria-label='Workspace preview'>
 					<Tabs.Tab value='project'>Project</Tabs.Tab>
 					<Tabs.Tab value='preferences'>Preferences</Tabs.Tab>
 				</Tabs.List>
@@ -245,37 +247,6 @@ export function ProjectPreview({ compact = false }: { compact?: boolean }) {
 					</div>
 				</Tabs.Panel>
 			</Tabs>
-		</div>
-	)
-}
-
-export function CopyCommand() {
-	const [feedback, setFeedback] = useState('')
-	const command = 'pnpm add @polyms/ui-kit'
-	return (
-		<div className='home-install-command'>
-			<div className='home-command-line'>
-				<span aria-hidden='true'>$</span>
-				<code>{command}</code>
-				<Button
-					aria-label='Copy install command'
-					icon
-					onClick={async () => {
-						try {
-							await navigator.clipboard.writeText(command)
-							setFeedback('Copied to clipboard.')
-						} catch {
-							setFeedback('Select the command and copy it manually.')
-						}
-					}}
-					size='lg'
-				>
-					<HugeiconsIcon icon={Copy01Icon} size={19} />
-				</Button>
-			</div>
-			<p aria-live='polite' className='home-copy-feedback' role='status'>
-				{feedback}
-			</p>
 		</div>
 	)
 }
