@@ -6,4 +6,4 @@ Skill: .agents/skills/feature-map/SKILL.md
 Index: .agents/skills/feature-map/references/features/README.md
 Harness: none
 
-File gốc nằm ở `.agents/skills/feature-map`. Cursor (`.cursor/skills/feature-map`), Claude (`.claude/skills/feature-map`) và Copilot (`.github/skills/feature-map`) là symlink tới đó. Không tạo bản sao thứ hai.
+File gốc nằm ở `.agents/skills/feature-map`. Cả folder `.agents/skills` được symlink sang Cursor (`.cursor/skills`), Claude (`.claude/skills`), Copilot (`.github/skills`) và Gemini (`.gemini/skills`). Thêm skill mới chỉ cần đặt trong `.agents/skills`. Không tạo bản sao thứ hai, không link từng skill.

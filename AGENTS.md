@@ -212,6 +212,8 @@ Thư mục **`ui-kit/skills/ui-kit/`** là nguồn chính cho agent guidance con
 
 Repo này tự dùng cùng skill qua symlink **`.agents/skills/ui-kit`** trỏ về **`ui-kit/skills/ui-kit`**; không tạo bản copy thứ hai để tránh drift.
 
+Mọi skill của repo nằm ở **`.agents/skills`**. **`.cursor/skills`**, **`.claude/skills`**, **`.github/skills`** và **`.gemini/skills`** là symlink cả folder tới đó (Codex đọc `.agents/skills` trực tiếp). Thêm skill mới chỉ cần tạo trong `.agents/skills` — không link từng skill sang từng tool.
+
 ---
 
 ## Liên kết local `ui-kit`
