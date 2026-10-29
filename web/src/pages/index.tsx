@@ -22,6 +22,7 @@ import {
 } from 'motion/react'
 import { type ReactNode, useRef, useState } from 'react'
 import { FaviconFit } from '../assets/FaviconFit'
+import { BrandLogo } from '../components/BrandLogo'
 import { CopyCommand } from '../components/landing/CopyCommand'
 import { HeroShelf } from '../components/landing/HeroShelf'
 import { LandingPlayground } from '../components/landing/LandingPlayground'
@@ -217,10 +218,10 @@ function LandingNav() {
 		<header className='home-nav'>
 			<div className='home-wrap home-nav-inner'>
 				<Link aria-label='Polyms home' className='home-brand' to='/'>
-					<FaviconFit className='h-10 w-auto' />
-					<span>
-						olyms<span className='home-brand-suffix'> / ui</span>
-					</span>
+					<BrandLogo className='gap-0.5' iconClassName='h-10 w-auto'>
+						olyms
+					</BrandLogo>
+					<span className='home-brand-suffix ms-2'> / ui</span>
 				</Link>
 				<nav aria-label='Main navigation' className='home-nav-links'>
 					<a className='item-dark' href='#playground'>
@@ -446,6 +447,8 @@ function StorySection() {
 }
 
 function StoryVisual({ step }: { step: number }) {
+	const story = STORY_STEPS[step] ?? STORY_STEPS[0]
+
 	return (
 		<div className='home-assembly' data-step={step}>
 			<div className='home-assembly-grid' />
@@ -466,9 +469,9 @@ function StoryVisual({ step }: { step: number }) {
 				<span className='home-drawn-switch' />
 			</div>
 			<div className='home-assembly-piece piece-badge'>
-				<HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} /> {STORY_STEPS[step].badge}
+				<HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} /> {story.badge}
 			</div>
-			<span className='home-assembly-caption'>{STORY_STEPS[step].caption}</span>
+			<span className='home-assembly-caption'>{story.caption}</span>
 		</div>
 	)
 }

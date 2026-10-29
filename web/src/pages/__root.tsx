@@ -3,20 +3,21 @@
 import { Toast } from '@polyms/ui-kit'
 import { createRootRoute, Link, Outlet, useRouterState } from '@tanstack/react-router'
 import { useRef } from 'react'
+import { BrandLogo } from '../components/BrandLogo'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { AppSidebar } from '../layouts/AppSidebar'
 import { DocsFloatingDock } from '../layouts/DocsFloatingDock'
 
 import '../stores/app.store'
 import '../stores/theme.store'
-import { FaviconFit } from '../assets/FaviconFit'
 
 const Name = () => {
 	return (
 		<div id='app-name'>
 			<Link aria-label='Polyms home' className='flex items-center gap-1' data-testid='brand-home-link' to='/'>
-				<FaviconFit className='h-10 w-auto' />
-				<strong className='text-xl'>olyms</strong>
+				<BrandLogo className='gap-1' iconClassName='h-10 w-auto'>
+					<strong className='text-xl'>olyms</strong>
+				</BrandLogo>
 			</Link>
 			<span className='badge badge-primary rounded-full px-4 font-bold whitespace-nowrap'>Design system</span>
 		</div>
