@@ -117,9 +117,7 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
 		}
 
 		if (variant === 'landing') {
-			return sidebarRef
-				? [topAction, themeAction, appearanceAction, menuAction]
-				: [topAction, themeAction, appearanceAction]
+			return [topAction, themeAction, appearanceAction]
 		}
 
 		const docsActions: DockAction[] = [

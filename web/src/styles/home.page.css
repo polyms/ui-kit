@@ -1406,7 +1406,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 		justify-content: space-between;
 	}
 	.home-footer-mark {
-		transform: translateY(0.22em);
+		margin-bottom: -0.22em;
 	}
 	.home-footer-meta {
 		align-items: flex-end;

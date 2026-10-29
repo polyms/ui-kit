@@ -42,8 +42,7 @@ const Root = () => {
 		return (
 			<Toast>
 				<Outlet />
-				{isDesktop && <AppSidebar drawerOnly ref={appSidebarRef} />}
-				<DocsFloatingDock sidebarRef={isDesktop ? appSidebarRef : undefined} variant='landing' />
+				<DocsFloatingDock variant='landing' />
 				<Toast.Container />
 			</Toast>
 		)
