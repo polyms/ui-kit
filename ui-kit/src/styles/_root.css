@@ -127,6 +127,25 @@
     --line: var(--color-neutral-300);
     --input: #ffffff;
 
+    --control-radius: var(--radius-sm);
+    --control-ring-width: 3px;
+    --control-ring: color-mix(in oklab, var(--color-primary-600) 35%, transparent);
+    --control-ring-danger: color-mix(in oklab, var(--color-danger-500) 35%, transparent);
+    --control-tint-hover: 10%;
+    --control-tint-active: 15%;
+    --control-tint-pressed: 12%;
+    --control-tint-pressed-hover: 18%;
+    --control-tint-pressed-active: 24%;
+    --group-radius: var(--radius-lg);
+    --popup-radius: var(--radius-lg);
+    --popup-shadow:
+      0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
+      0 4px 6px -4px color-mix(in oklab, #000 10%, transparent);
+    --dialog-radius: var(--radius-3xl);
+    --sheet-radius: var(--radius-2xl);
+    --overlay-bg: var(--body);
+    --overlay-backdrop: #000;
+
     color-scheme: light;
 
     --shadow-base: var(--shadow-base);
@@ -161,6 +180,7 @@
     --muted: #c0c8d4;
     --line: #4c566a;
     --input: #3b4252;
+    --control-ring: color-mix(in oklab, var(--color-primary-400) 45%, transparent);
 
     color-scheme: dark;
   }

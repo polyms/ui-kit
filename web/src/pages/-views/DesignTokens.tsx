@@ -1,5 +1,6 @@
 import { Button } from '@polyms/ui-kit'
-import { useLayoutEffect, useRef, useState } from 'react'
+import clsx from 'clsx'
+import { Fragment, useLayoutEffect, useRef, useState } from 'react'
 import { cssColorToHex } from '../../stores/brand-ramp'
 import { useThemeStore } from '../../stores/theme.store'
 import {
@@ -27,6 +28,24 @@ const TYPE_VIEWPORTS = [
 ] as const
 const COLOR_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
 const SURFACES = ['--body', '--fg', '--surface', '--surface-2', '--muted', '--line', '--input'] as const
+const ROLE_TOKENS = [
+	'--control-radius',
+	'--control-ring',
+	'--control-ring-width',
+	'--control-ring-danger',
+	'--control-tint-hover',
+	'--control-tint-active',
+	'--control-tint-pressed',
+	'--control-tint-pressed-hover',
+	'--control-tint-pressed-active',
+	'--group-radius',
+	'--popup-radius',
+	'--popup-shadow',
+	'--dialog-radius',
+	'--sheet-radius',
+	'--overlay-bg',
+	'--overlay-backdrop',
+] as const
 const cssModules = import.meta.glob('../../../../ui-kit/src/styles/*.css', {
 	eager: true,
 	import: 'default',
@@ -53,6 +72,15 @@ function themedValue(token: CatalogToken | undefined, mode: 'dark' | 'light') {
 		mode === 'dark' ? item.selector.includes('.dark') : !item.selector.includes('.dark')
 	)
 	return displayValue(use?.value)
+}
+
+function roleValue(token: CatalogToken | undefined, mode: 'dark' | 'light') {
+	if (mode === 'dark') {
+		const dark = token?.uses.find(item => item.selector === '.dark' || item.selector.startsWith('.dark'))
+		return displayValue(dark?.value)
+	}
+	const root = token?.uses.find(item => item.selector === ':root')
+	return displayValue(root?.value)
 }
 
 function componentGroups(tokens: CatalogToken[]) {
@@ -370,11 +398,50 @@ function ZIndex() {
 	)
 }
 
+function RoleTokens() {
+	return (
+		<div>
+			<h3 className='h3 mb-3'>Controls and overlays</h3>
+			<div className='overflow-x-auto'>
+				<table className='table w-full'>
+					<thead>
+						<tr>
+							<th>Token</th>
+							<th>Light</th>
+							<th>Dark</th>
+						</tr>
+					</thead>
+					<tbody>
+						{ROLE_TOKENS.map(name => {
+							const token = tokenByName(catalog.semantic, name)
+							if (!token) return null
+							return (
+								<tr key={name}>
+									<td>
+										<code className='font-mono text-xs text-nowrap'>{name}</code>
+									</td>
+									<td>
+										<ValueCode value={roleValue(token, 'light')} />
+									</td>
+									<td>
+										<ValueCode value={roleValue(token, 'dark')} />
+									</td>
+								</tr>
+							)
+						})}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	)
+}
+
 function SemanticTokens() {
 	return (
 		<div className='space-y-8'>
 			<Surfaces />
 			<SurfaceAliases />
+			<RoleTokens />
 			<ZIndex />
 		</div>
 	)
@@ -426,51 +493,61 @@ function ComponentTable({ tokens }: { tokens: CatalogToken[] }) {
 	)
 }
 
-function VariantTokens({ variant }: { variant: VariantSection }) {
-	const hasDark = variant.rows.some(row => row.dark)
+function VariantTokens({ variants }: { variants: VariantSection[] }) {
+	const hasDark = variants.some(variant => variant.rows.some(row => row.dark))
+	const columns = hasDark ? 3 : 2
 	return (
-		<div>
-			<h4 className={isSizeVariant(variant.label) ? 'h4 mb-2' : 'h4 mb-2 capitalize'}>{variant.label}</h4>
-			<div className='overflow-x-auto'>
-				<table className='table w-full'>
-					<thead>
-						<tr>
-							<th className='w-px'>Token</th>
-							{hasDark ? (
-								<>
-									<th>Light</th>
-									<th>Dark</th>
-								</>
-							) : (
-								<th>Value</th>
-							)}
-						</tr>
-					</thead>
-					<tbody>
-						{variant.rows.map(row => (
-							<tr key={row.name}>
-								<td>
-									<code className='font-mono text-xs text-nowrap'>{row.name}</code>
-								</td>
-								{hasDark ? (
-									<>
-										<td>
-											<ValueCode value={displayValue(row.light)} />
-										</td>
-										<td>
-											<ValueCode value={displayValue(row.dark)} />
-										</td>
-									</>
-								) : (
-									<td>
-										<ValueCode value={displayValue(row.light ?? row.dark)} />
-									</td>
-								)}
+		<div className='overflow-x-auto'>
+			<table className='table w-full'>
+				<thead>
+					<tr>
+						<th className='w-px'>Token</th>
+						{hasDark ? (
+							<>
+								<th>Light</th>
+								<th>Dark</th>
+							</>
+						) : (
+							<th>Value</th>
+						)}
+					</tr>
+				</thead>
+				<tbody>
+					{variants.map(variant => (
+						<Fragment key={variant.label}>
+							<tr>
+								<th
+									className={clsx('token-variant-label', !isSizeVariant(variant.label) && 'capitalize')}
+									colSpan={columns}
+								>
+									{variant.label}
+								</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+							{variant.rows.map(row => (
+								<tr key={`${variant.label}:${row.name}`}>
+									<td>
+										<code className='font-mono text-xs text-nowrap'>{row.name}</code>
+									</td>
+									{hasDark ? (
+										<>
+											<td>
+												<ValueCode value={displayValue(row.light)} />
+											</td>
+											<td>
+												<ValueCode value={displayValue(row.dark)} />
+											</td>
+										</>
+									) : (
+										<td>
+											<ValueCode value={displayValue(row.light ?? row.dark)} />
+										</td>
+									)}
+								</tr>
+							))}
+						</Fragment>
+					))}
+				</tbody>
+			</table>
 		</div>
 	)
 }
@@ -489,9 +566,7 @@ function ComponentTokens() {
 						{layout.variants.length ? (
 							<div className='space-y-6'>
 								{layout.defaults.length ? <ComponentTable tokens={layout.defaults} /> : null}
-								{layout.variants.map(variant => (
-									<VariantTokens key={variant.label} variant={variant} />
-								))}
+								<VariantTokens variants={layout.variants} />
 							</div>
 						) : (
 							<ComponentTable tokens={layout.defaults} />

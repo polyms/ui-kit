@@ -27,7 +27,7 @@ Mở `/`. Trang này không có sidebar docs. Skip link `Skip to the playground`
 - Dialog: bấm `Try a dialog`; `[data-testid="playground-dialog"]` hiện heading `A little focus goes a long way.` và palette đang chọn. `Back to playing` hoặc Escape đóng dialog, focus về nút mở.
 - Offcanvas: bấm `Try an offcanvas`; `[data-testid="playground-offcanvas"]` hiện `A little space for the details.` và dòng Appearance `Light` hoặc `Dark`. `Back to the workspace` đóng panel.
 - Copy: bấm `Copy install command`; status là `Copied to clipboard.` hoặc `Select the command and copy it manually.`
-- Paths: `Get started` và `Let’s get building` mở `/installation`. Nav `Design system` và `Explore components` mở `/design-system`. Story: `Explore the components` mở `/design-system`, `See composition in action` mở `/docs/modal`, `Meet your design tokens` mở `/design-tokens`. `Explore the Button API` mở `/docs/button`. Footer `Design system` mở `/design-system`, `Typography` mở `/typography`.
+- Paths: `Get started` và `Let’s get building` mở `/installation`. Nav `Design system` và `Explore components` mở `/design-system`. Story: `Explore the components` mở `/design-system`, `See composition in action` mở `/docs/modal`, `Meet your design tokens` mở `/design-tokens`. `Explore the Button API` mở `/docs/button`. Footer `Design system` mở `/design-system`, `Typography` mở `/typography`, `Installation` mở `/installation`. `hello@polyms.dev` là `mailto:hello@polyms.dev`.
 - FAQ: bấm `What do I need to get started?`; panel hiện và nhắc installation guide. Bấm lại thì panel đóng.
 
 ## Gotchas

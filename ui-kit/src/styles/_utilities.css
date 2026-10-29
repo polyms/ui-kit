@@ -63,14 +63,14 @@
 	@media (hover: hover) {
 		&:hover {
 			color: var(--item-interaction-color);
-			background-color: color-mix(in oklab, var(--item-tint-color) 10%, transparent);
+			background-color: color-mix(in oklab, var(--item-tint-color) var(--control-tint-hover), transparent);
 		}
 	}
 
 	&:active,
 	&.active {
 		color: var(--item-interaction-color);
-		background-color: color-mix(in oklab, var(--item-tint-color) 15%, transparent);
+		background-color: color-mix(in oklab, var(--item-tint-color) var(--control-tint-active), transparent);
 	}
 }
 

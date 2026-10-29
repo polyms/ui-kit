@@ -37,19 +37,20 @@
 }
 
 .modal-content {
-	background-color: var(--body);
+	background-color: var(--overlay-bg);
 
 	/* overflow: hidden; */
-	border-radius: 1.5rem;
+	border-radius: var(--dialog-radius);
 	@apply pointer-events-auto relative flex w-full flex-auto flex-col bg-clip-padding outline-none;
 	@apply ring-4 ring-white/30;
 }
 
 .modal-backdrop {
 	z-index: var(--zindex-modal-backdrop);
+	background-color: var(--overlay-backdrop);
 	opacity: 0.8;
 	transition: opacity 300ms cubic-bezier(0.45, 1.005, 0, 1.005);
-	@apply fixed inset-0 h-screen w-screen bg-black;
+	@apply fixed inset-0 h-screen w-screen;
 
 	&[data-starting-style] {
 		transition: opacity 150ms cubic-bezier(0.45, 1.005, 0, 1.005);
@@ -63,8 +64,10 @@
 
 .modal-header {
 	font-size: 22px;
+	border-top-left-radius: var(--dialog-radius);
+	border-top-right-radius: var(--dialog-radius);
 	@apply flex shrink-0 items-center gap-2 leading-5;
-	@apply rounded-t-3xl p-5 font-semibold;
+	@apply p-5 font-semibold;
 
 	.modal-close {
 		@apply self-start;
@@ -88,7 +91,7 @@
 	position: sticky;
 	bottom: 0;
 	padding: 0.5rem 1.5rem 1rem;
-	border-radius: 1.5rem;
+	border-radius: var(--dialog-radius);
 	@apply flex shrink-0 flex-wrap items-center justify-end gap-2 backdrop-blur-lg;
 }
 

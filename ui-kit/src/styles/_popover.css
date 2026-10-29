@@ -12,7 +12,7 @@
 	outline: 0;
 	background-color: var(--surface);
 	border: 1px solid var(--line);
-	border-radius: 0.375rem;
+	border-radius: var(--radius-md);
 
 	@media (hover: hover) {
 		&:hover {
@@ -29,7 +29,7 @@
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--color-primary-700);
+		outline: var(--control-ring-width) solid var(--control-ring);
 		outline-offset: -1px;
 	}
 }
@@ -57,10 +57,8 @@
 	outline: none;
 	background-color: var(--surface-2);
 	border: 1px solid var(--line);
-	border-radius: 0.5rem;
-	box-shadow:
-		0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
-		0 4px 6px -4px color-mix(in oklab, #000 10%, transparent);
+	border-radius: var(--popup-radius);
+	box-shadow: var(--popup-shadow);
 	transform-origin: var(--transform-origin);
 	transition:
 		transform 150ms,

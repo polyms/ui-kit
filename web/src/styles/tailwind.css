@@ -32,3 +32,18 @@
 		@apply mb-10;
 	}
 }
+
+/* Variant band between token rows. Unlayered so it beats .table cell fill. */
+.table tr > .token-variant-label {
+	padding: 0.25rem 2.25rem;
+	color: #fff;
+	background-color: var(--color-primary-700);
+	border-bottom-width: 0;
+	border-radius: var(--radius-xs);
+	box-shadow: none;
+}
+
+.dark .table tr > .token-variant-label {
+	color: var(--color-neutral-950);
+	background-color: var(--color-primary-300);
+}

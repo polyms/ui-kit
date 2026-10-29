@@ -1,12 +1,31 @@
 .toolbar {
 	/* Transparent palette tokens (mirrors `.item-primary` pattern in _utilities.css) */
 	--toolbar-variant-color: var(--color-primary-700);
-	--toolbar-bg-hover: color-mix(in oklab, var(--toolbar-variant-color) 10%, transparent);
-	--toolbar-bg-active: color-mix(in oklab, var(--toolbar-variant-color) 15%, transparent);
-	--toolbar-bg-pressed: color-mix(in oklab, var(--toolbar-variant-color) 12%, transparent);
-	--toolbar-bg-pressed-hover: color-mix(in oklab, var(--toolbar-variant-color) 18%, transparent);
-	--toolbar-bg-pressed-active: color-mix(in oklab, var(--toolbar-variant-color) 24%, transparent);
-	--toolbar-focus-ring: color-mix(in oklab, var(--color-primary-500) 35%, transparent);
+	--toolbar-bg-hover: color-mix(
+		in oklab,
+		var(--toolbar-variant-color) var(--control-tint-hover),
+		transparent
+	);
+	--toolbar-bg-active: color-mix(
+		in oklab,
+		var(--toolbar-variant-color) var(--control-tint-active),
+		transparent
+	);
+	--toolbar-bg-pressed: color-mix(
+		in oklab,
+		var(--toolbar-variant-color) var(--control-tint-pressed),
+		transparent
+	);
+	--toolbar-bg-pressed-hover: color-mix(
+		in oklab,
+		var(--toolbar-variant-color) var(--control-tint-pressed-hover),
+		transparent
+	);
+	--toolbar-bg-pressed-active: color-mix(
+		in oklab,
+		var(--toolbar-variant-color) var(--control-tint-pressed-active),
+		transparent
+	);
 	box-sizing: border-box;
 
 	display: flex;
@@ -18,7 +37,7 @@
 	color: var(--fg);
 	background-color: transparent;
 	border: 1px solid var(--line);
-	border-radius: 0.5rem;
+	border-radius: var(--group-radius);
 
 	&[data-orientation='vertical'] {
 		flex-direction: column;
@@ -103,7 +122,7 @@
 	outline: none;
 	background-color: transparent;
 	border: 1px solid transparent;
-	border-radius: 0.375rem;
+	border-radius: var(--control-radius);
 	transition:
 		background-color 150ms ease,
 		color 150ms ease,
@@ -125,7 +144,7 @@
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--toolbar-focus-ring);
+		outline: var(--control-ring-width) solid var(--control-ring);
 		outline-offset: -1px;
 	}
 
@@ -157,17 +176,7 @@
 
 	/* Compact variant when used inside a Group: collapse spacing into a unified pill */
 	.toolbar-group > & {
-		border-radius: 0.25rem;
-	}
-
-	.toolbar-group > &:first-child {
-		border-start-start-radius: 0.375rem;
-		border-end-start-radius: 0.375rem;
-	}
-
-	.toolbar-group > &:last-child {
-		border-start-end-radius: 0.375rem;
-		border-end-end-radius: 0.375rem;
+		border-radius: var(--control-radius);
 	}
 
 	/* When composed with Button via `render={<Button icon />}`, defer horizontal
@@ -187,7 +196,7 @@
 	text-decoration: none;
 	outline: none;
 	background-color: transparent;
-	border-radius: 0.375rem;
+	border-radius: var(--control-radius);
 	transition:
 		background-color 150ms ease,
 		color 150ms ease;
@@ -205,7 +214,7 @@
 	}
 
 	&:focus-visible {
-		outline: 2px solid var(--toolbar-focus-ring);
+		outline: var(--control-ring-width) solid var(--control-ring);
 		outline-offset: 2px;
 	}
 }
@@ -223,7 +232,7 @@
 	outline: none;
 	background-color: var(--input);
 	border: 1px solid var(--line);
-	border-radius: 0.375rem;
+	border-radius: var(--control-radius);
 	transition:
 		border-color 150ms ease,
 		box-shadow 150ms ease;
@@ -238,7 +247,7 @@
 
 	&:focus-visible {
 		border-color: var(--color-primary-500);
-		box-shadow: 0 0 0 2px var(--toolbar-focus-ring);
+		box-shadow: 0 0 0 var(--control-ring-width) var(--control-ring);
 	}
 
 	&[data-disabled] {
@@ -250,5 +259,4 @@
 /* Dark-mode override: accent dùng shade sáng (-300) cho contrast với body Nord. */
 .dark .toolbar {
 	--toolbar-variant-color: var(--color-primary-300);
-	--toolbar-focus-ring: color-mix(in oklab, var(--color-primary-400) 45%, transparent);
 }

@@ -424,6 +424,10 @@ export const brandTokens = [
     token: '--body, --fg, --surface, --surface-2, --muted, --line, --input',
     role: 'Optional page chrome tuning (test light and .dark)',
   },
+  {
+    token: '--control-*, --group-radius, --popup-*, --dialog-radius, --sheet-radius, --overlay-*',
+    role: 'Shared corners, focus, press wash, and overlay chrome',
+  },
 ]
 
 <div className='card my-4'>
@@ -574,7 +578,7 @@ After `pnpm exec ui-kit-skill`, your AI assistant can follow the same brand rule
 
 ### Color modes
 
-Add `.dark` to `<html>`, or to any ancestor that should switch. Semantic surfaces (`--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input`) take their dark values. Alerts, badges, toasts, and links reassign their own component tokens for that mode. Primitive ramps keep the same steps in both modes. A dark alert picks a lighter step, or a `color-mix` wash, from the ramp you already defined.
+Add `.dark` to `<html>`, or to any ancestor that should switch. Semantic surfaces (`--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input`) take their dark values. `--overlay-bg` follows `--body`, and `--control-ring` switches to a lighter mix. Alerts, badges, toasts, and links reassign their own component tokens for that mode. Primitive ramps keep the same steps in both modes. A dark alert picks a lighter step, or a `color-mix` wash, from the ramp you already defined.
 
 Setup, the surface utilities, and the light-to-dark token list are on [Dark mode](/docs/dark-mode).
 

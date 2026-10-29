@@ -130,9 +130,9 @@
 		outline: none;
 
 		&:focus-visible {
-			outline: 2px solid color-mix(in oklab, var(--color-primary-700) 25%, transparent);
+			outline: var(--control-ring-width) solid var(--control-ring);
 			outline-offset: -1px;
-			border-radius: 0.25rem;
+			border-radius: var(--control-radius);
 		}
 
 		&[hidden] {

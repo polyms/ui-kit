@@ -4,7 +4,7 @@
 	position: fixed;
 	inset: 0;
 	z-index: 50;
-	background-color: rgb(0 0 0);
+	background-color: var(--overlay-backdrop);
 	opacity: calc(var(--offcanvas-backdrop-opacity) * (1 - var(--drawer-swipe-progress, 0)));
 	backdrop-filter: blur(4px);
 	transition-timing-function: ease;
@@ -53,7 +53,7 @@
 	flex-direction: column;
 	color: var(--fg);
 	pointer-events: auto;
-	background-color: var(--body);
+	background-color: var(--overlay-bg);
 	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 	transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
 	transition-duration: 400ms;
@@ -83,15 +83,15 @@
 	&[data-swipe-direction='up'] {
 		top: 0;
 		border-bottom: 1px solid var(--line);
-		border-bottom-right-radius: 1rem;
-		border-bottom-left-radius: 1rem;
+		border-bottom-right-radius: var(--sheet-radius);
+		border-bottom-left-radius: var(--sheet-radius);
 	}
 
 	&[data-swipe-direction='down'] {
 		bottom: 0;
 		border-top: 1px solid var(--line);
-		border-top-left-radius: 1rem;
-		border-top-right-radius: 1rem;
+		border-top-left-radius: var(--sheet-radius);
+		border-top-right-radius: var(--sheet-radius);
 	}
 
 	&[data-swipe-direction='left'],
@@ -292,9 +292,9 @@
 		color: var(--fg);
 		user-select: none;
 		outline: none;
-		background-color: var(--body);
+		background-color: var(--overlay-bg);
 		border: 0;
-		border-radius: 0.625rem 0.625rem 0 0;
+		border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
 		transform: translate3d(
 			0,
 			max(0px, calc(var(--drawer-snap-point-offset, 0px) + var(--drawer-swipe-movement-y, 0px))),
@@ -313,7 +313,7 @@
 		padding: 0.5rem 0.75rem;
 		touch-action: none;
 		user-select: none;
-		background-color: var(--body);
+		background-color: var(--overlay-bg);
 	}
 
 	.offcanvas-mobile-handle {

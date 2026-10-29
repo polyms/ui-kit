@@ -47,11 +47,12 @@ Infer before touching tokens:
 
 ### What you own (brand)
 
-| Token family                                                                           | Role                                           | Override pattern                                  |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------------------- |
-| `--color-primary-50` … `--color-primary-950`                                           | Brand accent ramp                              | Remap steps to brand hue; keep 11-step scale      |
-| `--color-primary-700`                                                                  | Links, buttons, `item-primary`, focus emphasis | Brand emphasis step on the primary ramp           |
-| Optional: `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input` | Page chrome                                    | Tune for brand warmth; test light **and** `.dark` |
+| Token family                                                                                               | Role                                                     | Override pattern                                                 |
+| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------- |
+| `--color-primary-50` … `--color-primary-950`                                                               | Brand accent ramp                                        | Remap steps to brand hue; keep 11-step scale                     |
+| `--color-primary-700`                                                                                      | Links, buttons, `item-primary`, focus emphasis           | Brand emphasis step on the primary ramp                          |
+| Optional: `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, `--input`                     | Page chrome                                              | Tune for brand warmth; test light **and** `.dark`                |
+| Optional: `--control-*`, `--group-radius`, `--popup-*`, `--dialog-radius`, `--sheet-radius`, `--overlay-*` | Shared corners, focus, press wash, dialog and sheet fill | Set on `:root`. Only `--control-ring` also needs a `.dark` value |
 
 ### What stays semantic (do not remap per brand whims)
 

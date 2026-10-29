@@ -14,7 +14,7 @@ The names are unprefixed: `--color-primary-500`, `--body`, `--alert-bg`. Some st
 A screen color travels through four layers, from a general scale to a single control.
 
 1. **Primitive** tokens are the scales. `--color-primary-50` through `--color-primary-950`, and the same steps for success, info, warning, danger, and neutral, are the source colors. A step on its own does not style a component. Elevation uses `--shadow-*`, motion uses `--animate-fade-zoom-*`, and the type scale runs from `h1` to `h6`.
-2. **Semantic** tokens name a job for the whole page. Surfaces — `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, and `--input` — each have a light value on `:root` and a dark value under `.dark`. Stacking tokens such as `--zindex-modal` and `--zindex-tooltip` name overlay order. Each surface also has a `--color-*` alias (`--color-body`, `--color-fg`, and the rest) so utilities such as `bg-body` and `text-fg` stay on the same value.
+2. **Semantic** tokens name a job for the whole page. Surfaces — `--body`, `--fg`, `--surface`, `--surface-2`, `--muted`, `--line`, and `--input` — each have a light value on `:root` and a dark value under `.dark`. Control tokens (`--control-radius`, `--control-ring`, `--control-tint-hover`, `--control-tint-active`, and the pressed steps) keep buttons, fields, selects, toggles, and toolbars on one corner, focus ring, and press wash. Overlay tokens (`--overlay-bg`, `--overlay-backdrop`, `--dialog-radius`, `--sheet-radius`, `--popup-radius`) keep modal, offcanvas, and popup chrome together. Stacking tokens such as `--zindex-modal` and `--zindex-tooltip` name overlay order. Each surface also has a `--color-*` alias (`--color-body`, `--color-fg`, and the rest) so utilities such as `bg-body` and `text-fg` stay on the same value. Control and overlay names stay CSS variables. They do not add a Tailwind color or radius utility.
 3. **Component** tokens are the properties one component reads, such as `--btn-*` on a button and `--alert-*` on an alert. They usually point at a semantic token or a primitive step, so the component stays with the rest of the product. A variant does not invent new names. It assigns different values to the same properties. A primary alert and a danger alert both use `--alert-bg`, `--alert-border`, and `--alert-color`. On a light surface the primary alert points those three at steps 50, 600, and 700. Under `.dark` the same three names switch to a `color-mix(in oklab, …)` wash, step 500, and step 200, so the alert stays readable on a dark page.
 4. **Classes and props** read those names. `Button variant='primary'` and `bg-primary-500` both resolve through the primary ramp. Set the ramp, and both move. Pass `variant` on each component. Each one reads its own tokens.
 
@@ -33,6 +33,31 @@ export const layerChoices = [
     change: 'Page background, text, and dividers',
     tokens: ['--body', '--fg', '--surface', '--surface-2', '--muted', '--line', '--input'],
     follows: 'Shells, cards, inputs, and muted copy in both light and .dark',
+  },
+  {
+    change: 'Control corners, focus, and press',
+    tokens: ['--control-radius', '--control-ring', '--control-tint-hover', '--control-tint-active'],
+    note: [
+      'plus ',
+      { token: '--control-ring-width' },
+      ', ',
+      { token: '--control-ring-danger' },
+      ', and the pressed tint steps',
+    ],
+    follows: 'Buttons, fields, selects, toggles, and toolbars',
+  },
+  {
+    change: 'Dialog, drawer, and popup chrome',
+    tokens: ['--overlay-bg', '--dialog-radius', '--sheet-radius', '--popup-radius'],
+    note: [
+      'plus ',
+      { token: '--group-radius' },
+      ', ',
+      { token: '--popup-shadow' },
+      ', and ',
+      { token: '--overlay-backdrop' },
+    ],
+    follows: 'Modal and offcanvas panels, plus menu, popover, and select popups',
   },
   {
     change: 'One component’s padding or fill',
@@ -109,7 +134,7 @@ Look here when you want the source of a value. Primary step 700 is the emphasis 
 
 This layer names a purpose. Surfaces each have a light value and a dark value, plus a `--color-*` alias. Z-index tokens name stacking layers.
 
-Edit a semantic token when the whole product should change together: a new page background, or a higher modal. For a new brand color, remap the primary ramp, including step 700. Status colors stay on their own primitive steps, such as success step 500.
+Edit a semantic token when the whole product should change together: a new page background, a shared focus ring, or a higher modal. For a new brand color, remap the primary ramp, including step 700. Status colors stay on their own primitive steps, such as success step 500. `--overlay-bg` follows `--body` until you set it, so a dialog can leave the page canvas without a second edit to every panel. `--control-ring` is the one control color that switches under `.dark`. Size classes on a button, field, or select reassign `--control-radius` for that size only. The table below also lists ring width, the danger ring, every tint step, `--group-radius`, `--popup-shadow`, and `--overlay-backdrop`.
 
 export const surfacePairings = [
   {

@@ -82,13 +82,7 @@ const COMPONENT_PREFIXES = [
 	'--toolbar-',
 ]
 
-const COMPONENT_EXACT = new Set([
-	'--control-radius',
-	'--select-icon-size',
-	'--toast-bg',
-	'--toast-border',
-	'--toast-color',
-])
+const COMPONENT_EXACT = new Set(['--select-icon-size', '--toast-bg', '--toast-border', '--toast-color'])
 
 const FILE_COMPONENTS: Record<string, string> = {
 	'_alert.css': 'Alert',
@@ -152,6 +146,8 @@ function tokenLevel(name: string): TokenLevel | null {
 	if (/^--(body|fg|surface|surface-2|muted|line|input)$/.test(name)) return 'semantic'
 	if (/^--color-(body|fg|surface|surface-2|muted|line|input)$/.test(name)) return 'semantic'
 	if (name.startsWith('--zindex-')) return 'semantic'
+	if (/^--(control|overlay)-/.test(name)) return 'semantic'
+	if (/^--(group-radius|popup-radius|popup-shadow|dialog-radius|sheet-radius)$/.test(name)) return 'semantic'
 	const isComponent = COMPONENT_EXACT.has(name) || COMPONENT_PREFIXES.some(prefix => name.startsWith(prefix))
 	if (isComponent) return 'component'
 	return null

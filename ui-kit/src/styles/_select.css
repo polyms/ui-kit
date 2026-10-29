@@ -1,5 +1,5 @@
 .select {
-	--control-radius: 0.25rem;
+	--control-radius: var(--radius-sm);
 	--input-padding-x: 0.5rem;
 	--input-padding-y: 0.375rem;
 	--input-lh: 1.125rem;
@@ -52,8 +52,8 @@
 	}
 
 	&:focus-visible {
-		border-color: var(--color-primary-500);
-		box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-primary-700) 35%, transparent);
+		border-color: color-mix(in oklab, var(--color-primary-600) 70%, transparent);
+		box-shadow: 0 0 0 var(--control-ring-width) var(--control-ring);
 	}
 
 	&[aria-invalid] {
@@ -62,7 +62,7 @@
 
 	&[aria-invalid]:focus-visible {
 		border-color: var(--color-danger-600);
-		box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-danger-500) 35%, transparent);
+		box-shadow: 0 0 0 var(--control-ring-width) var(--control-ring-danger);
 	}
 
 	&[data-disabled] {
@@ -84,7 +84,7 @@
 	}
 
 	&.select-lg {
-		--control-radius: 0.5rem;
+		--control-radius: var(--radius-lg);
 		--input-padding-x: 0.5rem;
 		--input-padding-y: 0.5rem;
 		--input-lh: 1.125rem;
@@ -92,7 +92,7 @@
 	}
 
 	&.select-xl {
-		--control-radius: 0.75rem;
+		--control-radius: var(--radius-xl);
 		--input-padding-x: 0.75rem;
 		--input-padding-y: 0.5rem;
 		--input-lh: 1.375rem;
@@ -100,7 +100,7 @@
 	}
 
 	&.select-2xl {
-		--control-radius: 0.75rem;
+		--control-radius: var(--radius-xl);
 		--input-padding-x: 1rem;
 		--input-padding-y: 0.625rem;
 		--input-lh: 1.625rem;
@@ -108,7 +108,7 @@
 	}
 
 	&.select-3xl {
-		--control-radius: 0.75rem;
+		--control-radius: var(--radius-xl);
 		--input-padding-x: 1rem;
 		--input-padding-y: 0.875rem;
 		--input-lh: 1.625rem;
@@ -165,17 +165,15 @@
 	outline: 1px solid var(--line);
 	background-color: var(--surface-2);
 	border: 1px solid var(--line);
-	border-radius: 0.5rem;
-	box-shadow:
-		0 10px 15px -3px color-mix(in oklab, #000 12%, transparent),
-		0 4px 6px -4px color-mix(in oklab, #000 8%, transparent);
+	border-radius: var(--popup-radius);
+	box-shadow: var(--popup-shadow);
 
 	&::before {
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
 		content: '';
-		border-radius: calc(0.5rem - 1px);
+		border-radius: calc(var(--popup-radius) - 1px);
 		box-shadow: 0 -1px 0 color-mix(in oklab, var(--fg) 6%, transparent);
 	}
 
@@ -249,7 +247,7 @@
 	user-select: none;
 	outline: none;
 	scroll-margin-block: 0.5rem;
-	border-radius: 0.375rem;
+	border-radius: var(--radius-md);
 	transition: background-color 0.15s;
 
 	&[data-highlighted] {

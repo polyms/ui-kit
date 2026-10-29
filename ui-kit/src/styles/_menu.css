@@ -8,10 +8,8 @@
 	outline: none;
 	background-color: var(--surface-2);
 	border: 1px solid var(--line);
-	border-radius: 0.5rem;
-	box-shadow:
-		0 10px 15px -3px color-mix(in oklab, #000 15%, transparent),
-		0 4px 6px -4px color-mix(in oklab, #000 10%, transparent);
+	border-radius: var(--popup-radius);
+	box-shadow: var(--popup-shadow);
 	transform-origin: var(--transform-origin);
 	transition:
 		transform 150ms,
@@ -40,7 +38,7 @@
 	cursor: pointer;
 	user-select: none;
 	outline: 0;
-	border-radius: 0.375rem;
+	border-radius: var(--radius-md);
 
 	&[data-highlighted] {
 		position: relative;
@@ -54,7 +52,7 @@
 		z-index: -1;
 		content: '';
 		background-color: var(--surface);
-		border-radius: 0.25rem;
+		border-radius: var(--radius-sm);
 	}
 
 	.dark &:not(.menu-danger)[data-highlighted]:not([data-disabled])::before {

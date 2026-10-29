@@ -590,20 +590,45 @@ function FooterSection() {
 					</Reveal>
 					<img alt='' aria-hidden='true' height='2400' loading='lazy' src='/mascot.png' width='2600' />
 				</div>
-				<div className='home-footer-bottom'>
+			</div>
+			<div className='home-footer-panel'>
+				<div className='home-wrap'>
+					<div className='home-footer-links'>
+						<div className='home-footer-support'>
+							<span className='home-label'>Support</span>
+							<a className='home-footer-mail' href='mailto:hello@polyms.dev'>
+								hello@polyms.dev
+							</a>
+						</div>
+						<nav aria-label='Footer navigation' className='home-footer-columns'>
+							<div className='home-footer-col'>
+								<span className='home-label'>Explore</span>
+								<Link to='/design-system'>Design system</Link>
+								<Link data-testid='home-nav-typography' to='/typography'>
+									Typography
+								</Link>
+								<Link to='/installation'>Installation</Link>
+							</div>
+							<div className='home-footer-col'>
+								<span className='home-label'>Elsewhere</span>
+								<a href='https://github.com/polyms/ui-kit' rel='noopener noreferrer' target='_blank'>
+									GitHub ↗
+								</a>
+								<a href='https://polyms.dev' rel='noopener noreferrer' target='_blank'>
+									Polyms ↗
+								</a>
+							</div>
+						</nav>
+					</div>
+					<Link className='home-footer-mark' to='/'>
+						<span className='home-footer-mark-name'>polyms</span>
+						<span className='home-footer-mark-suffix'>/ ui</span>
+					</Link>
+				</div>
+			</div>
+			<div className='home-footer-legal'>
+				<div className='home-wrap'>
 					<span>© {new Date().getFullYear()} Polyms · MIT licensed</span>
-					<nav aria-label='Footer navigation'>
-						<Link to='/design-system'>Design system</Link>
-						<Link data-testid='home-nav-typography' to='/typography'>
-							Typography
-						</Link>
-						<a href='https://github.com/polyms/ui-kit' rel='noopener noreferrer' target='_blank'>
-							GitHub ↗
-						</a>
-						<a href='https://polyms.dev' rel='noopener noreferrer' target='_blank'>
-							Polyms ↗
-						</a>
-					</nav>
 					<span>Built with a little care.</span>
 				</div>
 			</div>

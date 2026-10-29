@@ -69,6 +69,71 @@ apis:
     default: '#ffffff'
     values: '#3b4252'
     description: Form control background — Nord nord1.
+  - separator: Control and overlay
+  - name: --control-radius
+    default: radius-sm
+    values: radius-sm
+    description: Corner of buttons, fields, selects, toggles, and toolbar items. Size classes reassign it locally.
+  - name: --control-ring
+    default: primary-600 at 35%
+    values: primary-400 at 45%
+    description: Shared focus ring. Light uses primary step 600. Dark uses primary step 400.
+  - name: --control-ring-danger
+    default: danger-500 at 35%
+    values: danger-500 at 35%
+    description: Focus ring on an invalid control.
+  - name: --control-ring-width
+    default: 3px
+    values: 3px
+    description: Thickness of the shared focus ring.
+  - name: --control-tint-hover
+    default: 10%
+    values: 10%
+    description: Hover wash for ghost controls, outlined controls, and item rows.
+  - name: --control-tint-active
+    default: 15%
+    values: 15%
+    description: Active wash for those same controls.
+  - name: --control-tint-pressed
+    default: 12%
+    values: 12%
+    description: Fill of a pressed toggle or toolbar item.
+  - name: --control-tint-pressed-hover
+    default: 18%
+    values: 18%
+    description: Hover wash on a pressed toggle or toolbar item.
+  - name: --control-tint-pressed-active
+    default: 24%
+    values: 24%
+    description: Active wash on a pressed toggle or toolbar item.
+  - name: --group-radius
+    default: radius-lg
+    values: radius-lg
+    description: Outer corner of a toggle group or toolbar.
+  - name: --popup-radius
+    default: radius-lg
+    values: radius-lg
+    description: Corner of menu, popover, and select popups.
+  - name: --popup-shadow
+    default: black at 15% and 10%
+    values: black at 15% and 10%
+    description: Two-layer drop shadow on those popups.
+  - name: --dialog-radius
+    default: radius-3xl
+    values: radius-3xl
+    description: Corner of a modal panel.
+  - name: --sheet-radius
+    default: radius-2xl
+    values: radius-2xl
+    description: Corner of an offcanvas panel, including the mobile sheet.
+  - name: --overlay-bg
+    default: var(--body)
+    values: var(--body)
+    description: Modal and offcanvas panel fill. Follows the page canvas until you set it.
+  - name: --overlay-backdrop
+    default: '#000'
+    values: '#000'
+    description: Scrim behind modal and offcanvas. Opacity stays on each component.
 ---
 
 import Story from './-views/dark-mode/DarkModeDefault.tsx'
@@ -103,7 +168,7 @@ document.documentElement.classList.toggle('dark', prefersDark)
 
 ## Tokens
 
-Seven CSS variables drive the entire theme. Override them anywhere in your app to customize the palette:
+Surface tokens set the page. Control and overlay tokens set corners, focus, press washes, and dialog chrome. The reference at the bottom lists each name. Only `--control-ring` changes under `.dark`. Override them anywhere in your app:
 
 ```css
 .dark {
