@@ -1,3 +1,4 @@
+import { seoByRoute } from 'virtual:seo-meta'
 import {
 	ArrowDown01Icon,
 	ArrowRight01Icon,
@@ -27,6 +28,8 @@ import { CopyCommand } from '../components/landing/CopyCommand'
 import { HeroShelf } from '../components/landing/HeroShelf'
 import { LandingPlayground } from '../components/landing/LandingPlayground'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import { homeSeoPage } from '../seo/document'
+import { routeHead } from '../seo/head'
 import homePageStylesUrl from '../styles/home.page.css?url'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
@@ -41,6 +44,7 @@ type AnimatedTitleProps = {
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export const Route = createFileRoute('/')({
+	head: () => routeHead(seoByRoute['/'] ?? homeSeoPage()),
 	component: () => (
 		<>
 			<link href={homePageStylesUrl} precedence='high' rel='stylesheet' />

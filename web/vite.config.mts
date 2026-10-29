@@ -10,20 +10,11 @@ import { defineConfig, loadEnv, type Plugin } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
 import { mdxNavigationPlugin } from './plugins/mdxNavigation.plugin.ts'
+import { seoPlugin } from './plugins/seo.plugin.ts'
 import { stripFrontmatter } from './plugins/stripFrontmatter.plugin.ts'
-import { generateLlmDocs } from './scripts/mdx-to-llm.ts'
 
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as {
 	version: string
-}
-
-function llmDocsPlugin(): Plugin {
-	return {
-		async buildStart() {
-			await generateLlmDocs()
-		},
-		name: 'llm-docs',
-	}
 }
 
 function htmlVersionPlugin(version: string): Plugin {
@@ -71,7 +62,6 @@ export default defineConfig(({ mode }) => {
 		},
 		plugins: [
 			htmlVersionPlugin(pkg.version),
-			llmDocsPlugin(),
 			react(),
 			stripFrontmatter(),
 			mdx({ providerImportSource: '@mdx-js/react' }),
@@ -89,6 +79,7 @@ export default defineConfig(({ mode }) => {
 				project: sentryProject,
 				release: { name: pkg.version },
 			}),
+			seoPlugin(),
 		],
 		preview: {
 			host: 'localhost',

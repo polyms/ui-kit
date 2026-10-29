@@ -1,0 +1,7 @@
+# Public docs are crawlable, including AI crawlers. Playgrounds are not.
+User-agent: *
+Allow: /
+Disallow: /demo
+Disallow: /forms
+
+Sitemap: https://ui.polyms.dev/sitemap.xml

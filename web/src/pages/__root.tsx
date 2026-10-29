@@ -1,7 +1,7 @@
 // import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { Toast } from '@polyms/ui-kit'
-import { createRootRoute, Link, Outlet, useRouterState } from '@tanstack/react-router'
+import { createRootRoute, HeadContent, Link, Outlet, useRouterState } from '@tanstack/react-router'
 import { useRef } from 'react'
 import { BrandLogo } from '../components/BrandLogo'
 import { useMediaQuery } from '../hooks/useMediaQuery'
@@ -42,6 +42,7 @@ const Root = () => {
 	if (isLandingLayout) {
 		return (
 			<Toast>
+				<HeadContent />
 				<Outlet />
 				<DocsFloatingDock variant='landing' />
 				<Toast.Container />
@@ -51,6 +52,7 @@ const Root = () => {
 
 	return (
 		<Toast>
+			<HeadContent />
 			<Name />
 			<div data-testid='app-navigation' id='app-navigation' />
 			<AppSidebar ref={appSidebarRef} />

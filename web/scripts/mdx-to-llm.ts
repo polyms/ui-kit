@@ -52,7 +52,7 @@ type CatalogApi = {
 	groupComponentTokens: TokenModule['groupComponentTokens']
 }
 
-type LlmPage = { route: string; summary: string; title: string }
+export type LlmPage = { route: string; summary: string; title: string; updated: string }
 const visualComponents = new Set([
 	'Sizes',
 	'Variants',
@@ -821,18 +821,23 @@ export async function generateLlmDocs() {
 		fs.mkdirSync(path.dirname(outfile), { recursive: true })
 		fs.writeFileSync(outfile, converted.markdown)
 		written.push(outfile)
-		pages.push({ route, summary: converted.summary, title: converted.title })
+		pages.push({
+			route,
+			summary: converted.summary,
+			title: converted.title,
+			updated: fs.statSync(filePath).mtime.toISOString(),
+		})
 	}
 	cleanStale(written)
 	writeLlmsIndex(indexMarkdown(pages))
-	return pages.length
+	return pages
 }
 
 const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 if (isDirectRun) {
 	generateLlmDocs()
-		.then(count => {
-			console.log(`llm docs: ${count} markdown files`)
+		.then(pages => {
+			console.log(`llm docs: ${pages.length} markdown files`)
 		})
 		.catch(error => {
 			console.error(error instanceof Error ? error.message : error)
