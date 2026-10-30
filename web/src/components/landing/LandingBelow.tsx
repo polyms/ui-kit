@@ -25,7 +25,8 @@ type AnimatedTitleProps = {
 export function LandingBelow() {
 	return (
 		<>
-			<section aria-labelledby='playground-title' className='home-section home-wrap' id='playground'>
+			<section aria-labelledby='playground-title' className='home-section home-wrap'>
+				<div id='playground' />
 				<Reveal className='home-section-heading'>
 					<div>
 						<span className='home-label'>01 — THE PLAYGROUND</span>

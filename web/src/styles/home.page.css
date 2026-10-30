@@ -26,6 +26,10 @@ main.landing {
 	--fg: var(--home-ink);
 	--muted: var(--home-muted);
 	--line: var(--home-border);
+	/* Sticky bar plus its border. Hash offsets follow this if the bar changes. */
+	--home-nav-bar: 76px;
+	--home-nav-border: 1px;
+	--home-header-block: calc(var(--home-nav-bar) + var(--home-nav-border));
 	overflow-x: clip;
 	color: var(--home-ink);
 	background: var(--home-canvas);
@@ -56,6 +60,29 @@ main.landing {
 }
 .landing section[id] {
 	scroll-margin-top: 100px;
+}
+/* Hash anchor sits on the label's layout top, 1.5rem under the sticky header. */
+#playground {
+	scroll-margin-top: calc(var(--home-header-block) + 1.5rem);
+}
+/* Holds the playground's place until the lazy section replaces this box. */
+.home-playground-placeholder {
+	min-height: 1790px;
+}
+@media (min-width: 640px) {
+	.home-playground-placeholder {
+		min-height: 1260px;
+	}
+}
+@media (min-width: 768px) {
+	.home-playground-placeholder {
+		min-height: 1090px;
+	}
+}
+@media (min-width: 1024px) {
+	.home-playground-placeholder {
+		min-height: 1200px;
+	}
 }
 .home-label {
 	display: block;
@@ -148,7 +175,7 @@ main.landing {
 	top: 0;
 	z-index: 30;
 	background: color-mix(in oklab, var(--home-canvas) 94%, transparent);
-	border-bottom: 1px solid var(--home-border);
+	border-bottom: var(--home-nav-border) solid var(--home-border);
 	backdrop-filter: blur(12px);
 }
 .home-nav-inner {
@@ -156,7 +183,7 @@ main.landing {
 	gap: 12px;
 	align-items: center;
 	justify-content: space-between;
-	min-height: 76px;
+	min-height: var(--home-nav-bar);
 }
 .home-brand {
 	display: flex;

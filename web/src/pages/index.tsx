@@ -49,7 +49,13 @@ function LandingPage() {
 				<strong>Tailwind CSS 4</strong>
 				<strong>Open source ↗</strong>
 			</div>
-			<Suspense fallback={<div className='home-section home-wrap' id='playground' />}>
+			<Suspense
+				fallback={
+					<div className='home-playground-placeholder home-section home-wrap'>
+						<div id='playground' />
+					</div>
+				}
+			>
 				<LandingBelow />
 			</Suspense>
 		</main>
