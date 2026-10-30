@@ -510,7 +510,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 .home-preview-theme[data-mode='light'] .badge-primary {
 	--badge-border: var(--color-primary-600);
 	--badge-bg: color-mix(in oklab, var(--color-primary-700) 10%, transparent);
-	--badge-color: var(--color-primary-700);
+	--badge-color: var(--color-primary-800);
 }
 
 /* Hero shelf: individual components, distinct from the workspace playground. */
@@ -786,7 +786,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	margin-bottom: 24px;
 	font-family: var(--font-mono);
 	font-size: 12px;
-	color: var(--home-accent);
+	color: var(--color-primary-800);
 }
 .home-story-step h3 {
 	max-width: 360px;
@@ -848,17 +848,17 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 		border-color 200ms;
 }
 .home-story-timeline [data-state='active'] a {
-	color: var(--home-accent);
+	color: var(--color-primary-900);
 }
 .home-story-timeline [data-state='active'] .home-timeline-marker {
-	color: var(--home-canvas);
-	background: var(--home-accent);
-	border-color: var(--home-accent);
+	color: var(--color-neutral-50);
+	background: var(--color-primary-900);
+	border-color: var(--color-primary-900);
 	border-style: solid;
 }
 .home-story-timeline [data-state='complete'] .home-timeline-marker {
-	color: var(--home-accent);
-	border-color: var(--home-accent);
+	color: var(--color-primary-900);
+	border-color: var(--color-primary-900);
 }
 .home-story-timeline a:focus-visible {
 	outline: 2px solid var(--home-accent);
@@ -981,7 +981,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	margin-top: 18px;
 	font-size: 11px;
 	color: var(--color-neutral-50);
-	background: var(--assembly-accent);
+	background: color-mix(in oklab, var(--assembly-accent) 55%, black);
 	border-radius: 8px;
 	transition: background-color 400ms ease;
 }
@@ -1015,7 +1015,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 .piece-badge {
 	top: 44px;
 	right: 14px;
-	color: var(--assembly-accent);
+	color: color-mix(in oklab, var(--assembly-accent) 62%, black);
 	transform: rotate(8deg);
 }
 .home-piece-dot {
@@ -1205,7 +1205,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	border-block: 1px solid var(--home-border);
 }
 .home-command-line > span {
-	color: var(--home-accent);
+	color: var(--color-primary-800);
 }
 .home-command-line code {
 	font-size: clamp(12px, 2.8vw, 14px);
@@ -1566,6 +1566,25 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 	--home-muted: var(--color-neutral-400);
 	--home-border: var(--color-neutral-700);
 	--home-accent: var(--color-primary-300);
+}
+.dark main.landing .home-story-timeline [data-state='active'] a,
+.dark main.landing .home-story-timeline [data-state='complete'] .home-timeline-marker {
+	color: var(--color-primary-200);
+}
+.dark main.landing .home-story-timeline [data-state='complete'] .home-timeline-marker {
+	border-color: var(--color-primary-200);
+}
+.dark main.landing .home-story-timeline [data-state='active'] .home-timeline-marker {
+	color: var(--color-neutral-950);
+	background: var(--color-primary-200);
+	border-color: var(--color-primary-200);
+}
+.dark main.landing .piece-badge {
+	color: color-mix(in oklab, var(--assembly-accent) 40%, white);
+}
+.dark main.landing .home-step-number,
+.dark main.landing .home-command-line > span {
+	color: var(--color-primary-200);
 }
 /* Motion and accessible fallback */
 .home-hero-stage:has(.home-shelf[data-complete='true']) .home-hero-mascot {

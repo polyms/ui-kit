@@ -1,5 +1,3 @@
-import * as amplitude from '@amplitude/unified'
-
 // ── Tracking ───────────────────────────────────────────────────────────────────────────────────────────────
 
 function analyticsEnabled() {
@@ -8,5 +6,7 @@ function analyticsEnabled() {
 
 export function track(event: string, properties?: Record<string, string | number | boolean>) {
 	if (!analyticsEnabled()) return
-	amplitude.track(event, properties)
+	void import('@amplitude/unified').then(amplitude => {
+		amplitude.track(event, properties)
+	})
 }

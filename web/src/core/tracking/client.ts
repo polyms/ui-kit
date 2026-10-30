@@ -1,4 +1,3 @@
-import * as amplitude from '@amplitude/unified'
 import * as Sentry from '@sentry/react'
 
 // ── Constants ──────────────────────────────────────────────────────────────────────────────────────────────
@@ -8,11 +7,21 @@ const dsn = import.meta.env.VITE_SENTRY_DSN
 
 // ── Init ───────────────────────────────────────────────────────────────────────────────────────────────────
 
+function scheduleNonCritical(task: () => void) {
+	if (typeof window === 'undefined') return
+	const start = () => {
+		const idle = window.requestIdleCallback
+		if (typeof idle === 'function') idle(() => task(), { timeout: 4000 })
+		else window.setTimeout(task, 2000)
+	}
+	if (document.readyState === 'complete') start()
+	else window.addEventListener('load', start, { once: true })
+}
+
 if (dsn) {
 	Sentry.init({
 		dsn,
 		environment: import.meta.env.MODE,
-		integrations: [Sentry.replayIntegration()],
 		release: __VERSION__,
 		replaysOnErrorSampleRate: 1,
 		replaysSessionSampleRate: 0.1,
@@ -23,14 +32,25 @@ if (dsn) {
 			urlQueryParams: { deny: ['code'] },
 		},
 	})
+	scheduleNonCritical(() => {
+		Sentry.addIntegration(Sentry.replayIntegration())
+	})
 	console.debug(`[client] initialized release ${__VERSION__} env ${import.meta.env.MODE}`)
 }
 
 const amplitudeApiKey = import.meta.env.VITE_AMPLITUDE_API_KEY
 if (!amplitudeApiKey) {
 	console.warn('Amplitude API key missing — analytics disabled')
-} else if (!globalThis.__amplitudeInitialized) {
+} else {
+	scheduleNonCritical(() => {
+		void startAnalytics(amplitudeApiKey)
+	})
+}
+
+async function startAnalytics(apiKey: string) {
+	if (globalThis.__amplitudeInitialized) return
 	globalThis.__amplitudeInitialized = true
+	const amplitude = await import('@amplitude/unified')
 	amplitude.add({
 		name: 'ui-kit',
 		type: 'enrichment',
@@ -39,7 +59,7 @@ if (!amplitudeApiKey) {
 			return event
 		},
 	})
-	amplitude.initAll(amplitudeApiKey, {
+	await amplitude.initAll(apiKey, {
 		analytics: { autocapture: true },
 		sessionReplay: { sampleRate: 1 },
 	})

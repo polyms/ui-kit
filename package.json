@@ -12,7 +12,7 @@
 		"dev": "nx serve web",
 		"release": "nx release version patch",
 		"check": "biome check --write . && prettier -l --write .",
-		"prepare": "lefthook install"
+		"prepare": "if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then lefthook install; fi"
 	},
 	"dependencies": {
 		"@amplitude/unified": "^1.1.43",
