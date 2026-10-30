@@ -1,0 +1,15 @@
+{
+	"entries": [
+		{
+			"description": "Public documentation for the React component library @polyms/ui-kit.",
+			"displayName": "Polyms UI Kit",
+			"identifier": "urn:air:ui.polyms.dev:docs",
+			"representativeQueries": [
+				"How do I install @polyms/ui-kit?",
+				"Polyms UI Kit React component documentation"
+			],
+			"type": "text/html",
+			"url": "https://ui.polyms.dev"
+		}
+	]
+}
