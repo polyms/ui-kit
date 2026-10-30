@@ -1,9 +1,23 @@
-import * as Sentry from '@sentry/react'
+import type { AnyRouter } from '@tanstack/react-router'
+
+// ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+type SentryModule = typeof import('@sentry/react')
+
+declare global {
+	interface Window {
+		Sentry: typeof import('@sentry/react')
+	}
+}
 
 // ── Constants ──────────────────────────────────────────────────────────────────────────────────────────────
 
 const APP_NAME = 'ui-kit'
 const dsn = import.meta.env.VITE_SENTRY_DSN
+
+const queuedErrors: unknown[] = []
+let sentry: SentryModule | null = null
+let sentryStarted = false
 
 // ── Init ───────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -18,7 +32,26 @@ function scheduleNonCritical(task: () => void) {
 	else window.addEventListener('load', start, { once: true })
 }
 
-if (dsn) {
+export function captureException(error: unknown) {
+	if (!dsn) return
+	if (sentry) {
+		sentry.captureException(error)
+		return
+	}
+	queuedErrors.push(error)
+}
+
+export function installSentry(router: AnyRouter) {
+	if (!dsn || sentryStarted) return
+	sentryStarted = true
+	scheduleNonCritical(() => {
+		void startSentry(router)
+	})
+}
+
+async function startSentry(router: AnyRouter) {
+	const Sentry = await import('@sentry/react')
+	window.Sentry = Sentry
 	Sentry.init({
 		dsn,
 		environment: import.meta.env.MODE,
@@ -32,9 +65,10 @@ if (dsn) {
 			urlQueryParams: { deny: ['code'] },
 		},
 	})
-	scheduleNonCritical(() => {
-		Sentry.addIntegration(Sentry.replayIntegration())
-	})
+	Sentry.addIntegration(Sentry.tanstackRouterBrowserTracingIntegration(router))
+	Sentry.addIntegration(Sentry.replayIntegration())
+	sentry = Sentry
+	for (const error of queuedErrors.splice(0)) Sentry.captureException(error)
 	console.debug(`[client] initialized release ${__VERSION__} env ${import.meta.env.MODE}`)
 }
 
