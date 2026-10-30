@@ -1,21 +1,15 @@
 import { seoByRoute } from 'virtual:seo-meta'
-import {
-	ArrowDown01Icon,
-	ArrowRight01Icon,
-	CheckmarkCircle02Icon,
-	CodeIcon,
-	GithubIcon,
-} from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import { Button } from '@polyms/ui-kit'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { domAnimation, LazyMotion, MotionConfig, m, useReducedMotion } from 'motion/react'
 import { lazy, Suspense } from 'react'
+import { Icon, IconSymbols } from '../assets/icons'
 import { BrandLogo } from '../components/BrandLogo'
 import { HeroShelf } from '../components/landing/HeroShelf'
 import { MascotImage } from '../components/landing/MascotImage'
 import { homeSeoPage } from '../seo/document'
 import { routeHead } from '../seo/head'
+
 import '../styles/home.page.css'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -29,6 +23,7 @@ export const Route = createFileRoute('/')({
 	component: () => (
 		<LazyMotion features={domAnimation} strict>
 			<MotionConfig reducedMotion='user'>
+				<IconSymbols />
 				<LandingPage />
 			</MotionConfig>
 		</LazyMotion>
@@ -63,7 +58,7 @@ function LandingPage() {
 }
 
 function Arrow() {
-	return <HugeiconsIcon aria-hidden='true' icon={ArrowRight01Icon} size={18} />
+	return <Icon name='arrow-right-01' size={18} />
 }
 
 function LandingNav() {
@@ -90,7 +85,7 @@ function LandingNav() {
 						rel='noopener noreferrer'
 						target='_blank'
 					>
-						<HugeiconsIcon icon={GithubIcon} size={20} />
+						<Icon name='github' size={20} />
 					</a>
 				</nav>
 				<Button
@@ -141,7 +136,7 @@ function HeroSection() {
 						Explore components <Arrow />
 					</Button>
 					<Button render={<a href='#playground' />} rounded size='xl'>
-						Try the playground <HugeiconsIcon icon={ArrowDown01Icon} size={18} />
+						Try the playground <Icon name='arrow-down-01' size={18} />
 					</Button>
 				</div>
 				<div className='home-hero-note'>
@@ -166,7 +161,7 @@ function HeroSection() {
 					initial={{ opacity: 0, x: reduced ? 0 : -36, rotate: 0 }}
 					transition={{ duration: reduced ? 0 : 0.6, delay: reduced ? 0 : 0.3 }}
 				>
-					<HugeiconsIcon icon={CodeIcon} size={23} />
+					<Icon name='code' size={23} />
 					<span>
 						Typed.
 						<br />
@@ -180,11 +175,12 @@ function HeroSection() {
 					initial={{ opacity: 0, y: reduced ? 0 : 28 }}
 					transition={{ duration: reduced ? 0 : 0.6, delay: reduced ? 0 : 0.5 }}
 				>
-					<HugeiconsIcon icon={CheckmarkCircle02Icon} size={21} />
+					<Icon name='checkmark-circle-02' size={21} />
 					<span>Ready for your ideas</span>
 				</m.div>
 				<MascotImage
 					className='home-hero-mascot'
+					priority='high'
 					sizes='(min-width: 1024px) 235px, (min-width: 640px) 215px, 120px'
 				/>
 				<span aria-hidden='true' className='home-stage-caption'>
