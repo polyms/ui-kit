@@ -1,16 +1,9 @@
-import {
-	ArrowRight01Icon,
-	CircleArrowLeftDoubleIcon,
-	GoogleDocIcon,
-	SearchList02Icon,
-	SearchRemoveIcon,
-} from '@hugeicons/core-free-icons'
 import { Collapsible, Field, NavigationMenu } from '@polyms/ui-kit'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import { useEffect, useImperativeHandle, useState } from 'react'
 import { useBoolean, useEventCallback } from 'usehooks-ts'
-import { Icon } from '../components/Icons'
+import { Icon } from '../assets/layout-symbols'
 import { type DocsNavSection, useDocsNav } from '../hooks/useDocsNav'
 import { useDocsShellMode } from '../hooks/useMediaQuery'
 
@@ -91,13 +84,12 @@ export function AppSidebar({ ref, drawerOnly = false }: AppSidebarProps) {
 				<Icon
 					className={clsx('sidebar-toggle-icon link link-light')}
 					data-testid='sidebar-collapse-toggle'
-					icon={CircleArrowLeftDoubleIcon}
+					name='circle-arrow-left-double'
 					onClick={event => {
 						event.stopPropagation()
 						toggleSidebar()
 					}}
 					size={28}
-					strokeWidth={1.5}
 				/>
 			)}
 
@@ -150,7 +142,7 @@ function FullNav({
 					<Icon
 						className='icon-start'
 						data-testid='docs-search-clear'
-						icon={search ? SearchRemoveIcon : SearchList02Icon}
+						name={search ? 'search-remove' : 'search-list-02'}
 						onClick={() => setSearch('')}
 					/>
 					<Field.Control
@@ -167,9 +159,9 @@ function FullNav({
 				{sections.map(section => (
 					<Collapsible defaultOpen key={section.key}>
 						<Collapsible.Trigger className='nav-item' data-testid={`docs-section-${slug(section.key)}`}>
-							<Icon className={clsx('size-4', section.colorClass)} icon={section.icon} />
+							<Icon className={clsx('size-4', section.colorClass)} name={section.icon} />
 							{section.label}
-							<Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
+							<Icon className='chevron-icon ms-auto size-4' name='arrow-right-01' />
 						</Collapsible.Trigger>
 						<Collapsible.Panel className='nav-panel'>
 							<div className='nav-panel-content'>
@@ -198,18 +190,18 @@ function FullNav({
 				{showExamplesNav && (
 					<Collapsible defaultOpen>
 						<Collapsible.Trigger className='nav-item' data-testid='docs-section-examples'>
-							<Icon className='size-4 text-neutral-400' icon={examplesIcon} />
+							<Icon className='size-4 text-neutral-400' name={examplesIcon} />
 							Examples
-							<Icon className='chevron-icon ms-auto size-4' icon={ArrowRight01Icon} strokeWidth={3} />
+							<Icon className='chevron-icon ms-auto size-4' name='arrow-right-01' />
 						</Collapsible.Trigger>
 						<Collapsible.Panel className='nav-panel'>
 							<div className='nav-panel-content'>
 								<Link className='nav-item' data-testid='docs-nav-demo' to='/demo'>
-									<Icon className='size-4 text-neutral-400' icon={GoogleDocIcon} />
+									<Icon className='size-4 text-neutral-400' name='google-doc' />
 									Page Demo
 								</Link>
 								<Link className='nav-item' data-testid='docs-nav-forms' to='/forms'>
-									<Icon className='size-4 text-neutral-400' icon={GoogleDocIcon} />
+									<Icon className='size-4 text-neutral-400' name='google-doc' />
 									Forms preview
 								</Link>
 							</div>
@@ -236,7 +228,7 @@ function RailNav({ activePath, examplesIcon, onSelect, sections, showExamplesNav
 							data-testid='docs-section-examples'
 							type='button'
 						>
-							<Icon className='size-5 text-neutral-400' icon={examplesIcon} />
+							<Icon className='size-5 text-neutral-400' name={examplesIcon} />
 						</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
 							<p className='floating-dock-popover-title'>Examples</p>
@@ -247,7 +239,7 @@ function RailNav({ activePath, examplesIcon, onSelect, sections, showExamplesNav
 										data-testid='docs-nav-demo'
 										render={<Link to='/demo' />}
 									>
-										<Icon className='size-4 shrink-0 text-neutral-400' icon={GoogleDocIcon} />
+										<Icon className='size-4 shrink-0 text-neutral-400' name='google-doc' />
 										Page Demo
 									</NavigationMenu.Link>
 								</li>
@@ -257,7 +249,7 @@ function RailNav({ activePath, examplesIcon, onSelect, sections, showExamplesNav
 										data-testid='docs-nav-forms'
 										render={<Link to='/forms' />}
 									>
-										<Icon className='size-4 shrink-0 text-neutral-400' icon={GoogleDocIcon} />
+										<Icon className='size-4 shrink-0 text-neutral-400' name='google-doc' />
 										Forms preview
 									</NavigationMenu.Link>
 								</li>
@@ -291,7 +283,7 @@ function RailSection({ section, activePath, onSelect }: RailSectionProps) {
 				data-testid={`docs-section-${slug(section.key)}`}
 				type='button'
 			>
-				<Icon className={clsx('size-5', section.colorClass)} icon={section.icon} />
+				<Icon className={clsx('size-5', section.colorClass)} name={section.icon} />
 			</NavigationMenu.Trigger>
 			<NavigationMenu.Content>
 				<p className='floating-dock-popover-title'>{section.label}</p>

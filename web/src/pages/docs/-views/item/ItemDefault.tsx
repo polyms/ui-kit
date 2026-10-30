@@ -7,7 +7,7 @@ import {
 	StarIcon,
 	UserIcon,
 } from '@hugeicons/core-free-icons'
-import { Icon } from '../../../../components/Icons'
+import { HugeiconsIcon } from '@hugeicons/react'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -53,7 +53,7 @@ export default function ItemDefault() {
 							className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors ${v.cls}`}
 							type='button'
 						>
-							<Icon className='size-4 shrink-0' icon={v.icon} />
+							<HugeiconsIcon className='size-4 shrink-0' icon={v.icon} strokeWidth={2} />
 							<span className='flex-1'>{v.label}</span>
 							<code className='font-mono text-xs opacity-70'>.{v.name}</code>
 						</button>
@@ -62,7 +62,7 @@ export default function ItemDefault() {
 							className={`active flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors ${v.cls}`}
 							type='button'
 						>
-							<Icon className='size-4 shrink-0' icon={v.icon} />
+							<HugeiconsIcon className='size-4 shrink-0' icon={v.icon} strokeWidth={2} />
 							<span className='flex-1'>{v.label}</span>
 							<code className='font-mono text-xs opacity-70'>.active</code>
 						</button>
@@ -76,28 +76,28 @@ export default function ItemDefault() {
 					className='active item-primary flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors'
 					type='button'
 				>
-					<Icon className='size-4' icon={Album02Icon} />
+					<HugeiconsIcon className='size-4' icon={Album02Icon} strokeWidth={2} />
 					Dashboard
 				</button>
 				<button
 					className='item-light flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors'
 					type='button'
 				>
-					<Icon className='size-4' icon={UserIcon} />
+					<HugeiconsIcon className='size-4' icon={UserIcon} strokeWidth={2} />
 					Profile
 				</button>
 				<button
 					className='item-light flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors'
 					type='button'
 				>
-					<Icon className='size-4' icon={Settings02Icon} />
+					<HugeiconsIcon className='size-4' icon={Settings02Icon} strokeWidth={2} />
 					Settings
 				</button>
 				<button
 					className='item-danger flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-colors'
 					type='button'
 				>
-					<Icon className='size-4' icon={Alert02Icon} />
+					<HugeiconsIcon className='size-4' icon={Alert02Icon} strokeWidth={2} />
 					Delete account
 				</button>
 			</nav>

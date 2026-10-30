@@ -1,9 +1,8 @@
-import { ListViewIcon, Menu02Icon, MoveTopIcon } from '@hugeicons/core-free-icons'
 import { scrollToHeading, scrollToTop, useVisibleHeadings } from '@polyms/ui-kit'
 import { Moon, Palette, Sun } from '@solar-icons/react-perf/BoldDuotone'
 import clsx from 'clsx'
 import { type RefObject, useMemo } from 'react'
-import { Icon } from '../components/Icons'
+import { Icon } from '../assets/layout-symbols'
 import { useDocsToc } from '../hooks/useDocsToc'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useAppStore } from '../stores/app.store'
@@ -103,7 +102,7 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
 		const topAction: DockAction = {
 			type: 'button',
 			id: 'top',
-			icon: <Icon icon={MoveTopIcon} size={20} strokeWidth={2} />,
+			icon: <Icon name='move-top' size={20} />,
 			label: 'Back to top',
 			onClick: scrollToTop,
 		}
@@ -111,7 +110,7 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
 		const menuAction: DockAction = {
 			type: 'button',
 			id: 'menu',
-			icon: <Icon icon={Menu02Icon} size={20} strokeWidth={2} />,
+			icon: <Icon name='menu-02' size={20} />,
 			label: 'Open navigation',
 			onClick: () => sidebarRef?.current?.toggleSidebar(),
 		}
@@ -132,7 +131,7 @@ export function DocsFloatingDock({ variant, sidebarRef }: DocsFloatingDockProps)
 			docsActions.push({
 				type: 'popover',
 				id: 'toc',
-				icon: <Icon icon={ListViewIcon} size={20} strokeWidth={2} />,
+				icon: <Icon name='list-view' size={20} />,
 				label: 'Table of contents',
 				render: close => <DocsTocPopover onClose={close} />,
 			})

@@ -2,7 +2,8 @@
 
 import { Toast } from '@polyms/ui-kit'
 import { createRootRoute, HeadContent, Link, Outlet, useRouterState } from '@tanstack/react-router'
-import { useRef } from 'react'
+import { lazy, Suspense, useRef } from 'react'
+import { LayoutSymbols } from '../assets/layout-symbols'
 import { BrandLogo } from '../components/BrandLogo'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { AppSidebar } from '../layouts/AppSidebar'
@@ -10,6 +11,10 @@ import { DocsFloatingDock } from '../layouts/DocsFloatingDock'
 
 import '../stores/app.store'
 import '../stores/theme.store'
+
+const DocsSymbols = lazy(() =>
+	import('../assets/docs-symbols').then(module => ({ default: module.DocsSymbols }))
+)
 
 const Name = () => {
 	return (
@@ -39,27 +44,29 @@ const Root = () => {
 	}
 
 	// Landing layout không dùng sidebar
-	if (isLandingLayout) {
-		return (
-			<Toast>
-				<HeadContent />
-				<Outlet />
-				<DocsFloatingDock variant='landing' />
-				<Toast.Container />
-			</Toast>
-		)
-	}
-
 	return (
 		<Toast>
+			<LayoutSymbols />
 			<HeadContent />
-			<Name />
-			<div data-testid='app-navigation' id='app-navigation' />
-			<AppSidebar ref={appSidebarRef} />
-			<main className='docs-outlet' data-testid='docs-route-content'>
-				<Outlet />
-			</main>
-			<DocsFloatingDock sidebarRef={appSidebarRef} variant='docs' />
+			{isLandingLayout ? (
+				<>
+					<Outlet />
+					<DocsFloatingDock variant='landing' />
+				</>
+			) : (
+				<>
+					<Suspense fallback={null}>
+						<DocsSymbols />
+					</Suspense>
+					<Name />
+					<div data-testid='app-navigation' id='app-navigation' />
+					<AppSidebar ref={appSidebarRef} />
+					<main className='docs-outlet' data-testid='docs-route-content'>
+						<Outlet />
+					</main>
+					<DocsFloatingDock sidebarRef={appSidebarRef} variant='docs' />
+				</>
+			)}
 			<Toast.Container />
 		</Toast>
 	)

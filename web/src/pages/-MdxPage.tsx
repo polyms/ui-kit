@@ -6,7 +6,6 @@ import { Link, useMatch, useRouterState } from '@tanstack/react-router'
 import clsx from 'clsx'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { CodeHighlight } from '../components/CodeHighlight'
-import { Icon } from '../components/Icons'
 import APIReference from '../layouts/APIReference'
 import { CodePreview } from '../layouts/CodePreview'
 import { DocsToc } from '../layouts/DocsToc'
@@ -123,10 +122,11 @@ export function MdxPage() {
 				return (
 					<h2 {...props} className={clsx('h2', props.className)} id={id}>
 						<span className='link peer decoration-transparent'>{props.children}</span>
-						<Icon
+						<HugeiconsIcon
 							className='text-primary-700 ms-2 opacity-0 transition-opacity peer-hover:opacity-100'
 							icon={Unlink01Icon}
 							size={16}
+							strokeWidth={2}
 						/>
 					</h2>
 				)
@@ -137,10 +137,11 @@ export function MdxPage() {
 				return (
 					<h3 {...props} className={clsx('h3', props.className)} id={id}>
 						<span className='link peer decoration-transparent'>{props.children}</span>
-						<Icon
+						<HugeiconsIcon
 							className='text-primary-700 ms-2 opacity-0 transition-opacity peer-hover:opacity-100'
 							icon={Unlink01Icon}
 							size={16}
+							strokeWidth={2}
 						/>
 					</h3>
 				)

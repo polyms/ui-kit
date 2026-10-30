@@ -3,7 +3,7 @@ import { Button } from '@polyms/ui-kit'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { domAnimation, LazyMotion, MotionConfig, m, useReducedMotion } from 'motion/react'
 import { lazy, Suspense } from 'react'
-import { Icon, IconSymbols } from '../assets/icons'
+import { Icon } from '../assets/layout-symbols'
 import { BrandLogo } from '../components/BrandLogo'
 import { HeroShelf } from '../components/landing/HeroShelf'
 import { MascotImage } from '../components/landing/MascotImage'
@@ -23,7 +23,6 @@ export const Route = createFileRoute('/')({
 	component: () => (
 		<LazyMotion features={domAnimation} strict>
 			<MotionConfig reducedMotion='user'>
-				<IconSymbols />
 				<LandingPage />
 			</MotionConfig>
 		</LazyMotion>

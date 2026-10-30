@@ -1,22 +1,13 @@
 import { pages } from 'virtual:mdx-navigation'
-import {
-	AiChemistry02Icon,
-	ChatFeedback01Icon,
-	CodeIcon,
-	CursorMagicSelection04Icon,
-	GoogleDocIcon,
-	InputCursorTextIcon,
-	Share08Icon,
-	ThreeDScaleIcon,
-} from '@hugeicons/core-free-icons'
 import { useMemo } from 'react'
+import type { IconName } from '../assets/layout-symbols'
 
 // ── Types ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 export type DocsNavSection = {
 	key: string
 	label: string
-	icon: typeof GoogleDocIcon
+	icon: IconName
 	colorClass: string
 	items: { label: string; path: string; isNew?: boolean }[]
 }
@@ -25,14 +16,14 @@ export type DocsNavSection = {
 
 // biome-ignore-start lint/style/useNamingConvention: section labels from frontmatter
 const iconMaps = {
-	Guide: GoogleDocIcon,
-	Actions: CursorMagicSelection04Icon,
-	'Data input': InputCursorTextIcon,
-	Feedback: ChatFeedback01Icon,
-	Navigation: Share08Icon,
-	Others: ThreeDScaleIcon,
-	Utils: CodeIcon,
-} as const
+	Guide: 'google-doc',
+	Actions: 'cursor-magic-selection-04',
+	'Data input': 'input-cursor-text',
+	Feedback: 'chat-feedback-01',
+	Navigation: 'share-08',
+	Others: 'three-d-scale',
+	Utils: 'code',
+} as const satisfies Record<string, IconName>
 
 const colors = {
 	Guide: 'text-warning-400',
@@ -47,7 +38,11 @@ const colors = {
 
 // ── Hooks ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-export function useDocsNav(search = '') {
+export function useDocsNav(search = ''): {
+	sections: DocsNavSection[]
+	showExamplesNav: boolean
+	examplesIcon: IconName
+} {
 	const sections = useMemo(() => {
 		const nav: Record<string, DocsNavSection['items']> = {}
 		const q = search.trim().toLowerCase()
@@ -84,7 +79,7 @@ export function useDocsNav(search = '') {
 			.map(([label, items]) => ({
 				key: label,
 				label,
-				icon: iconMaps[label as keyof typeof iconMaps] || GoogleDocIcon,
+				icon: iconMaps[label as keyof typeof iconMaps] || 'google-doc',
 				colorClass: colors[label as keyof typeof colors] || 'text-neutral-400',
 				items: items.sort((a, b) => {
 					if (label === 'Guide') {
@@ -103,5 +98,5 @@ export function useDocsNav(search = '') {
 		return 'examples page demo'.includes(q)
 	}, [search])
 
-	return { sections, showExamplesNav, examplesIcon: AiChemistry02Icon }
+	return { sections, showExamplesNav, examplesIcon: 'ai-chemistry-02' }
 }

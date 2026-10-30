@@ -1,8 +1,7 @@
-import { ArrowRight01Icon, CheckmarkCircle02Icon, CodeIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 import { Button, Switch } from '@polyms/ui-kit'
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
+import { Icon } from '../../assets/layout-symbols'
 
 // ── Components ─────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -12,7 +11,7 @@ export function HeroShelf() {
 	return (
 		<div className='home-shelf' data-complete={clicked}>
 			<div className='home-shelf-header'>
-				<HugeiconsIcon icon={CodeIcon} size={22} />
+				<Icon name='code' size={22} />
 				<span>The component shelf</span>
 				<span aria-hidden='true'>↗</span>
 			</div>
@@ -20,7 +19,7 @@ export function HeroShelf() {
 				<span className='home-label'>A SMALL DETAIL. A GOOD FEELING.</span>
 				<Button onClick={() => setClicked(value => !value)} rounded={rounded} size='xl' variant='primary'>
 					{clicked ? 'One more time?' : 'Give it a click'}
-					<HugeiconsIcon icon={clicked ? CheckmarkCircle02Icon : ArrowRight01Icon} size={18} />
+					<Icon name={clicked ? 'checkmark-circle-02' : 'arrow-right-01'} size={18} />
 				</Button>
 				<p aria-live='polite' role='status'>
 					{clicked ? 'That’s the feeling.' : 'A real button. Right here.'}
@@ -43,7 +42,7 @@ export function HeroShelf() {
 					rounded
 					size='lg'
 				>
-					<HugeiconsIcon icon={ArrowRight01Icon} size={18} />
+					<Icon name='arrow-right-01' size={18} />
 				</Button>
 			</div>
 		</div>
