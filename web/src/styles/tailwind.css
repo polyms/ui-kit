@@ -1,5 +1,4 @@
 @import '../../../ui-kit/src/styles/tailwind.css';
-@import '../../../ui-kit/src/styles/_fonts.css';
 @import './_details.css' layer(components);
 /* @import './_docs.css' layer(components); */
 

@@ -32,6 +32,17 @@ function scheduleNonCritical(task: () => void) {
 	else window.addEventListener('load', start, { once: true })
 }
 
+// TBT counts long tasks until the main thread has been quiet for 5s.
+// The SDK and session replay are heavier than that window, so they start after it.
+const SENTRY_QUIET_DELAY_MS = 5000
+
+function scheduleAfterQuiet(task: () => void) {
+	if (typeof window === 'undefined') return
+	const start = () => window.setTimeout(task, SENTRY_QUIET_DELAY_MS)
+	if (document.readyState === 'complete') start()
+	else window.addEventListener('load', start, { once: true })
+}
+
 export function captureException(error: unknown) {
 	if (!dsn) return
 	if (sentry) {
@@ -44,7 +55,7 @@ export function captureException(error: unknown) {
 export function installSentry(router: AnyRouter) {
 	if (!dsn || sentryStarted) return
 	sentryStarted = true
-	scheduleNonCritical(() => {
+	scheduleAfterQuiet(() => {
 		void startSentry(router)
 	})
 }
@@ -66,10 +77,12 @@ async function startSentry(router: AnyRouter) {
 		},
 	})
 	Sentry.addIntegration(Sentry.tanstackRouterBrowserTracingIntegration(router))
-	Sentry.addIntegration(Sentry.replayIntegration())
 	sentry = Sentry
 	for (const error of queuedErrors.splice(0)) Sentry.captureException(error)
 	console.debug(`[client] initialized release ${__VERSION__} env ${import.meta.env.MODE}`)
+	const idle = window.requestIdleCallback
+	if (typeof idle === 'function') idle(() => Sentry.addIntegration(Sentry.replayIntegration()))
+	else window.setTimeout(() => Sentry.addIntegration(Sentry.replayIntegration()), 2000)
 }
 
 const amplitudeApiKey = import.meta.env.VITE_AMPLITUDE_API_KEY
