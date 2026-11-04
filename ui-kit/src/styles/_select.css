@@ -62,7 +62,7 @@
 
 	&[aria-invalid]:focus-visible {
 		border-color: var(--color-danger-600);
-		box-shadow: 0 0 0 var(--control-ring-width) var(--control-ring-danger);
+		box-shadow: 0 0 0 var(--control-ring-width) var(--control-danger-ring);
 	}
 
 	&[data-disabled] {

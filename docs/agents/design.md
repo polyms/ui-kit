@@ -13,6 +13,8 @@ How `/design` and `/dev` consume UI specifications and `@polyms/ui-kit`.
 - **Library:** `@polyms/ui-kit` (Tailwind CSS 4, React 19)
 - **Skill:** `.agents/skills/ui-kit` (symlink → `ui-kit/skills/ui-kit`)
 - **CSS tokens (source of truth):** `ui-kit/src/styles/_root.css`, component styles in `ui-kit/src/styles/_*.css`
+- **Component token names:** `component[-variant][-stage]-property` (ví dụ `btn-primary-active-bg`); stage đứng trước property. Bỏ `variant` khi token dùng chung cho các variant.
+- **Semantic token names:** surface roles giữ tên ổn định (`--body`, `--fg`, `--surface`, …) cùng alias `--color-*` cho Tailwind; shared chrome theo `context[-variant][-stage]-property` (ví dụ `--control-danger-ring`, `--control-hover-tint`, `--overlay-bg`).
 - **Boundary:** `/design` maps _what_; `/ui-kit` skill documents _how_ (primitives, tokens, motion API)
 
 ## Figma — Polyms design system
@@ -511,7 +513,7 @@ Mini preview 320×200; parts: `modal-backdrop`, `modal-dialog`, `modal-content`,
 | `Pressed`  | true, false | `data-pressed` tint via `color-mix` primary 12% |
 | `Disabled` | true, false | opacity 0.5                                     |
 
-Chrome: 32×32 min, radius 6px, `--toggle-variant-color` / item-* transparent mix. **`Toggle group`** (`189:301`): exclusive segmented control (`toggle-group` border + inner chips). Docs instances: **`HUG`** in GRID sample column.
+Chrome: 32×32 min, radius 6px, `--toggle-accent-color` / item-* transparent mix. **`Toggle group`** (`189:301`): exclusive segmented control (`toggle-group` border + inner chips). Docs instances: **`HUG`** in GRID sample column.
 
 Script order: `00-create-page` → `01-link-components` → `02-modal-components` → `03-toggle-components` → `04-link-docs` → `05-modal-docs` → `06-toggle-docs` → `07-fix-layout`.
 

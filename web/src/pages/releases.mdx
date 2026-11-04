@@ -5,9 +5,71 @@ title: Releases
 
 Changelogs for each release of **`@polyms/ui-kit`**. Read the breaking changes before you upgrade.
 
+<p className='release-date'>Nov 5, 2026</p>
+
+## v2.0.4 <span className='badge badge-primary mb-2'>Latest</span>
+
+### Renamed CSS tokens
+
+- **Breaking change:** Component CSS custom properties use `component-variant-stage-property`, with the variant or stage omitted when it does not apply. For example, `--btn-primary-active-bg`. Update overrides that use the old names below. Token values and behavior stay the same.
+
+export const componentTokenRenames = [
+  { old: '--btn-variant-color', next: '--btn-accent-color' },
+  { old: '--btn-bg-color', next: '--btn-bg' },
+  { old: '--btn-bg-hover-color', next: '--btn-hover-bg' },
+  { old: '--btn-bg-active-color', next: '--btn-active-bg' },
+  { old: '--btn-border-hover-color', next: '--btn-hover-border-color' },
+  { old: '--btn-border-active-color', next: '--btn-active-border-color' },
+  { old: '--control-tint-hover', next: '--control-hover-tint' },
+  { old: '--control-tint-active', next: '--control-active-tint' },
+  { old: '--control-tint-pressed', next: '--control-pressed-tint' },
+  { old: '--control-tint-pressed-hover', next: '--control-pressed-hover-tint' },
+  { old: '--control-tint-pressed-active', next: '--control-pressed-active-tint' },
+  { old: '--table-color-type', next: '--table-type-color' },
+  { old: '--table-bg-type', next: '--table-type-bg' },
+  { old: '--table-color-state', next: '--table-state-color' },
+  { old: '--table-bg-state', next: '--table-state-bg' },
+  { old: '--control-ring-danger', next: '--control-danger-ring' },
+  { old: '--toggle-variant-color', next: '--toggle-accent-color' },
+  { old: '--toggle-bg-hover', next: '--toggle-hover-bg' },
+  { old: '--toggle-bg-active', next: '--toggle-active-bg' },
+  { old: '--toggle-bg-pressed', next: '--toggle-pressed-bg' },
+  { old: '--toggle-bg-pressed-hover', next: '--toggle-pressed-hover-bg' },
+  { old: '--toggle-bg-pressed-active', next: '--toggle-pressed-active-bg' },
+  { old: '--toolbar-variant-color', next: '--toolbar-accent-color' },
+  { old: '--toolbar-bg-hover', next: '--toolbar-hover-bg' },
+  { old: '--toolbar-bg-active', next: '--toolbar-active-bg' },
+  { old: '--toolbar-bg-pressed', next: '--toolbar-pressed-bg' },
+  { old: '--toolbar-bg-pressed-hover', next: '--toolbar-pressed-hover-bg' },
+  { old: '--toolbar-bg-pressed-active', next: '--toolbar-pressed-active-bg' },
+]
+
+<div className='card my-4'>
+  <table className='table-striped table-borderless table align-middle'>
+    <thead className='thead-light'>
+      <tr>
+        <th>Old name</th>
+        <th>Use instead</th>
+      </tr>
+    </thead>
+    <tbody>
+      {componentTokenRenames.map((row) => (
+        <tr key={row.old}>
+          <td className='text-nowrap'>
+            <code>{row.old}</code>
+          </td>
+          <td className='text-nowrap'>
+            <code>{row.next}</code>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 <p className='release-date'>Oct 29, 2026</p>
 
-## v2.0.0 <span className='badge badge-primary mb-2'>Latest</span>
+## v2.0.0
 
 Release after **1.0.5**. Steps `50` through `950` on primary, success, info, warning, and danger keep the same hues. Buttons, links, badges, and alerts already read those steps. This release removes the bare color names and moves gray chrome onto the neutral ramp. It also adds Chip, ChipInput, Toggle, and ToggleGroup, and shares one set of tokens for control corners, focus, and overlay panels.
 
@@ -126,7 +188,7 @@ export const surfaceMoves = [
 
 Buttons, fields, selects, toggles, and toolbars share one corner radius, focus ring, and press wash. Modal and offcanvas share one panel fill.
 
-- Set `--control-radius`, `--control-ring`, `--control-ring-width`, and the `--control-tint-*` steps to change those controls together. `--control-ring` is the control color that switches under `.dark`. The shared ring is 3px wide.
+- Set `--control-radius`, `--control-ring`, `--control-ring-width`, and the `--control-*-tint` steps to change those controls together. `--control-ring` is the control color that switches under `.dark`. The shared ring is 3px wide.
 - Set `--overlay-bg` to change the modal and offcanvas panel. It follows `--body` until you set it. `--dialog-radius`, `--sheet-radius`, `--popup-radius`, `--group-radius`, and `--popup-shadow` size the shells around them.
 
 See [Design Tokens](/design-tokens).

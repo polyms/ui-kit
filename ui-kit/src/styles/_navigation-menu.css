@@ -51,20 +51,20 @@
 	@media (hover: hover) {
 		&:hover {
 			color: var(--color-primary-700);
-			background-color: color-mix(in oklab, var(--color-primary-700) var(--control-tint-hover), transparent);
+			background-color: color-mix(in oklab, var(--color-primary-700) var(--control-hover-tint), transparent);
 		}
 	}
 
 	&[data-popup-open] {
 		color: var(--color-primary-700);
-		background-color: color-mix(in oklab, var(--color-primary-700) var(--control-tint-active), transparent);
+		background-color: color-mix(in oklab, var(--color-primary-700) var(--control-active-tint), transparent);
 	}
 
 	&:focus-visible {
 		color: var(--color-primary-700);
 		outline: var(--control-ring-width) solid var(--control-ring);
 		outline-offset: -1px;
-		background-color: color-mix(in oklab, var(--color-primary-700) var(--control-tint-hover), transparent);
+		background-color: color-mix(in oklab, var(--color-primary-700) var(--control-hover-tint), transparent);
 	}
 
 	&:disabled,
@@ -420,7 +420,7 @@
 				color: var(--color-primary-300);
 				background-color: color-mix(
 					in oklab,
-					var(--color-primary-700) var(--control-tint-hover),
+					var(--color-primary-700) var(--control-hover-tint),
 					transparent
 				);
 			}
@@ -428,12 +428,12 @@
 
 		&[data-popup-open] {
 			color: var(--color-primary-300);
-			background-color: color-mix(in oklab, var(--color-primary-700) var(--control-tint-active), transparent);
+			background-color: color-mix(in oklab, var(--color-primary-700) var(--control-active-tint), transparent);
 		}
 
 		&:focus-visible {
 			color: var(--color-primary-300);
-			background-color: color-mix(in oklab, var(--color-primary-700) var(--control-tint-hover), transparent);
+			background-color: color-mix(in oklab, var(--color-primary-700) var(--control-hover-tint), transparent);
 		}
 	}
 

@@ -25,7 +25,7 @@ Semantic ramps use **11 steps (50–950)**. Prefer **`var(--color-{name}-{step})
 
 A ramp step is a source value. It does not style a component until a token or a utility points at it.
 
-`Button variant='primary'` sets button tokens such as `--btn-variant-color` to `--color-primary-600`. The utility `bg-primary-500` reads `--color-primary-500` from the same ramp. Set the ramp, and both follow. Set `variant` on each component, because each component reads its own tokens. A class on a parent does not restyle the buttons, alerts, and badges inside it.
+`Button variant='primary'` sets button tokens such as `--btn-accent-color` to `--color-primary-600`. The utility `bg-primary-500` reads `--color-primary-500` from the same ramp. Set the ramp, and both follow. Set `variant` on each component, because each component reads its own tokens. A class on a parent does not restyle the buttons, alerts, and badges inside it.
 
 Primitive scales, semantic surfaces, and component properties are catalogued on [Design Tokens](/design-tokens).
 

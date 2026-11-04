@@ -2,8 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ui.polyms.dev</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://ui.polyms.dev/agent-skill</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://ui.polyms.dev/design-system</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://ui.polyms.dev/design-tokens</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://ui.polyms.dev/design-system</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://ui.polyms.dev/design-tokens</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/accordion</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/alert</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/avatar</loc><lastmod>2026-10-29</lastmod></url>
@@ -14,7 +14,7 @@
   <url><loc>https://ui.polyms.dev/docs/checkbox</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/chip</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/collapsible</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://ui.polyms.dev/docs/dark-mode</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://ui.polyms.dev/docs/dark-mode</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/dynamic</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/field</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/item</loc><lastmod>2026-10-29</lastmod></url>
@@ -41,6 +41,6 @@
   <url><loc>https://ui.polyms.dev/docs/use-render</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/docs/z-index</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://ui.polyms.dev/installation</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://ui.polyms.dev/releases</loc><lastmod>2026-10-29</lastmod></url>
+  <url><loc>https://ui.polyms.dev/releases</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://ui.polyms.dev/typography</loc><lastmod>2026-10-29</lastmod></url>
 </urlset>

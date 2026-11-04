@@ -7,19 +7,19 @@
 	--toggle-lh: 1.125rem;
 	--toggle-fs: 0.75rem;
 	/* Transparent palette tokens (mirrors `.item-primary` & `.toolbar-button`) */
-	--toggle-variant-color: var(--color-primary-700);
+	--toggle-accent-color: var(--color-primary-700);
 	--toggle-tint-color: var(--color-primary-700);
-	--toggle-bg-hover: color-mix(in oklab, var(--toggle-tint-color) var(--control-tint-hover), transparent);
-	--toggle-bg-active: color-mix(in oklab, var(--toggle-tint-color) var(--control-tint-active), transparent);
-	--toggle-bg-pressed: color-mix(in oklab, var(--toggle-tint-color) var(--control-tint-pressed), transparent);
-	--toggle-bg-pressed-hover: color-mix(
+	--toggle-hover-bg: color-mix(in oklab, var(--toggle-tint-color) var(--control-hover-tint), transparent);
+	--toggle-active-bg: color-mix(in oklab, var(--toggle-tint-color) var(--control-active-tint), transparent);
+	--toggle-pressed-bg: color-mix(in oklab, var(--toggle-tint-color) var(--control-pressed-tint), transparent);
+	--toggle-pressed-hover-bg: color-mix(
 		in oklab,
-		var(--toggle-tint-color) var(--control-tint-pressed-hover),
+		var(--toggle-tint-color) var(--control-pressed-hover-tint),
 		transparent
 	);
-	--toggle-bg-pressed-active: color-mix(
+	--toggle-pressed-active-bg: color-mix(
 		in oklab,
-		var(--toggle-tint-color) var(--control-tint-pressed-active),
+		var(--toggle-tint-color) var(--control-pressed-active-tint),
 		transparent
 	);
 }
@@ -91,31 +91,31 @@
 
 	@media (hover: hover) {
 		&:hover:not([data-disabled]):not([data-pressed]) {
-			color: var(--toggle-variant-color);
-			background-color: var(--toggle-bg-hover);
+			color: var(--toggle-accent-color);
+			background-color: var(--toggle-hover-bg);
 		}
 	}
 
 	/* Press-down micro-interaction: applies in both idle & pressed states. */
 	&:active:not([data-disabled]) {
-		color: var(--toggle-variant-color);
-		background-color: var(--toggle-bg-active);
+		color: var(--toggle-accent-color);
+		background-color: var(--toggle-active-bg);
 		transform: scale(0.96);
 	}
 
 	&[data-pressed] {
-		color: var(--toggle-variant-color);
-		background-color: var(--toggle-bg-pressed);
+		color: var(--toggle-accent-color);
+		background-color: var(--toggle-pressed-bg);
 
 		/* Pressed surfaces still react to hover/active so the on-state feels alive. */
 		@media (hover: hover) {
 			&:hover:not([data-disabled]) {
-				background-color: var(--toggle-bg-pressed-hover);
+				background-color: var(--toggle-pressed-hover-bg);
 			}
 		}
 
 		&:active:not([data-disabled]) {
-			background-color: var(--toggle-bg-pressed-active);
+			background-color: var(--toggle-pressed-active-bg);
 		}
 	}
 
@@ -387,6 +387,6 @@
 /* Dark-mode override: accent matches `.item-primary` (text -200, tint -300). */
 .dark .toggle,
 .dark .toggle-group {
-	--toggle-variant-color: var(--color-primary-200);
+	--toggle-accent-color: var(--color-primary-200);
 	--toggle-tint-color: var(--color-primary-300);
 }

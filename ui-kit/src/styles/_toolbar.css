@@ -1,29 +1,25 @@
 .toolbar {
 	/* Transparent palette tokens (mirrors `.item-primary` pattern in _utilities.css) */
-	--toolbar-variant-color: var(--color-primary-700);
-	--toolbar-bg-hover: color-mix(
+	--toolbar-accent-color: var(--color-primary-700);
+	--toolbar-hover-bg: color-mix(in oklab, var(--toolbar-accent-color) var(--control-hover-tint), transparent);
+	--toolbar-active-bg: color-mix(
 		in oklab,
-		var(--toolbar-variant-color) var(--control-tint-hover),
+		var(--toolbar-accent-color) var(--control-active-tint),
 		transparent
 	);
-	--toolbar-bg-active: color-mix(
+	--toolbar-pressed-bg: color-mix(
 		in oklab,
-		var(--toolbar-variant-color) var(--control-tint-active),
+		var(--toolbar-accent-color) var(--control-pressed-tint),
 		transparent
 	);
-	--toolbar-bg-pressed: color-mix(
+	--toolbar-pressed-hover-bg: color-mix(
 		in oklab,
-		var(--toolbar-variant-color) var(--control-tint-pressed),
+		var(--toolbar-accent-color) var(--control-pressed-hover-tint),
 		transparent
 	);
-	--toolbar-bg-pressed-hover: color-mix(
+	--toolbar-pressed-active-bg: color-mix(
 		in oklab,
-		var(--toolbar-variant-color) var(--control-tint-pressed-hover),
-		transparent
-	);
-	--toolbar-bg-pressed-active: color-mix(
-		in oklab,
-		var(--toolbar-variant-color) var(--control-tint-pressed-active),
+		var(--toolbar-accent-color) var(--control-pressed-active-tint),
 		transparent
 	);
 	box-sizing: border-box;
@@ -131,15 +127,15 @@
 
 	@media (hover: hover) {
 		&:hover:not([data-disabled]):not([data-pressed]):not([data-popup-open]) {
-			color: var(--toolbar-variant-color);
-			background-color: var(--toolbar-bg-hover);
+			color: var(--toolbar-accent-color);
+			background-color: var(--toolbar-hover-bg);
 		}
 	}
 
 	/* Press-down micro-interaction: applies in both idle & pressed states. */
 	&:active:not([data-disabled]) {
-		color: var(--toolbar-variant-color);
-		background-color: var(--toolbar-bg-active);
+		color: var(--toolbar-accent-color);
+		background-color: var(--toolbar-active-bg);
 		transform: scale(0.96);
 	}
 
@@ -149,24 +145,24 @@
 	}
 
 	&[data-pressed] {
-		color: var(--toolbar-variant-color);
-		background-color: var(--toolbar-bg-pressed);
+		color: var(--toolbar-accent-color);
+		background-color: var(--toolbar-pressed-bg);
 
 		/* Pressed surfaces still react to hover/active so the on-state feels alive. */
 		@media (hover: hover) {
 			&:hover:not([data-disabled]) {
-				background-color: var(--toolbar-bg-pressed-hover);
+				background-color: var(--toolbar-pressed-hover-bg);
 			}
 		}
 
 		&:active:not([data-disabled]) {
-			background-color: var(--toolbar-bg-pressed-active);
+			background-color: var(--toolbar-pressed-active-bg);
 		}
 	}
 
 	&[data-popup-open] {
-		color: var(--toolbar-variant-color);
-		background-color: var(--toolbar-bg-hover);
+		color: var(--toolbar-accent-color);
+		background-color: var(--toolbar-hover-bg);
 	}
 
 	&[data-disabled] {
@@ -203,14 +199,14 @@
 
 	@media (hover: hover) {
 		&:hover {
-			color: var(--toolbar-variant-color);
-			background-color: var(--toolbar-bg-hover);
+			color: var(--toolbar-accent-color);
+			background-color: var(--toolbar-hover-bg);
 		}
 	}
 
 	&:active {
-		color: var(--toolbar-variant-color);
-		background-color: var(--toolbar-bg-active);
+		color: var(--toolbar-accent-color);
+		background-color: var(--toolbar-active-bg);
 	}
 
 	&:focus-visible {
@@ -258,5 +254,5 @@
 
 /* Dark-mode override: accent dùng shade sáng (-300) cho contrast với body Nord. */
 .dark .toolbar {
-	--toolbar-variant-color: var(--color-primary-300);
+	--toolbar-accent-color: var(--color-primary-300);
 }

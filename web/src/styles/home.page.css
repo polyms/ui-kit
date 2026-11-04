@@ -454,7 +454,7 @@ main.landing {
 	color: var(--preview-accent);
 }
 .home-preview-theme .btn-primary {
-	--btn-variant-color: var(--color-primary-700);
+	--btn-accent-color: var(--color-primary-700);
 }
 .home-preview-theme .btn-primary.outlined {
 	--btn-color: var(--preview-accent);
@@ -467,7 +467,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 }
 
 .home-preview-theme[data-mode='dark'] .btn-ghost {
-	--btn-variant-color: var(--color-primary-300);
+	--btn-accent-color: var(--color-primary-300);
 	--btn-hover-color: var(--color-primary-200);
 	--btn-active-color: var(--color-primary-200);
 }
@@ -524,7 +524,7 @@ body:has([data-testid='playground-offcanvas']) .floating-dock {
 /* A light specimen stays light even inside the page's dark ancestor. */
 .home-preview-theme[data-mode='light'] .btn-ghost,
 .home-preview-theme[data-mode='light'] .btn-light {
-	--btn-variant-color: var(--color-primary-600);
+	--btn-accent-color: var(--color-primary-600);
 	--btn-hover-color: var(--color-primary-700);
 	--btn-active-color: var(--color-primary-700);
 }
