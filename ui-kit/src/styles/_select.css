@@ -158,7 +158,9 @@
 	min-width: var(--anchor-width);
 	max-height: var(--available-height);
 	padding: 0.25rem;
-	overflow: hidden;
+	/* Base UI scrolls the popup when there is no Select.List; touch devices have no hover arrows. */
+	overflow-y: auto;
+	overscroll-behavior: contain;
 	font-size: 0.875rem;
 	color: var(--fg);
 

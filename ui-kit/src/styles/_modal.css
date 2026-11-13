@@ -5,8 +5,10 @@
 
 .modal-dialog {
 	z-index: var(--zindex-modal);
+	/* Mobile: keep a real gutter and room above the dialog for the close button. */
+	padding: 2.5rem 1rem 1rem;
 	transition-duration: 300ms;
-	@apply pointer-events-none relative flex w-full p-1 outline-0;
+	@apply pointer-events-none relative flex w-full outline-0;
 	@apply transition-all ease-out;
 
 	&[data-nested-dialog-open] {
@@ -97,8 +99,8 @@
 
 .modal-close {
 	position: absolute;
-	top: -1.5rem;
-	left: 100%;
+	top: -2.5rem;
+	right: -0.5rem;
 	@apply z-10 flex p-2;
 	@apply cursor-pointer rounded-full outline-0;
 	@apply text-neutral-300 hover:bg-neutral-50/10 hover:text-neutral-50;
@@ -108,9 +110,14 @@
 @media (min-width: 40rem) {
 	.modal-dialog {
 		max-width: var(--container-lg);
-
-		padding-block: 2rem;
+		padding: 2rem 0.25rem;
 		@apply mx-auto;
+	}
+
+	.modal-close {
+		top: -1.5rem;
+		right: auto;
+		left: 100%;
 	}
 
 	.modal-sm .modal-dialog {
@@ -158,6 +165,13 @@
 		max-width: none;
 		height: 100dvh;
 		padding: 2rem 0 0 0;
+	}
+
+	/* Full-width dialog: no room beside it, so the close button stays inside the viewport. */
+	.modal-close {
+		top: -2rem;
+		right: 0.5rem;
+		left: auto;
 	}
 
 	.modal-content {
