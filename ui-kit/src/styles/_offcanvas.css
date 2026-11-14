@@ -390,3 +390,14 @@
 		display: none;
 	}
 }
+
+/* Respect the system motion preference for both side drawers and mobile sheets. */
+@media (prefers-reduced-motion: reduce) {
+	.offcanvas-content,
+	.offcanvas-content[data-swipe-direction],
+	.offcanvas-content[data-ending-style],
+	.offcanvas-backdrop,
+	.offcanvas-backdrop[data-ending-style] {
+		transition: none;
+	}
+}
